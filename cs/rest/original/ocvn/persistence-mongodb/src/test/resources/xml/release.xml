@@ -1,0 +1,12 @@
+<test>
+    <release>
+        <buyer>
+            <name>Buyer Name</name>
+        </buyer>
+        <language>en</language>
+    </release>
+    <release>
+        <id>xmlimport-123</id>
+        <language>en</language>
+    </release>
+</test>

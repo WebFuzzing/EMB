@@ -1,0 +1,81 @@
+<!--
+    Copyright (c) 2015 Development Gateway, Inc and others.
+
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the MIT License (MIT)
+    which accompanies this distribution, and is available at
+    https://opensource.org/licenses/MIT
+
+    Contributors:
+    Development Gateway - initial API and implementation
+-->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-default-group" author="mpostelnicu">
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="CATEGORY" />
+        </preConditions>
+        <insert tableName="CATEGORY">
+            <column name="LABEL" value="group1" />
+            <column name="DTYPE" value="Group" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="add-default-roles" author="mpostelnicu">
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="ROLE" />
+        </preConditions>
+        <insert tableName="ROLE">
+            <column name="AUTHORITY" value="ROLE_USER" />
+        </insert>
+        <insert tableName="ROLE">
+            <column name="AUTHORITY" value="ROLE_ADMIN" />
+        </insert>
+        <insert tableName="ROLE">
+            <column name="AUTHORITY" value="ROLE_EDITOR" />
+        </insert>
+        <insert tableName="ROLE">
+            <column name="AUTHORITY" value="ROLE_VALIDATOR" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="7" author="mpostelnicu">
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="PERSON_ROLES" />
+            <tableExists tableName="ROLE" />
+            <tableExists tableName="PERSON" />
+        </preConditions>
+        <sqlFile path="Person.sql" />
+    </changeSet>
+
+    <changeSet id="8" author="mpostelnicu">
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="PERSON_ROLES" />
+            <tableExists tableName="ROLE" />
+            <tableExists tableName="PERSON" />
+        </preConditions>
+        <sqlFile path="Person_roles.sql" />
+    </changeSet>
+
+    <changeSet id="9" author="Octavian Ciubotaru">
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="PERSON_ROLES" />
+            <tableExists tableName="ROLE" />
+            <tableExists tableName="PERSON" />
+        </preConditions>
+        <sqlFile path="Renamed_roles.sql" />
+    </changeSet>
+
+    <changeSet id="OCE-125" author="mpostelnicu">
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="ROLE" />
+        </preConditions>
+        <comment>Enable admin to create users with "Procuring Entity" Role.</comment>
+        <insert tableName="ROLE">
+            <column name="AUTHORITY" value="ROLE_PROCURING_ENTITY" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -12,4 +12,6 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service]()  
 
-* Scout-API (MIT) from [https://github.com/mikaelsvensson/scout-api]()
+* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api]()
+
+* OCVN (MIT), from [https://github.com/devgateway/ocvn]()
