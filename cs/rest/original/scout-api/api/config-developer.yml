@@ -1,0 +1,124 @@
+server:
+  gzip:
+    minimumEntitySize: 0bytes
+
+#logging:
+#  level: INFO
+#  appenders:
+#    - type: console
+#      threshold: ALL
+#      timeZone: UTC
+#      target: stdout
+#      logFormat: # TODO
+#
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    se.devscout: DEBUG
+
+    org.hibernate.SQL: DEBUG
+#    org.hibernate.type: TRACE
+
+  appenders:
+    - type: console
+
+database:
+  # the name of your JDBC driver
+  driverClass: org.h2.Driver
+
+  # the username
+  user: sa
+
+  # the password
+  password:
+
+  # the JDBC URL
+  url: jdbc:h2:./db/dev
+
+  # any properties specific to your JDBC driver:
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.H2Dialect
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
+
+defaultTags:
+  - name: "Happy"
+    group: "feelings"
+  - name: "Sad"
+    group: "feelings"
+  - name: "Bored"
+    group: "feelings"
+  - name: "Think"
+    group: "feelings"
+  - name: "Excited"
+    group: "feelings"
+
+defaultUsers:
+  - name: "Crawler"
+    authorizationLevel: 10
+
+crawlerUser: "Crawler"
+
+mediaFilesFolder: ../temp/media-files
+
+tempFolder: ../temp
+
+#autoUpdateIntervalSeconds: 0 # 0 = disabled
+
+similarityCalculatorConfiguration:
+    maxRelated: 5
+
+    simplifyVocabulary: true
+
+    simplifyRules:
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[nl]in(g|gen|gs|gens|gar|gar|garna)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})in(g|gen|gs|gens|gar|gar|garna)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[lt]ig[at]"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})n(are|skt|ens|ens)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})(nar|are|ade|skt|ens|ena|nen)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})(na|re)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[aeis][nrtsk]"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[aens]"
+    - matchGroupIndex: 0
+      patternExpr: "(\\p{IsAlphabetic}{4,})"
+
+    comparatorFactorAllText: 2.0
+    comparatorFactorName: 0.5
+    comparatorFactorMaterials: 1.0
+    comparatorFactorIntroduction: 2.0
+    comparatorFactorCategories: 0.5
+    comparatorFactorAge: 0.1
+    comparatorFactorParticipantCount: 0.1
+    comparatorFactorTime: 0.1
+
+    reportFolder: ../temp/textanalyzer
+
+    relationOwner: "Crawler"

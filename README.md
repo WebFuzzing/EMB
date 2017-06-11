@@ -1,5 +1,5 @@
 # EMB
-EvoMaster Benchmark (EMB): a set of web/enterprise applications for experimentation in automated system testing
+[EvoMaster](http://evomaster.org) Benchmark (EMB): a set of web/enterprise applications for experimentation in automated system testing
 
 ## License
 All the code that is new for this repository is released un Apache 2.0 license. 
@@ -12,3 +12,4 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service]()  
 
+* Scout-API (MIT) from [https://github.com/mikaelsvensson/scout-api]()

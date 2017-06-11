@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="mikael.svensson">
+
+        <createTable tableName="system_message">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="key" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="value" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_from" type="datetime"/>
+            <column name="valid_to" type="datetime"/>
+        </createTable>
+
+        <createTable tableName="tag">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="grp" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="tag" indexName="tag_ix_grp_name" unique="true">
+            <column name="grp"/>
+            <column name="name"/>
+        </createIndex>
+
+        <createTable tableName="media_file">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+            <column name="mime_type" type="varchar(100)"/>
+            <column name="uri" type="varchar(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_address" type="varchar(500)"/>
+            <column name="authorization_level" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user_identity">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="type" type="nvarchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="nvarchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"
+                             references="users(id)"
+                             foreignKeyName="user_identity_fk_user"/>
+            </column>
+        </createTable>
+        <createIndex tableName="user_identity" indexName="user_identity_ix_type_value" unique="true">
+            <column name="type"/>
+            <column name="value"/>
+        </createIndex>
+
+        <createTable tableName="activity">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ACTIVITY_RATING">
+            <column name="activity_id" type="int">
+                <constraints nullable="false"
+                             references="activity(id)"
+                             foreignKeyName="ACTIVITY_RATING_fk_activity"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false"
+                             references="users(id)"
+                             foreignKeyName="ACTIVITY_RATING_fk_user"/>
+            </column>
+
+            <column name="rating" type="integer"/>
+            <column name="favourite" type="boolean"/>
+        </createTable>
+
+        <createIndex tableName="ACTIVITY_RATING" indexName="ACTIVITY_RATING_idx_rating" unique="false">
+            <column name="rating"/>
+        </createIndex>
+
+        <addPrimaryKey tableName="ACTIVITY_RATING"
+                       columnNames="activity_id,user_id"
+                       constraintName="ACTIVITY_RATING_pk"/>
+
+        <createTable tableName="ACTIVITY_RELATION">
+            <column name="activity_1_id" type="int">
+                <constraints nullable="false"
+                             references="activity(id)"
+                             foreignKeyName="ACTIVITY_RELATION_fk_activity_1"/>
+            </column>
+
+            <column name="activity_2_id" type="int">
+                <constraints nullable="false"
+                             references="activity(id)"
+                             foreignKeyName="ACTIVITY_RELATION_fk_activity_2"/>
+            </column>
+
+            <column name="owner_id" type="int">
+                <constraints nullable="false"
+                             references="users(id)"
+                             foreignKeyName="ACTIVITY_RELATION_fk_owner"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="ACTIVITY_RELATION"
+                       columnNames="activity_1_id,activity_2_id"
+                       constraintName="ACTIVITY_RELATION_pk"/>
+
+        <!-- Changes to this view should be mirrored in api\...\import.sql and data-access\...\import.sql -->
+        <createView viewName="activity_derived">
+            <![CDATA[
+            SELECT
+                A.ID ACTIVITY_ID,
+                SUM(CASE WHEN AUR.FAVOURITE THEN 1 ELSE 0 END) FAVOURITES_COUNT,
+                SUM(AUR.RATING) RATINGS_SUM,
+                COUNT(AUR.RATING) RATINGS_COUNT,
+                AVG(AUR.RATING) RATINGS_AVG
+            FROM
+                ACTIVITY A LEFT JOIN ACTIVITY_RATING AUR ON A.ID = AUR.ACTIVITY_ID
+            GROUP BY
+                A.ID
+            ]]>
+        </createView>
+
+        <createTable tableName="activity_properties">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="date_created" type="datetime"/>
+            <column name="date_published" type="datetime"/>
+            <column name="date_updated" type="datetime"/>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description_introduction" type="varchar(20000)"/>
+            <column name="description_main" type="varchar(20000)"/>
+            <column name="description_material" type="varchar(20000)"/>
+            <column name="description_notes" type="varchar(20000)"/>
+            <column name="description_prepare" type="varchar(20000)"/>
+            <column name="description_safety" type="varchar(20000)"/>
+            <column name="featured" type="boolean"/>
+            <column name="age_max" type="integer"/>
+            <column name="age_min" type="integer"/>
+            <column name="participants_max" type="integer"/>
+            <column name="participants_min" type="integer"/>
+            <column name="time_max" type="integer"/>
+            <column name="time_min" type="integer"/>
+            <column name="source" type="varchar(2000)"/>
+
+            <column name="activity_id" type="int">
+                <constraints nullable="false"
+                             references="activity(id)"
+                             foreignKeyName="activity_properties_fk_activity"/>
+            </column>
+
+            <column name="publishing_activity_id" type="int">
+                <constraints nullable="true"
+                             unique="true"
+                             references="activity(id)"
+                             foreignKeyName="activity_properties_fk_publishing_activity"/>
+            </column>
+
+            <column name="author_id" type="int">
+                <constraints nullable="false"
+                             references="users(id)"
+                             foreignKeyName="activity_properties_fk_author"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="activity_properties_tag">
+            <column name="activity_properties_id" type="int">
+                <constraints nullable="false"
+                             references="activity_properties(id)"
+                             foreignKeyName="activity_properties_tag_fk_activity_properties"/>
+            </column>
+
+            <column name="tag_id" type="int">
+                <constraints nullable="false"
+                             references="tag(id)"
+                             foreignKeyName="activity_properties_tag_fk_tag"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="activity_properties_tag"
+                       columnNames="activity_properties_id,tag_id"
+                       constraintName="activity_properties_tag_pk"/>
+
+        <createTable tableName="activity_properties_media_file">
+            <column name="activity_properties_id" type="int">
+                <constraints nullable="false"
+                             references="activity_properties(id)"
+                             foreignKeyName="activity_properties_media_file_fk_activity_properties"/>
+            </column>
+
+            <column name="media_file_id" type="int">
+                <constraints nullable="false"
+                             references="media_file(id)"
+                             foreignKeyName="activity_properties_media_file_fk_media_file"/>
+            </column>
+
+            <column name="featured" type="boolean"/>
+        </createTable>
+
+        <addPrimaryKey tableName="activity_properties_media_file"
+                       columnNames="activity_properties_id,media_file_id"
+                       constraintName="activity_properties_media_file_pk"/>
+    </changeSet>
+
+    <changeSet id="2" author="mikael.svensson">
+        <!-- Changes to this view should be mirrored in api\...\import.sql and data-access\...\import.sql -->
+        <createView viewName="tag_derived">
+            <![CDATA[
+            SELECT
+                T.ID TAG_ID,
+                COUNT(APT.ACTIVITY_PROPERTIES_ID) ACTIVITIES_COUNT
+            FROM TAG T LEFT JOIN ACTIVITY_PROPERTIES_TAG APT ON T.ID = APT.TAG_ID
+                INNER JOIN ACTIVITY_PROPERTIES AP ON (APT.ACTIVITY_PROPERTIES_ID = AP.ID AND AP.PUBLISHING_ACTIVITY_ID IS NOT NULL)
+            GROUP BY
+                T.ID;
+            ]]>
+        </createView>
+    </changeSet>
+
+    <changeSet id="3" author="mikael.svensson">
+        <createTable tableName="MEDIA_FILE_KEYWORDS">
+            <column name="media_file_id" type="int">
+                <constraints nullable="false"
+                             references="media_file(id)"
+                             foreignKeyName="media_file_keywords_fk_media_file"/>
+            </column>
+            <column name="keyword" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="MEDIA_FILE_KEYWORDS"
+                       columnNames="media_file_id,keyword"
+                       constraintName="MEDIA_FILE_KEYWORDS_pk"/>
+
+        <addColumn tableName="MEDIA_FILE">
+            <column name="capture_date" type="datetime"/>
+            <column name="copy_right" type="varchar(100)"/>
+            <column name="author" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="4" author="mikael.svensson">
+        <addColumn tableName="tag">
+            <column name="media_file_id" type="int">
+                <constraints nullable="true"
+                             references="media_file(id)"
+                             foreignKeyName="tag_fk_media_file"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

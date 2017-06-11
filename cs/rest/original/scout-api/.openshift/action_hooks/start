@@ -1,0 +1,33 @@
+#!/bin/bash
+# The logic to start up your application should be put in this
+# script. The application will work only if it binds to
+# $OPENSHIFT_DIY_IP:8080
+
+export JAVA_HOME="$OPENSHIFT_DATA_DIR/jdk1.8.0_05"
+export PATH=$JAVA_HOME/bin:$M2:$PATH
+
+cd $OPENSHIFT_REPO_DIR
+
+#
+# MIGRATE DATABASE
+#
+
+java \
+    -jar api/target/api-1.0-SNAPSHOT.jar \
+    db migrate \
+    api/config-openshift.yml > ${OPENSHIFT_DIY_LOG_DIR}/scoutapi-db-migrate.log 2>&1
+
+#
+# START SERVER
+#
+# Note: the paths are specified as command-line parameters instead of "substitutions in the build script"
+#       because the paths contain characters which break the regular expressions used in the build script.
+#
+
+nohup java \
+    -Ddw.similarityCalculatorConfiguration.reportFolder=${OPENSHIFT_DATA_DIR}/scoutapi-textanalyzer \
+    -Ddw.mediaFilesFolder=${OPENSHIFT_DATA_DIR}/scoutapi-mediafiles \
+    -Ddw.tempFolder=${OPENSHIFT_DATA_DIR}/scoutapi-temp \
+    -jar api/target/api-1.0-SNAPSHOT.jar \
+    server \
+    api/config-openshift.yml > ${OPENSHIFT_DIY_LOG_DIR}/scoutapi-server.log 2>&1 &

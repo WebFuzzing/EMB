@@ -1,0 +1,28 @@
+{
+  "name": "An Updated Activity",
+  "description_material": "Materials",
+  "description_introduction": "The Introduction Has Been Updated",
+  "description_prepare": "Preparations",
+  "description_main": "Main",
+  "description_safety": "Safety",
+  "description_notes": "Notes",
+  "age_min": 5,
+  "age_max": 10,
+  "participants_min": 1,
+  "participants_max": 3,
+  "time_min": 10,
+  "time_max": 30,
+  "featured": false,
+  "tags": [
+    {
+      "id": 1
+    }
+  ],
+  "media_files": [
+    {
+      "name": "bobcat.gif",
+      "mime_type": "image/gif",
+      "uri": "http://example.com/bobcat.gif"
+    }
+  ]
+}

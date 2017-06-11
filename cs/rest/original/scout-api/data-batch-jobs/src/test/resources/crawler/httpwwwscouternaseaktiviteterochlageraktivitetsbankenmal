@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="sv-SE">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="sv-SE">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="sv-SE">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="sv-SE">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+    <meta property="og:image" content="/wp-content/uploads/2013/06/scoutlilja-facebook-morkbla.png" />
+<title>
+    Målspår | Scouterna	</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://www.scouterna.se/wp-content/themes/scouterna/style.css" />
+<link rel="stylesheet" type="text/css" media="screen and (max-width: 768px)" href="http://www.scouterna.se/wp-content/themes/scouterna/tablet.css" />
+<link rel="stylesheet" type="text/css" media="screen and (max-width: 640px)" href="http://www.scouterna.se/wp-content/themes/scouterna/mobile.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/wp-content/uploads/2013/06/favicon-morkbla.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="/wp-content/uploads/2013/06/scoutlilja-57-morkbla.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/wp-content/uploads/2013/06/scoutlilja-72-morkbla.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/wp-content/uploads/2013/06/scoutlilja-114-morkbla.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/wp-content/uploads/2013/06/scoutlilja-144-morkbla.png" />
+<link rel="pingback" href="http://www.scouterna.se/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="http://www.scouterna.se/wp-content/themes/scouterna/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="Scouterna &raquo; nyhetsflöde" href="http://www.scouterna.se/nyhet/feed" />
+<link rel="alternate" type="application/rss+xml" title="Scouterna &raquo; flöde" href="http://www.scouterna.se/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Scouterna &raquo; kommentarsflöde" href="http://www.scouterna.se/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.scouterna.se\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='ai1ec_style-css'  href='//www.scouterna.se/wp-content/plugins/all-in-one-event-calendar/cache/2a7968a5_ai1ec_parsed_css.css?ver=2.1.9' type='text/css' media='all' />
+<link rel='stylesheet' id='views-pagination-style-css'  href='http://www.scouterna.se/wp-content/plugins/wp-views/embedded/res/css/wpv-pagination.css?ver=1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='valtech_facet_public_css-css'  href='http://www.scouterna.se/wp-content/plugins/val-facet/css/public-style.css?ver=4.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-style-css'  href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css?ver=4.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpv_render_css-css'  href='http://www.scouterna.se/wp-content/plugins/wp-views/res/css/wpv-views-sorting.css?ver=4.2.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.scouterna.se/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-content/plugins/wp-views/embedded/res/js/wpv-pagination-embedded.js?ver=1.2'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-content/plugins/wp-views/embedded/res/js/i18n/jquery.ui.datepicker-sv.js?ver=1.2'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-content/plugins/wp-views/embedded/res/js/wpv-date-front-end-control.js?ver=1.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.scouterna.se/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.scouterna.se/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='http://www.scouterna.se/?p=17193' />
+
+		<style type="text/css">
+
+			#setupform div#privacy { display: none; }
+
+		</style>
+
+		
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36290460-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Simple Google Analytics Begin -->
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-36290460-1']);
+_gaq.push(['_trackPageLoadTime']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<!-- Simple Google Analytics End -->
+<style type="text/css">
+    a{
+        color: ;
+    }
+    h1,
+    h1 a,
+    h2,
+    h2 a,
+    h3,
+    h3 a,
+    h4,
+    h4 a,
+    h5,
+    h5 a,
+    h6,
+    h6 a{
+        color: ;
+    }
+    .logo-child a{
+    	color: ;
+    }
+    #nav {
+        background: url("http://www.scouterna.se/wp-content/themes/scouterna/images/bg-nav.png") no-repeat;
+        text-decoration: none;
+    }
+    #nav a:focus, #nav a:active {
+        background:url("http://www.scouterna.se/wp-content/themes/scouterna/images/bg-nav-hover.png");
+    }
+    .boxes .box h2 {
+        color: ;
+    }
+    .nav-add a:focus,
+    .nav-add a:active {
+        color: #ffffff;
+    }
+    .entry-content a:focus,
+    .entry-content a:active,
+    .mainwidgets a:focus,
+    .mainwidgets a:active,
+    .nav-sub a:focus,
+    .nav-sub a:active,
+    .boxes .box p a:focus,
+    .boxes .box p a:active,
+    .columns a:focus,
+    .columns a:active,
+    #footer a:focus,
+    #footer a:active {
+        background: #003764;
+        color: #ffffff;
+    }
+    .jcarousel-control a:focus,
+    .jcarousel-control a:active {
+        background: url("http://www.scouterna.se/wp-content/themes/scouterna/images/bg-promo-list-hover3.png") no-repeat;
+        color: #fff;
+    }
+    .columns .column .widget-title {
+        color: ;
+    }
+    .location h2 {
+        color: ;
+    }
+    .location .aside h2 {
+        color: ;
+    }
+    #content h1 {
+        color: ;
+    }
+    #content h2 {
+        color: ;
+    }
+    #content h3 {
+        color: ;
+    }
+    #content .gform_wrapper .top_label .gfield_label {
+        color: ;
+    }
+    #sidebar ul a {
+        color: ;
+    }
+    #sidebar ul a:focus, #sidebar ul a:active {
+        background: #003764;
+        color: #ffffff;
+    }
+    .mainwidgets .widget-title{
+        color: ;
+    }
+    #sidebar .widget-title{
+        color: ;
+    }
+    #content .wpv-filter-form .filtrera-marken label,
+	#content .wpv-filter-form .filtrera-marken label .labeltext {
+	   color: ;
+	}
+    </style><script type='text/javascript'>
+
+        var result_name = '(Visa inte tillhörighetslänk)',
+            result_link = '',
+            result_id = 1;
+
+        jQuery(document).ready(function() {
+
+            if ( result_id != 1 ) {
+                if ( jQuery(window).width() > 767) {
+                    jQuery('.add-nav').append('<li class="menu-item menu-item-type-custom"><a title="(Visa inte tillhörighetslänk)" href="">(Visa inte tillhörighetslänk)</a></li>');
+                }
+            }
+
+        });
+
+    </script>
+<!-- Dynamic Widgets by QURL - http://www.qurl.nl //-->
+        <script type="text/javascript">
+            var front_ajaxurl = 'http://www.scouterna.se/wp-admin/admin-ajax.php';
+            var wpv_calendar_image = 'http://www.scouterna.se/wp-content/plugins/wp-views/embedded/res/img/calendar.gif';
+            var wpv_calendar_text = 'Välj datum';
+        </script>
+    
+    <script type="text/javascript" src="http://www.scouterna.se/wp-content/themes/scouterna/js/main.js"></script>
+
+
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	// Create the dropdown base
+	jQuery("<select />").appendTo(".menu-main-container");
+
+	// Create default option "Go to..."
+	jQuery("<option />", {
+	   "selected": "selected",
+	   "value"   : "",
+	   "text"    : "Huvudmeny"
+	}).appendTo(".menu-main-container select");
+
+	// Populate dropdown with menu items
+	jQuery(".menu-main-container a").each(function() {
+	 var el = jQuery(this);
+		jQuery("<option />", {
+			"value"   : el.attr("href"),
+			"text"    : el.text()
+		}).appendTo(".menu-main-container select");
+	});
+	jQuery(".nav-sub a").each(function() {
+	 var el = jQuery(this);
+		jQuery("<option />", {
+			"value"   : el.attr("href"),
+			"text"    : el.text()
+		}).appendTo(".menu-main-container select");
+	});
+
+	jQuery(".menu-main-container select").change(function() {
+  window.location = jQuery(this).find("option:selected").val();
+});
+});
+
+jQuery(document).ready(function() {
+	
+		function responsive_sub_nav() {
+			var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
+			var pathArray = window.location.pathname.split( '/' );
+			var secondLevelLocation = pathArray[0];
+
+			var newPathname = "";
+		    for ( i = 0; i < pathArray.length; i++ ) {
+		      newPathname += "/";
+		      newPathname += pathArray[i];
+		    }
+		    pageName = pathArray[1];
+
+		    jQuery('#header').append('<nav id=\"subaccess\"><div class=\"subnavigation\"></div></nav>');
+
+		    jQuery.get("/", { hip_name: pageName })
+		        .done(function(data) {
+		           var menuTitle = data;
+		        	// Create the dropdown base
+		        	if(jQuery("#sidebar .menu a").length){
+		        		jQuery("<select />").appendTo(".subnavigation");
+
+		        		// Create default option "Go to..."
+		        		jQuery("<option />", {
+		        		   "selected": "selected",
+		        		   "value"   : "",
+		        		   "text"    : "Meny för" + menuTitle,
+		        		}).appendTo(".subnavigation select");
+
+		        		// Populate dropdown with menu items
+		        		jQuery("#sidebar .menu a").each(function() {
+		        		 var el = jQuery(this);
+		        			jQuery("<option />", {
+		        				"value"   : el.attr("href"),
+		        				"text"    : el.text()
+		        			}).appendTo(".subnavigation select");
+		        		});
+
+		        		jQuery(".subnavigation select").change(function() {
+		        			window.location = jQuery(this).find("option:selected").val();
+		        		});
+		        	}
+		        	if(jQuery("#sidebar .submenu a").length){
+		        		jQuery("<select />").appendTo(".subnavigation");
+
+		        		// Create default option "Go to..."
+		        		jQuery("<option />", {
+		        		   "selected": "selected",
+		        		   "value"   : "",
+		        		   "text"    : "Meny för " + menuTitle,
+		        		}).appendTo(".subnavigation select");
+
+		        		// Populate dropdown with menu items
+		        		jQuery("#sidebar .submenu a").each(function() {
+		        		 var el = jQuery(this);
+		        			jQuery("<option />", {
+		        				"value"   : el.attr("href"),
+		        				"text"    : el.text()
+		        			}).appendTo(".subnavigation select");
+		        		});
+
+		        		jQuery(".subnavigation select").change(function() {
+		        			window.location = jQuery(this).find("option:selected").val();
+		        		});
+		        	}
+		    });
+			
+		}
+		
+		if ( jQuery( window ).width() < 800 ) {
+			responsive_sub_nav();	
+		}	
+	});	
+	
+</script>
+</head>
+
+<body class="page page-id-17193 page-child parent-pageid-270 page-template-default desktop single-author singular page-mal two-column right-sidebar">
+<div id="wrapper" class="hfeed">
+    <div class="skip-link"><a class="assistive-text-main" href="#main" title="Skip to content">Skip to content</a></div>
+	<div class="w1">
+		
+		<header id="header" role="banner">
+			<nav class="nav-add">
+			<div class="menu-zajtnavigation-container"><ul id="menu-zajtnavigation" class="add-nav"><li id="menu-item-578" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home current-menu-item current_page_item menu-item-578"><a title="Scouterna" href="http://www.scouterna.se/">Scouterna</a></li>
+<li id="menu-item-576" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-576"><a title="Service" href="http://www.scoutservice.se/">Scoutservice</a></li>
+<li id="menu-item-21768" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21768"><a title="Tidningen" href="http://www.scout.se">Tidningen Scout</a></li>
+<li id="menu-item-599" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-599"><a title="Folkhögskola" href="http://www.scouternasfolkhogskola.se/">Scouternas folkhögskola</a></li>
+<li id="menu-item-577" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-577"><a title="Shop" href="http://www.scoutshop.se/">Scoutshop</a></li>
+</ul></div>			</nav>
+
+			<div class="holder">
+											<div id="site-title" class="logo">
+								<span>
+									<a href="http://www.scouterna.se/" title="Scouterna" rel="home">
+										<img src="http://www.scouterna.se/wp-content/themes/scouterna/images/logo.png" width="376" height="138" alt="Scouterna" />
+									</a>
+								</span>
+							</div>
+							
+
+
+					<form method="get" class="searchform" action="http://www.scouterna.se/">
+		<label for="s" class="assistive-text">Sök på</label>
+		<span class="text">
+			<input type="text" class="field" name="s" id="s" placeholder="Sök på www.scouterna.se" />
+		</span>		
+		<input type="submit" class="submit" id="searchsubmit" value="Sök" />
+	</form>
+
+				<nav class="nav-sub">
+					<div class="menu-snabblankar-sidtopp-container"><ul id="menu-snabblankar-sidtopp" class="sub-nav"><li id="menu-item-8383" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8383"><a href="http://www.scouterna.se/kontakt/">Kontakt</a></li>
+<li id="menu-item-582" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-582"><a href="http://www.scouterna.se/media/">Press</a></li>
+<li id="menu-item-583" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-583"><a href="http://www.scouterna.se/stod-oss/">Stöd oss</a></li>
+<li id="menu-item-19028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19028"><a href="http://www.scouterna.se/other-languages/">Other languages</a></li>
+</ul></div>				</nav>
+			</div><!-- .holder -->
+
+			<!-- navigation -->
+			<nav id="access" role="navigation">
+								<div class="menu-main-container"><ul id="nav" class="menu"><li id="menu-item-585" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-585"><a href="http://www.scouterna.se/bli-scout/">Bli scout</a></li>
+<li id="menu-item-586" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-586"><a href="http://www.scouterna.se/hitta-scoutkar/">Hitta scoutkår</a></li>
+<li id="menu-item-587" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-587"><a href="http://www.scouterna.se/aktiviteter-och-lager/">Aktiviteter och läger</a></li>
+<li id="menu-item-8404" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8404"><a href="http://www.scouterna.se/ledarskap-och-utbildning/">Ledarskap och utbildning</a></li>
+<li id="menu-item-20989" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20989"><a title="scoutshop.se" href="http://www.scoutshop.se">Shop</a></li>
+<li id="menu-item-600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-600"><a href="http://www.scouterna.se/om-scouterna/">Om Scouterna</a></li>
+</ul></div>			</nav><!-- #access -->
+
+
+			<form method="get" action="http://www.scouterna.se/" class="mobile-form">
+				<fieldset>
+					<span class="text"><span><input type="text" name="s" value="Sök på www.scouterna.se" /></span></span>
+				</fieldset>
+			</form>
+
+            <a href="http://www.scouterna.se/kontakt/" class="contact-link">KONTAKT</a>		</header><!-- #header -->
+
+
+	<div id="main">
+            <!-- breadcrumbs -->
+		<div class="breadcrumbs"><!-- Breadcrumb NavXT 5.2.2 -->
+<a title="Gå till Scouterna." href="http://www.scouterna.se" class="home">Scouterna</a> &gt; <a title="Gå till Aktiviteter och läger." href="http://www.scouterna.se/aktiviteter-och-lager/" class="post post-page">Aktiviteter och läger</a> &gt; <a title="Gå till Aktivitetsbanken." href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/" class="post post-page">Aktivitetsbanken</a> &gt; Målspår</div>
+
+		<!-- sidebar -->
+<div id="sidebar" class="sidebar-left">
+    <div class="holder">
+        <div class="frame">
+            <div class="block">            	
+            	<nav><ul class='submenu'><li class="page_item page-item-270 page_item_has_children current_page_ancestor current_page_parent"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/">Aktivitetsbanken</a>
+<ul class='children'>
+	<li class="page_item page-item-1269"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/utokad-sokning/">Utökad sökning</a></li>
+	<li class="page_item page-item-15285"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/alla-aktiviteter/">Alla aktiviteter</a></li>
+	<li class="page_item page-item-17175"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/aldersgrupp/">Åldersgrupper</a></li>
+	<li class="page_item page-item-17184"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/tidsatgang/">Tidsåtgång</a></li>
+	<li class="page_item page-item-17189"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/upplagg/">Upplägg</a></li>
+	<li class="page_item page-item-17193 current_page_item"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/">Målspår</a></li>
+	<li class="page_item page-item-9507"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/om-aktivitetsbanken/">Om Aktivitetsbanken</a></li>
+	<li class="page_item page-item-15244"><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/ladda-upp-aktiviteter/">Ladda upp aktiviteter</a></li>
+</ul>
+</li>
+<li class="page_item page-item-17"><a href="http://www.scouterna.se/aktiviteter-och-lager/scoutklader-och-marken/">Scoutkläder och märken</a></li>
+<li class="page_item page-item-18498"><a href="http://www.scouterna.se/aktiviteter-och-lager/hajk-och-lager/">Hajk och läger</a></li>
+<li class="page_item page-item-19380"><a href="http://www.scouterna.se/aktiviteter-och-lager/om-aventyret/">Om Äventyret</a></li>
+<li class="page_item page-item-203"><a href="http://www.scouterna.se/aktiviteter-och-lager/scouthogtider/">Scouthögtider</a></li>
+<li class="page_item page-item-277"><a href="http://www.scouterna.se/aktiviteter-och-lager/lagerplatser-i-sverige/">Lägerplatser i Sverige</a></li>
+<li class="page_item page-item-15259"><a href="http://www.scouterna.se/aktiviteter-och-lager/lagerplatser-i-varlden/">Lägerplatser i världen</a></li>
+</ul></nav>            </div>
+        </div>
+    </div>
+</div><!-- end #sidebar -->
+
+		<div class="main-holder">
+			<div id="twocolumns">
+				<div id="content" role="main">
+					<div class="content-holder">
+						<div class="content-frame">
+							<div class="content-block">
+
+								
+									
+<div id="post-17193" class="post-17193 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Målspår</h1>
+	</header><!-- .entry-header -->
+	
+	
+	<div class="entry-content">
+		<p class="content-preamble">Aktiviteter är indelade utifrån Scouternas målspår. Målen för varje åldersgrupp följer 14 spår som tillsammans ger grunden för hur vi vill att barn och unga ska utvecklas i Scouterna.</p>
+<h2>Aktiv i gruppen</h2>
+<p>Här hittar du aktiviteter där alla kan vara aktiva och alla behövs. Oavsett om man är patrulledare eller patrullkock handlar Aktiv i gruppen om att ta sin roll på allvar, utveckla rollen och växa med uppgiften.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/aktiv-i-gruppen/">Aktiviteter för målspåret Aktiv i gruppen »</a></p>
+<h2>Aktiv i samhället</h2>
+<p>Här hittar du aktiviteter som ger möjlighet att engagera sig. Vi vill att våra scouter engagerar sig i frågor de brinner för, för att på så sätt bidra till en bättre värld.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/aktiv-i-samhallet/">Aktiviteter för målspåret Aktiv i samhället »</a></p>
+<h2>Egna värderingar</h2>
+<p>Här hittar du aktiviteter som utmanar scouterna att ta ställning eller hamnar i situationer när man tvingas fundera över vad man tror eller tycker. Målspåret Egna värderingar fokuserar på våra egna, personliga ställningstaganden och hur vi relaterar dem till scoutings värdegrund.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/egna-varderingar/">Aktiviteter för målspåret Egna värderingar »</a></p>
+<h2>Existens</h2>
+<p>Här hittar du aktiviteter som ger utrymme för andlig utveckling och till eftertanke, men också de som ger förståelse för olika existentiella tankesätt. I Scouterna finns utrymme för frågor som Vem är jag? Vem vill jag vara? Vad är meningen med livet? Vad händer när vi dör? Vad är gott och ont? Finns Gud? Vad betyder det i så fall för mig?</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/existens/">Aktiviteter för målspåret Existens »</a></p>
+<h2>Fantasi och kreativt uttryck</h2>
+<p>Här hittar du aktiviteter som ger utrymme för scoutens kreativitet. I Scouterna ges utrymmer för fantasin och den egna kreativiteten genom allt från sagor och symboler till att tillverka något användbart eller spela teater.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/fantasi-och-kreativt-uttryck/">Aktiviteter för målspåret Fantasi och kreativt uttryck »</a></p>
+<h2>Fysiska utmaningar</h2>
+<p>Här hittar du aktiviteter som utmanar scouten fysiskt och finmotoriskt. I Scouterna utmanas barn och unga efter en helhetssyn som innebär att kropp och själ hör ihop.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/fysiska-utmaningar/">Aktiviteter för målspåret Fysiska utmaningar »</a></p>
+<h2>Förståelse för omvärlden</h2>
+<p>Här hittar du aktiviteter som ger ökad förståelse för olika kulturer och som belyser orättvisor. Scouterna vill bidra till fred på jorden och minskade orättvisor oavsett om det är långt borta eller i vår närmiljö.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/forstaelse-for-omvarlden/">Aktiviteter för målspåret Förståelse för omvärlden »</a></p>
+<h2>Kritiskt tänkande</h2>
+<p>Här hittar du aktiviteter som ger utrymme för att sålla bland information och skapa sin uppfattning om detta. I Scouterna utmanas barn och unga att sålla bland information och avgöra dess sanning.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/kritiskt-tankande/">Aktiviteter för målspåret Kritiskt tänkande »</a></p>
+<h2>Känsla för naturen</h2>
+<p>Här hittar du aktiviteter som ger förståelse för naturen och vad som påverkar miljön. I Scouterna får barn och unga möjligheter att upptäcka det unika med naturen som leder till en större känsla än för den som bara mött den genom abstrakta beskrivningar.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/kansla-for-naturen/">Aktiviteter för målspåret Känsla för naturen »</a></p>
+<h2>Ledarskap</h2>
+<p>Här hittar du aktiviteter som övar ledarskapet. Scouterna ger unga möjligheter att i en trygg miljö öva på ett ledarskap och med goda förebilder utvecklas till bra ledare. Det kan till exempel handla om att någon får leda en ceremoni, planera ett projekt eller leka följa John.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/ledarskap/">Aktiviteter för målspåret Ledarskap »</a></p>
+<h2>Problemlösning</h2>
+<p>Här hittar du aktiviteter som utmanar scouternas klurighetsförmåga. I Scouterna utmanas scouterna att lösa problem på kreativa sätt, oavsett om det handlar om att laga en trasig ryggsäck, genomföra en organisationstävling eller planera en hajk.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/problemlosning/">Aktiviteter för målspåret Problemlösning »</a></p>
+<h2>Relationer</h2>
+<p>Här hittar du aktiviteter ger möjligeter för scouterna att stärka gemenskapen eller reflektera hur andra personer agerar. I scoutverksamheten finns många tillfällen att öva på de egenskaper som är viktiga för att skapa goda relationer.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/relationer/">Aktiviteter för målspåret Relationer »</a></p>
+<h2>Självinsikt och självkänsla</h2>
+<p>Här hittar du aktiviteter som stärker ens känsla om sig själv. Eftersom vi strävar efter att utgå från allas personliga förutsättning får alla möjlighet att spänna just sin båge lite extra och upptäcka att de klarade av det.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/sjalvinsikt-och-sjalvkansla/">Aktiviteter för målspåret Självinsikt och självkänsla »</a></p>
+<h2>Ta hand om sin kropp</h2>
+<p>Här hittar du aktiviteter som leder till förståelse och eftertanke kring vad kroppen mår dåligt och bra mot. I Scouterna lär vi oss hur man är schysst mot sin kropp – både på utsidan och insidan.</p>
+<p><a href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/ta-hand-om-sin-kropp/">Aktiviteter för målspåret Ta hand om sin kropp »</a></p>
+			</div><!-- .entry-content -->
+	<footer class="entry-meta">
+		<div class="sharebuttons">
+				<div class="sharingbuttons">
+        <div id="fb-root"></div>
+		<script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=124898400930282";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-like" data-href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/" data-send="false" data-layout="button_count" data-width="200" data-show-faces="false"></div>
+
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <!-- Place this tag where you want the share button to render. -->
+        <div class="g-plus" data-action="share" data-annotation="bubble" data-href="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/"></div>
+        <!-- Place this tag after the last share tag. -->
+        <script type="text/javascript">
+          window.___gcfg = {lang: 'sv'};
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script>
+
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.scouterna.se/aktiviteter-och-lager/aktivitetsbanken/mal/" width="20" data-lang="sv">Tweeta</a>
+
+        <script src="http://cdn.instaemail.net/js/app.js"></script>
+        <a href="#" onclick="pfEmail.init()" title="E-posta denna sida" class="shareemail">
+            <img alt="E-posta denna sida" src="http://www.scouterna.se/wp-content/themes/scouterna/images/e-post.png" />
+        </a>
+    </div>
+
+	<div class="printbutton">
+    	<input type="button" onClick="window.print()" value="Skriv ut"/>
+   	</div>
+	<br style="clear:both;" />
+	        </div>
+			</footer><!-- .entry-meta -->
+</div><!-- #post-17193 -->
+									
+									
+															</div><!-- .content-block -->
+						</div><!-- .content-frame -->
+					</div><!-- .content-holder -->
+				</div><!-- #content -->
+				
+				
+<!-- aside -->
+<div class="aside aside-wrapper">
+<div class="aside mainwidgets">
+                	<aside id="text-22" class="widget widget_text"><div class="holder"><div class="frame"><div class="block"><h2 class="widget-title">Tidningen Scout</h2>			<div class="textwidget"><p>
+<img src="/wp-content/uploads/2015/07/Scouterna_Startkampanj-copy.jpg" alt="Tidningen Scout" />
+Nu finns tidningen Scout på webben. Äventyr, inspiration, pyssel och prylar – allt som inte fick plats mellan bladen och lite till.
+</p>
+
+<p><a href="http://www.scout.se">Läs webbtidningen &raquo;</a></p></div>
+		</div></div></div></aside><aside id="text-16" class="widget widget_text"><div class="holder"><div class="frame"><div class="block"><h2 class="widget-title">Upplev scouting</h2>			<div class="textwidget"><img src="/wp-content/uploads/2013/04/widget-upplevscouting.jpg" alt="Två scouter håller om varandra" />
+
+Äventyr och utmaningar med nya kompisar! Uppleva hur det är att vara scout genom att se scouter berätta.
+<br /><br />
+<a href="/bli-scout/">Bli scout »</a></div>
+		</div></div></div></aside><aside id="text-17" class="widget widget_text"><div class="holder"><div class="frame"><div class="block"><h2 class="widget-title">Sök scoutkår där du bor</h2>			<div class="textwidget"><img src="http://www.scouterna.se/wp-content/uploads/2013/04/widget-hittascoutkar.png" alt="Karta över scoutkårer" />
+
+Du blir medlem i Scouterna genom att ta kontakt med en scoutkår.
+<br /><br />
+<a href="/hitta-scoutkar/">Hitta scoutkår »</a></div>
+		</div></div></div></aside></div>
+</div>				
+			</div><!-- #two-columns -->
+		
+	</div><!-- .main-holder -->
+
+
+		</div><!-- #main -->
+
+		<footer id="footer" role="contentinfo">
+			<div class="footer-holder">
+
+				<div class="footer_info"><div class="footer_contact footer_section footer_section_1"><h2 class="title">Scouterna</h2><ul><li><strong>Telefon:</strong> <a class="phone" href="tel:+46856843200">08-568 432 00</a>     <table border="1" style="width:100%">   <tr><td>måndag</td><td> 9.30–11.30,</td></tr>     <tr><td></td><td> 13.30-16.00</td></tr>    <tr><td>tisdag–fredag</td><td> 9.00–16.00</td></tr>           </table></li><li><strong>E-post:</strong> <a href="mailto:info@scouterna.se">info@scouterna.se</a></li><li><strong>Adress:</strong> Box 420 34, 126 12 Stockholm</li><li class="contact"><a href="http://www.scouterna.se/kontakt/">Fler kontaktuppgifter &raquo;</a></li><li class="about_page">Denna webbplats använder kakor.<br><a href="http://www.scouterna.se/om-webbplatsen/">Om webbplatsen &raquo;</a></li></ul></div><div class="footer_social footer_section footer_section_2"><a href="https://www.facebook.com/scouterna"><img src="http://www.scouterna.se/wp-content/themes/scouterna/images/icon_fb.png" alt="Facebook ikon" width="30" height="30"><span>Följ oss på Facebook</span></a><a href="http://instagram.com/scouterna"><img src="http://www.scouterna.se/wp-content/themes/scouterna/images/icon_instagram.png" alt="Instagram ikon" width="30" height="30"><span>Följ oss på Instagram</span></a><a href="http://twitter.com/scouterna"><img src="http://www.scouterna.se/wp-content/themes/scouterna/images/icon_twitter.png" alt="Twitter ikon" width="30" height="30"><span>Följ oss på Twitter</span></a></div><div class="footer_rich_text_field footer_section"><p style="text-align: center;">Vi hjälper Scouterna att skapa äventyr för barn och unga:</p>
+<p style="text-align: center;"><a href="/wp-content/uploads/2015/08/sparbanken_skane_130x40_c_pos_2.png"><img class=" wp-image-21929 size-full alignnone" src="/wp-content/uploads/2015/08/sparbanken_skane_130x40_c_pos_2.png" alt="sparbanken_skane_130x40_c_pos_2" width="130" height="40" /></a>        <a href="/om-scouterna/vara-sponsorer/svenska-postkodlotteriet/"><img class="alignnone size-full wp-image-19479" src="http://www.scouterna.se/wp-content/uploads/2013/07/SPL-logo-2013-FC.png" alt="SPL-logo-2013-FC" width="70" height="46" /></a></p></div></div><!-- end .footer_info -->			</div><!-- .footer-holder -->
+		</footer><!-- #footer -->
+	</div><!-- #w1 -->
+</div><!-- #wrapper -->
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+function changeTaxonomy() {
+	if ( 0 == this.options[this.selectedIndex].value ) {
+		return;
+	}
+	if ( 0 == this.options[this.selectedIndex].value ) {
+		return;
+	}
+	location.href = this.options[this.selectedIndex].value;
+}
+
+/* ]]> */
+</script><script type='text/javascript' src='http://www.scouterna.se/wp-includes/js/comment-reply.min.js?ver=4.2.2'></script>
+<script type='text/javascript' src='http://www.scouterna.se/wp-content/plugins/val-facet/js/public-script.js?ver=1.0.0'></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	
+	jQuery('.gform_wrapper form input[type="submit"]').click(function() {
+		
+		var pid = 17193;
+		var id = jQuery('.gform_wrapper').attr('id');
+		
+		_gaq.push(['_trackPageview', "/skickatformular-"+id+"p-"+pid]);
+		
+	});
+	
+	jQuery('.gform_wrapper form input:first').focus(function(){
+		
+		var pid = 17193;
+		var id = jQuery('.gform_wrapper').attr('id');
+		console.log('Du har påbörjat det här formuläret. Trackviewn är: /startatformular:'+id+'&p_'+pid);
+		_gaq.push(['_trackPageview', "/startatformular:"+id+"&p_"+pid]);
+	});
+	
+});
+
+</script>
+
+</body>
+</html>
+
+

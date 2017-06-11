@@ -1,0 +1,33 @@
+{
+  "permission_levels": {
+    "category_edit": 10,
+    "mediaitem_create": 10,
+    "reference_edit_own": 0,
+    "system_message_read": -100,
+    "reference_edit": 10,
+    "auth_role_list": 20,
+    "auth_user_create": 20,
+    "activity_edit_own": 0,
+    "comment_create": 0,
+    "category_create": 10,
+    "activity_edit": 10,
+    "mediaitem_edit": 10,
+    "reference_create": 10,
+    "auth_user_edit": 20,
+    "auth_profile_edit": 0,
+    "comment_edit": 10,
+    "system_message_manage": 20,
+    "mediaitem_edit_own": 0,
+    "auth_role_assignown": 10,
+    "rating_set_own": 0,
+    "auth_role_assign": 20,
+    "comment_edit_own": 0,
+    "activity_create": 0
+  },
+  "role_levels": {
+    "administrator": 20,
+    "moderator": 10,
+    "limited_user": -1,
+    "user": 0
+  }
+}

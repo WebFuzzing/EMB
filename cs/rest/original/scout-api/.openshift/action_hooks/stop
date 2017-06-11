@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ADMIN_SERVER_PID=`lsof | grep :30000 | awk '{print $2}'`
+if [[ "" != "$ADMIN_SERVER_PID" ]]; then
+  kill -SIGTERM $ADMIN_SERVER_PID
+fi
+
+PID=`lsof | grep :8080 | awk '{print $2}'`
+if [[ "" != "$PID" ]]; then
+  kill -SIGTERM $PID
+fi

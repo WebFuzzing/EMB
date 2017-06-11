@@ -1,0 +1,111 @@
+server:
+  gzip:
+    minimumEntitySize: 100bytes
+  type: simple
+  applicationContextPath: /api
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+
+#logging:
+#  level: INFO
+#  appenders:
+#    - type: console
+#      threshold: ALL
+#      timeZone: UTC
+#      target: stdout
+#      logFormat: # TODO
+#
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    se.devscout: DEBUG
+
+    # Enable JSON request and response loggning:
+    org.glassfish.jersey.filter.LoggingFilter: INFO
+
+    org.hibernate.SQL: DEBUG
+#    org.hibernate.type: TRACE
+
+  appenders:
+    - type: console
+
+database:
+  # the name of your JDBC driver
+  driverClass: org.h2.Driver
+
+  # the username
+  user: sa
+
+  # the password
+  password:
+
+  # the JDBC URL
+  url: jdbc:h2:mem:integrationtest
+
+  # any properties specific to your JDBC driver:
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: "org.hibernate.dialect.H2Dialect"
+    hibernate.hbm2ddl.auto: "create-drop"
+    hibernate.hbm2ddl.import_files_sql_extractor: "org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor"
+
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
+
+defaultTags:
+  - name: "Happy"
+    group: "feelings"
+  - name: "Sad"
+    group: "feelings"
+  - name: "Bored"
+    group: "feelings"
+  - name: "Think"
+    group: "feelings"
+  - name: "Excited"
+    group: "feelings"
+
+defaultUsers:
+  - name: "INTEGRATION TEST USER"
+    authorization_level: 0
+    identities:
+      - type: "API"
+        value: "user"
+  - name: "INTEGRATION TEST MODERATOR"
+    authorization_level: 10
+    identities:
+      - type: "API"
+        value: "moderator"
+  - name: "INTEGRATION TEST ADMINISTRATOR"
+    authorization_level: 20
+    identities:
+      - type: "API"
+        value: "administrator"
+
+mediaFilesFolder: ./temp/media-files
+
+tempFolder: ./temp
+
+autoUpdateIntervalSeconds: 0 # 0 = disabled
+
+crawlerUser: "Crawler"

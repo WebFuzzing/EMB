@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cd $OPENSHIFT_REPO_DIR
+
+#
+# Modify the Dropwizard configuration file with passwords available on the remote host (i.e. the OpenShift server)
+# in environment variables. Modifying the configuration file during deployment is a much better solution then
+# committing the file to Git with the password inside.
+#
+
+sed -i 's/@OPENSHIFT_DIY_IP@/'"$OPENSHIFT_DIY_IP"'/g' api/config-openshift.yml
+sed -i 's/@OPENSHIFT_POSTGRESQL_DB_HOST@/'"$OPENSHIFT_POSTGRESQL_DB_HOST"'/g' api/config-openshift.yml
+sed -i 's/@OPENSHIFT_POSTGRESQL_DB_PORT@/'"$OPENSHIFT_POSTGRESQL_DB_PORT"'/g' api/config-openshift.yml
+sed -i 's/@OPENSHIFT_POSTGRESQL_DB_USERNAME@/'"$OPENSHIFT_POSTGRESQL_DB_USERNAME"'/g' api/config-openshift.yml
+sed -i 's/@OPENSHIFT_POSTGRESQL_DB_PASSWORD@/'"$OPENSHIFT_POSTGRESQL_DB_PASSWORD"'/g' api/config-openshift.yml
+
+echo Deploy script done

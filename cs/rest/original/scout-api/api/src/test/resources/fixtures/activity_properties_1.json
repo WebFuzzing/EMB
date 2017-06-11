@@ -1,0 +1,42 @@
+{
+  "name": "A New Activity",
+  "description_material": "Materials",
+  "description_introduction": "Introduction",
+  "description_prepare": "Preparations",
+  "description_main": "Main",
+  "description_safety": "Safety",
+  "description_notes": "Notes",
+  "age_min": 5,
+  "age_max": 10,
+  "participants_min": 1,
+  "participants_max": 3,
+  "time_min": 10,
+  "time_max": 30,
+  "featured": false,
+  "tags": [
+    {
+      "id": 1
+    },
+    {
+      "group": "location",
+      "name": "At home"
+    }
+  ],
+  "media_files": [
+    {
+      "name": "ant.gif",
+      "mime_type": "image/gif",
+      "uri": "http://example.com/ant.gif"
+    },
+    {
+      "name": "ant.gif - Duplicate which should not be persisted",
+      "mime_type": "image/gif",
+      "uri": "http://example.com/ant.gif"
+    },
+    {
+      "name": "bobcat.gif",
+      "mime_type": "image/gif",
+      "uri": "http://example.com/bobcat.gif"
+    }
+  ]
+}
