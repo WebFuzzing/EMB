@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>evomaster-benchmark-em-embedded-rest-features-service</artifactId>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.evomaster</groupId>
+        <artifactId>evomaster-benchmark-em-embedded-rest</artifactId>
+        <version>0.0.3-SNAPSHOT</version>
+    </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.javiermf.features</groupId>
+            <artifactId>features-service</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jersey-bean-validation</artifactId>
+                    <groupId>org.glassfish.jersey.ext</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>bean-validator</artifactId>
+                    <groupId>org.glassfish.hk2.external</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+
+</project>
