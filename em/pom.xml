@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>evomaster-benchmark-em</artifactId>
+    <packaging>pom</packaging>
 
     <modules>
         <module>embedded</module>

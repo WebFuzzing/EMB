@@ -9,6 +9,8 @@
     </parent>
 
     <artifactId>evomaster-benchmark-cs-rest-original</artifactId>
+    <packaging>pom</packaging>
+
 
     <modules>
         <module>features-service</module>

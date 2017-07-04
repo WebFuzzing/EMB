@@ -9,10 +9,13 @@
     </parent>
 
     <artifactId>evomaster-benchmark-em-embedded-rest</artifactId>
+    <packaging>pom</packaging>
+
 
     <modules>
         <module>features-service</module>
         <module>scout-api</module>
+        <module>ocvn</module>
     </modules>
 
 </project>
