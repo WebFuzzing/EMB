@@ -33,6 +33,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.context.internal.ManagedSessionContext;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import se.devscout.scoutapi.activityimporter.ActivitiesImporter;
 import se.devscout.scoutapi.auth.AuthResult;
 import se.devscout.scoutapi.auth.apikey.ApiKeyAuthenticator;
@@ -51,6 +52,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +101,18 @@ public class ScoutAPIApplication extends Application<ScoutAPIConfiguration> {
         new ScoutAPIApplication().run(args);
     }
 
+    public Connection getConnection(){
+        try {
+            return hibernate
+                    .getSessionFactory()
+                    .getSessionFactoryOptions()
+                    .getServiceRegistry()
+                    .getService(ConnectionProvider.class)
+                    .getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public ScoutAPIApplication(){

@@ -12,6 +12,7 @@
 
     <modules>
         <module>features-service</module>
+        <module>scout-api</module>
     </modules>
 
 </project>
