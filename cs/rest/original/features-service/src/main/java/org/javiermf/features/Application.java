@@ -9,11 +9,6 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
 
-        String dbPort = System.getProperty("h2.tcp.dbport");
-        if(dbPort != null) {
-            Server.createTcpServer("-tcp","-tcpAllowOthers","-tcpPort",dbPort).start();
-        }
-
         SpringApplication.run(Application.class, args);
     }
 

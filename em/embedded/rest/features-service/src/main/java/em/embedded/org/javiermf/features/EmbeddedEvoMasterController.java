@@ -6,7 +6,6 @@ import org.evomaster.clientJava.controller.EmbeddedSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
-import org.hibernate.dialect.H2Dialect;
 import org.javiermf.features.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -55,7 +54,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--server.port=0",
                 "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
                 "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "--spring.jpa.database-platform=" + H2Dialect.class.getName(),
+                "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "--spring.datasource.username=sa",
                 "--spring.datasource.password"
         });
