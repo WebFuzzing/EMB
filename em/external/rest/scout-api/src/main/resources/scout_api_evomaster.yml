@@ -1,0 +1,75 @@
+server:
+  gzip:
+    minimumEntitySize: 100bytes
+  type: simple
+  applicationContextPath: /api
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+
+
+logging:
+  level: INFO
+  loggers:
+    se.devscout: INFO
+    org.glassfish.jersey.filter.LoggingFilter: INFO
+    org.hibernate.SQL: INFO
+  appenders:
+    - type: console
+
+database:
+#  driverClass: org.h2.Driver
+  driverClass: com.p6spy.engine.spy.P6SpyDriver
+  user: sa
+  password:
+#  url: jdbc:h2:mem:integrationtest
+  url: HAS_TO_BE_REPLACED
+  logValidationErrors: true
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: "org.hibernate.dialect.H2Dialect"
+    hibernate.hbm2ddl.auto: "create-drop"
+    hibernate.hbm2ddl.import_files_sql_extractor: "org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor"
+  maxWaitForConnection: 1s
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+
+defaultTags:
+  - name: "Happy"
+    group: "feelings"
+  - name: "Sad"
+    group: "feelings"
+  - name: "Bored"
+    group: "feelings"
+  - name: "Think"
+    group: "feelings"
+  - name: "Excited"
+    group: "feelings"
+
+defaultUsers:
+  - name: "INTEGRATION TEST USER"
+    authorization_level: 0
+    identities:
+      - type: "API"
+        value: "user"
+  - name: "INTEGRATION TEST MODERATOR"
+    authorization_level: 10
+    identities:
+      - type: "API"
+        value: "moderator"
+  - name: "INTEGRATION TEST ADMINISTRATOR"
+    authorization_level: 20
+    identities:
+      - type: "API"
+        value: "administrator"
+
+mediaFilesFolder: ./target/temp/media-files
+
+tempFolder: ./target/temp
+
+autoUpdateIntervalSeconds: 0 # 0 = disabled
+
+crawlerUser: "Crawler"

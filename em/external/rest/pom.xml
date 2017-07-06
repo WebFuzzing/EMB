@@ -14,7 +14,7 @@
 
     <modules>
         <module>features-service</module>
-        <!--<module>scout-api</module>-->
+        <module>scout-api</module>
         <!--<module>ocvn</module>-->
     </modules>
 

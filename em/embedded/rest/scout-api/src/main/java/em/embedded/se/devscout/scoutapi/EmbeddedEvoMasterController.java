@@ -119,7 +119,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public void resetStateOfSUT() {
 
         deleteDir(new File("./target/temp"));
-//select user0_.id as id1_13_, user0_.authorization_level as authoriz2_13_, user0_.date_created as date_cre3_13_, user0_.email_address as email_ad4_13_, user0_.name as name5_13_ from USERS user0_ inner join user_identity identities1_ on user0_.id=identities1_.user_id where identities1_.type='API' and identities1_.value='administrator'
+
         DbCleaner.clearDatabase_H2(connection);
         SqlScriptRunner.runCommands(connection, sqlCommands);
     }
