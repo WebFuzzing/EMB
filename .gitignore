@@ -26,3 +26,5 @@ hs_err_pid*
 /em/embedded/rest/scout-api/src/evo/
 /em/embedded/rest/ocvn/src/evo/
 /temp/
+/dist.zip
+/dist/

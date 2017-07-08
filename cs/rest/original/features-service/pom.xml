@@ -6,12 +6,16 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.javiermf.features</groupId>
-        <artifactId>features-service-root</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <!--<version>1.3.3.RELEASE</version>-->
+        <version>1.4.4.RELEASE</version>
     </parent>
 
+    <groupId>org.javiermf.features</groupId>
     <artifactId>features-service</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+
 
     <properties>
         <querydsl.version>3.7.2</querydsl.version>
@@ -102,6 +106,9 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <finalName>features-service</finalName>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

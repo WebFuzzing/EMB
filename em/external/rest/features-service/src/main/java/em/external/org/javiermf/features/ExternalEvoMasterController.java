@@ -28,7 +28,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 2) {
             jarLocation = args[2];
         }
-        jarLocation += "/features-service-1.0.1-SNAPSHOT.jar";
+        jarLocation += "/features-service.jar";
 
         ExternalEvoMasterController controller =
                 new ExternalEvoMasterController(controllerPort, jarLocation, sutPort);

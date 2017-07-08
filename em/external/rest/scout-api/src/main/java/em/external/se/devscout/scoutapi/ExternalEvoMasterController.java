@@ -37,7 +37,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if(args.length > 2){
             jarLocation = args[2];
         }
-        jarLocation += "/api-1.0-SNAPSHOT.jar";
+        jarLocation += "/scout-api.jar";
 
 
         ExternalEvoMasterController controller =
