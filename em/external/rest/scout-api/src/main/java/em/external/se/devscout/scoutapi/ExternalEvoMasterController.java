@@ -58,7 +58,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private List<String> sqlCommands;
 
     public ExternalEvoMasterController(){
-        this(40100, "../api/target/api-1.0-SNAPSHOT.jar", 12345);
+        this(40100, "../api/target", 12345);
     }
 
     public ExternalEvoMasterController(int controllerPort,

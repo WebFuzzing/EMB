@@ -45,7 +45,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
 
     public ExternalEvoMasterController() {
-        this(40100, "../core/target/features-service-1.0.1-SNAPSHOT.jar", 12345);
+        this(40100, "../core/target", 12345);
     }
 
     public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort) {
