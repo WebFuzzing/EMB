@@ -95,7 +95,6 @@ public class ScoutAPIApplication extends Application<ScoutAPIConfiguration> {
 
 
     private Server jettyServer;
-    private final int port;
 
     public static void main(String[] args) throws Exception {
         new ScoutAPIApplication().run(args);
@@ -116,12 +115,8 @@ public class ScoutAPIApplication extends Application<ScoutAPIConfiguration> {
 
 
     public ScoutAPIApplication(){
-        this(8080);
     }
 
-    public ScoutAPIApplication(int port){
-        this.port = port;
-    }
 
     public int getJettyPort(){
         return ((AbstractNetworkConnector)jettyServer.getConnectors()[0]).getLocalPort();
@@ -163,17 +158,6 @@ public class ScoutAPIApplication extends Application<ScoutAPIConfiguration> {
 //        );
 //        environment.jersey().register(AuthFactory.binder(chainedFactory));
 
-
-
-        /*
-            very ugly code, but does not seem that Dropwizard gives you any alternative :(
-         */
-//        HttpConnectorFactory applicationConnector = ((HttpConnectorFactory)
-//                ((SimpleServerFactory) scoutAPIConfiguration.getServerFactory()).getConnector());
-//        applicationConnector.setPort(port);
-//
-//        ((HttpConnectorFactory) ((SimpleServerFactory) scoutAPIConfiguration.getServerFactory())
-//                .getConnector()).setPort(0);
 
         environment.lifecycle().addServerLifecycleListener(server -> jettyServer = server);
     }

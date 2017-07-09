@@ -56,6 +56,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String startSut() {
         application = new ScoutAPIApplication(0);
+
+        //Dirty hack for DW...
+        System.setProperty("dw.server.connector.port", "0");
+
         try {
             application.run("server", "src/main/resources/scout_api_evomaster.yml");
         } catch (Exception e) {
