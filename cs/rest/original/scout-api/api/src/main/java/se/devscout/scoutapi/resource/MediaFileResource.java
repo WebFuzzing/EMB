@@ -137,11 +137,16 @@ public class MediaFileResource extends AbstractResource {
         return dao.create(mediaFile);
     }
 
-    @POST
-    @Timed
-    @UnitOfWork
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @ApiOperation(value = "Upload media files (presumably images) to the system. Media files can then be associated with activities. Keywords and copyright are automatically extracted from EXIF and IPTC metadata.")
+
+    /*
+        WARNING: this is a bug/limitation in Swagger, as it does now allow
+        same endpoint with different @Consumes, and it silently reports just one :(
+     */
+//    @POST
+//    @Timed
+//    @UnitOfWork
+//    @Consumes(MediaType.MULTIPART_FORM_DATA)
+//    @ApiOperation(value = "Upload media files (presumably images) to the system. Media files can then be associated with activities. Keywords and copyright are automatically extracted from EXIF and IPTC metadata.")
     public List<MediaFile> createFromMultiPart(@Auth @ApiParam(hidden = true) AuthResult authResult,
                                                MultiPart multiPart,
                                                @Context HttpServletResponse response) {
