@@ -8,10 +8,16 @@ projects, each one with its own license, as clarified in more details beneath.
 
 ## Current Case Studies
 
+To compile and generate all the jar files, use the command:
+
+``mvn  -P '!withEmbedded' clean package -DskipTests`` 
+
 ### REST
 
 * Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service]()  
 
 * Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api]()
+
+* ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen]()
 
 * OCVN (MIT), from [https://github.com/devgateway/ocvn]()

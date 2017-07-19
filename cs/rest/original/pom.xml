@@ -16,6 +16,7 @@
         <module>features-service</module>
         <module>scout-api</module>
         <module>ocvn</module>
+        <module>proxyprint</module>
     </modules>
 
 
