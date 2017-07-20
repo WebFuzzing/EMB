@@ -17,6 +17,7 @@
         <module>scout-api</module>
         <module>ocvn</module>
         <module>proxyprint</module>
+        <module>ncs</module>
     </modules>
 
 </project>
