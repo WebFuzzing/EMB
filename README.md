@@ -21,3 +21,8 @@ To compile and generate all the jar files, use the command:
 * ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen]()
 
 * OCVN (MIT), from [https://github.com/devgateway/ocvn]()
+
+* NCS (not-known license, artificial numerical examples)
+ 
+* SCS (not-known license, artificial string examples) 
+ 

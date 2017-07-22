@@ -37,6 +37,12 @@ cp("em/external/rest/scout-api/target/scout-api-evomaster-runner.jar", dist)
 cp("cs/rest/original/proxyprint/target/proxyprint.jar", dist)
 cp("em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
 
+cp("cs/rest/artificial/ncs/target/rest-ncs.jar", dist)
+cp("em/external/rest/ncs/target/rest-ncs-evomaster-runner.jar", dist)
+
+cp("cs/rest/artificial/scs/target/rest-scs.jar", dist)
+cp("em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
+
 
 zipName = "dist.zip"
 if os.path.exists(zipName):

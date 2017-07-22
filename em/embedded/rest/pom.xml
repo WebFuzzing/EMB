@@ -18,6 +18,7 @@
         <module>ocvn</module>
         <module>proxyprint</module>
         <module>ncs</module>
+        <module>scs</module>
     </modules>
 
 </project>

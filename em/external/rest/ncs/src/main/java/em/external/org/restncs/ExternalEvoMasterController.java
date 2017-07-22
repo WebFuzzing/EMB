@@ -75,7 +75,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public long getMaxAwaitForInitializationInSeconds() {
-        return 60;
+        return 120;
     }
 
     @Override

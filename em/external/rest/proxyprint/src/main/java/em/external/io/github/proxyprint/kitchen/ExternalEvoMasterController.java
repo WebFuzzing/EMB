@@ -51,7 +51,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final String jarLocation;
     private final String tmpDir;
     private Connection connection;
-
+    private Server h2;
 
     public ExternalEvoMasterController() {
         this(40100, "cs/rest/original/proxyprint/target/proxyprint.jar", 12345);
@@ -113,7 +113,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public long getMaxAwaitForInitializationInSeconds() {
-        return 60;
+        return 120;
     }
 
     @Override
@@ -121,7 +121,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             //starting H2
-            Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "" + dbPort).start();
+            h2 = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "" + dbPort);
+            h2.start();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -170,10 +171,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStop() {
-        try {
-            Server.shutdownTcpServer(dbUrl(false), "sa", true, true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if (h2 != null) {
+            h2.stop();
         }
     }
 

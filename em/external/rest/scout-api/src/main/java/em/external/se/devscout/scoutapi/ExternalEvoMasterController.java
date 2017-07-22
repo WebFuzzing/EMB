@@ -56,6 +56,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private Connection connection;
     private List<String> sqlCommands;
+    private Server h2;
+
 
     public ExternalEvoMasterController(){
         this(40100, "../api/target", 12345);
@@ -154,14 +156,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public long getMaxAwaitForInitializationInSeconds() {
-        return 60;
+        return 120;
     }
 
     @Override
     public void preStart() {
         try {
             //starting H2
-            Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "" + dbPort).start();
+            h2 = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "" + dbPort);
+            h2.start();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -187,7 +190,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStop() {
-
+        if (h2 != null) {
+            h2.stop();
+        }
     }
 
     @Override
