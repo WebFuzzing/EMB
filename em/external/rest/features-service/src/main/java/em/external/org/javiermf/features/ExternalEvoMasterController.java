@@ -29,15 +29,20 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         jarLocation += "/features-service.jar";
+        int timeoutSeconds = 120;
+        if(args.length > 3){
+            timeoutSeconds = Integer.parseInt(args[3]);
+        }
 
         ExternalEvoMasterController controller =
-                new ExternalEvoMasterController(controllerPort, jarLocation, sutPort);
+                new ExternalEvoMasterController(controllerPort, jarLocation, sutPort, timeoutSeconds);
         InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
 
         starter.start();
     }
 
 
+    private final int timeoutSeconds;
     private final int sutPort;
     private final int dbPort;
     private final String jarLocation;
@@ -45,13 +50,14 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private Server h2;
 
     public ExternalEvoMasterController() {
-        this(40100, "../core/target", 12345);
+        this(40100, "../core/target", 12345, 120);
     }
 
-    public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort) {
+    public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds) {
         this.sutPort = sutPort;
         this.dbPort = sutPort + 1;
         this.jarLocation = jarLocation;
+        this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
     }
 
@@ -98,7 +104,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public long getMaxAwaitForInitializationInSeconds() {
-        return 120;
+        return timeoutSeconds;
     }
 
     @Override

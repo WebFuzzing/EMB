@@ -24,25 +24,30 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         jarLocation += "/rest-ncs.jar";
+        int timeoutSeconds = 120;
+        if(args.length > 3){
+            timeoutSeconds = Integer.parseInt(args[3]);
+        }
 
         ExternalEvoMasterController controller =
-                new ExternalEvoMasterController(controllerPort, jarLocation, sutPort);
+                new ExternalEvoMasterController(controllerPort, jarLocation, sutPort, timeoutSeconds);
         InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
 
         starter.start();
     }
 
-
+    private final int timeoutSeconds;
     private final int sutPort;
     private final String jarLocation;
 
     public ExternalEvoMasterController() {
-        this(40100, "cs/rest/artificial/ncs/target/rest-ncs.jar", 12345);
+        this(40100, "cs/rest/artificial/ncs/target/rest-ncs.jar", 12345, 120);
     }
 
-    public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort) {
+    public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds) {
         this.sutPort = sutPort;
         this.jarLocation = jarLocation;
+        this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
     }
 
@@ -75,7 +80,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public long getMaxAwaitForInitializationInSeconds() {
-        return 120;
+        return timeoutSeconds;
     }
 
     @Override
