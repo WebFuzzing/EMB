@@ -1,5 +1,19 @@
 # EMB
-[EvoMaster](http://evomaster.org) Benchmark (EMB): a set of web/enterprise applications for experimentation in automated system testing.
+[EvoMaster](http://evomaster.org) Benchmark (EMB): 
+a set of web/enterprise applications for experimentation in automated system testing.
+
+The folder `cs` (*case study*) contains the source code of the different 
+system under tests (SUT) in this benchmark.
+
+The folder `em` (*EvoMaster*) contains the classes needed to be written to enable
+the use of EvoMaster on the SUTs. 
+In particular, there are `EmbeddedEvoMasterController` and
+`ExternalEvoMasterController` class implementations for each SUT.
+Note: usually you would write a EvoMaster controller class in the same module
+of the SUTs. 
+Here, they are in different modules just to make clear what is needed to implement
+to enable the use of EvoMaster.
+
 
 ## License
 All the code that is new for this repository is released under Apache 2.0 license. 
@@ -12,6 +26,9 @@ To compile and generate all the jar files, use the command:
 
 ``mvn  -P '!withEmbedded' clean package -DskipTests`` 
 
+Depending on which shell/commandline you use, you might need to remove the
+ `''` from around `'!withEmbedded'`.
+
 ### REST
 
 * Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service]()  
@@ -20,9 +37,11 @@ To compile and generate all the jar files, use the command:
 
 * ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen]()
 
-* OCVN (MIT), from [https://github.com/devgateway/ocvn]()
+* <strike>OCVN (MIT), from [https://github.com/devgateway/ocvn]()</strike>
+  Note: still some issues to fix in the EvoMaster drivers. So this SUT
+  should not be used yet.
 
-* NCS (not-known license, artificial numerical examples)
+* NCS (not-known license, artificial numerical examples coming from different sources)
  
-* SCS (not-known license, artificial string examples) 
+* SCS (not-known license, artificial string examples coming from different sources) 
  
