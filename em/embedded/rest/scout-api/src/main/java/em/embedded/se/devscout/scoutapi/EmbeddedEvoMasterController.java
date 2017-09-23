@@ -168,4 +168,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         }
         file.delete();
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
 }

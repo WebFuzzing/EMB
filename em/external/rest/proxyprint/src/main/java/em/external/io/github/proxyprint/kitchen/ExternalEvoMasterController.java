@@ -147,6 +147,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
+    public List<String> getEndpointsToSkip() {
+        return Arrays.asList("/heapdump.json", "/heapdump");
+    }
+
+    @Override
     public void resetStateOfSUT() {
         DbCleaner.clearDatabase_H2(connection);
 

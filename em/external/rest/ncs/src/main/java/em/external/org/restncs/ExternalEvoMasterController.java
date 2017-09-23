@@ -128,4 +128,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String getDatabaseDriverName() {
         return null;
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
 }

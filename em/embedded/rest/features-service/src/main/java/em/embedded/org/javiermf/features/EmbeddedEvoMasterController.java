@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -122,4 +123,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
+
 }

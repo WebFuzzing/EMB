@@ -129,4 +129,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String getDatabaseDriverName() {
         return "org.apache.derby.jdbc.EmbeddedDriver";
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
 }

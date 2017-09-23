@@ -260,4 +260,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String getDatabaseDriverName() {
         return derbyDriver;
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
 }

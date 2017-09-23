@@ -97,4 +97,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String getDatabaseDriverName() {
         return null;
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
 }

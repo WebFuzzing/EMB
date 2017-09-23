@@ -145,6 +145,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
+    public List<String> getEndpointsToSkip() {
+        return Arrays.asList("/heapdump.json", "/heapdump");
+    }
+
+    @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(
                 new AuthenticationDto("admin") {{

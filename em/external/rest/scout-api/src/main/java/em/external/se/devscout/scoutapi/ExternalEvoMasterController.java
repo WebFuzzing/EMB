@@ -255,4 +255,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
     }
+
+    @Override
+    public List<String> getEndpointsToSkip() {
+        return null;
+    }
 }
