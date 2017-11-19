@@ -102,7 +102,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        //DbCleaner.clearDatabase_H2(connection);
+        DbCleaner.clearDatabase_H2(connection, Arrays.asList("schema_version"));
     }
 
     @Override
