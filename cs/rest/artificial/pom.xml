@@ -115,7 +115,7 @@
                     <!-- see https://kotlinlang.org/docs/reference/using-maven.html -->
                     <artifactId>kotlin-maven-plugin</artifactId>
                     <groupId>org.jetbrains.kotlin</groupId>
-                    <version>${version.kotlin}</version>
+                    <version>${kotlin.version}</version>
                     <!--
                         Kotlin has a major "limitation" that all classes are final by default.
                         Someone call it a "feature", others (like me) call it a "design flaw".
