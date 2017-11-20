@@ -20,6 +20,7 @@
         <module>ncs</module>
         <module>scs</module>
         <module>catwatch</module>
+        <module>news</module>
     </modules>
 
 </project>

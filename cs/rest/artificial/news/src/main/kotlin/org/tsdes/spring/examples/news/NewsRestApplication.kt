@@ -22,9 +22,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  *
  * Created by arcuri82 on 06-Jul-17.
  */
-@SpringBootApplication(scanBasePackages = arrayOf("org.tsdes.spring"))
-@EnableJpaRepositories(basePackages = arrayOf("org.tsdes.spring"))
-@EntityScan(basePackages = arrayOf("org.tsdes.spring"))
+@SpringBootApplication
+@EnableJpaRepositories
+@EntityScan
 @EnableSwagger2
 class NewsRestApplication {
 

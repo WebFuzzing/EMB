@@ -1,4 +1,5 @@
-package org.tsdes.spring.rest.newsrest.api
+package org.tsdes.spring.examples.news.api
+
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation

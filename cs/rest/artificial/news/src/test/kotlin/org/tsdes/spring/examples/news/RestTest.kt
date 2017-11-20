@@ -142,4 +142,18 @@ class RestTest {
                 .body(Matchers.containsString("Sweden"))
                 .body(Matchers.containsString("Germany"))
     }
+
+    @Test
+    fun testSwaggerSchema(){
+
+        RestAssured.get("../v2/api-docs")
+                .then()
+                .statusCode(200)
+                .body("swagger", equalTo("2.0"))
+    }
+
+    @Test
+    fun testSwaggerUI(){
+        RestAssured.get("../swagger-ui.html").then().statusCode(200)
+    }
 }
