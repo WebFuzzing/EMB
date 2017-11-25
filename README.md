@@ -37,11 +37,14 @@ Depending on which shell/commandline you use, you might need to remove the
 
 * ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen]()
 
-* <strike>OCVN (MIT), from [https://github.com/devgateway/ocvn]()</strike>
-  Note: still some issues to fix in the EvoMaster drivers. So this SUT
-  should not be used yet.
+* CatWatch (Apache-2.0), from [https://github.com/zalando-incubator/catwatch]()
+
+* OCVN (MIT), from [https://github.com/devgateway/ocvn]()
+
+* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems]() 
 
 * NCS (not-known license, artificial numerical examples coming from different sources)
  
-* SCS (not-known license, artificial string examples coming from different sources) 
+* SCS (not-known license, artificial string examples coming from different sources)
+
  
