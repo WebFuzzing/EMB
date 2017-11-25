@@ -110,6 +110,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getJVMParameters() {
 
         /*
+            FIXME
+
             see http://p6spy.github.io/p6spy/2.0/install.html#generic
 
             and class
@@ -129,9 +131,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Dspring.profiles.active=integration",
                 "-Dspring.data.mongodb.port=" + mongodPort,
                 "-Dspring.data.mongodb.uri=mongodb://localhost:"+mongodPort+"/ocvn",
-                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "-Dspring.datasource.url=" + dbUrl(true) + ";create=true",
-//                "-Dspring.datasource.url=" + dbUrl(false) + ";create=true",
+                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
+                "-Dspring.datasource.url=" + dbUrl(false) + ";create=true",
+//                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
+//                "-Dspring.datasource.url=" + dbUrl(true) + ";create=true",
                 "-Dspring.datasource.username=app",
                 "-Dspring.datasource.password=app",
                 "-Ddg-toolkit.derby.port="+derbyPort
