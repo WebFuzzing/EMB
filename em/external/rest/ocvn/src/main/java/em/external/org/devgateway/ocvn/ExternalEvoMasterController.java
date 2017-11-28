@@ -47,7 +47,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 2) {
             jarLocation = args[2];
         }
-        jarLocation += "/web-1.1.1-SNAPSHOT-exec.jar";
+        if(! jarLocation.endsWith(".jar")) {
+            jarLocation += "/web-1.1.1-SNAPSHOT-exec.jar";
+        }
+
         int timeoutSeconds = 120;
         if(args.length > 3){
             timeoutSeconds = Integer.parseInt(args[3]);
