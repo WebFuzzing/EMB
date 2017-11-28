@@ -37,10 +37,12 @@ cp("em/external/rest/scout-api/target/scout-api-evomaster-runner.jar", dist)
 cp("cs/rest/original/proxyprint/target/proxyprint.jar", dist)
 cp("em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
 
-cp("cs/rest/original/catwatch/catwatch-backend/target/catwatch-backend.jar", dist)
+cp("cs/rest/original/catwatch/catwatch-backend/target/catwatch-backend.jar",
+   os.path.join(dist,"catwatch.jar"))
 cp("em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", dist)
 
-cp("cs/rest/original/ocvn/web/target/web-1.1.1-SNAPSHOT-exec.jar", dist)
+cp("cs/rest/original/ocvn/web/target/web-1.1.1-SNAPSHOT-exec.jar",
+   os.path.join(dist,"ocvn.jar"))
 cp("em/external/rest/ocvn/target/ocvn-evomaster-runner.jar", dist)
 
 cp("cs/rest/artificial/ncs/target/rest-ncs.jar", dist)
