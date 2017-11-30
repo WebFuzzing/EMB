@@ -23,7 +23,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 2) {
             jarLocation = args[2];
         }
-        jarLocation += "/rest-scs.jar";
+        if(! jarLocation.endsWith(".jar")) {
+            jarLocation += "/rest-scs.jar";
+        }
         int timeoutSeconds = 120;
         if(args.length > 3){
             timeoutSeconds = Integer.parseInt(args[3]);

@@ -37,7 +37,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if(args.length > 2){
             jarLocation = args[2];
         }
-        jarLocation += "/scout-api.jar";
+        if(! jarLocation.endsWith(".jar")) {
+            jarLocation += "/scout-api.jar";
+        }
         int timeoutSeconds = 120;
         if(args.length > 3){
             timeoutSeconds = Integer.parseInt(args[3]);
