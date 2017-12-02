@@ -185,7 +185,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             mongodExecutable = starter.prepare(mongodConfig);
             mongodExecutable.start();
 
-            NetworkServerControl nsc = new NetworkServerControl(InetAddress.getByName("localhost"), derbyPort);
+            nsc = new NetworkServerControl(InetAddress.getByName("localhost"), derbyPort);
             nsc.start(new PrintWriter(java.lang.System.out, true));
 
         } catch (Exception e) {
