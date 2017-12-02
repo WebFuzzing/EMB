@@ -80,7 +80,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
 
-        String base = Paths.get(jarLocation).getParent().toAbsolutePath().normalize().toString();
+        String base = Paths.get(jarLocation).toAbsolutePath().getParent().normalize().toString();
         tmpDir = base + "/temp/tmp_scout_api/temp_"+dbPort;
         createConfigurationFile();
 

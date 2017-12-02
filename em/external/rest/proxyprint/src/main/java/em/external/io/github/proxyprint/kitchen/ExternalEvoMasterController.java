@@ -71,7 +71,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
 
-        String base = Paths.get(jarLocation).getParent().toAbsolutePath().normalize().toString();
+        String base = Paths.get(jarLocation).toAbsolutePath().getParent().normalize().toString();
         tmpDir = base + "/temp/tmp_proxyprint/temp_" + dbPort;
     }
 
