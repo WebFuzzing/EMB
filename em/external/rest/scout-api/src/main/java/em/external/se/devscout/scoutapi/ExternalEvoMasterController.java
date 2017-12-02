@@ -126,9 +126,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private Path getConfigPath(){
         return Paths.get(jarLocation)
+                .toAbsolutePath()
                 .getParent()
                 .resolve(CONFIG_FILE)
-                .toAbsolutePath()
                 .normalize();
     }
 
