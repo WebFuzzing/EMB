@@ -126,9 +126,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<String> getEndpointsToSkip() {
-        //TODO relies on accessing Github, and it is veryyyy slow.
+        //TODO /fetch relies on accessing Github, and it is veryyyy slow.
         // Need to handle WireMock
-        return Arrays.asList("/fetch");
+        return Arrays.asList("/fetch","/health","/health.json","/error");
     }
 
 }

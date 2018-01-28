@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.google.common.base.Predicates
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
@@ -33,7 +34,7 @@ class NewsRestApplication {
         return Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .paths(PathSelectors.any())
+                .paths(Predicates.not(PathSelectors.regex("/error")))
                 .build()
     }
 
@@ -54,6 +55,8 @@ class NewsRestApplication {
                 .build()
     }
 }
+
+//http://localhost:8080/newsrest/api/swagger-ui.html
 
 fun main(args: Array<String>) {
     SpringApplication.run(NewsRestApplication::class.java, *args)

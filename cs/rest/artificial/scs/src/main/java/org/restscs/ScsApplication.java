@@ -15,6 +15,9 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 public class ScsApplication {
 
+    // http://localhost:8080/v2/api-docs
+    // http://localhost:8080/swagger-ui.html
+
     public static void main(String[] args) {
         SpringApplication.run(ScsApplication.class, args);
     }

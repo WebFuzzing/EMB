@@ -195,6 +195,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<String> getEndpointsToSkip() {
-        return Arrays.asList("/fetch");
+        return Arrays.asList("/fetch","/health","/health.json","/error");
     }
 }
