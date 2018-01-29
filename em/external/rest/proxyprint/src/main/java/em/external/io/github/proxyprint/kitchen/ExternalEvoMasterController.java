@@ -154,7 +154,19 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<String> getEndpointsToSkip() {
-        return Arrays.asList("/heapdump.json", "/heapdump");
+        //Spring Actuator endpoints
+        return Arrays.asList("/heapdump", "/heapdump.json",
+                "/autoconfig","/autoconfig.json",
+                "/beans", "/beans.json",
+                "/configprops", "/configprops.json",
+                "/dump", "/dump.json",
+                "/env","/env.json","/env/{name}",
+                "/error",
+                "/health", "/health.json",
+                "/info", "/info.json",
+                "/mappings", "/mappings.json",
+                "/metrics","/metrics.json","/metrics/{name}",
+                "/trace","/trace.json");
     }
 
     @Override
