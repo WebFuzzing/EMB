@@ -29,6 +29,19 @@ To compile and generate all the jar files, use the command:
 Depending on which shell/commandline you use, you might need to remove the
  `''` from around `'!withEmbedded'`.
 
+
+Note: the case studies do import EvoMaster as a library. Current SNAPSHOT
+versions of the case studies do use the most recent SNAPSHOT version of EvoMaster
+(the two versioning numbers are aligned).
+We do not publish the SNAPSHOT dependencies online.
+To use such SNAPSHOT versions, you need first a `mvn install` of EvoMaster on your 
+machine (so that the SNAPSHOT jars are created, and put under your `~/.m2` folder).
+However, in the Git repository of EMB, we did tag the versions of EMB that are
+using the published versions of EvoMaster.
+See the [releases](https://github.com/EMResearch/EMB/releases) page.
+For example, to use version `X` of EvoMaster, you can check out the Git commit
+of EMB tagged with version `X`. 
+
 ### REST
 
 * Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service]()  
