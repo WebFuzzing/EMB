@@ -44,20 +44,20 @@ of EMB tagged with version `X`.
 
 ### REST
 
-* Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service]()  
+* Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
 
-* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api]()
+* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
 
-* ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen]()
+* ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
 
-* CatWatch (Apache-2.0), from [https://github.com/zalando-incubator/catwatch]()
+* CatWatch (Apache-2.0), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
 
 <!---
 Currently issues with MongoDB handling
 * OCVN (MIT), from [https://github.com/devgateway/ocvn]()
 -->
 
-* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems]() 
+* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
 
 * NCS (not-known license, artificial numerical examples coming from different sources)
  
