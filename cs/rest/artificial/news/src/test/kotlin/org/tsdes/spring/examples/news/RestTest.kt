@@ -9,8 +9,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.spring.examples.news.api.V2_NEWS_JSON
 import org.tsdes.spring.examples.news.dto.NewsDto
@@ -32,7 +32,7 @@ class RestTest {
         // RestAssured configs shared by all the tests
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port
-        RestAssured.basePath = "/newsrest/api/news"
+        RestAssured.basePath = "/news"
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
         /*
@@ -133,7 +133,7 @@ class RestTest {
 
         given().accept(ContentType.JSON)
                 .and()
-                .get("http://localhost:$port/newsrest/api/countries")
+                .get("http://localhost:$port/countries")
                 .then()
                 .statusCode(200)
                 .and()

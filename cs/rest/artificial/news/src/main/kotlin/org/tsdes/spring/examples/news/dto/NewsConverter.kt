@@ -1,8 +1,6 @@
 package org.tsdes.spring.examples.news.dto
 
 import org.tsdes.spring.examples.news.db.NewsEntity
-import java.util.*
-import java.util.stream.Collectors
 
 /*
     It might be tempting to use the @Entity objects directly as DTOs.

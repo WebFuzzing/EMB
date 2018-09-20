@@ -46,9 +46,6 @@ class NewsRestApi {
     @Autowired
     private lateinit var crud: NewsRepository
 
-    @Value("\${server.contextPath}")
-    private lateinit var contextPath : String
-
     /*
         request URL parameters are in the form
 
@@ -159,7 +156,7 @@ class NewsRestApi {
             return ResponseEntity.status(404).build()
         }
 
-        val dto = crud.findOne(id) ?: return ResponseEntity.status(404).build()
+        val dto = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
 
         return ResponseEntity.ok(NewsConverter.transform(dto))
     }
@@ -193,7 +190,7 @@ class NewsRestApi {
             return ResponseEntity.status(409).build()
         }
 
-        if (!crud.exists(dtoId)) {
+        if (!crud.existsById(dtoId)) {
             //Here, in this API, made the decision to not allow to create a news with PUT.
             // So, if we cannot find it, should return 404 instead of creating it
             return ResponseEntity.status(404).build()
@@ -228,7 +225,7 @@ class NewsRestApi {
             return ResponseEntity.status(400).build()
         }
 
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
 
@@ -255,11 +252,11 @@ class NewsRestApi {
             return ResponseEntity.status(400).build()
         }
 
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
 
-        crud.delete(id)
+        crud.deleteById(id)
         return ResponseEntity.status(204).build()
     }
 
