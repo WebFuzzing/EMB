@@ -120,7 +120,7 @@
                     <!-- see https://kotlinlang.org/docs/reference/using-maven.html -->
                     <artifactId>kotlin-maven-plugin</artifactId>
                     <groupId>org.jetbrains.kotlin</groupId>
-                    <version>${kotlin.version}</version>
+                    <version>${version.kotlin}</version>
                     <!--
                         Kotlin has a major "limitation" that all classes are final by default.
                         Someone call it a "feature", others (like me) call it a "design flaw".
@@ -141,12 +141,12 @@
                         <dependency>
                             <groupId>org.jetbrains.kotlin</groupId>
                             <artifactId>kotlin-maven-allopen</artifactId>
-                            <version>${kotlin.version}</version>
+                            <version>${version.kotlin}</version>
                         </dependency>
                         <dependency>
                             <groupId>org.jetbrains.kotlin</groupId>
                             <artifactId>kotlin-maven-noarg</artifactId>
-                            <version>${kotlin.version}</version>
+                            <version>${version.kotlin}</version>
                         </dependency>
                     </dependencies>
                     <executions>
