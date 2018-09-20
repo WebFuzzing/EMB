@@ -106,7 +106,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getUrlOfSwaggerJSON() {
-        return "http://localhost:" + getSutPort() + "/newsrest/api/v2/api-docs";
+        return "http://localhost:" + getSutPort() + "/v2/api-docs";
     }
 
     @Override

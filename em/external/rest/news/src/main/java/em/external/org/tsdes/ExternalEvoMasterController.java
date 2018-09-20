@@ -173,7 +173,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getUrlOfSwaggerJSON() {
-        return getBaseURL() + "/newsrest/api/v2/api-docs";
+        return getBaseURL() + "/v2/api-docs";
     }
 
     @Override
