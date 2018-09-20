@@ -13,6 +13,13 @@
     </parent>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-client-database-spy</artifactId>
+            <version>0.1.2-SNAPSHOT</version>
+        </dependency>
+
         <!-- github API -->
         <dependency>
             <groupId>org.kohsuke</groupId>

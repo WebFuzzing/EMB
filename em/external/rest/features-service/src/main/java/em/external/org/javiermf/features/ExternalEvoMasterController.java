@@ -1,6 +1,6 @@
 package em.external.org.javiermf.features;
 
-import com.p6spy.engine.spy.P6SpyDriver;
+//import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.clientJava.controller.ExternalSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
@@ -81,11 +81,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public String[] getJVMParameters() {
         return new String[]{
-                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
-                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
+//                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
+//                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
                 //FIXME: re-enable once fixed issue with Spring
-//                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
 //                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
+                "-Dspring.datasource.driver-class-name=com.p6spy.engine.spy.P6SpyDriver",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
                 "-Dspring.datasource.password"
