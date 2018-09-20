@@ -52,14 +52,14 @@ public class Pat
 			String patrev  = Reverse(pat);
 			for (i = 0; i <= txtlen - patlen; i++) { 
 				if (txt.charAt(i) == pat.charAt(0)) {
-					possmatch = txt.substring(i, patlen);
+					possmatch = txt.substring(i, i + patlen);
 					if (possmatch.equals(pat)) {
 						//FOUND pat
 						result = 1;
 						//CHECK IF txt CONTAINS REVERSE pat
 						for (j = i + patlen; j <= txtlen - patlen; j++) { 
 							if (txt.charAt(j) == patrev.charAt(0)) {
-								possmatch = txt.substring(j, patlen);
+								possmatch = txt.substring(j, j + patlen);
 								if (possmatch.equals(patrev)) {
 									if (j == i + patlen) {
 										return "" + i;//4;
@@ -73,14 +73,14 @@ public class Pat
 					}
 				}
 				else if (txt.charAt(i) == patrev.charAt(0)) {
-					possmatch = txt.substring(i, patlen);
+					possmatch = txt.substring(i, i + patlen);
 					if (possmatch.equals(patrev)) {
 						//FOUND pat REVERSE
 						result = 2;
 						//CHECK IF txt CONTAINS pat
 						for (j = i + patlen; j <= txtlen - patlen; j++) { 
 							if (txt.charAt(j) == pat.charAt(0)) {
-								possmatch = txt.substring(j, patlen);
+								possmatch = txt.substring(j, j + patlen);
 								if (possmatch.equals(pat)) {
 									if (j == i + patlen) {
 										return "" + i;//5;
