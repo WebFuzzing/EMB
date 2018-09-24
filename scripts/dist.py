@@ -3,7 +3,11 @@
 import os
 import shutil
 from subprocess import call
+from os.path import expanduser
 
+EVOMASTER_VERSION = "0.1.2-SNAPSHOT"
+
+HOME = expanduser("~")
 SCRIPT_LOCATION = os.path.dirname(os.path.realpath(__file__))
 PROJ_LOCATION = os.path.abspath(os.path.join(SCRIPT_LOCATION, os.pardir))
 
@@ -38,11 +42,11 @@ cp("cs/rest/original/proxyprint/target/proxyprint.jar", dist)
 cp("em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
 
 cp("cs/rest/original/catwatch/catwatch-backend/target/catwatch-backend.jar",
-   os.path.join(dist,"catwatch.jar"))
+   os.path.join(dist, "catwatch.jar"))
 cp("em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", dist)
 
 cp("cs/rest/original/ocvn/web/target/web-1.1.1-SNAPSHOT-exec.jar",
-   os.path.join(dist,"ocvn.jar"))
+   os.path.join(dist, "ocvn.jar"))
 cp("em/external/rest/ocvn/target/ocvn-evomaster-runner.jar", dist)
 
 cp("cs/rest/artificial/ncs/target/rest-ncs.jar", dist)
@@ -54,6 +58,10 @@ cp("em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
 cp("cs/rest/artificial/news/target/rest-news.jar", dist)
 cp("em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
 
+cp(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
+   + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
+   + EVOMASTER_VERSION + ".jar",
+   os.path.join(dist, "evomaster-agent.jar"))
 
 zipName = "dist.zip"
 if os.path.exists(zipName):
