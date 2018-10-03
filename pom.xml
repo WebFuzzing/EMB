@@ -50,7 +50,8 @@
         <!--
             When upgrading this property, remember to manually update the
             evomaster-client-database-spy
-            in all the SUTs using a database
+            in all the SUTs using a database.
+            Also need to update same variable in dist.py
         -->
         <evomaster-version>0.1.2-SNAPSHOT</evomaster-version>
     </properties>
