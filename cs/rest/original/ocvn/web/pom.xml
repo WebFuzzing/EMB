@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.evomaster</groupId>
             <artifactId>evomaster-client-database-spy</artifactId>
-            <version>0.1.2-SNAPSHOT</version>
+            <version>0.2.0</version>
         </dependency>
 
         <dependency>

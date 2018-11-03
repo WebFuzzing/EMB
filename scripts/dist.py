@@ -5,7 +5,7 @@ import shutil
 from subprocess import call
 from os.path import expanduser
 
-EVOMASTER_VERSION = "0.1.2-SNAPSHOT"
+EVOMASTER_VERSION = "0.2.0"
 
 HOME = expanduser("~")
 SCRIPT_LOCATION = os.path.dirname(os.path.realpath(__file__))

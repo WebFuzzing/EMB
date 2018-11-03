@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.evomaster</groupId>
         <artifactId>evomaster-benchmark-cs-rest-artificial</artifactId>
-        <version>0.1.2-SNAPSHOT</version>
+        <version>0.2.0</version>
     </parent>
 
     <build>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.evomaster</groupId>
             <artifactId>evomaster-client-database-spy</artifactId>
-            <version>0.1.2-SNAPSHOT</version>
+            <version>0.2.0</version>
         </dependency>
 
         <dependency>
