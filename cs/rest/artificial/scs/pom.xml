@@ -43,7 +43,8 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>rest-scs-sut</finalName>
+                            <finalName>rest-scs</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>

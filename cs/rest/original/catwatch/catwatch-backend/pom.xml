@@ -195,7 +195,8 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>catwatch-sut</finalName>
+                            <finalName>catwatch</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>

@@ -261,7 +261,8 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>ocvn-sut</finalName>
+                            <finalName>ocvn</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>

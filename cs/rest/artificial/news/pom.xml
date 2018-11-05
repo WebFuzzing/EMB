@@ -27,7 +27,8 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>rest-news-sut</finalName>
+                            <finalName>rest-news</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>

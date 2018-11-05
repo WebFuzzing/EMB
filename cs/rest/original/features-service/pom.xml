@@ -115,7 +115,8 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>features-service-sut</finalName>
+                            <finalName>features-service</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>
