@@ -260,6 +260,10 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <finalName>ocvn</finalName>
+                            <classifier>sut</classifier>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

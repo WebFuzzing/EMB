@@ -4,7 +4,10 @@ import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.clientJava.controller.ExternalSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import org.h2.tools.Server;
 
 import java.sql.Connection;
@@ -30,7 +33,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/rest-news.jar";
+            jarLocation += "/rest-news-sut.jar";
         }
         int timeoutSeconds = 120;
         if(args.length > 3){
@@ -170,10 +173,17 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return "org.tsdes.";
     }
 
+    @Override
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                getBaseURL() + "/v2/api-docs",
+                null
+        );
+    }
 
     @Override
-    public String getUrlOfSwaggerJSON() {
-        return getBaseURL() + "/v2/api-docs";
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
     @Override
@@ -189,10 +199,5 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
-    }
-
-    @Override
-    public List<String> getEndpointsToSkip() {
-        return null;
     }
 }

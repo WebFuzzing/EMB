@@ -37,6 +37,7 @@
                 </executions>
                 <configuration>
                     <finalName>proxyprint</finalName>
+                    <classifier>sut</classifier>
                 </configuration>
             </plugin>
         </plugins>

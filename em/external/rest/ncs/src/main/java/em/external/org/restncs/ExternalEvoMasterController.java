@@ -2,7 +2,10 @@ package em.external.org.restncs;
 
 import org.evomaster.clientJava.controller.ExternalSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 
 import java.sql.Connection;
 import java.util.List;
@@ -24,7 +27,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/rest-ncs.jar";
+            jarLocation += "/rest-ncs-sut.jar";
         }
         int timeoutSeconds = 120;
         if(args.length > 3){
@@ -112,8 +115,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
 
     @Override
-    public String getUrlOfSwaggerJSON() {
-        return getBaseURL() + "/v2/api-docs";
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                getBaseURL() + "/v2/api-docs",
+                null
+        );
+    }
+
+    @Override
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
     @Override
@@ -128,11 +139,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getDatabaseDriverName() {
-        return null;
-    }
-
-    @Override
-    public List<String> getEndpointsToSkip() {
         return null;
     }
 }

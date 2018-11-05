@@ -5,7 +5,10 @@ import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.clientJava.controller.EmbeddedSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import org.javiermf.features.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -106,8 +109,16 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public String getUrlOfSwaggerJSON() {
-        return "http://localhost:" + getSutPort() + "/swagger.json";
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                "http://localhost:" + getSutPort() + "/swagger.json",
+                null
+        );
+    }
+
+    @Override
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
     @Override
@@ -122,11 +133,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
-    }
-
-    @Override
-    public List<String> getEndpointsToSkip() {
-        return null;
     }
 
 }

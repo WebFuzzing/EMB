@@ -6,7 +6,10 @@ import org.devgateway.toolkit.web.spring.WebApplication;
 import org.evomaster.clientJava.controller.EmbeddedSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -110,10 +113,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         DbCleaner.clearDatabase_Derby(connection, "ocvn");
     }
 
-    @Override
-    public String getUrlOfSwaggerJSON() {
-        return "http://localhost:" + getSutPort() + "/v2/api-docs?group=1ocDashboardsApi";
-    }
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
@@ -131,7 +130,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public List<String> getEndpointsToSkip() {
-        return null;
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                "http://localhost:" + getSutPort() + "/v2/api-docs?group=1ocDashboardsApi",
+                null
+        );
     }
+
+    @Override
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
+    }
+
+
 }

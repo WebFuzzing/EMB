@@ -4,8 +4,11 @@ import org.evomaster.clientJava.controller.EmbeddedSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
 import org.evomaster.clientJava.controller.db.SqlScriptRunner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
 import org.evomaster.clientJava.controllerApi.dto.HeaderDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import se.devscout.scoutapi.ScoutAPIApplication;
 
 import java.io.File;
@@ -21,10 +24,10 @@ import java.util.List;
  */
 public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         int port = 40100;
-        if(args.length > 0){
+        if (args.length > 0) {
             port = Integer.parseInt(args[0]);
         }
 
@@ -39,16 +42,16 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private Connection connection;
     private List<String> sqlCommands;
 
-    public EmbeddedEvoMasterController(){
+    public EmbeddedEvoMasterController() {
         this(40100);
     }
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
 
-        try(InputStream in = getClass().getResourceAsStream("/init_db.sql")) {
+        try (InputStream in = getClass().getResourceAsStream("/init_db.sql")) {
             sqlCommands = (new SqlScriptRunner()).readCommands(new InputStreamReader(in));
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -105,7 +108,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 e.printStackTrace();
             }
         }
-        if(connection != null){
+        if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {
@@ -128,10 +131,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         SqlScriptRunner.runCommands(connection, sqlCommands);
     }
 
-    @Override
-    public String getUrlOfSwaggerJSON() {
-        return "http://localhost:" + application.getJettyPort() + "/api/swagger.json";
-    }
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
@@ -158,6 +157,19 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return "org.h2.Driver";
     }
 
+    @Override
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                "http://localhost:" + application.getJettyPort() + "/api/swagger.json",
+                null
+        );
+    }
+
+    @Override
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
+    }
+
 
     private void deleteDir(File file) {
         File[] contents = file.listFiles();
@@ -167,10 +179,5 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
         file.delete();
-    }
-
-    @Override
-    public List<String> getEndpointsToSkip() {
-        return null;
     }
 }

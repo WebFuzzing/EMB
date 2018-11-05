@@ -13,28 +13,9 @@
 
     <modules>
         <module>external</module>
+        <module>embedded</module>
     </modules>
 
-    <profiles>
-        <!--
-            Complex story... we do not want to have embedded controllers
-            in the SUT folders, as 3rd-party libraries might be have side
-            effects when shadowing versions before building the SUT executables.
-            But if we have them in separated modules, no problem when running
-            from IDE, but Maven can fail. This for example happens with SpringBoot
-            that has its own structure for the uber jar, which are then no longer
-            valid jar libraries.
-        -->
-        <profile>
-            <id>withEmbedded</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>embedded</module>
-            </modules>
-        </profile>
-    </profiles>
 
     <dependencies>
         <dependency>

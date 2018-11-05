@@ -28,6 +28,7 @@
                         </goals>
                         <configuration>
                             <finalName>rest-news</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>

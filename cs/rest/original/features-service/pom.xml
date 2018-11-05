@@ -116,6 +116,7 @@
                         </goals>
                         <configuration>
                             <finalName>features-service</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>

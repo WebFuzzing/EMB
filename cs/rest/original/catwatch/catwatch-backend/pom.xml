@@ -194,6 +194,10 @@
                             <goal>build-info</goal>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <finalName>catwatch</finalName>
+                            <classifier>sut</classifier>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

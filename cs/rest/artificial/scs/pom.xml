@@ -44,6 +44,7 @@
                         </goals>
                         <configuration>
                             <finalName>rest-scs</finalName>
+                            <classifier>sut</classifier>
                         </configuration>
                     </execution>
                 </executions>
