@@ -203,23 +203,29 @@
                 <artifactId>apt-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
-                <artifactId>exec-maven-plugin</artifactId>
-                <groupId>org.codehaus.mojo</groupId>
-                <version>1.4.0</version>
-                <executions>
-                    <execution>
-                        <id>Generate scm-source.json</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>${basedir}/etc/scm/scm-source.sh</executable>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--
+                WARNING:
+                this was removed, as only working in Mac/Linux, and failing the
+                build on Windows.
+                As such file seems only used in Dockerfile, we removed it
+            -->
+            <!--<plugin>-->
+                <!--<artifactId>exec-maven-plugin</artifactId>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<version>1.4.0</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>Generate scm-source.json</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<executable>${basedir}/etc/scm/scm-source.sh</executable>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>
