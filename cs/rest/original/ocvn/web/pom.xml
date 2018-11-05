@@ -260,6 +260,9 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <finalName>ocvn-sut</finalName>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

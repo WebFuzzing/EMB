@@ -139,7 +139,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <finalName>scout-api</finalName>
+                            <finalName>scout-api-sut</finalName>
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>

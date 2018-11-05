@@ -4,8 +4,11 @@ import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.clientJava.controller.ExternalSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
 import org.evomaster.clientJava.controllerApi.dto.HeaderDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import org.h2.tools.Server;
 
 import java.io.File;
@@ -36,11 +39,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 2) {
             jarLocation = args[2];
         }
-        if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/proxyprint.jar";
+        if (!jarLocation.endsWith(".jar")) {
+            jarLocation += "/proxyprint-sut.jar";
         }
         int timeoutSeconds = 120;
-        if(args.length > 3){
+        if (args.length > 3) {
             timeoutSeconds = Integer.parseInt(args[3]);
         }
 
@@ -153,23 +156,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
-    public List<String> getEndpointsToSkip() {
-        //Spring Actuator endpoints
-        return Arrays.asList("/heapdump", "/heapdump.json",
-                "/autoconfig","/autoconfig.json",
-                "/beans", "/beans.json",
-                "/configprops", "/configprops.json",
-                "/dump", "/dump.json",
-                "/env","/env.json","/env/{name}",
-                "/error",
-                "/health", "/health.json",
-                "/info", "/info.json",
-                "/mappings", "/mappings.json",
-                "/metrics","/metrics.json","/metrics/{name}",
-                "/trace","/trace.json");
-    }
-
-    @Override
     public void resetStateOfSUT() {
         DbCleaner.clearDatabase_H2(connection);
 
@@ -221,10 +207,29 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return "io.github.proxyprint.kitchen.";
     }
 
+    @Override
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                getBaseURL() + "/v2/api-docs",
+                //Spring Actuator endpoints
+                Arrays.asList("/heapdump", "/heapdump.json",
+                        "/autoconfig", "/autoconfig.json",
+                        "/beans", "/beans.json",
+                        "/configprops", "/configprops.json",
+                        "/dump", "/dump.json",
+                        "/env", "/env.json", "/env/{name}",
+                        "/error",
+                        "/health", "/health.json",
+                        "/info", "/info.json",
+                        "/mappings", "/mappings.json",
+                        "/metrics", "/metrics.json", "/metrics/{name}",
+                        "/trace", "/trace.json")
+        );
+    }
 
     @Override
-    public String getUrlOfSwaggerJSON() {
-        return getBaseURL() + "/v2/api-docs";
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
     @Override

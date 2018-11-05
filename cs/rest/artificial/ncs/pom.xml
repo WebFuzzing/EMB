@@ -64,7 +64,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>rest-ncs</finalName>
+                            <finalName>rest-ncs-sut</finalName>
                         </configuration>
                     </execution>
                 </executions>

@@ -24,10 +24,7 @@ projects, each one with its own license, as clarified in more details beneath.
 
 To compile and generate all the jar files, use the command:
 
-``mvn  -P '!withEmbedded' clean package -DskipTests`` 
-
-Depending on which shell/commandline you use, you might need to remove the
- `''` from around `'!withEmbedded'`.
+``mvn clean package -DskipTests`` 
 
 
 Note: the case studies do import EvoMaster as a library. Current SNAPSHOT

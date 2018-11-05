@@ -4,7 +4,10 @@ package em.external.org.javiermf.features;
 import org.evomaster.clientJava.controller.ExternalSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import org.h2.tools.Server;
 
 import java.sql.Connection;
@@ -29,7 +32,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/features-service.jar";
+            jarLocation += "/features-service-sut.jar";
         }
         int timeoutSeconds = 120;
         if(args.length > 3){
@@ -172,9 +175,18 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
 
     @Override
-    public String getUrlOfSwaggerJSON() {
-        return getBaseURL() + "/swagger.json";
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                getBaseURL() + "/swagger.json",
+                null
+        );
     }
+
+    @Override
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
+    }
+
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
@@ -189,10 +201,5 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
-    }
-
-    @Override
-    public List<String> getEndpointsToSkip() {
-        return null;
     }
 }

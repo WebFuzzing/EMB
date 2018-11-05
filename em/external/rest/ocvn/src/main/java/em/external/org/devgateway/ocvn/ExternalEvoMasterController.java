@@ -13,7 +13,10 @@ import org.apache.derby.drda.NetworkServerControl;
 import org.evomaster.clientJava.controller.ExternalSutController;
 import org.evomaster.clientJava.controller.InstrumentedSutStarter;
 import org.evomaster.clientJava.controller.db.DbCleaner;
+import org.evomaster.clientJava.controller.problem.ProblemInfo;
+import org.evomaster.clientJava.controller.problem.RestProblem;
 import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
+import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -48,7 +51,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/web-1.1.1-SNAPSHOT-exec.jar";
+            jarLocation += "/ocvn-sut.jar";
         }
 
         int timeoutSeconds = 120;
@@ -247,9 +250,19 @@ public class ExternalEvoMasterController extends ExternalSutController {
         DbCleaner.clearDatabase_Derby(connection, derbyName);
     }
 
+
+
     @Override
-    public String getUrlOfSwaggerJSON() {
-        return getBaseURL() + "/v2/api-docs?group=1ocDashboardsApi";
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                getBaseURL() + "/v2/api-docs?group=1ocDashboardsApi",
+                null
+        );
+    }
+
+    @Override
+    public SutInfoDto.OutputFormat getPreferredOutputFormat() {
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
     @Override
@@ -267,8 +280,5 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return derbyDriver;
     }
 
-    @Override
-    public List<String> getEndpointsToSkip() {
-        return null;
-    }
+
 }

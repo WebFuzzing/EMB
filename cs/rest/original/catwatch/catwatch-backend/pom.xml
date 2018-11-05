@@ -194,6 +194,9 @@
                             <goal>build-info</goal>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <finalName>catwatch-sut</finalName>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
