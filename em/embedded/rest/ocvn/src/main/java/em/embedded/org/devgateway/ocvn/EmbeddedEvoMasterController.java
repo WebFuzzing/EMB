@@ -12,6 +12,7 @@ import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
 import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
@@ -41,7 +42,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private ConfigurableApplicationContext ctx;
     private Connection connection;
     private int mongodPort;
-
+    private MongoTemplate mongoTemplate;
 
     public EmbeddedEvoMasterController() {
         this(0);
@@ -56,6 +57,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String startSut() {
 
+        // An embedded MongoDB is automatically started by Spring
 
         ctx = SpringApplication.run(WebApplication.class,
                 new String[]{"--server.port=0",
@@ -79,6 +81,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        mongoTemplate = ctx.getBean(MongoTemplate.class);
 
         return "http://localhost:" + getSutPort();
     }
@@ -108,7 +112,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        //TODO reset Mongo
+        mongoTemplate.getDb().dropDatabase();
 
         DbCleaner.clearDatabase_Derby(connection, "ocvn");
     }
@@ -141,6 +145,4 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
-
-
 }

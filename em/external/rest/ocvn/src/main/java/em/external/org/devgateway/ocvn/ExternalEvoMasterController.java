@@ -1,5 +1,6 @@
 package em.external.org.devgateway.ocvn;
 
+import com.mongodb.MongoClient;
 import de.flapdoodle.embed.mongo.MongodExecutable;
 import de.flapdoodle.embed.mongo.MongodStarter;
 import de.flapdoodle.embed.mongo.config.IMongodConfig;
@@ -28,15 +29,6 @@ import java.util.List;
 public class ExternalEvoMasterController extends ExternalSutController {
 
     public static void main(String[] args) {
-
-        /*
-            FIXME: until SLF4J issue is fixed in pom, need to use
-            -Devomaster.instrumentation.jar.path=<path>
-
-            eg
-
-            java -Devomaster.instrumentation.jar.path=/Users/foo/WEB/EvoMaster/client-java/instrumentation/target/evomaster-client-java-instrumentation-0.0.3-SNAPSHOT.jar  -jar em/external/rest/ocvn/target/ocvn-evomaster-runner.jar
-         */
 
         int controllerPort = 40100;
         if (args.length > 0) {
@@ -72,6 +64,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int derbyPort;
     private final String jarLocation;
     private MongodExecutable mongodExecutable;
+    private MongoClient mongoClient;
     private Connection connection;
     private final String derbyName;
     private final String derbyDriver;
@@ -106,8 +99,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
             url += ":p6spy";
         }
         url += ":derby://localhost:" + derbyPort + "/./temp/tmp_ocvn/" + derbyName;
-//        url += ":derby://localhost/./temp/tmp_ocvn/" + derbyName;
-//        url += ":derby://localhost//" + derbyName;
 
         return url;
     }
@@ -115,22 +106,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public String[] getJVMParameters() {
 
-        /*
-            FIXME
-
-            see http://p6spy.github.io/p6spy/2.0/install.html#generic
-
-            and class
-
-            org.devgateway.toolkit.persistence.spring.DatabaseConfiguration
-
-            look at classes with
-            @Profile("integration")  and @Profile("!integration")
-
-            don't manage to get P6Spy working due to
-
-            Caused by: java.sql.SQLException: Unable to find a driver that accepts jdbc:derby://localhost:12347/./temp/tmp_ocvn/derby_12347;create=true
-         */
 
         return new String[]{
                 "-Dliquibase.enabled=false",
@@ -188,6 +163,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
             mongodExecutable = starter.prepare(mongodConfig);
             mongodExecutable.start();
 
+            mongoClient = new MongoClient(bindIp, mongodPort);
+
             nsc = new NetworkServerControl(InetAddress.getByName("localhost"), derbyPort);
             nsc.start(new PrintWriter(java.lang.System.out, true));
 
@@ -243,10 +220,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
 
     public void resetStateOfSUT() {
-        //TODO mongo
+        mongoClient.getDatabase("ocvn").drop();
 
         //schema name takes value of "user"
-//        DbCleaner.clearDatabase_Derby(connection, "app");
         DbCleaner.clearDatabase_Derby(connection, derbyName);
     }
 

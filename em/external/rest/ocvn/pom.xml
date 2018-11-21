@@ -57,6 +57,12 @@
             <artifactId>derbynet</artifactId>
             <version>${derby.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.4.2</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
