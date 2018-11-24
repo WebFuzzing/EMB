@@ -1,11 +1,11 @@
 package em.external.org.restscs;
 
-import org.evomaster.clientJava.controller.ExternalSutController;
-import org.evomaster.clientJava.controller.InstrumentedSutStarter;
-import org.evomaster.clientJava.controller.problem.ProblemInfo;
-import org.evomaster.clientJava.controller.problem.RestProblem;
-import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
-import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
+import org.evomaster.client.java.controller.ExternalSutController;
+import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.problem.ProblemInfo;
+import org.evomaster.client.java.controller.problem.RestProblem;
+import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 
 import java.sql.Connection;
 import java.util.List;

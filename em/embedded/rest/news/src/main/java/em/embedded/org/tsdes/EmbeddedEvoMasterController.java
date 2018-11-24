@@ -2,13 +2,13 @@ package em.embedded.org.tsdes;
 
 
 import com.p6spy.engine.spy.P6SpyDriver;
-import org.evomaster.clientJava.controller.EmbeddedSutController;
-import org.evomaster.clientJava.controller.InstrumentedSutStarter;
-import org.evomaster.clientJava.controller.db.DbCleaner;
-import org.evomaster.clientJava.controller.problem.ProblemInfo;
-import org.evomaster.clientJava.controller.problem.RestProblem;
-import org.evomaster.clientJava.controllerApi.dto.AuthenticationDto;
-import org.evomaster.clientJava.controllerApi.dto.SutInfoDto;
+import org.evomaster.client.java.controller.EmbeddedSutController;
+import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.problem.ProblemInfo;
+import org.evomaster.client.java.controller.problem.RestProblem;
+import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
