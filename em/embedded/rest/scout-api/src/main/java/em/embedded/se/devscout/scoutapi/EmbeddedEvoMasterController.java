@@ -137,7 +137,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(
                 AuthUtils.getForAuthorizationHeader("user", "ApiKey user"),
-                AuthUtils.getForAuthorizationHeader("moderator", "ApiKey user"),
+                AuthUtils.getForAuthorizationHeader("moderator", "ApiKey moderator"),
                 AuthUtils.getForAuthorizationHeader("administrator", "ApiKey administrator")
         );
     }
