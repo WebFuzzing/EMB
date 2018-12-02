@@ -1,5 +1,6 @@
 package em.external.se.devscout.scoutapi;
 
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
@@ -248,15 +249,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(
-                new AuthenticationDto("user") {{
-                    headers.add(new HeaderDto("Authorization", "ApiKey user"));
-                }},
-                new AuthenticationDto("moderator") {{
-                    headers.add(new HeaderDto("Authorization", "ApiKey moderator"));
-                }},
-                new AuthenticationDto("administrator") {{
-                    headers.add(new HeaderDto("Authorization", "ApiKey administrator"));
-                }}
+                AuthUtils.getForAuthorizationHeader("user", "ApiKey user"),
+                AuthUtils.getForAuthorizationHeader("moderator", "ApiKey user"),
+                AuthUtils.getForAuthorizationHeader("administrator", "ApiKey administrator")
         );
     }
 

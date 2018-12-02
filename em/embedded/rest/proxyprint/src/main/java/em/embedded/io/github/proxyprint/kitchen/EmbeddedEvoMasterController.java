@@ -2,6 +2,7 @@ package em.embedded.io.github.proxyprint.kitchen;
 
 import com.p6spy.engine.spy.P6SpyDriver;
 import io.github.proxyprint.kitchen.WebAppConfig;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
@@ -173,18 +174,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(
-                new AuthenticationDto("admin") {{
-                    headers.add(new HeaderDto("Authorization", encode("master", "1234")));
-                }},
-                new AuthenticationDto("consumer") {{
-                    headers.add(new HeaderDto("Authorization", encode("joao", "1234")));
-                }},
-                new AuthenticationDto("manager") {{
-                    headers.add(new HeaderDto("Authorization", encode("joaquim", "1234")));
-                }},
-                new AuthenticationDto("employee") {{
-                    headers.add(new HeaderDto("Authorization", encode("mafalda", "1234")));
-                }}
+                AuthUtils.getForBasic("admin","master","1234"),
+                AuthUtils.getForBasic("consumer","joao","1234"),
+                AuthUtils.getForBasic("manager","joaquim","1234"),
+                AuthUtils.getForBasic("employee","mafalda","1234")
         );
     }
 
