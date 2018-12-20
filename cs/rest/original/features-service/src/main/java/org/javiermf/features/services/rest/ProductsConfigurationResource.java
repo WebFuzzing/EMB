@@ -18,8 +18,8 @@ public class ProductsConfigurationResource {
     @Autowired
     ProductsConfigurationsService configurationsService;
 
-    @Autowired
-    ProductsConfigurationFeaturesResource productsConfigurationFeaturesResource;
+//    @Autowired
+//    ProductsConfigurationFeaturesResource productsConfigurationFeaturesResource;
 
     @GET
     public List<String> getConfigurationsForProduct(@PathParam("productName") String productName) {
@@ -50,12 +50,12 @@ public class ProductsConfigurationResource {
         return Response.noContent().build();
     }
 
-    @Path("/{configurationName}/features")
-    public ProductsConfigurationFeaturesResource getConfigurationActivedFeatures(@PathParam("productName") String productName,
-                                                                                 @PathParam("configurationName") String configurationName) {
-        return productsConfigurationFeaturesResource;
-
-    }
+//    @Path("/{configurationName}/features")
+//    public ProductsConfigurationFeaturesResource getConfigurationActivedFeatures(@PathParam("productName") String productName,
+//                                                                                 @PathParam("configurationName") String configurationName) {
+//        return productsConfigurationFeaturesResource;
+//
+//    }
 
 
 }
