@@ -32,9 +32,6 @@ public class ProductsResource {
     @Autowired
     ProductsConstraintsResource productsConstraintsResource;
 
-    @Autowired
-    ProductsConfigurationFeaturesResource productsConfigurationFeaturesResource;
-
 
     @GET
     public List<String> getAllProducts() {
@@ -75,11 +72,6 @@ public class ProductsResource {
     @Path("{productName}/constraints")
     public ProductsConstraintsResource productsConstraintsResource() {
         return productsConstraintsResource;
-    }
-
-    @Path("{productName}/configurations/{configurationName}/features")
-    public ProductsConfigurationFeaturesResource getConfigurationActivedFeatures() {
-        return productsConfigurationFeaturesResource;
     }
 
 }
