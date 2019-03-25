@@ -5,19 +5,16 @@ import io.github.proxyprint.kitchen.WebAppConfig;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
-import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.HeaderDto;
-import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.codec.Base64;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
@@ -179,16 +176,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 AuthUtils.getForBasic("manager","joaquim","1234"),
                 AuthUtils.getForBasic("employee","mafalda","1234")
         );
-    }
-
-    private static String encode(String username, String password) {
-        byte[] toEncode;
-        try {
-            toEncode = (username + ":" + password).getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-        return "Basic " + new String(Base64.encode(toEncode));
     }
 
     private void deleteDir(File file) {

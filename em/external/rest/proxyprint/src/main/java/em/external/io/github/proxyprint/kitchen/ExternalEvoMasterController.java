@@ -4,16 +4,14 @@ import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
-import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.HeaderDto;
-import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.h2.tools.Server;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -21,7 +19,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -97,9 +94,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public String[] getJVMParameters() {
         return new String[]{
-//                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
-//                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
-                //FIXME: re-enable once fixed issue with Spring
                 "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
                 "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
@@ -251,16 +245,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 AuthUtils.getForBasic("manager","joaquim","1234"),
                 AuthUtils.getForBasic("employee","mafalda","1234")
         );
-    }
-
-    private static String encode(String username, String password) {
-        byte[] toEncode;
-        try {
-            toEncode = (username + ":" + password).getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-        return "Basic " + Base64.getEncoder().encodeToString(toEncode);
     }
 
     private void deleteDir(File file) {
