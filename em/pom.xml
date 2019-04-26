@@ -22,6 +22,17 @@
             <groupId>org.evomaster</groupId>
             <artifactId>evomaster-client-java-controller</artifactId>
             <version>${evomaster-version}</version>
+            <exclusions>
+            <!--
+                At the moment, we use an old version in EM, due to some
+                issues/headaches in upgrading Jetty.
+                So, to avoid conflicts, we just exclude it here
+            -->
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.evomaster</groupId>
