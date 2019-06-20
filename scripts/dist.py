@@ -44,9 +44,6 @@ cp("em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
 cp("cs/rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar",dist)
 cp("em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", dist)
 
-cp("cs/rest/original/ocvn/web/target/ocvn-sut.jar", dist)
-cp("em/external/rest/ocvn/target/ocvn-evomaster-runner.jar", dist)
-
 cp("cs/rest/artificial/ncs/target/rest-ncs-sut.jar", dist)
 cp("em/external/rest/ncs/target/rest-ncs-evomaster-runner.jar", dist)
 
