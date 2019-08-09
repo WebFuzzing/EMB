@@ -22,8 +22,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         All info that could possibly identify the case study is removed, and
         must be passed as either parameter input or environment variable
      */
-    private static final String SUT_LOCATION_IND0 = System.getProperty("SUT_LOCATION_IND0");
-    private static final String SUT_PACKAGE_IND0 = System.getProperty("SUT_PACKAGE_IND0");
+    private static final String SUT_LOCATION_IND0 = System.getenv("SUT_LOCATION_IND0");
+    private static final String SUT_PACKAGE_IND0 = System.getenv("SUT_PACKAGE_IND0");
 
     public static void main(String[] args) {
 
@@ -74,6 +74,14 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public ExternalEvoMasterController(
             int controllerPort, String jarLocation, int sutPort, int timeoutSeconds,
             String packagesToInstrument) {
+
+        if(jarLocation==null || jarLocation.isEmpty()){
+            throw new IllegalArgumentException("Missing jar location");
+        }
+        if(packagesToInstrument==null || packagesToInstrument.isEmpty()){
+            throw new IllegalArgumentException("Missing packages to instrument");
+        }
+
         this.sutPort = sutPort;
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
