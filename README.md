@@ -49,10 +49,7 @@ of EMB tagged with version `X`.
 
 * CatWatch (Apache-2.0), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
 
-<!---
-Currently issues with MongoDB handling
-* OCVN (MIT), from [https://github.com/devgateway/ocvn]()
--->
+* OCVN (MIT), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
 
 * News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<body>
+<wicket:panel>
+    <!-- already uploaded file section -->
+    <div wicket:id="alreadyUploadedFiles" class="panel panel-info col-md-12">
+        <div class="panel-heading">
+            <span wicket:id="uploadedFilesTitle"></span>
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-condensed table-hover">
+                <tbody>
+                    <tr wicket:id="list">
+                        <td class="col-md-10">
+                            <a wicket:id="downloadLink"><span wicket:id="downloadText"/></a>
+                        </td>
+                        <td class="col-md-2">
+                            <i style="cursor: pointer;" wicket:id="download"/>
+                            <i style="cursor: pointer;" wicket:id="delete"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- pending files for upload section -->
+    <div wicket:id="pendingFiles" class="panel panel-info col-md-12">
+        <div class="panel-heading">
+            <span wicket:id="pendingFilesTitle"></span>
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-condensed table-hover">
+                <tbody>
+                    <tr wicket:id="list">
+                        <td class="col-md-10">
+                            <span wicket:id="fileTitle"/>
+                        </td>
+                        <td class="col-md-2">
+                            <i style="cursor: pointer;" wicket:id="delete"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div wicket:id="fileUploadFeedback" class="col-md-12"></div>
+
+    <!-- the input upload section -->
+    <div>
+        <input class="btn btn-default" type="file" wicket:id="bootstrapFileInput" multiple="multiple"/>
+    </div>
+</wicket:panel>
+</body>
+</html>

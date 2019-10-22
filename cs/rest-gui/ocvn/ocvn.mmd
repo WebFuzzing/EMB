@@ -1,0 +1,7 @@
+%% Mermaid diagram syntax
+graph TB
+E["Excel Files"]-->|Upload|RDBMS
+RDBMS-->|OCDS Convert|MongoDB
+MongoDB-->A["Aggregation Framework"]
+A-->|JSON|Dashboard
+MongoDB-->|JSON|O["OCDS Export"]

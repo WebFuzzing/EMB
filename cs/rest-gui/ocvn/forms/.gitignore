@@ -1,0 +1,10 @@
+/target/
+/.settings/
+/derby.log
+.classpath
+.project
+/.springBeans
+/.checkstyle
+/nbactions.xml
+/.rebel.xml.bak
+/LOG_DIR_IS_UNDEFINED/

@@ -1,0 +1,13 @@
+{
+    "id": "12345",
+    "tag": ["award"],
+    "planning": {
+        "budget": {
+            "description": "budget desc...",
+            "amount": {
+                "amount": 10000,
+                "currency": "RON"
+            }
+        }
+    }
+}

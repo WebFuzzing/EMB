@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2015 Development Gateway, Inc and others.
+
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the MIT License (MIT)
+    which accompanies this distribution, and is available at
+    https://opensource.org/licenses/MIT
+
+    Contributors:
+    Development Gateway - initial API and implementation
+-->
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+    <defaultCache eternal="true" overflowToDisk="false" statistics="true" maxEntriesLocalHeap="100000" />
+
+    <cache name="classifications" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="1000" />
+
+    <cache name="procurementMethodsJson" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="1000" />
+
+    <cache name="genericPagingRequestJson" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="10000" />
+
+    <cache name="bidSelectionMethodsJson" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="1000" />
+
+    <cache name="bidTypesJson" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="1000" />
+    <cache name="organizations" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="100000" />
+
+    <cache name="indicatorTypesMappingJson" eternal="true" overflowToDisk="false"
+           diskPersistent="false" diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="1000"/>
+
+    <cache name="locations" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="100000" />
+
+    <cache name="contrMethods" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="10000" />
+
+    <cache name="orgGroups" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="10000" />
+
+    <cache name="orgDepartments" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="10000" />
+
+    <cache name="cities" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="10000" />
+
+    <cache name="tendersAwardsYears" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="1000" />
+
+
+    <cache name="excelExport" eternal="true" diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU" maxEntriesLocalHeap="100000" statistics="true">
+    </cache>
+
+    <cache name="excelChartExport" eternal="true" diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU" maxEntriesLocalHeap="100000" statistics="true">
+    </cache>
+
+    <cache name="excelChartHelper" eternal="true" diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU" maxEntriesLocalHeap="100000" statistics="true">
+    </cache>
+
+    <!-- EhCache Config for Pentaho Reports -->
+    <!-- Defines the caches used by libloader. This cache holds the raw binary data loaded via libloader. -->
+    <cache name="libloader-data" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="100000" />
+
+    <!-- Defines the caches used by libloader. This cache holds the raw binary bundle-file data loaded via libloader. -->
+    <cache name="libloader-bundles" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="100000" />
+
+    <!-- Defines a cache used by libloader. This cache holds the parsed object loaded via libloader. -->
+    <cache name="libloader-factory" eternal="true" overflowToDisk="false" diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120" statistics="true" maxEntriesLocalHeap="100000" />
+
+    <!-- Defines a cache used by libloader. This cache holds the parsed object loaded via libloader. -->
+    <cache name="report-dataset-cache" eternal="true" overflowToDisk="false"
+           diskPersistent="false" diskExpiryThreadIntervalSeconds="120" statistics="true"
+           maxEntriesLocalHeap="100000" />
+
+    <cache name="reportsCache"
+           eternal="true"
+           diskPersistent="false"
+           memoryStoreEvictionPolicy="LRU"
+           maxEntriesLocalHeap="100000"
+           statistics="true">
+    </cache>
+</ehcache>

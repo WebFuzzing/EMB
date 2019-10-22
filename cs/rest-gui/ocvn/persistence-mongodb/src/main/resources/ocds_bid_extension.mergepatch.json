@@ -1,0 +1,175 @@
+{
+  "properties": {
+    "bids": {
+      "title": "Bids",
+      "description": "The bid section is used to publish summary statistics, and where applicable, individual bid information.",
+      "$ref": "#/definitions/Bids"
+    }
+  },
+  "definitions": {
+    "BidsStatistic": {
+      "title": "Bid Statistic",
+      "description": "For reporting aggregate statistics about the bids related to a tender. Where lots are in use, statistics may optionally be broken down by lot. ",
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "id",
+        "measure",
+        "value"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "description": "An internal identifier for this statistical item.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "measure": {
+          "title": "Measure",
+          "description": "An item from the bidStatistics codelist for the statisic reported in value. This is an open codelist, and other statistics may also be included.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "codelist": "bidStatistics.csv",
+          "openCodelist": true
+        },
+        "date": {
+          "title": "Date",
+          "description": "The date when this statistic was last updated. This is often the closing date of the tender process. This field can be left blank unless either (a) the same statistic is provided from multiple points in time, or (b) there is a specific local requirement for the data when statistics were calculated to be provided.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "value": {
+          "title": "Value",
+          "description": "The value for the measure in question. Total counts should be provided as an integer. Percentages should be presented as a proportion of 1 (e.g. 10% = 0.1)",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Any notes required to understand or interpret the given statistic.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "relatedLot": {
+          "title": "Related Lot",
+          "description": "Where lots are in use, if this statistic relates to bids on a particular lot, provide the lot identifier here. If left blank, the statistic will be interpreted as applying to the whole tender.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Bids": {
+      "title": "Bids",
+      "description": "Summary and detailed information about bids received and evaluated as part of this contracting process.",
+      "type": "object",
+      "properties": {
+        "statistics": {
+          "title": "Statistics",
+          "description": "Summary statistics on the number and nature of bids received. Where information is provided on individual bids, these statistics should match those that can be calculated from the bid details array.",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/BidsStatistic"
+          }
+        },
+        "details": {
+          "title": "Bid details",
+          "description": "An array of bids, providing information on the bidders, and where applicable, bid status, bid values and related documents. The extent to which this information can be disclosed varies from jurisdiction to jurisdiction.",
+          "type": "array",
+          "required": [
+            "id"
+          ],
+          "items": {
+            "$ref": "#/definitions/Bid"
+          }
+        }
+      }
+    },
+    "Bid": {
+      "title": "Bid",
+      "description": "For representing a bid in response to the tender or qualification stage in this contracting process.",
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "description": "A local identifier for this bid",
+          "type": [
+            "string"
+          ]
+        },
+        "date": {
+          "title": "Date",
+          "description": "The date when this bid was received.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "status": {
+          "title": "Status",
+          "description": "The status of the bid, drawn from the bidStatus codelist",
+          "type": [
+            "string",
+            "null"
+          ],
+          "codelist": "bidStatus.csv",
+          "openCodelist": false
+        },
+        "tenderers": {
+          "title": "Tenderer",
+          "description": "The party, or parties, responsible for this bid. This should provide a name and identifier, cross-referenced to an entry in the parties array at the top level of the release.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/OrganizationReference"
+          }
+        },
+        "value": {
+          "title": "Value",
+          "description": "The total value of the bid.",
+          "$ref": "#/definitions/Value"
+        },
+        "documents": {
+          "title": "Documents",
+          "description": "All documents and attachments related to the bid and its evaluation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Document"
+          },
+          "uniqueItems": true
+        },
+        "requirementResponses": {
+          "title": "Requirement responses",
+          "description": "If the requirements extension is also in use, the detailed responses of this bid to the tender requirements can be specified here.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequirementResponse"
+          },
+          "unqiueItems": true
+        }
+      }
+    }
+  }
+}

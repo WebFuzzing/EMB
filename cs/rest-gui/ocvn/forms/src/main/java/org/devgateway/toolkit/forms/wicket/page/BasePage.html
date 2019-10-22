@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html wicket:id="html" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta charset="utf-8">
+    <title>E-Procurement Toolkit</title>
+</head>
+
+    <body>
+        <wicket:container wicket:id="scripts-container"/>
+
+        <header wicket:id="mainHeader" class="mainHeader"></header>
+
+        <div wicket:id="mainContainer" class="mainContainer">
+            <h1 class="pageTitle text-center" wicket:id="pageTitle">[PAGE-TITLE]</h1>
+
+            <wicket:child/>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <div wicket:id="feedback" class="feedbackPanel"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer wicket:id="mainFooter" class="mainFooter"></footer>
+    </body>
+</html>

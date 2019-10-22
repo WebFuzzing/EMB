@@ -1,0 +1,19 @@
+.jumbo-icon-link {
+	display: inline-block;
+	text-align: center;
+	padding: 10px;
+}
+
+.jumbo-icon-txt {
+	display: block;
+}
+
+.jumbotron-icon {
+	font-size: 14px;
+}
+
+.log-text {
+ 	white-space: pre-wrap;
+ 	font-family: monospace;
+ 	font-size: smaller;	
+}

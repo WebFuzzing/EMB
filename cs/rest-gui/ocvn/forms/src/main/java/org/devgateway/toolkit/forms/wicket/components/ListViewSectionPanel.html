@@ -1,0 +1,30 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>ListSectionPanel</title>
+</head>
+<body>
+<wicket:panel>
+    <div class="panel panel-default" wicket:id="listWrapper">
+        <div class="panel-heading">
+            <h4 wicket:id="panelTitle">[[title]]</h4>
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-hover table-fixed">
+                <tr wicket:id="list">
+                    <wicket:child />
+
+                    <td class="col-md-2">
+                        <button wicket:id="remove" type="button" class="btn btn-red l-float">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button wicket:id="newButton" class="btn btn-blue l-float" type="button">[[+ ADD another element]]</button>
+    </div>
+</wicket:panel>
+</body>
+</html>

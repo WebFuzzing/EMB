@@ -53,6 +53,11 @@ cp("em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
 cp("cs/rest/artificial/news/target/rest-news-sut.jar", dist)
 cp("em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
 
+cp("cs/rest/original/ocvn/web/target/ocvn-rest-sut.jar", dist)
+cp("em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
+
+
+
 cp(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
    + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
    + EVOMASTER_VERSION + ".jar",

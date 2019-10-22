@@ -1,0 +1,19 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "linebreak-style": 0,
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/extensions": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/no-find-dom-node": 0,
+    "no-underscore-dangle": 0,
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  }
+}

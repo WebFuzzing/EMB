@@ -1,0 +1,714 @@
+{
+    "publishedDate":"2016-03-15T14:45:00Z",
+    "publisher": {
+        "scheme": "OCDS-scheme",
+        "uid": "10389383",
+        "name": "Open Data Services DG",
+        "uri": "http://standard.open-contracting.org/examples/"
+    },
+    "license":"https://www.gnu.org/licenses/gpl-3.0.en.html",
+    "publicationPolicy":"github.com/devgateway/oc-explorer",
+    "releases":[{
+        "ocid": "ocds-endpoint-001",
+        "id": "ocds-endpoint-001",
+        "date": "2016-08-10T09:30:00Z",
+        "tag": ["award"],
+        "initiationType": "tender",
+        "planning": {
+            "bidPlanProjectDateApprove" : "2016-01-10T09:00:00Z",
+            "budget": {
+                "description": "[ocds-endpoint-001] planning - budget",
+                "amount": {
+                    "amount": 1000.00,
+                    "currency": "USD"
+                },
+                "projectLocation" : [
+                    {
+                        "geometry" : {
+                            "type" : "Point",
+                            "coordinates" : [
+                                47.411,
+                                28.36
+                            ]
+                        },
+                        "description" : "Moldova"
+                    }
+                ],
+                "projectID": "SP001"
+            },
+            "rationale": "[ocds-endpoint-001] - planning rationale"
+        },
+        "tender": {
+            "id": "ocds-endpoint-001-tender",
+            "title": "[ocds-endpoint-001-tender] - Title",
+            "description": "[ocds-endpoint-001-tender] - Description",
+            "status": "active",
+            "procurementMethodDetails" : "Competitive offers",
+            "publicationMethod": "eGP",
+            "items": [
+                {
+                    "id": "0001",
+                    "description": "description 1",
+                    "classification": {
+                        "scheme": "CPV",
+                        "id": "09100000",
+                        "description": "Fuels",
+                        "uri": "http://cpv.data.ac.uk/code-09100000"
+                    },
+                    "deliveryLocation" : {
+                        "geometry" : {
+                            "coordinates" : [
+                                45.9432,
+                                24.9668
+                            ]
+                        },
+                        "description" : "Romania"
+                    }
+                }
+            ],
+            "value": {
+                "amount": 9000.00,
+                "currency": "USD"
+            },
+            "procurementMethod": "open",
+            "submissionMethod": [ "electronicSubmission" ],
+            "submissionMethodDetails": "Submit through the online portal at http://example.com/submissions/ocds-endpoint-001/",
+            "tenderPeriod": {
+                "startDate": "2015-03-01T09:00:00Z",
+                "endDate": "2015-04-01T09:00:00Z"
+
+            },
+            "numberOfTenderers": 10,
+            "procuringEntity": {
+                "id": "E09000001",
+                "identifier": {
+                    "id": "E09000001",
+                    "legalName": "[ocds-endpoint-001] procuringEntity"
+                },
+                "name": "[ocds-endpoint-001] procuringEntity name",
+                "address": {
+                    "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                    "locality": "London",
+                    "region": "London",
+                    "postalCode": "N11 1NP",
+                    "countryName": "United Kingdom"
+                },
+                "contactPoint": {
+                    "name": "Procurement Team",
+                    "email": "procurement-team@example.com",
+                    "telephone": "01234 345 346",
+                    "faxNumber": "01234 345 345",
+                    "url": "http://example.com/contact/"
+                }
+            },
+            "tenderers": [
+                {
+                    "identifier": {
+                        "scheme": "GB-LAC",
+                        "id": "E09000002",
+                        "legalName": "Tenderer 01",
+                        "uri": "http://www.example.com/tenderer01"
+                    },
+                    "name": "Organization name",
+                    "address": {
+                        "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                        "locality": "London",
+                        "region": "London",
+                        "postalCode": "N11 1NP",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Procurement Team",
+                        "email": "procurement-team@example.com",
+                        "telephone": "01234 345 346",
+                        "faxNumber": "01234 345 345",
+                        "url": "http://example.com/contact/"
+                    }
+                }
+            ]
+        },
+        "buyer": {
+            "identifier": {
+                "scheme": "GB-LAC",
+                "id": "E09000003",
+                "legalName": "Buyer 01",
+                "uri": "http://www.example.com/buyer01"
+            },
+            "name": "Buyer 01 name",
+            "address": {
+                "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                "locality": "London",
+                "region": "London",
+                "postalCode": "N11 1NP",
+                "countryName": "United Kingdom"
+            },
+            "contactPoint": {
+                "name": "Procurement Team",
+                "email": "procurement-team@example.com",
+                "telephone": "01234 345 346",
+                "faxNumber": "01234 345 345",
+                "url": "http://example.com/contact/"
+            }
+        },
+        "awards": [
+            {
+                "id": "ocds-endpoint-001-awards",
+                "title": "Award of contract to build...",
+                "status": "active",
+                "date": "2016-05-10T09:00:00Z",
+                "value": {
+                    "amount": 40000,
+                    "currency": "USD"
+                },
+                "suppliers": [
+                    {
+                        "id": "GB-COH-1234567844",
+                        "identifier": {
+                            "scheme": "GB-COH",
+                            "id": "1234567844",
+                            "legalName": "Supplier 01 ",
+                            "url": "http://example.com/supplier01/"
+                        },
+                        "name": "Supplier 01 name",
+                        "address": {
+                            "streetAddress": "100 Anytown Lane",
+                            "locality": "Anytown",
+                            "region": "AnyCounty",
+                            "postalCode": "AN1 1TN",
+                            "countryName": "United Kingdom"
+                        },
+                        "contactPoint": {
+                            "name": "Contracts Team",
+                            "email": "contracts@anycorp.example",
+                            "telephone": "12345 456 343",
+                            "faxNumber": "12345 456 343",
+                            "url": "http://example.com/contact/"
+                        }
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "0001",
+                        "description": "desc",
+                        "classification": {
+                            "scheme": "CPV",
+                            "id": "09100000",
+                            "description": "Fuels",
+                            "uri": "http://cpv.data.ac.uk/code-09100000"
+                        }
+                    }
+                ],
+                "contractPeriod": {
+                    "startDate": "2015-07-01T00:00:00Z",
+                    "endDate": "2016-08-01T23:59:00Z"
+                }
+            }
+        ],
+        "contracts": [
+            {
+                "id": "ocds-endpoint-001-contract",
+                "awardID": "ocds-endpoint-001-contract-award-01",
+                "title": "Contract 01 Title",
+                "status": "active",
+                "period": {
+                    "startDate": "2015-07-01T00:00:00Z",
+                    "endDate": "2016-08-01T23:59:00Z"
+                },
+                "value": {
+                    "amount": 70000,
+                    "currency": "USD"
+                },
+                "items": [
+                    {
+                        "id": "0001",
+                        "description": "desc 2",
+                        "classification": {
+                            "scheme": "CPV",
+                            "id": "09100000",
+                            "description": "Fuels",
+                            "uri": "http://cpv.data.ac.uk/code-09100000"
+                        }
+                    }
+                ],
+                "dateSigned": "2016-08-10T14:23:12Z",
+                "implementation": {
+                    "transactions": [
+                        {
+                            "id": "ocds-endpoint-001-contract-1",
+                            "source": "https://www.example.com/ocds-endpoint-001-contract-1",
+                            "date": "2016-08-01T00:00:00Z",
+                            "amount": {
+                                "amount": 500000,
+                                "currency": "USD"
+                            },
+                            "providerOrganization": {
+                                "scheme": "GB-LAC",
+                                "id": "E09000007",
+                                "legalName": "Barnet Ltd",
+                                "uri": "http://www.example.com/barnet"
+                            },
+                            "receiverOrganization": {
+                                "scheme": "GB-COH",
+                                "id": "1234567844",
+                                "legalName": "AnyCorp Ltd",
+                                "uri": "http://www.anycorp.example"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "language": "en"
+    }, {
+        "ocid": "ocds-endpoint-002",
+        "id": "ocds-endpoint-002",
+        "date": "2015-08-10T09:30:00Z",
+        "tag": ["award"],
+        "initiationType": "tender",
+        "planning": {
+            "budget": {
+                "description": "[ocds-endpoint-002] planning - budget",
+                "amount": {
+                    "amount": 5000.00,
+                    "currency": "USD"
+                }
+            },
+            "rationale": "[ocds-endpoint-002] - planning"
+        },
+        "tender": {
+            "id": "ocds-endpoint-002-tender",
+            "title": "[ocds-endpoint-002-tender] - Title",
+            "description": "[ocds-endpoint-002-tender] - Description",
+            "status": "active",
+            "items": [
+                {
+                    "id": "0001",
+                    "description": "[0001] - description 1",
+                    "classification": {
+                        "scheme": "CPV",
+                        "id": "45233130",
+                        "description": "Construction work for highways",
+                        "uri": "http://cpv.data.ac.uk/code-45233130"
+                    }
+                }
+            ],
+            "value": {
+                "amount": 600000,
+                "currency": "USD"
+            },
+            "procurementMethod": "selective",
+            "submissionMethod": [ "electronicSubmission" ],
+            "submissionMethodDetails": "Submit through the online portal at http://example.com/submissions/ocds-endpoint-002/",
+            "tenderPeriod": {
+                "startDate": "2014-03-01T09:00:00Z",
+                "endDate": "2014-03-16T09:00:00Z"
+
+            },
+            "numberOfTenderers": 5,
+            "procuringEntity": {
+                "id": "E09000005",
+                "identifier": {
+                    "id": "E09000005",
+                    "legalName": "[ocds-endpoint-002] procuringEntity"
+                },
+                "name": "[ocds-endpoint-002] procuringEntity name",
+                "address": {
+                    "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                    "locality": "London",
+                    "region": "London",
+                    "postalCode": "N11 1NP",
+                    "countryName": "United Kingdom"
+                },
+                "contactPoint": {
+                    "name": "Procurement Team",
+                    "email": "procurement-team@example.com",
+                    "telephone": "01234 345 346",
+                    "faxNumber": "01234 345 345",
+                    "url": "http://example.com/contact/"
+                }
+            },
+            "tenderers": [
+                {
+                    "identifier": {
+                        "scheme": "GB-LAC",
+                        "id": "E09000006",
+                        "legalName": "Tenderer 02",
+                        "uri": "http://www.example.com/tenderer01"
+                    },
+                    "name": "Organization name",
+                    "address": {
+                        "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                        "locality": "London",
+                        "region": "London",
+                        "postalCode": "N11 1NP",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Procurement Team",
+                        "email": "procurement-team@example.com",
+                        "telephone": "01234 345 346",
+                        "faxNumber": "01234 345 345",
+                        "url": "http://example.com/contact/"
+                    }
+                }
+            ]
+        },
+        "buyer": {
+            "identifier": {
+                "scheme": "GB-LAC",
+                "id": "E09000007",
+                "legalName": "Buyer 02",
+                "uri": "http://www.example.com/buyer02"
+            },
+            "name": "Buyer 01 name",
+            "address": {
+                "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                "locality": "London",
+                "region": "London",
+                "postalCode": "N11 1NP",
+                "countryName": "United Kingdom"
+            },
+            "contactPoint": {
+                "name": "Procurement Team",
+                "email": "procurement-team@example.com",
+                "telephone": "01234 345 346",
+                "faxNumber": "01234 345 345",
+                "url": "http://example.com/contact/"
+            }
+        },
+        "awards": [
+            {
+                "id": "ocds-endpoint-002-awards",
+                "title": "Award of contract to build...",
+                "status": "active",
+                "date": "2015-03-16T09:00:00Z",
+                "value": {
+                    "amount": 6000000,
+                    "currency": "USD"
+                },
+                "suppliers": [
+                    {
+                        "id": "GB-COH-1234567845",
+                        "identifier": {
+                            "scheme": "GB-COH",
+                            "id": "1234567845",
+                            "legalName": "Supplier 02",
+                            "url": "http://example.com/supplier02/"
+                        },
+                        "name": "Supplier 02 name",
+                        "address": {
+                            "streetAddress": "100 Anytown Lane",
+                            "locality": "Anytown",
+                            "region": "AnyCounty",
+                            "postalCode": "AN1 1TN",
+                            "countryName": "United Kingdom"
+                        },
+                        "contactPoint": {
+                            "name": "Contracts Team",
+                            "email": "contracts@anycorp.example",
+                            "telephone": "12345 456 343",
+                            "faxNumber": "12345 456 343",
+                            "url": "http://example.com/contact/"
+                        }
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "0001",
+                        "description": "desc",
+                        "classification": {
+                            "scheme": "CPV",
+                            "id": "45233130",
+                            "description": "Construction work for highways",
+                            "uri": "http://cpv.data.ac.uk/code-45233130"
+                        }
+                    }
+                ],
+                "contractPeriod": {
+                    "startDate": "2015-07-01T00:00:00Z",
+                    "endDate": "2016-08-01T23:59:00Z"
+                }
+            }
+        ],
+        "contracts": [
+            {
+                "id": "ocds-endpoint-002-contract",
+                "awardID": "ocds-endpoint-002-contract-01",
+                "title": "Contract 02 Title",
+                "status": "active",
+                "period": {
+                    "startDate": "2015-07-01T00:00:00Z",
+                    "endDate": "2016-08-01T23:59:00Z"
+                },
+                "value": {
+                    "amount": 6000000,
+                    "currency": "USD"
+                },
+                "items": [
+                    {
+                        "id": "0001",
+                        "description": "desc 2",
+                        "classification": {
+                            "scheme": "CPV",
+                            "id": "45233130",
+                            "description": "Construction work for highways",
+                            "uri": "http://cpv.data.ac.uk/code-45233130"
+                        }
+                    }
+                ],
+                "dateSigned": "2016-06-10T14:23:12Z",
+                "implementation": {
+                    "transactions": [
+                        {
+                            "id": "ocds-endpoint-002-contract-2",
+                            "source": "https://www.example.com/ocds-endpoint-002-contract-2",
+                            "date": "2016-08-01T00:00:00Z",
+                            "amount": {
+                                "amount": 500000,
+                                "currency": "USD"
+                            },
+                            "providerOrganization": {
+                                "scheme": "GB-LAC",
+                                "id": "E09000008",
+                                "legalName": "Barnet Ltd",
+                                "uri": "http://www.example.com/barnet"
+                            },
+                            "receiverOrganization": {
+                                "scheme": "GB-COH",
+                                "id": "1234567846",
+                                "legalName": "AnyCorp Ltd",
+                                "uri": "http://www.anycorp.example"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "language": "en"
+    }, {
+        "ocid": "ocds-endpoint-003",
+        "id": "ocds-endpoint-003",
+        "date": "2016-08-10T09:30:00Z",
+        "tag": ["award"],
+        "initiationType": "tender",
+        "planning": {
+            "budget": {
+                "description": "[ocds-endpoint-003] planning - budget",
+                "amount": {
+                    "amount": 9000.00,
+                    "currency": "USD"
+                }
+            },
+            "rationale": "[ocds-endpoint-003] - planning"
+        },
+        "tender": {
+            "id": "ocds-endpoint-003-tender",
+            "title": "[ocds-endpoint-003-tender] - Title",
+            "description": "[ocds-endpoint-003-tender] - Description",
+            "status": "active",
+            "items": [
+                {
+                    "id": "0003",
+                    "description": "[0003] - description 1",
+                    "classification": {
+                        "scheme": "CPV",
+                        "id": "45233130",
+                        "description": "Construction work for highways",
+                        "uri": "http://cpv.data.ac.uk/code-45233130"
+                    }
+                }
+            ],
+            "value": {
+                "amount": 400000,
+                "currency": "USD"
+            },
+            "procurementMethod": "open",
+            "submissionMethod": [ "inPerson" ],
+            "submissionMethodDetails": "Submit in person",
+            "tenderPeriod": {
+                "startDate": "2015-06-01T09:00:00Z",
+                "endDate": "2015-08-01T09:00:00Z"
+            },
+            "numberOfTenderers": 1,
+            "procuringEntity": {
+                "id": "E09000003",
+                "identifier": {
+                    "id": "E09000003",
+                    "legalName": "[ocds-endpoint-003] procuringEntity"
+                },
+                "name": "[ocds-endpoint-003] procuringEntity name",
+                "address": {
+                    "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                    "locality": "London",
+                    "region": "London",
+                    "postalCode": "N11 1NP",
+                    "countryName": "United Kingdom"
+                },
+                "contactPoint": {
+                    "name": "Procurement Team",
+                    "email": "procurement-team@example.com",
+                    "telephone": "01234 345 346",
+                    "faxNumber": "01234 345 345",
+                    "url": "http://example.com/contact/"
+                }
+            },
+            "tenderers": [
+                {
+                    "identifier": {
+                        "scheme": "GB-LAC",
+                        "id": "E09000003",
+                        "legalName": "Tenderer 03",
+                        "uri": "http://www.example.com/tenderer03"
+                    },
+                    "name": "Organization name",
+                    "address": {
+                        "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                        "locality": "London",
+                        "region": "London",
+                        "postalCode": "N11 1NP",
+                        "countryName": "United Kingdom"
+                    },
+                    "contactPoint": {
+                        "name": "Procurement Team",
+                        "email": "procurement-team@example.com",
+                        "telephone": "01234 345 346",
+                        "faxNumber": "01234 345 345",
+                        "url": "http://example.com/contact/"
+                    }
+                }
+            ]
+        },
+        "buyer": {
+            "identifier": {
+                "scheme": "GB-LAC",
+                "id": "E09000009",
+                "legalName": "Buyer 03",
+                "uri": "http://www.example.com/buyer03"
+            },
+            "name": "Buyer 03 name",
+            "address": {
+                "streetAddress": "4, North London Business Park, Oakleigh Rd S",
+                "locality": "London",
+                "region": "London",
+                "postalCode": "N11 1NP",
+                "countryName": "United Kingdom"
+            },
+            "contactPoint": {
+                "name": "Procurement Team",
+                "email": "procurement-team@example.com",
+                "telephone": "01234 345 346",
+                "faxNumber": "01234 345 345",
+                "url": "http://example.com/contact/"
+            }
+        },
+        "awards": [
+            {
+                "id": "ocds-endpoint-003-awards",
+                "title": "Award of contract to build...",
+                "status": "pending",
+                "date": "2016-02-10T09:30:00Z",
+                "value": {
+                    "amount": 500000,
+                    "currency": "USD"
+                },
+                "suppliers": [
+                    {
+                        "id": "GB-COH-1234567844",
+                        "identifier": {
+                            "scheme": "GB-COH",
+                            "id": "1234567844",
+                            "legalName": "Supplier 03",
+                            "url": "http://example.com/supplier03/"
+                        },
+                        "name": "Supplier 03 name",
+                        "address": {
+                            "streetAddress": "100 Anytown Lane",
+                            "locality": "Anytown",
+                            "region": "AnyCounty",
+                            "postalCode": "AN1 1TN",
+                            "countryName": "United Kingdom"
+                        },
+                        "contactPoint": {
+                            "name": "Contracts Team",
+                            "email": "contracts@anycorp.example",
+                            "telephone": "12345 456 343",
+                            "faxNumber": "12345 456 343",
+                            "url": "http://example.com/contact/"
+                        }
+                    }
+                ],
+                "items": [
+                    {
+                        "id": "0001",
+                        "description": "desc",
+                        "classification": {
+                            "scheme": "CPV",
+                            "id": "45233130",
+                            "description": "Construction work for highways",
+                            "uri": "http://cpv.data.ac.uk/code-45233130"
+                        }
+                    }
+                ],
+                "contractPeriod": {
+                    "startDate": "2015-07-01T00:00:00Z",
+                    "endDate": "2017-08-01T23:59:00Z"
+                }
+            }
+        ],
+        "contracts": [
+            {
+                "id": "ocds-endpoint-003-contract",
+                "awardID": "ocds-endpoint-003-contract-03",
+                "title": "Contract 01 Title",
+                "status": "active",
+                "period": {
+                    "startDate": "2015-07-01T00:00:00Z",
+                    "endDate": "2016-08-01T23:59:00Z"
+                },
+                "value": {
+                    "amount": 30000,
+                    "currency": "USD"
+                },
+                "items": [
+                    {
+                        "id": "0001",
+                        "description": "desc 2",
+                        "classification": {
+                            "scheme": "CPV",
+                            "id": "45233130",
+                            "description": "Construction work for highways",
+                            "uri": "http://cpv.data.ac.uk/code-45233130"
+                        }
+                    }
+                ],
+                "dateSigned": "2016-06-10T14:23:12Z",
+                "implementation": {
+                    "transactions": [
+                        {
+                            "id": "ocds-endpoint-003-contract-1",
+                            "source": "https://www.example.com/ocds-endpoint-001-contract-3",
+                            "date": "2016-08-01T00:00:00Z",
+                            "amount": {
+                                "amount": 500000,
+                                "currency": "USD"
+                            },
+                            "providerOrganization": {
+                                "scheme": "GB-LAC",
+                                "id": "E09000007",
+                                "legalName": "Barnet Ltd",
+                                "uri": "http://www.example.com/barnet"
+                            },
+                            "receiverOrganization": {
+                                "scheme": "GB-COH",
+                                "id": "1234567844",
+                                "legalName": "AnyCorp Ltd",
+                                "uri": "http://www.anycorp.example"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "language": "en"
+    }]
+}
