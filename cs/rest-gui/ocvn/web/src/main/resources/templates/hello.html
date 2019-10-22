@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Hello World!</title>
+</head>
+<body>
+    <h1>Hello world!</h1>
+
+    <a th:href="@{/api/profile}">Application-Level Profile Semantics
+        (ALPS) access for DAO entities</a>
+
+    <p />
+
+    <a th:href="@{/api/dump}">Performs a thread dump</a>
+
+    <p />
+
+
+    <a th:href="@{/api/configprops}">Configuration Properties</a>
+
+    <p />
+
+    <a th:href="@{/api/env}">Exposes properties from Spring’s
+        ConfigurableEnvironment</a>
+
+    <p />
+
+    <a th:href="@{/api/health}">Shows application health information</a>
+
+    <p />
+
+    <a th:href="@{/api/beans}">Displays a complete list of all the
+        Spring beans in your application</a>
+
+    <p />
+
+
+    <a th:href="@{/api/autoconfig}">Displays an auto-configuration
+        report showing all auto-configuration candidates and the reason
+        why they ‘were’ or ‘were not’ applied</a>
+
+    <p />
+
+
+    <a th:href="@{/api/metrics}">Shows ‘metrics’ information for the
+        current application</a>
+
+    <p />
+
+    <a th:href="@{/api/trace}">Displays trace information (by
+        default the last few HTTP requests)</a>
+
+    <p />
+
+
+    <a th:href="@{/api/liquibase}">Shows any Liquibase database
+        migrations that have been applied</a>
+
+    <p />
+
+    <a th:href="@{/api/mappings}">Displays a collated list of all
+        @RequestMapping paths</a>
+
+    <p />
+
+    <a th:href="@{/api/info}">Displays arbitrary application info</a>
+
+    <p />
+
+    <a th:href="@{/api/shutdown}">Shutdown application (works only
+        with POST)</a>
+
+    <p />
+
+
+    <a th:href="@{/logout}">Logout</a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<body>
+<wicket:extend>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <form wicket:id="filterForm">
+                <button type="submit" style="display: none;">Submit</button>
+                <table class="dataview table" wicket:id="table"></table>
+            </form>
+            <button wicket:id="new" type="button" class="btn-add-output">
+                Add entity
+            </button>
+        </div>
+    </div>
+</wicket:extend>
+</body>
+</html>

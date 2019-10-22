@@ -1,0 +1,13 @@
+/target/
+/.classpath
+/.project
+/.springBeans
+/org.eclipse.m2e.core.prefs
+/.settings/
+/derby.log
+/node/
+/node_modules/
+npm-debug.log
+/webpack-test/bundle.js
+/public/
+/.checkstyle

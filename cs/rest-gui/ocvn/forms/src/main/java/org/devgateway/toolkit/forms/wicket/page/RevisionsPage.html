@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<body>
+<wicket:extend>
+    <div class="row-fluid">
+        <div class="col-md-6 col-md-offset-3">
+            <table class="table">
+                <tr>
+                    <th><wicket:message key="revisionNumber"/></th>
+                    <th><wicket:message key="revisionDate"/></th>
+                </tr>
+                <tr wicket:id="revisions">
+                    <td wicket:id="revisionNumber"></td>
+                    <td wicket:id="revisionDate"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</wicket:extend>
+</body>
+</html>

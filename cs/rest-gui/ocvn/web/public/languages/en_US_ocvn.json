@@ -1,0 +1,9 @@
+{
+  "general:amountInVND": "Amount (in VND)",
+  "charts:amountsByItem:yAxisTitle": "Amount (in VND)",
+  "charts:costEffectiveness:yAxisTitle": "Amount (in VND)",
+  "charts:procurementMethod:yAxisName": "Amount (in VND)",
+  "charts:cancelledAmounts:yAxisName": "Amount (in VND)",
+  "charts:cancelledFunding:yAxisTitle": "Amount (in VND)",
+  "tables:top10suppliers:totalAwardedValue": "Total awarded value (in VND)"
+}

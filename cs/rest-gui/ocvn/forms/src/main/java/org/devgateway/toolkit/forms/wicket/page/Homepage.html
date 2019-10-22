@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta charset="utf-8">
+    <title>Homepage</title>
+</head>
+<body>
+<wicket:extend>
+
+
+    <div class="jumbotron jumbotron-icon text-center">
+    <div class="row">
+        <div class="col-md-offset-1 jumbo-icon-link col-md-2">
+            <a href="/dashboard" target="_blank">
+                <i class="fa fa-tachometer fa-5x"></i>
+                <span class="fa-2x jumbo-icon-txt">Dashboard</span>
+            </a>
+        </div>
+
+        <div class="jumbo-icon-link col-md-2">
+            <a href="listImportSourceFiles">
+                <i class="fa fa-file-archive-o fa-5x"></i>
+                <span class="fa-2x jumbo-icon-txt">Import Batches</span>
+            </a>
+        </div>
+
+        <div class="jumbo-icon-link col-md-2">
+            <a href="import">
+                <i class="fa fa-cloud-upload fa-5x"></i>
+                <span class="fa-2x jumbo-icon-txt">Import Process</span>
+            </a>
+        </div>
+
+      
+        <div wicket:id="manageUsers" class="jumbo-icon-link col-md-2">
+            <a href="listusers">
+                <i class="fa fa-users fa-5x"></i>
+                <span class="fa-2x jumbo-icon-txt">Manage Users</span>
+            </a>
+        </div>
+
+        <div class="jumbo-icon-link col-md-2">
+            <a href="swagger-ui.html" target="_blank">
+                <i class="fa fa-gears fa-5x"></i>
+                <span class="fa-2x jumbo-icon-txt">API</span>
+            </a>
+        </div>
+      </div>
+    </div>    
+</wicket:extend>
+</body>
+</html>

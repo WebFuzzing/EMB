@@ -1,0 +1,57 @@
+/**
+ * @file
+ * This file contains the basic style for any page.
+ */
+
+html {
+    /*
+     * Always show page scroll-bar to prevent side-movement when hovering over items that are extending their height and
+     * suddenly the content doesn't fit above the fold.
+     */
+    overflow-y: scroll;
+}
+
+.mainHeader.with-navbar-default .navbar-default {
+    /*
+     * The mainHeader navbar should not have rounded borders when it is not fixed.
+     *
+     * @see: Navbar.Position.DEFAULT
+     * @see: bootstrap::navbar.less
+     */
+    border-radius: 0;
+}
+
+.mainHeader.with-navbar-fixed-top {
+    /*
+     * The mainHeader doesn't have any height when the navbar is fixed, and other elements are behind it.
+     *
+     * HACK: The default bootstrap navbar is 50px height and has a bottom margin of 20px for the default font size.
+     *
+     * TODO: Convert to LESS and use Bootstrap variables.
+     * @see: Navbar.Position.TOP
+     * @see: bootstrap::navbar.less
+     */
+    min-height: 50px;
+    margin-bottom: 20px;
+}
+
+.mainContainer {
+    /*
+     * The main page content should have some height.
+     */
+    min-height: 20em;
+}
+
+.mainFooter {
+    /*
+     * Add some spacing around the footer.
+     */
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/* file upload
+-------------------------------------------------- */
+.file-preview.loading {
+    background: transparent url('./assets/img/ajax-loader.gif') no-repeat scroll center center content-box !important;
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- keep console log colors configured in spring boot -->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/logger.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_DIR}/logger.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 64MB -->
+                <maxFileSize>64MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.hibernate.tool.hbm2ddl" level="WARN" />
+    <logger name="org.hibernate.cache.ehcache" level="ERROR" />
+
+    <logger name="org.apache.wicket.resource" level="WARN" />
+    <logger name="org.apache.wicket.Localizer" level="ERROR" />
+    <logger name="net.sf.ehcache.pool.sizeof.SizeOf" level="ERROR" />
+
+    <logger name="org.pentaho.reporting.libraries.fonts" level="WARN" />
+    <logger name="org.pentaho.reporting.engine.classic" level="WARN" />
+
+    <!-- Setting the root level of logging to INFO -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

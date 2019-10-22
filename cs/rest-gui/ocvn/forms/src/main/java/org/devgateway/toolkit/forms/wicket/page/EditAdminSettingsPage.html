@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>EditAdminSettingsPage</title>
+</head>
+<body>
+<wicket:extend>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        <span wicket:id="excelTitle">[[Excel Export Settings]]</span>
+                    </div>
+                    <div class="panel-body">
+                        <br/>
+                        <div wicket:id="excelBatchSize" class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        <span wicket:id="systemTitle">[[System Settings]]</span>
+                    </div>
+
+                    <div class="panel-body">
+                        <br/>
+                        <div wicket:id="disableApiSecurity" class="col-md-12"></div>
+                        <div wicket:id="enableDailyAutomatedImport" class="col-md-12"></div>
+                        <div wicket:id="adminEmail" class="col-md-12"></div>
+                        <div wicket:id="importFilesPath" class="col-md-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</wicket:extend>
+</body>
+</html>
