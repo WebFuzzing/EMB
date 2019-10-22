@@ -27,6 +27,15 @@
     </parent>
 
     <dependencies>
+
+<!-- MODIFIED -->
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-client-database-spy</artifactId>
+            <version>0.3.1-SNAPSHOT</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -261,7 +270,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <finalName>ocvn</finalName>
+                            <finalName>ocvn-rest</finalName>
                             <classifier>sut</classifier>
                         </configuration>
                     </execution>

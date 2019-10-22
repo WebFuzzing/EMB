@@ -73,3 +73,4 @@ hs_err_pid*
 /em/external/rest/proxyprint/target/
 /em/external/rest/scout-api/target/
 /em/external/rest/scs/target/
+/em/embedded/rest/ocvn/derby.log

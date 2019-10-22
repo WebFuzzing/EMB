@@ -1,14 +1,7 @@
 package em.external.org.devgateway.ocvn;
 
+
 import com.mongodb.MongoClient;
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.IMongodConfig;
-import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
-import de.flapdoodle.embed.mongo.config.Net;
-import de.flapdoodle.embed.mongo.config.Storage;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.runtime.Network;
 import com.p6spy.engine.spy.P6SpyDriver;
 import org.apache.derby.drda.NetworkServerControl;
 import org.evomaster.client.java.controller.ExternalSutController;
@@ -18,9 +11,9 @@ import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.testcontainers.containers.GenericContainer;
 
-import java.io.PrintWriter;
-import java.net.InetAddress;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -38,12 +31,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 1) {
             sutPort = Integer.parseInt(args[1]);
         }
-        String jarLocation = "cs/rest/original/ocvn/web/target";
+        String jarLocation = "cs/rest-gui/ocvn/web/target";
         if (args.length > 2) {
             jarLocation = args[2];
         }
         if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/ocvn-sut.jar";
+            jarLocation += "/ocvn-rest-sut.jar";
         }
 
         int timeoutSeconds = 120;
@@ -60,15 +53,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private final int timeoutSeconds;
     private final int sutPort;
-    private final int mongodPort;
     private final int derbyPort;
     private final String jarLocation;
-    private MongodExecutable mongodExecutable;
-    private MongoClient mongoClient;
     private Connection connection;
     private final String derbyName;
     private final String derbyDriver;
-    private NetworkServerControl nsc;
+
+    private MongoClient mongoClient;
+
+    private static final GenericContainer mongodb = new GenericContainer("mongo:3.2")
+            .withExposedPorts(27017);
 
     public ExternalEvoMasterController() {
         this(40100, "../web/target/web-1.1.1-SNAPSHOT-exec.jar", 12345, 120);
@@ -79,7 +73,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
-        this.mongodPort = sutPort + 1;
         this.derbyPort = sutPort + 2;
         this.derbyName = "derby_" + derbyPort;
         this.derbyDriver = "org.apache.derby.jdbc.ClientDriver";
@@ -109,11 +102,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         return new String[]{
                 "-Dliquibase.enabled=false",
-                "-Dspring.profiles.active=integration",
-                "-Dspring.data.mongodb.port=" + mongodPort,
-                "-Dspring.data.mongodb.uri=mongodb://localhost:"+mongodPort+"/ocvn",
-//                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
-//                "-Dspring.datasource.url=" + dbUrl(false) + ";create=true",
+                "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
+//                "-Dspring.data.mongodb.port=" + mongodb.getMappedPort(27017),
+//                "-Dspring.data.mongodb.host=" + mongodb.getContainerIpAddress(),
                 "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "-Dspring.datasource.url=" + dbUrl(true) + ";create=true",
                 "-Dspring.datasource.username=app",
@@ -146,34 +137,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public void preStart() {
 
-        MongodStarter starter = MongodStarter.getDefaultInstance();
+        mongodb.start();
 
         try {
-            String bindIp = "localhost";
-
-            Storage replication = new Storage("./temp/tmp_ocvn/mongodb_"+mongodPort,null,0);
-
-            IMongodConfig mongodConfig = new MongodConfigBuilder()
-                    .version(Version.Main.V3_4)
-                    .net(new Net(bindIp, mongodPort, Network.localhostIsIPv6()))
-                    .replication(replication)
-                    .build();
-
-
-            mongodExecutable = starter.prepare(mongodConfig);
-            mongodExecutable.start();
-
-            mongoClient = new MongoClient(bindIp, mongodPort);
-
-            nsc = new NetworkServerControl(InetAddress.getByName("localhost"), derbyPort);
-            nsc.start(new PrintWriter(java.lang.System.out, true));
+            mongoClient = new MongoClient(mongodb.getContainerIpAddress(),
+                    mongodb.getMappedPort(27017));
 
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e);
         }
-
-
     }
 
     @Override
@@ -201,16 +174,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStop() {
-        if (mongodExecutable != null) {
-            mongodExecutable.stop();
-        }
-        if(nsc != null){
-            try {
-                nsc.shutdown();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        mongodb.stop();
     }
 
     @Override
@@ -221,8 +185,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public void resetStateOfSUT() {
         mongoClient.getDatabase("ocvn").drop();
+        mongoClient.getDatabase("ocvn-shadow").drop();
 
-        //schema name takes value of "user"
+        //TODO will need to create user id/password
         DbCleaner.clearDatabase_Derby(connection, derbyName);
     }
 
@@ -243,6 +208,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
+        //TODO need to handle form-based login
         return null;
     }
 

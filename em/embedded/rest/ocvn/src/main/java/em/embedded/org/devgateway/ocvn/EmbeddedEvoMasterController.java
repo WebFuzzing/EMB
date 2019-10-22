@@ -1,6 +1,7 @@
 package em.embedded.org.devgateway.ocvn;
 
 
+import com.mongodb.MongoClient;
 import com.p6spy.engine.spy.P6SpyDriver;
 import org.devgateway.toolkit.web.spring.WebApplication;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -12,8 +13,8 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -41,8 +42,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection connection;
-    private int mongodPort;
-    private MongoTemplate mongoTemplate;
+    private MongoClient mongoClient;
+
+
+    private static final GenericContainer mongodb = new GenericContainer("mongo:3.2")
+            .withExposedPorts(27017);
+
 
     public EmbeddedEvoMasterController() {
         this(0);
@@ -50,21 +55,27 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
-        mongodPort = 27018;
     }
 
 
     @Override
     public String startSut() {
 
-        // An embedded MongoDB is automatically started by Spring
+        mongodb.start();
+
+        mongoClient = new MongoClient(mongodb.getContainerIpAddress(),
+                mongodb.getMappedPort(27017));
 
         ctx = SpringApplication.run(WebApplication.class,
                 new String[]{"--server.port=0",
                         "--liquibase.enabled=false",
-                        "--spring.data.mongodb.port=" + mongodPort,
+                        "--spring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
+//                        "--spring.data.mongodb.host=" + mongodb.getContainerIpAddress(),
+//                        "--spring.data.mongodb.port=" + mongodb.getMappedPort(27017),
                         "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                        "--spring.datasource.url=jdbc:p6spy:derby:memory:ocvn;create=true"
+//                        "--spring.datasource.url=jdbc:p6spy:derby:memory:ocvn;create=true",
+                        "--spring.datasource.url=jdbc:p6spy:derby://localhost//derby/ocvn;create=true",
+                        "--dg-toolkit.derby.port=1527"
                 });
 
         if (connection != null) {
@@ -81,8 +92,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        mongoTemplate = ctx.getBean(MongoTemplate.class);
 
         return "http://localhost:" + getSutPort();
     }
@@ -103,6 +112,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public void stopSut() {
         ctx.stop();
         ctx.close();
+
+        mongodb.stop();
     }
 
     @Override
@@ -112,14 +123,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        mongoTemplate.getDb().dropDatabase();
+        mongoClient.getDatabase("ocvn").drop();
+        mongoClient.getDatabase("ocvn-shadow").drop();
 
+        //TODO will need to create user id/password
         DbCleaner.clearDatabase_Derby(connection, "ocvn");
     }
 
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
+        //TODO need to handle form-based login
         return null;
     }
 
