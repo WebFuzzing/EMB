@@ -4,16 +4,16 @@
 
     <parent>
         <groupId>org.evomaster</groupId>
-        <artifactId>evomaster-benchmark</artifactId>
+        <artifactId>evomaster-benchmark-cs</artifactId>
         <version>0.3.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-cs</artifactId>
+    <artifactId>evomaster-benchmark-cs-rest-gui</artifactId>
     <packaging>pom</packaging>
 
+
     <modules>
-        <module>rest</module>
-        <module>rest-gui</module>
+
     </modules>
 
 
