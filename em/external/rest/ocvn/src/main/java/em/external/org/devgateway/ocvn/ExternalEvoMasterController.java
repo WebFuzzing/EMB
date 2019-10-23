@@ -103,13 +103,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new String[]{
                 "-Dliquibase.enabled=false",
                 "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
-//                "-Dspring.data.mongodb.port=" + mongodb.getMappedPort(27017),
-//                "-Dspring.data.mongodb.host=" + mongodb.getContainerIpAddress(),
                 "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "-Dspring.datasource.url=" + dbUrl(true) + ";create=true",
                 "-Dspring.datasource.username=app",
                 "-Dspring.datasource.password=app",
-                "-Ddg-toolkit.derby.port="+derbyPort
+                "-Ddg-toolkit.derby.port="+derbyPort,
+                "-Dspring.cache.type=NONE"
         };
     }
 

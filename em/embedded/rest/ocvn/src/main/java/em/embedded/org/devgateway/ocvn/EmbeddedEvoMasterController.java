@@ -70,12 +70,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 new String[]{"--server.port=0",
                         "--liquibase.enabled=false",
                         "--spring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
-//                        "--spring.data.mongodb.host=" + mongodb.getContainerIpAddress(),
-//                        "--spring.data.mongodb.port=" + mongodb.getMappedPort(27017),
                         "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-//                        "--spring.datasource.url=jdbc:p6spy:derby:memory:ocvn;create=true",
                         "--spring.datasource.url=jdbc:p6spy:derby://localhost//derby/ocvn;create=true",
-                        "--dg-toolkit.derby.port=1527"
+                        "--dg-toolkit.derby.port=1527",
+                        "--spring.cache.type=NONE"
                 });
 
         if (connection != null) {
