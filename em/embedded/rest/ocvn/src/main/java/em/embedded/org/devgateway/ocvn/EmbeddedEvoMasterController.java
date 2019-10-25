@@ -4,9 +4,11 @@ package em.embedded.org.devgateway.ocvn;
 import com.mongodb.MongoClient;
 import com.p6spy.engine.spy.P6SpyDriver;
 import org.devgateway.toolkit.web.spring.WebApplication;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -18,6 +20,7 @@ import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -124,15 +127,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         mongoClient.getDatabase("ocvn").drop();
         mongoClient.getDatabase("ocvn-shadow").drop();
 
-        //TODO will need to create user id/password
         DbCleaner.clearDatabase_Derby(connection, "ocvn");
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection, "/Person.sql");
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection, "/Person_roles.sql");
     }
 
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        //TODO need to handle form-based login
-        return null;
+        return Arrays.asList(AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"));
     }
 
     @Override
