@@ -73,11 +73,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 new String[]{"--server.port=0",
                         "--liquibase.enabled=false",
                         "--spring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
+                        "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
                         "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                        "--spring.datasource.url=jdbc:p6spy:derby://localhost//derby/ocvn;create=true",
-                        "--dg-toolkit.derby.port=1527",
+                        "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
+                        "--spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
+                        "--spring.datasource.username=sa",
+                        "--spring.datasource.password",
+                        "--dg-toolkit.derby.port=0",
                         "--spring.cache.type=NONE"
                 });
+
+
 
         if (connection != null) {
             try {
@@ -127,9 +133,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         mongoClient.getDatabase("ocvn").drop();
         mongoClient.getDatabase("ocvn-shadow").drop();
 
-        DbCleaner.clearDatabase_Derby(connection, "ocvn");
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection, "/Person.sql");
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection, "/Person_roles.sql");
+        DbCleaner.clearDatabase_H2(connection);
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/init_db.sql");
     }
 
 
@@ -145,7 +150,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getDatabaseDriverName() {
-        return "org.apache.derby.jdbc.EmbeddedDriver";
+        return "org.h2.Driver";
     }
 
     @Override

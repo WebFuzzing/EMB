@@ -4,19 +4,23 @@ package em.external.org.devgateway.ocvn;
 import com.mongodb.MongoClient;
 import com.p6spy.engine.spy.P6SpyDriver;
 import org.apache.derby.drda.NetworkServerControl;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.h2.tools.Server;
 import org.testcontainers.containers.GenericContainer;
 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -53,11 +57,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private final int timeoutSeconds;
     private final int sutPort;
-    private final int derbyPort;
+    private final int dbPort;
+
     private final String jarLocation;
     private Connection connection;
-    private final String derbyName;
-    private final String derbyDriver;
+    private Server h2;
 
     private MongoClient mongoClient;
 
@@ -73,10 +77,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
-        this.derbyPort = sutPort + 2;
-        this.derbyName = "derby_" + derbyPort;
-        this.derbyDriver = "org.apache.derby.jdbc.ClientDriver";
-//        this.derbyDriver = "org.apache.derby.jdbc.ClientDriver40";
+        this.dbPort = sutPort + 2;
     }
 
     @Override
@@ -91,7 +92,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (withP6Spy) {
             url += ":p6spy";
         }
-        url += ":derby://localhost:" + derbyPort + "/./temp/tmp_ocvn/" + derbyName;
+        url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_ocvn/testdb_" + dbPort;
 
         return url;
     }
@@ -104,10 +105,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Dliquibase.enabled=false",
                 "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
                 "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "-Dspring.datasource.url=" + dbUrl(true) + ";create=true",
-                "-Dspring.datasource.username=app",
-                "-Dspring.datasource.password=app",
-                "-Ddg-toolkit.derby.port="+derbyPort,
+                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
+                "-Dspring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
+                "-Dspring.datasource.username=sa",
+                "-Dspring.datasource.password",
+                "-Ddg-toolkit.derby.port=0",
                 "-Dspring.cache.type=NONE"
         };
     }
@@ -146,34 +149,50 @@ public class ExternalEvoMasterController extends ExternalSutController {
             System.out.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e);
         }
-    }
 
-    @Override
-    public void postStart() {
         try {
-            Class.forName(derbyDriver);
-            connection = DriverManager.getConnection(dbUrl(false), "app", "app");
-        } catch (Exception e) {
+            //starting H2
+            h2 = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "" + dbPort);
+            h2.start();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        resetStateOfSUT();
     }
 
-    @Override
-    public void preStop() {
-        if(connection != null){
+    private void closeDataBaseConnection() {
+        if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            connection = null;
         }
+    }
+
+    @Override
+    public void postStart() {
+        closeDataBaseConnection();
+
+        try {
+            Class.forName("org.h2.Driver");
+            connection = DriverManager.getConnection(dbUrl(false), "sa", "");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void preStop() {
+        closeDataBaseConnection();
     }
 
     @Override
     public void postStop() {
         mongodb.stop();
+        if (h2 != null) {
+            h2.stop();
+        }
     }
 
     @Override
@@ -186,8 +205,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         mongoClient.getDatabase("ocvn").drop();
         mongoClient.getDatabase("ocvn-shadow").drop();
 
-        //TODO will need to create user id/password
-        DbCleaner.clearDatabase_Derby(connection, derbyName);
+        DbCleaner.clearDatabase_H2(connection);
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/init_db.sql");
     }
 
 
@@ -207,8 +226,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        //TODO need to handle form-based login
-        return null;
+        return Arrays.asList(AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"));
     }
 
     @Override
@@ -218,7 +236,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getDatabaseDriverName() {
-        return derbyDriver;
+        return "org.h2.Driver";
     }
 
 
