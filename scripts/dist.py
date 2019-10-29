@@ -53,8 +53,6 @@ cp("em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
 cp("cs/rest/artificial/news/target/rest-news-sut.jar", dist)
 cp("em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
 
-cp("cs/rest/original/ocvn/web/target/ocvn-rest-sut.jar", dist)
-cp("em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
 
 
 
@@ -71,5 +69,23 @@ zipres = call(["zip", zipName, "-r", "dist"], cwd=PROJ_LOCATION)
 if zipres != 0:
     print("\nERROR: Failed to zip dist folder")
     exit(1)
+
+
+
+#### For some SUTs depending on Docker, we do not run them on cluster yet, so no point
+#### to be in the zip file, although we still want to put on same folder to run experiments
+#### locally.
+
+
+cp("cs/rest-gui/ocvn/web/target/ocvn-rest-sut.jar", dist)
+cp("em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
+
+
+ind0 = os.environ.get('SUT_LOCATION_IND0', '')
+if ind0 == '':
+    print("\nWARN: SUT_LOCATION_IND0 env variable is not defined")
+else:
+    cp(ind0, os.path.join(dist, "ind0-sut.jar"))
+    cp("em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
 
 print("\n\nSUCCESS\n\n")
