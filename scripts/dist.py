@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 
+EVOMASTER_VERSION = "0.3.1-SNAPSHOT"
+
 import os
 import shutil
 from subprocess import call
 from os.path import expanduser
 
-EVOMASTER_VERSION = "0.3.1-SNAPSHOT"
 
 HOME = expanduser("~")
 SCRIPT_LOCATION = os.path.dirname(os.path.realpath(__file__))
 PROJ_LOCATION = os.path.abspath(os.path.join(SCRIPT_LOCATION, os.pardir))
 
-mvnres = call(["mvn", "clean", "install", "-DskipTests"], cwd=PROJ_LOCATION)
+mvnres = call(["mvn", "clean", "install", "-DskipTests"], cwd=PROJ_LOCATION, shell=True)
 
 if mvnres != 0:
     print("\nERROR: Maven command failed")
@@ -26,7 +27,8 @@ os.mkdir(dist)
 
 
 def cp(target, dist):
-    cpres = call(["cp", target, dist], cwd=PROJ_LOCATION)
+    print("Copying " + target)
+    cpres = call(["cp", target, dist], cwd=PROJ_LOCATION, shell=True)
     if cpres != 0:
         print("\nERROR: Failed to copy " + target + " into " + dist)
         exit(1)
@@ -65,11 +67,8 @@ zipName = "dist.zip"
 if os.path.exists(zipName):
     os.remove(zipName)
 
-zipres = call(["zip", zipName, "-r", "dist"], cwd=PROJ_LOCATION)
-if zipres != 0:
-    print("\nERROR: Failed to zip dist folder")
-    exit(1)
-
+print("Creating " + zipName)
+shutil.make_archive("dist", 'zip', "dist")
 
 
 #### For some SUTs depending on Docker, we do not run them on cluster yet, so no point
