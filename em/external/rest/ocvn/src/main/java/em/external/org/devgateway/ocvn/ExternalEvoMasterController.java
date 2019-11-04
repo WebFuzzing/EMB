@@ -197,7 +197,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "org.devgateway.ocvn.";
+        return "org.devgateway.";
     }
 
 

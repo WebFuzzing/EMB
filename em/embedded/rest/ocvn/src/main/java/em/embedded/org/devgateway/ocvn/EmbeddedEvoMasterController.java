@@ -125,7 +125,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "org.devgateway.ocvn.";
+        return "org.devgateway.";
     }
 
     @Override
