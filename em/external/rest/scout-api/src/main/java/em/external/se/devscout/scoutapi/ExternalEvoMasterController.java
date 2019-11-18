@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -115,14 +116,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         //save config to same folder of JAR file
         Path path = getConfigPath();
 
-        try {
-            Files.deleteIfExists(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         try(InputStream is = this.getClass().getResourceAsStream("/"+ CONFIG_FILE )){
-            Files.copy(is, path);
+            Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e){
             throw new RuntimeException(e);
         }
