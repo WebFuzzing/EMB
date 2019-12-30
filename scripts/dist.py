@@ -18,6 +18,7 @@ if  platform.system() == 'Windows':
     mvnres = run(["mvn", "clean", "install", "-DskipTests"], cwd=PROJ_LOCATION, shell=True)
 else:
     mvnres = run(["mvn", "clean", "install", "-DskipTests"], cwd=PROJ_LOCATION)
+    mvnres = mvnres.returncode
 
 if mvnres != 0:
     print("\nERROR: Maven command failed")
