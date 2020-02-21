@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 
 app.get("/api/triangle/:a/:b/:c", (req, res) => {
 
-    const a = req.params.a;
-    const b = req.params.b;
-    const c = req.params.c;
+    const a = parseInt(req.params.a);
+    const b = parseInt(req.params.b);
+    const c = parseInt(req.params.c);
 
     const dto = {resultAsInt: triangle(a, b, c)};
 
@@ -25,8 +25,8 @@ app.get("/api/triangle/:a/:b/:c", (req, res) => {
 
 app.get("/api/bessj/:n/:x", (req, res) => {
 
-    const x = req.params.x;
-    const n = req.params.n;
+    const x = parseInt(req.params.x);
+    const n = parseInt(req.params.n);
 
     if (n <= 2 || n > 100) {
         res.status(400);
@@ -41,8 +41,8 @@ app.get("/api/bessj/:n/:x", (req, res) => {
 
 app.get("/api/expint/:n/:x", (req, res) => {
 
-    const x = req.params.x;
-    const n = req.params.n;
+    const x = parseInt(req.params.x);
+    const n = parseInt(req.params.n);
 
     try {
         const dto = {resultAsDouble: expint(n, x)};
@@ -55,9 +55,9 @@ app.get("/api/expint/:n/:x", (req, res) => {
 
 app.get("/api/fisher/:m/:n/:x", (req, res) => {
 
-    const x = req.params.x;
-    const n = req.params.n;
-    const m = req.params.m;
+    const x = parseInt(req.params.x);
+    const n = parseInt(req.params.n);
+    const m = parseInt(req.params.m);
 
     if (m > 1000 || n > 1000) {
         res.status(400);
@@ -76,8 +76,8 @@ app.get("/api/fisher/:m/:n/:x", (req, res) => {
 
 app.get("/api/gammq/:a/:x", (req, res) => {
 
-    const a = req.params.a;
-    const x = req.params.x;
+    const a = parseInt(req.params.a);
+    const x = parseInt(req.params.x);
 
     try {
         const dto = {resultAsDouble: gammq(a, x)};
@@ -90,10 +90,10 @@ app.get("/api/gammq/:a/:x", (req, res) => {
 
 app.get("/api/remainder/:a/:b", (req, res) => {
 
-    const a = req.params.a;
-    const b = req.params.b;
+    const a = parseInt(req.params.a);
+    const b = parseInt(req.params.b);
 
-    const lim = 10000;
+    const lim = 1000;
     if (a > lim || a < -lim || b > lim || b < -lim) {
         res.status(400);
         res.send();

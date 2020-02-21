@@ -14,7 +14,6 @@
     "@babel/core": "7.8.4",
     "evomaster-client-js": "file:../../evomaster-client-js",
     "jest": "24.9.0",
-    "babel-jest": "24.9.0",
     "dedent": "0.7.0",
     "superagent": "5.2.2",
     "supertest": "4.0.2"
@@ -35,15 +34,16 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testRegex": "tests/.*-test\\.(js|jsx|ts|tsx)$",
+    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
-      "src/**/.*(js|jsx|ts|tsx)"
+      "src/**/*.(js|jsx|ts|tsx)"
     ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/tests/",
       "<rootDir>/check/",
-      "<rootDir>/build/"
+      "<rootDir>/build/",
+      "<rootDir>/em"
     ]
   }
 }

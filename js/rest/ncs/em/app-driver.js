@@ -8,6 +8,10 @@ const em = require("evomaster-client-js");
 
 class AppController  extends em.SutController {
 
+    setupForGeneratedTest(){
+        return Promise.resolve();
+    }
+
     getInfoForAuthentication(){
         return [];
     }
