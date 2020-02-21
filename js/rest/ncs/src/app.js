@@ -28,7 +28,7 @@ app.get("/api/bessj/:n/:x", (req, res) => {
     const x = req.params.x;
     const n = req.params.n;
 
-    if (n <= 2 || n > 1000) {
+    if (n <= 2 || n > 100) {
         res.status(400);
         res.send();
         return;
@@ -97,6 +97,7 @@ app.get("/api/remainder/:a/:b", (req, res) => {
     if (a > lim || a < -lim || b > lim || b < -lim) {
         res.status(400);
         res.send();
+        return;
     }
 
     const dto = {resultAsInt: remainder(a, b)};
