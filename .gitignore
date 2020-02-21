@@ -75,3 +75,6 @@ hs_err_pid*
 /em/external/rest/scs/target/
 /em/embedded/rest/ocvn/derby.log
 /em/external/rest/ocvn/src/evo/
+/js/rest/ncs/build/
+/js/evomaster-client-js/
+/js/rest/ncs/node_modules/

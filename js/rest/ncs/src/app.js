@@ -93,7 +93,7 @@ app.get("/api/remainder/:a/:b", (req, res) => {
     const a = req.params.a;
     const b = req.params.b;
 
-    const lim = 10_000;
+    const lim = 10000;
     if (a > lim || a < -lim || b > lim || b < -lim) {
         res.status(400);
         res.send();
@@ -347,3 +347,5 @@ app.get("/swagger.json", (req, res) => {
     res.json(swagger);
 });
 
+
+module.exports = app;

@@ -1,7 +1,3 @@
-package
-org.restncs.imp;
-
-
 const triangle = (a, b, c) => {
 
     if (a <= 0 || b <= 0 || c <= 0) {
