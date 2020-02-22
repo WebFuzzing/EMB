@@ -24,7 +24,7 @@ module.exports = {
     encryptionKey: '',
 
     /* If enabled, loads example Dashboards from /examples folder into the database */
-    loadExampleDashboards: true,
+    loadExampleDashboards: false,
 
     /* Configuration for Analytics */
     analytics: {

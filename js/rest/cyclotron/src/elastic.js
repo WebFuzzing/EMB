@@ -22,7 +22,7 @@ var _ = require('lodash'),
 
 if (_.isUndefined(config.analytics.elasticsearch.host)) {
     console.error('Required config missing: "analytics.elasticsearch.host".');
-    return;
+    //return;
 }
 
 var elasticsearchConfig = config.analytics.elasticsearch;

@@ -1,7 +1,7 @@
 const http  = require("http");
 const {AddressInfo}  = require("net");
 
-const app = require("../app");
+const app = require("../src/app");
 
 const em = require("evomaster-client-js");
 
