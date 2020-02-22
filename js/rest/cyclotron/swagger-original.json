@@ -1760,21 +1760,23 @@
       "properties": {
         "_id": {
           "type": "string",
-          "description": "ID of the Dashboard."
+          "description": "ID of the Dashboard.",
+          "required": true
         },
         "name": {
           "type": "string",
-          "description": "Name of the Dashboard."
+          "description": "Name of the Dashboard.",
+          "required": true
         }
-      },
-      "required": ["_id", "name"]
+      }
     },
     "DashboardInfo": {
       "description": "The wrapper around but not including the actual Dashboard definition",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the Dashboard."
+          "description": "Name of the Dashboard.",
+          "required": true
         },
         "date": {
           "type": "string",
@@ -1841,18 +1843,19 @@
           },
           "readOnly": true
         }
-      },
-      "required": ["name"]
+      }
     },
     "Dashboard": {
       "description": "The entire Dashboard object, including the definition and metadata.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the Dashboard."
+          "description": "Name of the Dashboard.",
+          "required": true
         },
         "dashboard": {
-          "$ref": "#/definitions/DashboardDefinition"
+          "$ref": "#/definitions/DashboardDefinition",
+          "required": true
         },
         "date": {
           "type": "string",
@@ -1919,34 +1922,37 @@
           },
           "readOnly": true
         }
-      },
-      "required": ["name", "dashboard"]
+      }
     },
     "DashboardDefinition": {
       "description": "Definition of a Dashboard. This is a non-exhaustive list of properties",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the Dashboard."
+          "description": "Name of the Dashboard.",
+          "required": true
         },
         "dataSources": {
           "type": "array",
-          "description": "List of Data Sources."
+          "description": "List of Data Sources.",
+          "required": false
         },
         "pages": {
           "type": "array",
-          "description": "List of Pages in the Dashboard."
+          "description": "List of Pages in the Dashboard.",
+          "required": false
         },
         "scripts": {
           "type": "array",
-          "description": "List of Scripts to run when the Dashboard is loaded."
+          "description": "List of Scripts to run when the Dashboard is loaded.",
+          "required": false
         },
         "styles": {
           "type": "array",
-          "description": "List of Styles to apply when the Dashboard is loaded."
+          "description": "List of Styles to apply when the Dashboard is loaded.",
+          "required": false
         }
-      },
-      "required": ["name"]
+      }
     },
     "CreatedBy": {
       "properties": {
@@ -1986,7 +1992,8 @@
         },
         "dn": {
           "description": "LDAP distinguished name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "mail": {
           "description": "Email address",
@@ -1996,8 +2003,7 @@
           "description": "Type of account, e.g. user, group",
           "type": "string"
         }
-      },
-      "required": ["dn"]
+      }
     },
     "Viewer": {
       "properties": {
@@ -2011,7 +2017,8 @@
         },
         "dn": {
           "description": "LDAP distinguished name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "mail": {
           "description": "Email address",
@@ -2021,8 +2028,7 @@
           "description": "Type of account, e.g. user, group",
           "type": "string"
         }
-      },
-      "required": ["dn"]
+      }
     },
     "ExportResponse": {
       "properties": {
@@ -2075,79 +2081,95 @@
       "properties": {
         "dn": {
           "description": "LDAP distinguished name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "distinguishedName": {
           "description": "LDAP distinguished name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "displayName": {
           "description": "Display name of the User.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "memberOf": {
           "description": "List of LDAP distinguished names for groups this User is a member of.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "required": true
         },
         "department": {
           "description": "The User's department.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "division": {
           "description": "The User's division.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "name": {
           "description": "Formal name of the User.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "sAMAccountName": {
           "description": "Username of the User.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "objectCategory": {
           "description": "LDAP distinguished name of the category of this user.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "mail": {
           "description": "Email address",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "category": {
           "description": "Type of account, e.g. user, group",
-          "type": "string"
+          "type": "string",
+          "required": true
         }
-      },
-      "required": ["dn","distinguishedName","displayName","memberOf","department","division","name","sAMAccountName","objectCategory","mail","category"]
+      }
     },
     "User": {
       "properties": {
         "sAMAccountName": {
           "description": "Username of the User.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "name": {
           "description": "Formal name of the User.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "email": {
           "description": "Email address",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "emailHash": {
           "description": "An MD5 hash of the User's email address.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "distinguishedName": {
           "description": "LDAP distinguished name.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "displayName": {
           "description": "Display name of the User.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "givenName": {
           "description": "The User's given name.",
@@ -2167,28 +2189,27 @@
         },
         "firstLogin": {
           "description": "The date/time of the User's first login to Cyclotron.",
-          "type": "string",
-          "format": "date-time"
+          "type": "date-time"
         },
         "lastLogin": {
           "description": "The date/time of the User's last login to Cyclotron.",
-          "type": "string",
-          "format": "date-time"
+          "type": "date-time"
         },
         "timesLoggedIn": {
           "description": "The number of times this User has logged into Cyclotron.",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "required": true
         },
         "memberOf": {
           "description": "List of LDAP distinguished names for groups this User is a member of.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "required": true
         }
-      },
-      "required": ["sAMAccountName","name","email","emailHash","distinguishedName","displayName","timesLoggedIn","memberOf"]
+      }
     },
     "LoginRequest": {
       "properties": {
@@ -2226,8 +2247,7 @@
         },
         "expiration": {
           "description": "The current expiration date of the Session.",
-          "type": "string",
-          "format": "date-time"
+          "type": "date-time"
         },
         "user": {
           "description": "The User logged into this Session.",
@@ -2247,10 +2267,10 @@
       "properties": {
         "url": {
           "description": "Target URL for the request.",
-          "type": "string"
+          "type": "string",
+          "required": true
         }
-      },
-      "required": ["url"]
+      }
     },
     "ProxyResponse": {
       "properties": {
@@ -2269,86 +2289,103 @@
         "date": {
           "description": "The date this record was logged.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "required": false
         },
         "dashboard": {
           "description": "The ID of the Dashboard being viewed.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "page": {
           "description": "The current page index (0-indexed).",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "rev": {
           "description": "The current revision of the Dashboard.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "visitId": {
           "description": "The current Visit ID: a unique value generated when a Dashboard is opened.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "user": {
           "description": "The ID of a logged-in User. Either this or 'uid' is required.",
-          "type": "string"
+          "type": "string",
+          "required": false
         },
         "uid": {
           "description": "The unique ID for a non-logged-in User.  Either this or 'user' is required.",
-          "type": "string"
+          "type": "string",
+          "required": false
         },
         "browser": {
           "description": "An object containing browser information.",
-          "type": "object"
+          "type": "object",
+          "required": false
         },
         "ip": {
           "description": "The IP of the computer logging this record",
-          "type": "string"
+          "type": "string",
+          "required": false
         }
-      },
-      "required": ["dashboard","page","rev","visitId"]
+      }
     },
     "DataSourceAnalyticsRecord": {
-      "required": ["dashboard","page","rev","visitId"],
       "properties": {
         "date": {
           "description": "The date this record was logged.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "required": false
         },
         "dashboard": {
           "description": "The ID of the Dashboard being viewed.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "page": {
           "description": "The current page index (0-indexed).",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "rev": {
           "description": "The current revision of the Dashboard.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "visitId": {
           "description": "The current Visit ID: a unique value generated when a Dashboard is opened.",
-          "type": "string"
+          "type": "string",
+          "required": true
         },
         "dataSourceName": {
           "description": "The name of the Data Source that was executed.",
-          "type": "string"
+          "type": "string",
+          "required": false
         },
         "dataSourceType": {
           "description": "The type of Data Source that was executed.",
-          "type": "string"
+          "type": "string",
+          "required": false
         },
         "success": {
           "description": "Indicates whether or not the Data Source execution was successful.",
-          "type": "boolean"
+          "type": "boolean",
+          "required": false
         },
         "duration": {
           "description": "The duration of execution, in milliseconds.",
-          "type": "integer"
+          "type": "integer",
+          "required": false
         },
         "browser": {
           "description": "An object containing Data Source information.",
-          "type": "object"
+          "type": "object",
+          "required": false
         }
       }
     },
@@ -2504,7 +2541,8 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Uniquely identifying key of the Data Bucket."
+          "description": "Uniquely identifying key of the Data Bucket.",
+          "required": true
         },
         "createdDate": {
           "type": "string",
@@ -2526,10 +2564,10 @@
         },
         "data": {
           "description": "Array of data contained in the Data Bucket.",
-          "type": "array"
+          "type": "array",
+          "required": true
         }
-      },
-      "required": ["key","data"]
+      }
     }
   },
   "securityDefinitions": {
