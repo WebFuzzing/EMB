@@ -82,3 +82,4 @@ hs_err_pid*
 /js/rest/ncs/coverage/
 /js/rest/cyclotron/node_modules/
 /js/rest/cyclotron/build/
+/js/rest/cyclotron/em/EvoMasterTest.js

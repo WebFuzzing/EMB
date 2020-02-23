@@ -12,7 +12,9 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
  * either express or implied. See the License for the specific 
  * language governing permissions and limitations under the License. 
- */ 
+ */
+
+const path = require("path");
 
 var config = require('./config/config');
 
@@ -54,7 +56,7 @@ const swaggerIndex = fs.readFileSync(`${swaggerUiAssetPath}/index.html`)
     .toString()
     .replace("https://petstore.swagger.io/v2/swagger.json", "swagger.json")
 
-const swaggerJson = fs.readFileSync('swagger.json')
+const swaggerJson = fs.readFileSync(path.resolve(__dirname,'swagger.json'))
     .toString()
     .replace(`"basePath": "/",`, `"basePath": "${config.basePath}",`)
 

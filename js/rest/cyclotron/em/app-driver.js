@@ -44,6 +44,7 @@ class AppController  extends em.SutController {
     startSut(){
 
         //TODO MongoDB
+        //docker run -p 27017:27017 mongo
 
         return new Promise( (resolve) => {
 
