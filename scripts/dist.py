@@ -27,14 +27,14 @@ if JAVA_HOME_11 == '':
     exit(1)
 
 
+SHELL = platform.system() == 'Windows'
+
 # Building Maven JDK 8 projects
 env_vars = os.environ.copy()
 env_vars["JAVA_HOME"] = JAVA_HOME_8
-if platform.system() == 'Windows':
-    mvnres = run(["mvn", "clean", "install", "-DskipTests"], shell=True, cwd=PROJ_LOCATION, env=env_vars)
-else:
-    mvnres = run(["mvn", "clean", "install", "-DskipTests"], cwd=PROJ_LOCATION, env=env_vars)
-    mvnres = mvnres.returncode
+
+mvnres = run(["mvn", "clean", "install", "-DskipTests"], shell=SHELL, cwd=PROJ_LOCATION, env=env_vars)
+mvnres = mvnres.returncode
 
 if mvnres != 0:
     print("\nERROR: Maven command failed")
@@ -54,11 +54,11 @@ os.mkdir(dist)
 def buildJS(path, name):
     # TODO Windows
     print("Building '"+name+"' from " + path)
-    res = run(["npm", "install"], cwd=path).returncode
+    res = run(["npm", "install"], shell=SHELL, cwd=path).returncode
     if res != 0:
         print("\nERROR installing packages with NPM in " + path)
         exit(1)
-    res = run(["npm", "run", "build"], cwd=path).returncode
+    res = run(["npm", "run", "build"], shell=SHELL, cwd=path).returncode
     if res != 0:
         print("\nERROR when building " + path)
         exit(1)
@@ -66,6 +66,7 @@ def buildJS(path, name):
     target = os.path.join(dist, name+"-js")
     # shutil.make_archive(base_name=target, format='zip', root_dir=path+"/..", base_dir=name)
     copytree(path, target)
+
 
 buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
 buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","cyclotron")), "cyclotron")
