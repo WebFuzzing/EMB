@@ -52,7 +52,6 @@ os.mkdir(dist)
 
 # Building JavaScript projects
 def buildJS(path, name):
-    # TODO Windows
     print("Building '"+name+"' from " + path)
     res = run(["npm", "install"], shell=SHELL, cwd=path).returncode
     if res != 0:
@@ -69,7 +68,6 @@ def buildJS(path, name):
 
 
 buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
-buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","cyclotron")), "cyclotron")
 
 
 
