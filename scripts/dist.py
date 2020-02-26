@@ -68,6 +68,7 @@ def buildJS(path, name):
 
 
 buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
+buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","scs")), "scs")
 
 
 

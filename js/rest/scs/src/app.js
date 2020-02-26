@@ -75,8 +75,8 @@ app.get("/api/cookie/:name/:val/:site", (req, res) => {
 app.get("/api/calc/:op/:arg1/:arg2", (req, res) => {
 
     const op = req.params.op;
-    const arg1 = parseDobule(req.params.arg1);
-    const arg2 = parseDobule(req.params.arg2);
+    const arg1 = parseDouble(req.params.arg1);
+    const arg2 = parseDouble(req.params.arg2);
 
     res.json(calc(op, arg1, arg2));
 });
