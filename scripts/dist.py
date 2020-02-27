@@ -67,8 +67,9 @@ def buildJS(path, name):
     copytree(path, target)
 
 
-buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
-buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","scs")), "scs")
+### Due to the insanity of node_modules, those are off by default
+#buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
+#buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","scs")), "scs")
 
 
 
