@@ -1,0 +1,49 @@
+{
+  "name": "ncs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "evomaster-client-js": "file:../../evomaster-client-js",
+    "jest": "24.9.0",
+    "dedent": "0.7.0",
+    "superagent": "5.2.2",
+    "supertest": "4.0.2"
+  },
+  "scripts": {
+    "check": "babel src -d check",
+    "build": "babel  em src -d build/src --copy-files",
+    "test": "jest --coverage",
+    "em": "node build/src/em-main.js"
+  },
+  "babel": {
+    "only": [
+      "src"
+    ],
+    "plugins": [
+      "module:evomaster-client-js"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
+    "collectCoverageFrom": [
+      "src/**/*.(js|jsx|ts|tsx)"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/tests/",
+      "<rootDir>/check/",
+      "<rootDir>/build/",
+      "<rootDir>/em"
+    ]
+  }
+}

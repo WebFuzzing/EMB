@@ -75,3 +75,17 @@ hs_err_pid*
 /em/external/rest/scs/target/
 /em/embedded/rest/ocvn/derby.log
 /em/external/rest/ocvn/src/evo/
+/js/rest/ncs/build/
+/js/evomaster-client-js/
+/js/rest/ncs/node_modules/
+/js/rest/ncs/em/EvoMasterTest.js
+/js/rest/ncs/coverage/
+/js/rest/cyclotron/node_modules/
+/js/rest/cyclotron/build/
+/js/rest/cyclotron/em/EvoMasterTest.js
+/em/external/rest/ocvn/target/
+/em/embedded/rest/ocvn/target/
+/venv/
+/js/rest/scs/node_modules/
+/js/rest/scs/build/
+/js/rest/scs/em/EvoMasterTest.js
