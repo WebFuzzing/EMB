@@ -27,13 +27,13 @@ To compile and generate all the jar files, use the command:
 
 ``mvn clean package -DskipTests`` 
 
-Currently, all the case studies do require JDK _8_.
+Currently, all the case studies do require JDK __8__.
 They will not compile with a different version. 
 
 _Note_: the case studies do import EvoMaster as a library. Current SNAPSHOT
 versions of the case studies do use the most recent SNAPSHOT version of EvoMaster
 (the two versioning numbers are aligned).
-We do _NOT_ publish the SNAPSHOT dependencies online.
+We do __NOT__ publish the SNAPSHOT dependencies online.
 This means that, if you try to build the project directly, it will fail due to 
 missing SNAPSHOT dependencies. 
 
