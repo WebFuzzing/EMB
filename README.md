@@ -20,17 +20,23 @@ All the code that is new for this repository is released under Apache 2.0 licens
 However, this repository contains as well sources from different open-source 
 projects, each one with its own license, as clarified in more details beneath.
 
-## Current Case Studies
+
+## Build The Projects 
 
 To compile and generate all the jar files, use the command:
 
 ``mvn clean package -DskipTests`` 
 
+Currently, all the case studies do require JDK _8_.
+They will not compile with a different version. 
 
-Note: the case studies do import EvoMaster as a library. Current SNAPSHOT
+_Note_: the case studies do import EvoMaster as a library. Current SNAPSHOT
 versions of the case studies do use the most recent SNAPSHOT version of EvoMaster
 (the two versioning numbers are aligned).
-We do not publish the SNAPSHOT dependencies online.
+We do _NOT_ publish the SNAPSHOT dependencies online.
+This means that, if you try to build the project directly, it will fail due to 
+missing SNAPSHOT dependencies. 
+
 To use such SNAPSHOT versions, you need first a `mvn install` of EvoMaster on your 
 machine (so that the SNAPSHOT jars are created, and put under your `~/.m2` folder).
 However, in the Git repository of EMB, we did tag the versions of EMB that are
@@ -38,6 +44,9 @@ using the published versions of EvoMaster.
 See the [releases](https://github.com/EMResearch/EMB/releases) page.
 For example, to use version `X` of EvoMaster, you can check out the Git commit
 of EMB tagged with version `X`. 
+
+## Current Case Studies
+
 
 ### REST
 
