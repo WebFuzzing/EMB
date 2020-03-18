@@ -1,0 +1,174 @@
+<div id="title" class="text-center">
+  <h1 class="text-white">{{ title }}</h1>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#hospitais">Hospitais<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#paciente">Pacientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#estoque">Estoque</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<!--HOSPITAIS-->
+<h2 class="text-white text-center"><a name="hospitais">Hospitais</a></h2>
+<div class="cover-container d-flex h-100 p-4 mx-auto flex-column">
+  <p-panel header="Adicionar Hospital">
+    <div>
+      <p class="color">*Necessário preencher todos os campos!!</p><br>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-2">Nome do Hospital</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="hospital.name" placeholder="Ex.: Hospital dos Sonhos" required>
+      </div>
+      <div class="p-col-2">Endereço</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="hospital.address" placeholder="Ex.: Rua dos sonhos" required>
+      </div>
+      <div class="p-col-2">Leitos</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="hospital.beds" placeholder="Ex.: 10" required>
+      </div>
+      <div class="p-col-2">Leitos Disponíveis</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="hospital.availableBeds" placeholder="Ex.: 10" required>
+      </div>
+      <div class="p-col-2 p-offset-2">
+        <button pButton id="button" class="btn btn-lg btn-block" type="submit" label="Adicionar" (click)="adicionar()"></button>
+      </div>
+    </div>
+  </p-panel>
+  <hr>
+  <p-table [value]="hospitais">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Hospital</th>
+        <th>Endereço</th>
+        <th>Leitos</th>
+        <th>Leitos Disponíveis</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-hospital>
+      <tr>
+        <td>{{ hospital.name }}</td>
+        <td>{{ hospital.address }}</td>
+        <td>{{ hospital.beds }}</td>
+        <td>{{ hospital.availableBeds }}</td>
+      </tr>
+    </ng-template>  
+  </p-table>
+</div>
+<!--PACIENTES-->
+<h2 class="text-white text-center"><a name="paciente">Pacientes</a></h2>
+<div class="cover-container d-flex h-100 p-4 mx-auto flex-column">
+  <p-panel header="Adicionar Paciente">
+    <div>
+      <p class="color">*Necessário preencher todos os campos!!</p><br>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-2">Nome do Paciente</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="paciente.patientName" placeholder="Ex.: Pedro" required>
+      </div>
+      <div class="p-col-2">CPF</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="paciente.cpf" placeholder="Ex.: 1237549220" required>
+      </div>
+      <div class="p-col-2">Nascimento</div>
+      <div class="p-col-10">
+        <p-calendar [(ngModel)]="paciente.birthDate" required></p-calendar>
+      </div>
+      <div class="p-col-2">Gênero</div>
+      <div class="p-col-10">
+        <input pInputText type="text" [(ngModel)]="paciente.gender" placeholder="Ex.: Feminino" required>
+      </div>
+      <div class="p-col-2">Data de Entrada</div>
+      <div class="p-col-10">
+        <p-calendar [(ngModel)]="paciente.entryDate" required></p-calendar>
+      </div>
+      <div class="p-col-2 p-offset-2">
+        <button pButton id="button" class="btn btn-lg btn-block" type="submit" label="Adicionar" (click)=" adicionarPaciente()"></button>
+      </div>
+    </div>
+  </p-panel>
+  <hr>
+  <p-table [value]="pacientes">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nome do Paciente</th>
+        <th>CPF</th>
+        <th>Nascimento</th>
+        <th>Gênero</th>
+        <th>Data de Entrada</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-paciente>
+      <tr>
+        <td>{{ paciente.name }}</td>
+        <td>{{ paciente.cpf }}</td>
+        <td>{{ paciente.birthDate | date:'dd/MM/yyyy' }}</td>
+        <td>{{ paciente.gender }}</td>
+        <td>{{ paciente.entryDate | date:'dd/MM/yyyy' }}</td>
+      </tr>
+    </ng-template>  
+  </p-table>
+</div>
+<!--ESTOQUE-->
+<h2 class="text-white text-center"><a name="estoque">Estoque</a></h2>
+<div class="cover-container d-flex h-100 p-4 mx-auto flex-column">
+    <p-panel header="Adicionar Produtos">
+      <div>
+        <p class="color">*Necessário preencher todos os campos!!</p><br>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-2">Produto</div>
+        <div class="p-col-10">
+          <input pInputText type="text" [(ngModel)]="produto.productName" placeholder="Ex.: Alimento" required>
+        </div>
+        <div class="p-col-2">Descrição</div>
+        <div class="p-col-10">
+          <input pInputText type="text" [(ngModel)]="produto.description" placeholder="Ex.: Arroz Integral" required>
+        </div>
+        <div class="p-col-2">Tipo</div>
+        <div class="p-col-10">
+          <input pInputText type="text" [(ngModel)]="produto.productType" placeholder="Ex.: COMMON" required>
+        </div>
+        <div class="p-col-2">Quantidade</div>
+        <div class="p-col-10">
+          <input pInputText type="text" [(ngModel)]="produto.quantity" placeholder="Ex.: 10" required>
+        </div>
+        <div class="p-col-2 p-offset-2">
+          <button pButton id="button" class="btn btn-lg btn-block" type="submit" label="Adicionar" (click)="adicionarProduto()"></button>
+        </div>
+      </div>
+    </p-panel>
+    <hr>
+    <p-table [value]="produtos">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Descrição</th>
+          <th>Tipo</th>
+          <th>Quantidade</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-produto>
+        <tr>
+          <td>{{ produto.description }}</td>
+          <td>{{ produto.productType }}</td>
+          <td>{{ produto.quantity }}</td>
+        </tr>
+      </ng-template>  
+    </p-table>
+  </div>
+<p-toast></p-toast>
+<a class="top" href="#title">Topo</a>
+<footer class="page-footer text-white">
+  <div class="footer-copyright text-center py-3">© 2019 AceleraDev Brasil - <a href="https://www.codenation.dev/" target="blank">Code:Nation</a></div>  
+</footer>
