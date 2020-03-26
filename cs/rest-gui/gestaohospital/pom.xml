@@ -11,6 +11,8 @@
 	<groupId>com.codenation</groupId>
 	<artifactId>gestaohospitalar</artifactId>
 	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
 	<name>gestaohospitalar</name>
 	<description>Code:Nation - Sistema de Gestão Hospitalar</description>
 

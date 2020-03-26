@@ -13,6 +13,7 @@
 
 
     <modules>
+        <module>gestaohospital</module>
         <module>features-service</module>
         <module>scout-api</module>
         <module>proxyprint</module>
