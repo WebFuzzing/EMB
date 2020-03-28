@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.codenation</groupId>
 	<artifactId>gestaohospitalar</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>gestaohospitalar</name>
@@ -60,6 +60,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<configuration>
+							<finalName>gestaohospitalar</finalName>
+							<classifier>sut</classifier>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
