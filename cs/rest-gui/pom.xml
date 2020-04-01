@@ -13,6 +13,7 @@
 
 
     <modules>
+        <module>bezkoder-mongodb</module>
         <module>ocvn</module>
         <module>gestaohospital</module>
 
