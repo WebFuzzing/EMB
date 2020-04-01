@@ -4,7 +4,7 @@ import sys
 import re
 import platform
 import os
-
+from subprocess import run
 
 if len(sys.argv) != 2:
     print("Usage:\n<nameOfScript>.py <version-number>")
@@ -53,7 +53,7 @@ def replace(file, regex, replacement):
 def replaceInDist():
     regex = re.compile(r'.*EVOMASTER_VERSION.*=.*".*".*')
     replacement = 'EVOMASTER_VERSION = "'+version+'"\n'
-    replace(file, regex, replacement)
+    replace("scripts/dist.py", regex, replacement)
 
 
 replaceInPom("pom.xml")
