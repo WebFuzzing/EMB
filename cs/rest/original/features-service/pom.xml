@@ -21,7 +21,7 @@
         <querydsl.version>3.7.2</querydsl.version>
         <!--<swaggerjersey.version>1.5.8</swaggerjersey.version>-->
         <swaggerjersey.version>1.5.12</swaggerjersey.version>
-        <evomaster-version>1.0.1</evomaster-version>
+        <evomaster-version>1.0.2-SNAPSHOT</evomaster-version>
     </properties>
 
 

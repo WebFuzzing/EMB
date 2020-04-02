@@ -9,7 +9,7 @@
         To change version in all modules, use:
         mvn versions:set -DnewVersion=a.b.c
      -->
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <inceptionYear>2017</inceptionYear>
     <name>EvoMaster Benchmark (EMB)</name>
@@ -53,7 +53,7 @@
             in all the SUTs using a database.
             Also need to update same variable in dist.py
         -->
-        <evomaster-version>1.0.1</evomaster-version>
+        <evomaster-version>1.0.2-SNAPSHOT</evomaster-version>
     </properties>
 
     <build>
