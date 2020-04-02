@@ -13,7 +13,7 @@
     </parent>
 
     <properties>
-        <evomaster-version>1.0.1-SNAPSHOT</evomaster-version>
+        <evomaster-version>1.0.1</evomaster-version>
     </properties>
 
     <dependencies>
