@@ -44,6 +44,17 @@ using the published versions of EvoMaster.
 See the [releases](https://github.com/EMResearch/EMB/releases) page.
 For example, to use version `X` of EvoMaster, you can check out the Git commit
 of EMB tagged with version `X`. 
+To see the current available tags, from a command-line you can execute:
+
+`git tag`
+
+Then, to switch to a specific tag X (e.g., `v1.0.0`), you can run:
+
+`git checkout tags/v1.0.0`
+
+Finally, if for any reason you need to swith back to the latest snapshot version, you can run:
+
+`git checkout master` 
 
 ## Current Case Studies
 
