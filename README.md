@@ -56,6 +56,23 @@ Finally, if for any reason you need to swith back to the latest snapshot version
 
 `git checkout master` 
 
+There is an issue if you try to checkout an old version. 
+Not only Java broke backward compatibility with JDK 9, but also Maven...
+If you try to build with Maven and get an error regarding
+`maven-processor-plugin`, you might have to add manually
+the following plugin dependency version:
+```
+<plugin>
+    <groupId>org.bsc.maven</groupId>
+    <artifactId>maven-processor-plugin</artifactId>
+    <version>3.3.3</version>
+</plugin>
+```
+
+Besides JDK 8, to build from Maven you will also need NPM and NodeJS installed
+on your machine (as some of the projects have GUIs built with JS).
+
+
 ## Current Case Studies
 
 
