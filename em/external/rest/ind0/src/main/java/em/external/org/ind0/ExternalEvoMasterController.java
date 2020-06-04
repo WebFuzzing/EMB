@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -65,7 +66,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private Connection connection;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
-            .withExposedPorts(5432);
+            .withExposedPorts(5432)
+            .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"));
 
     public ExternalEvoMasterController(){
         this(40100, SUT_LOCATION_IND0, 12345, 120, SUT_PACKAGE_IND0);
