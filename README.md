@@ -52,7 +52,7 @@ Then, to switch to a specific tag X (e.g., `v1.0.0`), you can run:
 
 `git checkout tags/v1.0.0`
 
-Finally, if for any reason you need to swith back to the latest snapshot version, you can run:
+Finally, if for any reason you need to switch back to the latest snapshot version, you can run:
 
 `git checkout master` 
 
