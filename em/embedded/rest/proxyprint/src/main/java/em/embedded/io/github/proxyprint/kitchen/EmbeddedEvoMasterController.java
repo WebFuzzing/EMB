@@ -56,7 +56,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         ctx = SpringApplication.run(WebAppConfig.class, new String[]{
                 "--server.port=0",
-                "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
+                "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;MVCC=true;",
                 "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "--spring.datasource.username=sa",
