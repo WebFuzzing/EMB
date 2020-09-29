@@ -67,6 +67,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
+            .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
             .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"));
 
     public ExternalEvoMasterController(){
