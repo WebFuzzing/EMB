@@ -21,6 +21,7 @@
         <module>catwatch</module>
         <module>news</module>
         <module>ocvn</module>
+        <module>languagetool</module>
     </modules>
 
 </project>

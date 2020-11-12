@@ -22,6 +22,7 @@
         <module>news</module>
         <module>ind0</module>
         <module>ocvn</module>
+        <module>languagetool</module>
     </modules>
 
 </project>

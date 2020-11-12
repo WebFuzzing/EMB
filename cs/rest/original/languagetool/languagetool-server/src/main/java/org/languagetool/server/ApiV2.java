@@ -63,8 +63,8 @@ class ApiV2 {
     this.textChecker = textChecker;
     this.allowOriginUrl = allowOriginUrl;
     try {
-      this.swagger = new String(Files.readAllBytes(new File(getClass().getClassLoader().getResource("swagger.json").getFile()).toPath()));
-    } catch (IOException e) {
+      this.swagger = new Scanner(ApiV2.class.getResourceAsStream("/swagger.json"), "UTF-8").useDelimiter("\\A").next();
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

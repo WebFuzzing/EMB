@@ -64,6 +64,10 @@ public abstract class Server {
     ServerTools.print("Server started");
   }
 
+  public int getBoundPort() {
+    return server.getAddress().getPort();
+  }
+
   /**
    * Stop the server. Once stopped, a server cannot be used again.
    */

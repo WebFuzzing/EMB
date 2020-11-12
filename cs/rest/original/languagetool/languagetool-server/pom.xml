@@ -34,28 +34,56 @@
     
     <build>
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>${maven.jar.plugin}</version>-->
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <classpathLayoutType>custom</classpathLayoutType>-->
+<!--                            &lt;!&ndash; this artifact is used in languagetool-standalone, so adapt the path accordingly: &ndash;&gt;-->
+<!--                            <customClasspathLayout>libs/$${artifact.artifactId}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>-->
+<!--                        </manifest>-->
+<!--                        <manifestEntries>-->
+<!--                            &lt;!&ndash; as we later unzip the language JARs (see languagetool-standalone's pom.xml), we need to add the top directory to the classpath: &ndash;&gt;-->
+<!--                            <Class-Path>./</Class-Path>-->
+<!--                            <Main-Class>org.languagetool.server.HTTPSServer</Main-Class>-->
+<!--                            <ComponentVersion>${project.version}</ComponentVersion>-->
+<!--                            <Implementation-Date>${maven.build.timestamp}</Implementation-Date>-->
+<!--                        </manifestEntries>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.plugin}</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathLayoutType>custom</classpathLayoutType>
-                            <!-- this artifact is used in languagetool-standalone, so adapt the path accordingly: -->
-                            <customClasspathLayout>libs/$${artifact.artifactId}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>
-                        </manifest>
-                        <manifestEntries>
-                            <!-- as we later unzip the language JARs (see languagetool-standalone's pom.xml), we need to add the top directory to the classpath: -->
-                            <Class-Path>./</Class-Path>
-                            <Main-Class>org.languagetool.server.HTTPSServer</Main-Class>
-                            <ComponentVersion>${project.version}</ComponentVersion>
-                            <Implementation-Date>${maven.build.timestamp}</Implementation-Date>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>            
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>org.languagetool.server.HTTPServer</mainClass>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                </manifest>
+                            </archive>
+                            <finalName>languagetool-sut</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
