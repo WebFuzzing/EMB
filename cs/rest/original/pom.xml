@@ -17,6 +17,7 @@
         <module>scout-api</module>
         <module>proxyprint</module>
         <module>catwatch</module>
+        <module>languagetool</module>
     </modules>
 
 
