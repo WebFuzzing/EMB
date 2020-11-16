@@ -129,3 +129,8 @@ hs_err_pid*
 /cs/rest/original/languagetool/languagetool-server/target/
 /cs/rest/original/restcountries/target/
 /em/embedded/rest/restcountries/src/evo/
+cs/rest/original/restcountries/target
+/em/embedded/rest/restcountries/target/
+/em/embedded/rest/languagetool/target/
+/em/external/rest/languagetool/target/
+/em/external/rest/restcountries/target/
