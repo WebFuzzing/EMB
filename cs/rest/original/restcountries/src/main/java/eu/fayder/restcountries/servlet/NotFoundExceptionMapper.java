@@ -6,7 +6,9 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
+@Component
 @Provider
 public class NotFoundExceptionMapper implements ExceptionMapper<javax.ws.rs.NotFoundException> {
 	

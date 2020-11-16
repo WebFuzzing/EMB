@@ -23,6 +23,7 @@
         <module>ind0</module>
         <module>ocvn</module>
         <module>languagetool</module>
+        <module>restcountries</module>
     </modules>
 
 </project>

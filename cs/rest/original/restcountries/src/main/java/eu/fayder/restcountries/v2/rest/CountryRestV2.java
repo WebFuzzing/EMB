@@ -8,21 +8,21 @@ import eu.fayder.restcountries.domain.ResponseEntity;
 import eu.fayder.restcountries.v2.domain.Country;
 import eu.fayder.restcountries.domain.ICountryRestSymbols;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Provider
+@Component
 @Path("/v2")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-public class CountryRest {
+public class CountryRestV2 {
 
-    private static final Logger LOG = Logger.getLogger(CountryRest.class);
+    private static final Logger LOG = Logger.getLogger(CountryRestV2.class);
 
     @GET
     @Path("all")

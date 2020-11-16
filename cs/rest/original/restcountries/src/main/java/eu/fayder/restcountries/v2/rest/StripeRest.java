@@ -6,8 +6,9 @@ import com.stripe.exception.*;
 import com.stripe.model.Charge;
 import eu.fayder.restcountries.domain.ResponseEntity;
 import eu.fayder.restcountries.v2.domain.Contribution;
-import org.apache.http.util.TextUtils;
+//import org.apache.http.util.TextUtils;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -20,18 +21,22 @@ import java.util.Map;
 /**
  * Created by fayder on 24/02/2017.
  */
-@Provider
+@Component
 @Path("/contribute")
 @Consumes("application/json;charset=utf-8")
 public class StripeRest {
 
     private static final Logger LOG = Logger.getLogger(StripeRest.class);
 
+    private boolean isBlank(String string) {
+        return string == null || string.trim().isEmpty();
+    }
+
     @POST
     public Object contribute(Contribution contribution) {
         LOG.debug("Contribution: " + contribution);
 
-        if (contribution == null || TextUtils.isBlank(contribution.getToken())) {
+        if (contribution == null || isBlank(contribution.getToken())) {
             return getResponse(Response.Status.BAD_REQUEST);
         }
 

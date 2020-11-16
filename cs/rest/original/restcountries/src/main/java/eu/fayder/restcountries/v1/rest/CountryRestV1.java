@@ -14,20 +14,20 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.Provider;
 
 import eu.fayder.restcountries.domain.ResponseEntity;
 import eu.fayder.restcountries.v1.domain.Country;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
+import org.springframework.stereotype.Component;
 
-@Provider
+@Component
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-public class CountryRest {
+public class CountryRestV1 {
 
-    private static final Logger LOG = Logger.getLogger(CountryRest.class);
+    private static final Logger LOG = Logger.getLogger(CountryRestV1.class);
 
     @GET
     @Path("all")
