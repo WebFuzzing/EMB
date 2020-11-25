@@ -35,16 +35,10 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-
-        //TODO MongoDB
-
         return Promise.resolve();
     }
 
     startSut(){
-
-        //TODO MongoDB
-        //docker run -p 27017:27017 mongo
 
         return new Promise( (resolve) => {
 
