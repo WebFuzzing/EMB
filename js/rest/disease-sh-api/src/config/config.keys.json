@@ -1,0 +1,23 @@
+{
+  "countries": "covidapi:countries",
+  "yesterday_countries": "covidapi:yesterday_countries",
+  "twoDaysAgo_countries": "covidapi:yesterday2_countries",
+  "continents": "covidapi:continents",
+  "yesterday_continents": "covidapi:yesterday_continents",
+  "twoDaysAgo_continents": "covidapi:yesterday2_continents",
+  "states": "covidapi:states",
+  "yesterday_states": "covidapi:yesterday_states",
+  "jhu_v2": "covidapi:jhu_v2",
+  "historical_v2": "covidapi:historical_v2",
+  "historical_v2_USA": "covidapi:historical_v2_USA",
+  "nyt_counties": "covidapi:nyt_counties",
+  "nyt_states": "covidapi:nyt_states",
+  "nyt_USA": "covidapi:nyt_usa",
+  "apple_all": "covidapi:apple_all",
+  "gov_countries": "covidapi:gov_countries",
+  "vaccine": "covidapi:vaccine",
+  "therapeutics": "covidapi:therapeutics",
+  "influenza_ILINET": "influenza:ILINET",
+  "influenza_USPHL": "influenza:USPHL",
+  "influenza_USCL": "influenza:USCL"
+}
