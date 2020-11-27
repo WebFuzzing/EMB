@@ -5,7 +5,13 @@ const app = require("../src/app");
 
 const em = require("evomaster-client-js");
 
-//https://kb.objectrocket.com/postgresql/mongoose-drop-collection-if-exists-605
+
+/*
+    https://github.com/KristianWEB/fakebooker-backend/blob/471d6f6fafc95af57a99b6506c8f945dce43ffe9/jest.setup.js
+    https://kb.objectrocket.com/postgresql/mongoose-drop-collection-if-exists-605
+    collections are created by startSUT,
+    before each of tests, we only clean documents for all collections.
+ */
 const clean = async () => {
     Object.keys(mongoose.connection.collections).forEach(async key => {
         await mongoose.connection.collections[key].deleteMany({});
