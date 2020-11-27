@@ -1,6 +1,6 @@
 const http  = require("http");
 const {AddressInfo}  = require("net");
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const app = require("../src/app");
 
@@ -36,18 +36,19 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-
-        //TODO MongoDB
-
-       return Promise.resolve();
+        // mongoose.connection.db.dropDatabase();
+        return Promise.resolve();
 
     }
 
     startSut(){
 
-        //TODO MongoDB
+        //for mogodb
+        // mongoose.connection.close();
+        // mongoose.connection.db.dropDatabase();
+        //
         //docker run -p 27017:27017 mongo
-
+        console.log("mongoose connection: "+mongoose.connection.readyState)
         return new Promise( (resolve) => {
             this.server = app.listen(0, "localhost", () => {
                 this.port = this.server.address().port;
