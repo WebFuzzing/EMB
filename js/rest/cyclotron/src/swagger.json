@@ -1577,7 +1577,10 @@
           "200": {
             "description": "The data array for a Data Bucket",
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                  "$ref": "#/definitions/DataBucket"
+              }
             }
           },
           "404": {
