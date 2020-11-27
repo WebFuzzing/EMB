@@ -21,15 +21,14 @@ beforeEach(async () =>  {
     await controller.resetStateOfSUT();
 });
 
-test("test_start", async () => {
-    console.log(baseUrlOfSut)
+test("test_get_operation", async () => {
     let respone;
     try{
         respone = await superagent
-            .get(baseUrlOfSut+"/v3/covid-19/all").set('Accept', "*/*");
+            .get(baseUrlOfSut + "/v3/covid-19/all").set('Accept', "*/*");
         expect(respone.statusCode).toBe(200);
-    }catch (e) {
-        console.error(e)
+    } catch(e){
     }
-
 });
+
+

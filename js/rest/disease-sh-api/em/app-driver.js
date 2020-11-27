@@ -5,9 +5,13 @@ const app = require("../src/server");
 const em = require("evomaster-client-js");
 const config = require('../src/config/index')
 
+const baseURL = "https://disease.sh/"
+
+
 class AppController  extends em.SutController {
 
     setupForGeneratedTest(){
+
         return Promise.resolve();
     }
 
@@ -16,13 +20,13 @@ class AppController  extends em.SutController {
     }
 
     getPreferredOutputFormat() {
-        //TODO
         return em.dto.OutputFormat.JS_JEST;
     }
 
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
-        dto.swaggerJsonUrl = "http://localhost:" + this.port + "/apidocs/swagger_v3.json";
+        //"http://localhost:" + this.port
+        dto.swaggerJsonUrl = baseURL + "/apidocs/swagger_v3.json";
 
         return dto;
     }
@@ -41,13 +45,14 @@ class AppController  extends em.SutController {
 
     startSut(){
 
-        return new Promise( (resolve) => {
+        new Promise( (resolve) => {
             this.server = app.listen(0, "localhost", () => {
-                this.port = config.port;//this.server.address().port;
-                console.log(this.port)
-                resolve("https://disease.sh/");
+                this.port = config.port;
+                resolve("http://localhost:" + this.port);
             });
         });
+
+        return baseURL
     }
 
     stopSut() {
