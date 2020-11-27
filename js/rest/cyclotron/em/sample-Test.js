@@ -73,3 +73,38 @@ test("test_add_dashboard", async () => {
         console.error(e)
     }
 });
+
+test("test_add_2dashboard", async () => {
+    let respone;
+    try{
+        await mongoose.models["dashboard2"].count({  }, function (err, count) {
+            expect(count).toBe(0);
+        });
+        respone = await superagent
+            .post(baseUrlOfSut + "/dashboards").set('Accept', "*/*")
+            .set('Content-Type','application/json')
+            .send(" { " +
+                " \"name\": \"foo\", " +
+                " \"dashboard\": {" +
+                " \"name\": \"bar\" " +
+                " } " +
+                " } ");
+        expect(respone.status).toBe(200);
+
+        await superagent
+            .post(baseUrlOfSut + "/dashboards").set('Accept', "*/*")
+            .set('Content-Type','application/json')
+            .send(" { " +
+                " \"name\": \"foo2\", " +
+                " \"dashboard\": {" +
+                " \"name\": \"bar2\" " +
+                " } " +
+                " } ");
+        await mongoose.models["dashboard2"].count({}, function (err, count) {
+            expect(count).toBe(2);
+        });
+
+    }catch (e) {
+        console.error(e)
+    }
+});

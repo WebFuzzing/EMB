@@ -9,7 +9,7 @@ const em = require("evomaster-client-js");
 const clean = async () => {
     Object.keys(mongoose.connection.collections).forEach(async key => {
         await mongoose.connection.collections[key].deleteMany({});
-        await mongoose.connection.db.dropCollection(key);
+        //await mongoose.connection.db.dropCollection(key);
     });
 }
 
