@@ -1,10 +1,17 @@
 const http  = require("http");
 const {AddressInfo}  = require("net");
 const mongoose = require('mongoose');
-
 const app = require("../src/app");
 
 const em = require("evomaster-client-js");
+
+//https://kb.objectrocket.com/postgresql/mongoose-drop-collection-if-exists-605
+const clean = async () => {
+    Object.keys(mongoose.connection.collections).forEach(async key => {
+        await mongoose.connection.collections[key].deleteMany({});
+        await mongoose.connection.db.dropCollection(key);
+    });
+}
 
 
 class AppController  extends em.SutController {
@@ -36,19 +43,14 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-        // mongoose.connection.db.dropDatabase();
+        clean();
         return Promise.resolve();
 
     }
 
     startSut(){
-
-        //for mogodb
-        // mongoose.connection.close();
-        // mongoose.connection.db.dropDatabase();
-        //
+        clean();
         //docker run -p 27017:27017 mongo
-        console.log("mongoose connection: "+mongoose.connection.readyState)
         return new Promise( (resolve) => {
             this.server = app.listen(0, "localhost", () => {
                 this.port = this.server.address().port;

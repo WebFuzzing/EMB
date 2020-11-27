@@ -83,6 +83,7 @@ hs_err_pid*
 /js/rest/cyclotron/node_modules/
 /js/rest/cyclotron/build/
 /js/rest/cyclotron/em/EvoMasterTest.js
+/js/rest/cyclotron/em/samples
 /js/rest/cyclotron/coverage/
 /em/external/rest/ocvn/target/
 /em/embedded/rest/ocvn/target/
@@ -93,3 +94,4 @@ hs_err_pid*
 /js/rest/disease-sh-api/node_modules/
 /js/rest/disease-sh-api/build/
 /js/rest/disease-sh-api/EvoMasterTest.js
+/js/rest/disease-sh-api/redis/
