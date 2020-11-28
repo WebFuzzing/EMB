@@ -8,7 +8,7 @@ services:
 
   app:
     command: ["npm", "test"]
-    build: .
+    build: src
     environment:
       - TEST_MODE=true
       - DOCKER=true

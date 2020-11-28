@@ -1,4 +1,4 @@
-![Logo](./public/assets/img/icon-long.png)
+![Logo](src/public/assets/img/icon-long.png)
 <br><br>
 
 ![DockerHub Downloads](https://img.shields.io/docker/pulls/novelcovid/novelcovid-api?style=for-the-badge)
@@ -107,7 +107,7 @@ Did you build a project with our API? We now offer an "awesome-list" for you to 
 > https://covid19.go.id
 
 # Contributing
-- [How to Contribute](./CONTRIBUTING.md)
+- [How to Contribute](CONTRIBUTING.md)
 
 # Contributors ✨
 

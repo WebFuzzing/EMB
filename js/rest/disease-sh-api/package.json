@@ -13,6 +13,9 @@
     "covid"
   ],
   "scripts": {
+    "check": "babel src -d check",
+    "build": "babel em src -d build/src --copy-files",
+    "em": "node build/src/em-main.js",
     "updateCheck": "node src/updateCheck.js",
     "start": "node src/serverStart.js",
     "start:scraper": "node src/serverScraper.js",
@@ -21,14 +24,7 @@
     "lint": "eslint 'src/**/*.js'",
     "lint:fix": "eslint ./src/**/*.js --fix",
     "lint:win32": "eslint ./src/**/*.js",
-    "test": "jest --coverage",
-    "docker-start": "docker-compose -f docker-compose.yml -f src/docker-compose.prod.yml up -d --build",
-    "docker-down": "docker-compose -f docker-compose.yml -f src/docker-compose.prod.yml down --rmi all",
-    "docker-start-dev": "docker-compose -f docker-compose.yml -f src/docker-compose.dev.yml up -d --build",
-    "docker-down-dev": "docker-compose -f docker-compose.yml -f src/docker-compose.dev.yml down --rmi all",
-    "docker-test": "docker-compose -f docker-compose.yml -f src/docker-compose.test.yml up --abort-on-container-exit --build",
-    "build": "babel em src -d build/src --copy-files",
-    "em": "node build/src/em-main.js"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@sentry/node": "5.12.2",
