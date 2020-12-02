@@ -1,14 +1,28 @@
 const http  = require("http");
 const {AddressInfo}  = require("net");
-const app = require("../src/server");
+const mongoose = require('mongoose');
+const app = require("../src/app");
 
 const em = require("evomaster-client-js");
-const config = require('../src/config/index')
+
+
+/*
+    https://github.com/KristianWEB/fakebooker-backend/blob/471d6f6fafc95af57a99b6506c8f945dce43ffe9/jest.setup.js
+    https://kb.objectrocket.com/postgresql/mongoose-drop-collection-if-exists-605
+    collections are created by startSUT,
+    before each of tests, we only clean documents for all collections.
+ */
+const clean = async () => {
+    Object.keys(mongoose.connection.collections).forEach(async key => {
+        await mongoose.connection.collections[key].deleteMany({});
+        //await mongoose.connection.db.dropCollection(key);
+    });
+}
+
 
 class AppController  extends em.SutController {
 
     setupForGeneratedTest(){
-
         return Promise.resolve();
     }
 
@@ -22,7 +36,7 @@ class AppController  extends em.SutController {
 
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
-        dto.swaggerJsonUrl = "http://localhost:" + this.port + "/apidocs/swagger_v3.json";
+        dto.swaggerJsonUrl = "http://localhost:" + this.port + "/swagger.json";
 
         return dto;
     }
@@ -35,17 +49,17 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-       return Promise.resolve();
+        clean();
+        return Promise.resolve();
 
     }
 
     startSut(){
-
+        clean();
+        //docker run -p 27017:27017 mongo
         return new Promise( (resolve) => {
             this.server = app.listen(0, "localhost", () => {
-                this.port = this.server.address.port;
-                process.env.SERVER_PORT = this.port;
-                console.log(config.port)
+                this.port = this.server.address().port;
                 resolve("http://localhost:" + this.port);
             });
         });
@@ -55,10 +69,13 @@ class AppController  extends em.SutController {
         return new Promise( (resolve) =>
             {
                 this.server.close( () => resolve());
+                // https://mongoosejs.com/docs/api/connection.html#connection_Connection-readyState
+                mongoose.connection.close();
             }
         );
     }
 
 }
+
 
 module.exports = AppController;

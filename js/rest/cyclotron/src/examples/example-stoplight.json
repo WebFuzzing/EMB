@@ -1,0 +1,88 @@
+{
+    "dataSources": [{
+        "format": "ducati",
+        "name": "datasource_0",
+        "refresh": 1,
+        "type": "mock"
+    }],
+    "description": "Examples of the Stoplight widget",
+    "disableAnalytics": true,
+    "name": "example-stoplight",
+    "pages": [{
+        "layout": {
+            "gridColumns": 3,
+            "gridRows": 3.5
+        },
+        "widgets": [{
+            "allowFullscreen": false,
+            "gridHeight": 0.5,
+            "gridWidth": 1,
+            "html": "<h2><center>Hardcoded Stoplights</center></h2>",
+            "noscroll": true,
+            "widget": "html"
+        }, {
+            "dataSource": "datasource_0",
+            "gridHeight": 2.5,
+            "gridWidth": 1,
+            "rules": {
+                "green": "${true}",
+                "red": "${false}",
+                "yellow": "${false}"
+            },
+            "sortBy": [],
+            "title": "Stoplight with Title",
+            "tooltip": "grossbookingvalue:#{grossbookingvalue}",
+            "widget": "stoplight"
+        }, {
+            "dataSource": "datasource_0",
+            "gridHeight": 3.5,
+            "gridWidth": 1,
+            "layout": {},
+            "rules": {
+                "green": "${true /* Else */}",
+                "red": "${#{roomnightcount} >= 150}",
+                "yellow": "${#{roomnightcount} >= 100}"
+            },
+            "title": "Random Stoplight",
+            "tooltip": "roomnightcount:#{roomnightcount}",
+            "widget": "stoplight"
+        }, {
+            "gridHeight": 1,
+            "gridWidth": 1,
+            "rules": {
+                "red": "${true}"
+            },
+            "tooltip": "Time To Stop",
+            "widget": "stoplight"
+        }, {
+            "gridHeight": 1,
+            "gridWidth": 1,
+            "rules": {
+                "yellow": "${true}"
+            },
+            "tooltip": "Time To Get Ready",
+            "widget": "stoplight"
+        }, {
+            "gridHeight": 1,
+            "gridWidth": 1,
+            "rules": {
+                "green": "${true}"
+            },
+            "tooltip": "Time To Run",
+            "widget": "stoplight"
+        }, {
+            "dataSource": "datasource_0",
+            "filters": {
+                "roomnightcount": "-1"
+            },
+            "gridHeight": 1,
+            "gridWidth": 1,
+            "noData": "There is no data",
+            "title": "No Data",
+            "widget": "stoplight"
+        }]
+    }],
+    "parameters": [],
+    "scripts": [],
+    "theme": "light"
+}
