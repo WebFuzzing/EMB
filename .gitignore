@@ -95,3 +95,7 @@ hs_err_pid*
 /js/rest/disease-sh-api/build/
 /js/rest/disease-sh-api/EvoMasterTest.js
 /js/rest/disease-sh-api/redis/
+/venv/
+/js/rest/scs/node_modules/
+/js/rest/scs/build/
+/js/rest/scs/em/EvoMasterTest.js
