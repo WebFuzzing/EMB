@@ -35,17 +35,15 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-       return Promise.resolve();
+        return Promise.resolve();
 
     }
 
     startSut(){
 
         return new Promise( (resolve) => {
-            this.server = app.listen(0, "localhost", () => {
-                this.port = this.server.address.port;
-                process.env.SERVER_PORT = this.port;
-                console.log(config.port)
+            this.port = config.port;
+            this.server = app.listen(this.port, "localhost", () => {
                 resolve("http://localhost:" + this.port);
             });
         });
