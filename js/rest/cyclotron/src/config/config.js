@@ -7,7 +7,7 @@ module.exports = {
      * Authentication:
      *      mongodb://<username>:<password>@<host1[:port]>,<host2[:port]>,...<hostN[:port]>/<databaseName>
      */
-    mongodb: 'mongodb://localhost/cyclotron',
+    mongodb: process.env.DB_URL || 'mongodb://localhost/cyclotron',
 
     /* Port to run the Cyclotron Service on */
     port: 8077,

@@ -13,14 +13,19 @@ const em = require("evomaster-client-js");
     before each of tests, we only clean documents for all collections.
  */
 const clean = async () => {
-    Object.keys(mongoose.connection.collections).forEach(async key => {
+    for (const key of Object.keys(mongoose.connection.collections)) {
         await mongoose.connection.collections[key].deleteMany({});
         //await mongoose.connection.db.dropCollection(key);
-    });
+    }
 }
 
 
 class AppController  extends em.SutController {
+
+    constructor(test_container) {
+        super();
+        this.test_container= test_container;
+    }
 
     setupForGeneratedTest(){
         return Promise.resolve();
@@ -71,6 +76,7 @@ class AppController  extends em.SutController {
                 this.server.close( () => resolve());
                 // https://mongoosejs.com/docs/api/connection.html#connection_Connection-readyState
                 mongoose.connection.close();
+                this.test_container.stop();
             }
         );
     }
