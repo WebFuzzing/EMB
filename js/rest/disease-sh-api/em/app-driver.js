@@ -5,7 +5,9 @@ const app = require("../src/server");
 const em = require("evomaster-client-js");
 const config = require('../src/config/index')
 
+
 class AppController  extends em.SutController {
+
 
     setupForGeneratedTest(){
 
@@ -36,7 +38,6 @@ class AppController  extends em.SutController {
 
     resetStateOfSUT(){
         return Promise.resolve();
-
     }
 
     startSut(){
