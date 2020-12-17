@@ -78,13 +78,13 @@ on your machine (as some of the projects have GUIs built with JS).
 
 ### REST
 
-* Features-Service (Apache 2.0), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
+* Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
 
 * Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
 
-* ProxyPrint (Apache-2.0), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
+* ProxyPrint (Apache), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
 
-* CatWatch (Apache-2.0), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
+* CatWatch (Apache), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
 
 * OCVN (MIT), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
 
@@ -94,4 +94,6 @@ on your machine (as some of the projects have GUIs built with JS).
  
 * SCS (not-known license, artificial string examples coming from different sources)
 
- 
+* Restcountries (MPL), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
+
+* Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
