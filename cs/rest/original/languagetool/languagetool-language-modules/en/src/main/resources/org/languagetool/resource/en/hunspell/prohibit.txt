@@ -1,0 +1,107 @@
+# Words to be marked as spelling errors even if the spell checker
+# accepts them. Useful to improve the spell checker without touching
+# its files (which are usually not from LT).
+# For the opposite (accept words), see spelling.txt.
+ad-on
+ad-ons
+al
+de
+easter
+enfranchize
+enfranchizes
+enfranchized
+enfranchizing
+es
+et
+facto
+# misspelling of 'for a':
+fora
+# Refer to https://forum.languagetool.org/t/en-new-rule-proper-noun-misspelt-as-gmail/1116
+gmail
+grand-daughter
+grand-daughters
+grand-father
+grand-fathers
+grand-mother
+grand-mothers
+grand-son
+grand-sons
+# In BrE and in AmE, the verb is 'improvise':
+improvize
+improvized
+improvizer
+improvizes
+improvizing
+ing
+# seems to be very rare and is a potential misspelling of 'means':
+meas
+maladjust
+nauseam
+ne
+personnels
+# should be built-in
+builtin
+amazon
+froward
+nerver
+heigh
+# brank is normally used in plural (branks), also it's Scottish and archaic, easily confused with "bank", "blank", "rank", "crank" etc.
+brank
+sin-off
+sin-offs
+Sin-off
+Sin-offs
+someones
+somethings
+anythings
+na
+pre-requisite
+pre-requisites
+on-line
+Nescafe
+# Has to be T-Mobile / T-Systems
+t-mobile
+T-mobile
+t-systems
+T-systems
+dc
+fo
+multi-task
+multi-tasks
+multi-tasked
+multi-tasking
+# commentor: AmE only, issue 3195
+commentor
+commentors
+dim-wit
+dim-wits
+nit-wit
+nit-wits
+# It is "K-pop" https://www.merriam-webster.com/dictionary/K-pop
+k-pop
+mean-time
+back-log
+christian
+editor-in-chiefs
+supp
+soom
+c-span
+c-Span
+C-Span
+well-planed
+# https://github.com/languagetool-org/languagetool/issues/3602
+mt
+hurst
+hursts
+# confusion of 'sell'
+sel
+# confusion of 'when' and 'went'
+wen
+# confusion of 'pull'
+pul
+# confusion of 'say'
+sai
+# confusion of 'misses'
+mises
+# confusion of 'fils'
+fils

@@ -99,6 +99,12 @@ copy("em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
 copy("cs/rest-gui/ocvn/web/target/ocvn-rest-sut.jar", dist)
 copy("em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
 
+copy("cs/rest/original/languagetool/languagetool-server/target/languagetool-sut.jar",dist)
+copy("em/external/rest/languagetool/target/languagetool-evomaster-runner.jar", dist)
+
+copy("cs/rest/original/restcountries/target/restcountries-sut.jar",dist)
+copy("em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", dist)
+
 
 ind0 = os.environ.get('SUT_LOCATION_IND0', '')
 if ind0 == '':
