@@ -11,7 +11,5 @@ controller.startTheControllerServer();
 const TB = process.env.EM_TB || 5 //min
 setTimeout(function () {
     console.log("stopped by timeout")
-    server.close(() => {
-        console.log(`em driver closed after ${TB} min`);
-        process.exit(0);
-    });},  TB * 60  * 1000)
+    controller.stopTheControllerServer();
+    },  TB * 60  * 1000)
