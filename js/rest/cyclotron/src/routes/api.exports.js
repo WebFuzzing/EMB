@@ -94,8 +94,15 @@ var exportPdf = function (req, res, sync) {
                     err = 'pdf export error (code ' + code + ')';
                     console.log(err);
                     _.assign(exportKeys[id], { status: 'error', error: err, duration: Date.now() - exportKeys[id].startTime });
-
-                    if (sync) { res.status(500).send(err); }
+                    // problem on windows os
+                    if (sync) {
+                        try{
+                            res.status(500).send(err);
+                        }catch(e){
+                            console.log(e+"\n"+res);
+                            res.status(500);
+                        }
+                    }
 
                 } else {
 
