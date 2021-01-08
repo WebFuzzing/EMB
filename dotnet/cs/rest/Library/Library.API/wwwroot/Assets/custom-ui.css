@@ -1,0 +1,9 @@
+﻿#swagger-ui {
+    max-width: 800px;
+    margin: auto;
+}
+
+.opblock-summary-method {
+    border-color: #000000 !important;
+    background: #000000 !important;
+}

@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Library.API</name>
+    </assembly>
+    <members>
+        <member name="M:Library.API.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Get a list of authors
+            </summary>
+            <returns>An ActionResult of type IEnumerable of Author</returns>
+        </member>
+        <member name="M:Library.API.Controllers.AuthorsController.GetAuthor(System.Guid)">
+            <summary>
+            Get an author by his/her id
+            </summary>
+            <param name="authorId">The id of the author you want to get</param>
+            <returns>An ActionResult of type Author</returns>
+        </member>
+        <member name="M:Library.API.Controllers.AuthorsController.UpdateAuthor(System.Guid,Library.API.Models.AuthorForUpdate)">
+            <summary>
+            Update an author 
+            </summary>
+            <param name="authorId">The id of the author to update</param>
+            <param name="authorForUpdate">The author with updated values</param>
+            <returns>An ActionResult of type Author</returns>
+            <response code="422">Validation error</response>
+        </member>
+        <member name="M:Library.API.Controllers.AuthorsController.UpdateAuthor(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Library.API.Models.AuthorForUpdate})">
+            <summary>
+            Partially update an author
+            </summary>
+            <param name="authorId">The id of the author you want to get</param>
+            <param name="patchDocument">The set of operations to apply to the author</param>
+            <returns>An ActionResult of type Author</returns>
+            <remarks>Sample request (this request updates the author's **first name**)  
+            
+            PATCH /authors/authorId
+            [ 
+                {
+                    "op": "replace", 
+                    "path": "/firstname", 
+                    "value": "new first name" 
+                } 
+            ] 
+            </remarks>
+            <response code="200">Returns the updated author</response>
+        </member>
+        <member name="M:Library.API.Controllers.AuthorsControllerV2.GetAuthors">
+            <summary>
+            Get the authors (V2)
+            </summary>
+            <returns>An ActionResult of type IEnumerable of Author</returns>
+            <response code="200">Returns the list of authors</response>
+        </member>
+        <member name="M:Library.API.Controllers.BooksController.GetBooks(System.Guid)">
+            <summary>
+            Get the books for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <returns>An ActionResult of type IEnumerable of Book</returns>
+        </member>
+        <member name="M:Library.API.Controllers.BooksController.GetBook(System.Guid,System.Guid)">
+            <summary>
+            Get a book by id for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <param name="bookId">The id of the book</param>
+            <returns>An ActionResult of type Book</returns>
+            <response code="200">Returns the requested book</response>
+        </member>
+        <member name="M:Library.API.Controllers.BooksController.GetBookWithConcatenatedAuthorName(System.Guid,System.Guid)">
+            <summary>
+            Get a book by id for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <param name="bookId">The id of the book</param>
+            <returns>An ActionResult of type BookWithConcatenatedAuthorName</returns>
+        </member>
+        <member name="M:Library.API.Controllers.BooksController.CreateBook(System.Guid,Library.API.Models.BookForCreation)">
+            <summary>
+            Create a book for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <param name="bookForCreation">The book to create</param>
+            <returns>An ActionResult of type Book</returns>
+            <response code="422">Validation error</response>
+        </member>
+        <member name="M:Library.API.Controllers.BooksController.CreateBookWithAmountOfPages(System.Guid,Library.API.Models.BookForCreationWithAmountOfPages)">
+            <summary>
+            Create a book for a specific author
+            </summary>
+            <param name="authorId">The id of the book author</param>
+            <param name="bookForCreationWithAmountOfPages">The book to create</param>
+            <returns>An ActionResult of type Book</returns>
+            <response code="422">Validation error</response>
+        </member>
+        <member name="T:Library.API.Models.Author">
+            <summary>
+            An author with Id, FirstName and LastName fields
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.Author.Id">
+            <summary>
+            The id of the author
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.Author.FirstName">
+            <summary>
+            The first name of the  
+            **author**
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.Author.LastName">
+            <summary>
+            The last name of the author
+            </summary>         
+        </member>
+        <member name="T:Library.API.Models.AuthorForUpdate">
+            <summary>
+            An author for update with FirstName and LastName fields
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.AuthorForUpdate.FirstName">
+            <summary>
+            The first name of the author
+            </summary>
+        </member>
+        <member name="P:Library.API.Models.AuthorForUpdate.LastName">
+            <summary>
+            The last name of the author
+            </summary>         
+        </member>
+    </members>
+</doc>
