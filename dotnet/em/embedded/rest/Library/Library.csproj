@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <Target Name="htmlWarning" AfterTargets="AfterBuild">
+    <Copy SourceFiles="../../../../../../EvoMaster/client-dotnet/src/Controller/Resources/warning.html" DestinationFolder="$(OutDir)" />
+  </Target>
+
+  <ItemGroup>
+    <!-- TODO: modify these relative paths -->
+    <ProjectReference Include="../../../../../../EvoMaster/client-dotnet/src/Controller/Controller.csproj" />
+    <ProjectReference Include="../../../../cs/rest/CaseStudies.Rest.Library/CaseStudies.Rest.Library.csproj" />
+  </ItemGroup>
+
+</Project>
