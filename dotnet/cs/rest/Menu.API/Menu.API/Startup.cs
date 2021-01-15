@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace Menu.API
 
         public bool IsK8S => Configuration.GetValue<string>("OrchestrationType").ToUpper().Equals("K8S");
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
             services.AddControllers();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
