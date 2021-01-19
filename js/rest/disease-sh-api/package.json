@@ -68,7 +68,7 @@
     ]
   },
   "jest": {
-    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
+    "testRegex": "(em|tests)/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],

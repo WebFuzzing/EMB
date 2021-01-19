@@ -1,5 +1,5 @@
 const dbHandler = require("./db-handler");
-dbHandler.startDb();
+
 
 const http  = require("http");
 const {AddressInfo}  = require("net");
@@ -11,7 +11,10 @@ const em = require("evomaster-client-js");
 class AppController  extends em.SutController {
 
     setupForGeneratedTest(){
-        return Promise.resolve();
+        return new Promise((resolve)=>{
+            this.testcontainer = dbHandler.startDb();
+            resolve(this.testcontainer);
+        });
     }
 
     getInfoForAuthentication(){
@@ -43,7 +46,6 @@ class AppController  extends em.SutController {
     }
 
     startSut(){
-        dbHandler.cleanDb();
         //docker run -p 27017:27017 mongo
         return new Promise( (resolve) => {
             this.server = require("../src/app").listen(0, "localhost", () => {

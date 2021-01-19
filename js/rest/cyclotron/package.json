@@ -71,12 +71,13 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
+    "testRegex": "(em|tests|bbtests)/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/",
+      "<rootDir>/bbtests/",
       "<rootDir>/tests/",
       "<rootDir>/check/",
       "<rootDir>/build/",

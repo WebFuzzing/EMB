@@ -16,8 +16,14 @@ module.exports ={
         exposedDbPort = test_container.getMappedPort(dbPort)
         dbURL = `mongodb://localhost:${exposedDbPort}/cyclotron`
         process.env.DB_URL = dbURL;
-        console.log("db starts at "+dbURL)
+
+        console.log("connecting "+dbURL);
         return test_container;
+    },
+
+    checkdb: async () =>{
+        if (mongoose.connection.readyState != 1)
+            setTimeout(checkdb, 300)
     },
 
     getDbPort: () =>{
