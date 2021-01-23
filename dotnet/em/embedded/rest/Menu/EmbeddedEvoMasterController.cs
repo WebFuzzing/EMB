@@ -39,17 +39,16 @@ namespace Menu {
 
         public override void ResetStateOfSut () { }
 
-        //This method in java client is not async
-        public override async Task<string> StartSutAsync () {
+        public override string StartSut () {
             //TODO: check this again
             int ephemeralPort = GetEphemeralTcpPort ();
 
             var task = Task.Run (() => {
 
-                Menu.API.Program.Main (new string[] { ephemeralPort.ToString () });
+                CaseStudies.Rest.Library.Program.Main (new string[] { ephemeralPort.ToString () });
             });
 
-            await WaitUntilSutIsRunningAsync (ephemeralPort);
+            WaitUntilSutIsRunning (ephemeralPort);
 
             sutPort = ephemeralPort;
 

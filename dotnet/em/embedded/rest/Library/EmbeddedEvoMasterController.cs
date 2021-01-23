@@ -40,8 +40,8 @@ namespace Embedded.Rest.Library {
 
         public override void ResetStateOfSut () { }
 
-        //This method in java client is not async
-        public override async Task<string> StartSutAsync () {
+
+        public override string StartSut () {
             //TODO: check this again
             int ephemeralPort = GetEphemeralTcpPort ();
 
@@ -50,7 +50,7 @@ namespace Embedded.Rest.Library {
                 CaseStudies.Rest.Library.Program.Main (new string[] { ephemeralPort.ToString () });
             });
 
-            await WaitUntilSutIsRunningAsync (ephemeralPort);
+            WaitUntilSutIsRunning (ephemeralPort);
 
             sutPort = ephemeralPort;
 

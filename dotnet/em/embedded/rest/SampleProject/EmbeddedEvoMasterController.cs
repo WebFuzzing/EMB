@@ -5,8 +5,7 @@ using Controller;
 using Controller.Api;
 using Controller.Problem;
 
-namespace SampleProject
-{
+namespace SampleProject {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
 
         private bool isSutRunning;
@@ -40,17 +39,16 @@ namespace SampleProject
 
         public override void ResetStateOfSut () { }
 
-        //This method in java client is not async
-        public override async Task<string> StartSutAsync () {
+        public override string StartSut () {
             //TODO: check this again
             int ephemeralPort = GetEphemeralTcpPort ();
 
             var task = Task.Run (() => {
-
+                
                 SampleProject.API.Program.Main (new string[] { ephemeralPort.ToString () });
             });
 
-            await WaitUntilSutIsRunningAsync (ephemeralPort);
+            WaitUntilSutIsRunning (ephemeralPort);
 
             sutPort = ephemeralPort;
 
