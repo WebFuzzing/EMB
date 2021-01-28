@@ -45,7 +45,7 @@ namespace Menu {
 
             var task = Task.Run (() => {
 
-                CaseStudies.Rest.Library.Program.Main (new string[] { ephemeralPort.ToString () });
+                Menu.API.Program.Main (new string[] { ephemeralPort.ToString () });
             });
 
             WaitUntilSutIsRunning (ephemeralPort);
