@@ -155,7 +155,7 @@ namespace Menu.API
             services.AddScoped<IRepository<FoodPicture>, PictureRepository>();
             services.AddScoped<IFoodPictureService, FoodPictureService>();
             services.AddScoped<ICurrencyProvider, CurrencyProvider>();
-            services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
+            // services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

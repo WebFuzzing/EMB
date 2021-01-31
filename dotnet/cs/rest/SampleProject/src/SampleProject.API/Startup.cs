@@ -19,6 +19,7 @@ using SampleProject.Infrastructure;
 using SampleProject.Infrastructure.Caching;
 using Serilog;
 using Serilog.Formatting.Compact;
+using Microsoft.OpenApi.Models;
 
 [assembly: UserSecretsId("54e8eb06-aaa1-4fff-9f05-3ced1cb623c2")]
 namespace SampleProject.API
@@ -50,7 +51,9 @@ namespace SampleProject.API
             
             services.AddMemoryCache();
 
-            services.AddSwaggerDocumentation();
+            services.AddSwaggerGen (c => {
+                c.SwaggerDoc ("v1", new OpenApiInfo { Title = "HelloWorld API", Version = "v1" });
+            });
 
             services.AddProblemDetails(x =>
             {
@@ -93,9 +96,12 @@ namespace SampleProject.API
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseSwagger ();
+            app.UseSwaggerUI (c => {
+                c.SwaggerEndpoint ("/swagger/v1/swagger.json", "HelloWorld API");
+            });
 
-            app.UseSwaggerDocumentation();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
         private static ILogger ConfigureLogger()
