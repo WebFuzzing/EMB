@@ -140,6 +140,7 @@ dotnet/*/Properties/
 .vscode/
 *.launchSettings.json
 */SampleProject.API/logs/*
+*/SampleProject/logs/*
 dotnet/cs/rest/SampleProject/src/SampleProject.API/logs/
 /em/embedded/rest/restcountries/target/
 /em/embedded/rest/languagetool/target/
