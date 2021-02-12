@@ -76,7 +76,7 @@ on your machine (as some of the projects have GUIs built with JS).
 ## Current Case Studies
 
 
-### REST
+### REST: Java/Kotlin
 
 * Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
 
@@ -97,3 +97,8 @@ on your machine (as some of the projects have GUIs built with JS).
 * Restcountries (MPL), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
 
 * Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
+
+
+### REST: .Net 
+
+TODO
