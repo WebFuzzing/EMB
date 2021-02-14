@@ -101,4 +101,8 @@ on your machine (as some of the projects have GUIs built with JS).
 
 ### REST: .Net 
 
-TODO
+* Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App/tree/develop/src/backend/services/menu.api](https://github.com/chayxana/Restaurant-App/tree/develop/src/backend/services/menu.api)
+
+* SampleProject (MIT), from [https://github.com/kgrzybek/sample-dotnet-core-cqrs-api](https://github.com/kgrzybek/sample-dotnet-core-cqrs-api)
+
+* Library (not-known license), from [https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI/tree/master/Finished%20sample](https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI/tree/master/Finished%20sample)
