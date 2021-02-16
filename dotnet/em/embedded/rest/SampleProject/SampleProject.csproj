@@ -1,23 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Controller" Version="1.1.1-SNAPSHOT"/>
+    </ItemGroup>
 
-  <Target Name="htmlWarning" AfterTargets="AfterBuild">
-    <Copy SourceFiles="../../../../../../EvoMaster/client-dotnet/src/Controller/Resources/warning.html" DestinationFolder="$(OutDir)" />
-  </Target>
+    <ItemGroup>
+        <ProjectReference Include="../../../../cs/rest/SampleProject/src/SampleProject.API/SampleProject.API.csproj"/>
+    </ItemGroup>
+    
+    <Target Name="htmlWarning" AfterTargets="AfterBuild">
+        <Copy SourceFiles="warning.html" DestinationFolder="$(OutDir)"/>
+    </Target>
 
-  <Target Name="appsettings" AfterTargets="AfterBuild">
-    <Copy SourceFiles="../../../../cs/rest/SampleProject/src/SampleProject.API/appsettings.json" DestinationFolder="$(OutDir)" />
-  </Target>
+    <Target Name="appsettings" AfterTargets="AfterBuild">
+        <Copy SourceFiles="../../../../cs/rest/SampleProject/src/SampleProject.API/appsettings.json" DestinationFolder="$(OutDir)"/>
+    </Target>
 
-  <ItemGroup>
-    <!-- TODO: modify these relative paths -->
-    <ProjectReference Include="../../../../../../EvoMaster/client-dotnet/src/Controller/Controller.csproj" />
-    <ProjectReference Include="../../../../cs/rest/SampleProject/src/SampleProject.API/SampleProject.API.csproj" />
-  </ItemGroup>
-  
 </Project>

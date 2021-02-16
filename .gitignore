@@ -132,7 +132,7 @@ hs_err_pid*
 /em/embedded/rest/restcountries/src/evo/
 cs/rest/original/restcountries/target
 
-#DotNet Build Results
+#DotNet
 [Dd]ebug/
 [Bb]in/
 [Oo]bj/
@@ -141,6 +141,9 @@ logs/
 dotnet/*/Properties/
 .vscode/
 *.launchSettings.json
+
+dotnet/em/embedded/rest/*/warning.html
+
 /em/embedded/rest/restcountries/target/
 /em/embedded/rest/languagetool/target/
 /em/external/rest/languagetool/target/
