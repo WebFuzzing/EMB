@@ -11,6 +11,8 @@ from subprocess import run
 from os.path import expanduser
 
 
+### Environment variables ###
+
 HOME = expanduser("~")
 SCRIPT_LOCATION = os.path.dirname(os.path.realpath(__file__))
 PROJ_LOCATION = os.path.abspath(os.path.join(SCRIPT_LOCATION, os.pardir))
@@ -29,25 +31,72 @@ if JAVA_HOME_11 == '':
 
 SHELL = platform.system() == 'Windows'
 
-# Building Maven JDK 8 projects
-env_vars = os.environ.copy()
-env_vars["JAVA_HOME"] = JAVA_HOME_8
 
-mvnres = run(["mvn", "clean", "install", "-DskipTests"], shell=SHELL, cwd=PROJ_LOCATION, env=env_vars)
-mvnres = mvnres.returncode
-
-if mvnres != 0:
-    print("\nERROR: Maven command failed")
-    exit(1)
-
-
-# Prepare "dist" folder
+### Prepare "dist" folder ###
 dist = os.path.join(PROJ_LOCATION, "dist")
 
 if os.path.exists(dist):
     shutil.rmtree(dist)
 
 os.mkdir(dist)
+
+
+
+### Building Maven JDK 8 projects ###
+
+def buildJDK_8() :
+
+    env_vars = os.environ.copy()
+    env_vars["JAVA_HOME"] = JAVA_HOME_8
+    folder = "jdk_8_maven"
+
+    mvnres = run(["mvn", "clean", "install", "-DskipTests"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+    mvnres = mvnres.returncode
+
+    if mvnres != 0:
+        print("\nERROR: Maven command failed")
+        exit(1)
+
+
+    # Copy JAR files
+    copy(folder+"/cs/rest/original/features-service/target/features-service-sut.jar", dist)
+    copy(folder+"/em/external/rest/features-service/target/features-service-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/original/scout-api/api/target/scout-api-sut.jar", dist)
+    copy(folder+"/em/external/rest/scout-api/target/scout-api-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/original/proxyprint/target/proxyprint-sut.jar", dist)
+    copy(folder+"/em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar",dist)
+    copy(folder+"/em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/artificial/ncs/target/rest-ncs-sut.jar", dist)
+    copy(folder+"/em/external/rest/ncs/target/rest-ncs-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/artificial/scs/target/rest-scs-sut.jar", dist)
+    copy(folder+"/em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/artificial/news/target/rest-news-sut.jar", dist)
+    copy(folder+"/em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest-gui/ocvn/web/target/ocvn-rest-sut.jar", dist)
+    copy(folder+"/em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/original/languagetool/languagetool-server/target/languagetool-sut.jar",dist)
+    copy(folder+"/em/external/rest/languagetool/target/languagetool-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/rest/original/restcountries/target/restcountries-sut.jar",dist)
+    copy(folder+"/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", dist)
+
+    ind0 = os.environ.get('SUT_LOCATION_IND0', '')
+    if ind0 == '':
+        print("\nWARN: SUT_LOCATION_IND0 env variable is not defined")
+    else:
+        copy(ind0, os.path.join(dist, "ind0-sut.jar"))
+        copy("em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
+
+
 
 
 # Building JavaScript projects
@@ -67,57 +116,26 @@ def buildJS(path, name):
     copytree(path, target)
 
 
+
+
+
+
 ### Due to the insanity of node_modules, those are off by default
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","scs")), "scs")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","cyclotron")), "cyclotron")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","disease-sh-api")), "disease-sh-api")
 
+buildJDK_8()
 
-# Copy JAR files
-copy("cs/rest/original/features-service/target/features-service-sut.jar", dist)
-copy("em/external/rest/features-service/target/features-service-evomaster-runner.jar", dist)
+### TODO .Net
 
-copy("cs/rest/original/scout-api/api/target/scout-api-sut.jar", dist)
-copy("em/external/rest/scout-api/target/scout-api-evomaster-runner.jar", dist)
-
-copy("cs/rest/original/proxyprint/target/proxyprint-sut.jar", dist)
-copy("em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
-
-copy("cs/rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar",dist)
-copy("em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", dist)
-
-copy("cs/rest/artificial/ncs/target/rest-ncs-sut.jar", dist)
-copy("em/external/rest/ncs/target/rest-ncs-evomaster-runner.jar", dist)
-
-copy("cs/rest/artificial/scs/target/rest-scs-sut.jar", dist)
-copy("em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
-
-copy("cs/rest/artificial/news/target/rest-news-sut.jar", dist)
-copy("em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
-
-copy("cs/rest-gui/ocvn/web/target/ocvn-rest-sut.jar", dist)
-copy("em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
-
-copy("cs/rest/original/languagetool/languagetool-server/target/languagetool-sut.jar",dist)
-copy("em/external/rest/languagetool/target/languagetool-evomaster-runner.jar", dist)
-
-copy("cs/rest/original/restcountries/target/restcountries-sut.jar",dist)
-copy("em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", dist)
-
-
-ind0 = os.environ.get('SUT_LOCATION_IND0', '')
-if ind0 == '':
-    print("\nWARN: SUT_LOCATION_IND0 env variable is not defined")
-else:
-    copy(ind0, os.path.join(dist, "ind0-sut.jar"))
-    copy("em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
-
-
+### Copy JavaAgent library ###
 copy(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
    + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
    + EVOMASTER_VERSION + ".jar",
    os.path.join(dist, "evomaster-agent.jar"))
+
 
 zipName = "dist.zip"
 if os.path.exists(zipName):
