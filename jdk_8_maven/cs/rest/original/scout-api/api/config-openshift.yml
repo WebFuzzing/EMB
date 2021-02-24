@@ -1,0 +1,126 @@
+server:
+  gzip:
+    minimumEntitySize: 0bytes
+  type: simple
+  applicationContextPath: /api
+  adminContextPath: /admin
+  connector:
+    bindHost: @OPENSHIFT_DIY_IP@
+    type: http
+    port: 8080
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    se.devscout: INFO
+
+    # Enable JSON request and response loggning:
+    org.glassfish.jersey.filter.LoggingFilter: INFO
+
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type: TRACE
+
+  appenders:
+    - type: console
+
+database:
+
+  # the name of your JDBC driver
+  driverClass: org.postgresql.Driver
+
+  # the username
+  user: @OPENSHIFT_POSTGRESQL_DB_USERNAME@
+
+  # the password
+  password: @OPENSHIFT_POSTGRESQL_DB_PASSWORD@
+
+  # the JDBC URL
+  url: jdbc:postgresql://@OPENSHIFT_POSTGRESQL_DB_HOST@:@OPENSHIFT_POSTGRESQL_DB_PORT@/scoutapi
+
+  # any properties specific to your JDBC driver:
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.PostgreSQL82Dialect
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "SELECT 1"
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
+
+defaultUsers:
+  - name: "Crawler"
+    authorization_level: 10
+
+crawlerUser: "Crawler"
+
+mediaFilesFolder: ./OVERRIDE_FROM_COMMAND_LINE/media-files
+
+tempFolder: ./OVERRIDE_FROM_COMMAND_LINE/temp
+
+autoUpdateIntervalSeconds: 0 # 0 = disabled, 43200 = 12 hours
+
+googleAuthentication:
+  clientId: "563244170192-0cqja2c5pcm0m0beiro2e3r72jvogqkq.apps.googleusercontent.com"
+
+defaultSystemMessages:
+  - key: "api:host"
+    value: "scoutapi-mikaelsvensson.rhcloud.com:80"
+  - key: "contact:error"
+    value: "devscout@mikaelsvensson.info"
+  - key: "contact:info"
+    value: "info@devscout.se"
+
+similarityCalculatorConfiguration:
+    maxRelated: 5
+
+    simplifyVocabulary: true
+
+    reportFilesRetentionLimit: 100
+
+    simplifyRules:
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[nl]in(g|gen|gs|gens|gar|gar|garna)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})in(g|gen|gs|gens|gar|gar|garna)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[lt]ig[at]"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})n(are|skt|ens|ens)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})(nar|are|ade|skt|ens|ena|nen)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})(na|re)"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[aeis][nrtsk]"
+    - matchGroupIndex: 1
+      patternExpr: "(\\p{IsAlphabetic}{4,})[aens]"
+    - matchGroupIndex: 0
+      patternExpr: "(\\p{IsAlphabetic}{4,})"
+
+    comparatorFactorAllText: 2.0
+    comparatorFactorName: 0.5
+    comparatorFactorMaterials: 1.0
+    comparatorFactorIntroduction: 2.0
+    comparatorFactorCategories: 0.5
+    comparatorFactorAge: 0.1
+    comparatorFactorParticipantCount: 0.1
+    comparatorFactorTime: 0.1
+
+    reportFolder: ./OVERRIDE_FROM_COMMAND_LINE/textanalyzer
+
+    relationOwner: "Crawler"
