@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Controller" Version="1.1.1-SNAPSHOT" />
+    <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT" />
   </ItemGroup>
 
   <Target Name="appsettings" AfterTargets="AfterBuild">
