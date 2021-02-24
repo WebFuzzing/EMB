@@ -23,6 +23,7 @@ pom.xml.versionsBackup
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /.idea/
+.idea/
 *.iml
 /em/embedded/rest/features-service/src/evo/
 /em/embedded/rest/scout-api/src/evo/
@@ -130,6 +131,19 @@ hs_err_pid*
 /cs/rest/original/restcountries/target/
 /em/embedded/rest/restcountries/src/evo/
 cs/rest/original/restcountries/target
+
+#DotNet
+[Dd]ebug/
+[Bb]in/
+[Oo]bj/
+logs/
+*.dll
+dotnet/*/Properties/
+.vscode/
+*.launchSettings.json
+
+dotnet/em/embedded/rest/*/warning.html
+
 /em/embedded/rest/restcountries/target/
 /em/embedded/rest/languagetool/target/
 /em/external/rest/languagetool/target/
