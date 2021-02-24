@@ -2,8 +2,72 @@
 [EvoMaster](http://evomaster.org) Benchmark (EMB): 
 a set of web/enterprise applications for experimentation in automated system testing.
 
+We collected several different systems, in different programming languages, like
+Java, Kotlin, JavaScript and C#.
+We also added the drivers for EvoMaster to use those systems. 
+
+Note that some of these open-source projects might be no longer supported, whereas others are still developed and updated.
+Once a system is added to EMB, we do not modify nor keep it updated with its current version under development.
+The reason is that we want to keep an easy to use, constant set of case studies for experimentation that can be reliably used throughout the years. 
+
+
+## License
+All the code that is new for this repository is released under Apache 2.0 license. 
+However, this repository contains as well sources from different open-source 
+projects, each one with its own license, as clarified in more details beneath.
+
+
+## Current Case Studies
+
+
+### REST: Java/Kotlin
+
+* Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
+
+* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
+
+* ProxyPrint (Apache), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
+
+* CatWatch (Apache), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
+
+* OCVN (MIT), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
+
+* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
+
+* NCS (not-known license, artificial numerical examples coming from different sources)
+ 
+* SCS (not-known license, artificial string examples coming from different sources)
+
+* Restcountries (MPL), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
+
+* Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
+
+
+### REST: JavaScript/TypeScript
+
+* Disease-sh-API (GPL), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
+
+* Cyclotron (MIT), from [https://github.com/ExpediaInceCommercePlatform/cyclotron](https://github.com/ExpediaInceCommercePlatform/cyclotron)
+
+* NCS (not-known license, artificial numerical examples coming from different sources)
+ 
+* SCS (not-known license, artificial string examples coming from different sources)
+
+### REST: .Net/C# 
+
+* Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App](https://github.com/chayxana/Restaurant-App)
+
+* SampleProject (MIT), from [https://github.com/kgrzybek/sample-dotnet-core-cqrs-api](https://github.com/kgrzybek/sample-dotnet-core-cqrs-api)
+
+* Library (not-known license), from [https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI](https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI)
+
+
+## Build The Systems
+
+### Build JDK_8_MAVEN
+
 The folder `cs` (*case study*) contains the source code of the different 
-system under tests (SUT) in this benchmark.
+system under tests (SUT) in this benchmark, for JDK 8 and Maven.
 
 The folder `em` (*EvoMaster*) contains the classes needed to be written to enable
 the use of EvoMaster on the SUTs. 
@@ -14,14 +78,6 @@ of the SUTs.
 Here, they are in different modules just to make clear what is needed to implement
 to enable the use of EvoMaster.
 
-
-## License
-All the code that is new for this repository is released under Apache 2.0 license. 
-However, this repository contains as well sources from different open-source 
-projects, each one with its own license, as clarified in more details beneath.
-
-
-## Build The Projects 
 
 To compile and generate all the jar files, use the command:
 
@@ -73,36 +129,11 @@ Besides JDK 8, to build from Maven you will also need NPM and NodeJS installed
 on your machine (as some of the projects have GUIs built with JS).
 
 
-## Current Case Studies
+### Build DOTNET_3
+
+*Documentation under construction*
 
 
-### REST: Java/Kotlin
+### Build JS_NPM
 
-* Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
-
-* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
-
-* ProxyPrint (Apache), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
-
-* CatWatch (Apache), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
-
-* OCVN (MIT), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
-
-* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
-
-* NCS (not-known license, artificial numerical examples coming from different sources)
- 
-* SCS (not-known license, artificial string examples coming from different sources)
-
-* Restcountries (MPL), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
-
-* Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
-
-
-### REST: .Net 
-
-* Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App/tree/develop/src/backend/services/menu.api](https://github.com/chayxana/Restaurant-App/tree/develop/src/backend/services/menu.api)
-
-* SampleProject (MIT), from [https://github.com/kgrzybek/sample-dotnet-core-cqrs-api](https://github.com/kgrzybek/sample-dotnet-core-cqrs-api)
-
-* Library (not-known license), from [https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI/tree/master/Finished%20sample](https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI/tree/master/Finished%20sample)
+*Documentation under construction*
