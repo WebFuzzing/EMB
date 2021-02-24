@@ -1,0 +1,83 @@
+{
+  "name": "novelcovid-api",
+  "version": "1.0.1",
+  "description": "A simple Node API for getting coronavirus cases from scraped information.",
+  "main": "server.js",
+  "repository": {
+    "url": "https://github.com/disease-sh/api"
+  },
+  "license": "MIT",
+  "keywords": [
+    "API",
+    "coronavirus",
+    "covid"
+  ],
+  "scripts": {
+    "check": "babel src -d check",
+    "build": "babel em src -d build/src --copy-files",
+    "em": "node build/src/em-main.js",
+    "updateCheck": "node src/updateCheck.js",
+    "start": "node  src/serverStart.js",
+    "start:scraper": "node --insecure-http-parser src/serverScraper.js",
+    "start:devserver": "nodemon --watch routes --watch scrapers --watch utils ./src/serverStart.js",
+    "start:dev": "concurrently --kill-others-on-fail --kill-others \"npm:start:devserver\" \"npm:start:scraper\"",
+    "lint": "eslint 'src/**/*.js'",
+    "lint:fix": "eslint ./src/**/*.js --fix",
+    "lint:win32": "eslint ./src/**/*.js",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "@sentry/node": "5.12.2",
+    "axios": "^0.19.2",
+    "axios-cookiejar-support": "^1.0.1",
+    "cheerio": "^0.22.0",
+    "cookie-parser": "1.4.5",
+    "cors": "^2.8.5",
+    "csurf": "1.11.0",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
+    "ejs": "3.0.2",
+    "express": "^4.16.3",
+    "ioredis": "*",
+    "mailgun-js": "^0.22.0",
+    "swagger-ui-express": "^4.1.4",
+    "tough-cookie": "^4.0.0"
+  },
+  "devDependencies": {
+    "@aero/eslint-config": "^1.0.1",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "concurrently": "^5.2.0",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.4",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "evomaster-client-js": "file:../../evomaster-client-js",
+    "jest": "24.9.0",
+    "dedent": "0.7.0",
+    "superagent": "5.2.2",
+    "supertest": "4.0.2",
+    "testcontainers": "^6.3.0"
+  },
+  "babel": {
+    "only": [
+      "src"
+    ],
+    "plugins": [
+      "module:evomaster-client-js"
+    ]
+  },
+  "jest": {
+    "testRegex": "(em|tests)/.*Test\\.(js|jsx|ts|tsx)$",
+    "collectCoverageFrom": [
+      "src/**/*.(js|jsx|ts|tsx)"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/tests/",
+      "<rootDir>/check/",
+      "<rootDir>/build/",
+      "<rootDir>/em"
+    ]
+  }
+}

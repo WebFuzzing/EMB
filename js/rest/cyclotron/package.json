@@ -1,0 +1,87 @@
+{
+  "name": "cyclotron-svc",
+  "description": "Cyclotron: REST API",
+  "version": "2.0.4",
+  "author": "Dave Bauman <dbauman@expedia.com>",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ExpediaInceCommercePlatform/cyclotron"
+  },
+  "bugs": {
+    "url": "https://github.com/ExpediaInceCommercePlatform/cyclotron/issues"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "check": "babel src -d check",
+    "build": "babel  em src -d build/src --copy-files",
+    "test": "jest --coverage",
+    "em": "node build/src/em-main.js",
+    "emdev": "node em/em-main.js"
+  },
+  "dependencies": {
+    "aws4": "^1.8.0",
+    "bluebird": "2.3.6",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "elasticsearch": "^11.0.1",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.3",
+    "highland": "^3.0.0-beta.2",
+    "ip": "0.3.0",
+    "json2csv": "^3.6.3",
+    "json2xls": "^0.1.2",
+    "jsondiffpatch": "0.1.41",
+    "ldapjs": "1.0.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.22.2",
+    "mongoose": "~4.5.1",
+    "morgan": "^1.9.1",
+    "node-uuid": "~1.4.3",
+    "passport": "~0.2.2",
+    "passport-ldapauth": "1.0.0",
+    "request": "^2.88.0",
+    "serve-static": "^1.13.2",
+    "shortid": "2.2.13",
+    "ssl-root-cas": "^1.2.2",
+    "swagger-ui-dist": "^3.24.0"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "evomaster-client-js": "file:../../evomaster-client-js",
+    "jest": "24.9.0",
+    "dedent": "0.7.0",
+    "superagent": "5.2.2",
+    "supertest": "4.0.2",
+    "testcontainers": "^6.3.0"
+  },
+  "babel": {
+    "only": [
+      "src"
+    ],
+    "plugins": [
+      "module:evomaster-client-js"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(em|tests|bbtests)/.*Test\\.(js|jsx|ts|tsx)$",
+    "collectCoverageFrom": [
+      "src/**/*.(js|jsx|ts|tsx)"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/bbtests/",
+      "<rootDir>/tests/",
+      "<rootDir>/check/",
+      "<rootDir>/build/",
+      "<rootDir>/em"
+    ]
+  }
+}

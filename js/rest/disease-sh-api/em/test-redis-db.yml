@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - 50000
+    volumes:
+      - ./db/dump.rdb:/data/dump.rdb
