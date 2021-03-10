@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Controller;
-using Controller.Api;
-using Controller.Problem;
+using EvoMaster.Controller;
+using EvoMaster.Controller.Api;
+using EvoMaster.Controller.Problem;
 
 namespace SampleProject {
     public class EmbeddedEvoMasterController : EmbeddedSutController {

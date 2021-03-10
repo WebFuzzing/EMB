@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CaseStudies.Rest.Library;
-using Controller;
-using Controller.Api;
-using Controller.Problem;
+using EvoMaster.Controller;
+using EvoMaster.Controller.Api;
+using EvoMaster.Controller.Problem;
 
 namespace Embedded.Rest.Library {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
