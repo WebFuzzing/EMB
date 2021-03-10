@@ -164,4 +164,4 @@ dotnet_3/*/Properties/
 *.launchSettings.json
 
 dotnet_3/em/embedded/rest/*/warning.html
-
+*packages.lock.json
