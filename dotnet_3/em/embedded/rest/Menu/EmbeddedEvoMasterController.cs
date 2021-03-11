@@ -4,20 +4,28 @@ using System.Threading.Tasks;
 using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
+using Npgsql;
+using DotNet.Testcontainers.Containers.Builders;
+using DotNet.Testcontainers.Containers.Configurations.Databases;
+using DotNet.Testcontainers.Containers.Modules.Abstractions;
+using DotNet.Testcontainers.Containers.Modules.Databases;
+using EvoMaster.Controller.Controllers.db;
 
 namespace Menu {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
 
-        private bool isSutRunning;
-        private int sutPort;
+        private bool _isSutRunning;
+        private int _sutPort;
+        private TestcontainerDatabase _database;
+        private NpgsqlConnection _connection;
 
-        static void Main (string[] args) {
+        private static void Main (string[] args) {
 
             var embeddedEvoMasterController = new EmbeddedEvoMasterController ();
 
-            InstrumentedSutStarter instrumentedSutStarter = new InstrumentedSutStarter (embeddedEvoMasterController);
+            var instrumentedSutStarter = new InstrumentedSutStarter (embeddedEvoMasterController);
 
-            System.Console.WriteLine ("Driver is starting...\n");
+            Console.WriteLine ("Driver is starting...\n");
 
             instrumentedSutStarter.Start ();
         }
@@ -28,42 +36,65 @@ namespace Menu {
 
         public override string GetPackagePrefixesToCover () => "Menu.API";
 
-        //TODO: later on we should create sth specific for C#
-        public override OutputFormat GetPreferredOutputFormat () => OutputFormat.JAVA_JUNIT_5;
+        public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 
         //TODO: check again
         public override IProblemInfo GetProblemInfo () =>
             GetSutPort () != 0 ? new RestProblem ("http://localhost:" + GetSutPort () + "/swagger/v1/swagger.json", null) : new RestProblem (null, null);
 
-        public override bool IsSutRunning () => isSutRunning;
+        public override bool IsSutRunning () => _isSutRunning;
 
-        public override void ResetStateOfSut () { }
+        public override void ResetStateOfSut () { 
+            DbCleaner.ClearDatabase_Postgres(_connection);
+        }
 
         public override string StartSut () {
-            //TODO: check this again
-            int ephemeralPort = GetEphemeralTcpPort ();
 
-            var task = Task.Run (() => {
+            var ephemeralPort = GetEphemeralTcpPort ();
 
-                Menu.API.Program.Main (new string[] { ephemeralPort.ToString () });
+            Task.Run (async () =>
+            {
+                var connectionString = await StartContainerAsync();
+                API.Program.Main (new[] { $"{ephemeralPort}", connectionString });
             });
 
-            WaitUntilSutIsRunning (ephemeralPort);
+            WaitUntilSutIsRunning (ephemeralPort, 190);
 
-            sutPort = ephemeralPort;
+            _sutPort = ephemeralPort;
 
-            isSutRunning = true;
+            _isSutRunning = true;
 
             return $"http://localhost:{ephemeralPort}";
         }
 
         public override void StopSut () {
 
-            Menu.API.Program.Shutdown ();
+            API.Program.Shutdown ();
 
-            isSutRunning = false;
+            _isSutRunning = false;
         }
 
-        protected int GetSutPort () => sutPort;
+        protected int GetSutPort () => _sutPort;
+        
+        private async Task<string> StartContainerAsync()
+        {
+            var postgresBuilder = new TestcontainersBuilder<PostgreSqlTestcontainer>()
+                .WithDatabase(new PostgreSqlTestcontainerConfiguration
+                {
+                    Database = "restaurant_menu_database",
+                    Username = "user",
+                    Password = "password123"
+                })
+                .WithExposedPort(5432);
+
+            _database = postgresBuilder.Build();
+            await _database.StartAsync();
+
+            _connection = new NpgsqlConnection(_database.ConnectionString);
+            await _connection.OpenAsync();
+            
+            //No idea why the password is missing in the connection string
+            return $"{_connection.ConnectionString};Password={_database.Password}";
+        }
     }
 }

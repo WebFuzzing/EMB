@@ -38,13 +38,13 @@ namespace Menu.API {
 
                 var host = CreateWebHostBuilder (args).Build ();
 
-                host = Migrate (host);
+                //host = Migrate (host);
 
                 host.RunAsync (tokens[port].Token).GetAwaiter ().GetResult ();
             } else {
                 var host = CreateWebHostBuilder (args).Build ();
 
-                host = Migrate (host);
+                //host = Migrate (host);
 
                 host.RunAsync ().GetAwaiter ().GetResult ();
             }
@@ -58,7 +58,12 @@ namespace Menu.API {
                     .AddJsonFile ("appsettings.json", optional : true, reloadOnChange : true)
                     .Build ());
 
-            return args.Length > 0 ? webHostBuilder.UseUrls ($"http://*:{args[0]}") : webHostBuilder;
+            return args.Length
+            switch {
+                0 => webHostBuilder,
+                    1 => webHostBuilder.UseUrls ($"http://*:{args[0]}"),
+                    _ => webHostBuilder.UseUrls ($"http://*:{args[0]}").UseSetting ("ConnectionString", args[1])
+            };
         }
 
         public static void Shutdown () {
@@ -70,43 +75,72 @@ namespace Menu.API {
             tokens.Clear ();
         }
 
-        public static IWebHost Migrate (IWebHost host) => host.MigrateDbContext<ApplicationDbContext> ((context, services) => {
-            var logger = services.GetRequiredService<ILogger<Program>> ();
-            var configuration = services.GetRequiredService<IConfiguration> ();
+        // private static void CreateDatabase(IApplicationBuilder app)
+        // {
+        //     using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
+        //     System.Console.WriteLine("********************************");
+        //     System.Console.WriteLine("********************************");
+        //     System.Console.WriteLine("********************************");
+        //     System.Console.WriteLine("********************************");
+        //     System.Console.WriteLine("********************************");
+        //     if (serviceScope == null) return;
 
-            var connectionString = configuration.GetConnectionString ("MenuDatabaseConnectionString");
-            logger.LogInformation (connectionString);
-            var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>> ();
+        //     var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            var env = services.GetRequiredService<IWebHostEnvironment> ();
-            new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
-        });
+        //     context.Database.EnsureCreated();
 
-        public static void Main2 (string[] args) {
-            Log.Logger = new LoggerConfiguration ()
-                .MinimumLevel.Debug ()
-                .MinimumLevel.Override ("Microsoft", LogEventLevel.Information)
-                .MinimumLevel.Override ("System", LogEventLevel.Information)
-                .MinimumLevel.Override ("Microsoft.AspNetCore.Authentication", LogEventLevel.Debug)
-                .Enrich.FromLogContext ()
-                .WriteTo.Console (outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme : AnsiConsoleTheme.Literate)
-                .CreateLogger ();
+        //     var serviceProvider = serviceScope.ServiceProvider;
+        // }
 
-            CreateWebHostBuilder (args)
-                .Build ()
-                .MigrateDbContext<ApplicationDbContext> ((context, services) => {
-                    var logger = services.GetRequiredService<ILogger<Program>> ();
-                    var configuration = services.GetRequiredService<IConfiguration> ();
+        // public static IWebHost Migrate (IWebHost host) {
+        //     var res =  host.MigrateDbContext<ApplicationDbContext> ((context, services) => {
+        //         var logger = services.GetRequiredService<ILogger<Program>> ();
+        //         var configuration = services.GetRequiredService<IConfiguration> ();
 
-                    var connectionString = configuration.GetConnectionString ("MenuDatabaseConnectionString");
-                    logger.LogInformation (connectionString);
-                    var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>> ();
+        //         var connectionString = GetConnectionString (configuration);
+        //         logger.LogInformation (connectionString);
+        //         var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>> ();
 
-                    var env = services.GetRequiredService<IWebHostEnvironment> ();
-                    new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
-                })
-                .Run ();
+        //         var env = services.GetRequiredService<IWebHostEnvironment> ();
+        //         new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
+        //     });
 
+        //     return res;
+        // }
+
+        // public static void Main2 (string[] args) {
+        //     Log.Logger = new LoggerConfiguration ()
+        //         .MinimumLevel.Debug ()
+        //         .MinimumLevel.Override ("Microsoft", LogEventLevel.Information)
+        //         .MinimumLevel.Override ("System", LogEventLevel.Information)
+        //         .MinimumLevel.Override ("Microsoft.AspNetCore.Authentication", LogEventLevel.Debug)
+        //         .Enrich.FromLogContext ()
+        //         .WriteTo.Console (outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme : AnsiConsoleTheme.Literate)
+        //         .CreateLogger ();
+
+        //     CreateWebHostBuilder (args)
+        //         .Build ()
+        //         .MigrateDbContext<ApplicationDbContext> ((context, services) => {
+        //             var logger = services.GetRequiredService<ILogger<Program>> ();
+        //             var configuration = services.GetRequiredService<IConfiguration> ();
+
+        //             var connectionString = GetConnectionString (configuration);
+        //             logger.LogInformation (connectionString);
+        //             var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>> ();
+
+        //             var env = services.GetRequiredService<IWebHostEnvironment> ();
+        //             new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
+        //         })
+        //         .Run ();
+
+        // }
+
+        private static string GetConnectionString (IConfiguration configuration){
+            var res =
+            configuration.GetConnectionString ("ConnectionString") ??
+            configuration.GetConnectionString ("MenuDatabaseConnectionString");
+
+            return res;
         }
     }
 }
