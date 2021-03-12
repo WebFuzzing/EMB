@@ -165,3 +165,4 @@ dotnet_3/*/Properties/
 
 dotnet_3/em/embedded/rest/*/warning.html
 *packages.lock.json
+*.sln.DotSettings.user
