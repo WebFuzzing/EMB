@@ -19,7 +19,6 @@ using Menu.API.Data;
 using Menu.API.Facades;
 using Menu.API.Managers;
 using Menu.API.Mappers;
-using Menu.API.Middlewares;
 using Menu.API.Models;
 using Menu.API.Providers;
 using Menu.API.Repositories;
@@ -208,7 +207,6 @@ namespace Menu.API
                 });
             }
 
-            //app.UseExceptionHandlerMiddleware();
             
             app.UseSwagger(c =>
             {
