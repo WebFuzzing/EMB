@@ -208,7 +208,7 @@ namespace Menu.API
                 });
             }
 
-            app.UseExceptionHandlerMiddleware();
+            //app.UseExceptionHandlerMiddleware();
             
             app.UseSwagger(c =>
             {
