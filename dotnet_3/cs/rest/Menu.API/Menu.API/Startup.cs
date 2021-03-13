@@ -166,15 +166,12 @@ namespace Menu.API
             services.AddScoped<IRepository<FoodPicture>, PictureRepository>();
             services.AddScoped<IFoodPictureService, FoodPictureService>();
             services.AddScoped<ICurrencyProvider, CurrencyProvider>();
-            //TODO: Uncomment this
             // services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
             
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            CreateDatabase(app);
-            
             app.UseForwardedHeaders();
             if (env.IsDevelopment())
             {

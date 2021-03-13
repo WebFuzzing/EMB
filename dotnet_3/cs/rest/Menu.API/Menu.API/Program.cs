@@ -15,130 +15,99 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 
-namespace Menu.API {
-    public class Program {
-        private static ConcurrentDictionary<int, CancellationTokenSource> tokens = new ConcurrentDictionary<int, CancellationTokenSource> ();
+namespace Menu.API
+{
+    public class Program
+    {
+        private static ConcurrentDictionary<int, CancellationTokenSource> tokens =
+            new ConcurrentDictionary<int, CancellationTokenSource>();
 
-        public static void Main (string[] args) {
+        public static void Main(string[] args)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("System", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Debug)
+                .Enrich.FromLogContext()
+                .WriteTo.Console(
+                    outputTemplate:
+                    "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}",
+                    theme: AnsiConsoleTheme.Literate)
+                .CreateLogger();
 
-            Log.Logger = new LoggerConfiguration ()
-                .MinimumLevel.Debug ()
-                .MinimumLevel.Override ("Microsoft", LogEventLevel.Information)
-                .MinimumLevel.Override ("System", LogEventLevel.Information)
-                .MinimumLevel.Override ("Microsoft.AspNetCore.Authentication", LogEventLevel.Debug)
-                .Enrich.FromLogContext ()
-                .WriteTo.Console (outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme : AnsiConsoleTheme.Literate)
-                .CreateLogger ();
+            if (args.Length > 0)
+            {
+                var port = Convert.ToInt32(args[0]);
+                tokens.TryAdd(port, new CancellationTokenSource());
 
-            if (args.Length > 0) {
+                var host = CreateWebHostBuilder(args).Build()
+                    .MigrateDbContext<ApplicationDbContext>((context, services) =>
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        var configuration = services.GetRequiredService<IConfiguration>();
 
-                int port = Convert.ToInt32 (args[0]);
+                        var connectionString = GetConnectionString(configuration);
+                        logger.LogInformation(connectionString);
+                        var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>>();
 
-                tokens.TryAdd (port, new CancellationTokenSource ());
+                        var env = services.GetRequiredService<IWebHostEnvironment>();
+                        new ApplicationDbContextSeed().SeedAsync(context, env, dbContextLogger);
+                    });
+                host.RunAsync(tokens[port].Token).GetAwaiter().GetResult();
+            }
+            else
+            {
+                CreateWebHostBuilder(args)
+                    .Build()
+                    .MigrateDbContext<ApplicationDbContext>((context, services) =>
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        var configuration = services.GetRequiredService<IConfiguration>();
 
-                var host = CreateWebHostBuilder (args).Build ();
+                        var connectionString = GetConnectionString(configuration);
+                        logger.LogInformation(connectionString);
+                        var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>>();
 
-                //host = Migrate (host);
-
-                host.RunAsync (tokens[port].Token).GetAwaiter ().GetResult ();
-            } else {
-                var host = CreateWebHostBuilder (args).Build ();
-
-                //host = Migrate (host);
-
-                host.RunAsync ().GetAwaiter ().GetResult ();
+                        var env = services.GetRequiredService<IWebHostEnvironment>();
+                        new ApplicationDbContextSeed().SeedAsync(context, env, dbContextLogger);
+                    })
+                    .Run();
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder (string[] args) {
-
-            var webHostBuilder = WebHost.CreateDefaultBuilder (args)
-                .UseStartup<Startup> ().UseConfiguration (new ConfigurationBuilder ()
-                    .SetBasePath (Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location))
-                    .AddJsonFile ("appsettings.json", optional : true, reloadOnChange : true)
-                    .Build ());
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var webHostBuilder = WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>().UseConfiguration(new ConfigurationBuilder()
+                    .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                    .Build());
 
             return args.Length
-            switch {
-                0 => webHostBuilder,
-                    1 => webHostBuilder.UseUrls ($"http://*:{args[0]}"),
-                    _ => webHostBuilder.UseUrls ($"http://*:{args[0]}").UseSetting ("ConnectionString", args[1])
-            };
+                switch
+                {
+                    0 => webHostBuilder,
+                    1 => webHostBuilder.UseUrls($"http://*:{args[0]}"),
+                    _ => webHostBuilder.UseUrls($"http://*:{args[0]}").UseSetting("ConnectionString", args[1])
+                };
         }
 
-        public static void Shutdown () {
-
-            foreach (var pair in tokens) {
-                pair.Value.Cancel ();
+        public static void Shutdown()
+        {
+            foreach (var pair in tokens)
+            {
+                pair.Value.Cancel();
             }
 
-            tokens.Clear ();
+            tokens.Clear();
         }
 
-        // private static void CreateDatabase(IApplicationBuilder app)
-        // {
-        //     using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
-        //     System.Console.WriteLine("********************************");
-        //     System.Console.WriteLine("********************************");
-        //     System.Console.WriteLine("********************************");
-        //     System.Console.WriteLine("********************************");
-        //     System.Console.WriteLine("********************************");
-        //     if (serviceScope == null) return;
-
-        //     var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        //     context.Database.EnsureCreated();
-
-        //     var serviceProvider = serviceScope.ServiceProvider;
-        // }
-
-        // public static IWebHost Migrate (IWebHost host) {
-        //     var res =  host.MigrateDbContext<ApplicationDbContext> ((context, services) => {
-        //         var logger = services.GetRequiredService<ILogger<Program>> ();
-        //         var configuration = services.GetRequiredService<IConfiguration> ();
-
-        //         var connectionString = GetConnectionString (configuration);
-        //         logger.LogInformation (connectionString);
-        //         var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>> ();
-
-        //         var env = services.GetRequiredService<IWebHostEnvironment> ();
-        //         new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
-        //     });
-
-        //     return res;
-        // }
-
-        // public static void Main2 (string[] args) {
-        //     Log.Logger = new LoggerConfiguration ()
-        //         .MinimumLevel.Debug ()
-        //         .MinimumLevel.Override ("Microsoft", LogEventLevel.Information)
-        //         .MinimumLevel.Override ("System", LogEventLevel.Information)
-        //         .MinimumLevel.Override ("Microsoft.AspNetCore.Authentication", LogEventLevel.Debug)
-        //         .Enrich.FromLogContext ()
-        //         .WriteTo.Console (outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme : AnsiConsoleTheme.Literate)
-        //         .CreateLogger ();
-
-        //     CreateWebHostBuilder (args)
-        //         .Build ()
-        //         .MigrateDbContext<ApplicationDbContext> ((context, services) => {
-        //             var logger = services.GetRequiredService<ILogger<Program>> ();
-        //             var configuration = services.GetRequiredService<IConfiguration> ();
-
-        //             var connectionString = GetConnectionString (configuration);
-        //             logger.LogInformation (connectionString);
-        //             var dbContextLogger = services.GetRequiredService<ILogger<ApplicationDbContext>> ();
-
-        //             var env = services.GetRequiredService<IWebHostEnvironment> ();
-        //             new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
-        //         })
-        //         .Run ();
-
-        // }
-
-        private static string GetConnectionString (IConfiguration configuration){
+        private static string GetConnectionString(IConfiguration configuration)
+        {
             var res =
-            configuration.GetConnectionString ("ConnectionString") ??
-            configuration.GetConnectionString ("MenuDatabaseConnectionString");
+                configuration.GetConnectionString("ConnectionString") ??
+                configuration.GetConnectionString("MenuDatabaseConnectionString");
 
             return res;
         }
