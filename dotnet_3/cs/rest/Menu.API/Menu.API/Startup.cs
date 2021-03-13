@@ -53,15 +53,7 @@ namespace Menu.API
 
         public bool IsK8S => Configuration.GetValue<string>("OrchestrationType").ToUpper().Equals("K8S");
         public void ConfigureServices(IServiceCollection services)
-        {   
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new ModelsMapperProfile());
-            });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
+        {
             services.AddControllers();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -165,8 +157,8 @@ namespace Menu.API
             services.AddScoped<IRepository<Food>, FoodRepository>();
             services.AddScoped<IRepository<FoodPicture>, PictureRepository>();
             services.AddScoped<IFoodPictureService, FoodPictureService>();
-            services.AddScoped<ICurrencyProvider, CurrencyProvider>();
-            // services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddScoped<ICurrencyProvider, CurrencyProvider>(); 
+            services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
             
         }
 
