@@ -16,8 +16,8 @@ namespace Menu {
 
         private bool _isSutRunning;
         private int _sutPort;
-        private TestcontainerDatabase _database;
         private NpgsqlConnection _connection;
+        private TestcontainerDatabase _database;
 
         private static void Main (string[] args) {
 
@@ -70,7 +70,11 @@ namespace Menu {
         public override void StopSut () {
 
             API.Program.Shutdown ();
-
+            
+            //TODO
+            _connection.Close();
+            _database.StopAsync().GetAwaiter().GetResult();
+            
             _isSutRunning = false;
         }
 
