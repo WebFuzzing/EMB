@@ -72,8 +72,8 @@ namespace Menu {
             API.Program.Shutdown ();
             
             //TODO
-            _connection.Close();
-            _database.StopAsync().GetAwaiter().GetResult();
+            // _connection.Close();
+            // _database.StopAsync().GetAwaiter().GetResult();
             
             _isSutRunning = false;
         }
