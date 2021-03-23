@@ -43,6 +43,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
+            .withEnv("POSTGRES_DB", "petclinic")
             .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"));
 
 
@@ -58,20 +59,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String startSut() {
 
+        postgres.start();
+
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
-        String url = "jdbc:p6spy:postgresql://"+host+":"+port+"/postgres";
+        String url = "jdbc:p6spy:postgresql://"+host+":"+port+"/petclinic";
 
         ctx = SpringApplication.run(PetClinicApplication.class, new String[]{
                 "--server.port=0",
                 "--spring.datasource.url=" + url,
                 "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "--spring.datasource.username=sa",
-                "--spring.datasource.password",
                 "--spring.cache.type=none",
                 "--spring.profiles.active=postgresql,spring-data-jpa",
-                "--spring.datasource.initialize=true",
-                "--spring.datasource.schema=classpath*:db/postgresql/initDB.sql"
+             //   "--spring.datasource.initialize=true",
+             //   "--spring.datasource.schema=classpath*:/db/postgresql/initDB.sql",
+                "--spring.jmx.enabled=false",
         });
 
         if (connection != null) {
@@ -88,6 +90,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/initDB.sql");
 
         return "http://localhost:" + getSutPort();
     }
@@ -107,6 +111,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void stopSut() {
         ctx.stop();
+        postgres.stop();
     }
 
     @Override
