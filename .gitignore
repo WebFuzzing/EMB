@@ -129,7 +129,8 @@ hs_err_pid*
 /jdk_8_maven/em/embedded/rest/languagetool/target/
 /jdk_8_maven/em/external/rest/languagetool/target/
 /jdk_8_maven/em/external/rest/restcountries/target/
-
+/jdk_8_maven/.idea
+/jdk_8_maven/cs/graphql/spring-petclinic-graphql/target
 
 ### JavaScript
 /venv/
