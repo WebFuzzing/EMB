@@ -4,16 +4,16 @@
 
     <parent>
         <groupId>org.evomaster</groupId>
-        <artifactId>evomaster-benchmark-em</artifactId>
+        <artifactId>evomaster-benchmark-em-embedded</artifactId>
         <version>1.1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-em-embedded</artifactId>
+    <artifactId>evomaster-benchmark-em-embedded-graphql</artifactId>
     <packaging>pom</packaging>
 
+
     <modules>
-        <module>rest</module>
-        <module>graphql</module>
+        <module>spring-petclinic-graphql</module>
     </modules>
 
 </project>

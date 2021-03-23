@@ -6,7 +6,7 @@
 	<groupId>org.springframework.samples</groupId>
 	<artifactId>spring-petclinic</artifactId>
 	<version>2.0.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>petclinic</name>
 	<description>Spring petclinic project</description>
@@ -150,6 +150,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<finalName>petclinic</finalName>
+							<classifier>sut</classifier>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
