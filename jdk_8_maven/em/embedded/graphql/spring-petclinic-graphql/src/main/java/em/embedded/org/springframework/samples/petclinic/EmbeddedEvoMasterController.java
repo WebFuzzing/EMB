@@ -71,8 +71,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "--spring.cache.type=none",
                 "--spring.profiles.active=postgresql,spring-data-jpa",
-             //   "--spring.datasource.initialize=true",
-             //   "--spring.datasource.schema=classpath*:/db/postgresql/initDB.sql",
                 "--spring.jmx.enabled=false",
         });
 
