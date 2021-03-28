@@ -1,0 +1,66 @@
+extends ../layout.pug
+
+block content
+    section.section
+        .container
+            .level
+                .level-left
+                    h2.title.is-3 Blockchain
+                .level-right
+                    .tags.has-addons
+                        span.tag Type
+                        span.tag.is-primary Regular
+                        span.tag.is-warning Fee
+                        span.tag.is-danger Reward
+            hr
+            .columns.is-multiline
+                each block in blocks                    
+                        .column.is-one-quarter
+                            .box
+                                .content.is-small
+                                    p.title.is-4
+                                        | Block 
+                                        small ##{block.index}
+                                    p.subtitle.is-6
+                                        | Hash: 
+                                        code.tooltip
+                                            | #{formatters.hash(block.hash)}
+                                            span.tooltiptext #{block.hash}                                            
+                                        if block.index > 0
+                                            br                                                
+                                            | Previous: 
+                                            code.tooltip
+                                                | #{formatters.hash(block.previousHash)}
+                                                span.tooltiptext #{block.previousHash}                                                
+                                    hr
+                                    if block.index > 0
+                                        each transaction in block.transactions                                       
+                                            if transaction.data.inputs.length > 0 || transaction.data.outputs.length > 0
+                                                - var classByType = { 'regular': 'is-primary', 'fee': 'is-warning', 'reward': 'is-danger' }
+                                                div.notification(class=`${classByType[transaction.type]}`)
+                                                    p
+                                                        if transaction.data.inputs.length > 0
+                                                            each input in transaction.data.inputs
+                                                                p
+                                                                    span.icon.has-text-white
+                                                                        i.fas.fa-arrow-right(data-fa-transform="rotate-45")
+                                                                    | #{formatters.amount(input.amount)}
+                                                                    |  from 
+                                                                    code.tooltip
+                                                                        | #{formatters.hash(input.address)}
+                                                                        span.tooltiptext #{input.address}
+                                                    p                                                            
+                                                        if transaction.data.outputs.length > 0
+                                                            each output in transaction.data.outputs
+                                                                p
+                                                                    span.icon.has-text-white
+                                                                        i.fas.fa-arrow-right(data-fa-transform="rotate-320")
+                                                                    | #{formatters.amount(output.amount)}
+                                                                    |  to 
+                                                                    code.tooltip
+                                                                        | #{formatters.hash(output.address)}
+                                                                        span.tooltiptext #{output.address}
+                                        p.has-text-grey-light.has-text-right.is-small
+                                            | #{formatters.time(block.timestamp)}
+                                    else
+                                        .subtitle.is-3.has-text-centered Genesis
