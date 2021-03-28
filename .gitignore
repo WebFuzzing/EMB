@@ -165,3 +165,5 @@ dotnet_3/*/Properties/
 
 dotnet_3/em/embedded/rest/*/warning.html
 
+/js_npm/rest/nestjs-realworld-example-app/node_modules/
+/js_npm/rest/nestjs-realworld-example-app/build/
