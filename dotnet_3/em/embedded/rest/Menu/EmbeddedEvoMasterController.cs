@@ -17,7 +17,7 @@ namespace Menu {
         private bool _isSutRunning;
         private int _sutPort;
         private NpgsqlConnection _connection;
-        private TestcontainerDatabase _database;
+        // private TestcontainerDatabase _database;
 
         private static void Main (string[] args) {
 
@@ -54,7 +54,8 @@ namespace Menu {
 
             Task.Run (async () =>
             {
-                var connectionString = await StartContainerAsync();
+                var (connectionString, dbConnection) = await DockerDatabaseStarter.StartAsync(DatabaseType.POSTGRES, "restaurant_menu_database");
+                _connection = (NpgsqlConnection) dbConnection;
                 API.Program.Main (new[] { $"{ephemeralPort}", connectionString });
             });
 
@@ -79,26 +80,5 @@ namespace Menu {
         }
 
         protected int GetSutPort () => _sutPort;
-        
-        private async Task<string> StartContainerAsync()
-        {
-            var postgresBuilder = new TestcontainersBuilder<PostgreSqlTestcontainer>()
-                .WithDatabase(new PostgreSqlTestcontainerConfiguration
-                {
-                    Database = "restaurant_menu_database",
-                    Username = "user",
-                    Password = "password123"
-                })
-                .WithExposedPort(5432);
-
-            _database = postgresBuilder.Build();
-            await _database.StartAsync();
-
-            _connection = new NpgsqlConnection(_database.ConnectionString);
-            await _connection.OpenAsync();
-            
-            //No idea why the password is missing in the connection string
-            return $"{_connection.ConnectionString};Password={_database.Password}";
-        }
     }
 }

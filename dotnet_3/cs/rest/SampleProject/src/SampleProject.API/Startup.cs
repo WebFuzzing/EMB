@@ -20,10 +20,12 @@ using SampleProject.Infrastructure.Caching;
 using Serilog;
 using Serilog.Formatting.Compact;
 using Microsoft.OpenApi.Models;
+using SampleProject.Infrastructure.Database;
 
 [assembly: UserSecretsId("54e8eb06-aaa1-4fff-9f05-3ced1cb623c2")]
+
 namespace SampleProject.API
-{  
+{
     public class Startup
     {
         private readonly IConfiguration _configuration;
@@ -48,11 +50,12 @@ namespace SampleProject.API
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             services.AddMemoryCache();
 
-            services.AddSwaggerGen (c => {
-                c.SwaggerDoc ("v1", new OpenApiInfo { Title = "HelloWorld API", Version = "v1" });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Sample API", Version = "v1"});
             });
 
             services.AddProblemDetails(x =>
@@ -60,19 +63,20 @@ namespace SampleProject.API
                 x.Map<InvalidCommandException>(ex => new InvalidCommandProblemDetails(ex));
                 x.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
             });
-            
+
 
             services.AddHttpContextAccessor();
             var serviceProvider = services.BuildServiceProvider();
 
-            IExecutionContextAccessor executionContextAccessor = new ExecutionContextAccessor(serviceProvider.GetService<IHttpContextAccessor>());
+            IExecutionContextAccessor executionContextAccessor =
+                new ExecutionContextAccessor(serviceProvider.GetService<IHttpContextAccessor>());
 
             var children = this._configuration.GetSection("Caching").GetChildren();
             var cachingConfiguration = children.ToDictionary(child => child.Key, child => TimeSpan.Parse(child.Value));
             var emailsSettings = _configuration.GetSection("EmailsSettings").Get<EmailsSettings>();
             var memoryCache = serviceProvider.GetService<IMemoryCache>();
             return ApplicationStartup.Initialize(
-                services, 
+                services,
                 this._configuration[OrdersConnectionString],
                 new MemoryCacheStore(memoryCache, cachingConfiguration),
                 null,
@@ -83,6 +87,8 @@ namespace SampleProject.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            CreateDatabase(app);
+            
             app.UseMiddleware<CorrelationMiddleware>();
 
             if (env.IsDevelopment())
@@ -96,10 +102,8 @@ namespace SampleProject.API
 
             app.UseRouting();
 
-            app.UseSwagger ();
-            app.UseSwaggerUI (c => {
-                c.SwaggerEndpoint ("/swagger/v1/swagger.json", "HelloWorld API");
-            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample API"); });
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
@@ -108,9 +112,24 @@ namespace SampleProject.API
         {
             return new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{Context}] {Message:lj}{NewLine}{Exception}")
+                .WriteTo.Console(
+                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{Context}] {Message:lj}{NewLine}{Exception}")
                 .WriteTo.RollingFile(new CompactJsonFormatter(), "logs/logs")
                 .CreateLogger();
+        }
+
+        private static void CreateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
+            {
+                if (serviceScope == null) return;
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<OrdersContext>();
+
+                context.Database.EnsureCreated();
+
+                var serviceProvider = serviceScope.ServiceProvider;
+            }
         }
     }
 }
