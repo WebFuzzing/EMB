@@ -26,6 +26,31 @@ module.exports ={
             setTimeout(checkdb, 300)
     },
 
+    initAuth: async (key)=>{
+        await mongoose.connection.useDb('auth')
+            .collection('users')
+            .insertOne({
+                key: key,
+                roles: [
+                    'cache:clear',
+                    'company:update',
+                    'core:create', 'core:update', 'core:delete',
+                    'crew:create', 'crew:update', 'crew:delete',
+                    'dragon:create', 'dragon:update', 'dragon:delete',
+                    'fairing:create', 'fairing:update', 'fairing:delete',
+                    'history:create', 'history:update', 'history:delete',
+                    'landpad:create', 'landpad:update', 'landpad:delete',
+                    'launch:create', 'launch:update', 'launch:delete',
+                    'launchpad:create', 'launchpad:update', 'launchpad:delete',
+                    'payload:create', 'payload:update', 'payload:delete',
+                    'roadster:update',
+                    'rocket:create', 'rocket:update', 'rocket:delete',
+                    'ship:create', 'ship:update', 'ship:delete',
+                    'starlink:create', 'starlink:update', 'starlink:delete',
+                    'user:create', 'user:update', 'user:delete'
+                ]});
+    },
+
     getDbPort: () =>{
         return exposedDbPort
     },

@@ -129,7 +129,7 @@ hs_err_pid*
 /jdk_8_maven/em/embedded/rest/languagetool/target/
 /jdk_8_maven/em/external/rest/languagetool/target/
 /jdk_8_maven/em/external/rest/restcountries/target/
-
+/jdk_8_maven/em/embedded/rest/restcountries/target/
 
 ### JavaScript
 /venv/
@@ -170,3 +170,4 @@ dotnet_3/em/embedded/rest/*/warning.html
 /js_npm/rest/naivecoin/build/
 /js_npm/rest/naivecoin/node_modules/
 /js_npm/rest/spaceX/node_modules/
+
