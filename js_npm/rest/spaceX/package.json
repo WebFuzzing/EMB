@@ -71,7 +71,8 @@
     "dedent": "0.7.0",
     "evomaster-client-js": "file:../../evomaster-client-js",
     "superagent": "5.2.2",
-    "supertest": "4.0.2"
+    "supertest": "4.0.2",
+    "testcontainers": "6.3.0"
   },
   "jest": {
     "testEnvironment": "node"

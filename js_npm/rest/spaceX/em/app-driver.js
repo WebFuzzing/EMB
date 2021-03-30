@@ -1,13 +1,16 @@
+const dbHandler = require("./db-handler");
 const http  = require("http");
 
 const em = require("evomaster-client-js");
 const mongoose = require('mongoose');
-const appAPIs = require("./appAPIs")
 
 class AppController  extends em.SutController {
 
     setupForGeneratedTest(){
-        return Promise.resolve();
+        return new Promise((resolve)=>{
+            this.testcontainer = dbHandler.startDb();
+            resolve(this.testcontainer);
+        });
     }
 
     getInfoForAuthentication(){
@@ -35,13 +38,14 @@ class AppController  extends em.SutController {
 
     resetStateOfSUT(){
         //TODO db cleaner and insert auth data
+        dbHandler.cleanDb();
         return Promise.resolve();
     }
 
     startSut(){
         //TODO get free tcp port
         return new Promise( (resolve) => {
-            this.server = appAPIs;
+            this.server = require("./appAPIs");
             this.port = 6673;
             this.server.listen(this.port, "localhost", () => {
                 resolve("http://localhost:" + this.port);
@@ -52,7 +56,7 @@ class AppController  extends em.SutController {
     stopSut() {
         return new Promise( (resolve) => {
                 mongoose.connection.close(false, () => {
-                    logger.info('Mongo closed');
+                    dbHandler.stopDb();
                     this.server.close(() => {
                         logger.info('Shutting down...');
                         process.exit();
