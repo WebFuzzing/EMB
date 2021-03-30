@@ -1,7 +1,7 @@
 const dbHandler = require("./db-handler");
 const http  = require("http");
 
-const em = require("evomaster-client-js");
+const em= require("evomaster-client-js");
 const mongoose = require('mongoose');
 
 
@@ -15,7 +15,13 @@ class AppController extends em.SutController {
     }
 
     getInfoForAuthentication(){
-        return [];
+        let header = new em.dto.HeaderDto();
+        header.name = "spaceX-key";
+        header.value = "foo";
+        let auth = new em.dto.AuthenticationDto();
+        auth.name = "spaceX-foo";
+        auth.headers = [header];
+        return [auth];
     }
 
     getPreferredOutputFormat() {
