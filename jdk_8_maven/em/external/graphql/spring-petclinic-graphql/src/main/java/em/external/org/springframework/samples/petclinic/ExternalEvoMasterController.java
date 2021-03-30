@@ -6,6 +6,8 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
+import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
@@ -30,9 +32,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 1) {
             sutPort = Integer.parseInt(args[1]);
         }
-        String jarLocation = "TODO";
+        String jarLocation = "cs/graphql/spring-petclinic-graphql/target";
         if (args.length > 2) {
             jarLocation = args[2];
+        }
+        if(! jarLocation.endsWith(".jar")) {
+            jarLocation += "/petclinic-sut.jar";
         }
 
         int timeoutSeconds = 120;
@@ -40,14 +45,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
             timeoutSeconds = Integer.parseInt(args[3]);
         }
 
-        String packagesToInstrument = "TODO";
-        if(args.length > 4){
-            packagesToInstrument = args[4];
-        }
-
         ExternalEvoMasterController controller =
                 new ExternalEvoMasterController(controllerPort, jarLocation,
-                        sutPort, timeoutSeconds, packagesToInstrument);
+                        sutPort, timeoutSeconds);
         InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
 
         starter.start();
@@ -56,33 +56,30 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
     private final String jarLocation;
-    private final String packagesToInstrument;
     private Connection connection;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
+            .withEnv("POSTGRES_DB", "petclinic")
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
             .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"));
 
     public ExternalEvoMasterController(){
-        this(40100, "TODO", 12345, 120, "TODO");
+        this(40100, "../core/target", 12345, 120);
     }
 
     public ExternalEvoMasterController(
-            int controllerPort, String jarLocation, int sutPort, int timeoutSeconds,
-            String packagesToInstrument) {
+            int controllerPort, String jarLocation, int sutPort, int timeoutSeconds
+           ) {
 
         if(jarLocation==null || jarLocation.isEmpty()){
             throw new IllegalArgumentException("Missing jar location");
         }
-        if(packagesToInstrument==null || packagesToInstrument.isEmpty()){
-            throw new IllegalArgumentException("Missing packages to instrument");
-        }
+
 
         this.sutPort = sutPort;
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
-        this.packagesToInstrument = packagesToInstrument;
         setControllerPort(controllerPort);
     }
 
@@ -97,12 +94,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new String[]{
                 "-Dspring.datasource.url=" + dbUrl(true),
                 "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "-Dspring.datasource.username=postgres",
-                "-Dspring.datasource.password",
-                "-Dspring.jpa.show-sql=false",
                 "-Dspring.cache.type=none",
+                "-Dspring.profiles.active=postgresql,spring-data-jpa",
                 "-Dspring.jmx.enabled=false",
-                "-Xmx4G"
         };
     }
 
@@ -115,7 +109,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (withP6Spy) {
             url += ":p6spy";
         }
-        url += ":postgresql://"+host+":"+port+"/postgres?currentSchema=comments";
+        url += ":postgresql://"+host+":"+port+"/petclinic";
 
         return url;
     }
@@ -155,13 +149,14 @@ public class ExternalEvoMasterController extends ExternalSutController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/initDB.sql");
     }
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection,
-                "comments",
-                Arrays.asList("flyway_schema_history"));
+        DbCleaner.clearDatabase_Postgres(connection);
+        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/populateDB.sql");
     }
 
     @Override
@@ -187,15 +182,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return packagesToInstrument;
+        return "org.springframework.samples.petclinic";
     }
 
     @Override
     public ProblemInfo getProblemInfo() {
-        return new RestProblem(
-                getBaseURL() + "/v2/api-docs",
-                null
-        );
+        return new GraphQlProblem("/graphql");
     }
 
     @Override
