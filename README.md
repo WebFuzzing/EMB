@@ -53,6 +53,12 @@ projects, each one with its own license, as clarified in more details beneath.
  
 * SCS (not-known license, artificial string examples coming from different sources)
 
+* SpaceX-API (Apache-2.0 License), from [https://github.com/r-spacex/SpaceX-API](https://github.com/r-spacex/SpaceX-API)
+
+* nestjs-realworld-example-app (ISC), from [https://github.com/lujakob/nestjs-realworld-example-app](https://github.com/lujakob/nestjs-realworld-example-app)
+
+* Naivecoin (Apache-2.0 License), from [https://github.com/conradoqg/naivecoin](https://github.com/conradoqg/naivecoin)
+
 ### REST: .Net/C# 
 
 * Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App](https://github.com/chayxana/Restaurant-App)
