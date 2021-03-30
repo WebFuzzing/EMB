@@ -90,7 +90,7 @@ def buildJDK_8() :
     copy(folder+"/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", dist)
 
     copy(folder+"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar",dist)
-    copy(folder+"/em/external/graphql/spring-petclinici/target/petclinic-evomaster-runner.jar", dist)
+    copy(folder+"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", dist)
 
 
 
