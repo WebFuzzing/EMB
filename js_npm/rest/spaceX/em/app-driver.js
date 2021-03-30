@@ -1,11 +1,9 @@
-import HeaderDto from "../../../evomaster-client-js/dist/controller/api/dto/HeaderDto";
-import AuthenticationDto from "../../../evomaster-client-js/dist/controller/api/dto/AuthenticationDto";
-
 const dbHandler = require("./db-handler");
 const http  = require("http");
 
 const em = require("evomaster-client-js");
 const mongoose = require('mongoose');
+
 
 class AppController extends em.SutController {
 
@@ -17,7 +15,7 @@ class AppController extends em.SutController {
     }
 
     getInfoForAuthentication(){
-        return [new AuthenticationDto('spaceX', [new HeaderDto('spacex-key', 'foo')], null)];
+        return [];
     }
 
     getPreferredOutputFormat() {
