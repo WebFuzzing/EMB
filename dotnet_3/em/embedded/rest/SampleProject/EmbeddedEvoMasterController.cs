@@ -76,7 +76,7 @@ namespace SampleProject
         public override void StopSut()
         {
             API.Program.Shutdown();
-
+            _connection.Close();
             _isSutRunning = false;
         }
 
