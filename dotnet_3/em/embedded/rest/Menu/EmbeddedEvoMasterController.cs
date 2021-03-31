@@ -5,10 +5,6 @@ using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
 using Npgsql;
-using DotNet.Testcontainers.Containers.Builders;
-using DotNet.Testcontainers.Containers.Configurations.Databases;
-using DotNet.Testcontainers.Containers.Modules.Abstractions;
-using DotNet.Testcontainers.Containers.Modules.Databases;
 using EvoMaster.Controller.Controllers.db;
 
 namespace Menu {

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CaseStudies.Rest.Library;
 using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
