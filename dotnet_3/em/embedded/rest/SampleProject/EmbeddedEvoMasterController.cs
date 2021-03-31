@@ -50,7 +50,7 @@ namespace SampleProject
         public override void ResetStateOfSut()
         {
             //TODO
-            //DbCleaner.ClearDatabase(_connection, null, DatabaseType.MSSQL);
+            DbCleaner.ClearDatabase(_connection, null, DatabaseType.MS_SQL_SERVER);
         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
         public override string StartSut()                                   
