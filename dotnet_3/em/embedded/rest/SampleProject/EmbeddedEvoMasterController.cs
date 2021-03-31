@@ -57,11 +57,11 @@ namespace SampleProject
         {
             var ephemeralPort = GetEphemeralTcpPort();
 
-            const int timeout = 400;
+            const int timeout = 300;                                                                                
             
             Task.Run(async () =>
             {
-                var (connectionString, connection) = await DockerDatabaseStarter.StartAsync(DatabaseType.MSSQL,"Sample_Database", timeout);
+                var (connectionString, connection) = await DockerDatabaseStarter.StartAsync(DatabaseType.MS_SQL_SERVER,"Sample_Database", timeout);
                 _connection = (SqlConnection) connection;
                 //TODO
                 _connection.ConnectionString = connectionString;
