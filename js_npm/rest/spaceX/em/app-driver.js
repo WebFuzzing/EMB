@@ -1,4 +1,5 @@
 const dbHandler = require("./db-handler");
+const {getFreePort} =require("./get-free-port")
 const http  = require("http");
 
 const em= require("evomaster-client-js");
@@ -49,13 +50,14 @@ class AppController extends em.SutController {
     }
 
     startSut(){
-        //TODO get free tcp port
         return new Promise( (resolve) => {
-            this.server = require("./appAPIs");
-            this.port = 6673;
-            this.server.listen(this.port, "localhost", () => {
-                resolve("http://localhost:" + this.port);
-            });
+            getFreePort().then((value)=>{
+                this.port = value;
+                this.server = require("./appAPIs");
+                this.server.listen(this.port, "localhost", () => {
+                    resolve("http://localhost:" + this.port);
+                });
+            })
         });
     }
 
