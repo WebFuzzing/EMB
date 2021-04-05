@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: patio
+---
+testFramework: junit
+sourceLanguage: java

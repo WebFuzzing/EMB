@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (C) 2019 Kaleidos Open Source SL
+
+    This file is part of PATIO.
+    PATIO is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    PATIO is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with PATIO.  If not, see <https://www.gnu.org/licenses/>
+
+-->
+<ruleset name="Custom ruleset"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
+  http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    <description>
+        PATIO PMD ruleset
+    </description>
+    <exclude-pattern>.*Test.*</exclude-pattern>
+
+    <rule ref="category/java/bestpractices.xml"/>
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="DefaultPackage" />
+    </rule>
+    <rule ref="category/java/codestyle.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="20"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ClassNamingConventions">
+        <properties>
+            <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]+(Utils?|Helper|Constants)" />
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ShortVariable" >
+        <properties>
+            <property name="xpath">
+                <value>
+                    //VariableDeclaratorId[(string-length(@Image) &lt; $minimum) and (not (@Image='id' or @Image='ID'))]
+                    (: ForStatement :)
+                    [not(../../..[self::ForInit])]
+                    (: Foreach statement :)
+                    [not(../../..[self::ForStatement])]
+                    (: Catch statement parameter :)
+                    [not(../..[self::CatchStatement])]
+                    (: Lambda expression parameter :)
+                    [not(parent::LambdaExpression or ../../..[self::LambdaExpression])]
+                </value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/design.xml">
+        <exclude name="DataClass"/>
+        <exclude name="LawOfDemeter"/>
+        <exclude name="LoosePackageCoupling"/>
+        <exclude name="ExcessiveImports" />
+    </rule>
+
+    <rule ref="category/java/documentation.xml"/>
+    <rule ref="category/java/documentation.xml/CommentRequired">
+        <properties>
+            <property name="fieldCommentRequirement" value="Ignored"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/documentation.xml/CommentSize">
+        <properties>
+            <property name="maxLines" value="16"/>
+            <property name="maxLineLength" value="120"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/ShortClassName">
+        <properties>
+            <property name="minimum" value="4"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="DataflowAnomalyAnalysis" />
+    </rule>
+
+    <rule ref="category/java/multithreading.xml"/>
+    <rule ref="category/java/performance.xml"/>
+    <rule ref="category/java/security.xml"/>
+</ruleset>

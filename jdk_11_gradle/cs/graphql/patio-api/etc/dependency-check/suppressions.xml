@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2019 Kaleidos Open Source SL
+
+    This file is part of PATIO.
+    PATIO is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    PATIO is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with PATIO.  If not, see <https://www.gnu.org/licenses/>
+
+-->
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.2.xsd">
+    <suppress>
+        <notes><![CDATA[
+       file name: spring-security-crypto-5.1.5.RELEASE.jar
+       ]]></notes>
+        <sha1>f5f8b415bd87d0e3bdeaa48751ec79bbdcd2e414</sha1>
+        <cve>CVE-2018-1258</cve>
+        <cpe>cpe:/a:pivotal_software:spring_security</cpe>
+    </suppress>
+</suppressions>

@@ -1,0 +1,185 @@
+#
+# Copyright (C) 2019 Kaleidos Open Source SL
+#
+# This file is part of PATIO.
+# PATIO is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PATIO is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PATIO.  If not, see <https://www.gnu.org/licenses/>
+#
+
+scalar Time
+scalar Date
+scalar DateTime
+scalar DayOfWeek
+
+directive @anonymousAllowed on FIELD_DEFINITION | OBJECT
+
+type Group {
+    id: ID
+    anonymousVote: Boolean
+    name: String
+    members: [User]
+    votingDays: [DayOfWeek]
+    votingTime: Time
+    votingDuration: Int
+    isCurrentUserAdmin: Boolean
+    votings(startDateTime: DateTime!, endDateTime: DateTime!): [Voting]
+}
+
+type UserProfile {
+    id: ID
+    name: String
+    email: String
+    hash: String
+    groups: [Group]
+    favouriteGroup: Group
+}
+
+type User {
+    id: ID
+    name: String
+    hash: String
+}
+
+type VotePaginationResult {
+    page: Int
+    lastPage: Int
+    totalCount: Int
+    data: [Vote]
+}
+
+type Voting {
+    id: ID,
+    group: Group,
+    createdAtDateTime: DateTime
+    createdBy: User
+    stats: VotingStats
+    votes(page: Int, max: Int): VotePaginationResult
+    didIVote: Boolean
+    nextVoting: Voting
+    previousVoting: Voting
+    expired: Boolean
+}
+
+type VotingStats {
+    createdAtDateTime: DateTime
+    votesByMood: [VotesByMood]
+    maxVoteCountExpected: Int
+    voteCount: Int
+    voteCountAverage: Float
+    average: Float
+    movingAverage: Float
+    standardDeviation: Float
+    voting: Voting
+}
+
+type VotingStatsPaginationResult {
+    offset: Int
+    totalCount: Int
+    data: [VotingStats]
+}
+
+type VotesByMood {
+    mood: Int
+    count: Int
+}
+
+type Vote {
+    id: ID
+    score: Int
+    comment: String
+    voting: Voting
+    createdAtDateTime: DateTime
+    createdBy: User
+    hueMood: String
+}
+
+type Tokens {
+    authenticationToken: String,
+    refreshToken: String
+}
+
+# Contains token and user information
+type Login {
+    profile: UserProfile
+    tokens: Tokens
+}
+
+# registered queries
+type Query {
+    # get groups of the current user
+    listMyGroups: [Group]
+
+    # get the favourite group of the user
+    getMyFavouriteGroup: Group
+
+    # get group by its id
+    getGroup(id: ID!): Group
+
+    # get voting by its id
+    getVoting(id: ID!): Voting
+
+    # get last voting by group
+    getLastVotingByGroup(groupId: ID!): Voting
+
+    # get voting statistics for a group between a time interval
+    getStatsByGroup(groupId: ID!, offset: Int, max: Int): VotingStatsPaginationResult
+
+    # get user by its id
+    getUser(id: ID!): User
+
+    # get votes from an user in a group
+    listUserVotesInGroup(userId: ID!, groupId: ID!, startDateTime: DateTime!, endDateTime: DateTime!): [Vote]
+
+    # log in with email/password credentials
+    login(email: String!, password: String!): Login @anonymousAllowed
+
+    # log in with oauth2 authorization code credentials
+    loginOauth2(authorizationCode: String!): Login @anonymousAllowed
+
+    # log in the user who posseses the provided OTP (one-time passowrd)
+    loginOtp(otpCode: String!): Login @anonymousAllowed
+
+    # get the current user's profile
+    myProfile: UserProfile
+}
+
+# registered mutations
+type Mutation {
+    # request to initiate the process to reset the password for a user
+    resetPassword(email: String!): Boolean
+
+    # change the password for the current user
+    changePassword(password: String!, otp: String!): Boolean
+
+    # creates a new voting slot
+    createVoting(groupId: ID): Voting
+
+    # creates a user vote
+    createVote(votingId: ID!, score: Int!, hueMood: String, comment: String, anonymous: Boolean = false): Vote
+
+    # creates a group
+    # TODO: mark votingDuration as mandatory (frontend must send it first)
+    createGroup(name: String!, anonymousVote: Boolean = false, votingTime: Time!, votingDays: [DayOfWeek]!,
+        votingDuration: Int = 24): Group
+
+    # updates a group
+    # TODO: mark votingDuration as mandatory (frontend must send it first)
+    updateGroup(groupId: ID!, name: String!, anonymousVote: Boolean = false, votingTime: Time!,
+        votingDuration: Int = 24, votingDays: [DayOfWeek]!): Group
+
+    # add an user to a group
+    addUserToGroup(email: String!, groupId: ID!): Boolean
+
+    # add an user to a group
+    leaveGroup(groupId: ID!): Boolean
+}

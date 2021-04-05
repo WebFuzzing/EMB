@@ -1,0 +1,100 @@
+#
+# Copyright (C) 2019 Kaleidos Open Source SL
+#
+# This file is part of PATIO.
+# PATIO is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PATIO is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PATIO.  If not, see <https://www.gnu.org/licenses/>
+#
+
+locale: ${PATIO_LOCALE}
+
+micronaut:
+  application:
+    name: patio
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 10
+  server:
+    cors:
+      enabled: true
+---
+datasources:
+  default:
+    url: ${PATIO_JDBC_URL}
+    username: ${PATIO_JDBC_USER}
+    password: ${PATIO_JDBC_PASSWORD}
+    driverClassName: ${PATIO_JDBC_DRIVER}
+jpa:
+  default:
+    properties:
+      hibernate:
+        show_sql: false
+#        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+
+flyway:
+  datasources:
+    default:
+      locations: classpath:migrations
+      validate-on-migrate: false
+
+graphql:
+  enabled: true
+  path: /graphql
+  schema: "classpath:graphql/schema.graphqls"
+
+aws:
+  credentials:
+    accesskey: ${PATIO_AWS_ACCESS_KEY}
+    secretkey: ${PATIO_AWS_SECRET_KEY}
+  mail:
+    sourceemail: ${PATIO_AWS_EMAIL_SOURCE}
+    region: ${PATIO_AWS_EMAIL_REGION}
+    enabled: ${PATIO_AWS_EMAIL_ENABLED}
+
+crypto:
+  password: SHA-256
+  jwt:
+    secret: ${PATIO_JWT_SECRET}
+    days: ${PATIO_JWT_DAYS}
+    algorithm: ${PATIO_JWT_ALGO}
+    issuer: ${PATIO_JWT_ISSUER}
+
+otp:
+  expirytime:
+    minutes: 3
+
+oauth2:
+  apikey: ${PATIO_OAUTH2_KEY}
+  apisecret: ${PATIO_OAUTH2_SECRET}
+  callback: ${PATIO_OAUTH2_CALLBACK}
+
+duser:
+  enabled: ${PATIO_DUSER_ENABLED}
+  name: ${PATIO_DUSER_NAME}
+  email: ${PATIO_DUSER_EMAIL}
+  password: ${PATIO_DUSER_PASSWORD}
+
+# to resolve application links (e.g. mails)
+urlresolver:
+  host: ${PATIO_HOST}
+
+templates:
+  cached: false
+  encoding: UTF-8
+  path: /templates
+
+front:
+  urls:
+    voting: "/team/{0}/{1}/vote"
+    change-password: "/change-password?otp={0}"

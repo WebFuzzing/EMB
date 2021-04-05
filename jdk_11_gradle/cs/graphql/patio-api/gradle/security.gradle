@@ -1,0 +1,6 @@
+dependencyCheck {
+    failOnError = false
+    analyzedTypes = ['jar']
+    skipConfigurations = ['dockerJava', 'spotbugs']
+    suppressionFile = 'etc/dependency-check/suppressions.xml'
+}

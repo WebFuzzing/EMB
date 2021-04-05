@@ -1,0 +1,136 @@
+/**
+ * @since 0.1.0
+ */
+test {
+    useJUnitPlatform()
+}
+
+/**
+ * Configuring PMD static analyzer
+ *
+ * @since 0.1.0
+ */
+pmd {
+    toolVersion "6.11.0"
+    ignoreFailures = false
+    ruleSets = [] // https://stackoverflow.com/questions/53695965/not-able-to-exclude-some-rules-from-pmd
+    ruleSetFiles 'etc/pmd/rulesets-general.xml'
+}
+
+/**
+ * Configuring syntax checker/formatter
+ *
+ * @since 0.1.0
+ */
+spotless {
+    java {
+        importOrder 'spotless.importorder'
+        googleJavaFormat()
+        removeUnusedImports()
+    }
+    groovyGradle {
+        target '**/*.gradle'
+    }
+}
+
+/**
+ * Configuration to check license properly
+ *
+ * @since 0.1.0
+ */
+license {
+    header = file('etc/license/gpl3.license')
+
+    mapping(
+        java: 'SLASHSTAR_STYLE',
+        graphql: 'SCRIPT_STYLE',
+        graphqls: 'SCRIPT_STYLE',
+        template: 'SCRIPT_STYLE',
+    )
+}
+
+/**
+ * In order to be able to process license checking
+ * in etc dir, we need to register it as a Gradle
+ * source set.
+ *
+ * @since 0.1.0
+ */
+sourceSets {
+    etc {
+        resources {
+            srcDir('etc')
+        }
+    }
+}
+
+/**
+ * Configuring latest version of bugs finder
+ *
+ * @since 0.1.0
+ */
+spotbugs {
+    toolVersion = '3.1.11'
+}
+
+/**
+ * Enabling HTML reports for bugs finder (main)
+ *
+ * @since 0.1.0
+ */
+spotbugsMain {
+    reports.xml.enabled = false
+    reports.html.enabled = true
+    excludeFilter = file("$rootProject.projectDir/etc/spotbugs/exclude.xml")
+}
+
+/**
+ * Enabling HTML reports for bugs finder (test)
+ *
+ * @since 0.1.0
+ */
+spotbugsTest {
+    reports.xml.enabled = false
+    reports.html.enabled = true
+}
+
+/**
+ * Using latest jacoco version
+ *
+ * @since 0.1.0
+ */
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+/**
+ * Getting rid of some generated classes
+ *
+ * @since 0.1.0
+ */
+jacocoTestReport {
+    afterEvaluate {
+        classDirectories.setFrom(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                '**/Application*',
+                '**/*$*Definition*/**'
+            ])
+        })
+    }
+}
+
+/**
+ * Overall coverage can't be less than X%
+ *
+ * @since 0.1.0
+ */
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                minimum = 0.7
+            }
+        }
+    }
+}

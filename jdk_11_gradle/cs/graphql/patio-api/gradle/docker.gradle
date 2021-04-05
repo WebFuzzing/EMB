@@ -1,0 +1,12 @@
+docker {
+    registryCredentials {
+        username = project.properties.registryUser
+        password = project.properties.registryKey
+    }
+
+    javaApplication {
+        baseImage = 'openjdk:11-slim'
+        // tag = "kaleidosteam/patio-api:$version"
+        tag = "kaleidosteam/patio-api:latest"
+    }
+}
