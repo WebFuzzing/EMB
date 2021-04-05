@@ -132,6 +132,12 @@ hs_err_pid*
 /jdk_8_maven/.idea
 /jdk_8_maven/cs/graphql/spring-petclinic-graphql/target
 
+
+/jdk_11_gradle/cs/graphql/patio-api/build
+
+
+
+
 ### JavaScript
 /venv/
 /js_npm/rest/ncs/build/
