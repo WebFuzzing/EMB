@@ -1,28 +1,28 @@
-import com.github.jk1.license.render.InventoryHtmlReportRenderer
+//import com.github.jk1.license.render.InventoryHtmlReportRenderer
 
 plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
     id "com.github.johnrengelman.shadow" version "4.0.2"
     id "net.ltgt.apt-eclipse" version "0.18"
     id "net.ltgt.apt-idea" version "0.18"
-    id "com.diffplug.gradle.spotless" version "3.18.0"
-    id "com.github.spotbugs" version "1.6.10"
-    id 'com.bmuschko.docker-java-application' version '4.5.0'
-    id 'com.github.jk1.dependency-license-report' version '1.5'
-    id "com.github.hierynomus.license" version "0.15.0"
+//    id "com.diffplug.gradle.spotless" version "3.18.0"
+//    id "com.github.spotbugs" version "1.6.10"
+//    id 'com.bmuschko.docker-java-application' version '4.5.0'
+//    id 'com.github.jk1.dependency-license-report' version '1.5'
+//    id "com.github.hierynomus.license" version "0.15.0"
     id "net.kaleidos.dwbh.gradle-fixtures-plugin" version "0.1.2"
-    id "org.owasp.dependencycheck" version "5.0.0-M2"
+//    id "org.owasp.dependencycheck" version "5.0.0-M2"
 }
 
 apply plugin: "application"
 apply plugin: "java"
-apply plugin: "pmd"
-apply plugin: "jacoco"
-apply from: 'gradle/quality.gradle'
-apply from: 'gradle/fixtures.gradle'
-apply from: 'gradle/docker.gradle'
-apply from: 'gradle/docs.gradle'
-apply from: 'gradle/security.gradle'
+//apply plugin: "pmd"
+//apply plugin: "jacoco"
+//apply from: 'gradle/quality.gradle'
+//apply from: 'gradle/fixtures.gradle'
+//apply from: 'gradle/docker.gradle'
+//apply from: 'gradle/docs.gradle'
+//apply from: 'gradle/security.gradle'
 
 group "kaleidos.net"
 
@@ -132,10 +132,10 @@ tasks.withType(JavaCompile) {
  *
  * @since 0.1.0
  */
-licenseReport {
-    renderers = [new InventoryHtmlReportRenderer()]
-    configurations = ['compile']
-}
+//licenseReport {
+//    renderers = [new InventoryHtmlReportRenderer()]
+//    configurations = ['compile']
+//}
 
 /**
  * Improving code quality and documentation making sure
@@ -144,11 +144,11 @@ licenseReport {
  *
  * @since 0.1.0
  */
-build.finalizedBy(javadoc, jacocoTestReport)
+//build.finalizedBy(javadoc, jacocoTestReport)
 
 /**
  * Enforcing code coverage restrictions
  *
  * @since 0.1.0
  */
-check.dependsOn jacocoTestCoverageVerification//, dependencyCheckAnalyze
+//check.dependsOn jacocoTestCoverageVerification//, dependencyCheckAnalyze
