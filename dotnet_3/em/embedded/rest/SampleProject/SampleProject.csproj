@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT" />
-      <PackageReference Include="DotNet.Testcontainers" Version="1.4.0"/>
+       <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT" /> 
+      <PackageReference Include="DotNet.Testcontainers" Version="1.4.0" />
     </ItemGroup>
 
     <Target Name="appsettings" AfterTargets="AfterBuild">

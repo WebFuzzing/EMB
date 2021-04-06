@@ -34,23 +34,27 @@ namespace SampleProject.API
 
         private static ILogger _logger;
 
-        public Startup(IWebHostEnvironment env)
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
+            _configuration = configuration;
             _logger = ConfigureLogger();
             _logger.Information("Logger configured");
-
-            this._configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
-                .AddJsonFile($"hosting.{env.EnvironmentName}.json")
-                .AddUserSecrets<Startup>()
-                .Build();
+            
+            // this._configuration = new ConfigurationBuilder()
+            //     .AddJsonFile("appsettings.json")
+            //     .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
+            //     .AddJsonFile($"hosting.{env.EnvironmentName}.json")
+            //     .AddUserSecrets<Startup>()
+            //     .Build();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //read connection string from the driver, if null, then from the appsettings of the SUT
+            var connectionString = _configuration.GetValue<string>("ConnectionStringFromDriver") ?? _configuration.GetConnectionString(OrdersConnectionString);
 
+            services.AddControllers();
+    
             services.AddMemoryCache();
 
             services.AddSwaggerGen(c =>
@@ -75,9 +79,11 @@ namespace SampleProject.API
             var cachingConfiguration = children.ToDictionary(child => child.Key, child => TimeSpan.Parse(child.Value));
             var emailsSettings = _configuration.GetSection("EmailsSettings").Get<EmailsSettings>();
             var memoryCache = serviceProvider.GetService<IMemoryCache>();
+            
+                       
             return ApplicationStartup.Initialize(
                 services,
-                this._configuration[OrdersConnectionString],
+                connectionString,
                 new MemoryCacheStore(memoryCache, cachingConfiguration),
                 null,
                 emailsSettings,
@@ -87,7 +93,7 @@ namespace SampleProject.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            CreateDatabase(app);
+             CreateDatabase(app);
             
             app.UseMiddleware<CorrelationMiddleware>();
 

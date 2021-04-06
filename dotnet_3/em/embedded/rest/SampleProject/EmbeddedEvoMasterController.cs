@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Docker.DotNet;
 using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Controllers.db;
@@ -14,7 +15,6 @@ namespace SampleProject
         private bool _isSutRunning;
         private int _sutPort;
         private SqlConnection _connection;
-        // private TestcontainerDatabase _container;
 
         static void Main(string[] args)
         {
@@ -47,24 +47,25 @@ namespace SampleProject
         {
             //TODO
             DbCleaner.ClearDatabase(_connection, null, DatabaseType.MS_SQL_SERVER);
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        }
 
-        public override string StartSut()                                   
+        public override string StartSut()
         {
             var ephemeralPort = GetEphemeralTcpPort();
 
-            const int timeout = 300;                                                                                
-            
+            const int timeout = 300;
+
             Task.Run(async () =>
             {
-                var (connectionString, connection) = await DockerDatabaseStarter.StartAsync(DatabaseType.MS_SQL_SERVER,"Sample_Database", timeout);
-                _connection = (SqlConnection) connection;
-                //TODO
-                _connection.ConnectionString = connectionString;
+                var dbPort = GetEphemeralTcpPort();
+
+                var (connectionString, dbConnection) =
+                    await DatabaseStarter.RunAsync(DatabaseType.MS_SQL_SERVER, "SampleApi", dbPort, timeout);
+                _connection = dbConnection as SqlConnection;
                 API.Program.Main(new[] {ephemeralPort.ToString(), connectionString});
             });
 
-             WaitUntilSutIsRunning(ephemeralPort, timeout);
+            WaitUntilSutIsRunning(ephemeralPort, timeout);
 
             _sutPort = ephemeralPort;
 
@@ -77,6 +78,8 @@ namespace SampleProject
         {
             API.Program.Shutdown();
             _connection.Close();
+            //TODO
+            //_sqlServerContainer.RemoveAsync(_dockerClient).GetAwaiter().GetResult();
             _isSutRunning = false;
         }
 
