@@ -13,7 +13,6 @@ namespace Menu {
         private bool _isSutRunning;
         private int _sutPort;
         private NpgsqlConnection _connection;
-        // private TestcontainerDatabase _database;
 
         private static void Main (string[] args) {
 
@@ -50,8 +49,9 @@ namespace Menu {
 
             Task.Run (async () =>
             {
-                var (connectionString, dbConnection) = await DockerDatabaseStarter.StartAsync(DatabaseType.POSTGRES, "restaurant_menu_database");
-                _connection = (NpgsqlConnection) dbConnection;
+                var dbPort = GetEphemeralTcpPort();
+                var (connectionString, dbConnection) = await DatabaseStarter.RunAsync(DatabaseType.POSTGRES, "restaurant_menu_database", dbPort);
+                _connection = dbConnection as NpgsqlConnection;
                 API.Program.Main (new[] { $"{ephemeralPort}", connectionString });
             });
 
