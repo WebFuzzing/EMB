@@ -133,6 +133,7 @@ hs_err_pid*
 /jdk_8_maven/cs/graphql/spring-petclinic-graphql/target
 
 
+/jdk_11_gradle/.gradle
 /jdk_11_gradle/cs/graphql/patio-api/build
 
 
