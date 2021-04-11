@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Logging;
 using NCS.Imp;
 
 namespace NCS.Controllers
@@ -81,16 +75,16 @@ namespace NCS.Controllers
             try
             {
                 var dto = new Dto();
-                
+
                 var gammq = new Gammq();
-                
+
                 dto.ResultAsDouble = gammq.Exe(a, x);
-                
+
                 return Ok(dto);
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e);
             }
         }
 
