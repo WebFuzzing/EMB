@@ -4,20 +4,23 @@ using System.Threading.Tasks;
 using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
+using Npgsql;
+using EvoMaster.Controller.Controllers.db;
 
 namespace Menu {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
 
-        private bool isSutRunning;
-        private int sutPort;
+        private bool _isSutRunning;
+        private int _sutPort;
+        private NpgsqlConnection _connection;
 
-        static void Main (string[] args) {
+        private static void Main (string[] args) {
 
             var embeddedEvoMasterController = new EmbeddedEvoMasterController ();
 
-            InstrumentedSutStarter instrumentedSutStarter = new InstrumentedSutStarter (embeddedEvoMasterController);
+            var instrumentedSutStarter = new InstrumentedSutStarter (embeddedEvoMasterController);
 
-            System.Console.WriteLine ("Driver is starting...\n");
+            Console.WriteLine ("Driver is starting...\n");
 
             instrumentedSutStarter.Start ();
         }
@@ -28,42 +31,50 @@ namespace Menu {
 
         public override string GetPackagePrefixesToCover () => "Menu.API";
 
-        //TODO: later on we should create sth specific for C#
-        public override OutputFormat GetPreferredOutputFormat () => OutputFormat.JAVA_JUNIT_5;
+        public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 
         //TODO: check again
         public override IProblemInfo GetProblemInfo () =>
             GetSutPort () != 0 ? new RestProblem ("http://localhost:" + GetSutPort () + "/swagger/v1/swagger.json", null) : new RestProblem (null, null);
 
-        public override bool IsSutRunning () => isSutRunning;
+        public override bool IsSutRunning () => _isSutRunning;
 
-        public override void ResetStateOfSut () { }
+        public override void ResetStateOfSut () { 
+            DbCleaner.ClearDatabase_Postgres(_connection);
+        }
 
         public override string StartSut () {
-            //TODO: check this again
-            int ephemeralPort = GetEphemeralTcpPort ();
 
-            var task = Task.Run (() => {
+            var ephemeralPort = GetEphemeralTcpPort ();
 
-                Menu.API.Program.Main (new string[] { ephemeralPort.ToString () });
+            Task.Run (async () =>
+            {
+                var dbPort = GetEphemeralTcpPort();
+                var (connectionString, dbConnection) = await DatabaseStarter.RunAsync(DatabaseType.POSTGRES, "restaurant_menu_database", dbPort);
+                _connection = dbConnection as NpgsqlConnection;
+                API.Program.Main (new[] { $"{ephemeralPort}", connectionString });
             });
 
-            WaitUntilSutIsRunning (ephemeralPort);
+            WaitUntilSutIsRunning (ephemeralPort, 190);
 
-            sutPort = ephemeralPort;
+            _sutPort = ephemeralPort;
 
-            isSutRunning = true;
+            _isSutRunning = true;
 
             return $"http://localhost:{ephemeralPort}";
         }
 
         public override void StopSut () {
 
-            Menu.API.Program.Shutdown ();
-
-            isSutRunning = false;
+            API.Program.Shutdown ();
+            
+            //TODO
+            // _connection.Close();
+            // _database.StopAsync().GetAwaiter().GetResult();
+            
+            _isSutRunning = false;
         }
 
-        protected int GetSutPort () => sutPort;
+        protected int GetSutPort () => _sutPort;
     }
 }

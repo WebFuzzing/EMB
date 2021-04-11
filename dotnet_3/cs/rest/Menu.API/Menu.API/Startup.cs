@@ -18,6 +18,7 @@ using Menu.API.Abstraction.Services;
 using Menu.API.Data;
 using Menu.API.Facades;
 using Menu.API.Managers;
+using Menu.API.Mappers;
 using Menu.API.Models;
 using Menu.API.Providers;
 using Menu.API.Repositories;
@@ -52,7 +53,7 @@ namespace Menu.API
 
         public bool IsK8S => Configuration.GetValue<string>("OrchestrationType").ToUpper().Equals("K8S");
         public void ConfigureServices(IServiceCollection services)
-        {   
+        {
             services.AddControllers();
             services.Configure<ForwardedHeadersOptions>(options =>
             {
@@ -94,8 +95,10 @@ namespace Menu.API
                     ValidateIssuer = false
                 };
             });
-
-            var connectionString = Configuration.GetConnectionString("MenuDatabaseConnectionString");
+            
+            //read connection string from the driver, if null, then from the appsettings of the SUT
+            var connectionString = Configuration.GetValue<string>("ConnectionString") ?? Configuration.GetConnectionString("MenuDatabaseConnectionString");
+            
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseNpgsql(connectionString);
@@ -154,9 +157,9 @@ namespace Menu.API
             services.AddScoped<IRepository<Food>, FoodRepository>();
             services.AddScoped<IRepository<FoodPicture>, PictureRepository>();
             services.AddScoped<IFoodPictureService, FoodPictureService>();
-            services.AddScoped<ICurrencyProvider, CurrencyProvider>();
-            //TODO: Uncomment this
-            // services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddScoped<ICurrencyProvider, CurrencyProvider>(); 
+            services.AddAutoMapper(typeof(Startup).GetTypeInfo().Assembly);
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -192,6 +195,8 @@ namespace Menu.API
                     return next();
                 });
             }
+
+            
             app.UseSwagger(c =>
             {
                 c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
@@ -231,6 +236,23 @@ namespace Menu.API
                     Predicate = r => r.Name.Contains("self")
                 });
             });
+        }
+        
+        private static void CreateDatabase(IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
+
+            if (serviceScope == null) return;
+
+            var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            context.Database.EnsureCreated();
+
+            var serviceProvider = serviceScope.ServiceProvider;
+            
+            var dbContextLogger = serviceScope.ServiceProvider.GetRequiredService<ILogger<ApplicationDbContext>> ();
+            var env = serviceScope.ServiceProvider.GetRequiredService<IWebHostEnvironment> ();
+            new ApplicationDbContextSeed ().SeedAsync (context, env, dbContextLogger);
         }
     }
 }
