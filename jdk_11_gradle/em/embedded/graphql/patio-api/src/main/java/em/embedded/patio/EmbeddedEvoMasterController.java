@@ -6,6 +6,7 @@ import io.micronaut.runtime.Micronaut;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
@@ -15,7 +16,6 @@ import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
 import patio.Application;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -143,8 +143,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        //TODO
-        return null;
+
+        JsonTokenPostLoginDto token = new JsonTokenPostLoginDto();
+        token.headerPrefix = "JWT ";
+        token.endpoint = "/graphql";
+        token.jsonPayload = "{\"query\": \"{login(email: \\\"Tony Stark\\\",password: \\\"avengers\\\"){tokens{authenticationToken}}}\"}";
+        token.extractTokenField = "/tokens/authenticationToken";
+
+        AuthenticationDto dto = new AuthenticationDto("Stark");
+        dto.jsonTokenPostLogin = token;
+
+        return List.of(dto);
     }
 
     public Connection getConnection() {
