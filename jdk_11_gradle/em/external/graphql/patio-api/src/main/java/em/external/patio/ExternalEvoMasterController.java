@@ -43,10 +43,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if(args.length > 3){
             timeoutSeconds = Integer.parseInt(args[3]);
         }
+        String command = "java";
+        if(args.length > 4){
+            command = args[4];
+        }
+
 
         ExternalEvoMasterController controller =
                 new ExternalEvoMasterController(controllerPort, jarLocation,
-                        sutPort, timeoutSeconds);
+                        sutPort, timeoutSeconds, command);
         InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
 
         starter.start();
@@ -65,11 +70,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
             .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"));
 
     public ExternalEvoMasterController(){
-        this(40100, "../core/target", 12345, 120);
+        this(40100, "../core/target", 12345, 120, "java");
     }
 
     public ExternalEvoMasterController(
-            int controllerPort, String jarLocation, int sutPort, int timeoutSeconds
+            int controllerPort, String jarLocation, int sutPort, int timeoutSeconds, String command
            ) {
 
         if(jarLocation==null || jarLocation.isEmpty()){
@@ -81,6 +86,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
+        setJavaCommand(command);
     }
 
 

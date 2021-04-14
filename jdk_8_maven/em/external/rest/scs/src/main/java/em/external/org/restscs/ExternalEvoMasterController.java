@@ -33,10 +33,14 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if(args.length > 3){
             timeoutSeconds = Integer.parseInt(args[3]);
         }
+        String command = "java";
+        if(args.length > 4){
+            command = args[4];
+        }
 
 
         ExternalEvoMasterController controller =
-                new ExternalEvoMasterController(controllerPort, jarLocation, sutPort, timeoutSeconds);
+                new ExternalEvoMasterController(controllerPort, jarLocation, sutPort, timeoutSeconds, command);
         InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
 
         starter.start();
@@ -47,14 +51,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final String jarLocation;
 
     public ExternalEvoMasterController() {
-        this(40100, "cs/rest/artificial/scs/target/rest-scs.jar", 12345, 120);
+        this(40100, "cs/rest/artificial/scs/target/rest-scs.jar", 12345, 120, "java");
     }
 
-    public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds) {
+    public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds, String command) {
         this.sutPort = sutPort;
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
+        setJavaCommand(command);
     }
 
 
