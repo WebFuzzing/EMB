@@ -43,7 +43,6 @@ os.mkdir(dist)
 
 
 ### Building Maven JDK 8 projects ###
-
 def buildJDK_8() :
 
     env_vars = os.environ.copy()
@@ -103,6 +102,27 @@ def buildJDK_8() :
 
 
 
+####################
+def build_jdk_11_gradle() :
+
+    env_vars = os.environ.copy()
+    env_vars["JAVA_HOME"] = JAVA_HOME_11
+    folder = "jdk_11_gradle"
+
+    gradleres = run(["gradlew", "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+    gradleres = gradleres.returncode
+
+    if gradleres != 0:
+        print("\nERROR: Gradle command failed")
+        exit(1)
+
+
+    # Copy JAR files
+    copy(folder+"/cs/graphql/patio-api/build/libs/patio-api-sut.jar", dist)
+    copy(folder+"/em/external/graphql/patio-api/build/libs/patio-api-evomaster-runner.jar", dist)
+
+
+
 
 # Building JavaScript projects
 def buildJS(path, name):
@@ -131,7 +151,10 @@ def buildJS(path, name):
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","cyclotron")), "cyclotron")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","disease-sh-api")), "disease-sh-api")
 
+
 buildJDK_8()
+
+build_jdk_11_gradle()
 
 ### TODO .Net
 

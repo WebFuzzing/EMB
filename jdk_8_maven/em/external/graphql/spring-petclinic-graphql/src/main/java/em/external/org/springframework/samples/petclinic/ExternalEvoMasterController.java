@@ -155,7 +155,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection);
+        DbCleaner.clearDatabase_Postgres(connection,"public", null);
         SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/populateDB.sql");
     }
 

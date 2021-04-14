@@ -119,7 +119,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection);
+        DbCleaner.clearDatabase_Postgres(connection,"public", null);
         SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/populateDB.sql");
     }
 
