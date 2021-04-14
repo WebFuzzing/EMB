@@ -6,6 +6,8 @@ using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Controllers.db;
 using EvoMaster.Controller.Problem;
+using EvoMaster.DatabaseStarter;
+using EvoMaster.DatabaseStarter.Abstractions;
 using Microsoft.Data.SqlClient;
 
 namespace SampleProject
@@ -15,7 +17,7 @@ namespace SampleProject
         private bool _isSutRunning;
         private int _sutPort;
         private SqlConnection _connection;
-
+        private IDatabaseStarter _databaseStarter;
         static void Main(string[] args)
         {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
@@ -59,9 +61,12 @@ namespace SampleProject
             {
                 var dbPort = GetEphemeralTcpPort();
 
-                var (connectionString, dbConnection) =
-                    await DatabaseStarter.RunAsync(DatabaseType.MS_SQL_SERVER, "SampleApi", dbPort, timeout);
+                _databaseStarter = new SqlServerDatabaseStarter();
+
+                var (connectionString, dbConnection) = await _databaseStarter.StartAsync("SampleApi", dbPort, timeout);
+                
                 _connection = dbConnection as SqlConnection;
+                
                 API.Program.Main(new[] {ephemeralPort.ToString(), connectionString});
             });
 

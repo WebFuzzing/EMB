@@ -6,16 +6,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../../../../cs/rest/SampleProject/src/SampleProject.API/SampleProject.API.csproj" />
+        <ProjectReference Include="../../../../cs/rest/SampleProject/src/SampleProject.API/SampleProject.API.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-       <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT" /> 
-      <PackageReference Include="DotNet.Testcontainers" Version="1.4.0" />
+        <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT"/>
+        <PackageReference Include="DotNet.Testcontainers" Version="1.4.0"/>
+        <PackageReference Include="EvoMaster.DatabaseStarter" Version="1.1.1-SNAPSHOT"/>
     </ItemGroup>
 
     <Target Name="appsettings" AfterTargets="AfterBuild">
-        <Copy SourceFiles="../../../../cs/rest/SampleProject/src/SampleProject.API/appsettings.json" DestinationFolder="$(OutDir)" />
+        <Copy SourceFiles="../../../../cs/rest/SampleProject/src/SampleProject.API/appsettings.json" DestinationFolder="$(OutDir)"/>
     </Target>
 
 </Project>
