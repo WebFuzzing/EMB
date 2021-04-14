@@ -136,7 +136,7 @@ hs_err_pid*
 /jdk_11_gradle/.gradle
 /jdk_11_gradle/cs/graphql/patio-api/build
 /jdk_11_gradle/em/embedded/graphql/patio-api/build
-
+/jdk_11_gradle/em/external/graphql/patio-api/build
 
 
 
