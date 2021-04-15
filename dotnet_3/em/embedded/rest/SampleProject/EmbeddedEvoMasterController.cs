@@ -6,8 +6,8 @@ using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Controllers.db;
 using EvoMaster.Controller.Problem;
-using EvoMaster.DatabaseStarter;
-using EvoMaster.DatabaseStarter.Abstractions;
+using EvoMaster.DatabaseController;
+using EvoMaster.DatabaseController.Abstractions;
 using Microsoft.Data.SqlClient;
 
 namespace SampleProject
@@ -17,7 +17,8 @@ namespace SampleProject
         private bool _isSutRunning;
         private int _sutPort;
         private SqlConnection _connection;
-        private IDatabaseStarter _databaseStarter;
+        private IDatabaseController _databaseController;
+
         static void Main(string[] args)
         {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
@@ -37,7 +38,6 @@ namespace SampleProject
 
         public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 
-        //TODO: check again
         public override IProblemInfo GetProblemInfo() =>
             GetSutPort() != 0
                 ? new RestProblem("http://localhost:" + GetSutPort() + "/swagger/v1/swagger.json", null)
@@ -61,12 +61,12 @@ namespace SampleProject
             {
                 var dbPort = GetEphemeralTcpPort();
 
-                _databaseStarter = new SqlServerDatabaseStarter();
+                _databaseController = new SqlServerDatabaseController("SampleApi", dbPort, "password123", timeout);
 
-                var (connectionString, dbConnection) = await _databaseStarter.StartAsync("SampleApi", dbPort, timeout);
-                
+                var (connectionString, dbConnection) = await _databaseController.StartAsync();
+
                 _connection = dbConnection as SqlConnection;
-                
+
                 API.Program.Main(new[] {ephemeralPort.ToString(), connectionString});
             });
 
@@ -82,12 +82,10 @@ namespace SampleProject
         public override void StopSut()
         {
             API.Program.Shutdown();
-            _connection.Close();
-            //TODO
-            //_sqlServerContainer.RemoveAsync(_dockerClient).GetAwaiter().GetResult();
+            _databaseController.Stop();
             _isSutRunning = false;
         }
 
-        protected int GetSutPort() => _sutPort;
+        private int GetSutPort() => _sutPort;
     }
 }

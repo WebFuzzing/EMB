@@ -66,6 +66,6 @@ namespace NcsDriver
         {
         }
 
-        protected int GetSutPort() => _sutPort;
+        private int GetSutPort() => _sutPort;
     }
 }

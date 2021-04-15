@@ -6,8 +6,8 @@ using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
 using Npgsql;
 using EvoMaster.Controller.Controllers.db;
-using EvoMaster.DatabaseStarter;
-using EvoMaster.DatabaseStarter.Abstractions;
+using EvoMaster.DatabaseController;
+using EvoMaster.DatabaseController.Abstractions;
 
 namespace Menu
 {
@@ -16,7 +16,7 @@ namespace Menu
         private bool _isSutRunning;
         private int _sutPort;
         private NpgsqlConnection _connection;
-        private IDatabaseStarter _databaseStarter;
+        private IDatabaseController _databaseController;
 
         private static void Main(string[] args)
         {
@@ -58,17 +58,16 @@ namespace Menu
             {
                 var dbPort = GetEphemeralTcpPort();
 
-                _databaseStarter = new PostgresDatabaseStarter();
+                _databaseController = new PostgresDatabaseController("restaurant_menu_database", dbPort, "password123");
 
-                var (connectionString, dbConnection) =
-                    await _databaseStarter.StartAsync("restaurant_menu_database", dbPort);
+                var (connectionString, dbConnection) = await _databaseController.StartAsync();
 
                 _connection = dbConnection as NpgsqlConnection;
 
                 API.Program.Main(new[] {$"{ephemeralPort}", connectionString});
             });
 
-            WaitUntilSutIsRunning(ephemeralPort, 190);
+            WaitUntilSutIsRunning(ephemeralPort, 300);
 
             _sutPort = ephemeralPort;
 
@@ -80,11 +79,7 @@ namespace Menu
         public override void StopSut()
         {
             API.Program.Shutdown();
-
-            _connection.Close();
-            //TODO
-            // _database.StopAsync().GetAwaiter().GetResult();
-
+            _databaseController.Stop();
             _isSutRunning = false;
         }
 

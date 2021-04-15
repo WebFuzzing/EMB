@@ -67,6 +67,6 @@ namespace ScsDriver
         {
         }
 
-        protected int GetSutPort() => _sutPort;
+        private int GetSutPort() => _sutPort;
     }
 }
