@@ -59,7 +59,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "--spring.datasource.username=sa",
-                "--spring.datasource.password"
+                "--spring.datasource.password",
+                "--spring.jmx.enabled=false"
         });
 
         if (connection != null) {

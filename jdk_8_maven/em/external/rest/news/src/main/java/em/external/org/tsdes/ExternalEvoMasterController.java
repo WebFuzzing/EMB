@@ -92,7 +92,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
-                "-Dspring.datasource.password"
+                "-Dspring.datasource.password",
+                "-Dspring.jmx.enabled=false"
         };
     }
 
