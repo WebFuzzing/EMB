@@ -145,6 +145,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public List<AuthenticationDto> getInfoForAuthentication() {
 
         JsonTokenPostLoginDto token = new JsonTokenPostLoginDto();
+        token.userId = "Stark";
         token.headerPrefix = "JWT ";
         token.endpoint = "/graphql";
         token.jsonPayload = "{\"query\": \"{login(email: \\\"Tony Stark\\\",password: \\\"avengers\\\"){tokens{authenticationToken}}}\"}";
