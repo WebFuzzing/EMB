@@ -34,6 +34,6 @@ public class Application {
    * @since 0.1.0
    */
   public static void main(String[] args) {
-    Micronaut.run(Application.class);
+    Micronaut.run(Application.class, args);
   }
 }

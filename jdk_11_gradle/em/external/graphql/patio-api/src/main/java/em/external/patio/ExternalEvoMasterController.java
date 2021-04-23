@@ -36,7 +36,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if(! jarLocation.endsWith(".jar")) {
-            jarLocation += "/patio-api-0.1.0-all.jar";
+            jarLocation += "/patio-api-sut.jar";
         }
 
         int timeoutSeconds = 120;
