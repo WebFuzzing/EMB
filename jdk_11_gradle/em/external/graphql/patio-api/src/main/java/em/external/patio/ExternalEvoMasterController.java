@@ -31,7 +31,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 1) {
             sutPort = Integer.parseInt(args[1]);
         }
-        String jarLocation = "cs/graphql/patio-api/build";
+        String jarLocation = "cs/graphql/patio-api/build/libs";
         if (args.length > 2) {
             jarLocation = args[2];
         }
@@ -129,7 +129,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getLogMessageOfInitializedServer() {
-        return "Tomcat started on port"; //FIXME
+        return "Startup completed in";
     }
 
     @Override

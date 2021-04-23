@@ -85,12 +85,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 throw new RuntimeException(e);
             }
         }
-//        DataSource dataSource = ctx.getBean(DataSource .class);
 
         try {
-            //connection = dataSource.getConnection();
-           // connection = io.micronaut.transaction.jdbc.DataSourceUtils.getConnection(dataSource, true);
-            connection = DriverManager.getConnection(url, "patio", "patio");
+           connection = DriverManager.getConnection(url, "patio", "patio");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
