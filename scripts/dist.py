@@ -98,7 +98,7 @@ def buildJDK_8() :
         print("\nWARN: SUT_LOCATION_IND0 env variable is not defined")
     else:
         copy(ind0, os.path.join(dist, "ind0-sut.jar"))
-        copy("em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
+        copy(folder+"/em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
 
 
 
