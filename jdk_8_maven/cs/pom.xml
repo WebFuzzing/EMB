@@ -14,6 +14,7 @@
     <modules>
         <module>rest</module>
         <module>rest-gui</module>
+        <module>graphql</module>
     </modules>
 
 

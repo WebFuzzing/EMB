@@ -1,0 +1,11 @@
+/**
+ * Configures configuration paths for fixture
+ * loading/removal and database configuration
+ *
+ * @since 0.1.0
+ */
+fixtures {
+    loadDir 'etc/fixtures/load'
+    cleanDir 'etc/fixtures/clean'
+    configFile 'etc/fixtures/fixtures.yaml'
+}

@@ -1,0 +1,69 @@
+#
+# Copyright (C) 2019 Kaleidos Open Source SL
+#
+# This file is part of PATIO.
+# PATIO is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PATIO is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PATIO.  If not, see <https://www.gnu.org/licenses/>
+#
+
+locale: es
+
+micronaut:
+  application:
+    name: patio-api
+---
+datasources:
+  default:
+    url: jdbc:tc:postgresql:10-alpine://localhost/patio
+    username: patio
+    password: patio
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+jpa:
+  default:
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+
+flyway:
+  datasources:
+    default:
+      locations: classpath:migrations
+
+graphql:
+  enabled: true
+  path: /graphql
+  schema: "classpath:graphql/schema.graphqls"
+
+duser:
+  enabled: false
+  name: unknown
+  email: unknown
+  password: unknown
+
+email:
+  voting:
+    recipient: somebody@email.com
+    subjectTemplate: How are you today %s ?
+    bodyTemplate: |
+      Hi %s:
+
+      Looking forward to hearing from you in group %s.
+
+      Cheers
+      Admin
+
+front:
+  urls:
+    voting: "/team/{0}/{1}/vote"
+    change-password: "/change-password?otp={0}"
