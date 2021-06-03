@@ -26,7 +26,7 @@
         <spring-data-jdbc.version>1.2.1.RELEASE</spring-data-jdbc.version>
 		<cobertura.version>2.7</cobertura.version>
 
-        <evomaster-version>1.2.0</evomaster-version>
+        <evomaster-version>1.2.1-SNAPSHOT</evomaster-version>
 
 	</properties>
 
