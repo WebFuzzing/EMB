@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-EVOMASTER_VERSION = "1.1.1-SNAPSHOT"
+EVOMASTER_VERSION = "1.2.0"
 
 import os
 import shutil
