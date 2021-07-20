@@ -170,4 +170,4 @@ dotnet_3/em/embedded/rest/*/warning.html
 /js_npm/rest/naivecoin/build/
 /js_npm/rest/naivecoin/node_modules/
 /js_npm/rest/spaceX/node_modules/
-
+/js_npm/rest/spaceX/build/
