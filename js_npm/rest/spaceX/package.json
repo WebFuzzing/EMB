@@ -75,7 +75,18 @@
     "testcontainers": "6.3.0"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
+    "collectCoverageFrom": [
+      "src/**/*.(js|jsx|ts|tsx)"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/tests/",
+      "<rootDir>/check/",
+      "<rootDir>/build/",
+      "<rootDir>/em"
+    ]
   },
   "babel": {
     "only": [

@@ -66,14 +66,12 @@ class AppController extends em.SutController {
                 mongoose.connection.close(false, () => {
                     dbHandler.stopDb();
                     this.server.close(() => {
-                        logger.info('Shutting down...');
-                        process.exit();
+                        process.exit('Shutting down...');
                     });
                 });
             }
         );
     }
-
 }
 
 module.exports = AppController;
