@@ -44,9 +44,11 @@ class AppController extends em.SutController {
     }
 
     resetStateOfSUT(){
-        dbHandler.cleanDb();
-        dbHandler.initAuth('foo');
-        return Promise.resolve();
+        return new Promise((async resolve => {
+            await dbHandler.cleanDb();
+            dbHandler.initAuth('foo');
+            resolve();
+        }))
     }
 
     startSut(){
@@ -62,14 +64,13 @@ class AppController extends em.SutController {
     }
 
     stopSut() {
-        return new Promise( (resolve) => {
-                mongoose.connection.close(false, () => {
-                    dbHandler.stopDb();
-                    this.server.close(() => {
-                        process.exit('Shutting down...');
-                    });
+        return new Promise( (async resolve => {
+                await dbHandler.stopDb();
+                this.server.close( () => {
+                    process.exit();
+                    resolve();
                 });
-            }
+            })
         );
     }
 }

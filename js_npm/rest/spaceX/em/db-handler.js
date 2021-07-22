@@ -67,9 +67,10 @@ module.exports ={
         }
     },
 
-    stopDb : () =>{
+    stopDb : async () =>{
         if (test_container){
-            test_container.stop();
+            await mongoose.connection.close();
+            await test_container.stop();
             test_container = null;
         }
     }
