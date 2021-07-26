@@ -62,7 +62,7 @@ def replaceInProperty(file):
 
 def replaceInKotlinGradle(file):
     regex = re.compile(r'.*val.*EVOMASTER_VERSION.*=.*')
-    replacement = "val EVOMASTER_VERSION = "+version+'\n'
+    replacement = "val EVOMASTER_VERSION = \""+version+"\"\n"
     replace(file, regex, replacement)
 
 # TODO these will be removed once we get rid off of P6Spy
