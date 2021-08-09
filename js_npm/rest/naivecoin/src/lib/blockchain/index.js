@@ -15,14 +15,17 @@ const TRANSACTIONS_FILE = 'transactions.json';
 
 class Blockchain {
     constructor(dbName) {
-        this.blocksDb = new Db('data/' + dbName + '/' + BLOCKCHAIN_FILE, new Blocks());
-        this.transactionsDb = new Db('data/' + dbName + '/' + TRANSACTIONS_FILE, new Transactions());
+        this.dbName = dbName;
+        this.reset();
+    }
 
-        // INFO: In this implementation the database is a file and every time data is saved it rewrites the file, probably it should be a more robust database for performance reasons
+    reset(){
+        this.blocksDb = new Db('data/' + this.dbName + '/' + BLOCKCHAIN_FILE, new Blocks());
+        this.transactionsDb = new Db('data/' + this.dbName + '/' + TRANSACTIONS_FILE, new Transactions());
+
         this.blocks = this.blocksDb.read(Blocks);
         this.transactions = this.transactionsDb.read(Transactions);
 
-        // Some places uses the emitter to act after some data is changed
         this.emitter = new EventEmitter();
         this.init();
     }

@@ -11,11 +11,16 @@ const OPERATOR_FILE = 'wallets.json';
 
 class Operator {
     constructor(dbName, blockchain) {
-        this.db = new Db('data/' + dbName + '/' + OPERATOR_FILE, new Wallets());
+        this.dbName = dbName;
+        this.reset();
+        this.blockchain = blockchain;
+    }
+
+    reset(){
+        this.db = new Db('data/' + this.dbName + '/' + OPERATOR_FILE, new Wallets());
 
         // INFO: In this implementation the database is a file and every time data is saved it rewrites the file, probably it should be a more robust database for performance reasons
         this.wallets = this.db.read(Wallets);
-        this.blockchain = blockchain;
     }
 
     addWallet(wallet) {

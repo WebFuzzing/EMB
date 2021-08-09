@@ -1,11 +1,11 @@
 const http  = require("http");
 const {AddressInfo}  = require("net");
 
-const app = require("../src/lib/app");
+const {app, reset} = require("../src/lib/app");
 
 const em = require("evomaster-client-js");
 const {getFreePort} =require("./get-free-port")
-
+const fs = require('fs-extra');
 
 class AppController  extends em.SutController {
 
@@ -36,7 +36,15 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-        return Promise.resolve();
+        return new Promise(async (resolve) => {
+            let file = 'data';
+            // if (fs.existsSync(file))
+            fs.removeSync(file);
+            reset(this.server);
+            resolve(file);
+
+        });
+        // return Promise.resolve();
     }
 
     startSut(){

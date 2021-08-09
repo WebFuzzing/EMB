@@ -8,10 +8,14 @@ class Node {
     constructor(host, port, peers, blockchain) {
         this.host = host;
         this.port = port;
-        this.peers = [];
+        this.reset();
         this.blockchain = blockchain;
         this.hookBlockchain();
         this.connectToPeers(peers);
+    }
+
+    reset(){
+        this.peers = [];
     }
 
     hookBlockchain() {

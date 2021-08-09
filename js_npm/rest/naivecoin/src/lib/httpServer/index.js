@@ -16,6 +16,11 @@ const timeago = require('timeago.js');
 class HttpServer {
     constructor(node, blockchain, operator, miner) {
         this.app = express();
+        // Man, made a minor change in sut in order to reset sut
+        this.node = node;
+        this.blockchain = blockchain;
+        this.operator = operator;
+        this.miner = miner;
 
         const projectWallet = (wallet) => {
             return {

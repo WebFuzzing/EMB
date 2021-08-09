@@ -4,7 +4,7 @@ const Operator = require('./operator');
 const Miner = require('./miner');
 const Node = require('./node');
 
-module.exports = function app(host, port) {
+const app = function app(host, port) {
     host = process.env.HOST || host || 'localhost';
     port = process.env.PORT || process.env.HTTP_PORT || port || 3001;
     peers = (process.env.PEERS ? process.env.PEERS.split(',') :  []);
@@ -24,4 +24,23 @@ module.exports = function app(host, port) {
 
     //httpServer.listen(host, port);
     return httpServer;
+}
+
+const reset = function app(httpServer) {
+    peers = (process.env.PEERS ? process.env.PEERS.split(',') :  []);
+    peers = peers.map((peer) => { return { url: peer }; });
+    logLevel = (process.env.LOG_LEVEL ? process.env.LOG_LEVEL : 6);
+    name = process.env.NAME  || '1';
+
+    console.info(`resetting node ${name}`);
+
+    httpServer.blockchain.reset();
+    httpServer.operator.reset();
+    httpServer.node.reset();
+
+}
+
+module.exports = {
+    reset,
+    app
 };
