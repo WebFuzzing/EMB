@@ -77,6 +77,7 @@
   "jest": {
     "testEnvironment": "node",
     "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
+    "setupTestFrameworkScriptFile": "./jest.setup.js",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],
