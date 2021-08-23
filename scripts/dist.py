@@ -121,10 +121,13 @@ def buildJS(path, name):
 
 
 ### Due to the insanity of node_modules, those are off by default
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","scs")), "scs")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","cyclotron")), "cyclotron")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","disease-sh-api")), "disease-sh-api")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","ncs")), "ncs")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "scs")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","disease-sh-api")), "disease-sh-api")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","naivecoin")), "naivecoin")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","nestjs-realworld-example-app")), "nestjs-realworld-example-app")
+# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spaceX")), "spaceX")
 
 buildJDK_8()
 
