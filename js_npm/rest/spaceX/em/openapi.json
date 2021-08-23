@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "/v4"
+      "url": "http://localhost:8080/v4"
     }
   ],
   "tags": [
