@@ -1,0 +1,99 @@
+#
+# Copyright (C) 2019 Kaleidos Open Source SL
+#
+# This file is part of PATIO.
+# PATIO is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PATIO is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PATIO.  If not, see <https://www.gnu.org/licenses/>
+#
+
+locale: en
+
+micronaut:
+  application:
+    name: patio
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 10
+  server:
+    cors:
+      enabled: true
+---
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/patio
+    username: patio
+    password: patio
+    driverClassName: org.postgresql.Driver
+jpa:
+  default:
+    properties:
+      hibernate:
+        show_sql: true
+#        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+
+flyway:
+  datasources:
+    default:
+      locations: classpath:migrations
+      validate-on-migrate: false
+
+graphql:
+  enabled: true
+  path: /graphql
+  schema: "classpath:graphql/schema.graphqls"
+
+aws:
+  credentials:
+    accesskey: XXX
+    secretkey: YYY
+  mail:
+    enabled: false
+    sourceemail: noreply@patio.com
+    region: eu-west-1
+
+crypto:
+  jwt:
+    secret: secret
+    days: 7
+    algorithm: HS256
+    issuer: http://localhost:8000/auth/realms/patio
+
+otp:
+  expirytime:
+    minutes: 3
+
+oauth2:
+  apikey: oauth2apikey
+  apisecret: oauth2apisecret
+  callback: oauth2callbackuri
+
+duser:
+  enabled: false
+  name: Johny Cash
+  email: johnny@cash.com
+  password: johnycashpassword
+
+# to resolve application links (e.g. mails)
+urlresolver:
+  host: https://mydomain.com
+
+templates:
+  cached: false
+  encoding: UTF-8
+  path: /templates
+
+front:
+  urls:
+    voting: "/team/{0}/{1}/vote"
+    change-password: "/change-password?otp={0}"

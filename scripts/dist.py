@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-EVOMASTER_VERSION = "1.1.1-SNAPSHOT"
+EVOMASTER_VERSION = "1.2.2-SNAPSHOT"
 
 import os
 import shutil
@@ -43,7 +43,6 @@ os.mkdir(dist)
 
 
 ### Building Maven JDK 8 projects ###
-
 def buildJDK_8() :
 
     env_vars = os.environ.copy()
@@ -89,12 +88,38 @@ def buildJDK_8() :
     copy(folder+"/cs/rest/original/restcountries/target/restcountries-sut.jar",dist)
     copy(folder+"/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", dist)
 
+    copy(folder+"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar",dist)
+    copy(folder+"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", dist)
+
+
+
     ind0 = os.environ.get('SUT_LOCATION_IND0', '')
     if ind0 == '':
         print("\nWARN: SUT_LOCATION_IND0 env variable is not defined")
     else:
         copy(ind0, os.path.join(dist, "ind0-sut.jar"))
-        copy("em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
+        copy(folder+"/em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
+
+
+
+####################
+def build_jdk_11_gradle() :
+
+    env_vars = os.environ.copy()
+    env_vars["JAVA_HOME"] = JAVA_HOME_11
+    folder = "jdk_11_gradle"
+
+    gradleres = run(["gradlew", "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+    gradleres = gradleres.returncode
+
+    if gradleres != 0:
+        print("\nERROR: Gradle command failed")
+        exit(1)
+
+
+    # Copy JAR files
+    copy(folder+"/cs/graphql/patio-api/build/libs/patio-api-sut.jar", dist)
+    copy(folder+"/em/external/graphql/patio-api/build/libs/patio-api-evomaster-runner.jar", dist)
 
 
 
@@ -129,7 +154,10 @@ def buildJS(path, name):
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","nestjs-realworld-example-app")), "nestjs-realworld-example-app")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spaceX")), "spaceX")
 
+
 buildJDK_8()
+
+build_jdk_11_gradle()
 
 ### TODO .Net
 

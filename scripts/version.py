@@ -55,14 +55,31 @@ def replaceInDist():
     replacement = 'EVOMASTER_VERSION = "'+version+'"\n'
     replace("scripts/dist.py", regex, replacement)
 
+def replaceInProperty(file):
+    regex = re.compile(r'.*EVOMASTER_VERSION.*=.*')
+    replacement = 'EVOMASTER_VERSION='+version+'\n'
+    replace(file, regex, replacement)
 
-replaceInPom("pom.xml")
-replaceInPom("cs/rest/original/scout-api/api/pom.xml")
-replaceInPom("cs/rest/original/catwatch/catwatch-backend/pom.xml")
-replaceInPom("cs/rest/artificial/news/pom.xml")
-replaceInPom("cs/rest/original/features-service/pom.xml")
-replaceInPom("cs/rest/original/proxyprint/pom.xml")
-replaceInPom("cs/rest-gui/ocvn/web/pom.xml")
+def replaceInKotlinGradle(file):
+    regex = re.compile(r'.*val.*EVOMASTER_VERSION.*=.*')
+    replacement = "val EVOMASTER_VERSION = \""+version+"\"\n"
+    replace(file, regex, replacement)
+
+# TODO these will be removed once we get rid off of P6Spy
+replaceInPom("jdk_8_maven/pom.xml")
+replaceInPom("jdk_8_maven/cs/rest/original/scout-api/api/pom.xml")
+replaceInPom("jdk_8_maven/cs/rest/original/catwatch/catwatch-backend/pom.xml")
+replaceInPom("jdk_8_maven/cs/rest/artificial/news/pom.xml")
+replaceInPom("jdk_8_maven/cs/rest/original/features-service/pom.xml")
+replaceInPom("jdk_8_maven/cs/rest/original/proxyprint/pom.xml")
+replaceInPom("jdk_8_maven/cs/rest-gui/ocvn/web/pom.xml")
+replaceInPom("jdk_8_maven/cs/graphql/spring-petclinic-graphql/pom.xml")
+replaceInProperty("jdk_11_gradle/cs/graphql/patio-api/gradle.properties")
+
+# is there any easier way for Gradle?
+replaceInKotlinGradle("jdk_11_gradle/em/embedded/graphql/patio-api/build.gradle.kts")
+replaceInKotlinGradle("jdk_11_gradle/em/external/graphql/patio-api/build.gradle.kts")
+
 replaceInDist()
 
 
@@ -72,7 +89,7 @@ env_vars = os.environ.copy()
 env_vars["JAVA_HOME"] = JAVA_HOME_8
 
 
-mvnres = run(["mvn", "versions:set", "-DnewVersion="+version], shell=SHELL, cwd=PROJ_LOCATION, env=env_vars)
+mvnres = run(["mvn", "versions:set", "-DnewVersion="+version], shell=SHELL, cwd=PROJ_LOCATION+"/jdk_8_maven", env=env_vars)
 mvnres = mvnres.returncode
 
 if mvnres != 0:

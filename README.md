@@ -2,6 +2,10 @@
 [EvoMaster](http://evomaster.org) Benchmark (EMB): 
 a set of web/enterprise applications for experimentation in automated system testing.
 
+__WARNING__: This repository is going through a major refactoring. 
+Most of the documentation is still under construction. 
+
+
 We collected several different systems, in different programming languages, like
 Java, Kotlin, JavaScript and C#.
 We also added the drivers for EvoMaster to use those systems. 

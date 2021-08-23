@@ -1,0 +1,17 @@
+/**
+ * Javadoc configuration
+ *
+ * @since 0.1.0
+ */
+javadoc {
+    failOnError = true
+}
+
+/**
+ * Makes javadoc to fail if there're warnings too
+ *
+ * @since 0.1.0
+ */
+tasks.withType(Javadoc) {
+    options.addStringOption('Xwerror', '-quiet')
+}

@@ -261,7 +261,7 @@ class NewsRestApi {
     }
 
 
-    @ExceptionHandler(value = ConstraintViolationException::class)
+    @ExceptionHandler(value = [ConstraintViolationException::class])
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     fun handleValidationFailure(ex: ConstraintViolationException): String {
 

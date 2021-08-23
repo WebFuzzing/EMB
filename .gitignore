@@ -32,8 +32,8 @@ hs_err_pid*
 /dist.zip
 /dist/
 
-
-
+/jdk_8_maven/.idea
+/jdk_8_maven/temp
 /jdk_8_maven/em/embedded/rest/features-service/src/evo/
 /jdk_8_maven/em/embedded/rest/scout-api/src/evo/
 /jdk_8_maven/em/embedded/rest/ocvn/src/evo/
@@ -124,10 +124,24 @@ hs_err_pid*
 /jdk_8_maven/cs/rest/original/languagetool/languagetool-server/target/
 /jdk_8_maven/cs/rest/original/restcountries/target/
 /jdk_8_maven/em/embedded/rest/restcountries/src/evo/
-/jdk_8_maven/cs/rest/original/restcountries/target
-/jdk_8_maven//em/embedded/rest/restcountries/target/
+/jdk_8_maven/em/embedded/rest/restcountries/target/
+/jdk_8_maven/em/external/rest/restcountries/target/
+/jdk_8_maven/em/external/rest/restcountries/src/evo/
 /jdk_8_maven/em/embedded/rest/languagetool/target/
 /jdk_8_maven/em/external/rest/languagetool/target/
+/jdk_8_maven/cs/graphql/spring-petclinic-graphql/target
+/jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/target/
+/jdk_8_maven/em/external/graphql/spring-petclinic-graphql/target/
+/jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/src/main/em/
+/jdk_8_maven/em/external/graphql/spring-petclinic-graphql/src/main/em/
+
+
+/jdk_11_gradle/.gradle
+/jdk_11_gradle/cs/graphql/patio-api/build
+/jdk_11_gradle/em/embedded/graphql/patio-api/build
+/jdk_11_gradle/em/external/graphql/patio-api/build
+
+
 /jdk_8_maven/em/external/rest/restcountries/target/
 /jdk_8_maven/em/embedded/rest/restcountries/target/
 
@@ -150,7 +164,12 @@ hs_err_pid*
 /js_npm/rest/disease-sh-api/build/
 /js_npm/rest/disease-sh-api/EvoMasterTest.js
 /js_npm/rest/disease-sh-api/redis/
-
+/js_npm/rest/nestjs-realworld-example-app/node_modules/
+/js_npm/rest/nestjs-realworld-example-app/build/
+/js_npm/rest/naivecoin/build/
+/js_npm/rest/naivecoin/node_modules/
+/js_npm/rest/spaceX/node_modules/
+/js_npm/rest/spaceX/build/
 
 
 #DotNet
@@ -164,10 +183,10 @@ dotnet_3/*/Properties/
 *.launchSettings.json
 
 dotnet_3/em/embedded/rest/*/warning.html
+dotnet_3/cs/rest/Menu.API/Menu.API/packages.lock.json
 
-/js_npm/rest/nestjs-realworld-example-app/node_modules/
-/js_npm/rest/nestjs-realworld-example-app/build/
-/js_npm/rest/naivecoin/build/
-/js_npm/rest/naivecoin/node_modules/
-/js_npm/rest/spaceX/node_modules/
-/js_npm/rest/spaceX/build/
+*packages.lock.json
+*.sln.DotSettings.user
+
+
+

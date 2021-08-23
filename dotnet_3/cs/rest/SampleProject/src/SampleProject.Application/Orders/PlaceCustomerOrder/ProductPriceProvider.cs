@@ -17,7 +17,7 @@ namespace SampleProject.Application.Orders.PlaceCustomerOrder
                                                                                   $"[ProductPrice].ProductId AS [{nameof(ProductPriceResponse.ProductId)}], " +
                                                                                   $"[ProductPrice].Value AS [{nameof(ProductPriceResponse.Value)}], " +
                                                                                   $"[ProductPrice].Currency AS [{nameof(ProductPriceResponse.Currency)}] " +
-                                                                                  "FROM orders.v_ProductPrices AS [ProductPrice]");
+                                                                                  "FROM orders.ProductPrices AS [ProductPrice]");
 
             return productPrices.AsList()
                 .Select(x => new ProductPriceData(
