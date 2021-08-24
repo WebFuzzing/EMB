@@ -65,10 +65,11 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
+    "testRegex": "em/.*[Test|fault_representatives|faults|others|successess]\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],
+    "coverageReporters": ["json", "html", "json-summary"],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/tests/",
