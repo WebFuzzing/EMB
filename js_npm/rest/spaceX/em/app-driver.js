@@ -33,7 +33,7 @@ class AppController extends em.SutController {
         const dto = new em.dto.RestProblemDto();
         dto.swaggerJsonUrl = "http://localhost:" + this.port + "/openapi.json";
         // cache uses the redis, we skip it for the moment
-        dto.endpointsToSkip = ["/v4/admin/cache"];
+        dto.endpointsToSkip = ["/admin/cache"];
         return dto;
     }
 
