@@ -4,7 +4,7 @@
   "description": "[![Build Status](https://travis-ci.org/anishkny/node-express-realworld-example-app.svg?branch=master)](https://travis-ci.org/anishkny/node-express-realworld-example-app)",
   "main": "src/index.js",
   "scripts": {
-    "build": "babel em src -d build/src --copy-files",
+    "build": "tsc && babel em src -d build/src --copy-files",
     "em": "NODE_ENV=em_production node build/src/em-main.js",
     "start": "node src/index.js",
     "start:watch": "nodemon",
@@ -73,13 +73,25 @@
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],
-    "coverageReporters": ["json", "html", "json-summary"],
+    "coverageReporters": [
+      "json",
+      "html",
+      "json-summary"
+    ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/tests/",
       "<rootDir>/check/",
       "<rootDir>/build/",
       "<rootDir>/em"
+    ]
+  },
+  "babel": {
+    "only": [
+      "src"
+    ],
+    "plugins": [
+      "module:evomaster-client-js"
     ]
   }
 }
