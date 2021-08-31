@@ -1,5 +1,6 @@
 const { GenericContainer } = require("testcontainers");
 const mongoose = require('mongoose');
+const cache = require("../src/middleware/cache");
 
 let dbPort = 27017;
 let exposedDbPort = 0;
@@ -65,11 +66,23 @@ module.exports ={
             await mongoose.connection.collections[key].deleteMany({});
             //await mongoose.connection.db.dropCollection(key);
         }
+
+        // redis
+        const cache = require("../src/middleware/cache")
+        if(cache && cache.redis && cache.redis.status == "ready"){
+            await cache.redis.flushall();
+        }
     },
 
     stopDb : async () =>{
         if (test_container){
             await mongoose.connection.close();
+
+            const cache = require("../src/middleware/cache")
+            if(cache && cache.redis && cache.redis.status == "ready"){
+                await cache.redis.disconnect();
+            }
+
             await test_container.stop();
             test_container = null;
         }
