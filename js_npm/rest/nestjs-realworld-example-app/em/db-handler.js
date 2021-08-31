@@ -58,7 +58,6 @@ module.exports ={
         console.log("todo check")
     },
 
-    // discuss with Andrea, whether we put this code in client-js
     cleanDb: () =>{
         // https://www.npmjs.com/package/mysql
 
@@ -82,58 +81,6 @@ module.exports ={
                 })
             );
         })
-
-
-        // connection.beginTransaction( function (error) {
-        //     if (error) throw error;
-        //
-        //     connection.query(disableReferentialIntegrity, function (error) {
-        //         if (error){
-        //             return connection.rollback(function(){throw error;});
-        //         }
-        //
-        //         connection.query(queryAllTables, function (error, results){
-        //             if (error) {
-        //                 return connection.rollback(function() {
-        //                     throw error;
-        //                 });
-        //             }
-        //
-        //             let truncateAll= '';
-        //             let resetSeq = '';
-        //             for (const element of results){
-        //                 truncateAll += `TRUNCATE TABLE ${element.TABLE_NAME};`;
-        //                 resetSeq += `ALTER TABLE ${element.TABLE_NAME} AUTO_INCREMENT=1;`;
-        //             }
-        //
-        //             connection.query(truncateAll + resetSeq, function (error){
-        //                 if (error) {
-        //                     return connection.rollback(function() {
-        //                         throw error;
-        //                     });
-        //                 }
-        //
-        //                 connection.query(enableReferentialIntegrity, function(error){
-        //                     if (error) {
-        //                         return connection.rollback(function() {
-        //                             throw error;
-        //                         });
-        //                     }
-        //
-        //                     connection.commit(async function(err) {
-        //                         if (err) {
-        //                             return connection.rollback(function() {
-        //                                 throw err;
-        //                             });
-        //                         }
-        //                         console.log('clean db done!');
-        //                     });
-        //                 });
-        //             });
-        //         });
-        //     });
-        // });
-
     },
 
     stopDb : async () =>{

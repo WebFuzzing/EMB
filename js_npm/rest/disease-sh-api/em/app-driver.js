@@ -6,7 +6,7 @@ const {AddressInfo}  = require("net");
 const em = require("evomaster-client-js");
 
 
-class AppController  extends em.SutController {
+class AppController extends em.SutController {
 
 
     setupForGeneratedTest(){

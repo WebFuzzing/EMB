@@ -65,7 +65,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testRegex": "em/.*[Test|fault_representatives|faults|others|successess]\\.(js|jsx|ts|tsx)$",
+    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],

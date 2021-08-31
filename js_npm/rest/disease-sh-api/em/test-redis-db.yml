@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   redis:
-    image: redis:latest
+    image: redis:6.2.5
+    command: ["redis-server", "--bind", "redis", "--port", "50000"]
     ports:
       - 50000
     volumes:
