@@ -25,24 +25,32 @@ function querySql(sql)  {
 module.exports ={
 
     startDb: async () =>{
-        console.log("start db")
-        dbPort = process.env.DB_PORT || 3306;
-        test_container= await new GenericContainer("mysql", "5.7.22")
-            .withEnv("MYSQL_ROOT_PASSWORD", "test")
-            .withEnv("MYSQL_USER", "test")
-            .withEnv("MYSQL_PASSWORD", "test")
-            .withEnv("MYSQL_DATABASE", "test")
-            .withExposedPorts(dbPort)
-            .start();
-        exposedDbPort = test_container.getMappedPort(dbPort)
-        process.env.DB_PORT = exposedDbPort
-        dbURL = `mysql://localhost:${exposedDbPort}/test`
 
-        console.log("connecting "+dbURL);
+        dbPort = process.env.DB_PORT || 3306;
+
+        if(process.env.DOCKER_REDIS && process.env.DOCKER_REDIS === '0'){
+            process.env.DB_PORT = dbPort
+            console.log("use local mysql on port:" + dbPort)
+        }else{
+            console.log("start db with test container")
+            test_container= await new GenericContainer("mysql:5.7.22")
+                .withEnv("MYSQL_ROOT_PASSWORD", "test")
+                .withEnv("MYSQL_USER", "test")
+                .withEnv("MYSQL_PASSWORD", "test")
+                .withEnv("MYSQL_DATABASE", "test")
+                .withExposedPorts(dbPort)
+                .withTmpFs({ "/var/lib/mysql": "rw" })
+                .start();
+            exposedDbPort = test_container.getMappedPort(dbPort)
+            process.env.DB_PORT = exposedDbPort
+            dbURL = `mysql://localhost:${exposedDbPort}/test`
+
+            console.log("connecting "+dbURL);
+        }
 
         connection = mysql.createConnection({
             host : 'localhost',
-            port : exposedDbPort,
+            port : process.env.DB_PORT,
             user : 'test',
             password : 'test',
             database : 'test',
@@ -52,6 +60,7 @@ module.exports ={
         await connection.connect();
 
         return test_container;
+
     },
 
     checkdb: async () =>{

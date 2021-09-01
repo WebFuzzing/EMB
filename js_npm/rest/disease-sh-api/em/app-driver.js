@@ -54,10 +54,11 @@ class AppController extends em.SutController {
     }
 
     stopSut() {
-        return new Promise( (resolve) =>
-            {
-                this.server.close( () => resolve());
-            }
+        return new Promise( (resolve) => {
+                this.server.close( () => {
+                    dbHandler.stopDb();
+                    resolve();
+                });}
         );
     }
 

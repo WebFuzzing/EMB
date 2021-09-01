@@ -7,18 +7,22 @@ let test_container = null;
 
 module.exports ={
     startDb: async () =>{
-        console.log("start db")
-        dbPort = process.env.DB_PORT || 50000;
+        if(process.env.DOCKER_REDIS && process.env.DOCKER_REDIS === '0'){
+            console.log("use local redis on port:" + process.env.REDIS_PORT)
+        }else{
+            console.log("start docker db")
+            dbPort = process.env.DB_PORT || 50000;
 
-        // solve ioredis connection problem https://github.com/luin/ioredis/issues/763
-        const environment = await new DockerComposeEnvironment(__dirname, "test-redis-db.yml")
-        .withWaitStrategy("redis_1", Wait.forLogMessage("Ready to accept connections"))
-        .up();
-        test_container = await environment.getContainer("redis_1");
-        exposedDbPort = test_container.getMappedPort(dbPort);
-        process.env.REDIS_PORT = exposedDbPort;
+            // solve ioredis connection problem https://github.com/luin/ioredis/issues/763
+            const environment = await new DockerComposeEnvironment(__dirname, "test-redis-db.yml")
+                .withWaitStrategy("redis_1", Wait.forLogMessage("Ready to accept connections"))
+                .up();
+            test_container = await environment.getContainer("redis_1");
+            exposedDbPort = test_container.getMappedPort(dbPort);
+            process.env.REDIS_PORT = exposedDbPort;
 
-        console.log("connecting redis-server with " + exposedDbPort+ " " + test_container.getHost());
+            console.log("connecting redis-server with " + exposedDbPort+ " " + test_container.getHost());
+        }
         return test_container;
     },
 
