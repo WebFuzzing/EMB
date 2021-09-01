@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "tsc && babel em src -d build/src --copy-files",
-    "em": "NODE_ENV=em_production node build/src/em-main.js",
+    "em": "node build/src/em-main.js",
     "start": "node src/index.js",
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
