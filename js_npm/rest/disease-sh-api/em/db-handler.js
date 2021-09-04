@@ -7,7 +7,7 @@ let test_container = null;
 
 module.exports ={
     startDb: async () =>{
-        if(process.env.DOCKER_REDIS && process.env.DOCKER_REDIS === '0'){
+        if(process.env.DOCKER_DBC && process.env.DOCKER_DBC === '0'){
             console.log("use local redis on port:" + process.env.REDIS_PORT)
         }else{
             console.log("start docker db")

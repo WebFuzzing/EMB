@@ -28,7 +28,7 @@ module.exports ={
 
         dbPort = process.env.DB_PORT || 3306;
 
-        if(process.env.DOCKER_REDIS && process.env.DOCKER_REDIS === '0'){
+        if(process.env.DOCKER_DBC && process.env.DOCKER_DBC === '0'){
             process.env.DB_PORT = dbPort
             console.log("use local mysql on port:" + dbPort)
         }else{
