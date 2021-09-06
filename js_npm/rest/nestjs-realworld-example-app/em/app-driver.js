@@ -82,7 +82,7 @@ class AppController  extends em.SutController {
         //docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test  -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5.7.22
         //note that for this sut, do not support mysql:8.*
         return new Promise(async (resolve) => {
-            this.port = await getFreePort();
+            this.port = process.env.SUT_PORT || await getFreePort();
             this.server = await require("../src/dist/server").bootstrap(this.port);
             this.baseUrlOfSut = "http://localhost:" + this.port;
             resolve("http://localhost:" + this.port);
