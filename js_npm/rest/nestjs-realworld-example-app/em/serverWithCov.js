@@ -8,7 +8,7 @@
     await app.startSut()
     await app.resetStateOfSUT()
 
-    const TB = process.env.EM_TB || 5 //min
+    const TB = process.env.TB || 5 //min
     setTimeout(function () {
         console.log("stopped by timeout");
         app.stopSut();
