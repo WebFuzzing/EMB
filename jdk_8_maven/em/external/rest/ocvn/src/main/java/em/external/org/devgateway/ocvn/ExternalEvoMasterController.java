@@ -90,7 +90,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String url = "jdbc";
         url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_ocvn/testdb_" + dbPort;
@@ -105,7 +105,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new String[]{
                 "-Dliquibase.enabled=false",
                 "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
-                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
                 "-Dspring.datasource.username=sa",

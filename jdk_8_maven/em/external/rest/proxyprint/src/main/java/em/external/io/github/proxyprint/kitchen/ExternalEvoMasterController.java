@@ -82,7 +82,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setJavaCommand(command);
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String url = "jdbc";
         url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_proxyprint/testdb_" + dbPort;
@@ -97,7 +97,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public String[] getJVMParameters() {
         return new String[]{
-                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1;MVCC=true",
+                "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1;MVCC=true",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
                 "-Dspring.datasource.password",

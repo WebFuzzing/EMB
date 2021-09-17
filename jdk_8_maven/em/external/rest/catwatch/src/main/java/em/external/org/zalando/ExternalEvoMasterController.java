@@ -73,7 +73,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setJavaCommand(command);
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String url = "jdbc";
         url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_catwatch/testdb_" + dbPort;
@@ -92,7 +92,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 //                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
 //                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
                 //FIXME: re-enable once fixed issue with Spring
-                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
                 "-Dspring.datasource.password"

@@ -102,7 +102,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         };
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl() {
 
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
@@ -144,7 +144,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName(getDatabaseDriverName());
-            connection = DriverManager.getConnection(dbUrl(false), "postgres", "");
+            connection = DriverManager.getConnection(dbUrl(), "postgres", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
