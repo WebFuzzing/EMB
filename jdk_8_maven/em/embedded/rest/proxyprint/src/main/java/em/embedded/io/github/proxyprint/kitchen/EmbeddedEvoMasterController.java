@@ -1,6 +1,5 @@
 package em.embedded.io.github.proxyprint.kitchen;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import io.github.proxyprint.kitchen.WebAppConfig;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -56,8 +55,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         ctx = SpringApplication.run(WebAppConfig.class, new String[]{
                 "--server.port=0",
-                "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;MVCC=true;",
-                "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
+                "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MVCC=true;",
                 "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "--spring.datasource.username=sa",
                 "--spring.datasource.password",

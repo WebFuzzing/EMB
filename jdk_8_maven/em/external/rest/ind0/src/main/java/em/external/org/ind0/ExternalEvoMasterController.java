@@ -1,6 +1,5 @@
 package em.external.org.ind0;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -109,7 +108,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         return new String[]{
                 "-Dspring.datasource.url=" + dbUrl(true),
-                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "-Dspring.datasource.username=postgres",
                 "-Dspring.datasource.password",
                 "-Dspring.jpa.show-sql=false",
@@ -125,9 +123,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         int port = postgres.getMappedPort(5432);
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":postgresql://"+host+":"+port+"/postgres?currentSchema=comments";
 
         return url;

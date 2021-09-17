@@ -2,7 +2,6 @@ package em.embedded.org.devgateway.ocvn;
 
 
 import com.mongodb.MongoClient;
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.devgateway.toolkit.web.spring.WebApplication;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -73,8 +72,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 new String[]{"--server.port=0",
                         "--liquibase.enabled=false",
                         "--spring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
-                        "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
-                        "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
+                        "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
                         "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                         "--spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
                         "--spring.datasource.username=sa",

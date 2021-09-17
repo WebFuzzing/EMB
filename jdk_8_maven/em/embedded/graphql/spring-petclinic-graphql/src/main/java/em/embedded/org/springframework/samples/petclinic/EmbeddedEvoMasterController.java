@@ -1,6 +1,5 @@
 package em.embedded.org.springframework.samples.petclinic;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -63,12 +62,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
-        String url = "jdbc:p6spy:postgresql://"+host+":"+port+"/petclinic";
+        String url = "jdbc:postgresql://"+host+":"+port+"/petclinic";
 
         ctx = SpringApplication.run(PetClinicApplication.class, new String[]{
                 "--server.port=0",
                 "--spring.datasource.url=" + url,
-                "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "--spring.cache.type=none",
                 "--spring.profiles.active=postgresql,spring-data-jpa",
                 "--spring.jmx.enabled=false",

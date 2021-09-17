@@ -19,12 +19,10 @@ logging:
     - type: console
 
 database:
-#  driverClass: org.h2.Driver
-  driverClass: com.p6spy.engine.spy.P6SpyDriver
+  driverClass: org.h2.Driver
   user: sa
   password:
-#  url: jdbc:h2:mem:integrationtest
-  url: HAS_TO_BE_REPLACED
+  url: jdbc:h2:mem:integrationtest
   logValidationErrors: true
   properties:
     charSet: UTF-8

@@ -1,6 +1,5 @@
 package em.external.org.springframework.samples.petclinic;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -9,13 +8,11 @@ import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
-import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -99,7 +96,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         return new String[]{
                 "-Dspring.datasource.url=" + dbUrl(true),
-                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
                 "-Dspring.cache.type=none",
                 "-Dspring.profiles.active=postgresql,spring-data-jpa",
                 "-Dspring.jmx.enabled=false",
@@ -112,9 +108,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         int port = postgres.getMappedPort(5432);
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":postgresql://"+host+":"+port+"/petclinic";
 
         return url;
