@@ -47,12 +47,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--
-            When upgrading this property, remember to manually update the
-            evomaster-client-database-spy
-            in all the SUTs using a database.
-            Also need to update same variable in dist.py
-        -->
         <evomaster-version>1.2.2-SNAPSHOT</evomaster-version>
     </properties>
 
