@@ -1,6 +1,5 @@
 package em.external.patio;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -94,8 +93,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getInputParameters() {
         return new String[]{
                 "-micronaut.server.port="+sutPort,
-                "-datasources.default.url=" + dbUrl(true),
-                "-datasources.default.driverClassName="+ P6SpyDriver.class.getName()
+                "-datasources.default.url=" + dbUrl()
         };
     }
 
@@ -103,15 +101,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new String[]{};
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl() {
 
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":postgresql://"+host+":"+port+"/patio";
 
         return url;
@@ -148,7 +143,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName(getDatabaseDriverName());
-            connection = DriverManager.getConnection(dbUrl(false), "patio", "patio");
+            connection = DriverManager.getConnection(dbUrl(), "patio", "patio");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
