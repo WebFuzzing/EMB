@@ -95,7 +95,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getJVMParameters() {
 
         return new String[]{
-                "-Dspring.datasource.url=" + dbUrl(true),
+                "-Dspring.datasource.url=" + dbUrl(),
                 "-Dspring.cache.type=none",
                 "-Dspring.profiles.active=postgresql,spring-data-jpa",
                 "-Dspring.jmx.enabled=false",

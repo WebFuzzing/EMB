@@ -137,7 +137,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(false), "sa", "");
+            connection = DriverManager.getConnection(dbUrl(), "sa", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
