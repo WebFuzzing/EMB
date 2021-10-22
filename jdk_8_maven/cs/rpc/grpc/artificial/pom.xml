@@ -3,17 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>evomaster-benchmark-cs</artifactId>
+        <artifactId>evomaster-benchmark-cs-rpc-grpc</artifactId>
         <groupId>org.evomaster</groupId>
         <version>1.2.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>evomaster-benchmark-cs-rpc</artifactId>
+    <artifactId>evomaster-benchmark-cs-rpc-grpc-artificial</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>thrift</module>
-        <module>grpc</module>
+        <module>grpc-ncs</module>
     </modules>
+
 
 </project>

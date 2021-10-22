@@ -3,21 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>evomaster-benchmark-cs-rpc-thrift</artifactId>
+        <artifactId>evomaster-benchmark-cs-rpc</artifactId>
         <groupId>org.evomaster</groupId>
         <version>1.2.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>evomaster-benchmark-cs-rpc-thrift-artificial</artifactId>
+    <artifactId>evomaster-benchmark-cs-rpc-grpc</artifactId>
     <packaging>pom</packaging>
-
     <modules>
-        <module>thrift-ncs</module>
+        <module>artificial</module>
     </modules>
 
+
     <properties>
-        <thrift.libthrift.version>0.15.0</thrift.libthrift.version>
+        <io.grpc.version>1.41.0</io.grpc.version>
         <springboot.version>2.5.4</springboot.version>
         <junit.jupiter.version>5.7.2</junit.jupiter.version>
         <java.version>1.8</java.version>
@@ -26,9 +26,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.apache.thrift</groupId>
-                <artifactId>libthrift</artifactId>
-                <version>${thrift.libthrift.version}</version>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-netty-shaded</artifactId>
+                <version>${io.grpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-protobuf</artifactId>
+                <version>${io.grpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-stub</artifactId>
+                <version>${io.grpc.version}</version>
             </dependency>
 
             <dependency>
@@ -75,4 +85,8 @@
             </plugins>
         </pluginManagement>
     </build>
+
+
+
+
 </project>

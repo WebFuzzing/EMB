@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.grpc.ncs.generated";
+
+
+service NcsService {
+  rpc checkTriangle(TriangleRequest) returns (DtoRequest) {}
+
+  rpc bessj(BessjRequest) returns (DtoRequest) {}
+
+  rpc expint(ExpintRequest) returns (DtoRequest) {}
+
+  rpc fisher(FisherRequest) returns (DtoRequest) {}
+
+  rpc gammq(GammqRequest) returns (DtoRequest) {}
+
+  rpc remainder(RemainderRequest) returns (DtoRequest) {}
+}
+
+message ExpintRequest{
+  int32 n = 1;
+  double x = 2;
+}
+
+message FisherRequest{
+  int32  m = 1;
+  int32  n = 2;
+  double x = 3;
+}
+
+message GammqRequest{
+  int32 a = 1;
+  double x = 2;
+}
+
+message RemainderRequest{
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message BessjRequest{
+  int32 n = 1;
+  double x = 2;
+}
+
+message TriangleRequest{
+  int32 a = 1;
+  int32 b = 2;
+  int32 c = 3;
+}
+
+message DtoRequest {
+  int32 resultAsInt = 1;
+  double resultAsDouble = 2;
+}
