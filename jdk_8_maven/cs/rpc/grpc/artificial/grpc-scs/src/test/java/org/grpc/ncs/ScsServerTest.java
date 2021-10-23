@@ -43,7 +43,7 @@ public class ScsServerTest {
     }
 
     @Test
-    public void testTriangle(){
+    public void testCalc(){
         DtoResponse dto = stub.calc(CalcRequest.newBuilder().setOp("plus").setArg1(1).setArg2(2).build());
         assertEquals("3.0", dto.getValue());
     }
