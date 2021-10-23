@@ -5,17 +5,17 @@ option java_package = "org.grpc.ncs.generated";
 
 
 service NcsService {
-  rpc checkTriangle(TriangleRequest) returns (DtoRequest) {}
+  rpc checkTriangle(TriangleRequest) returns (DtoResponse) {}
 
-  rpc bessj(BessjRequest) returns (DtoRequest) {}
+  rpc bessj(BessjRequest) returns (DtoResponse) {}
 
-  rpc expint(ExpintRequest) returns (DtoRequest) {}
+  rpc expint(ExpintRequest) returns (DtoResponse) {}
 
-  rpc fisher(FisherRequest) returns (DtoRequest) {}
+  rpc fisher(FisherRequest) returns (DtoResponse) {}
 
-  rpc gammq(GammqRequest) returns (DtoRequest) {}
+  rpc gammq(GammqRequest) returns (DtoResponse) {}
 
-  rpc remainder(RemainderRequest) returns (DtoRequest) {}
+  rpc remainder(RemainderRequest) returns (DtoResponse) {}
 }
 
 message ExpintRequest{
@@ -50,7 +50,7 @@ message TriangleRequest{
   int32 c = 3;
 }
 
-message DtoRequest {
+message DtoResponse {
   int32 resultAsInt = 1;
   double resultAsDouble = 2;
 }

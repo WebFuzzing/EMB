@@ -38,7 +38,7 @@ public class NcsApplicationTest {
     }
 
     @Test
-    public void testbessj() throws Exception {
+    public void testTriangle() throws Exception {
         Dto dto = client.checkTriangle(3, 4,5);
         assertEquals(1, dto.resultAsInt);
     }
