@@ -65,6 +65,12 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * Library (not-known license), from [https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI](https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI)
 
+### RPC (Thrift/gRPC): Java
+
+* NCS (not-known license, artificial numerical examples coming from different sources)
+
+* SCS (not-known license, artificial string examples coming from different sources)
+
 
 ## Build The Systems
 
