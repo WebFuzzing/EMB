@@ -182,3 +182,4 @@ dotnet_3/cs/rest/Menu.API/Menu.API/packages.lock.json
 *.sln.DotSettings.user
 /jdk_8_maven/cs/rpc/thrift/artificial/ncs/target/
 /jdk_8_maven/cs/rpc/grpc/artificial/grpc-ncs/target/
+/jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs/target/

@@ -2,9 +2,10 @@ package org.grpc.ncs;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.grpc.ncs.generated.DtoResponse;
-import org.grpc.ncs.generated.NcsServiceGrpc;
-import org.grpc.ncs.generated.TriangleRequest;
+import org.grpc.scs.ScsServer;
+import org.grpc.scs.generated.CalcRequest;
+import org.grpc.scs.generated.DtoResponse;
+import org.grpc.scs.generated.ScsServiceGrpc;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,23 +17,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * created by manzhang on 2021/10/23
  */
-public class NcsServerTest {
+public class ScsServerTest {
 
-    NcsServer server;
+    ScsServer server;
 
     final int port = 9090;
 
     ManagedChannel channel;
-    NcsServiceGrpc.NcsServiceBlockingStub stub;
+    ScsServiceGrpc.ScsServiceBlockingStub stub;
 
 
     @BeforeEach
     public void start() throws IOException {
-        server = new NcsServer(port);
+        server = new ScsServer(port);
         server.start();
 
         channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
-        stub = NcsServiceGrpc.newBlockingStub(channel);
+        stub = ScsServiceGrpc.newBlockingStub(channel);
     }
 
     @AfterEach
@@ -43,8 +44,8 @@ public class NcsServerTest {
 
     @Test
     public void testTriangle(){
-        DtoResponse dto = stub.checkTriangle(TriangleRequest.newBuilder().setA(3).setB(4).setC(5).build());
-        assertEquals(1, dto.getResultAsInt());
+        DtoResponse dto = stub.calc(CalcRequest.newBuilder().setOp("plus").setArg1(1).setArg2(2).build());
+        assertEquals("3.0", dto.getValue());
     }
 
 
