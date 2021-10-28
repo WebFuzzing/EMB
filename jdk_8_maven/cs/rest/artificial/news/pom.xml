@@ -42,11 +42,7 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.evomaster</groupId>
-            <artifactId>evomaster-client-database-spy</artifactId>
-            <version>${evomaster-version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

@@ -1,7 +1,6 @@
 package em.embedded.org.javiermf.features;
 
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
@@ -16,7 +15,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -56,8 +54,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         ctx = SpringApplication.run(Application.class, new String[]{
                 "--server.port=0",
-                "--spring.datasource.url=jdbc:p6spy:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
-                "--spring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
+                "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
                 "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "--spring.datasource.username=sa",
                 "--spring.datasource.password"

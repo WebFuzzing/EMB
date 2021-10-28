@@ -21,12 +21,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.evomaster</groupId>
-            <artifactId>evomaster-client-database-spy</artifactId>
-            <version>${evomaster-version}</version>
-        </dependency>
-        
-        <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jetty</artifactId>
             <version>${dropwizard.version}</version>
