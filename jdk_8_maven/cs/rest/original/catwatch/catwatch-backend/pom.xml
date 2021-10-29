@@ -12,9 +12,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <evomaster-version>1.2.2-SNAPSHOT</evomaster-version>
-    </properties>
+
 
     <dependencies>
 

@@ -26,8 +26,6 @@
         <spring-data-jdbc.version>1.2.1.RELEASE</spring-data-jdbc.version>
 		<cobertura.version>2.7</cobertura.version>
 
-        <evomaster-version>1.2.2-SNAPSHOT</evomaster-version>
-
 	</properties>
 
 	<!-- repository for springfox plugin -->

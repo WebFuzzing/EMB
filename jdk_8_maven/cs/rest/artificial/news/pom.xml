@@ -36,10 +36,6 @@
         </plugins>
     </build>
 
-    <properties>
-        <evomaster-version>1.2.2-SNAPSHOT</evomaster-version>
-    </properties>
-
     <dependencies>
 
 

@@ -65,16 +65,9 @@ def replaceInKotlinGradle(file):
     replacement = "val EVOMASTER_VERSION = \""+version+"\"\n"
     replace(file, regex, replacement)
 
-# TODO these will be removed once we get rid off of P6Spy
+
 replaceInPom("jdk_8_maven/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/scout-api/api/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/catwatch/catwatch-backend/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/artificial/news/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/features-service/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/proxyprint/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest-gui/ocvn/web/pom.xml")
-replaceInPom("jdk_8_maven/cs/graphql/spring-petclinic-graphql/pom.xml")
-replaceInProperty("jdk_11_gradle/cs/graphql/patio-api/gradle.properties")
+
 
 # is there any easier way for Gradle?
 replaceInKotlinGradle("jdk_11_gradle/em/embedded/graphql/patio-api/build.gradle.kts")
@@ -89,6 +82,7 @@ env_vars = os.environ.copy()
 env_vars["JAVA_HOME"] = JAVA_HOME_8
 
 
+# Note: this will change version in sub-modules only if those have the same groupId. So the ones in CS are unaffected
 mvnres = run(["mvn", "versions:set", "-DnewVersion="+version], shell=SHELL, cwd=PROJ_LOCATION+"/jdk_8_maven", env=env_vars)
 mvnres = mvnres.returncode
 
