@@ -13,6 +13,7 @@
 
 
     <modules>
+        <module>cwa-verification</module>
     </modules>
 
 </project>
