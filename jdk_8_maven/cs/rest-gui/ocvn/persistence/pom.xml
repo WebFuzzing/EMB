@@ -22,6 +22,7 @@
         <jadira.usertype.version>5.0.0.GA</jadira.usertype.version>
         <ehcache.version>2.6.11</ehcache.version>
         <dozer.hibernate.model.version>0.3.5-06032016</dozer.hibernate.model.version>
+<!--        <dozer.hibernate.model.version>0.3.7-SNAPSHOT</dozer.hibernate.model.version>-->
     </properties>
 
     <parent>
@@ -137,11 +138,24 @@
             <artifactId>hibernate-jpamodelgen</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>dozer-hibernate-model</groupId>-->
+<!--            <artifactId>dozer-hibernate-model</artifactId>-->
+<!--            <version>${dozer.hibernate.model.version}</version>-->
+<!--        </dependency>-->
+
+        <!--
+            dozer-hibernate-model is not accessible now (https://github.com/DriesSchulten/dozer-model),
+            then we use the local jar instead of downloading it from remote repository
+        -->
         <dependency>
-            <groupId>dozer-hibernate-model</groupId>
+            <groupId>nl.dries.wicket.hibernate</groupId>
             <artifactId>dozer-hibernate-model</artifactId>
             <version>${dozer.hibernate.model.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/dozer-hibernate-model-0.3.5-06032016.jar</systemPath>
         </dependency>
+
 
         <dependency>
             <groupId>org.apache.derby</groupId>

@@ -96,8 +96,6 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-all:1.3"
 
     fixtures 'org.postgresql:postgresql:42.2.5'
-
-    compile "org.evomaster:evomaster-client-database-spy:"+EVOMASTER_VERSION
 }
 
 shadowJar {

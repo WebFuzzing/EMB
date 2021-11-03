@@ -1,6 +1,5 @@
 package em.embedded.patio;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.runtime.Micronaut;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -69,12 +68,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
-        String url = "jdbc:p6spy:postgresql://"+host+":"+port+"/patio";
+        String url = "jdbc:postgresql://"+host+":"+port+"/patio";
 
         ctx = Micronaut.run(Application.class, new String[]{
                 "-micronaut.server.port="+portApp,
-                "-datasources.default.url=" + url,
-                "-datasources.default.driverClassName="+ P6SpyDriver.class.getName()
+                "-datasources.default.url=" + url
         });
 
 

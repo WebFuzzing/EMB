@@ -21,17 +21,11 @@
         <querydsl.version>3.7.2</querydsl.version>
         <!--<swaggerjersey.version>1.5.8</swaggerjersey.version>-->
         <swaggerjersey.version>1.5.12</swaggerjersey.version>
-        <evomaster-version>1.2.2-SNAPSHOT</evomaster-version>
     </properties>
 
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.evomaster</groupId>
-            <artifactId>evomaster-client-database-spy</artifactId>
-            <version>${evomaster-version}</version>
-        </dependency>
 
 
         <dependency>

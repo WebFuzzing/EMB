@@ -1,6 +1,5 @@
 package em.external.org.ind0;
 
-import com.p6spy.engine.spy.P6SpyDriver;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -108,8 +107,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getJVMParameters() {
 
         return new String[]{
-                "-Dspring.datasource.url=" + dbUrl(true),
-                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
+                "-Dspring.datasource.url=" + dbUrl(),
                 "-Dspring.datasource.username=postgres",
                 "-Dspring.datasource.password",
                 "-Dspring.jpa.show-sql=false",
@@ -119,15 +117,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         };
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":postgresql://"+host+":"+port+"/postgres?currentSchema=comments";
 
         return url;
@@ -164,7 +159,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName(getDatabaseDriverName());
-            connection = DriverManager.getConnection(dbUrl(false), "postgres", "");
+            connection = DriverManager.getConnection(dbUrl(), "postgres", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
