@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Class used to start/stop the SUT. This will be controller by the EvoMaster process
@@ -104,9 +105,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public ProblemInfo getProblemInfo() {
+
+        String schema = new Scanner(EmbeddedEvoMasterController.class.getResourceAsStream("/api-docs.json"), "UTF-8").useDelimiter("\\A").next();
+
         return new RestProblem(
-                "http://localhost:" + getSutPort() + "/api/docs",
-                null
+                null, //"http://localhost:" + getSutPort() + "/api/docs",
+                null,
+                schema
         );
     }
 
