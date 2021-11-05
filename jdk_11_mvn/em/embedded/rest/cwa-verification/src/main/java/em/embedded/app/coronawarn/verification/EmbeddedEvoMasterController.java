@@ -55,7 +55,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         ctx = SpringApplication.run(VerificationApplication.class, new String[]{
                 "--server.port=0",
-                "--spring.profiles.active=local"
+                "--spring.profiles.active=local,external",
+                "--management.server.port=-1",
+                "--server.ssl.enabled=false",
+                "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;"
         });
 
         if (connection != null) {
@@ -100,7 +103,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection);
+        DbCleaner.clearDatabase_H2(connection, List.of("DATABASECHANGELOG"));
     }
 
     @Override
