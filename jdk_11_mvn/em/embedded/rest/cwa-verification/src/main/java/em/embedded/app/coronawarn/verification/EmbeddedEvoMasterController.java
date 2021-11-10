@@ -55,7 +55,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         ctx = SpringApplication.run(VerificationApplication.class, new String[]{
                 "--server.port=0",
-                "--spring.profiles.active=local,external",
+                "--spring.profiles.active=local,external,internal",
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
                 "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;"

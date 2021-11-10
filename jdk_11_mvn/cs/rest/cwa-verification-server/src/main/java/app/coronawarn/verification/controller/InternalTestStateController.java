@@ -37,7 +37,8 @@ import org.springframework.web.context.request.async.DeferredResult;
 @RestController
 @RequestMapping("/version/v1")
 @Validated
-@Profile("internal")
+//@Profile("internal")
+@Profile("REMOVED_DUE_TO_CONFLICTS")
 public class InternalTestStateController {
 
   /**
