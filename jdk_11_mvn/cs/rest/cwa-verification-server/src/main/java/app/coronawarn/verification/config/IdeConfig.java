@@ -1,14 +1,13 @@
 package app.coronawarn.verification.config;
 
+import java.util.Properties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Properties;
-
 /**
- * Needed to able to run from an IDE, otherwise OpenApiConfig crashes
+ * Needed to able to run from an IDE, otherwise OpenApiConfig crashes.
  */
 @Configuration
 public class IdeConfig {
