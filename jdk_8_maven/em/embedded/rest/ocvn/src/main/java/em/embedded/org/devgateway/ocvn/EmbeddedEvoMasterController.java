@@ -72,6 +72,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 new String[]{"--server.port=0",
                         "--liquibase.enabled=false",
                         "--spring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
+                        "--spring.datasource.driver-class-name=org.h2.Driver",
                         "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
                         "--spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                         "--spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
@@ -146,10 +147,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return connection;
     }
 
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.h2.Driver";
-    }
+
 
     @Override
     public ProblemInfo getProblemInfo() {
