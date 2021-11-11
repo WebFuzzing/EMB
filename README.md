@@ -46,6 +46,7 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
 
+* CWA-Verification-Server (Apache), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
 
 ### REST: JavaScript/TypeScript
 
