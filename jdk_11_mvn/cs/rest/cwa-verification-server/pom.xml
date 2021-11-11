@@ -277,6 +277,10 @@
               <goal>repackage</goal>
               <goal>build-info</goal>
             </goals>
+            <configuration>
+              <finalName>cwa-verification</finalName>
+              <classifier>sut</classifier>
+            </configuration>
           </execution>
         </executions>
       </plugin>
