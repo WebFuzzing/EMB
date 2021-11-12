@@ -38,7 +38,7 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Main-Class>em.embedded.app.coronawarn.verification.ExternalEvoMasterController
+                                        <Main-Class>em.external.app.coronawarn.verification.ExternalEvoMasterController
                                         </Main-Class>
                                         <Premain-Class>org.evomaster.client.java.instrumentation.InstrumentingAgent
                                         </Premain-Class>
