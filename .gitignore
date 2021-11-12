@@ -169,6 +169,7 @@ hs_err_pid*
 [Dd]ebug/
 [Bb]in/
 [Oo]bj/
+bin-temp/
 logs/
 *.dll
 dotnet_3/*/Properties/
