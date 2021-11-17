@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>evomaster-benchmark-cs-rpc-grpc</artifactId>
+    <artifactId>evomaster-benchmark-cs-rpc-dubbo</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>artificial</module>
