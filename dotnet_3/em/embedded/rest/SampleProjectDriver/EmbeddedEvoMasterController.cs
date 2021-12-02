@@ -10,7 +10,7 @@ using EvoMaster.DatabaseController;
 using EvoMaster.DatabaseController.Abstractions;
 using Microsoft.Data.SqlClient;
 
-namespace SampleProject
+namespace SampleProjectDriver
 {
     public class EmbeddedEvoMasterController : EmbeddedSutController
     {
@@ -34,7 +34,7 @@ namespace SampleProject
 
         public override List<AuthenticationDto> GetInfoForAuthentication() => null;
 
-        public override string GetPackagePrefixesToCover() => "SampleProject.API";
+        public override string GetPackagePrefixesToCover() => "SampleProjectDriver.API";
 
         public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 
@@ -67,7 +67,7 @@ namespace SampleProject
 
                 _connection = dbConnection as SqlConnection;
 
-                API.Program.Main(new[] {ephemeralPort.ToString(), connectionString});
+                SampleProject.API.Program.Main(new[] {ephemeralPort.ToString(), connectionString});
             });
 
             WaitUntilSutIsRunning(ephemeralPort, timeout);
@@ -81,7 +81,7 @@ namespace SampleProject
 
         public override void StopSut()
         {
-            API.Program.Shutdown();
+            SampleProject.API.Program.Shutdown();
             _databaseController.Stop();
             _isSutRunning = false;
         }
