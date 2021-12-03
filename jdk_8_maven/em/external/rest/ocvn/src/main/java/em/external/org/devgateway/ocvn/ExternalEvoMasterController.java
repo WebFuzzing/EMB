@@ -106,6 +106,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Dliquibase.enabled=false",
                 "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
                 "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.driver-class-name=org.h2.Driver",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
                 "-Dspring.datasource.username=sa",

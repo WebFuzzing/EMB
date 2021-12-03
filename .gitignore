@@ -135,6 +135,10 @@ hs_err_pid*
 /jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/src/main/em/
 /jdk_8_maven/em/external/graphql/spring-petclinic-graphql/src/main/em/
 
+/jdk_11_maven/temp
+/jdk_11_maven/cs/rest/cwa-verification-server/target
+/jdk_11_maven/em/embedded/rest/cwa-verification/target
+/jdk_11_maven/em/external/rest/cwa-verification/target
 
 /jdk_11_gradle/.gradle
 /jdk_11_gradle/cs/graphql/patio-api/build

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-EVOMASTER_VERSION = "1.2.2-SNAPSHOT"
+EVOMASTER_VERSION = "1.3.1-SNAPSHOT"
 
 import os
 import shutil
@@ -41,13 +41,9 @@ if os.path.exists(dist):
 os.mkdir(dist)
 
 
-
-### Building Maven JDK 8 projects ###
-def buildJDK_8() :
-
+def callMaven(folder, jdk_home):
     env_vars = os.environ.copy()
-    env_vars["JAVA_HOME"] = JAVA_HOME_8
-    folder = "jdk_8_maven"
+    env_vars["JAVA_HOME"] = jdk_home
 
     mvnres = run(["mvn", "clean", "install", "-DskipTests"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
     mvnres = mvnres.returncode
@@ -56,6 +52,11 @@ def buildJDK_8() :
         print("\nERROR: Maven command failed")
         exit(1)
 
+### Building Maven JDK 8 projects ###
+def build_jdk_8_maven() :
+
+    folder = "jdk_8_maven"
+    callMaven(folder, JAVA_HOME_8)
 
     # Copy JAR files
     copy(folder+"/cs/rest/original/features-service/target/features-service-sut.jar", dist)
@@ -103,6 +104,16 @@ def buildJDK_8() :
 
 
 ####################
+def build_jdk_11_maven() :
+
+    folder = "jdk_11_maven"
+    callMaven(folder, JAVA_HOME_11)
+
+    copy(folder+"/cs/rest/cwa-verification-server/target/cwa-verification-sut.jar", dist)
+    copy(folder+"/em/external/rest/cwa-verification/target/cwa-verification-evomaster-runner.jar", dist)
+
+
+####################
 def build_jdk_11_gradle() :
 
     env_vars = os.environ.copy()
@@ -142,9 +153,6 @@ def buildJS(path, name):
 
 
 
-
-
-
 ### Due to the insanity of node_modules, those are off by default
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","ncs")), "ncs")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","scs")), "scs")
@@ -152,8 +160,8 @@ def buildJS(path, name):
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","disease-sh-api")), "disease-sh-api")
 
 
-buildJDK_8()
-
+build_jdk_8_maven()
+build_jdk_11_maven()
 build_jdk_11_gradle()
 
 ### TODO .Net
