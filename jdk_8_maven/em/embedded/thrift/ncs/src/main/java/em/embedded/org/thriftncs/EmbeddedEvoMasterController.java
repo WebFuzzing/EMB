@@ -1,5 +1,10 @@
 package em.embedded.org.thriftncs;
 
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.THttpClient;
+import org.apache.thrift.transport.TTransport;
+import org.apache.thrift.transport.TTransportException;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -9,9 +14,11 @@ import org.evomaster.client.java.controller.problem.RPCProblem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.thrift.ncs.NcsApplication;
+import org.thrift.ncs.NcsService;
 
 import java.sql.Connection;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +49,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     private ConfigurableApplicationContext ctx;
+    private NcsService.Client client;
 
     @Override
     public boolean isSutRunning() {
@@ -66,8 +74,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public ProblemInfo getProblemInfo() {
-        return new RPCProblem(Arrays.asList("org.thrift.ncs.NcsService$Iface"));
 
+        return new RPCProblem(new HashMap<String, Object>() {{
+            put("org.thrift.ncs.NcsService$Iface", client);
+        }});
     }
 
     @Override
@@ -82,8 +92,18 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--server.port=0"
         });
 
+        String url = "http://localhost:"+getSutPort()+"/ncs";
 
-        return "http://localhost:" + getSutPort();
+        try {
+            // init client
+            TTransport transport = new THttpClient(url);
+            TProtocol protocol = new TBinaryProtocol(transport);
+            client = new NcsService.Client(protocol);
+        } catch (TTransportException e) {
+            e.printStackTrace();
+        }
+
+        return url;
     }
 
     protected int getSutPort() {
