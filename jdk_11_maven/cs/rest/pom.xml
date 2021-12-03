@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.evomaster</groupId>
         <artifactId>evomaster-benchmark-jdk11-cs</artifactId>
-        <version>1.2.2-SNAPSHOT</version>
+        <version>1.3.0</version>
     </parent>
 
     <artifactId>evomaster-benchmark-jdk11-cs-rest</artifactId>

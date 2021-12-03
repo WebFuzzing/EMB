@@ -9,7 +9,7 @@
         To change version in all modules, use:
         mvn versions:set -DnewVersion=a.b.c
      -->
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.3.0</version>
 
     <inceptionYear>2017</inceptionYear>
     <name>EvoMaster Benchmark (EMB)</name>
@@ -47,7 +47,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <evomaster-version>1.2.2-SNAPSHOT</evomaster-version>
+        <evomaster-version>1.3.0</evomaster-version>
     </properties>
 
     <build>
