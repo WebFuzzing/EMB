@@ -1,4 +1,4 @@
-package em.embedded.org.thriftncs;
+package em.embedded.org.thriftscs;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -13,11 +13,10 @@ import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RPCProblem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.thrift.ncs.NcsApplication;
-import org.thrift.ncs.NcsService;
+import org.thrift.scs.ScsApplication;
+import org.thrift.scs.ScsService;
 
 import java.sql.Connection;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +48,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     private ConfigurableApplicationContext ctx;
-    private NcsService.Client client;
+    private ScsService.Client client;
 
     @Override
     public boolean isSutRunning() {
@@ -59,7 +58,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "org.thrift.ncs";
+        return "org.thrift.scs";
     }
 
     @Override
@@ -76,7 +75,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public ProblemInfo getProblemInfo() {
 
         return new RPCProblem(new HashMap<String, Object>() {{
-            put(NcsService.Iface.class.getName(), client);
+            put(ScsService.Iface.class.getName(), client);
         }});
     }
 
@@ -88,17 +87,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String startSut() {
 
-        ctx = SpringApplication.run(NcsApplication.class, new String[]{
+        ctx = SpringApplication.run(ScsApplication.class, new String[]{
                 "--server.port=0"
         });
 
-        String url = "http://localhost:"+getSutPort()+"/ncs";
+        String url = "http://localhost:"+getSutPort()+"/scs";
 
         try {
             // init client
             TTransport transport = new THttpClient(url);
             TProtocol protocol = new TBinaryProtocol(transport);
-            client = new NcsService.Client(protocol);
+            client = new ScsService.Client(protocol);
         } catch (TTransportException e) {
             e.printStackTrace();
         }
