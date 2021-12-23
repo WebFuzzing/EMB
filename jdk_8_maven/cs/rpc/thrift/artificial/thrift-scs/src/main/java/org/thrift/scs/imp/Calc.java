@@ -15,45 +15,35 @@
 
 package org.thrift.scs.imp;
 
-public class Calc
-{
-	public static String  subject(String op, double arg1 , double arg2 )
-	{
-		op = op.toLowerCase();
-		double result =  0.0;
-		if ("pi".equals(op)) { //CONSTANT OPERATOR
-			result = Math.PI;
-		}
-		else if ("e".equals(op)) {
-			result = Math.E;
-		}       //UNARY OPERATOR 
-		else if ("sqrt".equals(op)) {
-			result = Math.sqrt(arg1);
-		}
-		else if ("log".equals(op)) {
-			result = Math.log(arg1);
-		}
-		else if ("sine".equals(op)) {
-			result = Math.sin(arg1);
-		}
-		else if ("cosine".equals(op)) {
-			result = Math.cos(arg1);
-		}
-		else if ("tangent".equals(op)) {
-			result = Math.tan(arg1);
-		}      //BINARY OPERATOR 
-		else if ("plus".equals(op)) {
-			result = arg1 + arg2;
-		}
-		else if ("subtract".equals(op)) {
-			result = arg1 - arg2;
-		}
-		else if ("multiply".equals(op)) {
-			result = arg1 * arg2;
-		}
-		else if ("divide".equals(op)) {
-			result = arg1 / arg2;
-		}
-		return "" + result;
-	}
+public class Calc {
+    public static String subject(String op, double arg1, double arg2) {
+        op = op.toLowerCase();
+        double result = 0.0;
+        if ("pi".equals(op)) { //CONSTANT OPERATOR
+            result = Math.PI;
+        } else if ("e".equals(op)) {
+            result = Math.E;
+        }       //UNARY OPERATOR
+        else if ("sqrt".equals(op)) {
+            result = Math.sqrt(arg1);
+        } else if ("log".equals(op)) {
+            result = Math.log(arg1);
+        } else if ("sine".equals(op)) {
+            result = Math.sin(arg1);
+        } else if ("cosine".equals(op)) {
+            result = Math.cos(arg1);
+        } else if ("tangent".equals(op)) {
+            result = Math.tan(arg1);
+        }      //BINARY OPERATOR
+        else if ("plus".equals(op)) {
+            result = arg1 + arg2;
+        } else if ("subtract".equals(op)) {
+            result = arg1 - arg2;
+        } else if ("multiply".equals(op)) {
+            result = arg1 * arg2;
+        } else if ("divide".equals(op)) {
+            result = arg1 / arg2;
+        }
+        return "" + result;
+    }
 }

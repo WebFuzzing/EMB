@@ -13,39 +13,35 @@
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
 package org.thrift.scs.imp;
 
-public class Text2Txt
-{
+public class Text2Txt {
 
-	public static String  subject(String word1 , String word2 , String word3 )
-	{
-		//CONVERT ENGLISH TEXT txt INTO MOBILE TELEPHONE TXT
-		//BY SUBSTITUTING ABBREVIATIONS FOR COMMON WORDS
-		word1 = word1.toLowerCase();
-		word2 = word2.toLowerCase();
-		word3 = word3.toLowerCase();
-		String result  = "";
-		if (word1.equals("two")) {
-			result = "2";
-		}
-		if (word1.equals("for") || word1.equals("four")) {
-			result = "4";
-		}
-		if (word1.equals("you")) {
-			result = "u";
-		}
-		if (word1.equals("and")) {
-			result = "n";
-		}
-		if (word1.equals("are")) {
-			result = "r";
-		}
-		else if (word1.equals("see") && word2.equals("you")) {
-			result = "cu";
-		}
-		else if (word1.equals("by") && word2.equals("the") && word3.equals("way")) {
-			result = "btw";
-		}
-		return result;
-	}
+    public static String subject(String word1, String word2, String word3) {
+        //CONVERT ENGLISH TEXT txt INTO MOBILE TELEPHONE TXT
+        //BY SUBSTITUTING ABBREVIATIONS FOR COMMON WORDS
+        word1 = word1.toLowerCase();
+        word2 = word2.toLowerCase();
+        word3 = word3.toLowerCase();
+        String result = "";
+        if (word1.equals("two")) {
+            result = "2";
+        }
+        if (word1.equals("for") || word1.equals("four")) {
+            result = "4";
+        }
+        if (word1.equals("you")) {
+            result = "u";
+        }
+        if (word1.equals("and")) {
+            result = "n";
+        }
+        if (word1.equals("are")) {
+            result = "r";
+        } else if (word1.equals("see") && word2.equals("you")) {
+            result = "cu";
+        } else if (word1.equals("by") && word2.equals("the") && word3.equals("way")) {
+            result = "btw";
+        }
+        return result;
+    }
 
 }

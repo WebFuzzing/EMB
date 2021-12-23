@@ -5,7 +5,7 @@
 //! totalpopsize = 100    //TOTAL SIZE OF POPULATIONS 
 //! mutationpercent = 50  //REL FREQUENCY OF GENETIC MUTATION TO CROSSOVER
 //! samefitcountmax = 100 //NUMBER OF CONSECUTIVE TESTS IN A POP 
-                          //THAT MUST HAVE THE SAME COST FOR POP TO BE STAGNANT
+//THAT MUST HAVE THE SAME COST FOR POP TO BE STAGNANT
 //! verbose = false        //PRINT MESSAGES SHOWING PROGRESS OF SEARCH
 //! showevery = 3000      //NUMBER OF CANDIDATE INPUTS GENERATED BETWEEN EACH SHOW
 //! numbins = 0           //GRANULARITY OF CANDIDATE INPUT HISTOGRAM, SET TO 0 TO NOT COLLECT STATS
@@ -14,45 +14,41 @@
 
 package org.thrift.scs.imp;
 
-public class Title
-{
-  
-  public static String  subject(String sex, String title)
-  {
-  //CHECK PERSONAL TITLE CONSISTENT WITH SEX
-    sex = sex.toLowerCase();
-	title = title.toLowerCase();
-    int result  = -1;
-		if ("male".equals(sex)) {
-			if ("mr".equals(title) || 
-					"dr".equals(title) ||
-					"sir".equals(title) ||
-					"rev".equals(title) ||
-					"rthon".equals(title) ||
-					"prof".equals(title)) {
-        result = 1;
-      }
-	  }
-		else if ("female".equals(sex)) {
-			if ("mrs".equals(title) || 
-					"miss".equals(title) ||
-					"ms".equals(title) ||
-					"dr".equals(title) ||
-					"lady".equals(title) ||
-					"rev".equals(title) ||
-					"rthon".equals(title) ||
-					"prof".equals(title)){
-        result = 0;
-      }
-	  }
-		else if ("none".equals(sex)) {
-			if ("dr".equals(title) ||
-					"rev".equals(title) ||
-					"rthon".equals(title) ||
-					"prof".equals(title)){
-        result = 2;
-      }
-	  }
-    return "" + result;
-  }
+public class Title {
+
+    public static String subject(String sex, String title) {
+        //CHECK PERSONAL TITLE CONSISTENT WITH SEX
+        sex = sex.toLowerCase();
+        title = title.toLowerCase();
+        int result = -1;
+        if ("male".equals(sex)) {
+            if ("mr".equals(title) ||
+                    "dr".equals(title) ||
+                    "sir".equals(title) ||
+                    "rev".equals(title) ||
+                    "rthon".equals(title) ||
+                    "prof".equals(title)) {
+                result = 1;
+            }
+        } else if ("female".equals(sex)) {
+            if ("mrs".equals(title) ||
+                    "miss".equals(title) ||
+                    "ms".equals(title) ||
+                    "dr".equals(title) ||
+                    "lady".equals(title) ||
+                    "rev".equals(title) ||
+                    "rthon".equals(title) ||
+                    "prof".equals(title)) {
+                result = 0;
+            }
+        } else if ("none".equals(sex)) {
+            if ("dr".equals(title) ||
+                    "rev".equals(title) ||
+                    "rthon".equals(title) ||
+                    "prof".equals(title)) {
+                result = 2;
+            }
+        }
+        return "" + result;
+    }
 }

@@ -15,31 +15,29 @@
 
 package org.thrift.scs.imp;
 
-public class NotyPevar
-{
-	//SHOW USE OF UNTYPED VARIABLES
-	public static String  subject(int i,  String s )
-	{
-		int x;
-		int y;
-		int result  = 0;
-		x = i;
-		y = x;
-		if (x + y == 56) {     //i0
-			result = x;
-		}
-		String xs = "hello";
-		if ((xs + y).equals("hello7")) {   //i1
-			result = 1;
-		}
-		if (xs.compareTo(s)   < 0) {  //i2
-			result = 2;
-		}
-		x = 5;
-		if (y > x) {    //i3
-			result = 3;
-		}
-		return "" + result;
-	}
+public class NotyPevar {
+    //SHOW USE OF UNTYPED VARIABLES
+    public static String subject(int i, String s) {
+        int x;
+        int y;
+        int result = 0;
+        x = i;
+        y = x;
+        if (x + y == 56) {     //i0
+            result = x;
+        }
+        String xs = "hello";
+        if ((xs + y).equals("hello7")) {   //i1
+            result = 1;
+        }
+        if (xs.compareTo(s) < 0) {  //i2
+            result = 2;
+        }
+        x = 5;
+        if (y > x) {    //i3
+            result = 3;
+        }
+        return "" + result;
+    }
 }
 

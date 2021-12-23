@@ -13,23 +13,20 @@
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
 package org.thrift.scs.imp;
 
-public class Ordered4
-{
+public class Ordered4 {
 
-	public static String subject(String w,  String x,  String z, String y)
-	{
-		String  result = "unordered";
-		if (w.length() >= 5 && w.length() <= 6 &&  //LIMIT LENGTH TO LIMIT PROB OF RANDOM SATISFACTION
-				x.length() >= 5 && x.length() <= 6 &&
-				y.length() >= 5 && y.length() <= 6 &&
-				z.length() >= 5 && z.length() <= 6) {
-			if (z.compareTo(y) > 0 && y.compareTo(x) > 0 && x.compareTo(w) > 0) {
-				result = "increasing";
-			}
-			else if (w.compareTo(x) > 0 && x.compareTo(y) > 0 && y.compareTo(z) > 0) {
-				result = "decreasing";
-			}
-		}
-		return result;
-	}
+    public static String subject(String w, String x, String z, String y) {
+        String result = "unordered";
+        if (w.length() >= 5 && w.length() <= 6 &&  //LIMIT LENGTH TO LIMIT PROB OF RANDOM SATISFACTION
+                x.length() >= 5 && x.length() <= 6 &&
+                y.length() >= 5 && y.length() <= 6 &&
+                z.length() >= 5 && z.length() <= 6) {
+            if (z.compareTo(y) > 0 && y.compareTo(x) > 0 && x.compareTo(w) > 0) {
+                result = "increasing";
+            } else if (w.compareTo(x) > 0 && x.compareTo(y) > 0 && y.compareTo(z) > 0) {
+                result = "decreasing";
+            }
+        }
+        return result;
+    }
 }

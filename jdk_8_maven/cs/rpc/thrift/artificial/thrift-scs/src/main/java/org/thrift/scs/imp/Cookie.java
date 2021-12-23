@@ -14,29 +14,25 @@
 
 package org.thrift.scs.imp;
 
-public class Cookie
-{
-	public static String subject(String name,  String val, String site)
-	{
-		name = name.toLowerCase();
-		val = val.toLowerCase();
-		site = site.toLowerCase();
-		int result = 0;
-		if ("userid".equals(name)) {
-			if (val.length() > 6) {
-				if ("user".equals(val.substring(0, 4))) {
-					result = 1;
-				}
-			}
-		}
-		else if ("session".equals(name)) {
-			if ("am".equals(val) && "abc.com".equals(site)) {
-				result = 1;
-			}
-			else {
-				result = 2;
-			}
-		}
-		return "" + result;
-	}
+public class Cookie {
+    public static String subject(String name, String val, String site) {
+        name = name.toLowerCase();
+        val = val.toLowerCase();
+        site = site.toLowerCase();
+        int result = 0;
+        if ("userid".equals(name)) {
+            if (val.length() > 6) {
+                if ("user".equals(val.substring(0, 4))) {
+                    result = 1;
+                }
+            }
+        } else if ("session".equals(name)) {
+            if ("am".equals(val) && "abc.com".equals(site)) {
+                result = 1;
+            } else {
+                result = 2;
+            }
+        }
+        return "" + result;
+    }
 }
