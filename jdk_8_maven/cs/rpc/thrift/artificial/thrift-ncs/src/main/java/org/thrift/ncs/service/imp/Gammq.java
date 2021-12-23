@@ -1,4 +1,4 @@
-package org.thrift.ncs.imp;
+package org.thrift.ncs.service.imp;
 public class Gammq {
 	private static final int ITMAX = 100;
 	private static final double EPS = 3.0e-7;

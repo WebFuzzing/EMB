@@ -13,7 +13,7 @@
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
 
 
-package org.thrift.scs.imp;
+package org.thrift.scs.service.imp;
 
 public class DateParse {
     public static String subject(String dayname, String monthname) {

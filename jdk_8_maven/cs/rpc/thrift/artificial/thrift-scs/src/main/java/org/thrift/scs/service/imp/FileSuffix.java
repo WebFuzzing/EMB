@@ -12,7 +12,7 @@
 //! trialfirst = 1        //EACH TRIAL USES A DIFFERENT RANDOM SEED
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
 
-package org.thrift.scs.imp;
+package org.thrift.scs.service.imp;
 
 public class FileSuffix {
     public static String subject(String directory, String file) {

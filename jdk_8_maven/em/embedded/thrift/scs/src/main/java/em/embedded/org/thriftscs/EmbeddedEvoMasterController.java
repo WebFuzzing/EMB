@@ -14,7 +14,7 @@ import org.evomaster.client.java.controller.problem.RPCProblem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.thrift.scs.ScsApplication;
-import org.thrift.scs.ScsService;
+import org.thrift.scs.client.ScsService;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -58,7 +58,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "org.thrift.scs";
+        return "org.thrift.scs.service.";
     }
 
     @Override

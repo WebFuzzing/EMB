@@ -1,8 +1,9 @@
-package org.thrift.scs;
+package org.thrift.scs.service;
 
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
-import org.thrift.scs.imp.*;
+import org.thrift.scs.client.ScsService;
+import org.thrift.scs.service.imp.*;
 
 /**
  * created by manzhang on 2021/10/23

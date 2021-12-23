@@ -11,7 +11,7 @@
 //! numbins = 0           //GRANULARITY OF CANDIDATE INPUT HISTOGRAM, SET TO 0 TO NOT COLLECT STATS
 //! trialfirst = 1        //EACH TRIAL USES A DIFFERENT RANDOM SEED
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
-package org.thrift.scs.imp;
+package org.thrift.scs.service.imp;
 
 public class Text2Txt {
 

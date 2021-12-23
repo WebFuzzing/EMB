@@ -14,10 +14,9 @@ import org.evomaster.client.java.controller.problem.RPCProblem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.thrift.ncs.NcsApplication;
-import org.thrift.ncs.NcsService;
+import org.thrift.ncs.client.NcsService;
 
 import java.sql.Connection;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +58,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "org.thrift.ncs";
+        return "org.thrift.ncs.service.";
     }
 
     @Override

@@ -11,22 +11,28 @@
 //! numbins = 0           //GRANULARITY OF CANDIDATE INPUT HISTOGRAM, SET TO 0 TO NOT COLLECT STATS
 //! trialfirst = 1        //EACH TRIAL USES A DIFFERENT RANDOM SEED
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
-package org.thrift.scs.imp;
 
-public class Ordered4 {
+package org.thrift.scs.service.imp;
 
-    public static String subject(String w, String x, String z, String y) {
-        String result = "unordered";
-        if (w.length() >= 5 && w.length() <= 6 &&  //LIMIT LENGTH TO LIMIT PROB OF RANDOM SATISFACTION
-                x.length() >= 5 && x.length() <= 6 &&
-                y.length() >= 5 && y.length() <= 6 &&
-                z.length() >= 5 && z.length() <= 6) {
-            if (z.compareTo(y) > 0 && y.compareTo(x) > 0 && x.compareTo(w) > 0) {
-                result = "increasing";
-            } else if (w.compareTo(x) > 0 && x.compareTo(y) > 0 && y.compareTo(z) > 0) {
-                result = "decreasing";
+public class Cookie {
+    public static String subject(String name, String val, String site) {
+        name = name.toLowerCase();
+        val = val.toLowerCase();
+        site = site.toLowerCase();
+        int result = 0;
+        if ("userid".equals(name)) {
+            if (val.length() > 6) {
+                if ("user".equals(val.substring(0, 4))) {
+                    result = 1;
+                }
+            }
+        } else if ("session".equals(name)) {
+            if ("am".equals(val) && "abc.com".equals(site)) {
+                result = 1;
+            } else {
+                result = 2;
             }
         }
-        return result;
+        return "" + result;
     }
 }

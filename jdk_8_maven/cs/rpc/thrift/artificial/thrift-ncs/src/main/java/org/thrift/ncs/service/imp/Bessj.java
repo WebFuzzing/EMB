@@ -1,4 +1,4 @@
-package org.thrift.ncs.imp;
+package org.thrift.ncs.service.imp;
 
 public class Bessj {
 

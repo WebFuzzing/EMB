@@ -14,7 +14,7 @@
 //! name = costfuns       //NAME OF EXPT, NOT COMPUTATIONALLY SIGNIFICANT
 
 
-package org.thrift.scs.imp;
+package org.thrift.scs.service.imp;
 
 public class Costfuns {
     public static String subject(int i, String s) {

@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.servlet.Servlet;
+import org.thrift.ncs.client.NcsService;
+import org.thrift.ncs.service.NcsServiceImpl;
 
 
 /**

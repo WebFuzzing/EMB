@@ -13,7 +13,7 @@
 //! triallast = 1         //NUMBER OF TRIALS = triallast - trialfirst + 1
 //! name = calc           //NAME OF EXPT, NOT COMPUTATIONALLY SIGNIFICANT
 
-package org.thrift.scs.imp;
+package org.thrift.scs.service.imp;
 
 public class Calc {
     public static String subject(String op, double arg1, double arg2) {

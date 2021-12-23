@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.thrift.ncs.client.NcsService;
+import org.thrift.ncs.service.Dto;
 
 /**
  * created by manzhang on 2021/10/21
