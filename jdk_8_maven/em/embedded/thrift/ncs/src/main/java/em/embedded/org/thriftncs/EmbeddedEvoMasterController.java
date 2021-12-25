@@ -49,6 +49,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private NcsService.Client client;
+    private TTransport transport;
+    private TProtocol protocol;
 
     @Override
     public boolean isSutRunning() {
@@ -95,8 +97,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         try {
             // init client
-            TTransport transport = new THttpClient(url);
-            TProtocol protocol = new TBinaryProtocol(transport);
+            transport = new THttpClient(url);
+            protocol = new TBinaryProtocol(transport);
             client = new NcsService.Client(protocol);
         } catch (TTransportException e) {
             e.printStackTrace();
@@ -114,6 +116,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void stopSut() {
+        transport.close();
         ctx.stop();
     }
 

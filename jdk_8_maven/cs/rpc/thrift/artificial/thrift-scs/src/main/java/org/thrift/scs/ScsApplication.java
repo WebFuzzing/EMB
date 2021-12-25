@@ -29,7 +29,7 @@ public class ScsApplication {
     }
 
     @Bean
-    public ServletRegistrationBean ncsServlet(TProtocolFactory protocolFactory, ScsServiceImpl service) {
+    public ServletRegistrationBean scsServlet(TProtocolFactory protocolFactory, ScsServiceImpl service) {
         TServlet tServlet =  new TServlet(new ScsService.Processor<>(service), protocolFactory);
         return new ServletRegistrationBean(tServlet, "/scs");
     }
