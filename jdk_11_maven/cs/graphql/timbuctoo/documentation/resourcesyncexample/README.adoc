@@ -1,0 +1,24 @@
+= Resource sync example server
+
+== Background
+Timbuctoo should be able to import RDF-data (n-quads) provided by a resource sync server.
+To be able to test this functionality.
+
+== How to use
+//tag::startup[]
+Simply run `docker-compose up` and the service will start at localhost port 80 (default http port).
+//end:startup[]
+Open the uri `http://localhost/.well-known/resourcesync` to list the resource sync files.
+
+== Contents of this example server
+
+According to the resource sync spec we placed the source description (`sourcedescription.xml`) in the `./well-known/resourcesync` folder.
+This source description sums up the available.
+
+Another option is `robots.txt` that points to the resource list of `dataset1`.
+
+The third option is to use an html or a response with a link to the capability list of a data set.
+And example of this is `html_with_link.html` in teh folder of `dataset2`.
+
+For more information see: http://www.openarchives.org/rs/1.0/resourcesync#FrameworkOrg
+

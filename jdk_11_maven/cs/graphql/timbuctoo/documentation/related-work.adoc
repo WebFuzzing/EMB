@@ -1,0 +1,54 @@
+== Related work
+Some things that timbuctoo will not do, and that you can use other software for:
+
+ - present the data in a faceted search (for this we're building a different tool that subscribes to timbuctoo's data)
+ - clean up datasets (for this we point you to http://openrefine.org[openrefine] and https://github.com/usc-isi-i2/Web-Karma[karma])
+ - visualize the data (for this we'll expose the data in timbuctoo in such a way that it can be picked up by tools such as http://hdlab.stanford.edu/projects/palladio/[palladio] or https://gephi.org/[gephi])
+
+We will offer a basic editing interface but we'll also actively try to allow the data to be edited in external tools such as google spreadsheets, openrefine or excel.
+
+=== Databases
+For most databases the answer is the same: timbuctoo is not a database, but rather it uses a database and adds a REST API and related 
+http://ontotext.com/products/graphdb/
+
+=== triple stores
+
+=== Database wrappers
+Sandman::
+Postgres-rest::
+firebase and other Baas-es::
+no interlinking and transclusion of datasets
+
+=== mapping languages
+X3ML::https://github.com/delving/x3ml http://139.91.183.3/3M/
+R2RML::
+XSLT::
+JSON-LD framing::
+XML2RDF::
+SQuaRE::
+  http://resources.visualdataweb.de/paper4.pdf
+=== harmonization tools
+GoogleRefine/OpenRefine::
+karma::
+tabulapdf::
+UIMA (entity extraction)
+Gate (entity extraction)
+Silk (link discovery)
+Datagraft::
+  https://datagraft.net/ (https://github.com/dapaas)
+
+map4rdf
+lodlive
+
+http://link.springer.com/book/10.1007/978-3-319-13817-6/page/2#page-2
+
+xanadu::
+  At a distance, Xanadu looks like a well-thought out approach at exchanging and re-using data.
+  The problems that are most similar are (1) keeping track of owner/authorship while having that enables and foster's re-use (2) keeping control of the data that was cited without having to depose snapshots at digital heritage institutions.
+  However, RDF probably differs too much from text to be able to apply these ideas.
+  You usually exchange it in some serialised, textual, form, but it has no predefined sort-order and re-use/transclusion is not necessarily in a few blocks.
+  We're not aware of any research for building a system that fulfills the xanadu requirements for structured data
+Pelagios::
+  http://dlib.nyu.edu/awdl/isaw/isaw-papers/7/simon-barker-desoto-isaksen/ We're thinking about providing the pelagios API's from withing timbuctoo.
+Salt::
+  Salt (http://dl.acm.org/citation.cfm?id=2785528)

@@ -1,0 +1,131 @@
+= Configurable Permissions
+
+== The problem
+* All permissions hardcoded to roles
+** All instances of Timbuctoo have the same permissions for the same roles
+
+=== User Roles
+* __**L0: Anonymous user**__: only published datasets
+* *L1: Reader - datasets*: both all published + spec. assigned datasets
+* *L2: Contributor - datasets*: both all published + spec. assigned datasets
+* *L3: Editor - datasets*: both all published + spec. assigned datasets
+* *L4: Administrator - datasets*: both all published + spec. assigned datasets
+* __**L5: Site administrator**__: Timbuctoo instance
+** The super users of the instances, these should be configured with a system administrator
+
+The list above is an example to give an impression what could be possible.
+Though every application will have multiple _Anonymous users_ and one or more _Site administrators_.
+Another role that will be in every instance is the _data set administrator_.
+
+=== Actions
+GraphQL
+
+* Create a new data set
+* Edit dataset metadata
+* Update resourcesync
+* Delete a data set
+* Edit existing data
+* Change view config for the GUI
+* Change search config for the GUI
+* Publish an unpublished data set
+* Promote a published data set
+* Change collection metadata
+* Change the schema of a collection / data set
+* Read data of non-published data set via GraphQL
+* Resourcesync
+** Import initial data
+** Synchronize with remote
+* Read import status
+* Delete specific data fom a data set [Future]
+* Add new data to a data set [Future]
+
+REST / HTTP
+
+* Upload RDF
+** Upload initial data
+** Upload an update of the data
+* Read resourcesync of a non-published data set
+* Read resourcesync of a published data set
+
+Other / unknown
+
+* Give users permission to data set [Future]
+* Limit the users that can create new data sets [Future]
+* Configure user roles [Future] (This might be done by the system administrator)
+
+== Definition of done
+* The owner of the Timbuctoo instance can assign all the permissions to roles of her of his liking.
+* All permissions are defined in the code.
+* Make it possible for each instance of TImbuctoo to have its own user roles.
+* Allow multiple implementations.
+** Create a filesystem based implementation
+* GraphQL should list permission of a single user
+
+
+== Structure
+
+----
++------+                +------+           +------------+           +-----------+
+|      |*          1...*|      |*     1...*|            |1         1|           |
+| User +--------------->+ Role +---------->+ Permission +---------->+ Operation |
+|      |                |      |           |            |           |           |
++------+                +------+           +------------+           +-----------+
+----
+
+== Steps
+. Identify the actions Timbuctoo needs limited accessibility.
+.. Give each action its own permission.
+.. Add checks for the specific actions.
+.. Let legacy Timbuctoo use new Permissions
+. Make the permissions configurable.
+.. Make a matrix where the user roles can be connected to the authorized actions
+. Design a default Timbuctoo user roles to support the current instances of Timbuctoo
+.. Make the current implementations work with the new schema, without any functionality changes
+. Add a migration from the old to the new structure.
+. Add a GraphQL query for listing permissions of a user per data set.
+
+== Code changes
+
+=== Java
+The first two code changes are  refactoring that will remove a lot of duplication and will make the code on a lot of places a bit more readable.
+Method added because getPermissions is only used like `getPermissions(user, dataset).contains(Permission.WRITE)`
+[source, java]
+----
+public interface PermissionFetcher {
+  ...
+  boolean hasPermission(User user, DataSetMetaData dataSetMetadata) throws PermissionFetchingException;
+  ...
+}
+----
+Method added because getPermissions is only used like `getPermissions(user, dataset).contains(Permission.WRITE)`
+[source, java]
+----
+public class UserPermissionCheck {
+  ...
+  public boolean hasPermission(User user, DataSetMetaData dataSetMetadata) {
+  ...
+  }
+  ...
+}
+----
+
+There need to be an object that is going to translate the roles to the interface should look like this:
+[source, java]
+----
+public interface RoleToPermissionTranslator {
+  Set<Permission> getPermissionsForRoles(Collection<String> roles);
+}
+----
+
+=== GraphQL
+----
+
+type DataSetMetaData {
+  ...
+  usersPermissions: [String!]
+  ...
+}
+----
+
+== Links
+How To Structure Permissions In A SaaS App: https://heapanalytics.com/blog/engineering/structure-permissions-saas-app

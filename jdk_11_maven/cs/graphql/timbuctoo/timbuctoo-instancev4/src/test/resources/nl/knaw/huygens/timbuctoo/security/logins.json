@@ -1,0 +1,15 @@
+[ {
+  "@type" : "login",
+  "userPid" : "pid",
+  "password" : "77+9BXQj77+977+9KzAU77+977+9EQ1PYiQ8W++/ve+/vSd277+9Je+/ve+/ve+/ve+/vRtM77+9",
+  "salt" : "MDgxM2FlMTMtZDVmZC00Y2JmLTk5ODEtOTRhNWZmM2FjNjYz",
+  "givenName" : "givenName",
+  "surName" : null,
+  "emailAddress" : "email",
+  "organization" : "organization",
+  "id" : "LOGI000000000001",
+  "rev" : "0",
+  "created" : null,
+  "modified" : null,
+  "userName" : "knownUser"
+} ]

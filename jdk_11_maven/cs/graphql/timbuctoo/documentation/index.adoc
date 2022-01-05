@@ -1,0 +1,170 @@
+= Timbuctoo: Bridge to networked research data
+:toc: left
+:hide-uri-scheme:
+:javasourcesdir: ../timbuctoo-instancev4/src/main/java/nl/knaw/huygens/timbuctoo
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:docinfo:
+
+include::../README.adoc[tags=support-note] 
+
+[WARNING]
+Links to files are broken. I have reported the issue at https://github.com/asciidoctor/asciidoctor/issues/1903
+
+== Introduction
+
+=== Background
+
+include::../README.adoc[tags=background] 
+
+A lot of applications go quite some part of the distance however, so timbuctoo mostly glue between these applications.
+
+=== History
+
+Timbuctoo was started in 2012.
+
+include::./compiling.adoc[leveloffset=+1]
+
+== Software Components
+
+=== Overview
+
+Timbuctoo is a set of REST api's on top of a graph database that stores RDF. gloss:REST[http api]
+
+[ditaa,file="./images/ditaa-example.png"]
+--
+                              +     +----------+           +--------+                                         +----------+
+                              |     |Search GUI|           |Edit GUI|                                         |Upload GUI|
+                              |     +-----+----+           +-+-+-+--+                                         +--+--+--+-+
+                              |           |                  | | |                                               |  |  |
+                              |           |                  | | |                                               |  |  |
+ Client tooling               |        +--+-+                | | |                                               |  |  |
+(we provide some scaffolds,   |        |SOLR|                | | |                                               |  |  |
+ but you're expected to write |        +--+-+                | | |                                               |  |  |
+ this yourself)               |           |                  | | |                                               |  |  |
+                              |           |                  | | |                                               |  |  |
+                              |    +------+------+           | | |                                               |  |  |
+                              |    |Index crawler+---+  +----+ | +-----------+                   +---------------+  |  +----------------+
+                              +    +---+---------+   |  |      |             |                   |                  |                   |
+                                       |             |  |      |             |                   |                  |                   |
+                                       |             |  |      |             |                   |                  |                   |
+                              + +------+---+        ++--+-+ +--+-----+ +-----+------+     +------+--------------+   +------+-------+     +-----+------+
+               Timbuctoo API  | |Changelog |        |CRUD | |Metadata| |Autocomplete|     |Tabular data importer|   |Rml processor |     |RDF importer|
+                              + +----------+        +-----+ +--------+ +------------+     +---------------------+   +--------------+     +------------+
+
+
+
+                                                                    +---------+
+                                                                    |{s}      |
+                                                                    |graph db |
+                                                                    |  with   |
+                                                                    |   RDF   |
+                                                                    +---------+
+--
+Changelog::
+  todo:feature["The changelog will provide a chronological list of additions or deletions filtered by either the entity or the dataset"].
+  The changelog API isn't available yet, but the data to generate it is already being saved. So when the API becomes available it will expose the data retroactively.  
+RDF-publication::
+  todo:feature["We will publish the RDF data in the CLARIAH RDF exchange format"].
+The V2.1 API::
+  CRUD::
+include::{javasourcesdir}/crud/README.adoc[tags=summary] 
+  Metadata::
+    A dataset contains information about the property names (predicates) that are in use etc.
+    This information cannot be retrieved from the CRUD endpoint, but can be retrieved from here.
+    This module is not really documented, you can read link:{javasourcesdir}/server/endpoints/v2/Metadata.java[the source] though.
+  Autocomplete::
+    Timbuctoo allows you to do a quick search on the labels (aka displaynames) of the entities.
+    This is implemented as part of the CRUD module.  
+Tabular data importer::
+include::{javasourcesdir}/bulkupload/README.adoc[tags=summary] 
+RML processor::
+include::{javasourcesdir}/rml/README.adoc[tags=summary] 
+RDF importer::
+include::{javasourcesdir}/rdf/README.adoc[tags=summary]
+Resource sync::
+include::{javasourcesdir}/remote/rs/README.adoc[tags=summary]
+Search GUI & Index crawler::
+== Summary
+
+These ruby scripts harvest the timbuctoo CRUD endpoint, format the data and send it to solr.
+
+//include::{scriptsourcesdir}/index_scripts/README.adoc[tags=summary]
+Discover-GUI::
+  A gui that is not aimed at precise querying, but rather to get a high-level overview of the data so that you know what queries to write.
+Dataset-search::
+  find subjects using their properties and then find the datasets that contain them
+Data curation tools::
+  Tools for cleaning up datasets. We're mostly implementing this by working together with existing tools.
+Data-export::
+  Render the timbuctoo data as RDF, graphviz and whatnot. This epic might also focus on generating data representations in a semantic form that can be well imported by other tools. (i.e. use the proper date-time encoding or geo-coordinates encoding)
+Dataset-interdependencies:: Be able to depend on other datasets.
+  * Link to RDF subjects in a specific other dataset
+  * todo:feature["Import (parts of) other datasets into your own dataset"]
+  * todo:feature["Create a new (read-only?) dataset that is fully dependent on other datasets"]
+
+Next to these core endpoints we also have:
+
+An authentication endpoint::
+  This allows users to sign in.
+  We will probably remove the code once the project that we're part of (CLARIAH) provides a good openid2 implementation.
+Authorization handling::
+  todo:feature["User management that specifies who is allowed to see your data"]. Currently only a basic form is implemented (only you are allowed to edit your own datasets).
+A D3 graph render endpoint::
+  This will probably be removed after we have built the new CRUD Api
+A raw query endpoint::
+  This is for development use only
+A jsenv endpoint::
+  This is a quick way to pass some data from the configuration file to the javascript applications.
+  We're not sure if we're keeping this around.
+
+These are all the user facing components. Other packages are supporting these components.
+
+:leveloffset: +2
+
+include::{javasourcesdir}/database/README.adoc[]
+
+include::{javasourcesdir}/crud/README.adoc[]
+
+include::{javasourcesdir}/bulkupload/README.adoc[]
+
+include::{javasourcesdir}/rml/README.adoc[]
+
+include::{javasourcesdir}/rdf/README.adoc[]
+
+include::{javasourcesdir}/remote/rs/README.adoc[]
+
+include::./resourcesyncexample/README.adoc[]
+
+= Solr index script
+== Summary
+
+These ruby scripts harvest the timbuctoo CRUD endpoint, format the data and send it to solr.
+For more info follow the link below.
+
+include::https://github.com/HuygensING/timbuctoo-faceted-search-indexer/blob/master/README.adoc[]
+
+:leveloffset: -2
+
+== User guide
+
+todo:feature["A user guide has not been written yet"]
+
+== API documentation
+link:./api.html[API documentation has its own page]
+
+== Development process
+=== Releases
+=== Bug tracking
+
+
+== Additional information
+=== Presentations
+
+.A quick overview of the timbuctoo project
+video::186090384[vimeo,align="center"]
+
+:leveloffset: +1
+
+include::./related-work.adoc[]
+
+:leveloffset: -1

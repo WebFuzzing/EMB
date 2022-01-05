@@ -1,0 +1,64 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Timbuctoo v2.1 API for relation types</title>
+</head>
+<body>
+<section data-type="chapter">
+    <h2>Retrieving relation types</h2>
+
+    <aside class="example highlight" h:http="#relationTypesGet">
+        <div h:request="">
+            GET /v2.1/system/relationtypes HTTP/1.1
+        </div>
+        <div h:response="">
+            HTTP/1.1 200
+            Content-type: application/json
+
+            [
+                {
+                    "@type": "/*STRING*/",
+                    "^created": {
+                        "timeStamp": "/*NUMBER*/",
+                        "userId": "/*STRING*/",
+                        "vreId": "/*STRING*/"
+                    },
+                    "^modified": {
+                        "timeStamp": "/*NUMBER*/",
+                        "userId": "/*STRING*/",
+                        "vreId": "/*STRING*/"
+                    },
+                    "^rev": 1,
+                    "_id": "/*STRING*/",
+                    "derived": "/*BOOLEAN*/",
+                    "inverseName": "/*STRING*/",
+                    "reflexive": "/*BOOLEAN*/",
+                    "regularName": "/*STRING*/",
+                    "sourceTypeName": "/*STRING*/",
+                    "symmetric": "/*BOOLEAN*/",
+                    "targetTypeName": "/*STRING*/"
+                }
+            ]
+        </div>
+    </aside>
+
+    <aside class="example highlight" h:http="#relationTypesGet">
+        <div h:request="">
+            GET /v2.1/system/relationtypes?iname=person HTTP/1.1
+        </div>
+        <div h:response="">
+            HTTP/1.1 200
+            Content-type: application/json
+
+            [
+                "/*SOURCE_TYPE_OR_TARGET_TYPE_MUST_BE_PERSON*/"
+            ]
+        </div>
+    </aside>
+</section>
+
+
+</body>
+</html>

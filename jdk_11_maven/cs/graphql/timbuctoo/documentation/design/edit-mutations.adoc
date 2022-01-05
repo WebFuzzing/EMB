@@ -1,0 +1,370 @@
+= Edit mutations
+
+== The problem
+At the moment of writing, Timbuctoo's GraphQL API has several mutations to edit metadata like facets and summary properties.
+But the real data cannot not be edited with the GraphQL API.
+This has to be done with the `JSON-LD endpoint` or uploading NQUD-files to the `RDF upload endpoint`.
+The problem with the ways mentioned in the last sentence is that both can also change the GraphQL schema of a data set.
+A GraphQL edit mutation for each type should protect against unwittingly changing the schema.
+
+
+=== Possible operations
+Possible operations the user might execute on the data:
+
+. Change single valued value or link properties (i.e. the birth date of a person or the birthplace of a person)
+.. Overwrite the current value
+.. Clear the current value
+. Change multi valued value or link properties (i.e. the first names of a person or places a person lived in)
+.. Add one or more items to the list
+.. Delete one or more items from the list
+.. Overwrite the complete list with a new value
+.. Clear the complete list
+. For all above points there should be an optional check if the data wasn't changed in the meantime.
+
+
+=== Validation
+A mutation on the data might produce an "invalid" dataset. We can have vaildation on
+
+. An entity against the schema (Person's may only have 1 birthdate, it must be EDTF)
+. A value against the type (An xsd:integer may only be [0-9]+)
+. An entity against some local rules (each Person must have a "name")
+. An entity against some global rules (a person may not have the same BSN as another person entity, all person entities must have a birthdate within the early modern period)
+
+=== Provenance
+. A user should be able to add provenance information such as where a piece of information is retrieved from. (see link:edit-mutations-custom-provenance.adoc[Edit mutations custom provenance])
+. Timbuctoo might record some provenance (user, change date, etc.) automatically.
+
+== Definition of done
+. Mutations for each collection should be added to the GraphQL schema. (point 1 and 2 of <<Possible operations>>)
+. Non of the mutations can change the schema of the data set. (see <<Validation>>)
+.. No new properties can be introduced.
+.. No new types can be added to existing properties.
+.. Single valued properties cannot become multi valued.
+. Only users with with `WRITE` permissions should be able to see and use the mutations.
+. Timbuctoo generates a provenance file that contains the changes and adds the data to the data set.
+. A user should be able to add provenance.
+. A bulk edit must be possible.
+
+=== Current state 2018-09-24
+Currently the users with 'WRITE' permissions are able to edit the every collections except from the provenance.
+No new resources (entities) can be added.
+The schema prohibits adding new properties and changing types of properties.
+
+The next features still have to be implemented:
+
+. Custom provenance per data set
+. Bulk edit for editing multiple resources
+
+== Design
+
+=== Provenance schema
+
+----
+"http://example.org/entity"                           "2"                                                                "http://example.org/user"
+      ^                                                ^                                                                          ^
+      |  uri                                           |    tim:version                                                           |  uri
+      |                                                |                                                                          |
++-----+--------+    prov:specializationOf      +-------+------+    prov:generated  +---------------+   prov:associatedWith  +-----+------+
+|              |                               |              |                    |               |                        |            |
+| <tim:Entity> +<------------------------------+ <tim:Entity> +<-------------------+ prov:Activity +----------------------->+ prov:Agent |
+|              |                               |              |                    |               |                        |            |
++----+---------+------------------------------>+-----+--------+                    +--------+------+                        +----------+-+
+     ^                                               |   prov:wasRevisionOf                 |                                          ^
+     |             tim:latestRevision                |                    prov:qualifiedAssociation   +-------------------             |
+     |                                               v                                      |         |                  |             | prov:agent
+     |                                         +-----+--------+                             +-------->+ prov:Association +-------------+
+     |                                         |              |                                       |                  |
+     +-----------------------------------------+ <tim:Entity> |                                       +--------+---------+
+                                               |              |                                                |
+                  prov:specializationOf        +-------+------+                                                | prov:hadPlan
+                                                       |                                                       |
+                                                       |  tim:version                                          v
+                                                       |            +---------------+                    +-----+-----+                      +------------------+
+                                                       v            |               |   tim:additions    |           |  tim:replacements    |                  |
+                                                      "1"           | tim:Additions +<-------------------+ prov:Plan +--------------------->+ tim:Replacements |
+                                                                    |               |                    |           |                      |                  |
+                                                                    +---------------+                    +-----+-----+                      +------------------+
+                                                                                                               |
+                                                                                                               |  tim:deletions
+                                                                                                               v
+                                                                                                       +-------+-------+
+                                                                                                       |               |
+                                                                                                       | tim:Deletions |
+                                                                                                       |               |
+                                                                                                       +-------+-------+
+                                                                                                               |
+                                                                                                               | tim:hasDeletion
+                                                                                                               v
+                                                                                                       +-------+------+
+                                                                                                       |              | tim:hasKey
+                                                                                                       | tim:Deletion +----------->"http://example.org/predicate"
+                                                                                                       |              |
+                                                                                                       +--------------+
+                                                                                                       |              |
+                                                                                                 +-----+ tim:hasValue +------+ tim:hasValue
+                                                                                                 |                           |
+                                                                                                 v                           v
+                                                                              tim:type   +-------+---+                 +-----+-----+
+                                                "http://example.org/type"<---------------+           | tim:nextValue   |           |
+                                                                          tim:rawValue   | tim:Value +---------------->+ tim:Value |
+                                              "http://example.org/value"<----------------+           |                 |           |
+                                                                                         +-----------+                 +-----------+
+
+----
+What is not shown in the diagram is the custom provenance that can differ from data set to data set.
+This custom provenance will be added to each specialization of a `<tim:Entity>`.
+The `<tim:Entity>` consists of all different types in a data set.
+`tim:Additions` and `tim:Replacements` will look like `tim:Deletions`.
+`tim:nextValue` will only appear for multivalued predicates.
+
+=== GraphQL
+
+==== Schema
+
+----
+...
+type DataSetMutations {
+  <dataSetName>: <dataSetName>Mutations @passThrough
+}
+
+type <dataSetName>Mutations {
+  <collectionName>: <collectionName>Mutations @passThrough
+}
+
+type <collectionName>Mutations {
+  edit(uri: String! entity: <collectionName>Input!): <collectionName>
+}
+
+input <collectionName>Input {
+  additions: <collectionName>AdditionsInput
+  deletions: <collectionName>DeletionsInput
+  replacements: <collectionName>ReplacementsInput
+}
+
+input <collectionName>AdditionsInput {
+  <entityTypeField2List>: [PropertyInput!] # List property for values or links
+}
+
+input <collectionName>DeletionsInput {
+  <entityTypeField2List>: [PropertyInput!] # List property for values or links
+}
+
+input <collectionName>ReplacementsInput {
+  <entityTypeField1>: PropertyInput # Single value / link property
+  <entityTypeField2List>: [PropertyInput!] # List property for values or links
+  <entityTypeFieldN>: PropertyInput # Single value / link property
+}
+
+input <collectionName>_xsd_stringPropertyInput {
+  type: <collectionName>_xsd_stringPropertyEnum!
+  value: String!
+  # language is required when the type is http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
+  # the language field may only be used with the type http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
+  language: String
+}
+
+# each type of property will get its own enum that contains the possible property types
+enum <collectionName>_xsd_stringPropertyEnum {
+  # these are RDF type URI's modified by Timbuctoo to work as GraphQL enums
+  xsd_string
+}
+...
+----
+
+==== Examples
+
+----
+mutation EditEntity ($uri: String! $entity: <collectionName>Input!) {
+  dataSets {
+    <dataSetId> {
+      <collectionName> {
+        edit(uri: $uri entity: $entity) {
+          <entityTypeField1> {
+            value
+          }
+          <entityTypeField3> {
+            value
+          }
+          <entityTypeFieldN> {
+            value
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+The next examples show the GraphQL query values for the different use cases
+
+Change a value of a single valued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField1>": {
+        "type": "xsd_string",
+        "value": "Test2"
+      }
+    }
+  }
+}
+----
+
+Clear the value from a single valued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField1>": null
+    }
+  }
+}
+----
+
+Add value to an empty multivalued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "additions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "xsd_string",
+          "value": "Test"
+        }
+      ]
+    }
+  }
+}
+----
+
+Replace a value of a multivalued field.
+The next example replaces "Test2" with the value "Test".
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "additions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "xsd_string",
+          "value": "Test"
+        }
+      ]
+    },
+    "deletions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "xsd_string",
+          "value": "Test2"
+        }
+      ]
+    }
+  }
+}
+----
+
+Replace the whole collection of a multivalued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField2List>": [
+        {
+          "type": "xsd_string",
+          "value": "Test2"
+        }
+      ]
+    }
+  }
+}
+----
+
+Remove a value from a multivalued field
+The next example removes "Test2" from the collection.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "deletions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "xsd_string",
+          "value": "Test2"
+        }
+      ]
+    }
+  }
+}
+----
+
+Clear a multivalued field.
+Replace the field with an empty array.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField2List>": []
+    }
+  }
+}
+----
+
+
+
+=== Java
+The schema will be generated by the `DerivedSchemaGenerator`.
+
+----
++------------------------+  uses     +------------------------+
+|                        |           |                        |
+| DerivedSchemaGenerator +---------->+ DerivedSchemaContainer |
+|                        |           |                        |
++--------------+---------+           +------------+-----------+
+        |      |                                  |
+        |      |  uses                            | uses
+        |      |                                  |
+        |      |                                  v
+        |      |                      +-----------+----------------+
+        |      |                      |                            |
+        |      +--------------------->+ DerivedTypeSchemaGenerator +<----------------------------------+
+        |                             |                            |                                   |
+        |   uses                      +---+-------+----+-----------+                                   |
+        |                 +---------------^       ^    ^------------+                                  |
+        |                 |                       |                 |                                  |
+        |                 |     inherits          | inherits        | inherits                         | inherits
+        v                 |                       |                 |                                  |
+    +---------------------+------+ +--------------+-----------+ +---+----------------------------+ +---+-----------------------+
+    |                            | |                          | |                                | |                           |
+    | DerivedObjectTypeSchemaGen | | DerivedListTypeSchemaGen | | DerivedCollectionTypeSchemaGen | | DerivedValueTypeSchemaGen |
+    |                            | |                          | |                                | |                           |
+    +----------------------------+ +--------------------------+ +--------------------------------+ +---------------------------+
+----
+
+* `DerivedSchemaGenerator` is the same class as the current `DerivedSchemaTypeGenerator`.
+* `DerivedSchemaContainer` will be simplified, because most of the functionality will be moved to the `TypeSchemaGenerators`.
+* `TypeSchemaGenerator` is an interface for creating GraphQL schema's from RDF types.
+** `ValueTypeSchemaGenerator` will generate a schema for value types.
+** `ObjectTypeSchemaGenerator` will generate a schema for object types (types with properties).
+
+== Limitations
+* Only value fields of the object can be edited. (like person names, birth date)
+* Only links to objects can be changed. (birthplace, places lived in)
+
+So no values of linked objects can be edited.
+
+== Development steps
+. Generate the API
+. Add a DataFetcher mutation that stores the data
+. Hide the API from users without writing permission
+. Generate a provenance file of the changes and add the data to the data set
+. Add functionality for adding new items to collections
+. Add functionality for deleting items from collections
+
+== Links
+Organizing mutations: https://medium.freecodecamp.org/organizing-graphql-mutations-653306699f3d

@@ -1,0 +1,304 @@
+<!--
+ *  Copyright (c) Facebook, Inc.
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the license found in the
+ *  LICENSE file in the root directory of this source tree.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="referrer" content="no-referrer" />
+  <link rel="stylesheet" href="/static/graphiql/graphiql.css" />
+  <style>
+      body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+      #graphiql {
+        height: 100vh;
+      }
+      .CodeMirror-hint {
+        max-width: none;
+      }
+    </style>
+
+  <script src="/static/graphiql/es6-promise.auto.min.js"></script>
+  <script src="/static/graphiql/fetch.min.js"></script>
+  <script src="/static/graphiql/react.js"></script>
+  <script src="/static/graphiql/react-dom.js"></script>
+  <script src="/static/graphiql/graphiql.js"></script>
+  <script src="/static/graphiql/graphiql.js"></script>
+
+</head>
+<body>
+<div id="graphiql">Loading...</div>
+<div style="display: none">
+  <form action="https://secure.huygens.knaw.nl/saml2/login" method="POST" id="loginForm">
+    <input id="hsurl" name="hsurl" value="" />
+    <Button type="submit">Login</Button>
+  </form>
+</div>
+<script>
+      var authToken = undefined;
+      if (window.location.search != "") {
+        var newSearch = "?";
+        window.location.search.substr(1)
+          .split("&")
+          .map(function(x) { return x.split("=") })
+          .forEach(function (item, i) {
+            if (item[0] === "hsid") {
+              authToken = decodeURIComponent(item[1]);
+            } else {
+              if (i > 0) {
+                console.log("adding &");
+                newSearch += "&";
+              }
+              if (item.length > 1 && item[1]) {
+                newSearch += item[0] + "=" + item[1]
+              } else {
+                newSearch += item[0];
+              }
+            }
+          });
+        if (newSearch === "?") {
+          newSearch = "";
+        }
+        if (newSearch != window.location.search) {
+          history.replaceState(null, null, newSearch)
+        }
+
+      }
+
+      /**
+       * This GraphiQL example illustrates how to use some of GraphiQL's props
+       * in order to enable reading and updating the URL parameters, making
+       * link sharing of queries a little bit easier.
+       *
+       * This is only one example of this kind of feature, GraphiQL exposes
+       * various React params to enable interesting integrations.
+       */
+
+      // Parse the search string to get url parameters.
+      var search = window.location.search;
+      var parameters = {};
+      search.substr(1).split('&').forEach(function (entry) {
+        var eq = entry.indexOf('=');
+        if (eq >= 0) {
+          parameters[decodeURIComponent(entry.slice(0, eq))] =
+            decodeURIComponent(entry.slice(eq + 1));
+        }
+      });
+
+      // if variables was provided, try to format it.
+      if (parameters.variables) {
+        try {
+          parameters.variables =
+            JSON.stringify(JSON.parse(parameters.variables), null, 2);
+        } catch (e) {
+          // Do nothing, we want to display the invalid JSON as a string, rather
+          // than present an error.
+        }
+      }
+
+      // When the query and variables string is edited, update the URL bar so
+      // that it can be easily shared
+      function onEditQuery(newQuery) {
+        parameters.query = newQuery;
+        updateURL();
+      }
+
+      function onEditVariables(newVariables) {
+        parameters.variables = newVariables;
+        updateURL();
+      }
+
+      function onEditOperationName(newOperationName) {
+        parameters.operationName = newOperationName;
+        updateURL();
+      }
+
+      function updateURL() {
+        var newSearch = '?' + Object.keys(parameters).filter(function (key) {
+          return Boolean(parameters[key]);
+        }).map(function (key) {
+          return encodeURIComponent(key) + '=' +
+            encodeURIComponent(parameters[key]);
+        }).join('&');
+        history.replaceState(null, null, newSearch);
+      }
+
+      var acceptMediaType = "application/json";
+      var mediaTypeMenuItems = [];
+
+      function setAcceptMediaType(mediaType) {
+        acceptMediaType = mediaType;
+        reRender();
+      }
+
+      function graphQLFetcher(graphQLParams) {
+        var headers = {
+          'Accept': acceptMediaType,
+          'Content-Type': "application/json"
+        }
+        if (authToken !== undefined) {
+          headers.Authorization = authToken
+        }
+        return fetch("/v5/graphql", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(graphQLParams)
+        }).then(function (response) {
+          var s;
+          var contentType = response.headers.get('Content-Type');
+          if (contentType === 'application/json' || contentType.endsWith("+json")) {
+            s = response.json();
+          } else {
+            s = response.text();
+          }
+          return s
+        }).then(function (parsed) {
+          var data = parsed;
+          return data;
+        });
+      }
+
+
+      fetch("/v5/graphql?query={availableExportMimetypes{name}}", {
+        method: 'get',
+        headers: { 'Accept': 'application/json' }
+      }).then(function (mediaTypes) {
+        return mediaTypeMenuItems = mediaTypes.json();
+      }).then(function (mediaTypes) {
+        return mediaTypes.data.availableExportMimetypes.map(function (type) {
+          return React.createElement(GraphiQL.MenuItem, {
+            key: type.name,
+            onSelect: function () {
+              setAcceptMediaType(type.name);
+            },
+            label: type.name
+          })
+        })
+      }).then(function (newMenuItems) {
+        mediaTypeMenuItems = newMenuItems;
+        reRender();
+      });
+
+
+      /*
+      class CustomGraphiql extends React.Component {
+        render() {
+          return <GraphiQL
+            fetcher={graphQLFetcher}
+            query={parameters.query}
+            variables={parameters.variables}
+            operationName={parameters.operationName}
+            onEditQuery={onEditQuery}
+            onEditVariables={onEditVariables}
+            onEditOperationName={onEditOperationName}
+            ref="graphiql">
+            <GraphiQL.Toolbar>
+              <GraphiQL.ToolbarButton
+                onClick={() => this.refs.graphiql.handlePrettifyQuery()}
+                title="Prettify Query (Shift-Ctrl-P)"
+                label="Prettify"
+              />
+              <GraphiQL.ToolbarButton
+                onClick={() => this.refs.graphiql.handleToggleHistory()}
+                title="Show History"
+                label="History"
+              />
+              <GraphiQL.Menu
+                label={acceptMediaType}
+              >
+                {mediaTypeMenuItems}
+              </GraphiQL.Menu>
+            </GraphiQL.Toolbar>
+          </GraphiQL>
+        }
+      }
+      */
+
+      //START BABELIFIED VERSION OF ABOVE CODE
+      var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+      function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+      function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+      function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+      var CustomGraphiql = function (_React$Component) {
+        _inherits(CustomGraphiql, _React$Component);
+
+        function CustomGraphiql() {
+          _classCallCheck(this, CustomGraphiql);
+
+          return _possibleConstructorReturn(this, (CustomGraphiql.__proto__ || Object.getPrototypeOf(CustomGraphiql)).apply(this, arguments));
+        }
+
+        _createClass(CustomGraphiql, [{
+          key: "render",
+          value: function render() {
+            var me = this;
+            return React.createElement(
+              GraphiQL,
+              {
+                fetcher: graphQLFetcher,
+                query: parameters.query,
+                variables: parameters.variables,
+                operationName: parameters.operationName,
+                onEditQuery: onEditQuery,
+                onEditVariables: onEditVariables,
+                onEditOperationName: onEditOperationName,
+                ref: "graphiql"
+              },
+              React.createElement(
+                GraphiQL.Toolbar,
+                null,
+                React.createElement(GraphiQL.ToolbarButton, {
+                  onClick: function () {
+                    if (authToken) {
+                      window.location.reload()
+                    } else {
+                      document.getElementById("hsurl").value = window.location.protocol + "//" + window.location.host + window.location.pathname; //no hash, no query arguments
+                      document.getElementById("loginForm").submit();
+                    }
+                  },
+                  label: authToken ? "Logout" : "Login"
+                }),
+                React.createElement(GraphiQL.ToolbarButton, {
+                  onClick: function () { me.refs.graphiql.handlePrettifyQuery() },
+                  title: "Prettify Query (Shift-Ctrl-P)",
+                  label: "Prettify"
+                }),
+                React.createElement(GraphiQL.ToolbarButton, {
+                  onClick: function () { me.refs.graphiql.handleToggleHistory() },
+                  title: "Show History",
+                  label: "History"
+                }),
+                React.createElement(
+                  GraphiQL.Menu,
+                  {
+                    label: acceptMediaType
+                  },
+                  mediaTypeMenuItems
+                )
+              )
+            );
+          }
+        }]);
+
+        return CustomGraphiql;
+      }(React.Component);
+      //END BABELIFIED VERSION OF ABOVE CODE
+
+      function reRender() {
+        ReactDOM.render(React.createElement(CustomGraphiql), document.getElementById('graphiql'));
+      }
+
+    </script>
+</body>
+</html>

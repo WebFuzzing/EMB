@@ -1,0 +1,57 @@
+# Import status
+
+## Problems
+
+There are two problems with the import status.
+
+### Information not usable for GUI
+The two current import status GraphQl Types `CurrentImportStatus` and `DataSetImportStatus` only contain a high overview of the whole import.
+It cannot tell you what the progress is on the file you just uploaded.
+
+### Concurrency errors that make our integration tests fail some time
+The `CurrentImportStatus` has some concurrency problems.
+It sometimes says it has no errors when the import failed.
+
+## Solution
+
+### GraphQlDesign
+
+Output
+
+```
+"dataSetImportStatus": {
+  "items": [
+    {
+      "id": "value",
+      "status": "PENDING" | "IMPORTING" | "DONE"
+    }
+  ]
+}
+```
+
+```
+"importStatus": {
+  "id": "value",
+  "status": "PENDING" | "IMPORTING" | "DONE"
+  "source": "original.fileName",
+  "errors": ["error", "messages"],
+  "progress" : {
+    {
+      "label": "",
+      "status": "PENDING" | "IMPORTING" | "DONE",
+      "progress": "number of units processed",
+      "speed": "number of units processed per second"
+    }
+  }
+```
+
+Input
+```
+importStatus(id: "") {
+  id
+  ...
+}
+```
+
+### Changes in Timbuctoo
+* Make import status classes synchronized
