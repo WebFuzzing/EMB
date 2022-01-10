@@ -1,24 +1,20 @@
 package em.embedded.nl.knaw.huygens;
 
 
-import app.coronawarn.verification.VerificationApplication;
 import nl.knaw.huygens.timbuctoo.server.TimbuctooV4;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
-import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
-import org.evomaster.client.java.controller.problem.RestProblem;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Class used to start/stop the SUT. This will be controller by the EvoMaster process
@@ -41,6 +37,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private TimbuctooV4 application;
 
+    private String tmpFolder = "tmp";
+
     public EmbeddedEvoMasterController() {
         this(40100);
     }
@@ -55,7 +53,23 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         application = new TimbuctooV4();
 
         //Dirty hack for DW...
-        System.setProperty("dw.server.connector.port", "0");
+        //System.setProperty("dw.server.connector.port", "0");
+
+        tmpFolder = "tmpFolder";
+
+        resetStateOfSUT();
+
+        System.setProperty("timbuctoo_dataPath",tmpFolder);
+        System.setProperty("timbuctoo_authPath",tmpFolder);
+        System.setProperty("timbuctoo_port", "0");
+        System.setProperty("timbuctoo_adminPort","8081");
+        System.setProperty("base_uri","http://localhost:0");
+        System.setProperty("timbuctoo_elasticsearch_host","localhost");
+        System.setProperty("timbuctoo_elasticsearch_port","9200");
+        System.setProperty("timbuctoo_elasticsearch_user","elastic");
+        System.setProperty("timbuctoo_elasticsearch_password","changeme");
+        System.setProperty("timbuctoo_search_url","");
+        System.setProperty("timbuctoo_indexer_url", "http://localhost:3000");
 
         try {
             application.run("server", "src/main/resources/timbuctoo_evomaster.yml");
@@ -76,15 +90,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        return "http://localhost:" + getSutPort();
+        return "http://localhost:" + application.getJettyPort();
     }
-
-    protected int getSutPort() {
-        return (Integer) ((Map) ctx.getEnvironment()
-                .getPropertySources().get("server.ports").getSource())
-                .get("local.server.port");
-    }
-
 
     @Override
     public boolean isSutRunning() {
@@ -113,19 +120,20 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-
+        try {
+            deleteDir(new File(tmpFolder));
+            Files.createDirectory(Path.of(tmpFolder));
+            Files.copy(Path.of("src","main","resources","users.json"), Path.of(tmpFolder,"users.json"));
+            Files.copy(Path.of("src","main","resources","logins.json"), Path.of(tmpFolder,"logins.json"));
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public ProblemInfo getProblemInfo() {
 
-        String schema = new Scanner(EmbeddedEvoMasterController.class.getResourceAsStream("/api-docs.json"), "UTF-8").useDelimiter("\\A").next();
-
-        return new RestProblem(
-                null, //"http://localhost:" + getSutPort() + "/api/docs",
-                null,
-                schema
-        );
+       return new GraphQlProblem("/v5/graphql");
     }
 
     @Override
@@ -135,13 +143,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        return null;
+        return List.of(AuthUtils.getForAuthorizationHeader("user", "u33707283d426f900d4d33707283d426f900d4d0d"));
     }
 
     public Connection getConnection() {
-        return connection;
+        return null;
     }
 
 
-
+    private void deleteDir(File file) {
+        File[] contents = file.listFiles();
+        if (contents != null) {
+            for (File f : contents) {
+                deleteDir(f);
+            }
+        }
+        file.delete();
+    }
 }
