@@ -106,6 +106,7 @@ import nl.knaw.huygens.timbuctoo.v5.redirectionservice.RedirectionService;
 import nl.knaw.huygens.timbuctoo.v5.redirectionservice.RedirectionServiceFactory;
 import nl.knaw.huygens.timbuctoo.v5.security.SecurityFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.eclipse.jetty.server.AbstractNetworkConnector;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;
@@ -454,7 +455,20 @@ public class TimbuctooV4 extends Application<TimbuctooConfiguration> {
     }));
 
     setupObjectMapping(environment);
+
+    environment.lifecycle().addServerLifecycleListener(server -> jettyServer = server);
   }
+
+  private Server jettyServer;
+
+  public int getJettyPort(){
+    return ((AbstractNetworkConnector)jettyServer.getConnectors()[0]).getLocalPort();
+  }
+
+  public Server getJettyServer() {
+    return jettyServer;
+  }
+
 
   private void setupObjectMapping(Environment environment) {
     // object mapping
