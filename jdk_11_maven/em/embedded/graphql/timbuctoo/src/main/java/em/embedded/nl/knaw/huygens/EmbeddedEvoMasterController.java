@@ -13,6 +13,7 @@ import org.evomaster.client.java.controller.problem.ProblemInfo;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.util.List;
 
@@ -52,27 +53,31 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         application = new TimbuctooV4();
 
-        //Dirty hack for DW...
-        //System.setProperty("dw.server.connector.port", "0");
-
         tmpFolder = "tmpFolder";
+        //tmpDatabase = t
 
         resetStateOfSUT();
 
-        System.setProperty("timbuctoo_dataPath",tmpFolder);
-        System.setProperty("timbuctoo_authPath",tmpFolder);
-        System.setProperty("timbuctoo_port", "0");
-        System.setProperty("timbuctoo_adminPort","8081");
-        System.setProperty("base_uri","http://localhost:0");
-        System.setProperty("timbuctoo_elasticsearch_host","localhost");
-        System.setProperty("timbuctoo_elasticsearch_port","9200");
-        System.setProperty("timbuctoo_elasticsearch_user","elastic");
-        System.setProperty("timbuctoo_elasticsearch_password","changeme");
-        System.setProperty("timbuctoo_search_url","");
-        System.setProperty("timbuctoo_indexer_url", "http://localhost:3000");
+        System.setProperty("dw.server.applicationConnectors[0].port", "0");
+        System.setProperty("dw.securityConfiguration.localAuthentication.authorizationsPath", tmpFolder + "/datasets");
+        System.setProperty("dw.securityConfiguration.localAuthentication.permissionConfig",tmpFolder +"/permissionConfig.json");
+        System.setProperty("dw.securityConfiguration.localAuthentication.loginsFilePath", tmpFolder+"/logins.json");
+        System.setProperty("dw.securityConfiguration.localAuthentication.usersFilePath", tmpFolder + "/users.json");
+        System.setProperty("dw.server.adminConnectors[0].port","8081");
+        System.setProperty("dw.baseUri","http://localhost:0");
+        System.setProperty("dw.collectionFilters.elasticsearch.hostname","localhost");
+        System.setProperty("dw.collectionFilters.elasticsearch.port","9200");
+        System.setProperty("dw.collectionFilters.elasticsearch.username","elastic");
+        System.setProperty("dw.collectionFilters.elasticsearch.password","changeme");
+        System.setProperty("dw.webhooks.vreAdded","");
+        System.setProperty("dw.webhooks.dataSetUpdated", "http://localhost:3000");
+        System.setProperty("dw.databases.databaseLocation",tmpFolder+"/datasets");
+        System.setProperty("dw.databaseConfiguration.databasePath", tmpFolder+"/neo4j");
+        System.setProperty("dw.dataSet.dataStorage.rootDir","/datasets");
+
 
         try {
-            application.run("server", "src/main/resources/timbuctoo_evomaster.yml");
+            application.run("server", "src/main/resources/timbuctoo_evomaster.yaml");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -121,10 +126,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void resetStateOfSUT() {
         try {
-            deleteDir(new File(tmpFolder));
-            Files.createDirectory(Path.of(tmpFolder));
-            Files.copy(Path.of("src","main","resources","users.json"), Path.of(tmpFolder,"users.json"));
-            Files.copy(Path.of("src","main","resources","logins.json"), Path.of(tmpFolder,"logins.json"));
+            //FIXME: this fails due to locks on Neo4j. need way to reset it
+            //deleteDir(new File(tmpFolder));
+            if(!Files.exists(Path.of(tmpFolder))) {
+                Files.createDirectory(Path.of(tmpFolder));
+            }
+            Files.copy(Path.of("src","main","resources","users.json"), Path.of(tmpFolder,"users.json"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(Path.of("src","main","resources","logins.json"), Path.of(tmpFolder,"logins.json"), StandardCopyOption.REPLACE_EXISTING);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -158,6 +166,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 deleteDir(f);
             }
         }
-        file.delete();
+        boolean deleted = file.delete();
+        if(! deleted){
+            System.err.println("FAILED TO DELETE: " + file.getAbsolutePath());
+        }
     }
 }

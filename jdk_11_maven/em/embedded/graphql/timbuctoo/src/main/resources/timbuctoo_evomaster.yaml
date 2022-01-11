@@ -5,10 +5,10 @@ securityConfiguration:
   "@class": nl.knaw.huygens.timbuctoo.server.security.OldStyleSecurityFactoryConfiguration
   localAuthentication:
     "@class": nl.knaw.huygens.timbuctoo.security.dataaccess.localfile.LocalfileAccessFactory
-    authorizationsPath: ${timbuctoo_dataPath}/datasets
-    permissionConfig: ${timbuctoo_dataPath}/permissionConfig.json
-    loginsFilePath: ${timbuctoo_authPath}/logins.json
-    usersFilePath: ${timbuctoo_authPath}/users.json
+#    authorizationsPath: $#{timbuctoo_dataPath}/datasets
+#    permissionConfig: $#{timbuctoo_dataPath}/permissionConfig.json
+#    loginsFilePath: $#{timbuctoo_authPath}/logins.json
+#    usersFilePath: $#{timbuctoo_authPath}/users.json
   autoLogoutTimeout:
     duration: 8
     timeUnit: HOURS
@@ -17,16 +17,16 @@ securityConfiguration:
     authenticationServerUrl: DUMMY
     authenticationCredentials: DUMMY
 
-baseUri: ${base_uri} #specifying 0 as port will replace it with the port that timbuctoo ends up listening on
+#baseUri: $#{base_uri} #specifying 0 as port will replace it with the port that timbuctoo ends up listening on
 userRedirectUrl: ./static/graphiql
 
 collectionFilters:
   elasticsearch:
     "@class": nl.knaw.huygens.timbuctoo.v5.elasticsearch.ElasticSearchFilter
-    hostname: ${timbuctoo_elasticsearch_host}
-    port: ${timbuctoo_elasticsearch_port}
-    username: ${timbuctoo_elasticsearch_user}
-    password: ${timbuctoo_elasticsearch_password}
+#    hostname: $#{timbuctoo_elasticsearch_host}
+#    port: $#{timbuctoo_elasticsearch_port}
+#    username: $#{timbuctoo_elasticsearch_user}
+#    password: $#{timbuctoo_elasticsearch_password}
 
 archetypesSchema: |
   type Archetypes {
@@ -75,16 +75,16 @@ defaultSummaryProps:
     - http://schema.org/image
     type: SimplePath
 
-databases:
-  databaseLocation: ${timbuctoo_dataPath}/datasets
-
-databaseConfiguration:
-  databasePath: ${timbuctoo_dataPath}/neo4j
+#databases:
+#  databaseLocation: $#{timbuctoo_dataPath}/datasets
+#
+#databaseConfiguration:
+#  databasePath: $#{timbuctoo_dataPath}/neo4j
 
 dataSet:
   dataStorage:
     "@class": nl.knaw.huygens.timbuctoo.v5.datastorage.implementations.filesystem.FileSystemDataStorage
-    rootDir: ${timbuctoo_dataPath}/datasets
+#    rootDir: $#{timbuctoo_dataPath}/datasets
     rdfIo:
       "@class": nl.knaw.huygens.timbuctoo.v5.rdfio.implementations.rdf4j.Rdf4jIoFactory
       rdfFormat: application/n-quads
@@ -101,8 +101,8 @@ searchResultAvailabilityTimeout:
   timeUnit: HOURS
 
 webhooks:
-  vreAdded: ${timbuctoo_search_url}
-  dataSetUpdated: ${timbuctoo_indexer_url}
+#  vreAdded: $#{timbuctoo_search_url}
+#  dataSetUpdated: $#{timbuctoo_indexer_url}
   httpClient:
     connectionRequestTimeout: 200ms
 
@@ -130,10 +130,10 @@ allowGremlinEndpoint: true
 server:
   applicationConnectors:
     - type: http #Note! if you change this you might or might not also want to change the baseUri
-      port: ${timbuctoo_port} #Note! if you change this you might or might not also want to change the baseUri
+#      port: $#{timbuctoo_port} #Note! if you change this you might or might not also want to change the baseUri
   adminConnectors:
     - type: http
-      port: ${timbuctoo_adminPort}
+#      port: $#{timbuctoo_adminPort}
   requestLog:
     appenders: [] #All requests are already logged using logging.LoggingFilter so the seperate requestlog is not needed
 
