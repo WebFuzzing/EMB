@@ -48,7 +48,7 @@ namespace SampleProjectDriver
         public override void ResetStateOfSut()
         {
             //TODO
-            DbCleaner.ClearDatabase(_connection, null, DatabaseType.MS_SQL_SERVER);
+            DbCleaner.ClearDatabase(_connection, null, DatabaseType.MS_SQL_SERVER, "");
         }
 
         public override string StartSut()
@@ -61,7 +61,7 @@ namespace SampleProjectDriver
             {
                 var dbPort = GetEphemeralTcpPort();
 
-                _databaseController = new SqlServerDatabaseController("SampleApi", dbPort, "password123", timeout);
+                _databaseController = new SqlServerDatabaseController("SampleCQRS", dbPort, "sqlpass@123", timeout, "mcr.microsoft.com/mssql/server:2017-CU14-ubuntu");
 
                 var (connectionString, dbConnection) = await _databaseController.StartAsync();
 
