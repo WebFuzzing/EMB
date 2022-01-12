@@ -63,7 +63,7 @@ namespace SampleProjectDriver{
         public override string StartSut(){
             var ephemeralPort = GetEphemeralTcpPort();
 
-            const int timeout = 300;
+            const int timeout = 30;
 
             Task.Run(async () => {
                 var dbPort = GetEphemeralTcpPort();
@@ -78,7 +78,7 @@ namespace SampleProjectDriver{
                 SampleProject.API.Program.Main(new[]{ephemeralPort.ToString(), connectionString});
             });
 
-            WaitUntilSutIsRunning(ephemeralPort, timeout);
+            WaitUntilSutIsRunning(ephemeralPort);
 
             _sutPort = ephemeralPort;
 

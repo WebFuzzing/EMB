@@ -67,7 +67,7 @@ namespace Menu
                 API.Program.Main(new[] {$"{ephemeralPort}", connectionString});
             });
 
-            WaitUntilSutIsRunning(ephemeralPort, 30);
+            WaitUntilSutIsRunning(ephemeralPort);
 
             _sutPort = ephemeralPort;
 

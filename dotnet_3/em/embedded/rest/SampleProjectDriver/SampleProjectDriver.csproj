@@ -58,8 +58,8 @@
     -->
     <Target Name="TestInstrumentation" AfterTargets="Build">
 
-<!--        <Exec Command="cp @(SutPath) $(OutputPath)" Condition="$(OS.Contains('Unix'))"/>-->
-<!--        <Exec Command="copy @(SutPath) $(OutputPath)" Condition="$(OS.Contains('Windows'))"/>-->
+        <Exec Command="cp @(SutPath) $(OutputPath)" Condition="$(OS.Contains('Unix'))"/>
+        <Exec Command="copy @(SutPath) $(OutputPath)" Condition="$(OS.Contains('Windows'))"/>
     </Target>
 
 </Project>
