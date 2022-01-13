@@ -92,7 +92,12 @@ def build_jdk_8_maven() :
     copy(folder+"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar",dist)
     copy(folder+"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", dist)
 
+    #RPC
+    copy(folder+"/cs/rpc/thrift/artificial/thrift-ncs/target/rpc-thrift-ncs-sut.jar", dist)
+    copy(folder+"/em/external/thrift/ncs/target/rpc-thrift-ncs-evomaster-runner.jar", dist)
 
+    copy(folder+"/cs/rpc/thrift/artificial/thrift-scs/target/rpc-thrift-scs-sut.jar", dist)
+    copy(folder+"/em/external/thrift/scs/target/rpc-thrift-scs-evomaster-runner.jar", dist)
 
     ind0 = os.environ.get('SUT_LOCATION_IND0', '')
     if ind0 == '':
