@@ -2,6 +2,7 @@ package org.thrift.ncs.service;
 
 import org.apache.thrift.TException;
 import org.springframework.stereotype.Service;
+import org.thrift.ncs.client.Dto;
 import org.thrift.ncs.client.NcsService;
 import org.thrift.ncs.service.imp.*;
 
