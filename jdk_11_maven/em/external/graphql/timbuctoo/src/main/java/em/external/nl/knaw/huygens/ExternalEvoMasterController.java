@@ -7,6 +7,7 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
+import org.testcontainers.containers.GenericContainer;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -60,6 +61,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final String tmpFolder;
     private final String CONFIG_FILE = "timbuctoo_evomaster.yaml";
 
+    private static final GenericContainer elasticsearch = new GenericContainer("elasticsearch:5.6.5")
+            .withExposedPorts(9200)
+            //.withEnv("","")
+            //.withTmpFs(Collections.singletonMap("", "rw"))
+            ;
 
     public ExternalEvoMasterController(){
         this(40100, "../api/target", 12345, 120, "java");
@@ -119,10 +125,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Ddw.securityConfiguration.localAuthentication.permissionConfig="+tmpFolder +"/permissionConfig.json",
                 "-Ddw.securityConfiguration.localAuthentication.loginsFilePath="+tmpFolder+"/logins.json",
                 "-Ddw.securityConfiguration.localAuthentication.usersFilePath="+tmpFolder + "/users.json",
-                "-Ddw.server.adminConnectors[0].port=8081", //FIXME
+                "-Ddw.server.adminConnectors[0].port="+(sutPort+1),
                 "-Ddw.baseUri=http://localhost:0",
-                "-Ddw.collectionFilters.elasticsearch.hostname=localhost",
-                "-Ddw.collectionFilters.elasticsearch.port=9200",
+                "-Ddw.collectionFilters.elasticsearch.hostname="+elasticsearch.getContainerIpAddress(),
+                "-Ddw.collectionFilters.elasticsearch.port="+elasticsearch.getMappedPort(9200),
                 "-Ddw.collectionFilters.elasticsearch.username=elastic",
                 "-Ddw.collectionFilters.elasticsearch.password=changeme",
                 "-Ddw.webhooks.vreAdded=",
@@ -155,7 +161,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void preStart() {
-
+        elasticsearch.start();
     }
 
     @Override
@@ -171,6 +177,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStop() {
+        elasticsearch.stop();
     }
 
     @Override

@@ -9,12 +9,14 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
+import org.testcontainers.containers.GenericContainer;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,13 +50,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         setControllerPort(port);
     }
 
+    private static final GenericContainer elasticsearch = new GenericContainer("elasticsearch:5.6.5")
+            .withExposedPorts(9200)
+            //.withEnv("","")
+            //.withTmpFs(Collections.singletonMap("", "rw"))
+            ;
+
+
     @Override
     public String startSut() {
+
+        elasticsearch.start();
 
         application = new TimbuctooV4();
 
         tmpFolder = "tmpFolder";
-        //tmpDatabase = t
 
         resetStateOfSUT();
 
@@ -65,10 +75,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("dw.securityConfiguration.localAuthentication.usersFilePath", tmpFolder + "/users.json");
         System.setProperty("dw.server.adminConnectors[0].port","8081");
         System.setProperty("dw.baseUri","http://localhost:0");
-        System.setProperty("dw.collectionFilters.elasticsearch.hostname","localhost");
-        System.setProperty("dw.collectionFilters.elasticsearch.port","9200");
-        System.setProperty("dw.collectionFilters.elasticsearch.username","elastic");
-        System.setProperty("dw.collectionFilters.elasticsearch.password","changeme");
+        System.setProperty("dw.collectionFilters.elasticsearch.hostname", "" + elasticsearch.getContainerIpAddress());
+        System.setProperty("dw.collectionFilters.elasticsearch.port",""+elasticsearch.getMappedPort(9200));
+        //System.setProperty("dw.collectionFilters.elasticsearch.username","elastic");
+        //System.setProperty("dw.collectionFilters.elasticsearch.password","changeme");
         System.setProperty("dw.webhooks.vreAdded","");
         System.setProperty("dw.webhooks.dataSetUpdated", "http://localhost:3000");
         System.setProperty("dw.databases.databaseLocation",tmpFolder+"/datasets");
@@ -116,6 +126,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 e.printStackTrace();
             }
         }
+        elasticsearch.stop();
     }
 
     @Override
@@ -125,6 +136,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
+
+        //TODO does elasticsearch need to be reset?
+
         try {
             //FIXME: this fails due to locks on Neo4j. need way to reset it
             //deleteDir(new File(tmpFolder));
