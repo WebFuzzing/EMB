@@ -1,0 +1,224 @@
+= Add support for users to be able to add alternative redirection services (in addition to 'handle') to Timbuctoo
+
+== Problem:
+Currently, Timbuctoo only supports the Handle redirection service. It's not easy for Timbuctoo users to integrate other
+redirection services as the configuration for the Handle redirection is hard-coded into Timbuctoo.
+
+== Result:
+The hard-coded integration of Handle redirection service will be removed. Redirection service will now have to be
+specified instead in the Timbuctoo configuration. The users will be able to write implementations for their desired
+redirection service and configure Timbuctoo to use a new redirection service.
+
+The user will be able to do so as follows:
+
+=== Steps to add a desired redirection service to Timbuctoo and configure Timbuctoo to use it:
+- In the example_config.yaml file, change  the "redirectionService" property and child properties values to your new implementation.
+
+For example, Timbuctoo default (uses a *dummy* redirection service):
+----
+redirectionService:
+    "@class": nl.knaw.huygens.timbuctoo.v5.redirectionService.DummyRedirectionServiceFactory
+----
+
+can be changed to use *Handle* with the following configuration:
+----
+redirectionService:
+    "@class": nl.knaw.huygens.timbuctoo.v5.redirectionService.HandleRedirectionServiceFactory
+    privateKeyFile: <private_key_file>
+    cypher: <cypher>
+    namingAuthority: <naming_authority>
+    prefix: <prefix>
+----
+
+or, can be changed to use *Bit.ly* implementation as:
+----
+redirectionService:
+    "@class": nl.knaw.huygens.timbuctoo.v5.redirectionService.Bitly.BitlyServiceFactory
+    accessToken: <bitly_access_token>
+
+----
+
+NOTE: While using a custom redirection service, it's the user's responsibility to make sure that the configuration
+parameters required by the implementation are added to the configuration file (as demonstrated above for Handle and Bit.ly).
+
+The factory class mentioned above should then be able to use the specified information to build a redirection service.
+
+The factory class should implement the RedirectionServiceFactory interface and thus implement the "makeRedirectionService" function to create the new redirection service.
+
+This new implementation class for the redirection service should implement the RedirectionService interface and thus
+implement the "savePid" function.
+
+There is also an "oldSavePid" function that can be implemented to write to the old Timbuctoo.
+You can leave this function empty as the old part of Timbuctoo has been deprecated.
+
+
+== Approach:
+
+- The initial step will be to add support to one more redirection service as a test case, in addition to Handle.
+Bit.ly was chosen as the service as it has a Java library available.
+
+NOTE: We are using Bit.ly primarily for testing purposes. We have however left the Bit.ly test implementation available
+as an option. Using it requires the user to obtain their own authorization key from Bit.ly and configure it in their
+Timbuctoo instance.
+
+- Currently, handleAdder, specific to the handle service, is added directly to Timbuctoo. We need to change this so that
+the user can configure any implementation of the PersistenceUrlCreator in place of the handleAdder.
+
+- A RedirectionServiceFactory interface will be created that will be structured as follows:
+
+----
+public interface RedirectionServiceFactory {
+    RedirectionService makeRedirectionService();
+}
+----
+
+- A RedirectionService abstract class will also be created and structured as follows:
+
+----
+public abstract class RedirectionService {
+    void init();
+
+    public final void oldAdd(URI uriToRedirectTo, EntityLookup entityLookup){
+        ..do queing
+        call processRequestOld
+    }
+
+    public final void add(URI uriToRedirectTo, EntityLookup entityLookup){
+        ..do queing
+        call processRequest
+    }
+
+    protected abstract processRequest(); //handle specific/bitly specific code
+
+    protected abstract processRequestOld(); //handle specific/bitly specific code
+
+}
+----
+
+- Current handle service will be refactored to meet the above specification.
+
+This means we will now have a HandleServiceFactory that extends the RedirectionServiceFactory:
+----
+public class HandleServiceFactory implements RedirectionServiceFactory {
+    @JsonCreator
+    public HandleServiceFactory(@JsonProperty("useDummy") boolean useDummy,
+        @JsonProperty("privateKeyFile") String privateKeyFile, ...) {
+        ...
+    }
+
+    RedirectionService makeRedirectionService() {
+        ...
+    }
+}
+----
+
+Here, makeRedirectionService will return a:
+----
+public class HandleService extends RedirectionService {
+    void processRequest(..){
+        ...
+    }
+    void processOldRequest(...){
+        ...
+    }
+}
+----
+
+- Similarly, we will implement the RedirectionServiceFactory and RedirectionService classes for Bit.ly service (for test
+purposes) as follows:
+
+This means we will now have a BitlyServiceFactory that extends the RedirectionServiceFactory:
+----
+public class BitlyServiceFactory implements RedirectionServiceFactory {
+    @JsonCreator
+    public HandleServiceFactory(@JsonProperty("user") String user,
+        @JsonProperty("authKey") String authKey, ...) {
+        ...
+    }
+
+    RedirectionService makeRedirectionService() {
+        ...
+    }
+}
+----
+
+Here, makeRedirectionService will return a:
+----
+public class BitlyService extends RedirectionService {
+    void processRequest(..){
+        ...
+    }
+    void processOldRequest(...){
+        ...
+    }
+}
+----
+
+- This Bit.lyService will use the [Bit.ly Java API client](https://github.com/stackmagic/bitly-api-client)
+
+- The Bit.ly client will be used to call the Java client library as follows:
+
+----
+ShortenResponse respShort = new ShortenRequestBuilder("... the access token ...") //
+    .setLongUrl("https://example-timbuctoo-url/") //
+    .call();
+----
+
+== Testing Redirection
+
+To test that the Redirection Service is working correctly in Timbuctoo after the refactoring a GraphQL mutation will
+be added. A REST endpoint for entity retrieval is also necessary.
+
+=== GraphQL endpoint:
+
+The GraphQL mutation structure will be as follows;
+----
+persistEntity(dataSetId: String!, entityUri: String!): String! #persistentUri
+----
+
+This mutation will be implemented in the persistEntityMutation class that implements DataFetcher.
+The mutation will validate if the entity at the given entityUri exists and will call the 'add' function in the currently configured RedirectionService class (HandleService by default).
+
+The GraphQL endpoint will be tested manually by making sure that the persistentUri that is returned, when called in a web browser, redirects to a Timbuctoo entity.
+
+=== REST endpoint
+
+A REST endpoint called getEntity will be created as well. It will have the structure:
+----
+<timbuctoo_uri>/v5/{dataSetId}/{collection}/{id}
+----
+
+NOTE: The 'id' should be Url-encoded.
+
+Normal case (user has access to dataSet and provided collection and id are valid):
+
+. The given id will be decoded and the QuadStore will be used to retrieve the CursorQuads for the subject (id).
+. The CursorQuads will be converted to Triples and then to Json-LD using Rdf4j and the Json-LD will be returned.
+
+Case where user has no access to dataSet:
+
+. If the dataSet is public then proceed as 'normal case' above if not return 'Unauthorized'
+
+Case where collection and/or id are incorrect:
+
+. Return 'Collection/Id not found'
+
+The various cases for the REST endpoint will be tested manually by calling the endpoint Url.
+
+NOTE: After the service creates the persistent id it should be saved to the entity in the dataSet.
+(refer to addPid use by HandleService)
+
+=== Handle service support for new Timbuctoo
+
+Currently, the Handle service is only used by old Timbuctoo so the same functionality also needs to be added to new Timbuctoo.
+This will require some refactoring in addition to the new 'add' function.
+
+. The RedirectionService interface (from initial refactoring) will be converted to an abstract class.
+. The 'add' method will be changed to 'old_add' and a new 'add' method will be added.
+These will correspond respectively to 'add' functions for old and new Timbuctoos.
+Every new implementation of a redirection service will have to implement methods.
+. RedirectionService will also contain abstract methods that have to be implemented specifically by interfaces.
+. Queuing will be handled in the RedirectionService abstract class (so that implementations do not have to worry about it).
+. The HandleService class will now extend this abstract class.
+. The new 'add' function will have to write generated persistent ids to the triple store.
+

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# fail with an error message
+set -o errexit
+set -o pipefail
+set -o nounset
+
+# Create the integration test documentation
+#cd ../../../target/concordion/
+#find . -name *.html
+# Compose the documentation
+RESOURCE_DIR=$1
+TARGET_DIR=$2
+echo "Directory of the template page: $RESOURCE_DIR"
+#cd $RESOURCE_DIR 
+echo "Generate target page: $TARGET_DIR/index.html"
+
+#Xmllint must be executed with TARGET_DIR as PWD so that the generated xml:base attributes have the correct value
+cp $RESOURCE_DIR/index.html $TARGET_DIR/index_src.html
+cd "$TARGET_DIR"
+xmllint --xinclude index_src.html > index.html
+rm index_src.html

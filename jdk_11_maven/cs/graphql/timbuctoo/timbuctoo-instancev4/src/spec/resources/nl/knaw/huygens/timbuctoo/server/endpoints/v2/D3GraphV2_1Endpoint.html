@@ -1,0 +1,51 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Timbuctoo v2.1 D3Graph API</title>
+</head>
+
+<body>
+<section data-type="chapter">
+    <h2>Preface</h2>
+    Timbuctoo 2.1 can generate data for a d3 force-directed graph.
+</section>
+<section data-type="chapter">
+    <h2>Fetching the graph for a wwperson</h2>
+
+    <aside class="example highlight" h:http="#searchGet">
+        <div h:request="">
+            GET /v2.1/graph/wwpersons/37981a95-e527-40a8-9528-7d32c5c5f360?depth=2&amp;types=hasEdition&amp;types=hasSequel&amp;types=hasTranslation&amp;types=hasAdaptation&amp;types=hasPlagiarismBy&amp;types=isAnnotatedIn&amp;types=hasBibliography&amp;types=isCensoredBy&amp;types=isWorkCommentedOnIn&amp;types=containedInAnthology&amp;types=isCopiedBy&amp;types=isWorkAwarded&amp;types=hasPreface&amp;types=isIntertextualOf&amp;types=isWorkListedOn&amp;types=isWorkMentionedIn&amp;types=isParodiedBy&amp;types=isWorkQuotedIn&amp;types=isWorkReferencedIn&amp;types=hasDocumentSource&amp;types=hasBiography&amp;types=isPersonCommentedOnIn&amp;types=isDedicatedPersonOf&amp;types=isPersonAwarded&amp;types=isPersonListedOn&amp;types=isPersonMentionedIn&amp;types=hasObituary&amp;types=isPersonQuotedIn&amp;types=isPersonReferencedIn&amp;types=isCreatorOf&amp;types=isRelatedTo&amp;types=isParentOf&amp;types=isSpouseOf&amp;types=isPseudonymOf HTTP/1.1
+            VRE_ID: WomenWriters
+            Accept: application/json
+        </div>
+
+
+        <div h:response="">
+            HTTP/1.1 200
+
+            {
+                "links": [
+                    {
+                        "source": "/*NUMBER*/",
+                        "target": "/*NUMBER*/",
+                        "type": "/*STRING*/"
+                    }
+                ],
+                "nodes": [
+                    {
+                        "key": "/*STRING*/",
+                        "label": "/*STRING*/",
+                        "type": "/*STRING*/"
+                    }
+                ]
+            }
+        </div>
+    </aside>
+
+
+</section>
+
+</body>
+</html>

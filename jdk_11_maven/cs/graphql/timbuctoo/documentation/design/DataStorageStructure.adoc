@@ -1,0 +1,32 @@
+= Data storage structure
+
+== The problem
+After a delete of a data set several files of the old data set will be kept in memory until Timbuctoo is restarted.
+This manifests when a data set is created with a file upload then deleted and recreated.
+The `IndexManager` will try to process the (deleted) files of the deleted version of the data set.
+
+== The solution
+When a data set is deleted every reference to `fileList.json`, `log.json` and `metadata.json` should be removed.
+These files are referenced in several places of the code.
+So the best way is to refactor the code and make sure these files are only referenced in one place of the code.
+
+== The steps
+. Make `DataSet` and `DataSetRepository` independent of the file system for data storage.
+. Centralize the references to `fileList.json`, `log.json` and `metadata.json`.
+. Remove `FileSystemFileStorageFactory`.
+
+== The design
+
+=== New situation
+```
++-------------------+              +-------------+
+| DataSetRepository +------------->+ DataStorage |
++--------+----------+              +-------+-----+
+         |                                 |
+         |                                 |
+         v                                 v
+ +-------+-+                      +--------+-------+
+ | DataSet +--------------------->+ DataSetStorage |
+ +---------+                      +----------------+
+
+```

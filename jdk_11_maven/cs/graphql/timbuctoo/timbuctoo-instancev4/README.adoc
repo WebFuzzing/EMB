@@ -1,0 +1,23 @@
+= Timbuctoo instance v4
+This maven module contains the main code for Timbuctoo.
+
+== Timbuctoo file structure API v5
+The file structure looks something like the following:
+```
+- timbuctoo_data_dir
+   |- authorizations
+   |- logins.json
+   |- users.json
+   |- datasets
+       |- dataset_owner
+           |- dataset1
+               |- database
+               |- logs
+               |- files
+                   |- fileList.json
+                   |- <UUID>-<uri-escaped>
+                   |- <UUID>
+               |- log.json
+               |- schema.json
+               |- prefixes.json
+```

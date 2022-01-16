@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>nl.knaw.huygens</groupId>
+  <artifactId>timbuctoo-instancev4</artifactId>
+  <version>4.4.0-SNAPSHOT</version><!--marker for release.sh-->
+
+  <name>Timbuctoo-instance</name>
+  <description>Back-end software that provides different front-ends to share data and variations on that data.
+  </description>
+  <url>http://repository.huygens.knaw.nl/static/search.html</url>
+  <organization>
+    <name>Huygens ING</name>
+    <url>http://www.huygens.knaw.nl/</url>
+  </organization>
+  <inceptionYear>2012</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License</name>
+      <url>http://www.gnu.org/licenses/gpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <system>Jira</system>
+    <url>http://jira.huygens.knaw.nl/secure/RapidBoard.jspa?rapidView=3</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>http://ci.huygens.knaw.nl/job/timbuctoo_develop</url>
+  </ciManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>maven.huygens</id>
+      <name>Huygens Maven Repository</name>
+      <url>${huygens-repo}</url>
+    </repository>
+    <!-- use the following if you ARE using a snapshot version. -->
+    <snapshotRepository>
+      <id>maven.huygens</id>
+      <name>Huygens Maven Repository</name>
+      <url>${huygens-repo}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <developers>
+    <developer>
+      <id>RA</id>
+      <name>René van der Ark</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>HB</id>
+      <name>Henk van den Berg</name>
+      <organization>DANS</organization>
+      <organizationUrl>https://dans.knaw.nl/</organizationUrl>
+    </developer>
+    <developer>
+      <id>RD</id>
+      <name>Ronald Haentjens Dekker</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>MK</id>
+      <name>Meindert Kroese</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>PJ</id>
+      <name>Pratham Joshi</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>MM</id>
+      <name>Martijn Maas</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>KM</id>
+      <name>Kerim Meijer</name>
+      <organization>KNAW Humanities Cluster</organization>
+      <organizationUrl>https://huc.knaw.nl/</organizationUrl>
+    </developer>
+    <developer>
+      <id>JN</id>
+      <name>Jauco Noordzij</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+    <developer>
+      <id>WR</id>
+      <name>Walter Ravenek</name>
+      <organization>Huygens ING</organization>
+      <organizationUrl>http://www.huygens.knaw.nl</organizationUrl>
+    </developer>
+  </developers>
+
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- don't generate javadoc -->
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <!-- test output -->
+    <concordion.output.dir>${basedir}/target/concordion</concordion.output.dir>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <rpm.app-home>/data/timbuctoo/app</rpm.app-home>
+
+    <!--version numbers-->
+    <maven-compiler.version>3.8.1</maven-compiler.version>
+    <!-- code dependencies -->
+    <activemq.version>5.16.2</activemq.version>
+    <concoridion.version>1.5.1</concoridion.version>
+    <dropwizard.version>2.0.25</dropwizard.version>
+    <dropwizard-activemq.version>0.5.2</dropwizard-activemq.version>
+    <jsonassert.version>1.5.0</jsonassert.version>
+    <tinkerpop3.version>3.1.0-incubating</tinkerpop3.version>
+    <!-- The number after the dash is the Neo4j version -->
+    <neo4j-tinkerpop-api-impl.version>0.4-3.0.3</neo4j-tinkerpop-api-impl.version>
+    <neo4j.version>3.1.0</neo4j.version>
+    <hamcrest-library.version>2.2</hamcrest-library.version>
+    <vavr.version>0.10.4</vavr.version>
+    <huygens.persistence.version>2.3.0</huygens.persistence.version>
+    <junit.version>4.13.2</junit.version>
+    <timbuctoo-test-services.version>1.0.0-SNAPSHOT</timbuctoo-test-services.version>
+    <mockito.version>4.0.0</mockito.version>
+    <huygens.security.version>1.0.0-SNAPSHOT</huygens.security.version>
+    <HttpCommand.version>1.0.0-SNAPSHOT</HttpCommand.version>
+    <contract-diff.version>1.0.0-SNAPSHOT</contract-diff.version>
+    <jsonld-java.version>0.12.3</jsonld-java.version>
+    <rdf4j.version>3.7.3</rdf4j.version>
+    <xmlunit.version>2.8.2</xmlunit.version>
+    <jackson.version>2.13.0</jackson.version>
+    <!-- Maven plugins -->
+    <appassembler.version>2.0.0</appassembler.version>
+    <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+    <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+    <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+    <maven-failsafe-plugin.version>2.22.1</maven-failsafe-plugin.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.dropwizard</groupId>
+        <artifactId>dropwizard-bom</artifactId>
+        <version>${dropwizard.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>com.fasterxml.jackson</groupId>
+            <artifactId>jackson-bom</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Java 11 new dependencies -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>2.3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <!-- support voor dropwizard -->
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.28.0-GA</version>
+    </dependency>
+
+    <!-- list checkstyle so the bazel build also downloads it -->
+    <dependency>
+      <groupId>com.puppycrawl.tools</groupId>
+      <artifactId>checkstyle</artifactId>
+      <version>9.0.1</version>
+    </dependency>
+
+    <!-- ## Main dependencies ## -->
+    <!-- Dropwizard -->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-core</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+    <!--file uploads-->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-forms</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+    <!--make requests to other webservices-->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-client</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+    <!--serve static assets-->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-assets</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+
+
+    <!-- TinkerPop library for support graph databases -->
+    <dependency>
+      <groupId>org.apache.tinkerpop</groupId>
+      <artifactId>gremlin-core</artifactId>
+      <version>${tinkerpop3.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tinkerpop</groupId>
+      <artifactId>neo4j-gremlin</artifactId>
+      <version>${tinkerpop3.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-tinkerpop-api-impl</artifactId>
+      <version>${neo4j-tinkerpop-api-impl.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.neo4j</groupId>
+          <artifactId>neo4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.neo4j</groupId>
+          <artifactId>neo4j-enterprise</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphql-java</artifactId>
+      <version>11.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sleepycat</groupId>
+      <artifactId>je</artifactId>
+      <version>18.3.12</version>
+    </dependency>
+
+    <!-- ### handle ids ## -->
+    <!-- activeMQ for eventually executing commands on remote services -->
+    <dependency>
+      <groupId>com.kjetland.dropwizard</groupId>
+      <artifactId>dropwizard-activemq</artifactId>
+      <version>${dropwizard-activemq.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.activemq</groupId>
+          <artifactId>activemq-client</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <!-- Activemq broker package contains the in memory version for easy quick run -->
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-broker</artifactId>
+      <version>${activemq.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <!-- Activemq persistence db to make the in-memory broker somewhat production viable-->
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-kahadb-store</artifactId>
+      <version>${activemq.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- SDK to create Handle persistent ids-->
+    <dependency>
+      <groupId>nl.knaw.huygens</groupId>
+      <artifactId>huygens-persistence</artifactId>
+      <version>${huygens.persistence.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-all</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- ### RML datasource expression implementation -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-jexl3</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+
+    <!-- ### Uploads file handling ## -->
+    <!-- CSV -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.8</version>
+    </dependency>
+    <!-- Excel -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.17</version>
+    </dependency>
+    <!-- dataperfect -->
+    <dependency>
+      <groupId>com.github.DANS-KNAW</groupId>
+      <artifactId>dans-dp-lib</artifactId>
+      <version>36e6037f4b</version>
+    </dependency>
+    <!-- MS Access -->
+    <dependency>
+      <groupId>com.healthmarketscience.jackcess</groupId>
+      <artifactId>jackcess</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+
+    <!-- ### Search API's ## -->
+    <!-- ElasticSearch REST API -->
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>rest</artifactId>
+      <version>5.5.3</version>
+    </dependency>
+
+    <!-- ### Xml indenting ## -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>txw2</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
+    <!-- ### Logging and reporting ## -->
+    <!--GELF logback handler for sending logs to a remote log server-->
+    <dependency>
+      <groupId>net.gini.dropwizard</groupId>
+      <artifactId>dropwizard-gelf</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+
+    <!--federated auth support -->
+    <dependency>
+      <groupId>nl.knaw.huygens</groupId>
+      <artifactId>security-client-agnostic</artifactId>
+      <version>${huygens.security.version}</version>
+    </dependency>
+
+    <!-- OpenID Connect -->
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>oauth2-oidc-sdk</artifactId>
+      <version>9.18</version>
+    </dependency>
+
+    <!--ResourceSync library-->
+    <dependency>
+      <groupId>nl.knaw.huc</groupId>
+      <artifactId>resourcesync</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <!--Azure libraries for using azure services when running there -->
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-storage</artifactId>
+      <version>8.6.6</version>
+    </dependency>
+
+    <!-- ### RDF ## -->
+    <!-- Apache Jena -->
+    <dependency>
+      <groupId>org.apache.jena</groupId>
+      <artifactId>jena-tdb</artifactId>
+      <version>4.2.0</version>
+    </dependency>
+
+    <!-- Rdf4J -->
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-model</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-rdfxml</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-turtle</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-ntriples</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-trig</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-n3</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-nquads</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.rdf4j</groupId>
+      <artifactId>rdf4j-rio-jsonld</artifactId>
+      <version>${rdf4j.version}</version>
+    </dependency>
+
+    <!-- character encoding detection -->
+    <dependency>
+      <groupId>com.googlecode.juniversalchardet</groupId>
+      <artifactId>juniversalchardet</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+
+    <!-- ### make generating of value types easier -->
+    <dependency>
+      <groupId>org.immutables</groupId>
+      <artifactId>value</artifactId>
+      <version>2.8.8</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-guava</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jdk8</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <!-- ### Std lib additions ## -->
+
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.12.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>31.0.1-jre</version>
+    </dependency>
+
+    <!--Try monad-->
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>${vavr.version}</version>
+    </dependency>
+
+    <!-- Java implementation of Json-ld specification -->
+    <dependency>
+      <groupId>com.github.jsonld-java</groupId>
+      <artifactId>jsonld-java</artifactId>
+      <version>0.13.3</version>
+    </dependency>
+
+    <!-- Twitter-4j oauth for twitter -->
+    <dependency>
+      <groupId>org.twitter4j</groupId>
+      <artifactId>twitter4j-core</artifactId>
+      <version>4.0.7</version>
+    </dependency>
+
+    <!-- Bit.ly java client -->
+    <dependency>
+      <groupId>net.swisstech</groupId>
+      <artifactId>bitly-api-client</artifactId>
+      <version>0.8.0</version>
+    </dependency>
+
+    <!-- gson used in TestableTinkerPopGraphManager -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.8</version>
+    </dependency>
+
+    <!-- ## End of main dependencies ## -->
+
+    <!-- ## Test dependencies ## -->
+    <!-- Hamcrest dependency should be on top see http://stackoverflow.com/a/16735373 -->
+    <!-- Hamcrest library -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <version>${hamcrest-library.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Hamcrest matchers for streams, optionals, etc. -->
+    <dependency>
+      <groupId>co.unruly</groupId>
+      <artifactId>java-8-matchers</artifactId>
+      <version>1.6</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Concordion acceptance test framework -->
+    <dependency>
+      <groupId>org.concordion</groupId>
+      <artifactId>concordion</artifactId>
+      <version>${concoridion.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nl.knaw.huygens.concordion</groupId>
+      <artifactId>HttpCommand</artifactId>
+      <version>${HttpCommand.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Http core for parsing the acceptance test inputs -->
+    <dependency>
+      <groupId>nl.knaw.huygens</groupId>
+      <artifactId>contract-diff</artifactId>
+      <version>${contract-diff.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson</groupId>
+          <artifactId>jackson-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+        </exclusion>
+      </exclusions>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Dropwizard test dependencies -->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-testing</artifactId>
+      <version>${dropwizard.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--explicitly include neo4j in the tests for integration tests-->
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-kernel</artifactId>
+      <version>${neo4j.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-io</artifactId>
+      <version>${neo4j.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-ha</artifactId>
+      <version>${neo4j.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.neo4j</groupId>
+          <artifactId>neo4j-security-enterprise</artifactId> <!-- has a conflicting slf4j binder -->
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-slf4j</artifactId>
+      <version>${neo4j.version}</version>
+    </dependency>
+
+    <!-- Timbuctoo test services for easy creation of class matchers -->
+    <dependency>
+      <groupId>nl.knaw.huygens</groupId>
+      <artifactId>timbuctoo-test-services</artifactId>
+      <version>${timbuctoo-test-services.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--hamcrest matcher for asserting json -->
+    <dependency>
+      <groupId>uk.co.datumedge</groupId>
+      <artifactId>hamcrest-json</artifactId>
+      <version>0.2</version>
+    </dependency>
+
+    <!-- Mockito mocking framework -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- mockserver (with bad SAXParser) -->
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <version>5.11.2</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- A library to help validating xml documents -->
+    <dependency>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-core</artifactId>
+      <version>${xmlunit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xmlunit</groupId>
+      <artifactId>xmlunit-matchers</artifactId>
+      <version>${xmlunit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.21.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- ## End of test dependencies ## -->
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>oracleReleases</id>
+      <name>Oracle Released Java Packages</name>
+      <url>https://download.oracle.com/maven</url>
+      <layout>default</layout>
+    </repository>
+    <repository>
+      <id>central</id>
+      <name>Central repository</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>sun-repo-2</id>
+      <url>https://download.java.net/maven/2/</url>
+    </repository>
+    <repository>
+      <id>apache</id>
+      <url>https://repository.apache.org/content/repositories/public/</url>
+    </repository>
+    <repository>
+      <id>oracle</id>
+      <url>https://download.oracle.com/maven/</url>
+    </repository>
+    <repository>
+      <id>Huygens</id>
+      <url>https://maven.huygens.knaw.nl/repository/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>mbknor</id>
+      <name>mbknor</name>
+      <url>https://raw.githubusercontent.com/mbknor/mbknor.github.com/master/m2repo/releases</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+      <id>jcenter</id>
+      <name>bintray</name>
+      <url>https://jcenter.bintray.com</url>
+    </repository>
+  </repositories>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler.version}</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
+        <configuration>
+          <systemPropertyVariables>
+            <logback.configurationFile>${basedir}/src/test/resources/disable-logging.xml</logback.configurationFile>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${build-helper-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>add-test-source</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${basedir}/src/spec/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-test-resource</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>
+                    ${basedir}/src/spec/resources
+                  </directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>${appassembler.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+            <configuration>
+              <programs>
+                <program>
+                  <id>timbuctoo</id>
+                  <mainClass>nl.knaw.huygens.timbuctoo.server.TimbuctooV4</mainClass>
+                </program>
+              </programs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-failsafe-plugin.version}</version>
+        <configuration>
+          <forkCount>1</forkCount>
+          <reuseForks>false</reuseForks>
+          <argLine>-Xms1024m -Xmx1024m</argLine>
+          <testFailureIgnore>false</testFailureIgnore>
+          <skip>false</skip>
+          <testSourceDirectory>${project.build.testOutputDirectory}</testSourceDirectory>
+          <includes>
+            <include>**/*Fixture.java</include>
+          </includes>
+          <systemPropertyVariables>
+            <concordion.output.dir>${concordion.output.dir}</concordion.output.dir>
+            <!--<dw.logging.level>OFF</dw.logging.level>&lt;!&ndash; Do you want no logging output from your tests? because that's how you get no logging output from your tests&ndash;&gt;-->
+          </systemPropertyVariables>
+        </configuration>
+        <executions>
+          <execution>
+            <id>run-integration-tests</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>verify</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+<!--      REMOVED due to failing on Windows -->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--        <version>${maven-checkstyle-plugin.version}</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>validate</id>-->
+<!--            <phase>validate</phase>-->
+<!--            <goals>-->
+<!--              <goal>check</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <configLocation>/src/main/resources/checkstyle_config.xml</configLocation>-->
+<!--              <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+<!--              <encoding>UTF-8</encoding>-->
+<!--              <consoleOutput>true</consoleOutput>-->
+<!--              <failsOnError>true</failsOnError>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <configuration>
+          <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
+          <prefix>git</prefix>
+          <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+          <format>properties</format>
+
+          <failOnNoGitDirectory>false</failOnNoGitDirectory>
+          <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+
+          <skip>false</skip>
+
+          <includeOnlyProperties>
+            <includeOnlyProperty>^git.branch$</includeOnlyProperty>
+            <includeOnlyProperty>^git.commit.id$</includeOnlyProperty>
+            <includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
+          </includeOnlyProperties>
+
+          <!--
+            if set to true it uses native `git` executable for extracting all data.
+            This usually has better performance than the default (jgit) implementation, but requires you to
+            have git available as executable for the build as well as *might break unexpectedly* when you
+            upgrade your system-wide git installation.
+
+            As rule of thumb - stay on `jgit` (keep this `false`) until you notice performance problems.
+          -->
+          <useNativeGit>false</useNativeGit>
+
+          <!--
+              read up about git-describe on the in man, or it's homepage - it's a really powerful versioning helper
+          -->
+          <gitDescribe>
+            <!-- don't generate the describe property -->
+            <skip>false</skip>
+          </gitDescribe>
+        </configuration>
+
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <echo>
+                  ======================================================================================================
+                  Done! now run
+
+                  ./target/appassembler/bin/timbuctoo server example_config.yaml
+
+                  to get a debug server up and running then go to http://localhost:8080
+                  ======================================================================================================
+                </echo>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>timbuctoo-sut</finalName>
+              <transformers>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>nl.knaw.huygens.timbuctoo.server.TimbuctooV4</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>makeIndex</id>
+      <activation>
+        <os>
+          <family>unix</family>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>${exec-maven-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>build-docs</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>${basedir}/src/spec/scripts/builddoc</executable>
+                  <commandlineArgs>
+                    ${basedir}/src/spec/resources/ ${basedir}/target/concordion/
+                  </commandlineArgs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

@@ -1,0 +1,161 @@
+= Timbuctoo
+
+Bridge to networked research data
+
+https://gitter.im/HuygensING/timbuctoo[image:https://badges.gitter.im/HuygensING/timbuctoo.svg[alt="Join the chat at https://gitter.im/HuygensING/timbuctoo"]]
+
+//tag::support-note[]
+[NOTE]
+====
+This software is developed and supported by the http://huygens.knaw.nl[Huygens Institute] in the Netherlands. 
+We intend to support the software indefinitely, but *2021* is our current planning horizon.
+This notice will be updated before the end of 2021 with the new support duration.
+
+  * Support means that we'll review your https://github.com/huygensing/timbuctoo/pulls[pull requests], respond to https://github.com/huygensing/timbuctoo/issues[issues] and answer questions on the http://gitter.im/huygensing/timbuctoo[chat].
+  * It does not mean that we'll fix every issue that you raise.
+  * But it does mean that we'll commit regularly with new features or patches (usually every workday).
+  * While we try to make timbuctoo run everywhere, we're actively running it on Redhat 6. Using it on other platforms may trigger bugs that we are not aware of (and that you should report!)
+====
+//end::support-note[]
+
+== Background
+
+//tag::background[]
+Timbuctoo is aimed at historians doing interpretative research.
+Such a researcher collects facts from various documents, interprets and structures them, and creates tables of these facts. 
+The researcher then uses this new dataset either as an object to do analysis on, or as an index that allows them to look at their sources from a distance quickly stepping back to the original source for the real interpretative work.
+ 
+As such an historian you often need to categorize your findings. 
+For example: you keep track of birthplaces.
+You then need to decide how to write down the birthplace
+
+ - Do you use the name of the city, or the burrough? 
+ - Do you use the current name or the name when the person was born?
+ - If your dataset spans a long time you might have two different cities on the same geographical location. Are they one name or more?
+
+These judgements are sometimes the core of your research and sometimes incidental to it.
+Timbuctoo aims to make it easier to publish your research dataset and then to re-use other people's published datasets.
+To continue the example: another researcher might create a dataset containing locations, their coördinates and names and how that changed over time. You can then re-use that dataset and link to the entries instead of typing a string of characters that a humand might correctly interpret or not.
+
+There are database-like systems, so storing your data somewhere is easy.
+However, there are not many tools that will:
+
+ . allow you to upload any dataset without having to write code, (for most database importing large datasets will require you to write some amount of SQL, SPARQL or batch processing code) 
+ . expose your dataset so that it can be retrieved by another researcher (a http download and a REST interface)
+ . allow the researcher to base it's new dataset on that existing dataset 
+  * with a provenance trail
+  * without having to agree on the data model
+  * without having to agree on all data contents
+ . keep track of updates to the source dataset and allow the user to subscribe to these changes
+
+Which is the added value timbuctoo will bring. 
+//end::background[]
+
+video::186090384[vimeo, width=640, height=355]
+
+== Getting Started
+
+//tag::gettingstarted[]
+
+=== Prerequisites
+The following prerequisites need to be installed on the machine before running the Timbuctoo program:
+
+    * https://java.com/en/download/[Java]
+    * https://maven.apache.org/download.cgi[Maven] 
+    * https://git-scm.com/downloads[Git]
+    * https://www.docker.com/[Docker]
+    * http://xmlsoft.org/downloads.html[libxml2-utils]
+
+=== Start Timbuctoo without Docker
+==== Installation
+After the above requirements are fulfilled you can follow the following instructions to install Timbuctoo:
+
+    * Clone the https://github.com/HuygensING/timbuctoo.git[Timbuctoo Github repository] into a local directory using the command:
+
+    git clone https://github.com/HuygensING/timbuctoo.git
+ 
+==== Starting Timbuctoo
+    - On the Timbuctoo root directory run the Maven build command:
+
+      mvn clean package
+      
+    - On the "/devtools/debugrun" directory within your Timbuctoo repository, run:
+
+        ./timbuctoo_only.sh
+
+=== Start Timbuctoo with Docker
+To start Timbuctoo only:
+----
+$ (sudo) docker run -p8080:80 huygensing/timbuctoo
+----
+
+To start Timbuctoo with Timbuctoo GUI:
+----
+$ (sudo) docker-compose up
+----
+
+
+=== Uploading data
+    - You can run a curl command of the following format to upload data into Timbuctoo:
+
+    curl -v -F "file=@/<complete_path_to_file>/<filename>;type=<filetype>" -F "encoding=UTF-8" -H "Authorization: fake" http://localhost:8080/v5/u33707283d426f900d4d33707283d426f900d4d0d/mydataset/upload/rdf?forceCreation=true
+  
+    `u33707283d426f900d4d33707283d426f900d4d0d` the user id of the user when no security is used.
+    `mydataset` will be the name of the dataset
+
+    - You can use the provided *_bia_clusius.ttl_* data as a example dataset. The <filetype> for this is "text/turtle". It is available in the following folder:
+
+    "/<complete path to timbuctoo>/timbuctoo-instancev4/src/test/resources/nl/knaw/huygens/timbuctoo/v5/bia_clusius.ttl"
+
+    - Note that the above method forces a creation at upload time. Creating a dataset before doing the upload can be done at path:
+
+    "<host>/v5/dataSets/{userId}/{dataSetId}/create"
+
+
+=== Querying data and Applying Mutations
+
+    - With Timbuctoo running, you can access the https://github.com/graphql/graphiql[GraphIQL in-browser IDE] by pointing your web-browser to the following address:
+
+    http://localhost:8080/static/graphiql
+
+
+    - You can then refer to https://github.com/HuygensING/timbuctoo/blob/master/documentation/timbuctoo-graphql-api-guide.adoc[this Timbuctoo GraphQL API guide] for querying and mutation instructions with examples.
+
+//end::gettingstarted[]
+
+== FAQs/Q&A
+
+//tag::faqs[]
+
+**I can't access my data from the GraphiQL and I get the error _"SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data"_ on the right pane when I try to query for data.**
+
+It is likely that the filepath given while using the *curl* command to load the dataset was incorrect. Please note that the filepath to the dataset should be given in full (i.e. complete path from
+   root) with a '@' symbol preceding it.
+//end::faqs[]
+
+
+
+== License
+
+Timbuctoo is licensed under the link:./LICENSE.txt[GPL license]
+
+== Contributing
+
+See the link:./CONTRIBUTING.adoc[contribution guidelines]
+
+== Documentation
+
+Read about compiling, installing/running and using/developing timbuctoo in the link:./documentation[documentation] folder.
+A nicely rendered version of this documentation can be found http://huygensing.github.io/timbuctoo[online].
+
+== Acknowledgements
+
+Timbuctoo is funded by
+
+ * The Huygens Institute (indefinite)
+ * CLARIAH.nl (until ...)
+ * NDE (funding ends december 2016)
+
+'''
+
+This repository is available online at https://github.com/HuygensING/timbuctoo

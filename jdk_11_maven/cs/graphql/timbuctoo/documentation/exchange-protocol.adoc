@@ -1,0 +1,303 @@
+= Resource sync
+
+== Data model
+
+The http://www.openarchives.org/rs/1.1/resourcesync[resource sync specification] describes how various documents interlink in order to describe a set of resources and where the entrypoints should be placed.
+In it's simplest form it is just one file containing a directory listing with a predefined name.
+This is needed because the HTTP spec itself does not define a "list" command.
+Resourcesync is a set of embellishments on the sitemap.xml de-facto standard.
+Timbuctoo uses resourcesync to discover datasets at a source and to get the list of files that comprise the dataset.
+
+The document linked above provides the full spec, but we found it convenient to draw a picture of the various documents:
+
+[ditaa]
+--
+                                     +--------------------+
+                                     |                    |
+/.well-known/resourcesync  --------> | Source description |
+                                     |                    |
+                                     +--------------------+
+                                               |1
+                                               |
+                                               Vmany
+                                      +-----------------+
+                                      |                 |
+                   +------------------+ Capability list | <--------+ Link header/Link tag
+                   |                  |                 |
+                   |                  +-----------------+
+                   |1                      |1        |1
+                   |                       |         |
+                   V1                      |         V1
+           +-----------------+             |  +---------------------+
+           |   Changelist    |             |  |                     |
+           +-----------------+             |  |(Resource index list)|
+                   |1                      |  |                     |
+                   |                       |  +---------------------+
+                   Vmany                   |         |1
+          +--------------------+           |         |
+          | [changelist].nqud  |           V1        Vmany
+          +--------------------+       +---------------+
+                                       |               |
+                        +--------------+ Resource list | <--------- robots.txt
+                        |            1 |               |
+                        |              +---------------+
+                        |                      |1
+                        |                      |
+                        Vmany                  V1
+              +---------------------+    +---------------+
+              |                     |    |               |
+              |  Other files        |    |  [dataset]    |
+              |  (A.nq, B.jpg, ...) |    | (actual file) |
+              |                     |    |               |
+              +---------------------+    +---------------+
+
+--
+
+The horizontal arrows indicate entrypoints.
+If you provide timbuctoo (or another resourcesync destination) with a url it may try to find a link header/link tag, a resourcesync file in the folder .well-known at the root of the server, or a robots.txt.
+Each file provides links downwards, optionally they might also provide a link upwards.
+A source description contains links to one or more capability lists, each list is considered to contain 1 dataset by timbuctoo.
+
+NOTE: each capabilitylist is treated as 1 "dataset". Another instance will import a whole dataset, not a part of it.
+
+A capability list will link to one or more files via a resource (index) list.
+
+*Changelists*
+
+Besides the resourcelist, a capability list should also point to a changelist.
+The changelist should contain a list of files in the nqud format (see below) that when executed in serie construct the current dataset rdf file in the resourcelist.
+
+If such a changelist is available we will import the dataset using those change files.
+
+NOTE: It is very important that every change made to the dataset is included in the patch files (nqud) available
+in the changelist. Otherwise Timbuctoo won't be able to import the full dataset by using the changelist.
+
+If, and only if, a changelist is not available then the dataset will be imported from the resourcelist.
+
+All files in the resource list are considered to be part of the same dataset.
+
+NOTE: A single file in the dataset should contain the current version of the full rdf dataset.
+
+*The dataset in a resourcelist can be determined in one of three different ways:*
+
+1. If there is only one file in the list then that is assumed to be the dataset.
+2. If there is more than one file and one has the 'isDataSet' property in the metadata set to true then that file will be used.
+3. If there is more than one file, user can specify the dataset file by using the "dataSetFile" parameter to
+the ResourceSync import call.
+
+NOTE: If there is more than one file and the dataset cannot be determined either by the user specified 'dataSetFile'
+parameter or the 'isDataSet' property then an error is returned along with the list of all available files in the
+resourcelist. You can then do a call using one of those available files as a 'dataSetFile' as desired.
+
+
+*Resource dump*
+
+Finally, a capability list may also point to a resource dump, this is an optional feature and should be provided in addition to the resource list and the changelist.
+
+=== Resourcesync creation
+
+So to create a resourcesync capable server for timbuctoo you should:
+
+ 1. Put a http://www.openarchives.org/rs/1.0.9/resourcesync#ex_7[source description] at `/.well-known/resourcesync` on your server
+ 2. Fill it with links to http://www.openarchives.org/rs/1.0.9/resourcesync#ex_6[capability lists] (1 per dataset that you wish to publish)
+ 3. Fill them with a link to a http://www.openarchives.org/rs/1.0.9/resourcesync#ex_1[Resource list] and a http://www.openarchives.org/rs/1.0.9/resourcesync#ex_3[Change list]
+ 4. Fill the resource list with links to the actual data files. There should be at least one <dataset> file in one of the supported rdf formats (see below)
+ 5. Fill the changelist with the nqud files that together form <dataset>
+
+
+You may use the `describedby` mechanism (see http://www.openarchives.org/rs/1.1/resourcesync#DocumentFormats[]) to point to documents that describe your datasets. 
+These description documents can be in any format, however, using one of the RDF-formats is recommended. 
+Timbuctoo interprets http://www.openarchives.org/rs/1.1/resourcesync#CapabilityList[capabilitylist's] as description of a dataset. 
+Therefore expects that the metadata of a `capabilitylist` will contain the `describedby` mechanism.
+This `describedBy` item can either be added to a url in the sourcedescription or to the root item of the `capabilitylist`.
+
+=== Capabilitylists
+Capabilitylists have a special place in the resourcesync of Timbuctoo.
+Timbuctoo has a different for each of its data sets.
+So Timbuctoo considers each capability list to be a representative for a data set.
+This is why all Timbuctoo capability lists have a `describedby` link.
+The description will should something like the following:
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/terms/"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:schema="http://schema.org/">
+
+  <rdf:Description rdf:about="http://example.org/dataset">
+    <dc:title>Data set title</dc:title>
+    <dc:description>Short description of the data set</dc:description>
+    <foaf:depiction>https://timbuctoostorage.blob.core.windows.net/imagestorage/2TBI.png</foaf:depiction>
+    <dc:rightsHolder>
+      <rdf:Description rdf:about="http://example.org/rightsHolder">
+        <schema:name>Rights Holder</schema:name>
+        <schema:email>Rights.holder@example.org</schema:email>
+      </rdf:Description>
+    </dc:rightsHolder>
+
+    <schema:ContactPoint>
+      <rdf:Description rdf:about="http://example.org/contactPerson">
+        <schema:name>Contact Person</schema:name>
+        <schema:email>contact.person@example.org</schema:email>
+      </rdf:Description>
+    </schema:ContactPoint>
+
+    <dc:license rdf:resource="https://creativecommons.org/publicdomain/zero/1.0/"/> <!-- Could be any lincense -->
+    <dc:provenance>
+      <rdf:Description rdf:about="http://example.org/provenance">
+        <dc:title>Provenance title</dc:title>
+        <dc:description rdf:datatype="http://spec.commonmark.org/0.28/">
+          Provenance description, [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links) could be used.
+        </dc:description>
+      </rdf:Description>
+    </dc:provenance>
+
+    <dc:abstract rdf:resource="http://example.org/summaryProperties"/>
+  </rdf:Description>
+</rdf:RDF>
+```
+The description is based on https://www.w3.org/TR/void/[VoID vocabulary] with the addition of `foaf:depiction`.
+This description will be the information on the landing page of the data set in the Timbuctoo GUI.
+
+=== Valid resources
+Timbuctoo cannot sync every filetype on the internet, only files containing rdf in several of the more well-known serialisation formats.
+To indicate the serialisation format you can specify the mimetype in the optional `md` field (meta data field) for each url from the resource list.
+Alternatively you can use a file extension to indicate the type of file.
+The explicit mimetype overrules the file extension.
+Look add <<Valid types, Valid types>> for more information.
+
+
+The other files that are uploaded along with the dataset will simply be stored in the Timbuctoo filesystem.
+
+So we expect an item resource list will look like:
+
+```
+...
+<url>
+    <loc>http://localhost/.well-known/resourcesync/dataset1/dataset.nq</loc>
+    <rs:md type="application/n-quads"/> <!-- this line is optional, but can be used to override the extension -->
+</url>
+...
+```
+= RDF
+https://www.w3.org/1999/.status/PR-rdf-schema-19990303/status[RDF] is the exchange format we use.
+
+== Valid types
+The types Timbuctoo currently support are:
+
+ * text/turtle (.ttl)
+ * application/rdf+xml (.rdf)
+ * application/n-triples (.nt)
+ * application/ld+json (.jsonld)
+ * application/trig (.trig)
+ * application/n-quads (.nq)
+ * text/n3 (.n3)
+ * application/vnd.timbuctoo-rdf.nquads_unified_diff (.nqud) [Our custom type for more information look below]
+
+== Data set (rdf) design considerations
+In order to make your data set work well with Timbuctoo, there are a few thinks to be considered.
+
+First Timbuctoo expects each resource to have a `http://www.w3.org/1999/02/22-rdf-syntax-ns#type`.
+This is how it will organize your data set into multiple collections.
+If none of your resources have type definition, all the data will be swept on a big pile of a type Timbuctoo calls `unknown`.
+
+Timbuctoo supports all kind of value type definitions.
+But when you when you want to take full advantage of the power of the Timbuctoo and use its GUI to generate an Elasticsearch index for you; you are limited to:
+
+* `http://schema.org/Date` will suffice for your modern day dates.
+* `https://www.loc.gov/standards/datetime/pre-submission.html` will give you the freedom to add uncertainties to you date description.
+Currently we are using https://github.com/inukshuk/edtf.js to parse our EDTF for the Elasticseach index. So we are limited to the EDTF it supports, which is almost, but not all.
+
+=== Validate your RDF
+To make sure your RDF will be accepted by Timbuctoo, you can create a small test script using http://docs.rdf4j.org/programming/#_parsing_a_file_and_collecting_all_triples[RDF4J].
+
+
+=== Additions and retractions
+Changes (additions and retractions) made in Timbuctoo will be stored in the changelist for dataset.<rdf extension> file
+ that is in the nquads-ud format (see below)
+
+= N-Quads U.D.
+N-Quads U.D. stands for N-Quads Unified Diff.
+It is an extension on the RDF N-Quads notation.
+
+== Why another RDF notation?
+RDF data set notations are like snapshots.
+They have no visible history.
+Look at the example an n-triples data set:
+```
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherlands" .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/longitude> "436052"^^<http://schema.org/longitude> .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/latitude> "5200951"^^<http://schema.org/latitude> .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/original_id> "PL00000029" .
+```
+How would you know if one of these predicates is changed since the last time you viewed this file?
+
+To facilitate sharing of datasets between two parties we need to make sure that a dataset does not change under your feet. 
+For Timbuctoo we needed a way to change a data without changing its history.
+So the first thing we did was looking at ideas that were already floating around on the internet.
+We found one called https://afs.github.io/rdf-patch/[RDF Patch] and another one called https://www.w3.org/TR/ldpatch/[Linked Data Patch Format].
+
+== Why didn't we use RDF Patch?
+At first glance RDF Patch looks like the ideal solution for our problem.
+So we tried to write a piece of code that allowed us to import the notation.
+But we got stuck pretty quickly.
+The main reason is there are basically no libraries that parse RDF Patch.
+That is also true if you define you own standard.
+Another reason is that it was not simple to writer the parser ourselves.
+The next example will show the most complex form of RDF Patch:
+```
+@prefix  foaf: <http://xmlns.com/foaf/0.1/> .
+D <http://example/bob> foaf:name "bob" .
+A <http://example/bob> foaf:name "Bob" .
+A R foaf:knows <http://example/alice> .
+A R R <http://example/charlie> .
+```
+This is when we decided we should make a less complex notation.
+
+=== Why didn't we use Linked Data Patch Format?
+Linked Data Patch Format is very hard to generate automatically. 
+The patch statements are not about what changed, but more about the intent of the user.
+We wanted a format that people without much knowledge of RDF could generate with more-or-less standard tools.
+
+== Notation
+Because our notation should be simpler than RDF Patch we created an extension on N-Quads.
+N-Quads it self is an extension on N-Triples, so we support both.
+
+The format for the additions and deletions we decided to use http://www.gnu.org/software/diffutils/manual/html_node/Detailed-Unified.html#Detailed-Unified[Unified].
+
+Here's an example:
+```
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherland" .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherlands" .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/longitude> "436052"^^<http://schema.org/longitude> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/latitude> "5200951"^^<http://schema.org/latitude> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/original_id> "PL00000029" .
+```
+
+A processor MUST ignore all lines that do not start with a single `+` or `-`.
+So the extra info that is often part of the unified diff format is also allowed:
+
+```
+--- my_datafile.nq    2017-08-18 12:08:18.772264550 +0200
++++ update.nq  2017-07-19 11:18:16.057104790 +0200
+@@ -0,0 +1,35652 @@
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherland" .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherlands" .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/longitude> "436052"^^<http://schema.org/longitude> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/latitude> "5200951"^^<http://schema.org/latitude> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/original_id> "PL00000029" .
+```
+
+An advantage of choosing the unified format is that is easy to generate for people using N-Quads or N-Triples in combination with a Unix (Linux, Mac OS X) system:
+```
+sort prev.nq > prev_sorted.nq
+sort update.nq > update_sorted.nq
+diff --unified=0 prev_sorted.nq update_sorted.nq > updates.nqud
+```
+
+== Media type and file extension
+We chose to use the `application/vnd.timbuctoo-rdf.nquads_unified_diff` as media type.
+The file extension is `.nqud`.

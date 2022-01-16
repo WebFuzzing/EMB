@@ -1,0 +1,79 @@
+= Geo data
+
+== Requirements
+=== Storage, indexing and presentation
+Timbuctoo can store each format of geo encoded data.
+Some formats are easier to index than others.
+
+==== GeoJson
+This is a well used standard to represent Geo data on the web.
+This standard is for example used by Elasticsearch.
+
+==== Possible RDF vocabularies
+There are several RDF vocabularies that can be used to store geo data.
+
+http://schema.org/geo is looks a lot like GeoJson and could be easily converted.
+It has ways to describe points, lines and even polygons.
+
+https://www.w3.org/2005/Incubator/geo/XGR-geo-20071023/ has the same options as http://schema.org/geo.
+
+We can alwasy create a custom with serialized GeoJson, similar what we have done for
+
+== Search
+=== Elasticsearch possibilities
+* Supports GeoJson natively
+* Give a few possibilities to search through the GeoJson
+For Geo data storage see: https://www.elastic.co/guide/en/elasticsearch/guide/current/geoloc.html
+For Geo queries see: https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-queries.html
+
+==== GeoHash
+GeoHash is a way to encode geo locations.
+It is used be Elasticsearch to divide aggregations of the geo data into buckets.
+The size of the buckets is determined with the GeoHash precision.
+For queries with less precision the aggregations could have a large deviation from the real position.
+
+==== Aggrations
+Do not use the GeoHash of an aggregation to put markers on a map.
+Use the `cell` from the following aggregation:
+
+[source, json]
+...
+"aggs": {
+    "new_york": {
+      "geohash_grid": {
+        "field": "geometry.coordinates",
+        "precision": 5
+      },
+      "aggs": {
+        "cell": {
+          "geo_bounds": {
+            "field": "geometry.coordinates"
+          }
+        }
+      }
+    }
+  }
+...
+
+The first `aggs` property is the main aggregation of the query.
+
+== Display
+* Google maps
+** Custom tyles / overlay
+https://developers.google.com/maps/documentation/javascript/groundoverlays
+
+* OpenStreetMap https://www.openstreetmap.org
+** is an alternative for google maps
+
+== Tasks
+. Decide which RDF vocabularies are going te be supported.
+. Change the timbuctoo-elasticsearch-indexer to support those vocabularies as a geo-facet / geo-result.
+.. Decide which queries we want to do.
+This determines how the data should indexed.
+.. Create a separate facet or multiple facets for the geo data.
+. Add a GUI widget for the geo-facet / result
+. Add GUI widget for show the location in a detail view of an place
+
+== Test project
+The next link is to a project that was used to checkout how Elasticsearch works with geo data:
+https://github.com/HuygensING/timbuctoo-elasticsearch-indexer

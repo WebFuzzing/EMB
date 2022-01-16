@@ -1,0 +1,58 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tim: <http://timbuctoo.huygens.knaw.nl/properties/> .
+@prefix archetypes: <http://timbuctoo.huygens.knaw.nl/archetypes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix custom: <http://timbuctoo.huygens.knaw.nl/datatypes/> .
+@prefix clusius: <http://timbuctoo.huygens.knaw.nl/datasets/clusius/> .
+
+<> <http://purl.org/dc/terms/title> "DWC Data" ;
+  <http://purl.org/dc/terms/description> "Biographical data of the Digital Web Centre for the History of Science (DWC)" ;
+  <http://xmlns.com/foaf/0.1/depiction> "http://www.dwc.knaw.nl/wp-content/bestanden/2012/02/1.nadepromotie.jpg" ;
+  <http://purl.org/dc/terms/rightsHolder> <./rightsHolder> ;
+  <http://schema.org/ContactPoint> <./contactPerson> ;
+  <http://purl.org/dc/terms/license> <https://creativecommons.org/publicdomain/zero/1.0/> ;
+  <http://purl.org/dc/terms/provenance> <./provenance> ;
+  <http://purl.org/dc/terms/abstract> <./summaryProperties> .
+
+<./rightsHolder> <http://schema.org/name> "Huygens ING" .
+<./rightsHolder> <http://schema.org/email> "owner@email.com" .
+
+<./contactPerson> <http://schema.org/name> "Huygens ING" .
+<./contactPerson> <http://schema.org/email> "dwc@huygens.knaw.nl" .
+
+<./provenance> <http://purl.org/dc/terms/title> "Example Provenance Title" .
+<./provenance> <http://purl.org/dc/terms/description> "This is an example description for the example provenance." .
+
+clusius:Places
+  rdfs:subClassOf archetypes:location ;
+  <http://timbuctoo.huygens.knaw.nl/static/v5/vocabulary#hasIndexConfig> "{\"facet\":[{\"paths\":[\"tim_name.value\"],\"type\":\"MultiSelect\", \"caption\": \"Name\"},{\"paths\":[\"tim_country.value\"],\"type\":\"MultiSelect\", \"caption\": \"Country\"},{\"paths\":[\"tim_latitude.value\"],\"type\":\"MultiSelect\", \"caption\": \"Latitude\"},{\"paths\":[\"tim_longitude.value\"],\"type\":\"MultiSelect\", \"caption\": \"Longitude\"},{\"paths\":[\"tim_remarks.value\"],\"type\":\"MultiSelect\", \"caption\": \"Remarks\"}]}" ;
+  <http://timbuctoo.huygens.knaw.nl/static/v5/vocabulary#summaryTitlePredicate> "tim_name" .
+
+clusius:Persons
+  rdfs:subClassOf archetypes:person ;
+  <http://timbuctoo.huygens.knaw.nl/static/v5/vocabulary#hasIndexConfig> "{\"facet\":[{\"paths\":[\"tim_namesList.items.value\"],\"type\":\"MultiSelect\", \"caption\": \"Name\"},{\"paths\":[\"tim_gender.value\"],\"type\":\"MultiSelect\", \"caption\": \"Gender\"},{\"paths\":[\"tim_birthDate.value\"],\"type\":\"DateRange\", \"caption\": \"Birth date\"},{\"paths\":[\"tim_deathDate.value\"],\"type\":\"DateRange\", \"caption\": \"Death date\"},{\"paths\":[\"tim_hasDeathPlace.tim_country.value\",\"tim_hasDeathPlace.tim_name.value\"],\"type\":\"Hierarchical\", \"caption\": \"Death place\" },{\"paths\":[\"tim_hasBirthPlace.tim_country.value\",\"tim_hasBirthPlace.tim_name.value\"],\"type\":\"Hierarchical\", \"caption\": \"Birth place\"},{\"paths\":[\"_inverse_tim_isScientistBioOf.tim_biography.value\"],\"type\":\"MultiSelect\", \"caption\": \"Biography\"},{\"paths\":[\"_inverse_tim_hasResidentList.items.tim_hasLocation.tim_country.value\",\"_inverse_tim_hasResidentList.items.tim_hasLocation.tim_name.value\"],\"type\":\"Hierarchical\", \"caption\": \"Residences\"},{\"paths\":[\"_inverse_tim_isEducationOfList.items.tim_description.value\"],\"type\":\"MultiSelect\", \"caption\": \"Educations\"},{\"paths\":[\"_inverse_tim_isOccupationOfList.items.tim_description.value\"],\"type\":\"MultiSelect\", \"caption\": \"Occupations\"}],\"fullText\":[{\"fields\":[{\"path\":\"tim_namesList.items.value\"}], \"caption\": \"Name\"}]}" ;
+  <http://timbuctoo.huygens.knaw.nl/static/v5/vocabulary#summaryTitlePredicate> "tim_namesList.items" .
+
+clusius:Biography
+  rdfs:subClassOf archetypes:document ;
+  <http://timbuctoo.huygens.knaw.nl/static/v5/vocabulary#hasIndexConfig> "{\"facet\":[{\"paths\":[\"tim_isScientistBioOf.tim_namesList.items.value\"],\"type\":\"MultiSelect\", \"caption\":\"Scientist\"},{\"paths\":[\"tim_hasFieldOfInterestList.items.tim_value.value\"],\"type\":\"MultiSelect\", \"caption\":\"Fields of interest\"},{\"paths\":[\"tim_biography.value\"],\"type\":\"MultiSelect\", \"caption\":\"Biography\"},{\"paths\":[\"tim_highest_degree.value\"],\"type\":\"MultiSelect\", \"caption\":\"Highest degree\"}]}" ;
+  <http://timbuctoo.huygens.knaw.nl/static/v5/vocabulary#summaryDescriptionPredicate> "tim_biography" .
+
+clusius:Provenance_type rdfs:subClassOf archetypes:keyword .
+clusius:Fields_of_interest rdfs:subClassOf archetypes:keyword .
+clusius:Publications rdfs:subClassOf archetypes:document .
+clusius:Institutes rdfs:subClassOf archetypes:collective .
+clusius:Provenance rdfs:subClassOf archetypes:document .
+
+clusius:Education_EDU0000929
+  tim:description "Medicine"^^xsd:string ;
+  tim:original_id "EDU0000929"^^xsd:string ;
+  a clusius:Education ;
+  wrong_in_2:isEducationOf clusius:Persons_PE00011344 .
+
+clusius:Education_EDU0000930
+  tim:description "Law"^^xsd:string ;
+  tim:original_id "EDU0000930"^^xsd:string ;
+  a clusius:Education ;
+  tim:isEducationOf clusius:Persons_PE00011341 .

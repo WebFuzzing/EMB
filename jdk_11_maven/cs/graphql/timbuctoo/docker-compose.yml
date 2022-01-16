@@ -1,0 +1,39 @@
+version: '2.1'
+
+services:
+  elasticsearch:
+    image: huygensing/elasticsearch:5.6.5
+    ports:
+      - 9201:9200
+  indexer:
+    image: huygensing/timbuctoo-elasticsearch-indexer
+    environment:
+      indexer_elasticsearch_host: "http://elasticsearch:9200"
+      indexer_port: "80"
+      indexer_timbuctoo_graphql_endpoint: "http://timbuctoo/v5/graphql"
+      indexer_timbuctoo_login_endpoint: "http://timbuctoo/v2.1/authenticate"
+      timbuctoo_user: ""
+      timbuctoo_password: ""
+    ports:
+      - 3000:80
+  timbuctoo-gui:
+    image: huygensing/timbuctoo-gui:v5.7
+    environment:
+       REACT_APP_BACKEND_URL: "http://localhost:8080"
+    ports:
+      - 3006:80
+  timbuctoo:
+    image: huygensing/timbuctoo
+    command: sh -c "if ! [ -f /mapped-data/auth/users.json ]; then mkdir -p /mapped-data/auth; echo '[{\"@type\":\"user\",\"displayName\":\"givenNamesurname\",\"persistentId\":\"pid\",\"_id\":\"bc75a716-7965-49b5-bb93-68004ba0d900\"}]' > /mapped-data/auth/users.json; fi; if ! [ -f /mapped-data/auth/logins.json ]; then mkdir -p /mapped-data/auth; echo '[{\"@type\":\"login\",\"userPid\":\"pid\",\"password\":\"Cbjk8GMdx7HhQHgZkAR74FBo76eNWcb9q8R8WPMbup0=\",\"salt\":\"YTQzMjMzMjQtYWJmNC00YjYxLTk2ZDYtZDhkMDY1Nzc5MGJm\",\"userName\":\"user\",\"givenName\":\"givenName\",\"surName\":\"surname\",\"emailAddress\":\"email\",\"organization\":\"organization\"}]' > /mapped-data/auth/logins.json; fi; if ! [ -f /mapped-data/datasets/authorizations.json ]; then mkdir -p /mapped-data/datasets; echo '[{\"vreId\":\"indexer\",\"userId\":\"pid\",\"roles\":[\"USER\"]}]' > /mapped-data/datasets/authorizations.json; fi; /app/bin/timbuctoo server /app/example_config.yaml"
+    environment:
+      timbuctoo_elasticsearch_host: elasticsearch
+      timbuctoo_elasticsearch_port: 9200
+      base_uri: http://localhost:8080
+      JAVA_OPTS: ${JAVA_OPTS}
+      timbuctoo_dataPath: ${timbuctoo_dataPath:-/mapped-data}
+      timbuctoo_authPath: ${timbuctoo_authPath:-/mapped-data/auth}
+    volumes:
+      - ./timbuctoo-data/:/mapped-data
+    ports:
+      - 8080:80
+      - 8081:81

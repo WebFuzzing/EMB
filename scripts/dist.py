@@ -112,6 +112,8 @@ def build_jdk_11_maven() :
     copy(folder+"/cs/rest/cwa-verification-server/target/cwa-verification-sut.jar", dist)
     copy(folder+"/em/external/rest/cwa-verification/target/cwa-verification-evomaster-runner.jar", dist)
 
+    copy(folder+"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", dist)
+    copy(folder+"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", dist)
 
 ####################
 def build_jdk_11_gradle() :

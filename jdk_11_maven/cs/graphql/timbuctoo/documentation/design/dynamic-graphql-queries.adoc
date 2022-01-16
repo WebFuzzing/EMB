@@ -1,0 +1,91 @@
+= Dynamic Graphql Queries
+
+. Problem:
+In the generic frontend I often need to get a predicate that is usually there, but might not be.
+Also it might be a list or not, and it might be shortened using a common prefix or it might not be (`owl_sameAs` vs `http___www_w3_org_2002_07_owl_sameAs`).
+The current workaround is to first query the schema, loop through the properties check what the name of the prop for my predicate is (and see if it exists ata ll)
+
+This kinda works when I know the collection of the entity, but when I want to find related entities in other dataSets I often don't even know the collection directly.
+So I need to do two extra queries: one to find out the collection and another one to find the property in that collection.
+Since a query is about half a second this slows down the frontend.
+
+To solve this we often add dedicated properties to the graphql schema that we can be sure exist (such as the `title` property in DataSetMetadata.
+While this is good for properties that we wish to standardise this requires a change to the api for each property that the frontend needs which makes backend releases a bottleneck for frontend development.
+It also highly promotes these properties which may not be intended.
+
+. Result:
+* The frontend can retrieve the values of a predicate of a known subject without graphql throwing an error if the predicate doesn't exist and without needing to know the schema name of the property.
+* The frontend can get a subject without knowing whether it exists or what type it has.
+
+You can then execute a dynamic query such as:
+
+```
+{
+  dataSets {
+     u33707283d426f900d4d33707283d426f900d4d0d__dwc {
+      subject(uri: "http://example.com/some-uri-that-might-not-exist") {
+				type: getAllOfPredicate(uri: "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", outgoing: true, count: 1) {
+          entities {
+            uri
+          }
+        }
+        sameAs: getAllOfPredicate(uri: "http://www.w3.org/2002/07/owl#sameAs"outgoing: true) {
+          entities {
+            uri
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+or get info of a related entity using a query such as
+
+```
+
+# Get all sameAs uri's of this entity in other dataSets
+{
+  dataSets {
+    ufab7d657a250e3461361c982ce9b38f3816e0c4b__saa_index_op_ondertrouwregister {
+      saaOnt_IndexOpOndertrouwregister(uri: "") {
+        inOtherDataSets {
+          metadata { dataSetId }
+          entity {
+            sameAs: getAllOfPredicate(uri: "http://www.w3.org/2002/07/owl#sameAs", outgoing: true) {
+              entities {
+                uri
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+. Approach:
+
+Add a property `getAllOfPredicate` to the Entity interface. It will return a listwrapper that contains the Value's and the Entity's that the predicate points to.
+
+Example of the interface:
+
+```
+interface Entity {
+  getAllOfPredicate(uri: String!, outgoing: Boolean!, cursor: ID, count: Int): EntityOrValueList
+}
+
+type EntityOrValueList {
+  entities: [Entity!]!
+  values: [Value!]!
+  nextCursor: ID
+  prevCursor: ID
+}
+```
+
+.. Edge cases
+* If the predicate doesn't exist then the lists are empty.
+* if the predicate points to both values and uri's then the values and entities list's _together_ contain `count` items (so if you request 10 items you might get 2 entities and 8 values)
+* the entities and values need to be separate lists because graphql does not allow a union type of interfaces (i.e. `union EntityOrValue = Entity | Value` is not allowed)
+

@@ -1,0 +1,59 @@
+= Roadmap
+
+This document contains our todo list. It contains a list of ideas for improvements. It is a semi-automated dump from our issue tracker.
+
+Each idea belongs to an Epic (a word derived from the fact that ideas are often named "user stories"). These epics might be derived from the code structure (i.e. a Java package is an Epic) or from a commitment we made to a funder (i.e. an Epic is a section in a proposal).
+
+== The Epics
+
+[[Tabular-data-import]]Tabular-data-import::
+  Import non-rdf datasets (XML, CSV, Excel, MS Access) into a very simple RDF datamodel, and be able to specify how you would map that datamodel to an RDF graph.
+[[Edit-GUI]]Edit-GUI::
+  A GUI that will use the data descriptions to be able to edit arbitrary collections. We're aiming for something that allows a quick edit. It does not need to be customisable. (CLARIAH task 11.100)
+[[Query-GUI]]Query-GUI::
+  A gui for graph querying. The approach is that a user draws a pattern of the graph and the system answers what nodes match that pattern. note: 1. This is not an open-ended tool, but must have a clearly defined ceiling after which the user should switch to a true language such as SQL, SPARQL or an imperative language. 2. The tool will show what query it generates so that the user is put in contact with the query language. (3) The tool should provide queries based on the archetypes. (4) And you should be able to share your queries.
+[[Faceted-search]]Faceted-search::
+  Each dataset gets a faceted search based on the archetypes it specified. We're also building extension points to plug in more complex indexing configurations.
+[[Discover-GUI]]Discover-GUI::
+  A gui that is not aimed at precise querying, but rather to get a high-level overview of the data so that you know what queries to write.
+[[RDF-import-export]]RDF-import-export::
+  Being able to get your data from and to the LOD cloud and specifically from and to other timbuctoo instances. We might also implement a feature were a timbuctoo instance advertises it's datasets to other instances.
+[[RDF-transform]]RDF-transform:: 
+  Being able to project a graph as a new graph.
+[[Dataset-interdependencies]]Dataset-interdependencies:: Be able to depend on other datasets.
+  * Link to RDF subjects in a specific other dataset
+  * Import (parts of) other datasets into your own dataset
+  * Use RDF-transform to generate a new (read-only?) dataset that is fully dependent on other datasets
+  * A GUI that allows you to see published datasets (with the author, institution etc.)
+  * User management that specifies who is allowed to see your data
+[[Dataset-search]]Dataset-search::
+  * find subjects using their properties and then find the datasets that contain them
+[[Data-curation-tools]]Data curation tools::
+  Tools for cleaning up datasets. We're mostly implementing this by working together with existing tools.
+[[Data-export]]Data-export::
+  Render the timbuctoo data as RDF, graphviz and whatnot. This epic might also focus on generating data representations in a semantic form that can be well imported by other tools. (i.e. use the proper date-time encoding or geo-coordinates encoding)
+
+There's also two epic's for stuff that is not immediately user visible:
+
+[[Release-process]]Release process::
+    Have a better release process
+[[non-fatal-bugs]]non-fatal-bugs:: 
+    Cleanup work, not really related to a specific task and not quite visible to the user, but needed to keep timbuctoo workeable.
+
+
+== The roadmap
+
+=== MVP-demo (october 2015)
+This version will allow people to see what timbuctoo does, and allow us to easily upload some datasets. It is not yet useable for production work, but should contain all the features of the MVP (but sometimes slow, with maybe a somewhat confusing UI and perhaps buggy)
+
+To get timbuctoo here we're mostly adding the <<Tabular-data-import>> and a very basic version of a <<Faceted-search>>. We're also doing a basic implementation of <<Dataset-interdependencies>>.
+
+=== MVP (januari 2016)
+For this version no new features will be introduced, though we'll probably also work on the <<Release-process>>.
+
+
+
+ == Future ideas
+ We have more ideas than we can realize, so we focus on our main features. 
+ The next ideas we really want to implement, but we do not see the time to do it soon:
+  * https://github.com/HuygensING/neo4j-cluster-test[Run a cluster of Timbuctoo instances] based on a Neo4j HA-cluster.

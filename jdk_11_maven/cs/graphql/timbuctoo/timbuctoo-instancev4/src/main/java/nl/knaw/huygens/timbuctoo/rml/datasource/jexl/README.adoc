@@ -1,0 +1,46 @@
+= BulkUpload
+
+== BulkUpload Rml expression support
+
+We have added support for more elaborate rml expressions than the r2rml template syntax supports because r2rml is written under the assumption that the user can provide such expressions in the SELECT statement of the database query. We use Apache JEXL as the expression language. For more information on JEXL expressions see http://commons.apache.org/proper/commons-jexl/reference/syntax.html[the JEXL reference]
+
+There are three modules available to the expressions: `Math`, `Integer` and `Json`. 
+Math and Integer contain all static methods from their java.lang.* counterparts, Json contains one static method called stringify.
+There is also the variable `v`, which is a map with the fields from the input record.
+This allows you to formulate expressions such as `Integer:parseInt(v.age) + 2`.
+
+The configuration of a custom field will look something like this:
+```
+...
+@graph": [{
+		"@id": "http://timbuctoo.huygens.knaw.nl/mapping/DUMMY_TestVijf/Persons",
+		"http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://timbuctoo.huygens.knaw.nl/person",
+		"rml:logicalSource": {
+			"rml:source": {
+				"tim:rawCollection": "Persons",
+				"tim:vreName": "DUMMY_TestVijf",
+				"http://timbuctoo.huygens.knaw.nl/mapping#customField": [
+				      {
+					"http://timbuctoo.huygens.knaw.nl/mapping#name": "combinedNameValue",
+					"http://timbuctoo.huygens.knaw.nl/mapping#expression": "v.given_name + \" \" + v.family_name"
+				      }
+				]
+			}
+		}
+...
+```
+
+The usage of a custom field is the same as a normal field:
+```
+    ...
+		}, {
+			"objectMap": {
+				"column": "combinedNameValue",
+				"datatype": {
+					"@id": "https://www.w3.org/TR/2001/REC-xmlschema-2-20010502/#string"
+				}
+			},
+			"predicate": "http://timbuctoo.huygens.knaw.nl/combinedName"
+		},{
+		...
+```

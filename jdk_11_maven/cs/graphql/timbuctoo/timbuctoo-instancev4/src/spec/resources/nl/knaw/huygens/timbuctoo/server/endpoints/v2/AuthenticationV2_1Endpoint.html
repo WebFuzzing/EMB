@@ -1,0 +1,67 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Authentication API</title>
+</head>
+<body>
+  <section data-type="chapter">
+    <h2>Preface</h2>
+    <p>
+      This specification describes the workings of the v2.1 version of the Timbuctoo REST API for authentication.
+    </p>
+  </section>
+
+  <section data-type="chapter">
+    <h2>Local login</h2>
+    <span>For local login HTTP Basic Authorization is used.</span>
+    <aside class="example" h:http="#authPost">
+      <div h:request="">
+        POST /v2.1/authenticate HTTP/1.1
+        Authorization: Basic dXNlcjpwYXNzd29yZA==
+
+      </div>
+      <div h:response="">
+        HTTP/1.1 204
+        X_AUTH_TOKEN:
+
+      </div>
+    </aside>
+    <span c:assertTrue="hasContent(#authPost.firstHeaders.x_auth_token)">
+      You then get a X_AUTH_TOKEN header back (In this case <span c:echo="#authPost.firstHeaders.x_auth_token"></span>)
+      that you can use to get your own user information.
+    </span>
+    <aside class="note">
+      <span>
+        If you use a wrong user password combination, the response will be
+        <span c:assertEquals="doLoginWithInvalidUsernameAndPassword()">401 Unauthorized</span>.
+      </span>
+    </aside>
+    <aside class="note">
+      <span>
+        If the request does not contain a  &#39;Authorization&#39; header, the response will be
+        <span c:assertEquals="doLoginWithoutHeader()">401 Unauthorized</span>.
+      </span>
+    </aside>
+  </section>
+  <section data-type="chapter">
+    <h2>Get user information</h2>
+    <aside class="example" h:http="#userInfoGet">
+      <div h:request="">
+        GET /v2.1/system/users/me HTTP/1.1
+        Authorization: $(#authPost.firstHeaders.x_auth_token)
+        VRE_ID: WomenWriters
+      </div>
+      <div h:response="">
+        HTTP/1.1 200
+
+        {
+          "displayName": "/*STRING*/"
+        }
+      </div>
+    </aside>
+  </section>
+
+</body>
+</html>
