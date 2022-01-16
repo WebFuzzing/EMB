@@ -140,7 +140,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public ProblemInfo getProblemInfo() {
-
        return new GraphQlProblem("/v5/graphql");
     }
 
