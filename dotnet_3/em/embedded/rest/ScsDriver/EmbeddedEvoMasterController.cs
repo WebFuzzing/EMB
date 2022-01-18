@@ -5,15 +5,12 @@ using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
 
-namespace ScsDriver
-{
-    public class EmbeddedEvoMasterController : EmbeddedSutController
-    {
+namespace ScsDriver {
+    public class EmbeddedEvoMasterController : EmbeddedSutController {
         private bool _isSutRunning;
         private int _sutPort;
 
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
 
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
@@ -23,14 +20,10 @@ namespace ScsDriver
             instrumentedSutStarter.Start();
         }
 
-        public override string StartSut()
-        {
+        public override string StartSut() {
             var ephemeralPort = GetEphemeralTcpPort();
 
-            Task.Run(() =>
-            {
-                SCS.Program.Main(new[] {ephemeralPort.ToString()});
-            });
+            Task.Run(() => { SCS.Program.Main(new[] {ephemeralPort.ToString()}); });
 
             WaitUntilSutIsRunning(ephemeralPort);
 
@@ -41,8 +34,7 @@ namespace ScsDriver
             return $"http://localhost:{ephemeralPort}";
         }
 
-        public override void StopSut()
-        {
+        public override void StopSut() {
             SCS.Program.Shutdown();
             _isSutRunning = false;
         }
@@ -63,8 +55,7 @@ namespace ScsDriver
 
         public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 
-        public override void ResetStateOfSut()
-        {
+        public override void ResetStateOfSut() {
         }
 
         private int GetSutPort() => _sutPort;

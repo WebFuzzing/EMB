@@ -9,17 +9,14 @@ using EvoMaster.Controller.Controllers.db;
 using EvoMaster.DatabaseController;
 using EvoMaster.DatabaseController.Abstractions;
 
-namespace Menu
-{
-    public class EmbeddedEvoMasterController : EmbeddedSutController
-    {
+namespace Menu {
+    public class EmbeddedEvoMasterController : EmbeddedSutController {
         private bool _isSutRunning;
         private int _sutPort;
         private NpgsqlConnection _connection;
         private IDatabaseController _databaseController;
 
-        private static void Main(string[] args)
-        {
+        private static void Main(string[] args) {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
 
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
@@ -45,17 +42,14 @@ namespace Menu
 
         public override bool IsSutRunning() => _isSutRunning;
 
-        public override void ResetStateOfSut()
-        {
+        public override void ResetStateOfSut() {
             DbCleaner.ClearDatabase_Postgres(_connection);
         }
 
-        public override string StartSut()
-        {
+        public override string StartSut() {
             var ephemeralPort = GetEphemeralTcpPort();
 
-            Task.Run(async () =>
-            {
+            Task.Run(async () => {
                 var dbPort = GetEphemeralTcpPort();
 
                 _databaseController = new PostgresDatabaseController("restaurant_menu_database", dbPort, "password123");
@@ -76,8 +70,7 @@ namespace Menu
             return $"http://localhost:{ephemeralPort}";
         }
 
-        public override void StopSut()
-        {
+        public override void StopSut() {
             API.Program.Shutdown();
             _databaseController.Stop();
             _isSutRunning = false;

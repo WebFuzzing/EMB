@@ -116,3 +116,6 @@ Migrations/
 *csproj.user
 
 *packages.lock.json
+
+#logs
+dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
