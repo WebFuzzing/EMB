@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: changelog/v000-create-app-session-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: changelog/v000-create-tan-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: changelog/v001-add-dob-hash-column.yml
+      relativeToChangelogFile: true
+  - include:
+      file: changelog/v002-add-teletan-type-column.yml
+      relativeToChangelogFile: true

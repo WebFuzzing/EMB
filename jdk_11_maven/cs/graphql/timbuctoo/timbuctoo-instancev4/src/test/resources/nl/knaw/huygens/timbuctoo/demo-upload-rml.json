@@ -1,0 +1,124 @@
+{
+  "@context": {
+    "@vocab": "http://www.w3.org/ns/r2rml#",
+    "rml": "http://semweb.mmlab.be/ns/rml#",
+    "tim": "http://timbuctoo.huygens.knaw.nl/mapping#",
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+      "@type": "@id"
+    },
+    "predicate": {
+      "@type": "@id"
+    },
+    "termType": {
+      "@type": "@id"
+    },
+    "parentTriplesMap": {
+      "@type": "@id"
+    },
+    "class": {
+      "@type": "@id"
+    },
+    "object": {
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Persons",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://timbuctoo.huygens.knaw.nl/person",
+      "rml:logicalSource": {
+        "rml:source": {
+          "tim:rawCollection": "Persons",
+          "http://timbuctoo.huygens.knaw.nl/mapping#customField": [
+            {
+              "http://timbuctoo.huygens.knaw.nl/mapping#name": "combinedNameValue",
+              "http://timbuctoo.huygens.knaw.nl/mapping#expression": "\"{\\\"components\\\":[{\\\"type\\\":\\\"FORENAME\\\",\\\"value\\\":\\\"\" + v.given_name + \"\\\"},{\\\"type\\\":\\\"SURNAME\\\",\\\"value\\\":\\\"\" + v.family_name + \"\\\"}]}\""
+            }
+          ]
+        }
+      },
+      "subjectMap": {
+        "template": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Persons/{tim_id}"
+      },
+      "predicateObjectMap": [
+        {
+          "object": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Persons",
+          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+        },
+        {
+          "objectMap": {
+            "column": "combinedNameValue",
+            "datatype": {
+              "@id": "http://timbuctoo.huygens.knaw.nl/datatypes/person-name"
+            }
+          },
+          "predicate": "http://timbuctoo.huygens.knaw.nl/names"
+        },
+        {
+          "objectMap": {
+            "column": "gender",
+            "datatype": "https://www.w3.org/TR/2001/REC-xmlschema-2-20010502/#string"
+          },
+          "predicate": "http://timbuctoo.huygens.knaw.nl/gender"
+        },
+        {
+          "objectMap": {
+            "column": "birth_date",
+            "datatype": "http://timbuctoo.huygens.knaw.nl/types/datable"
+          },
+          "predicate": "http://timbuctoo.huygens.knaw.nl/birthDate"
+        },
+        {
+          "objectMap": {
+            "column": "death_date",
+            "datatype": "http://timbuctoo.huygens.knaw.nl/types/datable"
+          },
+          "predicate": "http://timbuctoo.huygens.knaw.nl/deathDate"
+        },
+        {
+          "objectMap": {
+            "column": "viaf_id",
+            "termType": "http://www.w3.org/ns/r2rml#IRI"
+          },
+          "predicate": "http://www.w3.org/2002/07/owl#sameAs"
+        },
+        {
+          "objectMap": {
+            "joinCondition": {
+              "child": "birth_place_persistent_id",
+              "parent": "persistent_id"
+            },
+            "parentTriplesMap": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Places"
+          },
+          "predicate": "http://timbuctoo.huygens.knaw.nl/hasBirthPlace"
+        }
+      ]
+    },
+    {
+      "@id": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Places",
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": "http://timbuctoo.huygens.knaw.nl/location",
+      "rml:logicalSource": {
+        "rml:source": {
+          "tim:rawCollection": "Places",
+          "tim:vreName": "{VRE_NAME}"
+        }
+      },
+      "subjectMap": {
+        "template": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Places/{tim_id}"
+      },
+      "predicateObjectMap": [
+        {
+          "object": "http://timbuctoo.huygens.knaw.nl/mapping/{VRE_NAME}/Places",
+          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+        },
+        {
+          "objectMap": {
+            "column": "name",
+            "datatype": "https://www.w3.org/TR/2001/REC-xmlschema-2-20010502/#string"
+          },
+          "predicate": "http://timbuctoo.huygens.knaw.nl/name"
+        }
+      ]
+    }
+  ]
+}

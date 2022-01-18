@@ -1,0 +1,68 @@
+= GraphQL
+
+== Working
+
+=== schema.graphql
+The explicit static schema.
+
+=== rootquery.RootQuery
+Merges the generated derived schema and the explicit schema's.
+
+Adds the `DataFetchers` to the static schema.
+
+=== derivedschema.DerivedSchemaContainer
+Contains the dynamically schema derived from the RDF data.
+
+=== datafetchers.RdfWiringFactory
+The place to add `DataFetchers` to the dynamically generated schema.
+
+== Customizing the dynamic schema
+
+=== Adding custom fields
+Custom fields can be added to `schema.graphql` and/or to `DerivedSchemaContainer`.
+If a field is added to `schema.graphql` it also needs to be add to `DerivedSchemaContainer`.
+If a field is added to `DerivedSchemaContainer`, it does not need to be added to `schema.graphql`.
+
+An example that adds a field to both `schema.graphql` and/ `DerivedSchemaContainer` is the `uri` of `Entity`.
+`schema.graphql`
+```
+...
+interface Entity {
+  ...
+  title: Value
+  ...
+}
+...
+```
+`DerivedSchemaContainer` needs to be changed because the schema is changed.
+And it contains a type that implements the interface `Entity`.
+The value of `ENTITY_INTERFACE_NAME` is "Entity".
+```
+...
+.append("type ").append(name).append(" implements ").append(ENTITY_INTERFACE_NAME).append(" @rdfType(uri: \"")
+...
+.append("  title: Value @entityTitle\n")
+...
+```
+
+=== Adding custom DataFetchers
+The custom `DataFetchers` should be added to `RdfWiringFactory`.
+The `title` example, that is used in the 'Adding custom fields` paragraph.
+The directive "entityTitle" points to "@entityTitle" configured in `DerivedSchemaContainer`.
+```
+...
+else if (environment.getFieldDefinition().getDirective("entityTitle") != null) {
+  return env -> { // bogus lambda implementation of a DataFetcher.
+    return TypedValue.create("test", RdfConstants.STRING, ((SubjectReference) env.getSource()).getDataSet());
+  };
+}
+...
+```
+
+The custom directive should also be registered in the providesDataFetcher method
+
+```
+...
+      return environment.getFieldDefinition().getDirective("entityTitle") != null;
+...
+```

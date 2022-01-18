@@ -1,0 +1,17 @@
+# Asciidoc documentation pipeline
+
+The scripts in this folder will build the timbuctoo documentation. 
+
+The following scripts are available
+
+build.sh::
+  This script runs the actual asciidoc build. 
+  It results in a set of HTML files in ./output.
+  It requires a functioning asciidoctor installation, the easiest way to get it is through docker.
+  You can run the script using `docker run -it -v $PWD:/documents asciidoctor ./documentation/asciidoc-pipeline/build.sh`
+watchbuild.sh::
+  This script calls build.sh whenever one of the input files change.
+  You can run the script using `docker run -it -v $PWD:/documents asciidoctor ./documentation/asciidoc-pipeline/watchbuild.sh`
+gh-pages.sh::
+  This script assumes that a build has been run and then creates a new commit on the gh-pages branch with the contents of output.
+  You can run the script using `./gh-pages.sh` after you have run build.sh (so this script should not be run in a container, it only requires git).

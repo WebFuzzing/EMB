@@ -1,0 +1,169 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 WWPerson API</title>
+</head>
+<body>
+<section data-type="chapter">
+  <p>
+    This specification describes the workings of the v2.1 version of the Timbuctoo REST API for wwrelations
+  </p>
+  <p>
+    <span c:execute="#token=getAuthenticationToken()">For each test we expect the user is logged in and uses token
+    <b><span c:echo="#token"></span></b>.</span>
+  </p>
+  <p>
+    <span c:execute="#documentRecordId=makeDocumentRecord()">And we assume an existing wwdocument with
+      this id: <b><span c:echo="#documentRecordId"></span></b>.</span>
+    <span c:execute="#documentPath=getDocumentPath()"></span>
+  </p>
+  <p>
+    <span c:execute="#personRecordId=makePersonRecord()">And we assume an existing wwperson with
+      this id: <b><span c:echo="#personRecordId"></span></b>.</span>
+    <span c:execute="#personPath=getPersonPath()"></span>
+  </p>
+  <p>
+    <span c:execute="#relationId=getRelationId()">And we will use the relation "isCreatedBy" which has the id: <b><span c:echo="#relationId"></span></b>.</span>
+  </p>
+</section>
+
+<section data-type="chapter">
+    <h2>Create a new wwrelation with POST</h2>
+
+    <aside class="example" h:http="#createResponse">
+      <p>When a valid POST is performed to wwrelations</p>
+
+      <div h:request="">
+        POST /v2.1/domain/wwrelations HTTP/1.1
+        Authorization: $(#token)
+        Content-type: application/json
+        VRE_ID: WomenWriters
+
+        {
+          "accepted": true,
+          "@type": "wwrelation",
+          "^typeId":"$(#relationId)",
+          "^sourceId":"$(#documentRecordId)",
+          "^sourceType":"document",
+          "^targetId":"$(#personRecordId)",
+          "^targetType":"person"
+        }
+      </div>
+      <p>The server will respond with a location header containing the URL of the created resource</p>
+
+      <div h:response="validateIdFromLocationHeader">
+        HTTP/1.1 201
+        Location:
+      </div>
+    </aside>
+    <span c:execute="#recordId=getRecordId()"></span>
+  <p>
+    After at most <b>60</b> seconds the new record
+        <span c:execute="#pid=retrievePid()">
+          <span c:assertTrue="recordHasPid()">
+            should have persistent ID in the field <i>^pid</i>:
+            <b><span c:echo="#pid"></span></b>
+          </span>.
+        </span>
+  </p>
+
+</section>
+<!--
+<section data-type="chapter">
+  <h2>Performing GET to the recently created wwrelation resource</h2>
+  <aside class="example" h:http="#response">
+    <p>When a GET is performed to the wwrelation </p>
+    <div h:request="">
+      GET #createResponse.headers.location HTTP/1.1
+      Accept: application/json
+    </div>
+    <p>The server will respond with the created resource</p>
+    <div h:response="">
+      HTTP/1.1 200
+      Content-type: application/json
+
+      {
+        "_id": "#recordId",
+        "@type": "wwrelation"
+      }
+    </div>
+  </aside>
+
+</section>
+-->
+
+<section >
+  <h2>Check relations on wwdocument</h2>
+
+  <p>When we GET the wwdocument</p>
+  <aside class="example" h:http="#response">
+    <div h:request="">
+      GET $(#documentPath) HTTP/1.1
+      Accept: application/json
+    </div>
+    <p>The wwperson should have a @relationCount of 1 and an isCreatedBy relation in @relations to the wwperson</p>
+    <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "@relationCount": 1,
+        "@relations": {
+          "isCreatedBy": [
+            {
+              "type": "wwperson",
+              "id": "$(#personRecordId)",
+              "path": "domain/wwpersons/$(#personRecordId)",
+              "displayName": "/*STRING*/",
+              "relationId": "$(#recordId)",
+              "accepted": true,
+              "rev": 1
+            }
+          ]
+        }
+      }
+    </div>
+  </aside>
+
+</section>
+
+<section >
+  <h2>Check relations on wwperson</h2>
+
+  <p>When we GET the wwperson</p>
+  <aside class="example" h:http="#response">
+    <div h:request="">
+      GET $(#personPath) HTTP/1.1
+      Accept: application/json
+    </div>
+    <p>The wwperson should have a @relationCount of 1 and an isCreatorOf relation in @relations to the wwdocument</p>
+    <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "@relationCount": 1,
+        "@relations": {
+        "isCreatorOf": [
+            {
+              "type": "wwdocument",
+              "id": "$(#documentRecordId)",
+              "path": "domain/wwdocuments/$(#documentRecordId)",
+              "displayName": "/*STRING*/",
+              "relationId": "$(#recordId)",
+              "accepted": true,
+              "rev": 1
+            }
+          ]
+        }
+      }
+    </div>
+  </aside>
+
+</section>
+
+
+<span c:execute="deleteEntities()"></span>
+
+</body>
+</html>

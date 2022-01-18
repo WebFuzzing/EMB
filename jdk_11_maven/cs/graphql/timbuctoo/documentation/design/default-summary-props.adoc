@@ -1,0 +1,33 @@
+= Default summary props
+
+== The problem
+After RDF upload the data can be browsed in the Timbuctoo GUI.
+The browsing is not very pleasant because the overview does not show any information just a view entry button.
+The only way it is possible to show any data is to configure summary properties (title, description, image)
+This configuration can only be done direct via the GraphQL API, at this moment.
+So it is impossible to configured without any technical knowledge.
+
+== Expected result
+To have "decent" results after each RDF upload, there should be a possibility to configure defaults for _titles_, _descriptions_ and _imagess_.
+The configuration should be done in the configuration of Timbuctoo, so it can be different for each instance.
+Users must be able to override the defaults, with the current summary props graphql mutations.
+So if a user configures summary properties this should be used instead of the system defaults.
+
+== Solution
+To achieve the expected result the following steps should be taken:
+
+* The Entity interface in GraphQL should get the properties _title_, _description_ and _image_.
+* A DataFetcher should be created that handles these properties and that looks up the value
+** It should check properties in the following order
+. Configured by the user.
+. The default properties in order they are configured.
+* The configuration should look like:
+```
+...
+defaultTitles:
+- type: SimplePath
+  path: ["http://skos.org/label"] # path to a property directly linked to the entity
+- type: SimplePath
+  path: ["http://schema.org/birthPlace", "http://rdfs.org/label"] # path to a property of a property linked to the entity
+...
+```

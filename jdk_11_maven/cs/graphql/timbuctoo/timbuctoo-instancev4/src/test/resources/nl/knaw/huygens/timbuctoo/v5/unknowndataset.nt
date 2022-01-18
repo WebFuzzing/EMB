@@ -1,0 +1,7 @@
+<http://example.org/person1> <http://schema.org/givenName> "Jan" .
+<http://example.org/person1> <http://schema.org/familyName> "Jansen" .
+
+<http://example.org/person2> <http://schema.org/givenName> "Alexander" .
+<http://example.org/person2> <http://schema.org/givenName> "Willem" .
+<http://example.org/person2> <http://schema.org/givenName> "Michiel" .
+<http://example.org/person2> <http://schema.org/familyName> "van Hasselt" .

@@ -1,0 +1,66 @@
+= Updates to Timbuctoo Resource/Changelist
+
+. Problem:
+* Timbuctoo datasets currently have information in fileList.json and log.json that do contain enough information to generate proper changeList according to the Resource Sync Specification. (we currently generate resourceList only)
+* Issue 1: Instead of storing all changes in the resourceList we want to start using both the changeList and the resourceList. The resourcelist should contain all files except the ones that are used as rdf patches. It should also contain a resource that represents the dataset as is.
+* Issue 2: When we download an external resourcesync dataset it may contain multiple changeList while our importmanager requires 1 ordered list of changes.
+
+. Result:
+* Timbuctoo properly generates a Changelist based on the log.json and according to the requirements stated in the
+http://www.openarchives.org/rs/1.1/resourcesync#ChangeList[ResourceSync Specification Documentation].
+* Resourcesync import is able to support seperate changelists. It will import from changelists if available and if not
+from the dataset.<rdf> file. Updates will be made using the changelists.
+* An endpoint that can be used to retrieve a resource list from Timbuctoo that no longer contains the patches but does include a resource representing the dataset as it is now.
+* We specify how timbuctoo will deal with datasets that contain multiple rdf files (and optionally changes for all these files): we require one of the files to be called `dataset` and ignore the others (i.e. we download them, but won't import them).
+* For now, we mark an imported dataset as "read-only" so that we won't have to solve all edge cases related to the merging of conflicting edits.
+
+. Approach:
+* Note the order of preference for importing nq, rdf, etc. in exchange-protocol.adoc (to avoid conflict in case of
+    multiple rdf files named 'rdf').
+* We import changelists by default and only the dataset if no changelist is found. Because otherwise you might get a race condition when downloading the updates (you can fix that by requiring hashes, but that complicates the provider's implementation and we don't want to do that)
+
+Changes required to import code:
+
+* On first call to resourcesync import, we check for the existence of a changelist.
+If it does not exist, we import the dataset resource from the resourcelist.xml
+and we mark the dataset as "DUMP_IMPORTED" (in the log.json).
+* For importing from the resourcelist.xml we have three options:
+** Only one file in resourcelist.xml. We import this.
+** Multiple files in resourcelist.xml and one is tagged with the <to_be_determined> property. We import the tagged one.
+** Multiple files in resourcelist.xml and user mentions which one to import. We import that one.
+** If none of the three above apply then we throw an error.
+(Note: add to exchange-protocol document)
+* If a changelist does exist, we loop over it and import all the patches.
+* We also store the address of the capabilityList in the log entries (log.json file).
+* If the user triggers an import from another dataset we check for the existence of a capabilityList url and return 400. A dataset can only contain 1 remote dataset (otherwise we have the merge conflict edge cases again).
+* If a dataset contains a capabilityList address then ImportManager only allows new changes that come from the sync. It blocks all other edits.
+
+New code structure for the above mentioned changes:
+
+* In the Import endpoint class we call the 'importRemoteFiles' function from the new "TimbuctooRemoteFilesImporter" class.
+** This 'importRemoteFiles' function in the new class will in-turn first call the
+'getRemoteFilesList' method which will be a new method in ResourceSyncFileLoader class. 'getRemoteFilesList' accepts a
+capabilityList uri and traverses it to find all the changelist changes and resourcelist resources.
+It will return an object that contains two lists:
+1) list of uris for changes 2) list of uris for resources
+* We will then filter on these files using the aforementioned priorities in "importRemoteFiles"
+** a new helper function 'filter' in "TimbuctooRemoteFilesImporter" will take the object
+from the 'getRemoteFilesList' call, filter over it according to the determined priorities and return a list of one
+or more RemoteFiles.
+** The filter function can also return an error if none of the pre-determined criteria are satisfied.
+* We now have three options depending on the result of the filter function call:
+** If the 'filter' method returned a file or files we will load those files.
+** If the 'filter' method threw an error because there were multiple resource files and none had the '<dataset>' property
+marked then we will ask the user to make an import call again with the dataset file to be imported specified. Once the
+user does that (or if the user does it directly on the first import call) we will only load the specified file.
+** If the 'filter' method threw an error for any other reason we let the user know that something is wrong with the
+import resource.
+
+Update feature:
+
+* we add an update graphql mutation so that the user can trigger an update
+* when triggered it checks for the existence of a capabilityList url and otherwise returns that you can't update this dataset
+* when triggered it checks for the existence of a changelist on the remote capabilitylist
+  ** it then checks for the existence of a "DUMP_IMPORTED" property
+    *** if it exists it deletes the data and re-imports (this time using the changelist)
+    *** if it does not exist it starts importing the changelist from the "processedUntil" prop from log.json onwards

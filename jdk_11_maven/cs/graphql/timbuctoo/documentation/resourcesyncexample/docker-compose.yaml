@@ -1,0 +1,9 @@
+version: "2"
+services:
+  nginx:
+    image: nginx
+    volumes:
+     - ./resourcesync_root:/usr/share/nginx/html:ro
+     - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+     - "80:80"

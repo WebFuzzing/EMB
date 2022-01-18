@@ -1,0 +1,43 @@
+= Back-up and restore Timbuctoo
+
+== Backup
+
+=== 1. Sync databases with disc:
+----
+curl -X POST --data "backupPath={path-on-server}/datasets" http://localhost:{admin-port}/tasks/backup
+----
+`adminport` is `8081` by default. +
+When request is done, the databases of each data set will synced with disc and the contents will duplicated to folder `databases.bak`.
+
+=== 2. Copy the data
+----
+rsync -av /path/to/timbuctoo/data /target/folder --exclude databases
+----
+`/path/to/timbuctoo/data` is the root folder of Timbuctoo.
+The contents should look something like this:
+----
+auth            datasets     neo4j                  users.json
+authorizations  logins.json  permissionConfig.json
+----
+
+== Restore
+The restore can be done per data set or all the data of Timbuctoo.
+
+==== Whole Timbuctoo restore
+. Copy the data to `/path/to/timbuctoo/data`.
+. Rename all the folders `databases.bak` to `databases`.
+In `/path/to/timbuctoo/data` execute:
+----
+ls -d  */*/*/*/ | grep databases.bak | rename 's/databases.bak/databases/g'
+----
+. Restart Timbuctoo
+
+=== Data set restore
+. Find the dataset to restore. You need a user UUID and the name of the data set.
+.. You can retrieve the UUID of the user from the data set label.
+... For the label `u74ccc032adf8422d7ea92df96cd4783f0543db3b__dwc` `u74ccc032adf8422d7ea92df96cd4783f0543db3b` is the user id.
+... The data set name will be `dwc`.
+. Paste the data of the backup to the right folder: `/path/to/timbuctoo/data/{uuid-of-the-user}/{data-set-name}`.
+. Restart Timbuctoo
+
+

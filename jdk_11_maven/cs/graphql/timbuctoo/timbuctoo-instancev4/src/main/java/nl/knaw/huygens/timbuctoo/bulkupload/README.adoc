@@ -1,0 +1,131 @@
+= Tabular data importer
+
+== Summary
+//tag::summary[]
+This package allows you to upload something that is tabular-like and have it converted to a basic RDF representation (just records pointing to the next record). 
+todo:bug["The data entered like this is not yet part of the changelog, but should be."]
+//end::summary[]
+
+== Context
+Timbuctoo should allow users to upload datasets. 
+We find that most of our users produce datasets in a tabular format (as opposed to a tree format or a graph format).
+This package contains an code to parse streams of tabular data and to generate vertices to represent that data.
+
+Originally this package also contained code to generate edges between the created vertices. 
+This has been removed and replaced with an RML implementation.
+
+== Responsibilies
+This package is responsible for
+ * Parsing various formats (currently excel only)
+ * generating "collections" (i.e. tables, sheets, files) containing "rows" of "fields"
+ * handling imports of arbitrary size (only limited by the space limitations of the target database)
+
+It is currently not responsible for
+ * converting the data to a specific data type (it should output plain text)
+ * handling links (i.e. foreign keys or edges)
+ * handling data that cannot be expressed as collections of rows
+
+After an import is finished all traces of the original format should be gone.
+
+== Data model
+Given a dataset called `movie information` containing a table called `actors` with the following data:
+
+[cols=2, options="header"]
+|===
+|first name | rating
+|Matt | 42
+|Saoirse | 44
+|===
+
+you'd get the following graph
+
+[ditaa]
+--
+                                                                        +---------hasFirstProperty--------+          
+                                                                        |                                 |          
+                                                                        |                                 V          
+                                                                        |                      +--------------------+
+                                                                        |                      |   id: 0            |
+                                                                        |         +----------->| name: "first name" |
+                                                                        |         |            |order: 0            |
+                                      +------------------------------+  |    hasProperty       +--------------------+
+                                      |             Vre              |<-+         |                       |          
+                                      |  name: "movie information"   |------------+                hasNextProperty   
+                                      |                              |            |                       V          
+                                      +------------------------------+       hasProperty       +--------------------+
+                                                      |                           |            |     id: 1          |
+                                              hasRawCollection                    +----------->|   name: "rating"   |
+                                                      |                                        |  order: 1          |
+                                                      V                                        +--------------------+
+                                              +----------------+                                                     
+        +------------hasFirstItem-------------| name: actors   |                                                     
+        |                                     +----------------+                                                     
+        |                                             |                                                             
+        |                 +--------hasItem------------+--------hasItem----+                                         
+        |                 |                                               |                                         
+        |                 V                                               V                                         
+        |  +------------------------------+                  +--------------------------+                            
+        |  | first name_value: "Saoirse"  |                  | first name_value: "Matt" |                            
+        +->|     rating_value: "44"       |----hasNextItem-->|     rating_value: "42"   |                            
+           +------------------------------+                  +--------------------------+                            
+--
+
+Note the following:
+
+ 1. the _value postfix is needed because we will also store mapping errors next to these values. e.g. if a value is interpreted as foreign key, but it's target is not available then an error will be stored on the raw entity vertex under `<property>_error`
+ 2. the property descriptions are stored mostly to be able to traverse them in order.
+ 3. Together with the ordered traversal of the items (`hasNextItem`) this allows us to rerender the table as it was uploaded.
+ 4. All properties are stored as text, regardless of the datatypes that the source format supports.
+
+== Contents of this package
+ * link:./BulkUploadService.java[BulkUploadService] is the entry point. It performs the actual upload an links everything together.
+ * link:./loaders[loaders] contains two variants of an Excel loader at the moment. To add a new loader you'd add an implementation of link:loaders/BulkLoader.java[BulkLoader] here.
+   * link:loaders/excel/allsheetloader/AllSheetLoader.java[AllSheetLoader] loads all columns of all sheets. *This is the one that timbuctoo currently uses*.
+   * link:loaders/excel/styleawarexlsxloader/StyleAwareXlsxLoader.java[StyleAwareXlsxLoader] loads only the columns that are marked with a specially named style. *This is not used at the moment.*
+ * link:parsingstatemachine[parsing state machine] contains the actual import logic. 
+ * link:savers[savers] contains only a Tinkerpop saver at the moment.
+   To load data in a different database you'd add your own implementation of link:savers/Saver.java[Saver] here. 
+   To change how the data is stored in the graph you'd change the code in link:savers/TinkerpopSaver.java[TinkerpopSaver] 
+  
+== List of known bugs / issues
+
+Some issues are described from user perspective, from the link:https://github.com/HuygensING/timbuctoo-default-frontend[excel mapping frontend]
+The problem analyses and suggested solutions, however, are written from a backend implementation perspective.
+
+=== Self referencing entity
+1. When I map a new relation for data sheet, and I use the same column as the source column and the target column,
+I get no errors and I see in the edit interface two relations on the same entity, pointing to the same entity.
+
+Solution: RML mapper should add an error: "child and parent column are the same in join condition".
+
+=== Mapping of data types
+1. Basic type inheritance of archetype: When I map (for instance) a column to a datable field, the field is not mapped as a datable, but as text.
+
+2. Mapping to types of limited values: When I map (for instance) a column to the 'gender' field, the field is mapped as text and may have any value I want.
+
+3. Mapping to lists: I can only map one column to a list. The field is mapped as text and I cannot add new values to this property after the import.
+
+4. The links data type is not supported yet.
+
+There are multiple interconnected issues here, so no clear solution presents itself:
+
+ * One part of the solution must be to start using rdf types for dates and numbers
+ * Another might be to make a list of 'known' predicates, which makes the rdf importer treat values correctly (i.e. with lists)
+ * One can also imagine the rml mapping frontend generating triples describing the types of certain predicates (i.e. <documentType> <isA> <Admin/documents/list-of-strings-of-limited-values>)
+   -- which would mean that property configurations need to be interpreted more by the rdf importer
+
+
+=== No validation of the relationType takes place
+1. No validation of the relationType takes place: I can easily create a relation like this:
+--
+<some person> <hasBirthPlace> <some other person>
+--
+
+Solution suggestions:
+
+1. We need to discuss how to fix this. When reusing a relationType, the source and target entity type should match the Timbuctoo requirements, or should the requirements be dropped? Or something inbetween.
+1a. Relationtype configurations should be part of a vre (dataset); they may inherit from an archetypal form, but they should not have to.
+
+
+=== Uncertainties about rdfUri lucene index
+We have not verified yet whether lucene index entries are thrown away, when the vertices they refer to are deleted. I have seen no indications that this potential problem actually occurs, but this could cause serious sync issues.

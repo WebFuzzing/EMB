@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "76172d31-893a-4f56-9d44-ff7131785386": {
+      "ProjectGuid": "76172d31-893a-4f56-9d44-ff7131785386",
+      "DisplayName": "ScsDriver",
+      "ColorIndex": 0
+    },
+    "ba300a30-3ccd-4def-a046-70684dd77093": {
+      "ProjectGuid": "ba300a30-3ccd-4def-a046-70684dd77093",
+      "DisplayName": "SampleProjectDriver",
+      "ColorIndex": 1
+    },
+    "1e1639d0-eb93-4500-a7aa-be22354fbb98": {
+      "ProjectGuid": "1e1639d0-eb93-4500-a7aa-be22354fbb98",
+      "DisplayName": "NcsDriver",
+      "ColorIndex": 2
+    },
+    "a3a318e8-8c68-488c-9538-068d511b82e2": {
+      "ProjectGuid": "a3a318e8-8c68-488c-9538-068d511b82e2",
+      "DisplayName": "Menu",
+      "ColorIndex": 3
+    },
+    "c0077fb0-5dc1-407a-a67b-d357738a5bae": {
+      "ProjectGuid": "c0077fb0-5dc1-407a-a67b-d357738a5bae",
+      "DisplayName": "Library",
+      "ColorIndex": 4
+    },
+    "add61962-ef1f-4327-acde-d71a93ba19e3": {
+      "ProjectGuid": "add61962-ef1f-4327-acde-d71a93ba19e3",
+      "DisplayName": "SampleProject.Infrastructure",
+      "ColorIndex": 5
+    },
+    "44144c49-97e9-46f0-bc1f-67e6392be38e": {
+      "ProjectGuid": "44144c49-97e9-46f0-bc1f-67e6392be38e",
+      "DisplayName": "SCS",
+      "ColorIndex": 6
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "30f6259e-2b4c-4b03-a90e-a24e245624ef": {
+      "ProjectGuid": "30f6259e-2b4c-4b03-a90e-a24e245624ef",
+      "DisplayName": "SampleProject.IntegrationTests",
+      "ColorIndex": 7
+    },
+    "3b6778b0-edda-46f9-8b97-f40a0bca2f0f": {
+      "ProjectGuid": "3b6778b0-edda-46f9-8b97-f40a0bca2f0f",
+      "DisplayName": "NCS",
+      "ColorIndex": 8
+    },
+    "f1222e9e-51da-45d1-a00a-e505165fc432": {
+      "ProjectGuid": "f1222e9e-51da-45d1-a00a-e505165fc432",
+      "DisplayName": "HelloApi",
+      "ColorIndex": 9
+    }
+  },
+  "NextColorIndex": 10
+}

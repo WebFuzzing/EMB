@@ -1,0 +1,23 @@
+= Prefix store
+
+== Supported prefixes
+```
+rdf -> http://www.w3.org/1999/02/22-rdf-syntax-ns#
+foaf -> http://xmlns.com/foaf/0.1/
+rdfs -> http://www.w3.org/2000/01/rdf-schema#
+owl -> http://www.w3.org/2002/07/owl#
+skos -> http://www.w3.org/2004/02/skos/core#
+dcat -> http://www.w3.org/ns/dcat#
+xsd -> http://www.w3.org/2001/XMLSchema#
+prov -> http://www.w3.org/ns/prov#
+dcterms -> http://purl.org/dc/terms/
+dbpedia -> http://dbpedia.org/resource/
+schema -> http://schema.org/
+tim -> RdfConstants.TIM_VOCAB
+tim_col -> http://timbuctoo.huygens.knaw.nl/static/v5/collection
+tim_pred -> http://timbuctoo.huygens.knaw.nl/static/v5/predicate
+tim_type -> http://timbuctoo.huygens.knaw.nl/static/v5/datatype
+local_pred -> {uri_of_dataset}/predicate/
+local_type -> {uri_of_dataset}/datatype/
+local_col -> {uri_of_dataset}/collection/
+```

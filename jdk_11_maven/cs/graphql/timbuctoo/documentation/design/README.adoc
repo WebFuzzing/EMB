@@ -1,0 +1,19 @@
+= Workflow
+
+This document describes the workflow of the Huygens team for adding new functionality to Timbuctoo.
+
+. Write an http://asciidoctor.org[ascii-doc] (make sure it has the extension adoc) doc that contains the following parts:
+* What problem does the work solve?
+* What should be the result of the work?
+* What will be the approach?
+. Add the document to the folder design in the documentation folder in the root folder of Timbuctoo.
+.. Create a new branch.
+.. Commit and push the changes.
+. Create a pull request for the document.
+. Process the feedback of your peers.
+. When the document is approved you can start writing the code.
+* Write code on the same branch you created for the document.
+* Keep the branch up-to-date with master.
+. When the code is complete create a pull request for the changed code.
+
+For the creating schemas we use: http://asciiflow.com/
