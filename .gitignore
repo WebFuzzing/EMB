@@ -175,12 +175,7 @@ hs_err_pid*
 [Oo]bj/
 dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 *.dll
-dotnet_3/*/Properties/
 .vscode/
 .vs/
 *.launchSettings.json
-
-dotnet_3/cs/rest/Menu.API/Menu.API/packages.lock.json
-dotnet_3/*/logs/
-
 *.sln.DotSettings.user
