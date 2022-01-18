@@ -180,7 +180,6 @@ dotnet_3/*/Properties/
 .vs/
 *.launchSettings.json
 
-dotnet_3/em/embedded/rest/*/warning.html
 dotnet_3/cs/rest/Menu.API/Menu.API/packages.lock.json
 dotnet_3/*/logs/
 
