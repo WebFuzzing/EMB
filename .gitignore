@@ -173,7 +173,7 @@ hs_err_pid*
 [Dd]ebug/
 [Bb]in/
 [Oo]bj/
-logs/
+dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 *.dll
 dotnet_3/*/Properties/
 .vscode/
@@ -184,5 +184,4 @@ dotnet_3/em/embedded/rest/*/warning.html
 dotnet_3/cs/rest/Menu.API/Menu.API/packages.lock.json
 dotnet_3/*/logs/
 
-*packages.lock.json
 *.sln.DotSettings.user
