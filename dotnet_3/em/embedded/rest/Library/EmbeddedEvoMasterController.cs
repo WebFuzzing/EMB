@@ -27,7 +27,7 @@ namespace Embedded.Rest.Library {
         public override string GetPackagePrefixesToCover() => "CaseStudies.Rest.Library";
 
         //TODO: later on we should create sth specific for C#
-        public override OutputFormat GetPreferredOutputFormat() => OutputFormat.JAVA_JUNIT_5;
+        public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 
         //TODO: check again
         public override IProblemInfo GetProblemInfo() =>
