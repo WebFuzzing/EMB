@@ -177,7 +177,6 @@ logs/
 *.dll
 dotnet_3/*/Properties/
 .vscode/
-.vs/
 *.launchSettings.json
 
 dotnet_3/em/embedded/rest/*/warning.html
