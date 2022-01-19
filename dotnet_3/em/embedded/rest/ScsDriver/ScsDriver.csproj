@@ -3,6 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>cs-rest-scs-evomaster-runner</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,7 +29,7 @@
 		<Sut Include="SCS.dll" />
 		<!--Do not change the \ to / as it may lead to error on Windows, just change the substring after the \-->
 		<SutPath Include="$(ProjectDir)bin-temp\SCS.dll" />
-		<CurrentRuntimeConfig Include="$(OutputPath)ScsDriver.runtimeconfig.json" />
+		<CurrentRuntimeConfig Include="$(OutputPath)cs-rest-scs-evomaster-runner.runtimeconfig.json" />
 
 		<!-- Don't need to touch these two lines -->
 		<TempDirectory Include="$(ProjectDir)bin-temp" />

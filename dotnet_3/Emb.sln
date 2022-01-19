@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rest", "rest", "{003C79EF-5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "em\embedded\rest\Library\Library.csproj", "{C0077FB0-5DC1-407A-A67B-D357738A5BAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Menu", "em\embedded\rest\Menu\Menu.csproj", "{A3A318E8-8C68-488C-9538-068D511B82E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MenuAPIDriver", "em\embedded\rest\MenuAPIDriver\MenuAPIDriver.csproj", "{A3A318E8-8C68-488C-9538-068D511B82E2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NcsDriver", "em\embedded\rest\NcsDriver\NcsDriver.csproj", "{1E1639D0-EB93-4500-A7AA-BE22354FBB98}"
 EndProject

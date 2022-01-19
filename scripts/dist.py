@@ -162,12 +162,42 @@ def buildJS(path, name):
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js","rest","disease-sh-api")), "disease-sh-api")
 
 
+####################
+def build_dotnet_3():
+
+    env_vars = os.environ.copy()
+    folder = "dotnet_3"
+
+    dotnet = run(["dotnet", "build"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+
+    if dotnet.returncode != 0:
+        print("\nERROR: .Net command failed")
+        exit(1)
+
+    rest = os.path.join(PROJ_LOCATION, "dotnet_3","em","embedded","rest")
+
+    ncs = os.path.abspath(os.path.join(rest,"NcsDriver","bin","Debug","netcoreapp3.1"))
+    scs = os.path.abspath(os.path.join(rest,"ScsDriver","bin","Debug","netcoreapp3.1"))
+    sampleproject = os.path.abspath(os.path.join(rest,"SampleProjectDriver","bin","Debug","netcoreapp3.1"))
+    menuapi = os.path.abspath(os.path.join(rest,"MenuAPIDriver","bin","Debug","netcoreapp3.1"))
+
+
+    copytree(ncs, os.path.join(dist, "cs-rest-ncs"))
+    copytree(scs, os.path.join(dist, "cs-rest-scs"))
+    copytree(sampleproject, os.path.join(dist, "sampleproject"))
+    copytree(menuapi, os.path.join(dist, "menu-api"))
+
+
+#####################################################################################
+### Build the different modules ###
 build_jdk_8_maven()
 build_jdk_11_maven()
 build_jdk_11_gradle()
+build_dotnet_3()
 
-### TODO .Net
 
+
+######################################################################################
 ### Copy JavaAgent library ###
 copy(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
    + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
@@ -175,6 +205,8 @@ copy(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation
    os.path.join(dist, "evomaster-agent.jar"))
 
 
+######################################################################################
+### Create Zip file with all the SUTs and Drivers ###
 zipName = "dist.zip"
 if os.path.exists(zipName):
     os.remove(zipName)
@@ -183,5 +215,5 @@ print("Creating " + zipName)
 shutil.make_archive(base_name=dist, format='zip', root_dir=dist+"/..", base_dir='dist')
 
 
-
+######################################################################################
 print("\n\nSUCCESS\n\n")

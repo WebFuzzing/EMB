@@ -3,6 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>sampleproject-evomaster-runner</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,7 +31,7 @@
         <Sut Include="SampleProject.API.dll"/>
         <!--Do not change the \ to / as it may lead to error on Windows, just change the substring after the \-->
         <SutPath Include="$(ProjectDir)bin-temp\SampleProject.API.dll"/>
-        <CurrentRuntimeConfig Include="$(OutputPath)SampleProjectDriver.runtimeconfig.json"/>
+        <CurrentRuntimeConfig Include="$(OutputPath)sampleproject-evomaster-runner.runtimeconfig.json"/>
 
         <!-- Don't need to touch these two lines -->
         <TempDirectory Include="$(ProjectDir)bin-temp"/>
