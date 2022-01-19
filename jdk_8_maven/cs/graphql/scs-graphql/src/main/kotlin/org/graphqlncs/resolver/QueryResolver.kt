@@ -36,6 +36,6 @@ open class QueryResolver(
     }
 
     fun bessj(n:Int, x:Double  ): Double {
-        return bessj(n, x)
+        return bessj.bessj(n, x)
     }
 }

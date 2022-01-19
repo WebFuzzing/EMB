@@ -1,5 +1,8 @@
 package org.graphqlncs.type
 
+import org.springframework.stereotype.Component
+
+@Component
 class Remainder {
     fun exe(a: Int, b: Int): Int {
         var r = 0 - 1
