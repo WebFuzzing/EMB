@@ -1,0 +1,13 @@
+type Query {
+   calc(op:String, arg1: Float, arg2: Float): String
+   #cookie(name: String, val: String, site: String): String
+   #costfuns(i: Int, s: String): String
+   #dateParse(dayname: String, monthname: String): String
+   #fileSuffix(directory: String, file: String): String
+   #notyPevar(i: Int, s: String): String
+   #ordred4(w: String, x: String, z: String, y: String): String
+   #pat(txt: String, pat: String): String
+   #regex(txt: String): String
+   #text2Txt(word1: String, word2: String, word3: String): String
+   #title(sex: String, title: String): String
+}
