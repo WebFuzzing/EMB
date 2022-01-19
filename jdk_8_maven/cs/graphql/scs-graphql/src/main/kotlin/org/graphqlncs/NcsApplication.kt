@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 
 
 @SpringBootApplication
-open class Ncs
+open class NcsApplication
 
 
 /*
@@ -20,5 +20,5 @@ open class Ncs
     http://localhost:8080/voyager
  */
 fun main(args: Array<String>) {
-    SpringApplication.run(Ncs::class.java, *args)
+    SpringApplication.run(NcsApplication::class.java, *args)
 }
