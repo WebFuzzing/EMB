@@ -1,4 +1,8 @@
 package org.graphqlncs.type
+
+import org.springframework.stereotype.Component
+
+@Component
 class TriangleClassification {
 
     fun classify(a: Int, b: Int, c: Int): Int {
