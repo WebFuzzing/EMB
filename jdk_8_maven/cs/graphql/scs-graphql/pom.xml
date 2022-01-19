@@ -37,29 +37,6 @@
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>1.4.4.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>1.10.7.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-java-tools</artifactId>
-            <version>4.3.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-        <groupId>javax.persistence</groupId>
-        <artifactId>persistence-api</artifactId>
-        <version>1.0.2</version>
-    </dependency>
-        <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>voyager-spring-boot-starter</artifactId>
             <version>${version.graphql-spring}</version>
@@ -73,16 +50,6 @@
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter</artifactId>
             <version>${version.graphql-spring}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${springboot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${springboot.version}</version>
         </dependency>
     </dependencies>
 

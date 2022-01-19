@@ -1,7 +1,7 @@
 package org.graphqlncs.resolver
 
+import graphql.kickstart.tools.GraphQLQueryResolver
 import org.graphqlncs.type.TriangleClassification
-import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import org.springframework.stereotype.Component
 
 @Component
