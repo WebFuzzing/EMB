@@ -15,6 +15,8 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <kotlin.version>1.6.10</kotlin.version>
+        <version.graphql-spring>11.1.0</version.graphql-spring>
+        <springboot.version>2.5.4</springboot.version>
     </properties>
 
     <dependencies>
@@ -58,28 +60,29 @@
         <version>1.0.2</version>
     </dependency>
         <dependency>
-            <groupId>com.graphql-java</groupId>
+            <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>voyager-spring-boot-starter</artifactId>
+            <version>${version.graphql-spring}</version>
         </dependency>
         <dependency>
-            <groupId>com.graphql-java</groupId>
+            <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphiql-spring-boot-starter</artifactId>
+            <version>${version.graphql-spring}</version>
         </dependency>
         <dependency>
-            <groupId>com.graphql-java</groupId>
+            <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter</artifactId>
+            <version>${version.graphql-spring}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <version>${springboot.version}</version>
         </dependency>
     </dependencies>
 
