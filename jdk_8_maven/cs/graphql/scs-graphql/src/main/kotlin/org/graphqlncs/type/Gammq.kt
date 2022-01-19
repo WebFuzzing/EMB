@@ -1,5 +1,8 @@
 package org.graphqlncs.type
 
+import org.springframework.stereotype.Component
+
+@Component
 class Gammq {
     private val ITMAX = 100
     private val EPS = 3.0e-7

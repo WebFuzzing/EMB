@@ -1,5 +1,8 @@
 package org.graphqlncs.type
 
+import org.springframework.stereotype.Component
+
+@Component
 class Expint {
     private val MAXIT = 100.0
     private val EULER = 0.5772156649

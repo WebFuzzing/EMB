@@ -1,5 +1,8 @@
 package org.graphqlncs.type
 
+import org.springframework.stereotype.Component
+
+@Component
 class Fisher {
     fun exe(m: Int, n: Int, x: Double): Double {
         val a: Int
