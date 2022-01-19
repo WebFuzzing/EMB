@@ -14,30 +14,36 @@ using Microsoft.Data.SqlClient;
 namespace SampleProjectDriver {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
         private bool _isSutRunning;
-        private int _sutPort;
+        private static int _sutPort;
         private SqlConnection _connection;
         private IDatabaseController _databaseController;
         private List<string> sqlCommands;
         private List<string> clearDbCommands;
 
         static void Main(string[] args) {
-            int port = 40100;
+          
+            var embeddedEvoMasterController = new EmbeddedEvoMasterController();
+          
+            var controllerPort = 40100;
             if (args.Length > 0) {
-                port = Int32.Parse(args[0]);
+                controllerPort = Int32.Parse(args[0]);
+            }
+            embeddedEvoMasterController.SetControllerPort(controllerPort);
+
+            if (args.Length > 1) {
+                _sutPort = Int32.Parse(args[1]);
+            } else {
+                var ephemeralPort = embeddedEvoMasterController.GetEphemeralTcpPort();
+                _sutPort = ephemeralPort;
             }
 
-            var embeddedEvoMasterController = new EmbeddedEvoMasterController(port);
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
 
             Console.WriteLine("Driver is starting...\n");
 
             instrumentedSutStarter.Start();
         }
-
-        public EmbeddedEvoMasterController(int port) {
-            SetControllerPort(port);
-        }
-
+        
         public override string GetDatabaseDriverName() => null;
 
         public override List<AuthenticationDto> GetInfoForAuthentication() => null;
@@ -60,11 +66,11 @@ namespace SampleProjectDriver {
         }
 
         public override string StartSut() {
-            var ephemeralPort = GetEphemeralTcpPort();
-
+            
             const int timeout = 40;
 
             Task.Run(async () => {
+                //TODO why is this not taken from Docker???
                 var dbPort = GetEphemeralTcpPort();
 
                 _databaseController = new SqlServerDatabaseController("SampleCQRS", dbPort, "sqlpass@123", timeout,
@@ -74,16 +80,14 @@ namespace SampleProjectDriver {
 
                 _connection = dbConnection as SqlConnection;
 
-                SampleProject.API.Program.Main(new[] {ephemeralPort.ToString(), connectionString});
+                SampleProject.API.Program.Main(new[] {_sutPort.ToString(), connectionString});
             });
 
-            WaitUntilSutIsRunning(ephemeralPort);
-
-            _sutPort = ephemeralPort;
-
+            WaitUntilSutIsRunning(_sutPort);
+            
             _isSutRunning = true;
 
-            return $"http://localhost:{ephemeralPort}";
+            return $"http://localhost:{_sutPort}";
         }
 
         public override void StopSut() {

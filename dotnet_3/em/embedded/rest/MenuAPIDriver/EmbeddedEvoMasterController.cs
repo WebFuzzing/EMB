@@ -12,12 +12,25 @@ using EvoMaster.DatabaseController.Abstractions;
 namespace Menu {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
         private bool _isSutRunning;
-        private int _sutPort;
+        private static int _sutPort;
         private NpgsqlConnection _connection;
         private IDatabaseController _databaseController;
 
         private static void Main(string[] args) {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
+            
+            var controllerPort = 40100;
+            if (args.Length > 0) {
+                controllerPort = Int32.Parse(args[0]);
+            }
+            embeddedEvoMasterController.SetControllerPort(controllerPort);
+
+            if (args.Length > 1) {
+                _sutPort = Int32.Parse(args[1]);
+            } else {
+                var ephemeralPort = embeddedEvoMasterController.GetEphemeralTcpPort();
+                _sutPort = ephemeralPort;
+            }
 
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
 
@@ -47,9 +60,9 @@ namespace Menu {
         }
 
         public override string StartSut() {
-            var ephemeralPort = GetEphemeralTcpPort();
 
             Task.Run(async () => {
+                // TODO why is this not taken from Docker??? 
                 var dbPort = GetEphemeralTcpPort();
 
                 _databaseController = new PostgresDatabaseController("restaurant_menu_database", dbPort, "password123");
@@ -58,16 +71,14 @@ namespace Menu {
 
                 _connection = dbConnection as NpgsqlConnection;
 
-                API.Program.Main(new[] {$"{ephemeralPort}", connectionString});
+                API.Program.Main(new[] {$"{_sutPort}", connectionString});
             });
 
-            WaitUntilSutIsRunning(ephemeralPort);
-
-            _sutPort = ephemeralPort;
-
+            WaitUntilSutIsRunning(_sutPort);
+            
             _isSutRunning = true;
 
-            return $"http://localhost:{ephemeralPort}";
+            return $"http://localhost:{_sutPort}";
         }
 
         public override void StopSut() {
