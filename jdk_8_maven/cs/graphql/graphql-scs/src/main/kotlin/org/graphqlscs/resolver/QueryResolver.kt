@@ -25,7 +25,7 @@ open class QueryResolver(
     fun calc(op: String, arg1: Double, arg2: Double): String {
         return calc.subject(op, arg1, arg2)
     }
-/*
+
     fun cookie(name: String, `val`: String, site: String): String {
         return cookie.subject(name, `val`, site)
     }
@@ -65,5 +65,5 @@ open class QueryResolver(
     fun title(sex: String, title: String): String {
         return titl.subject(sex, title)
     }
-*/
+
 }
