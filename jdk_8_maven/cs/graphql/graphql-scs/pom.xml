@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>scs-graphql</artifactId>
+    <artifactId>graphql-scs</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -84,6 +84,21 @@
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>graphql-scs</finalName>
+                            <classifier>sut</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
