@@ -1,4 +1,4 @@
-package org.graphqlncs
+package org.springframework.samples.ncs
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 

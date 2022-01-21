@@ -1,4 +1,4 @@
-package org.graphqlncs.type
+package org.springframework.samples.ncs.type
 
 import org.springframework.stereotype.Component
 
