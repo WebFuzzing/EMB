@@ -1,7 +1,7 @@
-package org.graphqlncs.resolver
+package org.springframework.samples.ncs.resolver
 
 import graphql.kickstart.tools.GraphQLQueryResolver
-import org.graphqlncs.type.*
+import org.springframework.samples.ncs.type.*
 import org.springframework.stereotype.Component
 
 @Component
