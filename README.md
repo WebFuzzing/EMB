@@ -64,7 +64,6 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * SampleProject (MIT), from [https://github.com/kgrzybek/sample-dotnet-core-cqrs-api](https://github.com/kgrzybek/sample-dotnet-core-cqrs-api)
 
-* Library (not-known license), from [https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI](https://github.com/KevinDockx/DocumentingAspNetCoreApisWithOpenAPI)
 
 
 ## Build The Systems
