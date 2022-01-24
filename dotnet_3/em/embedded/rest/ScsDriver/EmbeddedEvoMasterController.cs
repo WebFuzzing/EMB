@@ -8,11 +8,24 @@ using EvoMaster.Controller.Problem;
 namespace ScsDriver {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
         private bool _isSutRunning;
-        private int _sutPort;
+        private static int _sutPort;
 
         static void Main(string[] args) {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
 
+            var controllerPort = 40100;
+            if (args.Length > 0) {
+                controllerPort = Int32.Parse(args[0]);
+            }
+            embeddedEvoMasterController.SetControllerPort(controllerPort);
+
+            if (args.Length > 1) {
+                _sutPort = Int32.Parse(args[1]);
+            } else {
+                var ephemeralPort = embeddedEvoMasterController.GetEphemeralTcpPort();
+                _sutPort = ephemeralPort;
+            }
+            
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
 
             Console.WriteLine("Driver is starting...\n");
@@ -21,17 +34,14 @@ namespace ScsDriver {
         }
 
         public override string StartSut() {
-            var ephemeralPort = GetEphemeralTcpPort();
+         
+            Task.Run(() => { SCS.Program.Main(new[] {_sutPort.ToString()}); });
 
-            Task.Run(() => { SCS.Program.Main(new[] {ephemeralPort.ToString()}); });
-
-            WaitUntilSutIsRunning(ephemeralPort);
-
-            _sutPort = ephemeralPort;
+            WaitUntilSutIsRunning(_sutPort);
 
             _isSutRunning = true;
 
-            return $"http://localhost:{ephemeralPort}";
+            return $"http://localhost:{_sutPort}";
         }
 
         public override void StopSut() {
