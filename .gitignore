@@ -136,7 +136,10 @@ hs_err_pid*
 /jdk_8_maven/em/external/graphql/spring-petclinic-graphql/src/main/em/
 /jdk_8_maven/cs/graphql/graphql-ncs/target
 /jdk_8_maven/cs/graphql/graphql-scs/target
-
+/jdk_8_maven/em/embedded/graphql/graphql-ncs/target
+/jdk_8_maven/em/embedded/graphql/graphql-scs/target
+/jdk_8_maven/em/external/graphql/graphql-ncs/target
+/jdk_8_maven/em/external/graphql/graphql-scs/target
 
 /jdk_11_maven/temp
 /jdk_11_maven/cs/rest/cwa-verification-server/target

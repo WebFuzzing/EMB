@@ -92,6 +92,12 @@ def build_jdk_8_maven() :
     copy(folder+"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar",dist)
     copy(folder+"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", dist)
 
+    copy(folder+"/cs/graphql/graphql-ncs/target/graphql-ncs-sut.jar",dist)
+    copy(folder+"/em/external/graphql/graphql-ncs/target/graphql-ncs-evomaster-runner.jar", dist)
+
+    copy(folder+"/cs/graphql/graphql-scs/target/graphql-scs-sut.jar",dist)
+    copy(folder+"/em/external/graphql/graphql-scs/target/graphql-scs-evomaster-runner.jar", dist)
+
 
 
     ind0 = os.environ.get('SUT_LOCATION_IND0', '')

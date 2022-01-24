@@ -14,7 +14,8 @@
 
     <modules>
         <module>spring-petclinic-graphql</module>
-        <module>spring-ncs-graphql</module>
+        <module>graphql-ncs</module>
+        <module>graphql-scs</module>
     </modules>
 
 </project>
