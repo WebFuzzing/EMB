@@ -57,7 +57,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private final int timeoutSeconds;
     private final int sutPort;
-    private final String jarLocation;
+    private  String jarLocation;
     private final String tmpFolder;
     private final String CONFIG_FILE = "timbuctoo_evomaster.yaml";
 
@@ -69,6 +69,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public ExternalEvoMasterController(){
         this(40100, "../api/target", 12345, 120, "java");
+    }
+
+    public ExternalEvoMasterController(String jarLocation) {
+        this();
+        this.jarLocation = jarLocation;
     }
 
     public ExternalEvoMasterController(int controllerPort,

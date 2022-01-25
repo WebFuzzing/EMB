@@ -67,7 +67,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
     private final int dbPort;
-    private final String jarLocation;
+    private  String jarLocation;
     private final String tmpDir;
     private final String CONFIG_FILE = "scout_api_evomaster.yml";
 
@@ -78,6 +78,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public ExternalEvoMasterController(){
         this(40100, "../api/target", 12345, 120, "java");
+    }
+
+    public ExternalEvoMasterController(String jarLocation) {
+        this();
+        this.jarLocation = jarLocation;
     }
 
     public ExternalEvoMasterController(int controllerPort,

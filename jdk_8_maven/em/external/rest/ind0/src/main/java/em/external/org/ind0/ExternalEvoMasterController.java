@@ -66,7 +66,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private final int timeoutSeconds;
     private final int sutPort;
-    private final String jarLocation;
+    private  String jarLocation;
     private final String packagesToInstrument;
     private Connection connection;
 
@@ -77,6 +77,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public ExternalEvoMasterController(){
         this(40100, SUT_LOCATION_IND0, 12345, 120, "java", SUT_PACKAGE_IND0);
+    }
+
+    public ExternalEvoMasterController(String jarLocation) {
+        this();
+        this.jarLocation = jarLocation;
     }
 
     public ExternalEvoMasterController(
