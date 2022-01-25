@@ -38,6 +38,11 @@
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],
+    "coverageReporters": [
+      "json",
+      "html",
+      "json-summary"
+    ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/tests/",

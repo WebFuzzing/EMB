@@ -1,0 +1,12 @@
+.git
+node_modules
+npm-debug.log
+*.md
+test
+docs
+Dockerfile
+coverage
+LICENSE
+.eslintrc
+.gitignore
+.nvmrc
