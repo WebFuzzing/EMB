@@ -48,7 +48,7 @@ namespace SampleProjectDriver {
 
         public override List<AuthenticationDto> GetInfoForAuthentication() => null;
 
-        public override string GetPackagePrefixesToCover() => "SampleProjectDriver.API";
+        public override string GetPackagePrefixesToCover() => "SampleProject.";
 
         public override OutputFormat GetPreferredOutputFormat() => OutputFormat.CSHARP_XUNIT;
 

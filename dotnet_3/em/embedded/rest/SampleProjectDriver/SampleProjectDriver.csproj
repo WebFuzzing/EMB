@@ -31,6 +31,16 @@
         <Sut Include="SampleProject.API.dll"/>
         <!--Do not change the \ to / as it may lead to error on Windows, just change the substring after the \-->
         <SutPath Include="$(ProjectDir)bin-temp\SampleProject.API.dll"/>
+
+        <Application Include="SampleProject.Application.dll"/>
+        <ApplicationPath Include="$(ProjectDir)bin-temp\SampleProject.Application.dll"/>
+
+        <Domain Include="SampleProject.Domain.dll"/>
+        <DomainPath Include="$(ProjectDir)bin-temp\SampleProject.Domain.dll"/>
+
+        <Infrastructure Include="SampleProject.Infrastructure.dll"/>
+        <InfrastructurePath Include="$(ProjectDir)bin-temp\SampleProject.Infrastructure.dll"/>
+        
         <CurrentRuntimeConfig Include="$(OutputPath)sampleproject-evomaster-runner.runtimeconfig.json"/>
 
         <!-- Don't need to touch these two lines -->
@@ -51,6 +61,15 @@
         <Exec Command="cd $(OutputPath)
 			  dotnet EvoMaster.Instrumentation.dll @(Sut) @(TempDirectory)"/>
 
+        <Exec Command="cd $(OutputPath)
+			  dotnet EvoMaster.Instrumentation.dll @(Application) @(TempDirectory)"/>
+
+        <Exec Command="cd $(OutputPath)
+			  dotnet EvoMaster.Instrumentation.dll @(Domain) @(TempDirectory)"/>
+
+        <Exec Command="cd $(OutputPath)
+			  dotnet EvoMaster.Instrumentation.dll @(Infrastructure) @(TempDirectory)"/>
+
     </Target>
 
 
@@ -61,6 +80,15 @@
 
         <Exec Command="cp @(SutPath) $(OutputPath)" Condition="$(OS.Contains('Unix'))"/>
         <Exec Command="copy @(SutPath) $(OutputPath)" Condition="$(OS.Contains('Windows'))"/>
+
+        <Exec Command="cp @(ApplicationPath) $(OutputPath)" Condition="$(OS.Contains('Unix'))"/>
+        <Exec Command="copy @(ApplicationPath) $(OutputPath)" Condition="$(OS.Contains('Windows'))"/>
+
+        <Exec Command="cp @(DomainPath) $(OutputPath)" Condition="$(OS.Contains('Unix'))"/>
+        <Exec Command="copy @(DomainPath) $(OutputPath)" Condition="$(OS.Contains('Windows'))"/>
+
+        <Exec Command="cp @(InfrastructurePath) $(OutputPath)" Condition="$(OS.Contains('Unix'))"/>
+        <Exec Command="copy @(InfrastructurePath) $(OutputPath)" Condition="$(OS.Contains('Windows'))"/>
     </Target>
 
 </Project>
