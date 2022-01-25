@@ -23,7 +23,9 @@ import io.micronaut.context.annotation.Primary;
 import io.micronaut.core.async.publisher.Publishers;
 import io.micronaut.http.HttpRequest;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.dataloader.DataLoaderRegistry;
 import org.reactivestreams.Publisher;
 import patio.security.services.SecurityService;

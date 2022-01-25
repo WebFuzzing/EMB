@@ -20,7 +20,9 @@ package patio.user.services.internal;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.retry.annotation.Retryable;
 import io.micronaut.scheduling.annotation.Scheduled;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCrypt;

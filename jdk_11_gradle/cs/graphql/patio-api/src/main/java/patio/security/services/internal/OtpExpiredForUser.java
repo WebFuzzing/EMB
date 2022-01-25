@@ -22,7 +22,9 @@ import static patio.common.domain.utils.Check.checkIsTrue;
 import io.micronaut.context.annotation.Value;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.common.domain.utils.Check;
 import patio.common.domain.utils.Result;
 import patio.infrastructure.utils.ErrorConstants;

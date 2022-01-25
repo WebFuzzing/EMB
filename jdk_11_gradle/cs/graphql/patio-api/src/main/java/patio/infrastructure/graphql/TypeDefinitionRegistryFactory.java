@@ -25,9 +25,11 @@ import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.core.io.ResourceResolver;
+import jakarta.inject.Singleton;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 
 /**
  * Factory to creates an instance of type {@link TypeDefinitionRegistry}

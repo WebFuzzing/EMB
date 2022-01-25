@@ -25,7 +25,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCrypt;

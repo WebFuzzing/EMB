@@ -24,11 +24,13 @@ import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
+import jakarta.inject.Singleton;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 
 /**
  * This factory creates the {@link GraphQLSchema} instance. In order to create the {@link

@@ -19,7 +19,9 @@ package patio.security.services.internal;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import io.micronaut.context.annotation.Value;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.security.services.SecurityService;
 
 /**

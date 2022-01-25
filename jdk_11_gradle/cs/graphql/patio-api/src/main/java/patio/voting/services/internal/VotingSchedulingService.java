@@ -25,8 +25,10 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import patio.group.domain.Group;

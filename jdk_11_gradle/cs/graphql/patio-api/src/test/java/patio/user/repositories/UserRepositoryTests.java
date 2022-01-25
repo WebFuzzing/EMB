@@ -24,11 +24,13 @@ import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static patio.infrastructure.utils.IterableUtils.iterableToStream;
 
-import io.micronaut.test.annotation.MicronautTest;
+//import io.micronaut.test.annotation.MicronautTest;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
+//import javax.inject.Inject;
+
+import jakarta.inject.Inject;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +46,7 @@ import patio.user.domain.User;
  *
  * @since 0.1.0
  */
-@MicronautTest
+//@MicronautTest
 @Testcontainers
 class UserRepositoryTests {
 
@@ -52,7 +54,8 @@ class UserRepositoryTests {
   @SuppressWarnings("unused")
   private static PostgreSQLContainer DATABASE = new PostgreSQLContainer();
 
-  @Inject transient Flyway flyway;
+  @Inject
+  transient Flyway flyway;
 
   @Inject transient UserRepository repository;
 

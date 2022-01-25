@@ -19,7 +19,9 @@ package patio.infrastructure.graphql.dataloader;
 
 import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.dataloader.DataLoader;
 import org.dataloader.DataLoaderRegistry;
 import patio.user.domain.User;

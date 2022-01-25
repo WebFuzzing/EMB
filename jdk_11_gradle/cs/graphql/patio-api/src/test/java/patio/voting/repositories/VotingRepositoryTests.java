@@ -24,14 +24,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static patio.infrastructure.utils.IterableUtils.iterableToStream;
 
 import io.micronaut.data.model.Pageable;
-import io.micronaut.test.annotation.MicronautTest;
+//import io.micronaut.test.annotation.MicronautTest;
 import java.time.OffsetDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
+//import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.flywaydb.core.Flyway;
 import org.hamcrest.collection.IsIterableContainingInOrder;
 import org.junit.Assert;
@@ -54,7 +55,7 @@ import patio.voting.domain.Voting;
  *
  * @since 0.1.0
  */
-@MicronautTest
+//@MicronautTest
 @Testcontainers
 public class VotingRepositoryTests {
 
@@ -62,7 +63,8 @@ public class VotingRepositoryTests {
   @SuppressWarnings("unused")
   private static PostgreSQLContainer DATABASE = new PostgreSQLContainer();
 
-  @Inject transient Flyway flyway;
+  @Inject
+  transient Flyway flyway;
 
   @Inject transient UserRepository userRepository;
   @Inject transient VoteRepository voteRepository;

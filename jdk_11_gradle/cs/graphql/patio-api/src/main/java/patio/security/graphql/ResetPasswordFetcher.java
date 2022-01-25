@@ -18,7 +18,9 @@
 package patio.security.graphql;
 
 import graphql.schema.DataFetchingEnvironment;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.security.services.ResetPasswordService;
 import patio.user.domain.User;
 import patio.user.services.internal.DefaultUserService;

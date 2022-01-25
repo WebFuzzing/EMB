@@ -23,8 +23,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import patio.common.domain.utils.Builder;
 import patio.common.domain.utils.NotPresent;
 import patio.common.domain.utils.Result;

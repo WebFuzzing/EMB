@@ -19,8 +19,10 @@ package patio.security.services.internal;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import patio.common.domain.utils.Result;

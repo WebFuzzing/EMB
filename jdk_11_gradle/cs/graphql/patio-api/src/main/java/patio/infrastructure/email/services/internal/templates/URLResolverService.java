@@ -18,9 +18,11 @@
 package patio.infrastructure.email.services.internal.templates;
 
 import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
+
 import java.net.URI;
 import java.text.MessageFormat;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 
 /**
  * Resolves all links relative to the host declared in applcation configuration

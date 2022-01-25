@@ -22,9 +22,11 @@ import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.context.i18n.ResourceBundleMessageSource;
+import jakarta.inject.Singleton;
+
 import java.util.Locale;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 
 /** Handle the message template resolution and variables interpolation */
 @Factory

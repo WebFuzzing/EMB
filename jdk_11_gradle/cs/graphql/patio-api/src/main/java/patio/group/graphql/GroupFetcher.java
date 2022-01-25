@@ -20,7 +20,9 @@ package patio.group.graphql;
 import graphql.execution.DataFetcherResult;
 import graphql.schema.DataFetchingEnvironment;
 import java.util.List;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.group.domain.Group;
 import patio.group.services.GroupService;
 import patio.infrastructure.graphql.Context;

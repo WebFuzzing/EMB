@@ -26,7 +26,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.dataloader.DataLoader;
 import patio.common.domain.utils.PaginationRequest;
 import patio.common.domain.utils.PaginationResult;

@@ -22,8 +22,10 @@ import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

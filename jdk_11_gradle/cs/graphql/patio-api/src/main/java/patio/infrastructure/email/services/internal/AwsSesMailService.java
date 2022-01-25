@@ -28,7 +28,9 @@ import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.amazonaws.services.simpleemail.model.SendEmailResult;
 import io.micronaut.context.annotation.Primary;
 import io.micronaut.context.annotation.Value;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import patio.infrastructure.email.domain.Email;

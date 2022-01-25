@@ -20,8 +20,10 @@ package patio.voting.services.internal;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import patio.common.domain.utils.OffsetPaginationRequest;
 import patio.common.domain.utils.OffsetPaginationResult;
 import patio.group.domain.Group;

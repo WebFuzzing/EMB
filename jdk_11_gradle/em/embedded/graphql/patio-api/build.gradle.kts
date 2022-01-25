@@ -25,7 +25,7 @@ java {
 
 dependencyManagement  {
     imports {
-        mavenBom("io.micronaut:micronaut-bom:1.3.4")
+        mavenBom("io.micronaut:micronaut-bom:3.2.5")
     }
 }
 

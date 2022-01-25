@@ -19,12 +19,13 @@ package patio.group.repositories;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import io.micronaut.test.annotation.MicronautTest;
+//import io.micronaut.test.annotation.MicronautTest;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
-import javax.inject.Inject;
+//import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +43,7 @@ import patio.voting.domain.Voting;
  *
  * @since 0.1.0
  */
-@MicronautTest
+//@MicronautTest
 @Testcontainers
 public class GroupRepositoryTests {
 
@@ -50,7 +51,8 @@ public class GroupRepositoryTests {
   @SuppressWarnings("unused")
   private static PostgreSQLContainer DATABASE = new PostgreSQLContainer();
 
-  @Inject transient Flyway flyway;
+  @Inject
+  transient Flyway flyway;
 
   @Inject transient GroupRepository repository;
 

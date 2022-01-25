@@ -20,11 +20,14 @@ package patio.infrastructure.email.services.internal.templates;
 import static java.util.ResourceBundle.getBundle;
 
 import io.micronaut.context.annotation.Value;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
+
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javax.inject.Provider;
-import javax.inject.Singleton;
+//import javax.inject.Provider;
+//import javax.inject.Singleton;
 
 /**
  * Loads all mail related messages in the locale configured in application configuration file

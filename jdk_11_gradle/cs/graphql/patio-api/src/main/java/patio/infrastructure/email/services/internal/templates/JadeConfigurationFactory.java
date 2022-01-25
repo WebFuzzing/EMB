@@ -21,8 +21,11 @@ import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.template.ClasspathTemplateLoader;
 import de.neuland.jade4j.template.TemplateLoader;
 import io.micronaut.context.annotation.Value;
-import javax.inject.Provider;
-import javax.inject.Singleton;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
+
+//import javax.inject.Provider;
+//import javax.inject.Singleton;
 
 /**
  * Configuration related to templating behavior

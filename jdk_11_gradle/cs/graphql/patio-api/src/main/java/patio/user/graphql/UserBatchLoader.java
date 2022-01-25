@@ -22,7 +22,9 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import org.dataloader.BatchLoader;
 import patio.infrastructure.utils.IterableUtils;
 import patio.user.domain.User;

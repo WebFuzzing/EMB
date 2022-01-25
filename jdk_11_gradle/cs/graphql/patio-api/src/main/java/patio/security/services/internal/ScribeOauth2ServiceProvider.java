@@ -21,8 +21,11 @@ import com.github.scribejava.apis.GoogleApi20;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import io.micronaut.context.annotation.Value;
-import javax.inject.Provider;
-import javax.inject.Singleton;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
+
+//import javax.inject.Provider;
+//import javax.inject.Singleton;
 
 /**
  * Creates an instance of {@link OAuth20Service} with its properties configured from the

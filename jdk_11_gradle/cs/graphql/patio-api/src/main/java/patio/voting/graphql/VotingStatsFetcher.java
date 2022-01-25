@@ -20,7 +20,9 @@ package patio.voting.graphql;
 import static patio.common.graphql.ArgumentUtils.extractOffsetPaginationFrom;
 
 import graphql.schema.DataFetchingEnvironment;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.common.domain.utils.OffsetPaginationRequest;
 import patio.common.domain.utils.OffsetPaginationResult;
 import patio.group.domain.Group;

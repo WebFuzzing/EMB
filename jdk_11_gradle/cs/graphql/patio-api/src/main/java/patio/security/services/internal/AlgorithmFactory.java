@@ -20,13 +20,15 @@ package patio.security.services.internal;
 import com.auth0.jwt.algorithms.Algorithm;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
+
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 
 /**
  * Factory responsible for creating instances of {@link Algorithm}

@@ -32,8 +32,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import patio.common.domain.utils.NotPresent;
 import patio.common.domain.utils.PaginationRequest;
 import patio.common.domain.utils.PaginationResult;

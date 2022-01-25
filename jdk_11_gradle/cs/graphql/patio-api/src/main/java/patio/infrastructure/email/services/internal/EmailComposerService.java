@@ -27,8 +27,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
 import javax.transaction.Transactional;
+
+import jakarta.inject.Singleton;
 import patio.infrastructure.email.domain.Email;
 import patio.infrastructure.email.services.EmailComposer;
 import patio.infrastructure.email.services.internal.templates.JadeTemplateService;

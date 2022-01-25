@@ -20,7 +20,9 @@ package patio.user.graphql;
 import graphql.schema.DataFetchingEnvironment;
 import java.util.Optional;
 import java.util.UUID;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.infrastructure.graphql.Context;
 import patio.user.domain.User;
 import patio.user.services.UserService;

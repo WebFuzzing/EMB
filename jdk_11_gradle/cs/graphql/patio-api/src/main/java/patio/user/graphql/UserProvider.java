@@ -20,7 +20,9 @@ package patio.user.graphql;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.TypeRuntimeWiring;
 import java.util.function.UnaryOperator;
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Singleton;
 import patio.group.graphql.GroupFetcher;
 import patio.infrastructure.graphql.MutationProvider;
 import patio.infrastructure.graphql.QueryProvider;

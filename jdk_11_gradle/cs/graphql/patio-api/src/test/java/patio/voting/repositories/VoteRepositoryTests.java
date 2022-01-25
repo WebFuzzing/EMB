@@ -19,9 +19,10 @@ package patio.voting.repositories;
 
 import static org.junit.Assert.assertEquals;
 
-import io.micronaut.test.annotation.MicronautTest;
+//import io.micronaut.test.annotation.MicronautTest;
 import java.util.UUID;
-import javax.inject.Inject;
+//import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ import patio.infrastructure.tests.Fixtures;
  *
  * @since 0.1.0
  */
-@MicronautTest
+//@MicronautTest
 @Testcontainers
 public class VoteRepositoryTests {
 
@@ -47,7 +48,8 @@ public class VoteRepositoryTests {
   @Inject transient Flyway flyway;
 
   @Inject transient VoteRepository voteRepository;
-  @Inject transient VotingRepository votingRepository;
+  @Inject
+  transient VotingRepository votingRepository;
 
   @Inject transient Fixtures fixtures;
 

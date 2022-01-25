@@ -22,8 +22,11 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+//import javax.inject.Inject;
+//import javax.inject.Singleton;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import patio.security.services.OauthService;
