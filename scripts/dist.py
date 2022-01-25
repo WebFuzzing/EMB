@@ -150,7 +150,6 @@ def buildJS(path, name):
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "scs")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","disease-sh-api")), "disease-sh-api")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","naivecoin")), "naivecoin")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","nestjs-realworld-example-app")), "nestjs-realworld-example-app")
 # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spaceX")), "spaceX")
 
