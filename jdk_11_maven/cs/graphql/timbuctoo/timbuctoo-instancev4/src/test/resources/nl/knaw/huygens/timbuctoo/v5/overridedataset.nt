@@ -1,0 +1,9 @@
+<http://example.org/person3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://example.org/person3> <http://schema.org/givenName> "Piet" .
+<http://example.org/person3> <http://schema.org/familyName> "Pietersen" .
+
+<http://example.org/person4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://example.org/person4> <http://schema.org/givenName> "Jacques" .
+<http://example.org/person4> <http://schema.org/givenName> "Henrij" .
+<http://example.org/person4> <http://schema.org/familyName> "Abendanon" .
+

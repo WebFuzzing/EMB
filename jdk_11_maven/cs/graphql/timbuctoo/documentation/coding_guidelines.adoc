@@ -1,0 +1,38 @@
+= Coding guidelines
+
+== General
+
+=== Using Streams
+Always use `try-with-resources` when using `Streams`, because the `Streams` can contain an open database connection.
+[source, java]
+----
+try (Stream<String> data = database.getData()) {
+...
+}
+----
+
+=== Serializing interfaces with multiple subtypes with Jackson
+.the interface
+[source, java]
+----
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
+@JsonSubTypes({
+  // make sure name is the same as the value of @JsonTypeName in Implementation
+  @JsonSubTypes.Type(name= "Implementation", value = Implementation.class)
+})
+public interface Interface {
+...
+}
+----
+
+.one of the implementing classes
+[source, java]
+----
+@JsonTypeName("Implementation") // make sure this name is the same as the name specified in Interface
+public class Implementation implements Interface {
+...
+}
+----
+
+
+== Timbuctoo specific

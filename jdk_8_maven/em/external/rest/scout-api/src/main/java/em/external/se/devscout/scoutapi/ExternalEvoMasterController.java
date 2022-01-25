@@ -103,12 +103,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         }
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_scout_api/testdb_" + dbPort;
 
         return url;
@@ -150,7 +147,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Ddw.server.connector.port="+sutPort,
                 "-Ddw.mediaFilesFolder="+tmpDir+"/media-files",
                 "-Ddw.tempFolder="+tmpDir,
-                "-Ddw.database.url="+dbUrl(true)
+                "-Ddw.database.url="+dbUrl()
         };
     }
 
@@ -190,7 +187,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(false), "sa", "");
+            connection = DriverManager.getConnection(dbUrl(), "sa", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

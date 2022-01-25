@@ -1,0 +1,110 @@
+= N-Quads U.D.
+N-Quads U.D. stands for N-Quads Unified Diff.
+It is an extension on the RDF N-Quads notation.
+
+== Why another RDF notation?
+RDF data set notations are like snapshots.
+They have no visible history.
+Look at the example an n-triples data set:
+```
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherlands" .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/longitude> "436052"^^<http://schema.org/longitude> .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/latitude> "5200951"^^<http://schema.org/latitude> .
+<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/original_id> "PL00000029" .
+```
+How do know if one of these predicates has had a previous value?
+
+For Timbuctoo we needed a way to change a data without changing its history.
+So the first thing we did was looking at ideas that were already floating around on the internet.
+We found one called https://afs.github.io/rdf-patch/[RDF Patch].
+
+=== Why didn't we use RDF Patch?
+At first glance RDF Patch looks like the ideal solution for our problem.
+So we tried to write a piece of code that allowed us to import the notation.
+But we got stuck pretty quickly.
+The main reason is there are basically no libraries that parse RDF Patch.
+That is also true if you define you own standard.
+Another reason is that it was not simple to writer the parser ourselves.
+The next example will show the most complex form of RDF Patch:
+```
+@prefix  foaf: <http://xmlns.com/foaf/0.1/> .
+D <http://example/bob> foaf:name "bob" .
+A <http://example/bob> foaf:name "Bob" .
+A R foaf:knows <http://example/alice> .
+A R R <http://example/charlie> .
+```
+This is when we decided we should make a less complex notation.
+
+== Notation
+Because our notation should be simpler than RDF Patch we created an extension on N-Quads.
+N-Quads it self is an extension on N-Triples, so we support both.
+
+The format for the additions and deletions we decided to use http://www.gnu.org/software/diffutils/manual/html_node/Detailed-Unified.html#Detailed-Unified[Unified].
+
+The next example shows all additions:
+```
+--- empty.nq    2017-08-18 12:08:18.772264550 +0200
++++ clusius.nq  2017-07-19 11:18:16.057104790 +0200
+@@ -0,0 +1,35652 @@
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/location> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Provenance_type> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/keyword> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Fields_of_interest> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/keyword> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Publications> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/document> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Persons> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/person> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Institutes> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/collective> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Provenance> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/document> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherlands" .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/longitude> "436052"^^<http://schema.org/longitude> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/latitude> "5200951"^^<http://schema.org/latitude> .
++<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/original_id> "PL00000029" .
+```
+
+The next example shows all deletions:
+```
+--- clusius.nq  2017-07-19 11:18:16.057104790 +0200
++++ empty.nq    2017-08-18 12:08:18.772264550 +0200
+@@ -1,35652 +0,0 @@
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/location> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Provenance_type> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/keyword> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Fields_of_interest> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/keyword> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Publications> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/document> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Persons> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/person> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Institutes> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/collective> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Provenance> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://timbuctoo.huygens.knaw.nl/archetypes/document> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/country> "The Netherlands" .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/longitude> "436052"^^<http://schema.org/longitude> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/datasets/clusius/Places> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/latitude> "5200951"^^<http://schema.org/latitude> .
+-<http://timbuctoo.huygens.knaw.nl/datasets/clusius/Place_PL00000029> <http://timbuctoo.huygens.knaw.nl/properties/original_id> "PL00000029" .
+```
+
+Timbuctoo will only process hte lines that start with a single `+` or `-`.
+
+An advantage of choosing the unified format is that is easy to generate for people using N-Quads or N-Triples in combination with a Unix (Linux, Mac OS X) system:
+```
+diff --unified clusius.nq empty.nq > updates.nqud
+```
+
+The above example may add some unwanted data, the next will only show the real information:
+```
+diff --unified=0 clusius.nq empty.nq > updates.nqud
+```
+N.B. You want to sort the triples first before using diff to compare the files.
+So for comparing two files you want to do the following steps:
+```
+sort old_file.nq > old_file_sorted.nq
+sort new_file.nq > new_file_sorted.nq
+diff --unified=0 old_file.nq new_file.nq > updates.nqud
+```
+
+
+== Media type and file extension
+We chose to use the `application/vnd.timbuctoo-rdf.nquads_unified_diff` as media type.
+The file extension is `.nqud`.
+
+== TODO
+
+* Register mime type
+* Handle blank nodes, for a delete be able to determine which blank has to be deleted.

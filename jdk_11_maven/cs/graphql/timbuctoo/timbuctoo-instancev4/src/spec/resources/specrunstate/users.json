@@ -1,0 +1,17 @@
+[
+  {
+    "@type": "user",
+    "persistentId": "pid",
+    "email": "email",
+    "firstName": "givenName",
+    "lastName": "surname",
+    "displayName": "givenName surname",
+    "commonName": "givenName surname",
+    "organisation": "organization",
+    "vreAuthorization": null,
+    "_id": "pid",
+    "^rev": 0,
+    "^created": null,
+    "^modified": null
+  }
+]

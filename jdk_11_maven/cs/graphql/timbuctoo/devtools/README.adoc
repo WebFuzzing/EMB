@@ -1,0 +1,23 @@
+= Devtools
+
+This folder contains various scripts that you can use during development.
+Some of the names are a bit awkward, but they're chosen to make tab-completion work well while still being rememberable.
+
+debugrun::
+  contains a script that can run timbuctoo, optionally rebuild it, attach a debugger or not etc.
+asciidoc::
+  contains the asciidoc documentation pipeline
+container::
+  contains the script to build a docker file (basically docker build with the right flags)
+makerelease::
+  will change the versions in the pom's and tag the right commits in git
+pre-push-hook::
+  checks for words in commit messages and runs verify command on the topmost commit.
+  Useful before pushing to master.
+service-composition::
+  contains a docker-compose file that will run timbuctoo and all required related services.
+test-commit-range::
+  calls verify script on all commits in a specific range and marks the failed ones.
+  usefull after rebasing and editing commits a lot to see if what you're committing is still sane
+verify::
+  starts a docker image with the right maven version and a copy of the production timbuctoo db, runs compile test and verify on it.

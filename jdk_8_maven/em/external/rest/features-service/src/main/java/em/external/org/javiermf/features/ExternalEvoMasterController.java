@@ -71,12 +71,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setJavaCommand(command);
     }
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_features_service/testdb_" + dbPort;
 
         return url;
@@ -92,9 +89,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 //                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
 //                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
                 //FIXME: re-enable once fixed issue with Spring
-                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
-//                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "-Dspring.datasource.driver-class-name=com.p6spy.engine.spy.P6SpyDriver",
+                "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
                 "-Dspring.datasource.password"
@@ -139,7 +134,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(false), "sa", "");
+            connection = DriverManager.getConnection(dbUrl(), "sa", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

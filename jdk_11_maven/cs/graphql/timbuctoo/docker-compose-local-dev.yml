@@ -1,0 +1,46 @@
+version: '2.1'
+
+services:
+  elasticsearch:
+    image: huygensing/elasticsearch:5.6.5
+    ports:
+      - 9201:9200
+  indexer:
+    image: huygensing/timbuctoo-elasticsearch-indexer
+    environment:
+      indexer_elasticsearch_host: "http://elasticsearch:9200"
+      indexer_port: "80"
+      indexer_timbuctoo_graphql_endpoint: "http://timbuctoo/v5/graphql"
+      indexer_timbuctoo_login_endpoint: "http://timbuctoo/v2.1/authenticate"
+      timbuctoo_user: ""
+      timbuctoo_password: ""
+    ports:
+      - 3000:80
+  timbuctoo-gui:
+    image: huygensing/timbuctoo-gui:develop
+    environment:
+       REACT_APP_BACKEND_URL: "http://localhost:8080"
+    ports:
+      - 3006:80
+  timbuctoo:
+    image: huygensing/timbuctoo
+    command: ${CMD:-/app/bin/timbuctoo server /app/example_config.yaml}
+    environment:
+      timbuctoo_elasticsearch_host: elasticsearch
+      timbuctoo_elasticsearch_port: 9200
+      base_uri: http://localhost:8080
+      JAVA_OPTS: ${JAVA_OPTS}
+      timbuctoo_dataPath: ${timbuctoo_dataPath:-/mapped-data}
+      timbuctoo_authPath: ${timbuctoo_authPath:-/mapped-data/auth}
+    volumes:
+      - ./timbuctoo-instancev4/temp_for_debugrun/:/mapped-data
+      - ./timbuctoo-instancev4/example_config.yaml:/app/example_config.yaml
+
+      - ./bazel-bin/:/app/bazel-bin
+
+      - ./timbuctoo-instancev4/target/appassembler/bin:/app/bin
+      - ./timbuctoo-instancev4/target/appassembler/repo:/app/repo
+    ports:
+      - 8080:80
+      - 8081:81
+      - ${DEBUG_PORT:-5005}:5005

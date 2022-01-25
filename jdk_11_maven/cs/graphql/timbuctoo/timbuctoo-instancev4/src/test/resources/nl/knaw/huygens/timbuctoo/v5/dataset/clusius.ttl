@@ -1,0 +1,31 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tim: <http://timbuctoo.huygens.knaw.nl/properties/> .
+@prefix archetypes: <http://timbuctoo.huygens.knaw.nl/archetypes/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix custom: <http://timbuctoo.huygens.knaw.nl/datatypes/> .
+@prefix clusius: <http://timbuctoo.huygens.knaw.nl/datasets/clusius/> .
+
+clusius:Places rdfs:subClassOf archetypes:location .
+clusius:Provenance_type rdfs:subClassOf archetypes:keyword .
+clusius:Fields_of_interest rdfs:subClassOf archetypes:keyword .
+clusius:Publications rdfs:subClassOf archetypes:document .
+clusius:Persons rdfs:subClassOf archetypes:person .
+clusius:Institutes rdfs:subClassOf archetypes:collective .
+clusius:Provenance rdfs:subClassOf archetypes:document .
+
+clusius:Place_PL00000029
+  tim:country "The Netherlands"^^xsd:string ;
+  tim:longitude "436052"^^<http://schema.org/longitude> ;
+  a clusius:Places ;
+  tim:latitude "5200951"^^<http://schema.org/latitude> ;
+  tim:original_id "PL00000029"^^xsd:string ;
+  tim:name "Delft"^^xsd:string .
+
+clusius:Place_PL00000028
+  tim:country "The Netherlands"^^xsd:string ;
+  tim:longitude "538892"^^<http://schema.org/longitude> ;
+  a clusius:Places ;
+  tim:latitude "5215659"^^<http://schema.org/latitude> ;
+  tim:original_id "PL00000028"^^xsd:string ;
+  tim:name "Amersfoort"^^xsd:string .

@@ -2,8 +2,6 @@ package em.external.org.devgateway.ocvn;
 
 
 import com.mongodb.MongoClient;
-import com.p6spy.engine.spy.P6SpyDriver;
-import org.apache.derby.drda.NetworkServerControl;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
@@ -92,12 +90,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
 
-    private String dbUrl(boolean withP6Spy) {
+    private String dbUrl( ) {
 
         String url = "jdbc";
-        if (withP6Spy) {
-            url += ":p6spy";
-        }
         url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_ocvn/testdb_" + dbPort;
 
         return url;
@@ -110,8 +105,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new String[]{
                 "-Dliquibase.enabled=false",
                 "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
-                "-Dspring.datasource.driver-class-name=" + P6SpyDriver.class.getName(),
-                "-Dspring.datasource.url=" + dbUrl(true) + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.driver-class-name=org.h2.Driver",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
                 "-Dspring.datasource.username=sa",
@@ -182,7 +177,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(false), "sa", "");
+            connection = DriverManager.getConnection(dbUrl(), "sa", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

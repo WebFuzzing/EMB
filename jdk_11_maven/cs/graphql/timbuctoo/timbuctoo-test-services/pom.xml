@@ -1,0 +1,79 @@
+<!DOCTYPE project [
+    <!ELEMENT project (modelVersion|groupId|artifactId|version|name|description|properties|dependencies|build)*>
+    <!ATTLIST project
+        xmlns CDATA #REQUIRED
+        xmlns:xsi CDATA #REQUIRED
+        xsi:schemaLocation CDATA #REQUIRED>
+    <!ELEMENT modelVersion (#PCDATA)>
+    <!ELEMENT groupId (#PCDATA)>
+    <!ELEMENT artifactId (#PCDATA)>
+    <!ELEMENT version (#PCDATA)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT description (#PCDATA)>
+    <!ELEMENT properties (jdk.version|maven-compiler.version)*>
+    <!ELEMENT jdk.version (#PCDATA)>
+    <!ELEMENT maven-compiler.version (#PCDATA)>
+    <!ELEMENT dependencies (dependency)*>
+    <!ELEMENT dependency (groupId|artifactId|version)*>
+    <!ELEMENT build (plugins)*>
+    <!ELEMENT plugins (plugin)*>
+    <!ELEMENT plugin (artifactId|version|configuration)*>
+    <!ELEMENT configuration (source|target)*>
+    <!ELEMENT source (#PCDATA)>
+    <!ELEMENT target (#PCDATA)>
+    ]>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!--<parent>-->
+    <!--<groupId>nl.knaw.huygens</groupId>-->
+    <!--<artifactId>timbuctoo</artifactId>-->
+    <!--<version>3.1.0-SNAPSHOT</version>-->
+    <!--<relativePath>../timbuctoo-v3/pom.xml</relativePath>-->
+  <!--</parent>-->
+  <groupId>nl.knaw.huygens</groupId>
+  <artifactId>timbuctoo-test-services</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>Test services</name>
+  <description>A module that contains test helpers.</description>
+
+  <properties>
+    <jdk.version>11</jdk.version>
+    <maven-compiler.version>3.8.1</maven-compiler.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <hamcrest-all.version>1.3</hamcrest-all.version>
+    <guava.version>31.0.1-jre</guava.version>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+    <!-- Hamcrest library -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>${hamcrest-all.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>${maven-compiler.version}</version>
+      <configuration>
+        <source>${jdk.version}</source>
+        <target>${jdk.version}</target>
+      </configuration>
+    </plugin>
+    </plugins>
+  </build>
+
+</project>

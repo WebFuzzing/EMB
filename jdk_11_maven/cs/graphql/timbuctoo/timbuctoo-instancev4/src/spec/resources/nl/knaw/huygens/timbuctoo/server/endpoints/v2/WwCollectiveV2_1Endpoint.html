@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Timbuctoo v2.1 WWCollective API</title>
+</head>
+<body>
+  <section data-type="chapter">
+    <h2>Preface</h2>
+    <p>
+        This specification describes the workings of the v2.1 version of the Timbuctoo REST API for wwdocuments
+    </p>
+    <span c:execute="#token=getAuthenticationToken()">For each test we expect the user is logged in and uses token
+      <b><span c:echo="#token"></span></b>.</span>
+  </section>
+
+  <section data-type="chapter">
+    <h2>Create a new wwcollective with POST</h2>
+
+    <aside class="example" h:http="#createResponse">
+      <p>When a valid POST is performed to wwcollectives</p>
+      <div h:request="">
+        POST /v2.1/domain/wwcollectives HTTP/1.1
+        Authorization: $(#token)
+        Content-type: application/json
+        VRE_ID: WomenWriters
+
+        {
+          "@type": "wwcollective",
+          "type": "ACADEMY",
+          "name": "Testcollective",
+          "links": [{
+              "url": "http://example.com",
+              "label": "Test link"
+          }]
+        }
+      </div>
+      <p>The server will respond with a location header containing the URL of the created resource</p>
+      <div h:response="validateIdFromLocationHeader">
+        HTTP/1.1 201
+        Location:
+      </div>
+    </aside>
+    <span c:execute="#recordId=getRecordId()"></span>
+    <p>
+      The field <b>type</b> should have one of these values:
+      <ul>
+        <li>UNKNOWN</li>
+        <li>ACADEMY</li>
+        <li>ASSOCIATION</li>
+        <li>LIBRARY</li>
+        <li>PUBLISHER</li>
+        <li>SHOP</li>
+      </ul>
+    </p>
+    <p>
+      After at most <b>60</b> seconds the new record
+      <span c:execute="#pid=retrievePid()">
+         <span c:assertTrue="recordHasPid()">
+           should have persistent ID in the field <i>^pid</i>:
+           <b><span c:echo="#pid"></span></b>
+         </span>.
+      </span>
+    </p>
+  </section>
+
+  <section data-type="chapter">
+    <h2>Performing GET to the recently created wwcollective resource</h2>
+    <aside class="example" h:http="#response">
+      <p>When a GET is performed to the wwcollective </p>
+      <div h:request="">
+        GET $(#createResponse.firstHeaders.location) HTTP/1.1
+        Accept: application/json
+      </div>
+      <p>The server will respond with the created resource</p>
+      <div h:response="">
+        HTTP/1.1 200
+        Content-type: application/json
+
+        {
+            "_id": "$(#recordId)",
+            "@type": "wwcollective",
+            "@relations": {},
+            "@relationCount": 0,
+            "@variationRefs": [
+                {
+                  "id": "$(#recordId)",
+                  "type": "wwcollective"
+                },
+                {
+                  "id": "$(#recordId)",
+                  "type": "collective"
+                }
+            ],
+            "^created": {
+                "username": "/*STRING*/",
+                "userId": "/*STRING*/",
+                "timeStamp": "/*NUMBER*/"
+            },
+            "^modified": {
+                "username": "/*STRING*/",
+                "userId": "/*STRING*/",
+                "timeStamp": "/*NUMBER*/"
+            },
+            "^rev": 1,
+            "^pid": "/*STRING*/",
+            "^deleted": false,
+            "type": "ACADEMY",
+            "name": "Testcollective",
+            "links": [{
+                "url": "http://example.com",
+                "label": "Test link"
+            }]
+        }
+      </div>
+    </aside>
+  </section>
+  <section data-type="chapter">
+    <h2>Update the wwcollective with PUT</h2>
+    <aside class="example" h:http="#response">
+      <p>When a valid PUT is performed the wwcollective</p>
+      <div h:request="">
+        PUT $(#createResponse.firstHeaders.location) HTTP/1.1
+        Authorization: $(#token)
+        Content-type: application/json
+        VRE_ID: WomenWriters
+
+        {
+          "_id": "$(#recordId)",
+          "@type": "wwcollective",
+          "type": "LIBRARY",
+          "name": "Testcollective updated",
+          "links": [{
+            "url": "http://example.com",
+            "label": "Test link"
+          }],
+          "^rev": 1
+        }
+      </div>
+      <p>The server will respond with a 200 OK status code.</p>
+      <div h:response="">
+        HTTP/1.1 200
+      </div>
+    </aside>
+    <p>
+      After at most <b>60</b> seconds the updated record
+      <span c:execute="#pid=retrievePid()">
+        <span c:assertTrue="recordHasPid()">
+          should receive a new persistent ID:
+          <b><span c:echo="#pid"></span></b>
+        </span>.
+      </span>
+    </p>
+  </section>
+
+  <section data-type="chapter">
+    <h2>Performing GET to the recently updated wwcollective resource</h2>
+    <aside class="example" h:http="#response">
+      <p>When a GET is performed to the wwcollective </p>
+
+      <div h:request="">
+        GET $(#createResponse.firstHeaders.location) HTTP/1.1
+        Accept: application/json
+      </div>
+      <p>The server will respond with the updated resource</p>
+
+      <div h:response="">
+        HTTP/1.1 200
+        Content-type: application/json
+
+        {
+          "_id": "$(#recordId)",
+          "@type": "wwcollective",
+          "^rev": 2,
+          "name": "Testcollective updated",
+          "type": "LIBRARY"
+        }
+      </div>
+    </aside>
+  </section>
+        <section data-type="chapter">
+          <h2>Deleting a wwcollective</h2>
+          <aside class="example" h:http="#response">
+            <p>When a DELETE is sent to an existing wwcollective resource</p>
+
+            <div h:request="">
+              DELETE $(#createResponse.firstHeaders.location) HTTP/1.1
+              Authorization:$(#token)
+              VRE_ID: WomenWriters
+            </div>
+            <p>The server will respond with statusCode 204 no content</p>
+
+            <div h:response="">
+              HTTP/1.1 204
+            </div>
+          </aside>
+        </section>
+
+      <section data-type="chapter">
+        <h2>Trying to retrieve the deleted record</h2>
+        <aside class="example" h:http="#response">
+          <p>When a GET is sent to the recently deleted wwcollective resource</p>
+
+          <div h:request="">
+            GET $(#createResponse.firstHeaders.location) HTTP/1.1
+            Accept: application/json
+          </div>
+          <p>The server will respond with statusCode 404 not found</p>
+
+          <div h:response="">
+            HTTP/1.1 404
+          </div>
+        </aside>
+      </section>
+</body>
+</html>

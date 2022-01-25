@@ -1,0 +1,38 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Metadata API</title>
+</head>
+<body>
+<section data-type="chapter">
+  <p>
+    The autocomplete endpoint allows you to search through a collection using substrings of the displayname.
+  </p>
+</section>
+
+<section data-type="chapter">
+    <h2>Retrieving some results</h2>
+
+    <aside class="example" h:http="">
+      <p>When a GET is performed to {collection}/autocomplete</p>
+
+      <div h:request="">
+        GET /v2.1/domain/wwlanguages/autocomplete?query=*d* HTTP/1.1
+        Content-type: application/json
+      </div>
+      <p>The server will show all languages that contain a "d"</p>
+
+      <div h:response="">
+        HTTP/1.1 200
+
+        [{
+          "value": "/*STRING*/",
+          "key": "/*URL_WITHOUT_REV*/"
+        }]
+      </div>
+    </aside>
+</section>
+</body>
+</html>

@@ -65,16 +65,22 @@ def replaceInKotlinGradle(file):
     replacement = "val EVOMASTER_VERSION = \""+version+"\"\n"
     replace(file, regex, replacement)
 
-# TODO these will be removed once we get rid off of P6Spy
+def versionSetMaven(folder, jdk_home):
+    SHELL = platform.system() == 'Windows'
+    env_vars = os.environ.copy()
+    env_vars["JAVA_HOME"] = jdk_home
+
+    # Note: this will change version in sub-modules only if those have the same groupId. So the ones in CS are unaffected
+    mvnres = run(["mvn", "versions:set", "-DnewVersion="+version], shell=SHELL, cwd=PROJ_LOCATION+folder, env=env_vars)
+    mvnres = mvnres.returncode
+
+    if mvnres != 0:
+        print("\nERROR: Maven command failed")
+        exit(1)
+
+
 replaceInPom("jdk_8_maven/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/scout-api/api/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/catwatch/catwatch-backend/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/artificial/news/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/features-service/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest/original/proxyprint/pom.xml")
-replaceInPom("jdk_8_maven/cs/rest-gui/ocvn/web/pom.xml")
-replaceInPom("jdk_8_maven/cs/graphql/spring-petclinic-graphql/pom.xml")
-replaceInProperty("jdk_11_gradle/cs/graphql/patio-api/gradle.properties")
+replaceInPom("jdk_11_maven/pom.xml")
 
 # is there any easier way for Gradle?
 replaceInKotlinGradle("jdk_11_gradle/em/embedded/graphql/patio-api/build.gradle.kts")
@@ -82,16 +88,6 @@ replaceInKotlinGradle("jdk_11_gradle/em/external/graphql/patio-api/build.gradle.
 
 replaceInDist()
 
+versionSetMaven("/jdk_8_maven",JAVA_HOME_8)
+versionSetMaven("/jdk_11_maven",JAVA_HOME_11)
 
-SHELL = platform.system() == 'Windows'
-
-env_vars = os.environ.copy()
-env_vars["JAVA_HOME"] = JAVA_HOME_8
-
-
-mvnres = run(["mvn", "versions:set", "-DnewVersion="+version], shell=SHELL, cwd=PROJ_LOCATION+"/jdk_8_maven", env=env_vars)
-mvnres = mvnres.returncode
-
-if mvnres != 0:
-    print("\nERROR: Maven command failed")
-    exit(1)
