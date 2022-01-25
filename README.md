@@ -62,8 +62,6 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * nestjs-realworld-example-app (ISC), from [https://github.com/lujakob/nestjs-realworld-example-app](https://github.com/lujakob/nestjs-realworld-example-app)
 
-* Naivecoin (Apache-2.0 License), from [https://github.com/conradoqg/naivecoin](https://github.com/conradoqg/naivecoin)
-
 ### REST: .Net/C# 
 
 * Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App](https://github.com/chayxana/Restaurant-App)

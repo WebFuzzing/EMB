@@ -27,7 +27,7 @@ class AppController extends em.SutController {
 
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
-        dto.swaggerJsonUrl = "http://localhost:" + this.port + "/apidocs/swagger_v3.json";
+        dto.openApiUrl = "http://localhost:" + this.port + "/apidocs/swagger_v3.json";
 
         return dto;
     }
