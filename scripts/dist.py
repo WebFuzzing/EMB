@@ -17,28 +17,33 @@ HOME = expanduser("~")
 SCRIPT_LOCATION = os.path.dirname(os.path.realpath(__file__))
 PROJ_LOCATION = os.path.abspath(os.path.join(SCRIPT_LOCATION, os.pardir))
 
-
 JAVA_HOME_8 = os.environ.get('JAVA_HOME_8', '')
-if JAVA_HOME_8 == '':
-    print("\nERROR: JAVA_HOME_8 environment variable is not defined")
-    exit(1)
-
 JAVA_HOME_11 = os.environ.get('JAVA_HOME_11', '')
-if JAVA_HOME_11 == '':
-    print("\nERROR: JAVA_HOME_11 environment variable is not defined")
-    exit(1)
-
 
 SHELL = platform.system() == 'Windows'
 
 
+##################################################
+def checkJavaVersions():
+    if JAVA_HOME_8 == '':
+        print("\nERROR: JAVA_HOME_8 environment variable is not defined")
+        exit(1)
+
+    if JAVA_HOME_11 == '':
+        print("\nERROR: JAVA_HOME_11 environment variable is not defined")
+        exit(1)
+
+
+
+######################################
 ### Prepare "dist" folder ###
-dist = os.path.join(PROJ_LOCATION, "dist")
+def prepareDistFolder():
+    dist = os.path.join(PROJ_LOCATION, "dist")
 
-if os.path.exists(dist):
-    shutil.rmtree(dist)
+    if os.path.exists(dist):
+        shutil.rmtree(dist)
 
-os.mkdir(dist)
+    os.mkdir(dist)
 
 
 def callMaven(folder, jdk_home):
@@ -196,32 +201,45 @@ def build_dotnet_3():
     copytree(menuapi, os.path.join(dist, "menu-api"))
 
 
+
+######################################################################################
+### Copy JavaAgent library ###
+## This requires EvoMaster to be "mvn install"ed on your machine
+def copyEvoMasterAgent():
+    copy(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
+         + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
+        + EVOMASTER_VERSION + ".jar",
+        os.path.join(dist, "evomaster-agent.jar"))
+
+
+
+######################################################################################
+### Create Zip file with all the SUTs and Drivers ###
+def makeZip():
+    zipName = "dist.zip"
+    if os.path.exists(zipName):
+        os.remove(zipName)
+
+    print("Creating " + zipName)
+    shutil.make_archive(base_name=dist, format='zip', root_dir=dist+"/..", base_dir='dist')
+
+
 #####################################################################################
 ### Build the different modules ###
+
+checkJavaVersions()
+
+prepareDistFolder()
+
 build_jdk_8_maven()
 build_jdk_11_maven()
 build_jdk_11_gradle()
 build_dotnet_3()
 
+copyEvoMasterAgent()
 
-
-######################################################################################
-### Copy JavaAgent library ###
-copy(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
-   + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
-   + EVOMASTER_VERSION + ".jar",
-   os.path.join(dist, "evomaster-agent.jar"))
-
+makeZip()
 
 ######################################################################################
-### Create Zip file with all the SUTs and Drivers ###
-zipName = "dist.zip"
-if os.path.exists(zipName):
-    os.remove(zipName)
-
-print("Creating " + zipName)
-shutil.make_archive(base_name=dist, format='zip', root_dir=dist+"/..", base_dir='dist')
-
-
-######################################################################################
+## If we arrive here, it means everything worked fine, with no exception
 print("\n\nSUCCESS\n\n")
