@@ -174,12 +174,10 @@ hs_err_pid*
 /js_npm/rest/disease-sh-api/build/
 /js_npm/rest/disease-sh-api/EvoMasterTest.js
 /js_npm/rest/disease-sh-api/redis/
-/js_npm/rest/nestjs-realworld-example-app/node_modules/
-/js_npm/rest/nestjs-realworld-example-app/build/
-/js_npm/rest/naivecoin/build/
-/js_npm/rest/naivecoin/node_modules/
-/js_npm/rest/spaceX/node_modules/
-/js_npm/rest/spaceX/build/
+/js_npm/rest/realworld-app/node_modules/
+/js_npm/rest/realworld-app/build/
+/js_npm/rest/spacex-api/node_modules/
+/js_npm/rest/spacex-api/build/
 
 
 #DotNet

@@ -149,3 +149,20 @@ on your machine (as some of the projects have GUIs built with JS).
 ### Build JS_NPM
 
 *Documentation under construction*
+
+### Build *develop* Branch
+
+Branch *develop* is using the most recent SNAPSHOT version of _EvoMaster_.
+As that is not published online, you need to clone its repository, and build
+it locally (see its documentation on how to do it).
+
+To handle JavaScript, unfortunately there is the need for some manual settings.
+However, it needs to be done just once. 
+
+You need to create _symbolic_ link inside `EMB\js_npm` that points to the `evomaster-client-js` folder in _EvoMaster_.
+How to do this, depends on the Operating System.
+Note that in the following, `<some-path>` should be replace with the actual real paths of where you cloned the _EvoMaster_ and _EMB_ repositories. 
+
+Windows: `mklink /D  C:\<some-path>\EMB\js_npm\evomaster-client-js  C:\<some-path>\EvoMaster\client-js\evomaster-client-js`
+
+Mac: `ln -s /<some-path>/EvoMaster/client-js/evomaster-client-js  /<some-path>/EMB/js_npm/evomaster-client-js`

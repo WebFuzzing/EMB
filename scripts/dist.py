@@ -151,7 +151,8 @@ def build_jdk_11_gradle() :
 # Building JavaScript projects
 def buildJS(path, name):
     print("Building '"+name+"' from " + path)
-    res = run(["npm", "install"], shell=SHELL, cwd=path).returncode
+    # we use "ci" instead of "install" due to major flaws in NPM
+    res = run(["npm", "ci"], shell=SHELL, cwd=path).returncode
     if res != 0:
         print("\nERROR installing packages with NPM in " + path)
         exit(1)
@@ -160,19 +161,21 @@ def buildJS(path, name):
         print("\nERROR when building " + path)
         exit(1)
 
-    target = os.path.join(dist, name+"-js")
+    target = os.path.join(dist, name)
     # shutil.make_archive(base_name=target, format='zip', root_dir=path+"/..", base_dir=name)
     copytree(path, target)
 
 
 
-### Due to the insanity of node_modules, those are off by default
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","ncs")), "ncs")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "scs")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","disease-sh-api")), "disease-sh-api")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","nestjs-realworld-example-app")), "nestjs-realworld-example-app")
-# buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spaceX")), "spaceX")
+####################
+def build_js_npm():
+    ### Due to the insanity of node_modules, those are off by default
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","ncs")), "js-rest-ncs")
+    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "js-rest-scs")
+    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
+    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","disease-sh-api")), "disease-sh-api")
+    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","realworld-app")), "realworld-app")
+    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spacex-api")), "spacex-api")
 
 
 ####################
@@ -235,6 +238,7 @@ build_jdk_8_maven()
 build_jdk_11_maven()
 build_jdk_11_gradle()
 build_dotnet_3()
+build_js_npm()
 
 copyEvoMasterAgent()
 
