@@ -22,6 +22,8 @@ JAVA_HOME_11 = os.environ.get('JAVA_HOME_11', '')
 
 SHELL = platform.system() == 'Windows'
 
+DIST = os.path.join(PROJ_LOCATION, "dist")
+
 
 ##################################################
 def checkJavaVersions():
@@ -38,12 +40,11 @@ def checkJavaVersions():
 ######################################
 ### Prepare "dist" folder ###
 def prepareDistFolder():
-    dist = os.path.join(PROJ_LOCATION, "dist")
 
-    if os.path.exists(dist):
-        shutil.rmtree(dist)
+    if os.path.exists(DIST):
+        shutil.rmtree(DIST)
 
-    os.mkdir(dist)
+    os.mkdir(DIST)
 
 
 def callMaven(folder, jdk_home):
@@ -64,44 +65,44 @@ def build_jdk_8_maven() :
     callMaven(folder, JAVA_HOME_8)
 
     # Copy JAR files
-    copy(folder+"/cs/rest/original/features-service/target/features-service-sut.jar", dist)
-    copy(folder+"/em/external/rest/features-service/target/features-service-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/original/features-service/target/features-service-sut.jar", DIST)
+    copy(folder +"/em/external/rest/features-service/target/features-service-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/original/scout-api/api/target/scout-api-sut.jar", dist)
-    copy(folder+"/em/external/rest/scout-api/target/scout-api-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/original/scout-api/api/target/scout-api-sut.jar", DIST)
+    copy(folder +"/em/external/rest/scout-api/target/scout-api-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/original/proxyprint/target/proxyprint-sut.jar", dist)
-    copy(folder+"/em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/original/proxyprint/target/proxyprint-sut.jar", DIST)
+    copy(folder +"/em/external/rest/proxyprint/target/proxyprint-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar",dist)
-    copy(folder+"/em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar", DIST)
+    copy(folder +"/em/external/rest/catwatch/target/catwatch-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/artificial/ncs/target/rest-ncs-sut.jar", dist)
-    copy(folder+"/em/external/rest/ncs/target/rest-ncs-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/artificial/ncs/target/rest-ncs-sut.jar", DIST)
+    copy(folder +"/em/external/rest/ncs/target/rest-ncs-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/artificial/scs/target/rest-scs-sut.jar", dist)
-    copy(folder+"/em/external/rest/scs/target/rest-scs-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/artificial/scs/target/rest-scs-sut.jar", DIST)
+    copy(folder +"/em/external/rest/scs/target/rest-scs-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/artificial/news/target/rest-news-sut.jar", dist)
-    copy(folder+"/em/external/rest/news/target/rest-news-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/artificial/news/target/rest-news-sut.jar", DIST)
+    copy(folder +"/em/external/rest/news/target/rest-news-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest-gui/ocvn/web/target/ocvn-rest-sut.jar", dist)
-    copy(folder+"/em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest-gui/ocvn/web/target/ocvn-rest-sut.jar", DIST)
+    copy(folder +"/em/external/rest/ocvn/target/ocvn-rest-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/original/languagetool/languagetool-server/target/languagetool-sut.jar",dist)
-    copy(folder+"/em/external/rest/languagetool/target/languagetool-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/original/languagetool/languagetool-server/target/languagetool-sut.jar", DIST)
+    copy(folder +"/em/external/rest/languagetool/target/languagetool-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/rest/original/restcountries/target/restcountries-sut.jar",dist)
-    copy(folder+"/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/original/restcountries/target/restcountries-sut.jar", DIST)
+    copy(folder +"/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar",dist)
-    copy(folder+"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", dist)
+    copy(folder +"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/graphql/graphql-ncs/target/graphql-ncs-sut.jar",dist)
-    copy(folder+"/em/external/graphql/graphql-ncs/target/graphql-ncs-evomaster-runner.jar", dist)
+    copy(folder +"/cs/graphql/graphql-ncs/target/graphql-ncs-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/graphql-ncs/target/graphql-ncs-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/graphql/graphql-scs/target/graphql-scs-sut.jar",dist)
-    copy(folder+"/em/external/graphql/graphql-scs/target/graphql-scs-evomaster-runner.jar", dist)
+    copy(folder +"/cs/graphql/graphql-scs/target/graphql-scs-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/graphql-scs/target/graphql-scs-evomaster-runner.jar", DIST)
 
 
 
@@ -109,8 +110,8 @@ def build_jdk_8_maven() :
     if ind0 == '':
         print("\nWARN: SUT_LOCATION_IND0 env variable is not defined")
     else:
-        copy(ind0, os.path.join(dist, "ind0-sut.jar"))
-        copy(folder+"/em/external/rest/ind0/target/ind0-evomaster-runner.jar", dist)
+        copy(ind0, os.path.join(DIST, "ind0-sut.jar"))
+        copy(folder +"/em/external/rest/ind0/target/ind0-evomaster-runner.jar", DIST)
 
 
 
@@ -120,11 +121,11 @@ def build_jdk_11_maven() :
     folder = "jdk_11_maven"
     callMaven(folder, JAVA_HOME_11)
 
-    copy(folder+"/cs/rest/cwa-verification-server/target/cwa-verification-sut.jar", dist)
-    copy(folder+"/em/external/rest/cwa-verification/target/cwa-verification-evomaster-runner.jar", dist)
+    copy(folder +"/cs/rest/cwa-verification-server/target/cwa-verification-sut.jar", DIST)
+    copy(folder +"/em/external/rest/cwa-verification/target/cwa-verification-evomaster-runner.jar", DIST)
 
-    copy(folder+"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", dist)
-    copy(folder+"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", dist)
+    copy(folder +"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", DIST)
 
 ####################
 def build_jdk_11_gradle() :
@@ -142,8 +143,8 @@ def build_jdk_11_gradle() :
 
 
     # Copy JAR files
-    copy(folder+"/cs/graphql/patio-api/build/libs/patio-api-sut.jar", dist)
-    copy(folder+"/em/external/graphql/patio-api/build/libs/patio-api-evomaster-runner.jar", dist)
+    copy(folder +"/cs/graphql/patio-api/build/libs/patio-api-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/patio-api/build/libs/patio-api-evomaster-runner.jar", DIST)
 
 
 
@@ -161,7 +162,7 @@ def buildJS(path, name):
         print("\nERROR when building " + path)
         exit(1)
 
-    target = os.path.join(dist, name)
+    target = os.path.join(DIST, name)
     # shutil.make_archive(base_name=target, format='zip', root_dir=path+"/..", base_dir=name)
     copytree(path, target)
 
@@ -171,11 +172,11 @@ def buildJS(path, name):
 def build_js_npm():
     ### Due to the insanity of node_modules, those are off by default
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","ncs")), "js-rest-ncs")
-    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "js-rest-scs")
-    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
-    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","disease-sh-api")), "disease-sh-api")
-    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","realworld-app")), "realworld-app")
-    # buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spacex-api")), "spacex-api")
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "js-rest-scs")
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","disease-sh-api")), "disease-sh-api")
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","realworld-app")), "realworld-app")
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spacex-api")), "spacex-api")
 
 
 ####################
@@ -198,10 +199,10 @@ def build_dotnet_3():
     menuapi = os.path.abspath(os.path.join(rest,"MenuAPIDriver","bin","Debug","netcoreapp3.1"))
 
 
-    copytree(ncs, os.path.join(dist, "cs-rest-ncs"))
-    copytree(scs, os.path.join(dist, "cs-rest-scs"))
-    copytree(sampleproject, os.path.join(dist, "sampleproject"))
-    copytree(menuapi, os.path.join(dist, "menu-api"))
+    copytree(ncs, os.path.join(DIST, "cs-rest-ncs"))
+    copytree(scs, os.path.join(DIST, "cs-rest-scs"))
+    copytree(sampleproject, os.path.join(DIST, "sampleproject"))
+    copytree(menuapi, os.path.join(DIST, "menu-api"))
 
 
 
@@ -211,8 +212,8 @@ def build_dotnet_3():
 def copyEvoMasterAgent():
     copy(HOME + "/.m2/repository/org/evomaster/evomaster-client-java-instrumentation/"
          + EVOMASTER_VERSION + "/evomaster-client-java-instrumentation-"
-        + EVOMASTER_VERSION + ".jar",
-        os.path.join(dist, "evomaster-agent.jar"))
+         + EVOMASTER_VERSION + ".jar",
+         os.path.join(DIST, "evomaster-agent.jar"))
 
 
 
@@ -224,7 +225,7 @@ def makeZip():
         os.remove(zipName)
 
     print("Creating " + zipName)
-    shutil.make_archive(base_name=dist, format='zip', root_dir=dist+"/..", base_dir='dist')
+    shutil.make_archive(base_name=DIST, format='zip', root_dir=DIST + "/..", base_dir='dist')
 
 
 #####################################################################################
