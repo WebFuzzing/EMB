@@ -34,7 +34,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micronaut:micronaut-bom:3.2.5'
+        mavenBom 'io.micronaut:micronaut-bom:3.2.7'
     }
 }
 
@@ -57,7 +57,7 @@ dependencies {
 
     implementation "io.micronaut.data:micronaut-data-hibernate-jpa"
     implementation 'io.micronaut.sql:micronaut-jdbc-hikari'
-    implementation 'io.micronaut.configuration:micronaut-flyway:1.2.0'
+    implementation 'io.micronaut.flyway:micronaut-flyway:5.1.1'
     implementation 'com.vladmihalcea:hibernate-types-52:2.9.8'
 
     // graphql scalars
@@ -75,7 +75,7 @@ dependencies {
     compile 'de.neuland-bfi:jade4j:1.2.7'
 
     // test
-    testCompile "io.micronaut.test:micronaut-test-junit5:1.0.2"
+    testCompile "io.micronaut.test:micronaut-test-junit5:3.0.5"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.3.1'

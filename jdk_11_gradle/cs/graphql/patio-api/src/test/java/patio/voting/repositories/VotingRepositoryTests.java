@@ -32,6 +32,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 //import javax.inject.Inject;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.flywaydb.core.Flyway;
 import org.hamcrest.collection.IsIterableContainingInOrder;
@@ -55,7 +56,7 @@ import patio.voting.domain.Voting;
  *
  * @since 0.1.0
  */
-//@MicronautTest
+@MicronautTest
 @Testcontainers
 public class VotingRepositoryTests {
 

@@ -24,6 +24,7 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.UUID;
 //import javax.inject.Inject;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterEach;
@@ -42,7 +43,7 @@ import patio.infrastructure.tests.Fixtures;
  *
  * @since 0.1.0
  */
-//@MicronautTest
+@MicronautTest
 @Testcontainers
 public class VotingStatsRepositoryTests {
 
