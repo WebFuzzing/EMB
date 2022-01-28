@@ -25,7 +25,7 @@ java {
 
 dependencyManagement  {
     imports {
-        mavenBom("io.micronaut:micronaut-bom:3.2.5")
+        mavenBom("io.micronaut:micronaut-bom:3.2.7")
     }
 }
 
@@ -35,6 +35,7 @@ dependencies{
     implementation("org.evomaster:evomaster-client-java-controller:$EVOMASTER_VERSION")
     implementation("org.testcontainers:testcontainers:1.15.2")
     implementation(project(":cs:graphql:patio-api"))
+    implementation("io.micronaut:micronaut-runtime")
 
     implementation("io.micronaut.data:micronaut-data-tx:1.0.2")
 }

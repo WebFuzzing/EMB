@@ -33,7 +33,7 @@ java {
 
 dependencyManagement  {
     imports {
-        mavenBom("io.micronaut:micronaut-bom:3.2.5")
+        mavenBom("io.micronaut:micronaut-bom:3.2.7")
     }
 }
 

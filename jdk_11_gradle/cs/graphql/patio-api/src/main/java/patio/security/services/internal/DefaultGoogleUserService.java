@@ -21,7 +21,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.oauth2.Oauth2;
-import com.google.api.services.oauth2.model.Userinfoplus;
+import com.google.api.services.oauth2.model.Userinfo;
 import java.io.IOException;
 import java.util.Optional;
 //import javax.inject.Singleton;
@@ -51,7 +51,7 @@ public class DefaultGoogleUserService implements GoogleUserService {
     Optional<User> user = Optional.empty();
 
     try {
-      Userinfoplus userinfoplus = oauth2.userinfo().get().execute();
+      Userinfo userinfoplus = oauth2.userinfo().get().execute();
       user =
           Optional.of(
               User.builder()

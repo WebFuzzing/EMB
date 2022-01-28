@@ -43,7 +43,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     // TODO maybe report at https://github.com/micronaut-projects/micronaut-core/issues
 
 
-    private static final GenericContainer postgres = new GenericContainer("postgres:9")
+    private static final GenericContainer postgres = new GenericContainer("postgres:latest")
             .withExposedPorts(5432)
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
             .withEnv("POSTGRES_DB", "patio")
