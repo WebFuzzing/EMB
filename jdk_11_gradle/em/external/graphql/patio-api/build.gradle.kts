@@ -41,6 +41,7 @@ val EVOMASTER_VERSION = "1.3.1-SNAPSHOT"
 
 dependencies{
     implementation("org.evomaster:evomaster-client-java-controller:$EVOMASTER_VERSION")
+    implementation("org.evomaster:evomaster-client-java-instrumentation:$EVOMASTER_VERSION")
     implementation("org.testcontainers:testcontainers:1.15.2")
     implementation(project(":cs:graphql:patio-api"))
 
