@@ -156,7 +156,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getLogMessageOfInitializedServer() {
-        return "Server: Started";
+        return "Started @";
     }
 
     @Override
@@ -167,6 +167,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public void preStart() {
         elasticsearch.start();
+        resetStateOfSUT();
     }
 
     @Override
