@@ -87,7 +87,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
         try {
-            application.run("server", "src/main/resources/timbuctoo_evomaster.yaml");
+            application.run("server", "em/embedded/graphql/timbuctoo/src/main/resources/timbuctoo_evomaster.yaml");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -145,8 +145,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             if(!Files.exists(Path.of(tmpFolder))) {
                 Files.createDirectory(Path.of(tmpFolder));
             }
-            Files.copy(Path.of("src","main","resources","users.json"), Path.of(tmpFolder,"users.json"), StandardCopyOption.REPLACE_EXISTING);
-            Files.copy(Path.of("src","main","resources","logins.json"), Path.of(tmpFolder,"logins.json"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(Path.of(getClass().getClassLoader().getResource("users.json").toURI()), Path.of(tmpFolder,"users.json"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(Path.of(getClass().getClassLoader().getResource("logins.json").toURI()), Path.of(tmpFolder,"logins.json"), StandardCopyOption.REPLACE_EXISTING);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
