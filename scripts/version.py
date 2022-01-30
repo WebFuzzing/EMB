@@ -79,6 +79,27 @@ def versionSetMaven(folder, jdk_home):
         exit(1)
 
 
+def replaceInJS(file):
+    regex = re.compile(r'\s*"evomaster-client-js"\s*:.*')
+    replacement = ""
+    if version.endswith("-SNAPSHOT"):
+        replacement = "    \"evomaster-client-js\": \"file:../../evomaster-client-js\",\n"
+    else:
+        replacement = "    \"evomaster-client-js\": \""+version+"\",\n"
+    replace(file, regex, replacement)
+
+
+def replaceAllJs():
+    # Note: here we are not updating lock files... so still need to make a build
+    replaceInJS("js_npm/rest/cyclotron/package.json")
+    replaceInJS("js_npm/rest/disease-sh-api/package.json")
+    replaceInJS("js_npm/rest/ncs/package.json")
+    replaceInJS("js_npm/rest/realworld-app/package.json")
+    replaceInJS("js_npm/rest/scs/package.json")
+    replaceInJS("js_npm/rest/spacex-api/package.json")
+
+######################################################################################################
+
 replaceInPom("jdk_8_maven/pom.xml")
 replaceInPom("jdk_11_maven/pom.xml")
 
@@ -91,3 +112,4 @@ replaceInDist()
 versionSetMaven("/jdk_8_maven",JAVA_HOME_8)
 versionSetMaven("/jdk_11_maven",JAVA_HOME_11)
 
+replaceAllJs()
