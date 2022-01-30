@@ -143,10 +143,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             //FIXME: this fails due to locks on Neo4j. need way to reset it
             //deleteDir(new File(tmpFolder));
             if(!Files.exists(Path.of(tmpFolder))) {
-                Files.createDirectory(Path.of(tmpFolder));
+                Files.createDirectories(Path.of(tmpFolder));
             }
-            Files.copy(Path.of(getClass().getClassLoader().getResource("users.json").toURI()), Path.of(tmpFolder,"users.json"), StandardCopyOption.REPLACE_EXISTING);
-            Files.copy(Path.of(getClass().getClassLoader().getResource("logins.json").toURI()), Path.of(tmpFolder,"logins.json"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(getClass().getClassLoader().getResourceAsStream("users.json"), Path.of(tmpFolder,"users.json"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(getClass().getClassLoader().getResourceAsStream("logins.json"), Path.of(tmpFolder,"logins.json"), StandardCopyOption.REPLACE_EXISTING);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
