@@ -1,12 +1,11 @@
 package org.graphqlncs
+
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 
-
 @SpringBootApplication
 open class NcsApplication
-
 
 /*
     API accessible at
