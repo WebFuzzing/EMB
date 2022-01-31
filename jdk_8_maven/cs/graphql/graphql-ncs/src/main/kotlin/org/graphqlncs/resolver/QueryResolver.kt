@@ -1,7 +1,9 @@
 package org.graphqlncs.resolver
 
 import graphql.kickstart.tools.GraphQLQueryResolver
+import org.graphqlncs.Exep
 import org.graphqlncs.type.*
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 
 @Component
@@ -32,10 +34,18 @@ open class QueryResolver(
     }
 
     fun remainder(a: Int, b:Int  ): Int {
-        return remainder.exe(a, b)
+        val lim = 10000
+        return if (a > lim || a < -lim || b > lim || b < -lim) {
+            throw Exep("400")
+        } else remainder.exe(a, b)
     }
 
     fun bessj(n:Int, x:Double  ): Double {
-        return bessj.bessj(n, x)
+
+        return if (n <= 2 || n > 1000) {
+            throw Exep("400")
+
+        } else
+            bessj.bessj(n, x)
     }
 }
