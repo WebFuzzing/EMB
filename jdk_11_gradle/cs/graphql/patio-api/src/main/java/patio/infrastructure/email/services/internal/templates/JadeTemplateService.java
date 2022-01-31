@@ -21,7 +21,6 @@ import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.template.JadeTemplate;
 import java.util.Map;
 import java.util.Optional;
-//import javax.inject.Singleton;
 
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;

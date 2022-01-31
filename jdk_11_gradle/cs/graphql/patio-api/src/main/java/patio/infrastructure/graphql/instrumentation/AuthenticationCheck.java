@@ -115,7 +115,7 @@ public class AuthenticationCheck extends SimpleInstrumentation {
   private static boolean isDirectivePresent(CheckerParams cond) {
     return Optional.ofNullable(cond.field)
         .map(GraphQLFieldDefinition::getDefinition)
-        .map(def -> def.getDirective(DIRECTIVE_ANONYMOUS))
+        .map(def -> def.getDirectives(DIRECTIVE_ANONYMOUS))
         .isPresent();
   }
 }

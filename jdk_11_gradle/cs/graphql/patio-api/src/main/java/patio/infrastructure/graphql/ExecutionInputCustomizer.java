@@ -25,10 +25,13 @@ import io.micronaut.http.HttpRequest;
 import java.util.Optional;
 //import javax.inject.Singleton;
 
+import io.micronaut.http.MutableHttpResponse;
 import jakarta.inject.Singleton;
 import org.dataloader.DataLoaderRegistry;
 import org.reactivestreams.Publisher;
 import patio.security.services.SecurityService;
+
+import javax.annotation.Nullable;
 
 /**
  * Customizes {@link ExecutionInput} by adding information about security (e.g. authenticated user)
@@ -82,7 +85,7 @@ public class ExecutionInputCustomizer implements GraphQLExecutionInputCustomizer
 
   @Override
   public Publisher<ExecutionInput> customize(
-      ExecutionInput executionInput, HttpRequest httpRequest) {
+      ExecutionInput executionInput, HttpRequest httpRequest, @Nullable MutableHttpResponse<String> httpResponse) {
     Context context =
         httpRequest
             .getHeaders()

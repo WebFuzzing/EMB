@@ -52,7 +52,7 @@ class ExecutionInputCustomizerTests {
     // when: customizing a given ExecutionInput
     var builder = new ExecutionInputCustomizer(mockedService, new DataLoaderRegistry());
     var sourceExecutionInput = ExecutionInput.newExecutionInput().build();
-    var customizedExecutionInput = builder.customize(sourceExecutionInput, httpRequest);
+    var customizedExecutionInput = builder.customize(sourceExecutionInput, httpRequest, null);
 
     // then: it should be able to build a context with a user
     StepVerifier.create(customizedExecutionInput)
@@ -78,7 +78,7 @@ class ExecutionInputCustomizerTests {
     // and: a builder with no service (no necessary)
     var builder = new ExecutionInputCustomizer(null, new DataLoaderRegistry());
     var sourceExecutionInput = ExecutionInput.newExecutionInput().build();
-    var customizedExecutionInput = builder.customize(sourceExecutionInput, httpRequest);
+    var customizedExecutionInput = builder.customize(sourceExecutionInput, httpRequest, null);
 
     // then: it should be able to build a context with no user
     StepVerifier.create(customizedExecutionInput)

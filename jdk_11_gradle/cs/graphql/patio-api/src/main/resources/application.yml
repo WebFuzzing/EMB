@@ -52,6 +52,11 @@ graphql:
   enabled: true
   path: /graphql
   schema: "classpath:graphql/schema.graphqls"
+  graphql-ws:
+    enabled: false
+    path: /graphql-ws
+    keep-alive-enabled: true
+    keep-alive-interval: 15s
 
 aws:
   credentials:

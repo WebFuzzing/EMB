@@ -24,9 +24,6 @@ import io.micronaut.context.annotation.Value;
 import jakarta.inject.Provider;
 import jakarta.inject.Singleton;
 
-//import javax.inject.Provider;
-//import javax.inject.Singleton;
-
 /**
  * Configuration related to templating behavior
  *
@@ -46,8 +43,8 @@ public class JadeConfigurationFactory implements Provider<JadeConfiguration> {
    * @since 0.1.0
    */
   public JadeConfigurationFactory(
-      @Value("${templates.encoding}") String encoding,
-      @Value("${templates.cached}") boolean cached) {
+      @Value("${templates.encoding:UTF-8}") String encoding,
+      @Value("${templates.cached:false}") boolean cached) {
     this.cached = cached;
     this.encoding = encoding;
   }

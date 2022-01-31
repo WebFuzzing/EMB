@@ -38,6 +38,9 @@
     -->
     <logger name="patio.api" level="INFO" />
 
+    <!-- added temporarily to check scribejava-->
+    <logger name="io.micronaut.context.condition" level="DEBUG"/>
+
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
