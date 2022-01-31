@@ -128,9 +128,12 @@ Once the script is completed, all the SUTs will be available under the `dist` fo
 Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will be instrumented by code manipulations (for white-box testing heuristics) of _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
 
 
-For using EMB in other context, you can build (and install) each module separately, based on needs. See next section.
-However, it is important to understand how this repository is structured, to be able to effectively navigate through it.
+For using EMB in other context, you can build (and install) each module separately, based on needs. 
+For example, a Maven module can be installed with:
 
+``mvn clean package -DskipTests``
+
+However, it is important to understand how this repository is structured, to be able to effectively navigate through it.
 Each folder represents a set of SUTs (and drivers) that can be built using the same tools.
 For example, the folder `jdk_8_maven` contains all the SUTs that need JDK 8 and are built with Maven.
 On the other hand, the SUTs in the folder `jdk_11_gradle` require JDK 11 and Gradle.
@@ -139,47 +142,23 @@ For JVM and .Net, each module has 2 submodules, called `cs` (short for "Case Stu
 `cs` contains all the source code of the different SUTs, whereas `em` contains all the drivers.
 Note: building a top-module will build as well all of its internal submodules. 
 
+Regarding JavaScript, unfortunately NodeJS does not have a good handling of multi-module projects.
+Each SUT has to be built separately.
+However, for each SUT, we put its source code under a folder called `src`, whereas all the code related to the drivers is under `em`.
+
+The driver classes for Java and .Net are called `EmbeddedEvoMasterController`.
+For JavaScript, they are in a script file called `app-driver.js`.
+Note that Java also a different kind of driver called `ExternalEvoMasterController`.
+The difference is that in External the SUT is started on a separated process, and not running in the same JVM of the driver itself.
 
 
 
+## Old Versions
 
-## Build The Systems
-
-### Build JDK_8_MAVEN
-
-The folder `cs` (*case study*) contains the source code of the different 
-system under tests (SUT) in this benchmark, for JDK 8 and Maven.
-
-The folder `em` (*EvoMaster*) contains the classes needed to be written to enable
-the use of EvoMaster on the SUTs. 
-In particular, there are `EmbeddedEvoMasterController` and
-`ExternalEvoMasterController` class implementations for each SUT.
-Note: usually you would write a EvoMaster controller class in the same module
-of the SUTs. 
-Here, they are in different modules just to make clear what is needed to implement
-to enable the use of EvoMaster.
-
-
-To compile and generate all the jar files, use the command:
-
-``mvn clean package -DskipTests`` 
-
-Currently, all the case studies do require JDK __8__.
-They will not compile with a different version. 
-
-_Note_: the case studies do import EvoMaster as a library. Current SNAPSHOT
-versions of the case studies do use the most recent SNAPSHOT version of EvoMaster
-(the two versioning numbers are aligned).
-We do __NOT__ publish the SNAPSHOT dependencies online.
-This means that, if you try to build the project directly, it will fail due to 
-missing SNAPSHOT dependencies. 
-
-To use such SNAPSHOT versions, you need first a `mvn install` of EvoMaster on your 
-machine (so that the SNAPSHOT jars are created, and put under your `~/.m2` folder).
-However, in the Git repository of EMB, we did tag the versions of EMB that are
-using the published versions of EvoMaster.
+The release of EMB are linked in version number with the release of EvoMaster, as EvoMaster's libraries are used in the drivers (e.g., to clean databases and configure auth info).
+In the Git repository of EMB, we did tag the versions of EMB.
 See the [releases](https://github.com/EMResearch/EMB/releases) page.
-For example, to use version `X` of EvoMaster, you can check out the Git commit
+For example, to use version `X`, you can check out the Git commit
 of EMB tagged with version `X`. 
 To see the current available tags, from a command-line you can execute:
 
@@ -206,18 +185,6 @@ the following plugin dependency version:
 </plugin>
 ```
 
-Besides JDK 8, to build from Maven you will also need NPM and NodeJS installed
-on your machine (as some  projects have GUIs built with JS).
-
-
-### Build DOTNET_3
-
-*Documentation under construction*
-
-
-### Build JS_NPM
-
-*Documentation under construction*
 
 ### Build *develop* Branch
 
