@@ -127,7 +127,21 @@ The script will issue error messages if any prerequisite is missing.
 Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well.
 Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will be instrumented by code manipulations (for white-box testing heuristics) of _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
 
-TODO
+
+For using EMB in other context, you can build (and install) each module separately, based on needs. See next section.
+However, it is important to understand how this repository is structured, to be able to effectively navigate through it.
+
+Each folder represents a set of SUTs (and drivers) that can be built using the same tools.
+For example, the folder `jdk_8_maven` contains all the SUTs that need JDK 8 and are built with Maven.
+On the other hand, the SUTs in the folder `jdk_11_gradle` require JDK 11 and Gradle.
+
+For JVM and .Net, each module has 2 submodules, called `cs` (short for "Case Study") and `em` (short for "EvoMaster").
+`cs` contains all the source code of the different SUTs, whereas `em` contains all the drivers.
+Note: building a top-module will build as well all of its internal submodules. 
+
+
+
+
 
 ## Build The Systems
 
