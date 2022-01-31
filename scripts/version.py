@@ -32,6 +32,7 @@ if JAVA_HOME_11 == '':
     print("\nERROR: JAVA_HOME_11 environment variable is not defined")
     exit(1)
 
+SHELL = platform.system() == 'Windows'
 
 def replaceInPom(file):
     regex = re.compile(r'.*<evomaster-version>.*</evomaster-version>.*')
@@ -66,7 +67,7 @@ def replaceInKotlinGradle(file):
     replace(file, regex, replacement)
 
 def versionSetMaven(folder, jdk_home):
-    SHELL = platform.system() == 'Windows'
+
     env_vars = os.environ.copy()
     env_vars["JAVA_HOME"] = jdk_home
 
@@ -79,24 +80,30 @@ def versionSetMaven(folder, jdk_home):
         exit(1)
 
 
-def replaceInJS(file):
+def replaceInJS(folder):
     regex = re.compile(r'\s*"evomaster-client-js"\s*:.*')
     replacement = ""
     if version.endswith("-SNAPSHOT"):
         replacement = "    \"evomaster-client-js\": \"file:../../evomaster-client-js\",\n"
     else:
         replacement = "    \"evomaster-client-js\": \""+version+"\",\n"
-    replace(file, regex, replacement)
+    replace(PROJ_LOCATION+folder+"/package.json", regex, replacement)
 
+    # Note: as we need to update the lock files, then we have to make an install
+    res = run(["npm", "i"], shell=SHELL, cwd=PROJ_LOCATION+folder)
+    res = res.returncode
+
+    if res != 0:
+        print("\nERROR: 'npm i' command failed")
+        exit(1)
 
 def replaceAllJs():
-    # Note: here we are not updating lock files... so still need to make a build
-    replaceInJS("js_npm/rest/cyclotron/package.json")
-    replaceInJS("js_npm/rest/disease-sh-api/package.json")
-    replaceInJS("js_npm/rest/ncs/package.json")
-    replaceInJS("js_npm/rest/realworld-app/package.json")
-    replaceInJS("js_npm/rest/scs/package.json")
-    replaceInJS("js_npm/rest/spacex-api/package.json")
+    replaceInJS("/js_npm/rest/cyclotron")
+    replaceInJS("/js_npm/rest/disease-sh-api")
+    replaceInJS("/js_npm/rest/ncs")
+    replaceInJS("/js_npm/rest/realworld-app")
+    replaceInJS("/js_npm/rest/scs")
+    replaceInJS("/js_npm/rest/spacex-api")
 
 ######################################################################################################
 

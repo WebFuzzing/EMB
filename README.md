@@ -1,14 +1,19 @@
 # EMB
 [EvoMaster](http://evomaster.org) Benchmark (EMB): 
-a set of web/enterprise applications for experimentation in automated system testing.
-
-__WARNING__: This repository is going through a major refactoring. 
-Most of the documentation is still under construction. 
-
+a set of web/enterprise applications for scientific research in Software Engineering.
 
 We collected several different systems, in different programming languages, like
 Java, Kotlin, JavaScript and C#.
-We also added the drivers for EvoMaster to use those systems. 
+In this documentation, we will refer to these projects as System Under Test (SUT).
+Currently, the SUTs are either REST or GraphQL APIs.
+
+For each SUT, we implemented driver classes, which can programmatically start, stop and reset the state of SUT (e.g., data in SQL databases).
+If a SUT uses any external services (e.g., a SQL database), these will be automatically started via Docker in the driver classes. 
+
+
+This collection of SUTs was originally assembled for easing experimentation with the fuzzer called [EvoMaster](http://evomaster.org).
+However, 
+
 
 Note that some of these open-source projects might be no longer supported, whereas others are still developed and updated.
 Once a system is added to EMB, we do not modify nor keep it updated with its current version under development.
@@ -73,6 +78,18 @@ projects, each one with its own license, as clarified in more details beneath.
 
 * SCS (not-known license, artificial string examples coming from different sources)
 
+
+### GraphQL: Java/Kotlin
+
+* Spring-Pet-Clinic (Apache ), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
+
+* Patio-Api (GPL), from [https://github.com/patio-team/patio-api]()
+
+* Timbuctoo (GPL), from [https://github.com/HuygensING/timbuctoo]()
+
+* NCS (not-known license, artificial numerical examples coming from different sources)
+
+* SCS (not-known license, artificial string examples coming from different sources)
 
 ## Build The Systems
 
