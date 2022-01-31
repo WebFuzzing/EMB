@@ -23,7 +23,10 @@ All the code that is new for this repository (e.g., the driver classes) is relea
 However, this repository contains as well sources from different open-source 
 projects, each one with its own license, as clarified in more details beneath.
 
+## Example
 
+To see an example of using these drivers with EvoMaster to generate test cases, you can look at this [short video](https://youtu.be/3mYxjgnhLEo) (5 minutes).
+  
 ## Current Case Studies
 
 The projects were selected based on searches using keywords on GitHub APIs, using convenience sampling.
@@ -127,11 +130,15 @@ The script will issue error messages if any prerequisite is missing.
 Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well.
 Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will be instrumented by code manipulations (for white-box testing heuristics) of _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
 
+For running experiments with EvoMaster, you can also "start" each driver directly from an IDE (e.g., IntelliJ).
+Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by EvoMaster.
+For JavaScript, you need to use the files `em-main.js`.
 
-For using EMB in other context, you can build (and install) each module separately, based on needs. 
+
+For using EMB in other contexts besides EvoMaster, you can build (and install) each module separately, based on needs. 
 For example, a Maven module can be installed with:
 
-``mvn clean package -DskipTests``
+``mvn clean install -DskipTests``
 
 However, it is important to understand how this repository is structured, to be able to effectively navigate through it.
 Each folder represents a set of SUTs (and drivers) that can be built using the same tools.
