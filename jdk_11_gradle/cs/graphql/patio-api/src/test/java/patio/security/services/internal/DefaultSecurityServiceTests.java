@@ -70,7 +70,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing security service with a good token
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var user = securityService.resolveUser("good_token");
 
     // then: we should build the information of the matching user
@@ -96,7 +96,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing security service with a wrong token
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var user = securityService.resolveUser("good_token");
 
     // then: we should build NO user
@@ -121,7 +121,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service with good credentials
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result =
         securityService.loginByCredentials(
             new LoginInput(storedUser.get().getEmail(), plainPassword));
@@ -151,7 +151,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service with good credentials
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
 
     var loginInput = random(LoginInput.class);
     var result = securityService.loginByCredentials(loginInput);
@@ -192,7 +192,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service with the user's otp
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result = securityService.loginByOtp(storedUser.get().getOtp());
 
     // then: we should build a token that matches the user stored in database
@@ -234,7 +234,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service with the user's otp
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result = securityService.loginByOtp(anotherOtp);
 
     // then: we should build an error because of bad credentials
@@ -271,7 +271,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service to change her password
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result = securityService.changePassword(new ChangePasswordInput("otpCode", newPassword));
 
     // then: the result is correct
@@ -311,7 +311,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service to change her password
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result = securityService.changePassword(new ChangePasswordInput("otpCode", newPassword));
 
     // then: an error is returned because of the same password
@@ -354,7 +354,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service to change her password
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result = securityService.changePassword(new ChangePasswordInput("otpCode", newPassword));
 
     // then: an error is returned because of the same password
@@ -392,7 +392,7 @@ public class DefaultSecurityServiceTests {
 
     // when: executing the security service to change her password
     var securityService =
-        new DefaultSecurityService(cryptoService, null, null, userRepository, otpExpiredForUser);
+        new DefaultSecurityService(cryptoService, null, userRepository, otpExpiredForUser);
     var result = securityService.changePassword(new ChangePasswordInput("otpCode", newPassword));
 
     // then: an error is returned because of the same password

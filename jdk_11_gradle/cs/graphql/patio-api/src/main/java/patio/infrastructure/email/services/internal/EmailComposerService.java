@@ -33,7 +33,7 @@ import javax.transaction.Transactional;
 import jakarta.inject.Singleton;
 import patio.infrastructure.email.domain.Email;
 import patio.infrastructure.email.services.EmailComposer;
-import patio.infrastructure.email.services.internal.templates.JadeTemplateService;
+//import patio.infrastructure.email.services.internal.templates.JadeTemplateService;
 
 /**
  * Business logic regarding the composition of an {@link Email}
@@ -46,7 +46,7 @@ public class EmailComposerService implements EmailComposer {
 
   private static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
 
-  private final transient JadeTemplateService jadeTemplateService;
+//  private final transient JadeTemplateService jadeTemplateService;
   private final transient MessageSource messageSource;
   private final transient Locale locale;
 
@@ -59,10 +59,10 @@ public class EmailComposerService implements EmailComposer {
    * @since 0.1.0
    */
   public EmailComposerService(
-      JadeTemplateService jadeTemplateService,
+//      JadeTemplateService jadeTemplateService,
       MessageSource messageSource,
       @Value("${locale}") Optional<String> locale) {
-    this.jadeTemplateService = jadeTemplateService;
+//    this.jadeTemplateService = jadeTemplateService;
     this.messageSource = messageSource;
     this.locale = locale.map(Locale::new).orElse(DEFAULT_LOCALE);
   }
@@ -77,12 +77,12 @@ public class EmailComposerService implements EmailComposer {
   @Override
   public Email composeEmail(
       String recipient, String subject, String bodyTemplate, Map<String, Object> bodyVariables) {
-    String body = jadeTemplateService.render(bodyTemplate, bodyVariables);
+//    String body = jadeTemplateService.render(bodyTemplate, bodyVariables);
 
     return Email.builder()
         .with(email -> email.setRecipient(recipient))
         .with(email -> email.setSubject(subject))
-        .with(email -> email.setTextBody(body))
+        .with(email -> email.setTextBody("body"))
         .build();
   }
 

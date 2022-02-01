@@ -50,7 +50,7 @@ public class DefaultSecurityService implements SecurityService {
   private static final Logger LOG = LoggerFactory.getLogger(DefaultSecurityService.class);
 
   private final transient CryptoService cryptoService;
-  private final transient OauthService oauthService;
+//  private final transient OauthService oauthService;
   private final transient UserRepository userRepository;
   private final transient GoogleUserService googleUserService;
   private final transient OtpExpiredForUser otpExpiredForUser;
@@ -68,12 +68,12 @@ public class DefaultSecurityService implements SecurityService {
   public DefaultSecurityService(
       CryptoService cryptoService,
       GoogleUserService googleUserService,
-      OauthService oauthService,
+//      OauthService oauthService,
       UserRepository userRepository,
       OtpExpiredForUser otpExpiredForUser) {
     this.cryptoService = cryptoService;
     this.googleUserService = googleUserService;
-    this.oauthService = oauthService;
+//    this.oauthService = oauthService;
     this.userRepository = userRepository;
     this.otpExpiredForUser = otpExpiredForUser;
   }
@@ -110,7 +110,7 @@ public class DefaultSecurityService implements SecurityService {
   @Override
   public Result<Login> loginByOauth2(String code) {
     return Optional.ofNullable(code)
-        .flatMap(oauthService::getAccessToken)
+//        .flatMap(oauthService::getAccessToken)
         .flatMap(googleUserService::loadFromAccessToken)
         .flatMap(userRepository::findByEmailOrCreate)
         .flatMap(this::getLoginFromUser)
