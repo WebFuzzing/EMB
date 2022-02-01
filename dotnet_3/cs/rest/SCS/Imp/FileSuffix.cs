@@ -17,58 +17,34 @@ namespace SCS.Imp
             if (lastPart <= 0) return "" + result;
             
             var suffix = fileParts[lastPart];
-            
-            switch (directory)
-            {
-                //Console.WriteLine("{0}, {1}", directory, suffix);
-                case "text":
-                {
-                    if ("txt".Equals(suffix))
-                    {
-                        result = 1;
-                    }
 
-                    break;
+            if (directory == "text") {
+                if ("txt".Equals(suffix)) {
+                    result = 1;
                 }
-                case "acrobat":
-                {
-                    if ("pdf".Equals(suffix))
-                    {
-                        //print("acrobat");
-                        result = 2;
-                    }
-
-                    break;
+            }
+            else if (directory == "acrobat") {
+                if ("pdf".Equals(suffix)) {
+                    //print("acrobat");
+                    result = 2;
                 }
-                case "word":
-                {
-                    if ("doc".Equals(suffix))
-                    {
-                        //print("word");
-                        result = 3;
-                    }
-
-                    break;
+            }
+            else if (directory == "word") {
+                if ("doc".Equals(suffix)) {
+                    //print("word");
+                    result = 3;
                 }
-                case "bin":
-                {
-                    if ("exe".Equals(suffix))
-                    {
-                        //print("bin");
-                        result = 4;
-                    }
-
-                    break;
+            }
+            else if (directory == "bin") {
+                if ("exe".Equals(suffix)) {
+                    //print("bin");
+                    result = 4;
                 }
-                case "lib":
-                {
-                    if ("dll".Equals(suffix))
-                    {
-                        //print("lib");
-                        result = 5;
-                    }
-
-                    break;
+            }
+            else if (directory == "lib") {
+                if ("dll".Equals(suffix)) {
+                    //print("lib");
+                    result = 5;
                 }
             }
 

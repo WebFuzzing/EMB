@@ -9,49 +9,34 @@ namespace SCS.Imp
             title = title.ToLower();
             var result = -1;
 
-            switch (sex)
-            {
-                case "male":
-                {
-                    if ("mr".Equals(title) ||
-                        "dr".Equals(title) ||
-                        "sir".Equals(title) ||
-                        "rev".Equals(title) ||
-                        "rthon".Equals(title) ||
-                        "prof".Equals(title))
-                    {
-                        result = 1;
-                    }
-
-                    break;
+            if (sex == "male") {
+                if ("mr".Equals(title) ||
+                    "dr".Equals(title) ||
+                    "sir".Equals(title) ||
+                    "rev".Equals(title) ||
+                    "rthon".Equals(title) ||
+                    "prof".Equals(title)) {
+                    result = 1;
                 }
-                case "female":
-                {
-                    if ("mrs".Equals(title) ||
-                        "miss".Equals(title) ||
-                        "ms".Equals(title) ||
-                        "dr".Equals(title) ||
-                        "lady".Equals(title) ||
-                        "rev".Equals(title) ||
-                        "rthon".Equals(title) ||
-                        "prof".Equals(title))
-                    {
-                        result = 0;
-                    }
-
-                    break;
+            }
+            else if (sex == "female") {
+                if ("mrs".Equals(title) ||
+                    "miss".Equals(title) ||
+                    "ms".Equals(title) ||
+                    "dr".Equals(title) ||
+                    "lady".Equals(title) ||
+                    "rev".Equals(title) ||
+                    "rthon".Equals(title) ||
+                    "prof".Equals(title)) {
+                    result = 0;
                 }
-                case "none":
-                {
-                    if ("dr".Equals(title) ||
-                        "rev".Equals(title) ||
-                        "rthon".Equals(title) ||
-                        "prof".Equals(title))
-                    {
-                        result = 2;
-                    }
-
-                    break;
+            }
+            else if (sex == "none") {
+                if ("dr".Equals(title) ||
+                    "rev".Equals(title) ||
+                    "rthon".Equals(title) ||
+                    "prof".Equals(title)) {
+                    result = 2;
                 }
             }
 
