@@ -33,8 +33,12 @@ namespace ScsDriver {
             instrumentedSutStarter.Start();
         }
 
+        public EmbeddedEvoMasterController(){
+            _sutPort = GetEphemeralTcpPort();
+        }
+
         public override string StartSut() {
-         
+
             Task.Run(() => { SCS.Program.Main(new[] {_sutPort.ToString()}); });
 
             WaitUntilSutIsRunning(_sutPort);

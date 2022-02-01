@@ -34,6 +34,11 @@ namespace NcsDriver {
 
             instrumentedSutStarter.Start();
         }
+        
+        public EmbeddedEvoMasterController(){
+            _sutPort = GetEphemeralTcpPort();
+        }
+        
 
         public override string StartSut() {
 

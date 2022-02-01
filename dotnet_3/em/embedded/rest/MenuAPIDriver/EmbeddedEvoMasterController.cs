@@ -38,6 +38,10 @@ namespace Menu {
 
             instrumentedSutStarter.Start();
         }
+        
+        public EmbeddedEvoMasterController(){
+            _sutPort = GetEphemeralTcpPort();
+        }
 
         public override string GetDatabaseDriverName() => null;
 

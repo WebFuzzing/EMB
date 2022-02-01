@@ -44,6 +44,10 @@ namespace SampleProjectDriver {
             instrumentedSutStarter.Start();
         }
         
+        public EmbeddedEvoMasterController(){
+            _sutPort = GetEphemeralTcpPort();
+        }
+        
         public override string GetDatabaseDriverName() => null;
 
         public override List<AuthenticationDto> GetInfoForAuthentication() => null;
