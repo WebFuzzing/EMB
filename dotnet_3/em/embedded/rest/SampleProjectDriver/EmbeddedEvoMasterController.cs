@@ -32,10 +32,7 @@ namespace SampleProjectDriver {
 
             if (args.Length > 1) {
                 _sutPort = Int32.Parse(args[1]);
-            } else {
-                var ephemeralPort = embeddedEvoMasterController.GetEphemeralTcpPort();
-                _sutPort = ephemeralPort;
-            }
+            } 
 
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
 
