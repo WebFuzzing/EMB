@@ -2,6 +2,8 @@
 
 EVOMASTER_VERSION = "1.3.1-SNAPSHOT"
 
+
+import sys
 import os
 import shutil
 import platform
@@ -9,6 +11,12 @@ from shutil import copy
 from shutil import copytree
 from subprocess import run
 from os.path import expanduser
+
+
+MAKE_ZIP = False
+
+if len(sys.argv) > 1:
+    MAKE_ZIP = sys.argv[1] == "true" or sys.argv[1] == "True"
 
 
 ### Environment variables ###
@@ -170,7 +178,6 @@ def buildJS(path, name):
 
 ####################
 def build_js_npm():
-    ### Due to the insanity of node_modules, those are off by default
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","ncs")), "js-rest-ncs")
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","scs")), "js-rest-scs")
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","cyclotron")), "cyclotron")
@@ -243,7 +250,8 @@ build_js_npm()
 
 copyEvoMasterAgent()
 
-makeZip()
+if MAKE_ZIP:
+    makeZip()
 
 ######################################################################################
 ## If we arrive here, it means everything worked fine, with no exception

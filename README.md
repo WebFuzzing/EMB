@@ -117,25 +117,51 @@ To use EMB, you need to clone this repository:
 git clone https://github.com/EMResearch/EMB.git
 ```
 
-There are 2 use cases for EMB:
+There are 2 main use cases for EMB:
 
 * Run experiments with _EvoMaster_
 
 * Run experiments with other tools
 
-To run experiments with _EvoMaster_, everything can be setup by running the script `scripts/dist.py`.
+Everything can be setup by running the script `scripts/dist.py`.
 Note that you will need installed at least JDK 8, JDK 11, NPM and .Net 3.x, as well as Docker.
 Also, you will need to setup environment variables like `JAVA_HOME_8` and `JAVA_HOME_11`.
 The script will issue error messages if any prerequisite is missing.
-Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well.
-Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will be instrumented by code manipulations (for white-box testing heuristics) of _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
+Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well (if `scripts/dist.py` is run with `True` as input).
+
+[//]: # (There is also a Docker file to run `dist.py`, named `build.dockerfile`.)
+
+[//]: # (It can be built with:)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (docker build -f build.dockerfile -t emb .)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (The `dist` folder with all SUTs will be under `/emb/dist`. )
+
+
+
+Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will also have an instrumented version (for white-box testing heuristics) for _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
+
+In the built `dist` folder, the files will be organized as follows:
+
+* For JVM: `<name>-sut.jar` will be the non-instrumented SUTs, whereas their executable drivers will be called `<name>-evomaster-runner.jar`.
+ Instrumentation can be done at runtime by attaching the `evomaster-agent.jar` JavaAgent. If you are running experiments with EvoMaster, this will be automatically attached when running experiments with `exp.py` (available in the EvoMaster's repository). Or it can be attached manually with JVM option `-Devomaster.instrumentation.jar.path=evomaster-agent.jar` when starting the driver.
+* For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `build`.
+* For .Net: currently only the instrumented version is available (WORK IN PROGRESS)
+
+
 
 For running experiments with EvoMaster, you can also "start" each driver directly from an IDE (e.g., IntelliJ).
 Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by EvoMaster.
 For JavaScript, you need to use the files `em-main.js`.
 
 
-For using EMB in other contexts besides EvoMaster, you can build (and install) each module separately, based on needs. 
+You can also build (and install) each module separately, based on needs. 
 For example, a Maven module can be installed with:
 
 ``mvn clean install -DskipTests``
