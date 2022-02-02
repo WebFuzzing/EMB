@@ -40,7 +40,11 @@ COPY jdk_11_gradle jdk_11_gradle
 COPY js_npm js_npm
 COPY scripts scripts
 
-### Currently failing due to SNAPSHOT dependencies and link to client-js
+
+### TODO
+### Currently failing due to SNAPSHOT dependencies and link to client-js.
+### Might try again once published .Net libs.
+### But, anyway, would not work on "develop" branch
 #RUN python3 scripts/dist.py
 
 CMD ["bash"]
