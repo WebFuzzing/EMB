@@ -41,7 +41,7 @@ affiliations:
     index: 2
 date:  February 2022
 
-[//]: # (bibliography: paper.bib)
+bibliography: paper.bib
 ---
 
 # Summary
@@ -58,7 +58,7 @@ If a SUT uses any external services (e.g., a SQL database), these will be automa
 
 # Statement of Need
 
-This collection of SUTs was originally assembled for easing experimentation with the fuzzer called [EvoMaster](http://evomaster.org).
+This collection of SUTs was originally assembled for easing experimentation with the fuzzer called _EvoMaster_ [@arcuri2021evomaster].
 However, finding this type of applications is not trivial among open-source projects.
 Furthermore, it is not simple to sort out all the technical details on how to set these applications up and start them in a simple, uniform approach.
 
@@ -76,17 +76,10 @@ Note that some of these open-source projects might be no longer supported, where
 Once a system is added to EMB, we do not modify nor keep it updated with its current version under development.
 The reason is that we want to keep an easy to use, constant set of case studies for experimentation that can be reliably used throughout the years.
 
-The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case study) are artificial, developed by us.
+The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case Study) are artificial, developed by us.
 They are based on numerical and string-based functions previously used in the literature of unit test generation.
 We just re-implemented in different languages, and put them behind a web service.
 
-
-Due to several reasons, the software in this repository is not published as a library (e.g., on Maven and NPM).
-To use EMB, you need to clone this repository:
-
-```
-git clone https://github.com/EMResearch/EMB.git
-```
 
 There are 2 main use cases for EMB:
 
@@ -102,17 +95,9 @@ Once the script is completed, all the SUTs will be available under the `dist` fo
 
 Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will also have an instrumented version (for white-box testing heuristics) for _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent).
 
-In the built `dist` folder, the files will be organized as follows:
 
-* For JVM: `<name>-sut.jar` will be the non-instrumented SUTs, whereas their executable drivers will be called `<name>-evomaster-runner.jar`.
-  Instrumentation can be done at runtime by attaching the `evomaster-agent.jar` JavaAgent. If you are running experiments with EvoMaster, this will be automatically attached when running experiments with `exp.py` (available in the EvoMaster's repository). Or it can be attached manually with JVM option `-Devomaster.instrumentation.jar.path=evomaster-agent.jar` when starting the driver.
-* For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `build`.
-* For .Net: currently only the instrumented version is available (WORK IN PROGRESS)
-
-
-
-For running experiments with EvoMaster, you can also "start" each driver directly from an IDE (e.g., IntelliJ).
-Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by EvoMaster.
+For running experiments with _EvoMaster_, you can also "start" each driver directly from an IDE (e.g., IntelliJ).
+Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by _EvoMaster_.
 For JavaScript, you need to use the files `em-main.js`.
 
 
@@ -142,8 +127,12 @@ The difference is that in External the SUT is started on a separated process, an
 
 # Published Results
 
+The software implemented for this repository has been already used for some years when carrying out scientific research with the _EvoMaster_ fuzzer (e.g., [@arcuri2019restful; @arcuri2021tt]).
+Other research groups have started to use EMB as well for their experiments (e.g., [@stallenberg2021improving]).
+
 # Related Work
 
+As far as we know, there is no existing corpus of web/enterprise applications where scripts/libraries have been provided to easily handle them (e.g., to start/stop/reset them in a programmatic way, including running necessary dependencies like databases via Docker).   
 
 
 # Acknowledgements
