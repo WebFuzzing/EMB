@@ -65,7 +65,7 @@ Furthermore, it is not simple to sort out all the technical details on how to se
 Therefore, this repository provides the important contribution of providing all these necessary scripts and software libraries for researchers that need this kind of case study.
 
 
-# Tool Summary
+# Software Details
 
 The projects were selected based on searches using keywords on GitHub APIs, using convenience sampling.
 Several SUTs were looked at, in which we discarded the ones that would not compile, would crash at startup, would use obscure/unpopular libraries with no documentation to get them started, are too trivial, student projects, etc.
