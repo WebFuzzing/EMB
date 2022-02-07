@@ -26,10 +26,10 @@ authors:
     orcid: 0000-0003-1204-9322
     affiliation: 1
   - name: Amid Golmohammadi
-    orcid: TODO
+    orcid: 0000-0002-2324-5794
     affiliation: 1
   - name: Asma Belhadi
-    orcid: TODO
+    orcid: 0000-0002-7103-2179
     affiliation: 1
   - name: Juan Pablo Galeotti
     orcid: 0000-0002-0747-8205
