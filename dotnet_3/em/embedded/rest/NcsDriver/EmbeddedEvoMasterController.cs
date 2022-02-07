@@ -22,10 +22,7 @@ namespace NcsDriver {
 
             if (args.Length > 1) {
                 _sutPort = Int32.Parse(args[1]);
-            } else {
-                var ephemeralPort = embeddedEvoMasterController.GetEphemeralTcpPort();
-                _sutPort = ephemeralPort;
-            }
+            } 
             
             
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
@@ -34,6 +31,11 @@ namespace NcsDriver {
 
             instrumentedSutStarter.Start();
         }
+        
+        public EmbeddedEvoMasterController(){
+            _sutPort = GetEphemeralTcpPort();
+        }
+        
 
         public override string StartSut() {
 

@@ -27,16 +27,17 @@ namespace Menu {
 
             if (args.Length > 1) {
                 _sutPort = Int32.Parse(args[1]);
-            } else {
-                var ephemeralPort = embeddedEvoMasterController.GetEphemeralTcpPort();
-                _sutPort = ephemeralPort;
-            }
+            } 
 
             var instrumentedSutStarter = new InstrumentedSutStarter(embeddedEvoMasterController);
 
             Console.WriteLine("Driver is starting...\n");
 
             instrumentedSutStarter.Start();
+        }
+        
+        public EmbeddedEvoMasterController(){
+            _sutPort = GetEphemeralTcpPort();
         }
 
         public override string GetDatabaseDriverName() => null;
