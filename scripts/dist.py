@@ -245,8 +245,11 @@ prepareDistFolder()
 build_jdk_8_maven()
 build_jdk_11_maven()
 build_jdk_11_gradle()
-build_dotnet_3()
 build_js_npm()
+
+# Note: if uncomment this, must first install EM client manually, as not available on NuGet
+#build_dotnet_3()
+
 
 copyEvoMasterAgent()
 

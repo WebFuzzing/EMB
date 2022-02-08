@@ -84,7 +84,7 @@ We just re-implemented in different languages, and put them behind a web service
 * SCS (not-known license, artificial string examples coming from different sources)
 
 
-### REST: .Net/C# 
+### REST: .NET/C# 
 
 * Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App](https://github.com/chayxana/Restaurant-App)
 
@@ -124,7 +124,7 @@ There are 2 main use cases for EMB:
 * Run experiments with other tools
 
 Everything can be setup by running the script `scripts/dist.py`.
-Note that you will need installed at least JDK 8, JDK 11, NPM and .Net 3.x, as well as Docker.
+Note that you will need installed at least JDK 8, JDK 11, NPM and .NET 3.x, as well as Docker.
 Also, you will need to setup environment variables like `JAVA_HOME_8` and `JAVA_HOME_11`.
 The script will issue error messages if any prerequisite is missing.
 Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well (if `scripts/dist.py` is run with `True` as input).
@@ -145,14 +145,18 @@ Once the script is completed, all the SUTs will be available under the `dist` fo
 
 
 
-Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will also have an instrumented version (for white-box testing heuristics) for _EvoMaster_ (this is for JavaScript and .Net, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
+Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will also have an instrumented version (for white-box testing heuristics) for _EvoMaster_ (this is for JavaScript and .NET, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
 
 In the built `dist` folder, the files will be organized as follows:
 
 * For JVM: `<name>-sut.jar` will be the non-instrumented SUTs, whereas their executable drivers will be called `<name>-evomaster-runner.jar`.
  Instrumentation can be done at runtime by attaching the `evomaster-agent.jar` JavaAgent. If you are running experiments with EvoMaster, this will be automatically attached when running experiments with `exp.py` (available in the EvoMaster's repository). Or it can be attached manually with JVM option `-Devomaster.instrumentation.jar.path=evomaster-agent.jar` when starting the driver.
 * For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `build`.
-* For .Net: currently only the instrumented version is available (WORK IN PROGRESS)
+* For .NET: currently only the instrumented version is available (WORK IN PROGRESS)
+
+Note: the building of .NET SUTs/drivers is disabled by default in `dist.py`.
+The reason is that, at the time of this writing, it is _very_ expensive to publish libraries on NuGet (due to the high costs of code certificates). 
+The EM Driver library for .NET would have to be installed manually on local machine before any of the C# drivers can be used. 
 
 
 
@@ -171,7 +175,7 @@ Each folder represents a set of SUTs (and drivers) that can be built using the s
 For example, the folder `jdk_8_maven` contains all the SUTs that need JDK 8 and are built with Maven.
 On the other hand, the SUTs in the folder `jdk_11_gradle` require JDK 11 and Gradle.
 
-For JVM and .Net, each module has 2 submodules, called `cs` (short for "Case Study") and `em` (short for "EvoMaster").
+For JVM and .NET, each module has 2 submodules, called `cs` (short for "Case Study") and `em` (short for "EvoMaster").
 `cs` contains all the source code of the different SUTs, whereas `em` contains all the drivers.
 Note: building a top-module will build as well all of its internal submodules. 
 
@@ -179,7 +183,7 @@ Regarding JavaScript, unfortunately NodeJS does not have a good handling of mult
 Each SUT has to be built separately.
 However, for each SUT, we put its source code under a folder called `src`, whereas all the code related to the drivers is under `em`.
 
-The driver classes for Java and .Net are called `EmbeddedEvoMasterController`.
+The driver classes for Java and .NET are called `EmbeddedEvoMasterController`.
 For JavaScript, they are in a script file called `app-driver.js`.
 Note that Java also a different kind of driver called `ExternalEvoMasterController`.
 The difference is that in External the SUT is started on a separated process, and not running in the same JVM of the driver itself.
