@@ -6,11 +6,10 @@
     <RootNamespace>Menu</RootNamespace>
 	  <AssemblyName>menu-api-evomaster-runner</AssemblyName>
   </PropertyGroup>
-
+	
+	<Import Project="../../../common.props" />
+	
   <ItemGroup>
-    <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT" />
-    <PackageReference Include="EvoMaster.Instrumentation" Version="1.1.1-SNAPSHOT" />
-    <PackageReference Include="EvoMaster.DatabaseController" Version="1.1.1-SNAPSHOT" />
     <PackageReference Include="DotNet.Testcontainers" Version="1.4.0" />
   </ItemGroup>
 

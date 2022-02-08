@@ -6,10 +6,7 @@
         <AssemblyName>cs-rest-scs-evomaster-runner</AssemblyName>
     </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="EvoMaster.Controller" Version="1.1.1-SNAPSHOT" />
-        <PackageReference Include="EvoMaster.Instrumentation" Version="1.1.1-SNAPSHOT" />
-    </ItemGroup>
+    <Import Project="../../../common.props" />
 
     <ItemGroup>
         <ProjectReference Include="../../../../cs/rest/SCS/SCS.csproj" />
