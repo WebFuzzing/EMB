@@ -105,6 +105,12 @@ def replaceAllJs():
     replaceInJS("/js_npm/rest/scs")
     replaceInJS("/js_npm/rest/spacex-api")
 
+def replaceInCS():
+    regex = re.compile(r'\s*<Version>.*</Version>\s*')
+    replacement = '         <Version>'+version+'</Version>\n'
+    replace("dotnet_3/em/embedded/common.props", regex, replacement)
+
+
 ######################################################################################################
 
 replaceInPom("jdk_8_maven/pom.xml")
@@ -120,3 +126,5 @@ versionSetMaven("/jdk_8_maven",JAVA_HOME_8)
 versionSetMaven("/jdk_11_maven",JAVA_HOME_11)
 
 replaceAllJs()
+
+replaceInCS()
