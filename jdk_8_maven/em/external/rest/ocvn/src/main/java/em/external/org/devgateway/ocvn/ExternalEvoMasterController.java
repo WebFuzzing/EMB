@@ -62,7 +62,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int sutPort;
     private final int dbPort;
 
-    private final String jarLocation;
+    private  String jarLocation;
     private Connection connection;
     private Server h2;
 
@@ -73,6 +73,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public ExternalEvoMasterController() {
         this(40100, "../web/target/web-1.1.1-SNAPSHOT-exec.jar", 12345, 120, "java");
+    }
+
+    public ExternalEvoMasterController(String jarLocation) {
+        this();
+        this.jarLocation = jarLocation;
     }
 
     public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds, String command) {
@@ -106,6 +111,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Dliquibase.enabled=false",
                 "-Dspring.data.mongodb.uri=mongodb://"+mongodb.getContainerIpAddress()+":"+mongodb.getMappedPort(27017)+"/ocvn",
                 "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
+                "-Dspring.datasource.driver-class-name=org.h2.Driver",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.jpa.properties.hibernate.enable_lazy_load_no_trans=true",
                 "-Dspring.datasource.username=sa",

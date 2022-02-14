@@ -1,0 +1,315 @@
+= RML implementation
+
+//tag::summary[]
+Once you have uploaded some data in a tabular representation you can call the RML processor with an RML document to generate RDF which is then inserted into the database.
+The processor calls the RDF importer in the background with the generated triples.
+//end::summary[]
+
+The code in this package to implements the http://rml.io[rml specification].
+It does not implement any of the datasources itself, but allows you to provide your own implementations.
+
+== Context
+
+In timbuctoo we import data in tabular form as a "raw import" and then use a http://github.com/huygensING/timbuctoo-default-frontend[GUI] to generate an RML mapping that converts it into RDF.
+We then import the RDF using our generic RDF importer.
+
+ * This allows us to import many different data formats.
+ * It decouples the GUI from the importer which has allowed us to import data that the GUI does not support without having to make the GUI more complex (we can bypass it if needed).
+ * It makes our mapping software usable for people who do not use the full timbuctoo stack (by generating basic RDF).
+
+== Usage
+
+```java
+  //First you should generate a Jena Model of the data somehow
+  
+  //Dependencies:
+  //The thing that can construct an RmlMappingDocument from a jena model
+  final rmlBuilder = new JenaBasedReader();
+
+  //The thing that constructs dataSource instances as needed.
+  //This factory should use the contents of the rdfResource to determine what dataSource to create
+  Function<RdfResource, Optional<DataSource>> dataSourceFactory = rdfResource -> Optional.of(new MyDataSource(rdfResource));
+  
+  //The thing that responds to errors that can occur in valid RML mappings, such as missing values.
+  ErrorHandler errorHandler = new ErrorHandler() {
+    @Override
+    public void linkError(Map<String, Object> rowData, String childField, String parentCollection, String parentField) {
+      throw new RuntimeException("Linking failed!");
+    }
+  };
+  
+  //create the mappingDocument instance
+  final RmlMappingDocument rmlMappingDocument = rmlBuilder.fromRdf(model, dataSourceFactory);
+
+  //You can see how it's interpreted using toString()
+
+  if (rmlMappingDocument.getErrors().size() == 0) { //check for errors that make the RML mapping invalid
+    //execute the mapping
+    rmlMappingDocument.execute(errorHandler).forEach((triple) -> {
+      System.out.println(triple);
+    });
+  }
+```
+
+Implementing a minimal DataSource with shipped JoinHandler::
+
+```java
+ class MyDataSource implements DataSource {
+   // This wil handle references from one table to another
+   private final JoinHandler joinHandler = new HashMapBasedJoinHandler();
+   private final MyData myData;
+
+   public MyDataSource(RdfResource rdfResource) {
+     this.myData = new MyData(rdfResource); // somehow derive the correct data rows for this rdfResource
+   }
+
+   @Override
+   public Iterator<Row> getRows(ErrorHandler errorHandler) {
+     return myData
+       .turnIntoStream()
+       .map(values -> {
+         // values in Map should look like this:
+         // { "columnName": "cellValue", ... }
+         Map<String, Object> valueMap = transFormValuesOfThisDataRowToValueMap(values);
+
+         // This will handle the reference from one data source to another
+         joinHandler.resolveReferences(valueMap);
+
+         return new Row(valueMap, errorHandler);
+       })
+       .iterator();
+   }
+
+   @Override
+   public void willBeJoinedOn(String fieldName, Object referenceJoinValue, String uri, String outputFieldName) {
+    // This will handle the reference from one data source to another
+     joinHandler.willBeJoinedOn(fieldName, referenceJoinValue, uri, outputFieldName);
+   }
+ }
+```
+
+More information on how a JoinHandler can be implemented is documented in the source of link: ./datasource/joinhandlers/HashMapBasedJoinHandler.java[HashMapBasedJoinHandler].
+
+== Code layout
+The package contains the following folders:
+
+link:./rmldata[/rmldata]::
+  Contains the java representation of the RML rdf classes.
+  The java classes form a tree rooted in RmlMappingDocument.
+  They usually have a method that generates data (i.e. `execute()` or `getItems()`) and a toString() method that recursively prints the tree.
+  You will normally only interact with the outermost RmlMappingDocument class which calls the other classes recursively.
+link:./rmldata/builders[/rmldata/builders]::
+  RML contains a bunch of shorthands and the builders contain the logic needed to interpret the RML in context so that the built instances no longer need this context.
+  For example: you can omit the termType in the source mapping document. 
+  The `TermMapBuilder` will decide what the termType should be and the resulting `RrTermMap` will simply have a property TermType set to the correct value.
+link:./jena[/jena]::
+link:./rdfshim[/rdfshim]::
+  The library depends on jena at this moment, but we've invested some effort to make this a minimal dependency. 
+  It should be possible to extract the jena package to a separate package that depends on this library while the library is jena agnostic.
+link:./datasource[/datasource]::
+  The library ships with a JoinHandler interface which can be used by the datasource to handle joins and one sample implementation backed by a HashMap.
+
+== Implementation details
+
+=== Handling of circular and self-referencing data sources (let's call them tables)
+In order for this library to support big datasets without the leverage of querying on-the-fly (which SQL based databases provide), data rows are expected to be streamed per logical source (i.e. RdfResource).
+
+This however introduces the problem of handling tables which refer to each other (possibly with cyclic dependency) as explained in the next sub-sections.
+
+References without a cycle::
+
+When exactly one table references exactly one other table this is simply resolved by first mapping the rows of the table that is referred to and then the table that refers to it.
+Given these tables:
+
+[ditaa]
+--
+    +---------------+                         +--------------+
+    |Persons        |                         |Locations     |
+    +---------------+                         +--------------+
+    | ID            |                         | name         |
+    | name          |                         | country      |
+    | birthplace_id |-----hasBirthPlace------>| ID           |
+    +---------------+                         +--------------+
+--
+
+And this original order of mappers:
+
+```
+[
+  mapperForPersons,
+  mapperForLocations
+]
+```
+Sort the mappers so that URI's for Locations are generated *before* the mappings of persons are performed:
+
+```
+[
+  mapperForLocations, --> will generate URI's and store them using JoinHandler implementation
+  mapperForPersons    --> will look up URI's for the locations using store in JoinHandler implementation
+]
+
+```
+
+Self reference::
+The solution above does not solve the issue of a table in which one column references another column in the same table.
+In this case a new mapper is generated (split off) from the original mapper, so that two passes are made through the same datasource.
+The first pass maps all the values that are not a reference.
+The second pass maps all the values that are a reference to another column.
+
+Given this table:
+
+[ditaa]
+--
+         +----------+
+         |Persons   |
+         +----------+
+    +--> |ID        |
+    |    |name      |
+    |    |mother_id |-+
+    |    +----------+ |
+    |                 |
+    +----hasMother----+
+--
+
+And this mapper list:
+
+```
+[
+  mapperForPersons
+]
+```
+
+Split off one extra mapper to resolve the URI of person being referenced to by mother_id:
+
+```
+[
+  mapperForPersons,  --> will generate URI's and store them using JoinHandler implementation
+  mapperForPersons'  --> will look up URI's for the mothers using store in JoinHandler implementation
+]
+```
+
+Cyclic references::
+In cases where table A references table B and table B references table A there is a circular dependency as well.
+The same solutions as above apply here: first sort by dependency, then split off any unresolved dependencies.
+This also works for more complex cases with multiple cycles.
+The full implementation of sort and split is here: link:./rmldata/builders/MappingDocumentBuilder.java[/rml/rmldata/builders/MappingDocumentBuilder.java].
+
+Given this data structure:
+
+[ditaa]
+--
+       +------+                +------+                           +------+
+       |x     |                |y     |                           |a     |
+       +------+                +------+                           +------+
+       | y_id |---dependsOn-+->| ID   |                           |      |
+    +->| ID   |             |  | a_id |-------dependsOn---------->| ID   |
+    |  +------+             |  | z_id |-------dependsOn-----+     +------+
+    |                       |  | y_id |---+                 |
+    |                       |  +------+   |                 |     +------+
+    |                       |             |                 |     |z     |
+    |                       +--dependsOn--+                 |     +------+
+    |                                                       +---->| ID   |
+    +--------------------------dependsOn--------------------------| x_id |
+                                                                  +------+
+--
+
+And this original order of mappers:
+
+```
+[
+ zMapper, <--- depends on xMapper
+ xMapper, <--- depends on yMapper
+ yMapper, <--- depends on zMapper, aMapper and yMapper (self)
+ aMapper  <--- depends on no mapper
+]
+```
+
+Sort and split the mappers like this:
+
+```
+[
+  aMapper,   <--- has no dependencies on other mappers having been run
+  yMapper,   <--- depends on aMapper
+  xMapper,   <--- depends on yMapper
+  zMapper,   <--- depends on xMapper
+  yMapper'   <--- depends on yMapper and on zMapper (only one mapper needed to be split off to break 2 cycles.
+]
+```
+
+=== Error reporting
+
+R2RML (and thus RML) specifies that data errors should be reported to the client.
+We implement this by writing errors back to the datasource, allowing the application to present the user with the data rows that triggered invalid input according to his or her specification.
+For our own datasource the results will be written to neo4j as follows:
+
+[graphviz]
+--
+    digraph {
+      VRE
+      RawCollection
+      VRE -> RawCollection [label="hasRawCollection"]
+      RawItem1 [label="prop1_value=\"val\""]
+      RawCollection -> RawItem1 [label="hasNextItem"]
+      RawItem2 [label="prop1_value=\"val1\"\nprop1_error=\"Exception message\""]
+      RawItem1 -> RawItem2 [label="hasNextItem"]
+      RawCollection -> RawItem2 [label="hasNextError"]
+      RawItem3 [label="prop2_value=\"val\""]
+      RawItem2 -> RawItem3 [label="hasNextItem"]
+      RawItem4 [label="prop2_value=\"val1\"\n`prop2_error=\"Exception message\""]
+      RawItem3 -> RawItem4 [label="hasNextItem"]
+      RawItem2 -> RawItem4 [label="hasNextError"]
+    }
+--
+
+== Known issues
+
+Mapping columns::
+You cannot transform a column in RML.
+The R2RML languages gives you the ability to use an arbitrary SQL query as a datasource which allows for most of the conversions in SQL.
+RML does not have this support.
+This is especially annoying for implementing manytomany links and when you want to derive the name of the predicate.
++
+We might implement an extension that allows for referencingMaps in subjectMaps and predicateMaps and an extension that allows you to transform the inputline to aleviate some of this pain.
+Join handling is done by the wrong datasource::
+The index for joining is stored by the datasource that will use the join values.
+This is perhaps a bit confusing.
+I can imagine that intuitively the datasource that provides the data also stores the index (technicaly there's no clear preference).
+
+=== Upload and mapping states
+
+[ditaa]
+--
+   **non-exsistent** ----------------------+     +---------------+
+                                           |     |               |
+        ^                                  +-----| upload failed |
+        |                                  |     |               |
+        |                                  v     +---------------+
+        |                           +-----------+     ^
+        |                           |           |     |
+        |                           | uploading |-----+
+        |                           |           |
+  +------------+                    +-----------+
+  |            |                           |
+  |  available |                           |
+  |            |                           |
+  +------------+                           v
+        ^                            +------------------+
+        |                            |                  |
+        |             +--------------+ mapping creation |
+        |             |              |                  |
+        |             |              +------------------+
+        |             |
+        |             |
+        |             v
+        |  +-------------------+
+        |  |                   |
+        +--+ mapping execution +--------------+
+           |                   |              |
+           +-------------------+              v
+                      ^             +-------------------+
+                      |             |                   |
+                      +-------------+ mapping creation  |
+                                    | after errors      |
+                                    |                   |
+                                    +-------------------+
+--

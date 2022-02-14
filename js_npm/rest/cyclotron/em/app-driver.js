@@ -1,6 +1,5 @@
 const dbHandler = require("./db-handler");
 
-
 const http  = require("http");
 const {AddressInfo}  = require("net");
 const mongoose = require('mongoose');
@@ -27,7 +26,7 @@ class AppController  extends em.SutController {
 
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
-        dto.swaggerJsonUrl = "http://localhost:" + this.port + "/swagger.json";
+        dto.openApiUrl = "http://localhost:" + this.port + "/swagger.json";
 
         return dto;
     }

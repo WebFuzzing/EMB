@@ -60,13 +60,18 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
     private final int dbPort;
-    private final String jarLocation;
+    private  String jarLocation;
     private final String tmpDir;
     private Connection connection;
     private Server h2;
 
     public ExternalEvoMasterController() {
         this(40100, "cs/rest/original/proxyprint/target/proxyprint.jar", 12345, 120, "java");
+    }
+
+    public ExternalEvoMasterController(String jarLocation) {
+        this();
+        this.jarLocation = jarLocation;
     }
 
     public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds, String command) {

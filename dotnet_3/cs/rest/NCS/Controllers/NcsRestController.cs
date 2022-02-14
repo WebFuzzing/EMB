@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using NCS.Imp;
 
@@ -12,7 +13,7 @@ namespace NCS.Controllers
         [Produces("application/json")]
         public IActionResult CheckTriangle(int a, int b, int c)
         {
-            var dto = new Dto {ResultAsInt = TriangleClassification.Classify(a, b, c)};
+            var dto = new Dto {Result = TriangleClassification.Classify(a, b, c).ToString()};
 
             return Ok(dto);
         }
@@ -26,7 +27,7 @@ namespace NCS.Controllers
                 return BadRequest();
             }
 
-            var dto = new Dto {ResultAsDouble = new Bessj().BessjFunction(n, x)};
+            var dto = new Dto {Result = new Bessj().BessjFunction(n, x).ToString(CultureInfo.InvariantCulture)};
 
             return Ok(dto);
         }
@@ -37,13 +38,13 @@ namespace NCS.Controllers
         {
             try
             {
-                var dto = new Dto {ResultAsDouble = Imp.Expint.Exe(n, x)};
+                var dto = new Dto {Result = Imp.Expint.Exe(n, x).ToString(CultureInfo.InvariantCulture)};
 
                 return Ok(dto);
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(e.Message);
             }
         }
 
@@ -58,13 +59,13 @@ namespace NCS.Controllers
 
             try
             {
-                var dto = new Dto {ResultAsDouble = Imp.Fisher.Exe(m, n, x)};
+                var dto = new Dto {Result = Imp.Fisher.Exe(m, n, x).ToString(CultureInfo.InvariantCulture)};
 
                 return Ok(dto);
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(e.Message);
             }
         }
 
@@ -78,13 +79,13 @@ namespace NCS.Controllers
 
                 var gammq = new Gammq();
 
-                dto.ResultAsDouble = gammq.Exe(a, x);
+                dto.Result = gammq.Exe(a, x).ToString(CultureInfo.InvariantCulture);
 
                 return Ok(dto);
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(e.Message);
             }
         }
 
@@ -99,7 +100,7 @@ namespace NCS.Controllers
                 return BadRequest();
             }
 
-            var dto = new Dto {ResultAsInt = Imp.Remainder.Exe(a, b)};
+            var dto = new Dto {Result = Imp.Remainder.Exe(a, b).ToString()};
 
             return Ok(dto);
         }

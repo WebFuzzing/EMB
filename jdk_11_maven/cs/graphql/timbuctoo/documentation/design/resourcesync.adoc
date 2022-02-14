@@ -1,0 +1,40 @@
+= Disable ResourceSync for private dataSets
+henk van_den berg
+v1.0, 2018-01-23: first ingest
+==== Stream sourceDescription.xml and protect resources
+
+Author: {author}. +
+Version: {revnumber} | {revdate} | {revremark}
+
+=== What problem does the work solve?
+The `sourceDescription.xml` now is a concrete file on the file system that publishes
+a `capabilityList` for each `dataSet`, whether the `dataSet` is published or not.
+Furthermore resources are not protected and can be
+downloaded by unauthorized agents, either with the help of the
+`ResourceSync` document structure or through repeated trial under brute force.
+
+=== What should be the result of the work?
+* The `sourceDescription.xml` should only include ``capabilityList``s for ``dataSet``s
+that are published.
+* The `ResourceSyncEndpoint.getFile` method should check if the user is
+authorized and return a `403 Forbidden` if not. If the user does not provide
+any authentication information we return a `401 Unauthorized` for
+non-published ``dataSet``s.
+
+=== What will be the approach?
+* When `ResourceSyncEndpoint.getSourceDescription` is requested, create
+`sourceDescription.xml` on the fly.
+** Implement new classes or adapt existing ones in package `resourcesync` so they
+can provide the `org.w3c.dom.Document` as stream.
+** New method in `DataSetRepository`: `getPublishedDataSets`.
+** Iterate through this set and create `sourceDescription` document on the fly for each
+request.
+* When `ResourceSyncEndpoint.getFile` is requested, check `dataSet` published status.
+** Use `unsafeGetDataSetWithoutCheckingPermissions` of `DataSetRepository` to
+obtain the `dataSet`.
+** Proceed if the `dataSet` is published or user is authorized.
+** Return Response `403 Forbidden` if `dataSet` is not published and
+user is not authorized.
+** Return response `401 Unauthorized` if `dataSet` is not published and
+request has no header for authentication.
+

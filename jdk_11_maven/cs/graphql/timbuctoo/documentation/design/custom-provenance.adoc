@@ -1,0 +1,154 @@
+= Edit mutations custom provenance
+
+== Use case
+This feature is an expansion on the Edit mutations feature footnote:[link:edit-mutations.adoc[Edit mutations]].
+The current edit mutations will add some default Timbuctoo / PROV-O footnote:[https://www.w3.org/TR/2013/REC-prov-o-20130430/[PROV-O]] provenance.
+With this feature we would like to give the use the opportunity to add some extra documentation on why the change is made.
+
+== Requirements
+* The admin of a data set should be able to define a structure of the custom provenance.
+* The GraphQL schema should limit the user to the defined schema. (like how the rest of the edit mutations work)
+
+== Design
+The design will contain an example for the custom, to illustrate how the provenance works.
+The custom provenance will be added to the plan that contains all of the data for an edit mutation.
+The provenance will also be added to the entity, so it can be used by the user.
+
+=== Provenance schema additions
+For the whole provenance schema see link:tim-default-provenance.adoc[Timbuctoo provenance schema]
+
+Additions to `prov:Plan`:
+----
+                                                             "http://example.org/book"
+                                                                        ^
+                                                                        |
+                                                                        |
+                                                                        | uri
+                                                                        |
+                                                                        |
++-----------+                   +----------------+                 +----+----+
+|           | tim:hasCustomProv |                | ex:foundIn      |         | ex:remarks
+| prov:Plan +------------------>+ tim:CustomProv +---------------->+ ex:Book +------------>"value2"
+|           |                   |                |                 |         |
++-----------+                   +----------------+                 +---------+
+----
+
+Additions to a version of `<tim:Entity>`:
+----
+                                                                                    "http://example.org/book"
+                                                                                               ^
+                                                                                               |
+                                                                                               |
+                                                                                               | uri
+                                                                                               |
+                                                                                               |
++--------------+                                         +--------------+                 +----+----+
+|              |        prov:specializationOf            |              | ex:foundIn      |         | ex:remarks
+| <tim:Entity> +<----------------------------------------+ tim:<Entity> +---------------->+ ex:Book +------------>"value2"
+|              |                                         |              |                 |         |
++--------------+---------------------------------------->+--------------+                 +---------+
+                         tim:latestVersion
+
+----
+
+=== GraphQL
+Make the input types for edit, create and delete have a property for the custom provenance.
+----
+input <collectionName>Input {
+  additions: <collectionName>AdditionsInput
+  deletions: <collectionName>DeletionsInput
+  replacements: <collectionName>ReplacementsInput
+  provenance: <dataSetName>ProvenanceInput
+}
+
+# The provenance schema can be different for each data set, this is an example
+input <dataSetName>ProvenanceInput {
+  foundIn: <dataSetName>BookInput!
+}
+
+input <dataSetName>BookInput {
+  uri: String # will be generated when absent
+  remarks: String!
+  ...
+}
+----
+
+A data set administrator should be able to add the custom provenance to the GraphQL schema.
+This can be done in a similar way the schema can be changed.
+----
+type <dataset>Mutations {
+  ...
+  setCustomProvenance(customProvenance: CustomProvenanceInput!): Message! # returns that the action succeeded or why not
+  ...
+}
+
+input CustomProvenanceInput {
+  fields: [CustomProvenanceFieldInput!]!
+}
+
+input CustomProvenanceFieldInput {
+  uri: String!
+  isList: Boolean!
+  valueType: String
+  object: CustomProvenanceObjectFieldInput
+}
+
+input CustomProvenanceObjectFieldInput {
+  type: String!
+  fields: [CustomProvenanceFieldInput!]!
+}
+
+
+----
+
+==== Example
+This example is based on the _Provenance schema additions_ RDF schema example earlier in this document.
+These are the query variables for the `setCustomProvenance` mutation.
+----
+mutation SetCustomProvenance ($entity: CustomProvenanceInput!) {
+  dataSets {
+    <dataSetId> {
+      setCustomProvenance(customProvenance: $entity) {
+        message
+      }
+    }
+  }
+}
+
+
+{
+  "entity": {
+    "fields": [
+      {
+        "uri": "http://example.org/foundIn",
+        "isList": false,
+        "object": {
+          "type": "http://example.org/Book",
+          "fields": [
+            {
+              "uri": "http://example.org/remarks",
+              "isList": false,
+              "valueType": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+----
+
+== Approach
+. Add the setCustomProvenance
+.. Add DataFetcher
+.. Add the mutation to the schema
+. Add custom provenance to edit mutation
+.. Change the GraphQL schema
+.. Make `nl.knaw.huygens.timbuctoo.v5.graphql.mutations.dto.ChangeLog` support provenance
+.. Store the custom provenance
+.. Validate de custom provenance, make sure the `CustomProvenanceValueFieldInput` has a `valueType` or `object`.
+This is because GraphQL does not allow union types as input.
+... Make sure these types are ignored when creating edit mutations
+. Add custom provenance to create and delete mutations
+.. Change the GraphQL schema
+... Change GraphQL input types so they contain the custom provenance.

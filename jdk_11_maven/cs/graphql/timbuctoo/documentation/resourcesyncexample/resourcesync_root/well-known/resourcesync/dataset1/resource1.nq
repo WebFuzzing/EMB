@@ -1,0 +1,2 @@
+<http://example.org/ds1/241> <http://example.org/testprop> "This is a test"^^<http://www.w3.org/2001/XMLSchema#string> <http://example.org/dataset1/resource1> .
+<http://example.org/ds1/242> <http://example.org/testprop> "This is another test"^^<http://www.w3.org/2001/XMLSchema#string> <http://example.org/dataset1/resource1> .

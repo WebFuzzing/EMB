@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml ./schema/htmlbook.xsd"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+<head>
+  <meta charset="UTF-8" />
+  <title>Timbuctoo REST API V2.1 documentation</title>
+  <script src='https://www.w3.org/Tools/respec/respec-w3c-common' async='async' class='remove'>
+  </script>
+  <script class='remove'>
+    var respecConfig = {
+      specStatus: "unofficial",
+      editors: [
+        {
+          name:       "Jauco Noordzij",
+          company:    "Huygens ING"
+        },
+        {
+          name:       "Martijn Maas",
+          company:    "Huygens ING"
+        },
+        {
+          name:       "René van der Ark",
+          company:    "Huygens ING"
+        },
+        {
+          name:       "Meindert Kroese",
+          company:    "Huygens ING"
+        }
+      ],
+      issueBase: "http://jira.huygens.knaw.nl/TIM-",
+      shortName: "timbuctoov2.1"
+    };
+  </script>
+  <link href="concordion.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-type="book">
+  <h1>Timbuctoo REST API documentation</h1>
+  <section id="abstract" data-type="chapter">
+    <p>
+      This specification describes the workings of the v2.1 version of the Timbuctoo REST API.
+      It is authored as an [[html-polyglot]] document.
+    </p>
+  </section>
+  <section data-type="chapter">
+    <h2>Authentication</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/AuthenticationV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>Faceted Search</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwPersonFacetedSearchV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>Faceted Search for wwdocuments</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwDocumentFacetedSearchV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>Faceted Search for wwcollectives</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwCollectiveFacetedSearchV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+
+  <section data-type="chapter">
+    <h2>Reception search</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/RelationSearchV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>WWCollective</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwCollectiveV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <hr />
+  <section data-type="chapter">
+    <h2>WWDocument</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwDocumentV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>WWPerson</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwPersonV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>WWRelation</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/WwRelationV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>D3 Graph</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/D3GraphV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+  <section data-type="chapter">
+    <h2>Relation types</h2>
+    <xi:include href="nl/knaw/huygens/timbuctoo/server/endpoints/v2/RelationTypesV2_1Endpoint.html" xpointer="xpointer(//body/*)" />
+  </section>
+  <hr />
+</body>
+</html>

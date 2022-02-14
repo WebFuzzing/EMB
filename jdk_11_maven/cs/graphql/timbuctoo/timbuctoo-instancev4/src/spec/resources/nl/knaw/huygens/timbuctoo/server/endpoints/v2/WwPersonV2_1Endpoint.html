@@ -1,0 +1,294 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 WWPerson API</title>
+</head>
+<body>
+  <section data-type="chapter">
+    <h2>Preface</h2>
+    <p>
+      This specification describes the workings of the v2.1 version of the Timbuctoo REST API for wwpersons
+    </p>
+    <span c:execute="#token=getAuthenticationToken()">For each test we expect the user is logged in and uses token
+      <b><span c:echo="#token"></span></b>.</span>
+  </section>
+
+  <section data-type="chapter">
+    <h2>POST wwperson</h2>
+    <aside class="example" h:http="#postResponse">
+      <div h:request="">
+        POST /v2.1/domain/wwpersons HTTP/1.1
+        Content-type: application/json
+        Authorization: $(#token)
+        VRE_ID: WomenWriters
+
+        {
+          "@type": "wwperson",
+          "names": [
+            {
+              "components": [
+                {
+                  "type": "FORENAME",
+                  "value": "foreName1"
+                },
+                {
+                  "type": "SURNAME",
+                  "value": "surName1"
+                }
+              ]
+            },
+            {
+              "components": [
+                {
+                  "type": "FORENAME",
+                  "value": "foreName2"
+                },
+                {
+                  "type": "SURNAME",
+                  "value": "surName2"
+                },
+                {
+                  "type": "NAME_LINK",
+                  "value": "nameLink"
+                },
+                {
+                  "type": "ROLE_NAME",
+                  "value": "roleName"
+                },
+                {
+                  "type": "ADD_NAME",
+                  "value": "addName"
+                },
+                {
+                "type": "GEN_NAME",
+                "value": "genName"
+                }
+              ]
+            }
+          ],
+          "gender": "UNKNOWN",
+          "birthDate": "1589",
+          "deathDate": "1653",
+          "types": [
+            "ARCHETYPE",
+            "AUTHOR",
+            "PSEUDONYM",
+            "READER"
+          ],
+          "links":[
+            {
+            "url": "http://www.example.com",
+            "label": "Example link"
+            }
+          ],
+          "bibliography": "Some multi-lined\n text",
+          "children": "UNKNOWN",
+          "health": "Some multi-lined\n text",
+          "livedIn": "Some multi-lined\n text",
+          "nationality": "A name of a nationality",
+          "notes": "Some multi-lined\n text",
+          "personalSituation":"Some multi-lined\n text"
+        }
+      </div>
+      <div h:response="validateIdFromLocationHeader">
+        HTTP/1.1 201
+        Location:
+      </div>
+    </aside>
+    <span c:execute="#recordId=getRecordId()">
+      A valid UUID is generated for this record: <b><span c:echo="#recordId"></span></b>.
+    </span>
+    <div>
+      <p><i>gender</i> can contain one of the following values:
+        <ul>
+          <li>UNKNOWN</li>
+          <li>MALE</li>
+          <li>FEMALE</li>
+          <li>NOT_APPLICABLE</li>
+        </ul>
+      </p>
+      <p><i>names</i> also supports the format <i>20151231</i>.</p>
+      <p><i>children</i> can contain one of the following values:
+        <ul>
+          <li>UNKNOWN</li>
+          <li>YES</li>
+          <li>NO</li>
+        </ul>
+      </p>
+    </div>
+    <span c:execute="#pid=retrievePid()"></span>
+    <span c:assertTrue="isValidPid(#pid)">Has a valid pid within 1 minute:
+      <b>
+        <span c:echo="#pid"></span>
+      </b>
+    </span>
+  </section>
+  <section >
+    <h2>GET a single wwperson</h2>
+
+    <h3>GET an existing wwperson</h3>
+    <p> We try to get the wwperson we created with the POST.</p>
+    <aside class="example" h:http="#response">
+      <div h:request="">
+        GET $(#postResponse.firstHeaders.location) HTTP/1.1
+        Accept: application/json
+      </div>
+      <div h:response="">
+        HTTP/1.1 200
+
+        {
+          "_id": "$(#recordId)",
+          "^rev": 1,
+          "^pid": "/*STRING*/",
+          "@type": "wwperson",
+          "names": [
+            {
+              "components": [
+                {
+                  "type": "FORENAME",
+                  "value": "foreName1"
+                },
+                {
+                  "type": "SURNAME",
+                  "value": "surName1"
+                }
+              ]
+            },
+            {
+              "components": [
+                {
+                  "type": "FORENAME",
+                  "value": "foreName2"
+                },
+                {
+                  "type": "SURNAME",
+                  "value": "surName2"
+                },
+                {
+                  "type": "NAME_LINK",
+                  "value": "nameLink"
+                },
+                {
+                  "type": "ROLE_NAME",
+                  "value": "roleName"
+                },
+                {
+                  "type": "ADD_NAME",
+                  "value": "addName"
+                },
+                {
+                  "type": "GEN_NAME",
+                  "value": "genName"
+                }
+              ]
+            }
+          ],
+          "gender": "UNKNOWN",
+          "birthDate": "1589",
+          "deathDate": "1653",
+          "types": [
+            "ARCHETYPE",
+            "AUTHOR",
+            "PSEUDONYM",
+            "READER"
+          ],
+          "links":[
+            {
+              "url": "http://www.example.com",
+              "label": "Example link"
+            }
+          ],
+          "bibliography": "Some multi-lined\n text",
+          "children": "UNKNOWN",
+          "health": "Some multi-lined\n text",
+          "livedIn": "Some multi-lined\n text",
+          "nationality": "A name of a nationality",
+          "notes": "Some multi-lined\n text",
+          "personalSituation":"Some multi-lined\n text"
+        }
+      </div>
+    </aside>
+    <span c:echo="#response.getBody()"></span>
+
+    <h3>Get a none existing wwperson</h3>
+    <aside class="example" h:http="#response">
+
+      <p>When a wwperson with unknown id '00000000-0000-0000-0000-000000000000' is requested.</p>
+
+      <div h:request="">
+        GET /v2.1/domain/wwpersons/00000000-0000-0000-0000-000000000000 HTTP/1.1
+        Accept: application/json
+      </div>
+      <p>The response will look like this:</p>
+      <div h:response="">
+        HTTP/1.1 404
+      </div>
+    </aside>
+  </section>
+    <section data-type="chapter">
+      <h2>Delete the created person</h2>
+      <aside class="example" h:http="#response">
+        <div h:request="">
+          DELETE $(#postResponse.firstHeaders.location) HTTP/1.1
+          Authorization: $(#token)
+          VRE_ID: WomenWriters
+        </div>
+        <p>The response will look like this:</p>
+        <div h:response="">
+          HTTP/1.1 204
+        </div>
+      </aside>
+    </section>
+
+  <!--
+    <section data-type="chapter">
+      <h2>GET wwperson collection</h2>
+      <h3>A simple request</h3>
+      <aside class="example" h:http="#response">
+        <div h:request="">
+          GET /v2.1/domain/wwpersons HTTP/1.1
+          Accept: application/json
+        </div>
+        <div h:response="">
+          HTTP/1.1 200
+          Content-Type: application/json
+        </div>
+      </aside>
+      <span>A GET of the wwperson collection will return a json body that has <span
+          c:assertEquals="getNumberOfItems(#response)"><b>200</b></span> entries by default.
+      </span>
+
+      <h3>Pagination</h3>
+      <aside class="example" h:http="#response">
+        <div h:request="">
+          GET /v2.1/domain/wwpersons?rows=20 HTTP/1.1
+          Accept: application/json
+        </div>
+        <div h:response="">
+          HTTP/1.1 200
+          Content-Type: application/json
+        </div>
+      </aside>
+      <span>The rows query parameter is set to <b>20</b> the number of items returned is <span
+          c:assertEquals="getNumberOfItems(#response)"><b>20</b></span>.
+      </span>
+
+      <aside class="example" h:http="#pagResponse">
+        <div h:request="">
+          GET /v2.1/domain/wwpersons?rows=20&amp;start=20 HTTP/1.1
+          Accept: application/json
+        </div>
+        <div h:response="">
+          HTTP/1.1 200
+          Content-Type: application/json
+        </div>
+      </aside>
+      <span>When start is set to 20 it skips the first 20 persons, so
+        <span c:assertTrue="doesNotContainResult(#pagResponse, #response)"><i>it does not contain any result of the
+          previous request</i>.</span>
+      </span>
+    </section>-->
+</body>
+</html>

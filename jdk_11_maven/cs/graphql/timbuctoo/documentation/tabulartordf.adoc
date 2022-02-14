@@ -1,0 +1,146 @@
+= Tabular data to RDF data set
+
+== Use case
+* A lot of data is tabular
+* Timbuctoo is RDF store
+* Map the tabular data to RDF
+
+== 1. Upload tabular data
+
+----
+curl -v -F "file=@2017_09_28_BIA_Boerhaave_DEF.xlsx;type=application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" -F "encoding=UTF-8" -H "Authorization: fake" http://localhost:8080/v5/u33707283d426f900d4d33707283d426f900d4d0d/mappingdemo/upload/table?forceCreation=true
+----
+
+`33707283d426f900d4d33707283d426f900d4d0d` is the (default) user in the local hosted Timbuctoo.
+For getting your user information see: link:timbuctoo-graphql-api-guide.adoc#querying-for-logged-in-user-information[Querying for (logged-in) User information]
+`mappingdemo` is de name of the dataset.
+
+=== Expected format
+==== Excel
+|===
+|Header 1 |Header 2 |Header 3
+
+|Value 1
+|Value 2
+|Value 3
+
+|Value 1
+|Value 2
+|Value 3
+|===
+==== CSV
+----
+Header 1;Header 2;Header 3
+Value 1;Value 2;Value 3
+Value 1;Value 2;Value 3
+----
+
+=== Supported types
+* text/csv
+* application/vnd.openxmlformats-officedocument.spreadsheetml.sheet (Excel spreadsheets)
+* application/x.dataperfec (data perfect zips)
+* application/x-msaccess (access databases)
+
+== 2. Mapping the data
+
+First make sure to create the right mapping file the language is http://rml.io/[RML] in the  https://json-ld.org/[JSON-LD] format:
+
+----
+{
+  "@context": {
+    "rr": "http://www.w3.org/ns/r2rml#",
+    "rml": "http://semweb.mmlab.be/ns/rml#",
+    "tim": "http://timbuctoo.huygens.knaw.nl/mapping#"
+  },
+  "@graph": [
+    {
+      "@id": "http://timbuctoo.com/mappings/bia/plaatsnamen/Places",
+      "rml:logicalSource": {
+        "rml:source": {
+          "tim:rawCollectionUri": {
+            "@id": "http://example.org/datasets/u33707283d426f900d4d33707283d426f900d4d0d/bia/rawData/f70500b8-d1aa-41d3-850e-c5024f592857-file/collections/1"
+          },
+          "tim:customField": []
+        }
+      },
+      "rr:subjectMap": {
+        "rr:template": "http://timbuctoo.huygens.knaw.nl/v5/data/bia/Places/{persistent_id}",
+        "rr:class": {
+          "@id": "http://timbuctoo.huygens.knaw.nl/v5/data/bia/Places"
+        }
+      },
+      "rr:predicateObjectMap": [
+        {
+          "rr:predicate": {
+            "@id": "http://schema.org/name"
+          },
+          "rr:objectMap": {
+            "rr:column": "name",
+            "rr:datatype": {
+              "@id": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "rr:termType": {
+              "@id": "rr:Literal"
+            }
+          }
+        },
+        {
+          "rr:predicate": {
+            "@id": "http://schema.org/birthPlace"
+          },
+          "rr:objectMap": {
+            "rr:parentTriplesMap": {
+               "@id":"http://timbuctoo.com/mappings/bia/plaatsnamen/Places"
+             },
+             "rr:joinCondition": {
+                "rr:child": "birth_place_persistent_id",
+                "rr:parent": "persistent_id"
+              }
+          }
+        }
+      ]
+    }
+  ]
+}
+----
+
+* `http://timbuctoo.com/mappings/bia/plaatsnamen/Places` is the name of the type.
+* `http://example.org/datasets/u33707283d426f900d4d33707283d426f900d4d0d/bia/rawData/f70500b8-d1aa-41d3-850e-c5024f592857-file/collections/1` is the name of the raw collection currently in Timbuctoo.
+The number the at the end of the URI is the tab number of the excel sheet. 1 means the fist sheet.
+* `rr:template` in `rr:subjectMap` defines what the URI of the entity will be. This uri can be linked to from other types in this mapping.
+* `rr:predicate` in  `rr:predicateObjectMap` defines the rdf predicate will be used for column.
+* `rr:column` uses the header (first line of the tabular file) of the column
+* `rr:joinCondition` makes it possible to link between to resources
+** `rr:child` is the column that links to another resource (in SQL the foreign key field)
+** `rr:parent` is the id field in the resource that is linked (in SQL the primary key field)
+
+You van use the following GraphQL query to retrieve it:
+
+----
+query metadata {
+  dataSets {
+    u33707283d426f900d4d33707283d426f900d4d0d__mappingdemo {
+      metadata {
+        collectionList {
+          items {
+            uri
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+`u33707283d426f900d4d33707283d426f900d4d0d__mappingdemo` is the GraphQL id of the data set.
+
+NOTE: Only use hte collections that contain `rawData` in the uri and that do not end with `type`.
+
+When the mapping file is created the following curl command will execute the mapping:
+
+----
+curl --header "Content-type: application/ld+json" --header "Authorization: fake" --data "@{name of mapping file}.json" http://localhost:8080/v5/u33707283d426f900d4d33707283d426f900d4d0d/mappingdemo/rml
+----
+
+You can find the
+

@@ -1,0 +1,33 @@
+= Storing changes and resources in Timbuctoo with support for changeList and ResourceList
+
+. Problem:
+* Since Timbuctoo now supports changelist and resourcelist for ResourceSync Import,
+ we need to determine how we are going to store the resource files and change files so that they can be used for a
+ ResourceSync Import call when necessary.
+
+. Result:
+* Timbuctoo will maintain, for each Dataset:
+** A resourcelist.xml file (virtual) that contains a single resource file that determines the current state of the DataSet.
+** A changelist.xml file (virtual) that contains one or more NQUD change files (all virtual) that determine all the changes for the DataSet.
+
+. Approach:
+There are 3 different kinds of dataset updates in Timbuctoo that need to be handled:
+.. Upload Rdf
+.. JsonLd Update
+.. Rml Execution
+
+However, we can avoid handling each case individually as Timbuctoo already maintains an "UpdatedPatchStore" that can
+be used to retrieve changes for each version of a dataset (no matter how the update was triggered).
+
+When a request for the changelist is triggered, the virtual change files will be generated as follows:
+
+UpdatedPatchStore has version number as keys and subject as value. Each version number (key in UpdatedPatchStore) will
+correspond to a change file in the changelist (Eg. changes1.nqud for version number '1'). Each change file will
+contain the changes that were made in the particular update. We will get these updates from the TruePatchStore by
+using the subject and version number that we read from the UpdatedPatchStore. When the change file is requested these
+will be returned as a stream consisting of the quads.
+
+Note: The UpdatedPatchStore is currently not triggered for the first import (for performance reasons) but now that will
+be changed as we also need to include the first import in our changelist.
+
+

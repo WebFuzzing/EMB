@@ -1,0 +1,272 @@
+= Database access / core
+== Context
+We are using a database, but we're not convinced that it's the best one.
+We would like to be able to switch to other databases and the *evaluate* whether other databases make more sense.
+
+Furthermore TinkerPop requires us to handle transactions thoughtfully but provides a rather lax API.
+We'd like to access the database only in a correct manner.
+
+== Goal
+We add three classes
+
+ 1. TransactionEnforcer that helps to wrap all database using work in a transaction.
+    The transactionEnforcer API makes it clear to the client code when transaction starts and makes it impossible to forget to close it.
+ 2. TimbuctooActions that is autocloseable around a transaction.
+    It contains the business logic (authorization, UUID generation etc.)
+ 3. DataStoreOperations that is autocloseable around a transaction and performs the actual database work
+
+These classes have the following constraints:
+
+   * ~~no two transaction may run at the same time~~ (will be possible once no code uses graphWrapper directly anymore)
+   * Each method returns an Immutable Value object without TinkerPop or Neo4j references. 
+     (So that Timbuctoo is less dependent on one database implementation)
+   * A value object will never hit the database to lazy load more data.
+     (so that the client code can more easily reason about performance. Only db.something() calls will hit the database)
+   * A method is quite tightly coupled to the client. While a method may be used by more then one client is has a very tightly defined implementation and re-use is not expected to be the rule. 
+     (So that removing some client code will also clearly remove their constraints on the data model)
+      * of course, internally methods may re-use each other freely (so that we do not have code duplication)
+   * A mutation is a separate method adhering to the same practices as a retrieval method. 
+     (a second requirement to make only db.something() calls hit the database)
+   * You might have a mutation method that also retrieves data, but this is not the norm.
+     (explicitly mentioned for people who expect full Command Query Separation) 
+   * The DataStoreOperations methods will only get or mutate state. 
+     Triggering or calculating state (such as UUID's or changeLog information) is done by the TimbuctooActions.
+   * You may add a custom DataStoreOperations implementation.
+   * todo:feature[We might add code to TimbuctooActions that runs several DataStoreOperation implementations in parallel and reports their performance so we can do experiments on that]
+   
+== Known issues
+ * TinkerPopOperations.replaceRelation
+    * throws a NotFoundException instead of an AlreadyUpdatedException when the rev of the relation client is not the latest
+    * throw a distinct Exception when the client tries to save a relation with different source, target or type. 
+      Currently these properties are simply ignored.
+            
+== Dataflow
+The picture below describes the data flow of the update or the retrieval of an entity.
+
+[ditaa]
+--
++-----------------------------------------------------------+------------------------------------------------------------------+--------------------------------------+
+|                                                           |                                                                  |                                      |
+|                                                           |                                                                  |                                      |
+|       Client API                                          |                Domain                                            |         Database                     |
+|                                                           |                                                                  |                                      |
+| +------------------+                                      |                                                                  |                                      |
+| |                  |                                      |           +----------------------+                               |                                      |
+| |   SingleEntity   |                                      |           |                      |                               |                                      |
+| |                  |                                      |           |   TimbuctooActions   |                               |                                      |
+| +----------+-------+                                      |           |                      |                               |                                      |
+|            |                                              |           +----^----------+------+                               |                                      |
+|            |        +---------------------+               |                |          |                                      |                                      |
+|            |        |                     +---------------+----------------+          |     +-------------------------+      |      +-------------------------+     |
+|            +-------->   JsonCrudService   |               |                           |     |                         |  Implements |                         |     |
+|                     |                     |               |                           +----->   DataStoreOperations   <------+------+   TinkerPopOperations   |     |
+|                     +---------------------+               |                                 |                         |      |      |                         |     |
+|                                                           |                                 +-------------------------+      |      +-------------------------+     |
+|                                                           |                                                                  |                                      |
+|                                                           |                                                                  |                                      |
+|                                                           |                                                                  |                                      |
+|                                                           |                                                                  |                                      |
+|                                                           |                                                                  |                                      |
+|                                                           |                                                                  |                                      |
++-----------------------------------------------------------+------------------------------------------------------------------+--------------------------------------+
+--
+
+=== Client API
+The client API is our REST API. This where the client request arrive
+==== SingleEntity
+'SingleEntity' is the REST endpoint that is used for updating an retrieving entities. 
+==== JsonCrudService
+'JsonCrudService' translates the Json input of the REST endpoints to Entity (a data transfer object).
+
+=== Domain
+Domain contains all the actions that are specific for Timbuctoo. 
+==== TimbuctooActions
+'TimbuctooActions' is the interface for interacting with the database from the client.
+This class manages the Timbuctoo specific information, for example the way the id's look.
+==== DataStoreOperations
+'DataStoreOperations' is an interface that contains all the methods needed by 'TimbuctooActions'.
+To support a new database this class should be implemented.
+
+=== Database
+'TinkerPopOperations' is our implementation of DataStoreOperations.
+ 
+== Data model
+=== Entity
+Contains the information of the Entity saved in the database. 
+For example a person or a document.
+Each Entity has properties.
+Most Entities have relations.
+
+```java
+public interface Entity {
+  List<TimProperty> getProperties();
+  
+  List<RelationRef> getRelations();
+  //...
+} 
+```
+
+=== TimProperty
+Contains the information of the property of an Entity.
+The TimProperty interface has implementations for all property types used in Timbuctoo.
+A TimProperty can be a wrapper around a Java type like String, int, boolean or a Timbuctoo custom type like PersonNamesValue and Datable. 
+This way we can provide an implementation (e.g a link:./tinkerpop/conversion/TinkerPopPropertyConverter.java[TinkerPopPropertyConverter] implementation, a jersey serializer, or a js client of the API) with a finite list of types that they should be able to handle.
+
+==== Example
+If this is the interface
+
+```java
+public abstract class TimProperty {
+  private final String name;
+  private final Value value;
+
+  public TimProperty(String name, Value value){
+     this.name = name;
+     this.value = value;
+   }
+ 
+   public abstract <Type> Tuple<String, Type> convert(PropertyConverter<Type> propertyConverter) throws IOException;
+ 
+   public String getName() {
+     return name;
+   }
+ 
+   public Value getValue() {
+     return value;
+   }
+}
+```
+
+Then we can implement it for two property types like so:
+
+```java
+public class PersonNamesProperty extends TimProperty<PersonNames> {
+  public PersonNamesProperty(String name, PersonNames value) {
+    super(name, value);
+  }
+
+  @Override
+  public <Type> Tuple<String, Type> convert(PropertyConverter<Type> propertyConverter) throws IOException {
+    return propertyConverter.to(this);
+  }
+}
+
+public class StringProperty extends TimProperty<String> {
+  public StringProperty(String name, String value) {
+    super(name, value);
+  }
+
+  @Override
+  public <Type> Tuple<String, Type> convert(PropertyConverter<Type> propertyConverter) throws IOException {
+    return propertyConverter.to(this);
+  }
+}
+```
+
+=== PropertyConverter
+A PropertyConverter converts a Timbuctoo specific type to an output type.
+It will also convert an output type to a timbuctoo specific type (and thus function like a factory method).
+The input of PropertyConverter#from is a the property's name and it's value, so you can choose which converter to use based on the property name.
+The from method is responsible for determining what the input value contains and picking the right TimProperty implementation to return.
+
+The to methods all return the same result type because we don't think adding a type parameter for each result value is needed.
+They return a Tuple of String, Type where the left contains the propertyName as defined by the converter. 
+This allows a converter to change the name as well.
+This is currently needed for our database (which prefixes all properties with the collection and dataset name)
+
+```java
+public abstract class PropertyConverter<Type>{
+  public TimProperty from(String name, Type value){
+    //...
+  }
+  
+  protected abstract PersonNamesProperty createPersonNamesProperty(String name, Type value);
+  
+  protected abstract StringProperty createStringProperty(String name, Type value);
+  
+  protected abstract Tuple<String, Type> to(PersonNamesProperty property);
+    
+  protected abstract Tuple<String, Type> to(StringProperty property);
+}
+```
+ 
+==== Example
+
+```java
+public class JsonPropertyConverter implements TimPropertyConverter<JsonNode> {
+  public TinkerPopPropertyConverter(Collection collection) {
+    //store the collection for later use in deciding what property type 
+  }
+  
+  protected PersonNamesProperty createPersonNamesProperty(String name, JsonNode value) {
+    //...
+  }
+    
+  protected StringProperty createStringProperty(String name, JsonNode value) {
+    //...
+  }
+    
+  protected Tuple<String, JsonNode> to(PersonNamesProperty property){
+    //...
+  }
+  
+  protected Tuple<String, JsonNode> to(StringProperty property){
+    //...
+  }
+}
+```
+
+```java
+public class TinkerPopPropertyConverter implements TimPropertyConverter<Object> {
+  public TinkerPopPropertyConverter(Collection collection) {
+    
+  }
+
+  protected PersonNamesProperty createPersonNamesProperty(String name, Object value) {
+    //...
+  }
+    
+  protected StringProperty createStringProperty(String name, Object value) {
+    //...
+  }    
+
+  protected Tuple<String, Object> to(PersonNamesProperty property){
+    //...
+  }
+  
+  protected Tuple<String, Object> to(StringProperty propertyName){
+    //...
+  }
+}
+```
+
+=== RelationRef
+Represents a reference of another Entity. 
+It contains information like the name of the relation and the display name of the other Entity. 
+An Entity does not contain teh related entities.
+Only these RelationRefs.
+
+=== EntityRelation
+Is a way to represent a relation between two Entities. 
+This representation is used when a relation is saved in the database.
+ 
+=== TransactionFilter
+closes transactions at the end of a request.
+
+This is a stopgap method that should prevent the problems that will be really fixed by the DataAccess class.
+
+ 1. Dropwizard re-uses threads between requests.
+ 2. neo4j needs a transaction for read actions
+ 3. tinkerpop automatically creates a thread local transaction when 
+    needed. (also for read actions)
+ 4. we did not know so we don't close read transactions at the end of 
+    a read action
+
+Together this results in a thread that will not see the changes of 
+another thread. If it had a transaction open since before the other 
+thread had a transaction open. 
+
+I do not completely understand it though, because an open transaction
+should be able to see committed data from another transaction (and I 
+have verified that the data was indeed committed). However this filter 
+does fix the bug.

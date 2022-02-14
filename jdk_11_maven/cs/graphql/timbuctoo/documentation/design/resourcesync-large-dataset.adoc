@@ -1,0 +1,47 @@
+= Resourcesync for large datasets
+
+== Problem
+Resourcesync gets too slow with large datasets.
+So slow that a *gateway timeout* is returned for datasets with the size around 10G (size on disk).
+This problem only appears when retrieving the change files: `/v5/resourcesync/{ownerId}/{dataSetName}/changes/changes{x}.nqud`
+
+TruePatchStore stores the changes of a dataset in the form of inserts and deletes.
+This store will grow much faster than the QuadStore (which contains the current state).
+The main problem of the TruePatchStore is to filter on the version and if it is an assertion takes to long.
+Part of the problem is that this filtering has to be done in memory of the application.
+Another part of the problem is that finding a deletion takes much more time, than finding an assertion.
+
+== Solutions
+=== Create a new Berkeley TruePatchStore for each version
+==== Pros
+. Keep using the same data store
+. Simplest solution
+
+==== Cons
+. Do want to make changes to a data store we want to replace.
+. More overhead on disk
+. Migrate data
+
+=== Move data to PostGreSQL
+==== Pros
+. We want to replace Berkeley.
+
+==== Cons
+. Requires big changes in Timbuctoo.
+. Requires data migration.
+. We are not sure PostGreSQL is usable for this situation.
+
+== Actions
+=== Test PostGreSQL
+. Import RDF
+.. Create a PostGreSQL RDF importer.
+
+=== Create a new Berkeley TruePatchStore for each version
+. Wrap TruePatchStore API.
+.. Let it open multiple Berkeley databases.
+. Divide data over the multiple databases.
+
+== Test results
+=== Create a new Berkeley TruePatchStore for each version
+* Resourcesync is much faster and works with larger datasets.
+* Size on disk is similar

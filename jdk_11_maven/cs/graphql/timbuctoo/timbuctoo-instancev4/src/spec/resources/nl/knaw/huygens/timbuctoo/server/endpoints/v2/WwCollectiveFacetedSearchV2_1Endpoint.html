@@ -1,0 +1,171 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Faceted search API for wwcollectives</title>
+</head>
+<body>
+<section data-type="chapter">
+  <h2>Retrieving collectives</h2>
+  Let's assume we're searching the collection <b>wwcollectives</b>.
+  <aside class="example highlight" h:http="#searchPostDocs">
+    <div h:request="">
+      POST /v2.1/search/wwcollectives HTTP/1.1
+      VRE_ID: WomenWriters
+      Content-type: application/json
+
+      {}
+    </div>
+    <div h:response="">
+      HTTP/1.1 201
+      Location:
+    </div>
+  </aside>
+  <p>
+    You then get a Location header back (In this case <small><span c:echo="#searchPostDocs.firstHeaders.location"></span></small>)
+  </p>
+  <aside class="example highlight" h:http="#searchGetDocs">
+    <div h:request="">
+      GET $(#searchPostDocs.firstHeaders.location) HTTP/1.1
+    </div>
+    <div h:response="">
+      HTTP/1.1 200
+
+      {
+      	"start": "/*NUMBER*/",
+      	"rows": "/*NUMBER*/",
+      	"numFound": "/*NUMBER*/",
+      	"sortableFields": [
+      	],
+        "facets": [
+          {
+            "name": "dynamic_s_type",
+            "type": "LIST"
+          }
+        ],
+      	"fullTextSearchFields": [
+      		"dynamic_t_name"
+      	],
+      	"refs": {
+					"custom-matcher": "/*ALL_MATCH_ONE_OF*/",
+					"invariant": {
+						"type": "wwcollective",
+						"id": "/*STRING*/",
+						"displayName": "/*STRING_OR_NULL*/",
+						"path": "/*STRING*/",
+						"data": {
+						}
+					}
+				}
+      }
+    </div>
+  </aside>
+    <aside class="example highlight" h:http="#filteredPost">
+      <div h:request="">
+        POST /v2.1/search/wwcollectives HTTP/1.1
+        VRE_ID: WomenWriters
+        Content-type: application/json
+
+        {
+          "facetValues":[
+          {"name": "dynamic_s_type","values":["UNKNOWN"]}
+          ]
+        }
+      </div>
+      <div h:response="">
+        HTTP/1.1 201
+        Location:
+      </div>
+    </aside>
+    
+    <aside class="example highlight" h:http="">
+      <div h:request="">
+        GET $(#filteredPost.firstHeaders.location) HTTP/1.1
+        Accept: application/json
+      </div>
+      <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "numFound": "/*NUMBER*/",
+        "start": 0,
+        "rows": "/*NUMBER*/",
+        "facets": [
+        	{
+            "name":"dynamic_s_type",
+            "options":[{"name":"UNKNOWN","count":"/*NUMBER*/"}],
+            "type":"LIST"}
+        ],
+        "refs": {
+          "custom-matcher": "/*ALL_MATCH_ONE_OF*/",
+          "invariant": {
+            "type": "wwcollective",
+            "id": "/*STRING*/",
+            "path": "/*STRING*/",
+            "displayName": "/*STRING*/",
+            "data": { }
+          }
+        },
+        "fullTextSearchFields": [
+          "/*STRING*/"
+        ]
+      }
+      </div>
+    </aside>
+
+    <aside class="example highlight" h:http="#filteredPost">
+      <div h:request="">
+        POST /v2.1/search/wwcollectives HTTP/1.1
+        VRE_ID: WomenWriters
+        Content-type: application/json
+
+        {
+          "facetValues":[
+          {"name": "dynamic_s_type","values":["LIBRARY"]}
+          ],
+          "fullTextSearchParameters":[{"name":"dynamic_t_name","term":"norwegian"}]}
+        }
+      </div>
+      <div h:response="">
+        HTTP/1.1 201
+        Location:
+      </div>
+    </aside>
+    
+    <aside class="example highlight" h:http="">
+      <div h:request="">
+        GET $(#filteredPost.firstHeaders.location) HTTP/1.1
+        Accept: application/json
+      </div>
+      <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "numFound": "/*NUMBER*/",
+        "start": 0,
+        "rows": "/*NUMBER*/",
+        "facets": [
+        	{"name":"dynamic_s_type","options":[{"name":"LIBRARY","count":2}],"type":"LIST"}
+        ],
+        "refs": {
+          "custom-matcher": "/*ALL_MATCH_ONE_OF*/",
+          "invariant": {
+            "type": "wwcollective",
+            "id": "/*STRING*/",
+            "path": "/*STRING*/",
+            "displayName": "/*STRING*/",
+            "data": { }
+          }
+        },
+        "fullTextSearchFields": [
+          "/*STRING*/"
+        ]
+      }
+      </div>
+    </aside>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Faceted search API</title>
+</head>
+<body>
+  <section data-type="chapter">
+    <h2>Preface</h2>
+    Timbuctoo has support for building faceted searches. Doing a faceted search usually follows the following steps.
+    <ol>
+      <li>You <a href="#retrievingFacets">retrieve facets</a> by performing an empty POST to the search endpoint, and GET the returned location</li>
+      <li>You present the returned facets to the user</li>
+      <li>The user selects some combination of facets</li>
+      <li>You <a href="#searchingUsingFacets">search</a> using the selected facets</li>
+      <li>You present the returned results to the user and update your facet list based on the new facets</li>
+      <li>The user updates its combination of facets</li>
+      <li>etc.</li>
+    </ol>
+  </section>
+  <section data-type="chapter">
+    <h2>Retrieving facets</h2>
+    Let's assume we're searching the collection <b>wwpersons</b>.
+    <aside class="example highlight" h:http="#searchPost">
+        <div h:request="">
+          POST /v2.1/search/wwpersons HTTP/1.1
+          VRE_ID: WomenWriters
+          Content-type: application/json
+
+          {}
+        </div>
+        <div h:response="">
+          HTTP/1.1 201
+          Location:
+        </div>
+    </aside>
+    <aside class="note">
+      <span>A request for search to an unknown collection will result in a <em>
+        <span c:assertEquals="doSearchToUnknownCollection()">400 Bad Request</span></em>
+      </span>
+    </aside>
+    <p>
+      You then get a Location header back (In this case <small><span c:echo="#searchPost.firstHeaders.location"></span></small>)
+      that contains <span c:assertEquals="isFullyQualified(#searchPost.firstHeaders.location)">a fully qualified HTTP url</span>.
+      This url is valid during the next few hours. Once it starts returning 404's you are expected to retry the POST.
+    </p>
+    <aside id="emptyRetrieveResponse" class="example highlight" h:http="#searchGet">
+      <div h:request="">
+        GET $(#searchPost.firstHeaders.location) HTTP/1.1
+      </div>
+      <div h:response="">
+        HTTP/1.1 200
+
+        {
+          "facets": [
+            {
+              "name": "/*STRING*/",
+              "type": "LIST"
+            },
+            {
+              "name": "/*STRING*/",
+              "type": "RANGE"
+            }
+          ],
+          "fullTextSearchFields": [ "/*STRING*/" ],
+          "refs": [
+            {
+              "type": "wwperson",
+              "id": "/*STRING*/",
+              "displayName": "/*STRING_OR_NULL*/",
+              "path": "/*STRING*/",
+              "data": {
+              	"_id": "/*STRING*/",
+              	"name": "/*STRING_OR_NULL*/",
+                "birthDate": "/*STRING_OR_NULL*/",
+              	"deathDate": "/*STRING_OR_NULL*/",
+              	"gender": "/*STRING_OR_NULL*/",
+              	"modified_date": "/*DATE_STRING*/",
+              	"residenceLocation": "/*STRING_OR_NULL*/"
+              }
+            }
+          ],
+          "sortableFields": [ "/*STRING*/" ],
+          "start": "/*NUMBER*/",
+          "rows": "/*NUMBER*/",
+          "numFound": "/*NUMBER*/",
+          "_next": "/*STRING*/"
+        }
+      </div>
+    </aside>
+    <aside class="note">
+      When a GET request is done with a malformed UUID, <em><span c:assertEquals="doRequestWithMalformedUuid()">
+      400 Bad Request</span></em> is returned.
+    </aside>
+    <aside class="note">
+      When a an unknown search result is requested, <em><span c:assertEquals="doGetOfUnknown()">
+      404 Not Found</span></em> is returned.
+    </aside>
+    <ul>
+      <li>
+        <em>numFound</em> contains the total number of records that match the query and is therefore always greater than
+        , or equal to the facet numbers and the rows property.
+      </li>
+      <li>
+        <em>start</em> contains the offset, in items
+      </li>
+      <li>
+        <em>rows</em> contains the amount of rows in the returned dataset.
+        <ul>
+          <li>
+            This is always equal to the length of the <em>refs</em> array.
+          </li>
+          <li>
+            Might be less then 10 when the resultset contains less then 10 items.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <em>_next</em> contains a fully qualified url to the next results, if there are next results.
+      </li>
+      <li>
+        <em>_prev</em> contains a fully qualified url to the previous results, if there are previous results.
+      </li>
+      <li>
+        <em>sortableFields</em> is an array of names of sort parameters.
+      </li>
+      <li>
+        <em>sortableFields</em> is an collections of names that can be used as sort parameters.
+      </li>
+      <li>
+        <em>fullTextSearchFields</em> contains the names of the fields that can be used for full text search.
+      </li>
+    </ul>
+    <div>
+      <h3>Facets</h3>
+      Timbuctoo supports two types of facets.
+      <span>A general facet could contain the following values in the <em>type</em> property:</span>
+      <ul>
+        <li>BOOLEAN, has 2 options with the names <em>true</em> and <em>false</em>.</li>
+        <li>LIST, has a list with of options with unpredictable names and has an unpredictable length.</li>
+      </ul>
+      <pre class="requestContent">
+        {
+          "name": "facet name",
+          "type": "(possible values described above)",
+          "options": [
+            {
+               "name": "option1",
+               "count": 1176
+            },
+            {
+               "name": "option2",
+               "count": 126
+            },
+          ]
+        }
+      </pre>
+      <span>The ranges facets are used to search on date ranges. They have one option with an <em>upperLimit</em> and a
+      <em>lowerLimit</em>. The values are date converted to a number. The format is <em>yyyyMMdd</em> years after the
+        first millennium. Years after the first century will have the format <em>yyyMMdd</em>. So only the <em>MM</em>
+        and <em>dd</em> part of the format is ensured. The years part could be as little as one <em>y</em>.</span>
+      <pre class="requestContent">
+        {
+          "name": "facet name",
+          "type": "RANGE",
+          "options": [{
+            "upperLimit": 20150204,
+            "lowerLimit": 20120114
+          }]
+        }
+      </pre>
+    </div>
+    <div>
+      <h3>Refs</h3>
+      <span>Each ref consists of 3 fields. The <em>datafield</em> contains no fields that describe the entity.
+      The <em>displayName</em> contains a simple display name. The <em>path</em> contains a relative path to the
+      complete entity.</span>
+      <pre class="requestContent">
+        {
+          "data": {},
+          "displayName": "Name",
+          "path": "path/to/entity"
+        }
+      </pre>
+    </div>
+    <div>
+      <h3>Query parameters</h3>
+      <span>In the get request above no query parameters are used. The search requests supports two query paramters
+        <ul>
+          <li>rows
+            <ul>
+              <li>Defines the maximum number of results that are returned.</li>
+              <li>Has as default value 10.</li>
+            </ul>
+          </li>
+          <li>start
+            <ul>
+              <li>Defines the offset of the search result</li>
+              <li>Has as default value 0.</li>
+            </ul>
+          </li>
+        </ul>
+      </span>
+    </div>
+  </section>
+
+  <section data-type="chapter">
+    <h2>Searching with the selected facets</h2>
+    <p>
+      You can use the information in the facets, sortableFields and fullTextSearchFields to create a query form. You can
+      use the information createResponse the refs property to show a set of results.
+    </p>
+    <p>
+      The form should then create a POST containing those facets and fulltext fields that you wish to filter on. Let's
+      use a different domain (charterportaal) for our next search.
+    </p>
+    <aside class="example highlight" h:http="#filteredPost">
+      <div h:request="">
+        POST /v2.1/search/wwpersons HTTP/1.1
+        VRE_ID: WomenWriters
+        Content-type: application/json
+
+        {
+          "facetValues":[
+            {"name": "dynamic_s_gender","values":["FEMALE"]},
+            {"name": "dynamic_s_residence","values":["France"]},
+            {"name": "dynamic_s_language","values":["English"]},
+            {"name": "dynamic_s_marital_status","values":["Widowed"]}
+          ]
+        }
+      </div>
+      <div h:response="">
+        HTTP/1.1 201
+        Location:
+      </div>
+    </aside>
+    <aside class="example highlight" h:http="">
+      <div h:request="">
+        GET $(#filteredPost.firstHeaders.location) HTTP/1.1
+        Accept: application/json
+      </div>
+      <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "sortableFields": [
+          "/*STRING*/"
+        ],
+        "numFound": "/*NUMBER*/",
+        "start": 0,
+        "rows": "/*NUMBER*/",
+        "term": "*",
+        "facets": [
+          {
+            "name": "/*STRING*/",
+            "options": [
+              {
+                "name": "/*STRING*/",
+                "count": "/*NUMBER*/"
+              }
+            ],
+            "type": "LIST"
+          },
+          {
+            "name": "/*STRING*/",
+            "options": [
+              {
+                "lowerLimit": "/*NUMBER*/",
+                "upperLimit": "/*NUMBER*/"
+              }
+            ],
+            "type": "RANGE"
+          }
+        ],
+        "refs": [
+          {
+            "type": "wwperson",
+            "id": "/*STRING*/",
+            "path": "/*RELATIVE_URL_WITHOUT_STARTING_SLASH*/",
+            "displayName": "/*STRING*/",
+            "data": {
+              "_id": "/*STRING*/",
+              "birthDate": "/*STRING_OR_NULL*/",
+              "deathDate": "/*STRING*/",
+              "gender": "/*STRING*/",
+              "modified_date": "/*NUMERIC_DATE_WITHOUT_DASHES*/",
+              "name": "/*STRING*/",
+              "residenceLocation": "/*STRING*/"
+            }
+          }
+        ],
+        "fullTextSearchFields": [
+          "/*STRING*/"
+        ]
+      }
+      </div>
+    </aside>
+    <aside class="note">
+      <span>The example above shows how to search with list facets. The search with date facets is a bit different. The
+        facet will look like the example below. The upper and lower limit have number representation of a date string
+        with the format 'yyyyMMdd'.
+        <pre class="requestContent">
+          {
+            "name": "facet name",
+            "lowerLimit":12505560,
+            "upperLimit":19301231
+          }
+        </pre>
+      </span>
+    </aside>
+  </section>
+</body>
+</html>

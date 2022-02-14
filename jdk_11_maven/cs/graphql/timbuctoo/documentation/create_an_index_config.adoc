@@ -1,0 +1,109 @@
+= Create an index configuration
+
+== The mutation
+The mutation will overwrite the current index configuration.
+[source, graphql]
+----
+mutation setIndexConfig($dataSetId:String! $collectionUri:String! $indexConfig: IndexConfigInput!) {
+  setIndexConfig(dataSetId:$dataSetId collectionUri: $collectionUri indexConfig:$indexConfig) {
+    facet {
+      paths
+    }
+    ...
+  }
+}
+----
+
+== JSON structure
+[source, json]
+----
+{
+  "dataSetId": "ufdsasb282bf87b44e9222112670efdsa668571f4__data_set",
+  "collectionUri": "http://full.uri/to/collection",
+  "indexConfig": {
+    "facet": [
+      {
+        "paths": [
+          "[[\"clusius_Persons\", \"tim_gender\"], [\"Value\", \"value\"]]"
+        ],
+        "type": "MultiSelect"
+      },
+      {
+        "paths": [
+          "[[\"clusius_Persons\", \"tim_birthDate\"], [\"Value\", \"value\"]]"
+        ],
+        "type": "DateRange"
+      },
+      {
+        "paths": [
+          "[[\"clusius_Persons\", \"tim_deathDate\"], [\"Value\", \"value\"]]"
+        ],
+        "type": "DateRange"
+      },
+    ],
+    "fullText": [
+      {
+        "fields": [
+          {
+            "path": "[[\"clusius_Persons\", \"tim_namesList\"], [\"items\", \"items\"], [\"Value\", \"value\"]]"
+          }
+        ]
+      }
+    ]
+  }
+}
+----
+
+The index config is composed of configurations of facets and full text search fields.
+The `path` or `paths` properties describe the GraphQL-query structure as an array.
+Take the following GraphQL query:
+[source, graphql]
+----
+...
+{
+  ... on u33707283d426f900d4d33707283d426f900d4d0d__clusius_clusius_Persons {
+    tim_birthDate {
+      ... on Value {
+        value
+        type
+      }
+    }
+  }
+}
+...
+----
+This will be translated to the following path:
+[source, json]
+----
+"[[\"clusius_Persons\", \"tim_deathDate\"], [\"Value\", \"value\"]]"
+----
+
+=== Retrieving the current index configuration
+[source, graphql]
+----
+query index {
+  dataSets {
+    u38d24500551ccff8d2b0c4f84fc947f45934aa26__emplaces {
+      metadata {
+        collectionList {
+          items {
+            indexConfig {
+              facet {
+                paths
+                type
+              }
+              fullText {
+                caption
+                fields {
+                  path
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
