@@ -1,0 +1,177 @@
+= Create and delete mutations
+
+== The problem
+The GraphQL API has an edit mutation that allows for updates on properties of an entity.
+However, it is not yet possible to create new entities.
+It is possible to delete an entity using the edit mutation, but it requires an update of the entity where each property is removed explicitly.
+For these reasons, it should be convenient to have an explicit create and a delete mutation in the GraphQL API.
+
+=== Validation
+A create mutation might produce an "invalid" dataset. Just like the edit mutation, we can have validation on
+
+. An entity against the schema (Person's may only have 1 birthdate, it must be EDTF)
+. A value against the type (An xsd:integer may only be [0-9]+)
+. An entity against some local rules (each Person must have a "name")
+. An entity against some global rules (a person may not have the same BSN as another person entity, all person entities must have a birthdate within the early modern period)
+
+=== Provenance
+_See also link:tim-default-provenance.adoc[Timbuctoo default provenance]_
+
+Timbuctoo also records provenance data to an entity per revision.
+Currently this is already recorded for edit mutation actions, but should be extended to take the creation and delete mutations into account as well.
+Just like edit mutation actions, a new version of the entity should be recorded for the creation and delete mutations.
+This new version is associated with a plan which logs the mutation in the form of replacements, additions and deletions.
+
+In the case of a create mutation action, there are no existing versions of the entity and should therefore create a version 0.
+This version should then be associated with a plan which logs the new properties of the entity as additions.
+
+In the case of a delete mutation action, the result should equal the result of an edit mutation in which every property of the entity is removed.
+All that is left of the entity is a new, final version which should then be associated with a plan which logs all properties of the entity as deletions.
+
+== Definition of done
+. Create and delete mutations for each collection should be added to the GraphQL schema.
+. The create mutation cannot change the schema of the data set. (see <<Validation>>)
+.. No new properties can be introduced.
+.. No new types can be added to existing properties.
+.. Single valued properties cannot become multi valued.
+. Users should have the right permissions to be able to see and use the mutations.
+.. Only users with with the `CREATE` permission should be able to see and use the create mutations.
+.. Only users with with the `DELETE` permission should be able to see and use the delete mutations.
+. Timbuctoo adds/removes the data to/from the dataset.
+. Timbuctoo generates a provenance file that contains the changes. (see <<Provenance>>)
+.. Provenance additions should be recorded in the case of a create mutation action
+.. Provenance deletions should be recorded in the case of a delete mutation action
+
+== Design
+
+=== GraphQL
+
+==== Schema
+
+----
+...
+type DataSetMutations {
+  <dataSetName>: <dataSetName>Mutations @passThrough
+}
+
+type <dataSetName>Mutations {
+  <collectionName>: <collectionName>Mutations @passThrough
+}
+
+type <collectionName>Mutations {
+  create(uri: String! entity: <collectionName>CreateInput!): <collectionName>
+  edit(uri: String! entity: <collectionName>EditInput!): <collectionName>
+  delete(uri: String! entity: <collectionName>DeleteInput): RemovedEntity
+}
+
+type RemovedEntity {
+  uri: String!
+}
+
+input <collectionName>CreateInput {
+  creations: <collectionName>CreationsInput
+  provenance: <dataSetName>ProvenanceInput
+}
+
+# Renamed from '<collectionName>Input'
+input <collectionName>EditInput {
+  additions: <collectionName>AdditionsInput
+  deletions: <collectionName>DeletionsInput
+  replacements: <collectionName>ReplacementsInput
+  provenance: <dataSetName>ProvenanceInput
+}
+
+input <collectionName>DeleteInput {
+  provenance: <dataSetName>ProvenanceInput
+}
+
+input <collectionName>CreationsInput {
+  <entityTypeField1>: PropertyInput # Single value / link property
+  <entityTypeField2List>: [PropertyInput!] # List property for values or links
+  <entityTypeFieldN>: PropertyInput # Single value / link property
+}
+...
+----
+
+==== Examples
+
+----
+mutation CreateEntity ($uri: String! $entity: <collectionName>CreateInput!) {
+  dataSets {
+    <dataSetId> {
+      <collectionName> {
+        create(uri: $uri entity: $entity) {
+          <entityTypeField1> {
+            value
+          }
+          <entityTypeField3> {
+            value
+          }
+          <entityTypeFieldN> {
+            value
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteEntity ($uri: String!) {
+  dataSets {
+    <dataSetId> {
+      <collectionName> {
+        delete(uri: $uri) {
+          uri
+        }
+      }
+    }
+  }
+}
+----
+The next examples show the GraphQL query values for the different use cases
+
+Create a new entity
+----
+{
+  "uri": "http://example.org/new_entity"
+  "entity": {
+    "creations": {
+      "<entityTypeField1>": {
+        "type": "xsd_string",
+        "value": "Test1"
+      },
+      "<entityTypeField2>": {
+        "type": "xsd_string",
+        "value": "Test2"
+      },
+       "<entityTypeField3List>": [
+        {
+          "type": "xsd_string",
+          "value": "Test1"
+        }
+      ]
+    }
+  }
+}
+----
+
+Delete an entity
+----
+{
+  "uri": "http://example.org/entity_to_delete"
+}
+----
+
+=== Java
+The `DerivedInputTypeSchemaGenerator` class will be adapted to extend the generated GraphQL schema with the create and the deletion mutations next to the already existing edit mutations.
+
+The `GraphQlToRdfPatch` class, which processes the incoming GraphQL edit mutation, will be changed to an abstract class, such that the create, delete and edit mutations can share the common functionality.
+Instead there will be three different classes, `GraphQlCreateToRdfPatch`, `GraphQlEditToRdfPatch` and `GraphQlDeleteToRdfPatch`; one class implementation for each of the possible mutations.
+
+== Development steps
+. Generate the API
+. Add two DataFetcher mutations (one for each mutation) that stores the data
+. Hide the API from users without the correct permissions
+. Generate a provenance file of the changes and add/remove the data to the data set
+. Add functionality for creating new entities
+. Add functionality for deleting entities

@@ -1,0 +1,11 @@
+= Tasks
+
+Tasks are site admin actions for maintenance purposes.
+
+== Reload data set
+To reopen a closed data set.
+```
+curl -X POST localhost:8081/tasks/reloadDataSet -d "dataSetId={data set id}"
+```
+
+==

@@ -1,0 +1,492 @@
+# Directives have to be declared before the can be used se  https://www.graphql-java.com/documentation/v11/sdl-directives/
+directive @fromCollection(uri:String! listAll:Boolean indexName: String) on FIELD_DEFINITION
+directive @lookupUri on FIELD_DEFINITION
+directive @rdf(predicate:String! direction:String! isList: Boolean!, isObject: Boolean!, isValue: Boolean!) on FIELD_DEFINITION
+directive @uri on FIELD_DEFINITION
+directive @passThrough on FIELD_DEFINITION
+directive @related(source:String! predicate:String! direction:String!) on FIELD_DEFINITION
+directive @dataSet(userId:String! dataSetId:String!) on FIELD_DEFINITION
+directive @entityTitle on FIELD_DEFINITION
+directive @entityDescription on FIELD_DEFINITION
+directive @entityImage on FIELD_DEFINITION
+directive @otherDataSets on FIELD_DEFINITION
+directive @getAllOfPredicate on FIELD_DEFINITION
+directive @createMutation(dataSet:String! typeUri:String!) on FIELD_DEFINITION
+directive @editMutation(dataSet:String!) on FIELD_DEFINITION
+directive @deleteMutation(dataSet:String!) on FIELD_DEFINITION
+directive @persistEntityMutation(dataSet:String!) on FIELD_DEFINITION
+directive @setCustomProvenanceMutation(dataSet:String!) on FIELD_DEFINITION
+directive @rdfType(uri:String!) on OBJECT
+directive @resetIndex(dataSet:String!) on FIELD_DEFINITION
+# override deprecated to support the directive on input fields as wel
+directive @deprecated(reason: String = "No longer supported") on FIELD_DEFINITION | ENUM_VALUE | INPUT_FIELD_DEFINITION
+
+schema {
+  query: Query,
+  mutation: Mutation
+}
+
+interface Value {
+  value: String!
+  type: String!
+}
+
+interface Entity {
+  uri: String!
+  title: Value
+  description: Value
+  image: Value
+  inOtherDataSets(dataSetIds: [String!]): [DataSetLink!]!
+  getAllOfPredicate(uri: String!, outgoing: Boolean!, cursor: ID, count: Int): EntityOrValueList
+}
+
+type EntityOrValueList {
+  entities: [Entity!]!
+  values: [Value!]!
+  nextCursor: ID
+  prevCursor: ID
+}
+
+type DataSetLink {
+  metadata: DataSetMetadata!
+  entity: Entity!
+}
+
+type Facet {
+    caption: String!
+    options: [Option!]!
+}
+
+type Option {
+    name: String!
+    count: Int!
+}
+
+type Query {
+  #The actual dataSets
+  #dataSets: DataSets (Added using extends if there is actually a dataSet available)
+
+  #metadata for all visible dataSets, with or without the promoted ones, use aboutMe { dataSetMetadataList(ownOnly: true) } for the user's own data sets.
+  dataSetMetadataList(promotedOnly: Boolean!, publishedOnly: Boolean!): [DataSetMetadata!]!
+
+  #metadata for a specific dataset
+  dataSetMetadata(dataSetId: ID!): DataSetMetadata
+
+  #information about the logged in user, or null of no user is logged in
+  aboutMe: AboutMe
+
+  #all mimetypes that you can use when downloading data from a dataSet
+  availableExportMimetypes: [MimeType!]!
+
+  #Discover resources for resourcesync import. Requires a remote url as input. An optional authorization string starting with
+  #"Bearer " or "Basic "" and followed by the auth token can be provided in case the remote resource is protected.
+  discoverResourceSync(url: String!, debug: Boolean, authorization: String): [DiscoverRsResult]!
+
+  ##############
+  #DEPRECATED:
+  ##############
+
+  #metadata for the datasets that are supposed to get extra attention
+  promotedDataSets: [DataSetMetadata!]! @deprecated(reason: "Use dataSetMetadataList(promotedOnly: true, ownOnly: false)")
+
+  #metadata for all the dataSets that this user can see, with and without the promoted ones
+  allDataSets: [DataSetMetadata!]! @deprecated(reason: "Use dataSetMetadataList(promotedOnly: false, ownOnly: false)")
+}
+
+type DiscoverRsResult {
+    location: String
+    description: String
+    license: String
+    title: String
+}
+
+type MimeType {
+  name: String!
+}
+
+type DataSetMetadata {
+  uri: String! @uri
+  dataSetId: ID!
+  dataSetName: String!
+  ownerId: String!
+  published: Boolean!
+  promoted: Boolean!
+  title: Value @rdf(predicate: "http://purl.org/dc/terms/title", direction: "OUT", isList: false, isObject: false, isValue: true)
+  description: Value @rdf(predicate: "http://purl.org/dc/terms/description", direction: "OUT", isList: false, isObject: false, isValue: true)
+  imageUrl: Value @rdf(predicate: "http://xmlns.com/foaf/0.1/depiction", direction: "OUT", isList: false, isObject: false, isValue: true)
+  owner: ContactInfo @rdf(predicate: "http://purl.org/dc/terms/rightsHolder", direction: "OUT", isList: false, isObject: true, isValue: false)
+  contact: ContactInfo @rdf(predicate: "http://schema.org/contactPoint", direction: "OUT", isList: false, isObject: true, isValue: false)
+  provenanceInfo: ProvenanceInfo @rdf(predicate: "http://purl.org/dc/terms/provenance", direction: "OUT", isList: false, isObject: true, isValue: false)
+  license: License @rdf(predicate: "http://purl.org/dc/terms/license", direction: "OUT", isList: false, isObject: true, isValue: false)
+  prefixMappings: [PrefixMapping!]!
+  #archetypes: Archetypes! @passThrough (added by the RootQuery based on the config)
+  collection(collectionId: ID!): CollectionMetadata
+  collectionList(count: Int = 20, cursor: ID = ""): CollectionMetadataList
+  #status of imports
+  dataSetImportStatus: [ImportStatus!]!
+  importStatus(id: String!): ImportStatus!
+  # the permissions of the current user
+  userPermissions: [String!]
+
+}
+
+type ResourceSyncReport {
+    importedFiles: [String]!
+    ignoredFiles: [String]!
+}
+
+type ImportStatus {
+  id: String!
+  status: ImportStatusLabel!
+  source: String!
+  errors: [String!]! @deprecated(reason: "use errorObjects instead")
+  errorObjects: [ErrorObject!]!
+  progress: [ProgressStep!]!
+}
+
+type ErrorObject {
+  dateStamp: String!
+  file: String
+  method: String!
+  message: String!
+  error: String!
+}
+
+type ProgressStep {
+  label: String!
+  status: ImportStatusLabel!
+  progress: String!
+  speed: String!
+}
+
+enum ImportStatusLabel {
+  PENDING
+  IMPORTING
+  DONE
+}
+
+type EntryImportStatus {
+  #start date of import, when finished end date of import
+  date: String
+  #status of import
+  status: String
+  #duration of import
+  elapsedTime(unit: TimeUnit = SECONDS): Int!
+  #errors encountered during import
+  errors: [String!]!
+}
+
+enum TimeUnit {
+  MILLISECONDS
+  SECONDS
+  MINUTES
+  HOURS
+  DAYS
+}
+
+enum Permission {
+  ADMIN
+  WRITE
+  READ
+}
+
+type AboutMe {
+  #datasets that this user has some specific permissions on
+  dataSets: [DataSetMetadata!]! @deprecated(reason: "renamed to dataSetMetadataList to align with the naming conventions")
+
+  #datasets that this user has specifically been granted permissions on, or just his or her own data sets.
+  dataSetMetadataList(ownOnly: Boolean!, permission: Permission!): [DataSetMetadata!]!
+
+  #The unique identifier of this user
+  id: ID!
+
+  #a human readable name (or empty string if not available)
+  name: String!
+
+  #a url to a page with personal information on this user
+  personalInfo: String!
+
+  #This user may create a new dataset on this timbuctoo instance
+  canCreateDataSet: Boolean!
+}
+
+type PrefixMapping {
+  prefix: String!
+  uri: String!
+}
+
+type CollectionMetadataList {
+  prevCursor: ID
+  nextCursor: ID
+  items: [CollectionMetadata!]!
+}
+
+type CollectionMetadata {
+  uri: String! @uri
+
+  shortenedUri: String!
+
+  #the name of the property with which you can retrieve single items of this collection
+  collectionId: ID!
+
+  #the name of the property with which you can retrieve this collection as list
+  collectionListId: ID!
+
+  #The fully qualified graphql type name
+  itemType: String!
+
+  properties(count: Int = 20, cursor: ID = ""): PropertyList!
+
+  #The amount of items in this collection
+  total: Int!
+
+  title: Value @rdf(predicate: "http://www.w3.org/2000/01/rdf-schema#label", direction: "OUT", isList: false, isObject: false, isValue: true)
+  archeType: Entity @rdf(predicate: "http://www.w3.org/2000/01/rdf-schema#subClassOf", direction: "OUT", isList: false, isObject: true, isValue: false)
+  indexConfig: IndexConfig!
+  summaryProperties: SummaryProperties!
+  viewConfig: [Component]!
+}
+
+type SummaryProperties {
+  title: SummaryProperty
+  description: SummaryProperty
+  image: SummaryProperty
+}
+
+type SummaryProperty {
+  path: [DirectionalStep!]!
+}
+
+type DirectionalStep {
+  step: String!
+  direction: Direction!
+}
+
+enum Direction {
+  IN
+  OUT
+}
+
+input SummaryPropertiesInput {
+  title: SummaryPropertyInput
+  description: SummaryPropertyInput
+  image: SummaryPropertyInput
+}
+
+input SummaryPropertyInput  {
+  path: [DirectionalStepInput!]
+  type: String!
+}
+
+input DirectionalStepInput {
+  step: String!
+  direction: Direction!
+}
+
+type IndexConfig {
+  facet: [FacetConfig]!
+  fullText: [FullTextConfig]!
+}
+
+type FacetConfig {
+  paths: [String]
+  type: String
+  caption: String
+}
+
+type FullTextConfig {
+  caption: String
+  fields: [FullTextFieldConfig]
+}
+
+type FullTextFieldConfig {
+  path: String
+  boost: Float
+}
+
+input IndexConfigInput {
+  facet: [FacetConfigInput]!
+  fullText: [FullTextConfigInput]!
+}
+
+input FacetConfigInput {
+  paths: [String!]
+  type: String!
+  caption: String
+}
+
+input FullTextConfigInput {
+  caption: String
+  fields: [FullTextFieldConfigInput!]!
+}
+
+input FullTextFieldConfigInput {
+  path: String!
+  boost: Float
+}
+
+type PropertyList {
+  prevCursor: ID
+  nextCursor: ID
+  items: [Property!]!
+}
+
+type Property {
+  name: String!
+  uri: String!
+  shortenedUri: String!
+  isInverse: Boolean!
+  density: Int!
+  isList: Boolean!
+  referencedCollections(count: Int = 20, cursor: ID = ""): CollectionIdList!
+  isValueType: Boolean!
+}
+
+type CollectionIdList {
+  prevCursor: ID
+  nextCursor: ID
+  items: [String!]!
+}
+
+type ContactInfo {
+  name: Value @rdf(predicate: "http://schema.org/name", direction: "OUT", isList: false, isObject: false, isValue: true)
+  email: Value @rdf(predicate: "http://schema.org/email", direction: "OUT", isList: false, isObject: false, isValue: true)
+}
+
+type License {
+  uri: String! @uri
+}
+
+type ProvenanceInfo {
+  title: Value @rdf(predicate: "http://purl.org/dc/terms/title", direction: "OUT", isList: false, isObject: false, isValue: true)
+  body: Value @rdf(predicate: "http://purl.org/dc/terms/description", direction: "OUT", isList: false, isObject: false, isValue: true)
+}
+
+# the components used to define a view page or an edit page in the front-end
+type Component {
+  subComponents: [Component!]!
+  type: String!
+  value: String
+  formatter: [FormatterConfig!]!
+}
+
+type FormatterConfig {
+  type: String!
+  name: String!
+}
+
+input ComponentInput {
+  subComponents: [ComponentInput!]!
+  type: String!
+  value: String
+  formatter: [FormatterConfigInput!]!
+}
+
+input FormatterConfigInput {
+  type: String!
+  name: String!
+}
+
+type RemovedDataSet {
+  dataSetId: String!
+}
+
+input CustomSchemaTypeInputField {
+  uri: String!
+  isList: Boolean!
+  values: [String!]
+  references: [String!]
+}
+
+input CustomSchemaTypeInput {
+  collectionId: String!
+  fields: [CustomSchemaTypeInputField!]
+}
+
+type ExtendSchemaMessage {
+  message: String!
+}
+
+type Message {
+  message: String!
+}
+
+input DataSetMetadataInput {
+  title: String
+  description: String
+  imageUrl: String
+  owner: ContactInfoInput
+  contact: ContactInfoInput
+  provenanceInfo: ProvenanceInfoInput
+  license: LicenseInput
+}
+
+input ContactInfoInput {
+  name: String!
+  email: String!
+}
+
+input LicenseInput {
+  uri: String!
+}
+
+input ProvenanceInfoInput {
+  title: String!
+  body: String!
+}
+
+input CollectionMetadataInput {
+  title: String
+  archeType: String
+}
+
+input PropertyInput {
+  type: String!
+  value: String!
+}
+
+input CustomProvenanceInput {
+  fields: [CustomProvenanceFieldInput!]!
+}
+
+input CustomProvenanceFieldInput {
+  uri: String!
+  isList: Boolean!
+  valueType: String
+  object: CustomProvenanceObjectFieldInput
+}
+
+input CustomProvenanceObjectFieldInput {
+  type: String!
+  fields: [CustomProvenanceFieldInput!]!
+}
+
+type Mutation {
+  # dataSets: DataSetMutations is added in RootQuery
+  setViewConfig(dataSetId: String!, collectionUri: String!, viewConfig: [ComponentInput!]!): [Component]
+  setSummaryProperties(dataSetId: String!, collectionUri: String!, summaryProperties: SummaryPropertiesInput!): SummaryProperties
+  setIndexConfig(dataSetId: String!, collectionUri: String!, indexConfig: IndexConfigInput!): IndexConfig!
+  createDataSet(dataSetName: String!): DataSetMetadata!
+  deleteDataSet(dataSetId: String!): RemovedDataSet!
+  publish(dataSetId: String!): DataSetMetadata!
+  extendSchema(dataSetId: String!, customSchema: [CustomSchemaTypeInput!]!): ExtendSchemaMessage!
+  # Update the metadata for this dataset. To leave a property as-is you can omit it from the metadata. To delete it you can include it and set it's value to null.
+  setDataSetMetadata(dataSetId: String!, metadata: DataSetMetadataInput!): DataSetMetadata!
+  # Set the title or archetype for this collection
+  setCollectionMetadata(dataSetId: String!, collectionUri: String!, metadata: CollectionMetadataInput!): CollectionMetadata!
+  #To trigger a resourcesync import. Inputs required: "dataSetName" is the name you want to call the imported dataset.
+  #"capabilityListUri" is the remote location for the capabilitylist (can be obtained through the "discover" query).
+  #"userSpecifiedDataSet" is an optional location in the remote server for the dataset you want to import (in case there
+  #are more than one dataset available). You can also include an optional "authorization" string that starts with "Bearer "
+  # or "Basic " and is followed by an auth token for the case where the remote resource is protected.
+  resourceSyncImport(dataSetName: String!, capabilityListUri: String!, userSpecifiedDataSet: String, authorization: String): ResourceSyncReport!
+  #To trigger a resourcesync update. Inputs required: "dataSetId" is the local dataset that you want to update. You can
+  #also include an optional "authorization" string that starts with "Bearer "or "Basic " and is followed by an auth token
+  #for the case where the remote resource is protected.
+  resourceSyncUpdate(dataSetId: String!, authorization: String): ResourceSyncReport!
+}
+
+type RemovedEntity {
+  uri: String!
+}
+

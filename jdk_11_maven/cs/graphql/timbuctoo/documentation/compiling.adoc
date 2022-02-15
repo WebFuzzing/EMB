@@ -1,0 +1,34 @@
+
+== Getting up and running
+
+=== Sneak peek
+
+To get a quick look at timbuctoo go to: https://acc.repository.huygens.knaw.nl
+
+=== 1. System requirements
+
+//TODO
+
+=== 2. Building it
+
+This tool has been verified to work on Redhat 6.
+To build your own version, you can either have 'java 8' and 'maven 3' installed or use the maven3 docker container.
+
+ * *build* using `mvn clean package`
+
+=== 3. Running it
+
+ * Do a quick *debug run* using `./devtools/debugrun/debugrun.sh` or `docker-compose up`.
+ If you do not use docker the external services, such as solr won't be started. 
+ Timbuctoo will still run and the API will run fine, but some urls in the web GUI won't work.
+
+To run a real version you'd run all services mentioned in the docker-compose.yml file yourself and start timbuctoo using `./timbuctoo-instancev4/target/appassembler/bin/timbuctoo server <your config>.yaml`.
+You can use example_config.yaml for inspiration.
+
+ 1. After launching it you should be greated by a login page.
+ 2. After logging in you should be able to upload an excel file (or download the default excel file). The wizard will guide you onwards.
+ 3. When a dataset is uploaded you can edit it, and query it.
+
+=== 4. installing it
+
+ * *install/package timbuctoo* by copying the target/appassembler folder wherever you like (i.e. `mv timbuctoo-instancev4/target/appassembler/ my-install-location`

@@ -1,0 +1,205 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Relation search API</title>
+</head>
+
+<body>
+<section data-type="chapter">
+  <h2>Preface</h2>
+  Timbuctoo 2.1 can start a relation search using a faceted search ID as starting point.
+  <p>
+    Currently The only implemented use cases are a search for receptions (in the form of wwdocuments) on:
+    <ul>
+      <li>wwpersons</li>
+      <li>wwdocuments</li>
+    </ul>
+  </p>
+
+  <p>
+    <span c:execute="#personSearchId=getPersonSearchId()">For this test we assume an existing wwpersons search ID:
+    <b><span c:echo="#personSearchId"></span></b>.</span>
+  </p>
+</section>
+<section data-type="chapter">
+  <h2>Performing reception search on wwpersons</h2>
+  When you POST the wwpersons search ID to the relation search with wwdocuments to start the reception search on persons.
+  <aside class="example highlight" h:http="#searchPost">
+    <div h:request="">
+      POST /v2.1/search/wwrelations/wwdocuments HTTP/1.1
+      VRE_ID: WomenWriters
+      Content-type: application/json
+
+      {
+        "otherSearchId": "$(#personSearchId)"
+      }
+    </div>
+    <div h:response="">
+      HTTP/1.1 201
+      Location:
+    </div>
+  </aside>
+  <p>
+    You get a Location header back (In this case <small><span c:echo="#searchPost.firstHeaders.location"></span></small>)
+    that contains <span c:assertEquals="isFullyQualified(#searchPost.firstHeaders.location)">a fully qualified HTTP url</span>.
+    This url is valid during the next few hours. Once it starts returning 404's you are expected to retry the POST.
+  </p>
+  <aside class="example highlight" h:http="#searchGet">
+    <div h:request="">
+      GET $(#searchPost.firstHeaders.location) HTTP/1.1
+    </div>
+
+
+    <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "facets": [
+          {
+            "name": "/*STRING*/",
+            "options": [{
+              "name": "/*STRING*/",
+              "count": "/*NUMBER*/"
+            }],
+            "type": "LIST"
+          },
+          {
+            "name": "/*STRING*/",
+            "options": {
+              "custom-matcher": "/*IS_SAME_ARRAY*/",
+              "array": [{
+                "lowerLimit": "/*NUMBER*/",
+                "upperLimit": "/*NUMBER*/"
+              }]
+            },
+            "type": "RANGE"
+          }
+        ],
+        "fullTextSearchFields": {
+          "custom-matcher": "/*IS_SAME_ARRAY*/",
+          "array": [
+            "dynamic_t_author_name",
+            "dynamic_t_title",
+            "dynamic_t_notes"
+          ]
+        },
+        "refs": [
+          {
+              "id": "/*STRING*/",
+              "path": "/*RELATIVE_URL_WITHOUT_LEADING_SLASH*/",
+              "relationName": "/*STRING*/",
+              "sourceData": {
+                  "_id": "/*STRING*/",
+                  "birthDate": "/*STRING_OR_NULL*/",
+                  "deathDate": "/*STRING_OR_NULL*/",
+                  "gender": "/*STRING_OR_NULL*/",
+                  "modified_date": "/*NUMERIC_DATE_WITHOUT_DASHES*/",
+                  "name": "/*STRING_OR_NULL*/",
+                  "residenceLocation": "/*STRING_OR_NULL*/"
+              },
+              "sourceName": "/*STRING_OR_NULL*/",
+              "targetData": {
+                  "_id": "/*STRING*/",
+                  "authorGender": "/*STRING_OR_NULL*/",
+                  "authorName": "/*STRING_OR_NULL*/",
+                  "date": "/*STRING_OR_NULL*/",
+                  "documentType": "/*STRING_OR_NULL*/",
+                  "genre": "/*STRING_OR_NULL*/",
+                  "language": "/*STRING_OR_NULL*/",
+                  "modified_date": "/*NUMERIC_DATE_WITHOUT_DASHES*/",
+                  "publishLocation": "/*STRING_OR_NULL*/",
+                  "title": "/*STRING_OR_NULL*/"
+              },
+              "targetName": "/*STRING_OR_NULL*/",
+              "type": "/*STRING*/"
+          }
+        ],
+        "start": "/*NUMBER*/",
+        "rows": "/*NUMBER*/",
+        "numFound": "/*NUMBER*/",
+        "sortableFields": {
+          "custom-matcher": "/*IS_SAME_ARRAY*/",
+          "array": [
+            "dynamic_sort_title",
+            "dynamic_k_modified",
+            "dynamic_sort_creator"
+          ]
+        }
+      }
+    </div>
+  </aside>
+</section>
+
+<section data-type="chapter">
+  <h2>Performing reception search with fulltext search parameter and and</h2>
+  When you POST with the same person search ID and valid facetValues + fullTextSearchParameters
+  <aside class="example highlight" h:http="#searchPost2">
+    <div h:request="">
+      POST /v2.1/search/wwrelations/wwdocuments HTTP/1.1
+      VRE_ID: WomenWriters
+      Content-type: application/json
+
+      {
+        "otherSearchId": "$(#personSearchId)",
+        "facetValues":[
+          {
+            "name": "dynamic_s_relation",
+            "values": ["commentsOnPerson", "mentionsPerson"]
+          },
+          {
+            "name":"dynamic_i_date",
+            "lowerLimit":17808662,
+            "upperLimit":19058032
+          }
+        ],
+        "fullTextSearchParameters": [
+          {
+            "name": "dynamic_t_title",
+            "term": "private"
+          }
+        ]
+      }
+    </div>
+    <div h:response="">
+      HTTP/1.1 201
+      Location:
+    </div>
+  </aside>
+  <p>
+    You get a new Location header back (In this case <small><span c:echo="#searchPost2.firstHeaders.location"></span></small>)
+  </p>
+  <aside class="example highlight" h:http="#searchGet2">
+    <div h:request="">
+      GET #searchPost2.firstHeaders.location HTTP/1.1
+    </div>
+    <div h:response="">
+      HTTP/1.1 200
+
+      {
+        "fullTextSearchFields": {
+          "custom-matcher": "/*IS_SAME_ARRAY*/",
+          "array": [
+            "dynamic_t_author_name",
+            "dynamic_t_title",
+            "dynamic_t_notes"
+          ]
+        },
+        "start": "/*NUMBER*/",
+        "rows": "/*NUMBER*/",
+        "numFound": "/*NUMBER*/",
+        "sortableFields": {
+          "custom-matcher": "/*IS_SAME_ARRAY*/",
+          "array": [
+            "dynamic_sort_title",
+            "dynamic_k_modified",
+            "dynamic_sort_creator"
+          ]
+        }
+      }
+    </div>
+  </aside>
+</section>
+</body>
+</html>

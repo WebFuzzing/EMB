@@ -1,0 +1,116 @@
+= Timbuctoo default provenance
+
+== Problems
+The current default provenance is very much focused for edit.
+It does not work for create and delete.
+A smaller problem is that the replacements do not contain information which values are replaced.
+
+== Actions
+.Edit mutation
+|===
+|Description |GraphQL action |Log entries |Provenance type
+
+|Replace value of property single or multivalued
+|Replacement
+|Remove old quad(s), add new quad(s)
+|Replacement
+
+|Replace single valued field value with null
+|Replacement
+|Remove old quad
+|Deletion
+
+|Replace a multivalued field with []
+|Replacement
+|Remove old quads
+|Deletion
+
+|Set value of a property without value (single or multivalued)
+|Replacement
+|Add new quad(s)
+|Addition
+
+|Add a new value to a multivalued field
+|Addition
+|Add new quad
+|Addition
+
+|Remove value from a multivalued field
+|Deletion
+|Remove old quad
+|Deletion
+|===
+
+.Create mutation
+|===
+|Description |GraphQL action |Log entries |Provenance type
+
+|Set value of a property without value
+|Creation
+|Add new quad(s)
+|Addition
+
+|===
+
+.Delete mutation
+|===
+|Description |GraphQL action |Log entries |Provenance type
+
+|Replace single valued field value with null
+|`Delete mutation has no actions`
+|Remove old quad
+|Deletion
+
+|Replace a multivalued field with []
+|`Delete mutation has no actions`
+|Remove old quads
+|Deletion
+|===
+
+== Changes in the provenance structure
+
+----
+                                                                                                                                                                         +-----------+                +-----------+
+                                                                                                                                                                         |           | tim:nextValue  |           |
+                                                                                                                                                                         | tim:Value +--------------->+ tim:Value |
+                                                                                                                                                                         |           |                |           |
+                                                                                                                                                                         +----------++                +------+----+
+                                                                                                                                                                                    ^                        ^
+                                                                                                                                                                       tim:hasValue |                        |
+                                                                                                                                                                                    |                 +------+ tim:hasValue
+                                                                                                                                                                                    |                 |
+ +-----------+               +--------------+                          +---------------+                    +-----------+                      +------------------+                 +-----------------+
+ |           |  tim:hasValue |              |      tim:hasAddition     |               |   tim:additions    |           |  tim:replacements    |                  | hasReplacement  |                 | tim:hasKey
+ | tim:Value +<--------------+ tim:Addition +<-------------------------+ tim:Additions +<-------------------+ prov:Plan +--------------------->+ tim:Replacements +---------------->+ tim:Replacement +------------>"http://example.org/otherPred"
+ |           |               |              |                          |               |                    |           |                      |                  |                 |                 |
+ +-----+-----+               +------+-------+                          +---------------+                    +-----+-----+                      +------------------+                 +-------------+---+
+       |                            |                                                                             |                                                                 |             |
+       |  tim:nextValue             |                                                                             |  tim:deletions                                     tim:hadValue |             +----------------+
+       v                            | tim:hasValue                                                                v                                                                 |                              |  tim:hadValue
+ +-----+-----+                      |                                                                     +-------+-------+                                                         v                              v
+ |           |                      |                                                                     |               |                                                +--------+-----+                   +----+---------+
+ | tim:Value +<---------------------+                                                                     | tim:Deletions |                                                |              | tim:nextOldValue  |              |
+ |           |                                                                                            |               |                                                | tim:OldValue +------------------>+ tim:OldValue |
+ +-----------+                                                                                            +-------+-------+                                                |              |                   |              |
+                                                                                                                  |                                                        +--------------+            +------+-------------++
+                                                                                                                  | tim:hasDeletion                                                                    |                     |
+                                                                                                                  v                                                                                    | tim:rawValue        | tim:type
+                                                                                                          +-------+------+                                                                             v                     v
+                                                                                                          |              | tim:hasKey                                                             "oldValue"            "http://example.org/type"
+                                                                                                          | tim:Deletion +----------->"http://example.org/predicate"
+                                                                                                          |              |
+                                                                                                          +--------------+
+                                                                                                          |              |
+                                                                                                    +-----+ tim:hasValue +------+ tim:hasValue
+                                                                                                    |                           |
+                                                                                                    v                           v
+                                                                                 tim:type   +-------+---+                 +-----+-----+
+                                                   "http://example.org/type"<---------------+           | tim:nextValue   |           |
+                                                                             tim:rawValue   | tim:Value +----------------^+ tim:Value |
+                                                 "http://example.org/value"<----------------+           |                 |           |
+                                                                                            +-----------+                 +-----------+
+
+----
+
+== Development actions
+The change in code will all be done in the `GraphQlToRdfPatch` class.

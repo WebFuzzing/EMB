@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:rs="http://www.openarchives.org/rs/terms/">
+  <rs:md capability="capabilitylist" />
+  <rs:ln rel="up" href="http://localhost/.well-known/resourcesync/sourcedescription.xml" />
+  <url>
+    <loc>http://localhost/.well-known/resourcesync/dataset1/resourcelist.xml</loc>
+    <rs:md capability="resourcelist" />
+  </url>
+</urlset>

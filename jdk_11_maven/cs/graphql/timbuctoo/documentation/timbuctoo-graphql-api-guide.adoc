@@ -1,0 +1,483 @@
+= Timbuctoo GraphQL API Guide
+:toc:
+
+== Queries
+
+=== General instructions for querying:
+
+- You can use a query of the following basic format to query for data from the selected dataset:
+
+----
+query queryName($dataSet:ID!){
+    field(arg: "value") {
+             subField{value}
+    }
+}
+----
+
+- You will have to provide query variables used for the query in the "Query Variables" pane as follows:
+
+----
+{
+      "dataSet": <dataSet>,
+      <queryVariable1Name>: <queryVariable1Value>,
+      <queryVariable2Name>: <queryVariable2Value>,
+      ....
+}
+----
+
+- Press "Ctrl + Enter" or the "play button" on the top of the IDE window to run your query.
+The result (or error information in case of an error) will be displayed on the right pane.
+
+NOTE: You can check for auto-complete options in your graphQL query by pressing "Ctrl + Space" at any time.
+
+Some examples of common queries are given in the following few sub-sections.
+
+=== Querying for DataSet metadata information:
+
+----
+query retrieveMetadata($dataSet:ID!){
+  dataSetMetadata(dataSetId:$dataSet){
+    <metadataproperty1>{
+        <metadatavalue1>
+    }
+    <metadataproperty2>{
+        <metadatavalue2>
+        ...
+    }
+    ...
+  }
+}
+----
+
+NOTE: The "import status" of a dataSet can be queried as a metadata property.
+
+=== Querying for entities in a DataSet collection:
+
+----
+query retrieveData($dataSet:ID!){
+  dataSet{
+    <datasetName> {
+      <collection>List{
+        <items>{
+          <property1>
+          <property2>
+          ...
+        }
+      }
+    }
+  }
+}
+----
+
+=== Querying for (logged-in) User information:
+
+----
+{
+  aboutMe{
+    <property1>
+    <property2>
+    ...
+  }
+}
+----
+
+For example get the user id and name run the next query:
+
+----
+query aboutMe {
+  aboutMe {
+    id
+    name
+  }
+}
+----
+
+== Mutations
+=== Publish a DataSet
+
+You can publish a DataSet (admin access required) by using the following mutation:
+
+----
+mutation publish($dataSet: String!) {
+   publish(dataSetId: $dataSet) {
+    dataSetId
+   }
+}
+----
+
+
+=== Delete a DataSet
+
+You can delete a DataSet (admin access required) by using the following mutation:
+
+----
+mutation deleteDataSet($dataSet: String!) {
+   deleteDataSet(dataSetId: $dataSet) {
+    dataSetId
+   }
+}
+----
+
+
+=== Editing Metadata information in a Timbuctoo DataSet
+
+==== SetDataSetMetadata mutation
+You can set or update the metadata information for any dataset in Timbuctoo by using the SetDataSetMetadata mutation.
+
+The "setDataSetMetadata" mutation accepts a "dataSetId" parameter and a "metadata" parameter. The "dataSetId" is the
+Timbuctoo dataSetId (<user_id>__<dataSet_name> format) for the dataSet whose metadata you want to set or edit. The
+metadata is an object containing the values for the dataSet metadata that you want to edit.
+
+Example of a metadata Object:
+
+----
+"metadata":{
+    "title": "<Title>",
+    "discription": "<description>",
+    "imageUrl": "<url link to image>",
+    "owner": {"name":"<owner name>", "email":"<owner email>"},
+    "contact": {"name":"<contact name>", "email":"<contact email>"},
+    "provenanceInfo" : {"title":"<title>", "body":"<provenance info>"},
+    "license" : {"uri":"license uri"}
+}
+----
+
+
+Example query:
+
+----
+mutation setMetadata($dataSet:String!, $metadata:DataSetMetadataInput!){
+  setDataSetMetadata(dataSetId:$dataSet,metadata:$metadata){
+      title{value}
+      description{value}
+      contact{name{value} email{value}}
+  }
+}
+----
+
+Example query variables (for above query):
+
+----
+{
+  "dataSet": "testuser__testdataset",
+  "metadata": {
+    "title": "Test",
+    "description": "This is a test description"
+    "contact": {"name":"Contact Person", "email": "contactperson@test.com"}
+  }
+}
+----
+
+NOTE: The metadata fields that you omit from your 'setDataSetMetadata" query will have the same values as before the
+query.
+
+=== ResourceSync discover, import and update
+
+==== Discover Query
+You can do a resource sync discover request by using the "discoverResourceSync" query that accepts a "url" parameter.
+The url should be for the resource sync source. Optionally, you can also include a "authorization" token in your query.
+This is necessary when the remote source is protected by OAuth or SimpleAuth.
+
+Example:
+
+----
+discoverResourceSync(url: "http://example.org/.well-known/resourcesync",
+  authorization: "<Auth header>") {
+    location,
+    description,
+    license,
+    title
+  }
+----
+
+The query will return location, description, license and the title of the found resource.
+
+==== Import Query
+
+You can do a resource sync import by using the "resourceSyncImport" mutation.
+You will have to provide a capability list uri ("capabilityListUri" param).
+This can be obtained from the above discover query.
+You also need to provide the "dataSetName" parameter which is the name of the dataSet that is to be created from the imported data.
+In cases where there are more than one dataSet file in the remote source, you'll have to provide an extra "userSpecifiedDataSet" param to let Timbuctoo know which dataSet to import.
+Optionally, you can also include a "authorization" token in your query.
+This is necessary when the remote source is protected by OAuth or SimpleAuth.
+
+Example 1:
+----
+mutation resourceSyncImport {
+   resourceSyncImport(dataSetName: "testdataset",
+     capabilityListUri: "http://example.org/path/to/capabilitylist.xml") {
+     importedFiles,
+     ignoredFiles
+   }
+}
+----
+
+Example 2 (with authorization and user specified dataset):
+----
+mutation resourceSyncImport2 {
+   resourceSyncImport(dataSetName: "testdataset2",
+     capabilityListUri: "http://example.org/path/to/capabilitylist.xml",
+     userSpecifiedDataSet:"http://example.org/path/to/file_to_import.nq",
+     authorization:"<Auth header>") {
+     importedFiles,
+     ignoredFiles
+   }
+}
+----
+
+The query will return a list of imported files and ignored files.
+
+==== Update Query
+You can update a dataset previously imported using ResourceSync import by using the "resourceSyncUpdate" mutation.
+You will need to  provide the "dataSetId" parameter which is the id of the dataSet that is to be updated.
+Optionally, you can also include a "authorization" token in your query. This is necessary when the remote source
+is protected by OAuth or SimpleAuth.
+
+Example:
+
+----
+mutation resourceSyncUpdate {
+  resourceSyncUpdate(dataSetId:"testdataset2i",
+  authorization: "<Auth header>"){
+    importedFiles,
+    ignoredFiles
+  }
+}
+----
+
+The query will return a list of imported files and ignored files.
+
+=== Request persistentId for an Entity
+
+You can request a persistentId for an entity in a dataset with the persistEntity mutation:
+
+----
+mutation PersistEntity ($entityUri: String!) {
+  dataSets{
+    <dataset> {
+      <collection> {
+        persistEntity(entityUri: $entityUri){
+          message
+        }
+      }
+    }
+  }
+}
+----
+
+You will need to provide the entityUri as a query variable.
+
+NOTE: The request is submitted to the configured RedirectionService and stored in the dataset only when the redirection server processes it.
+
+
+=== Edit mutations
+
+The general format for the Edit mutation is as follows:
+
+----
+mutation EditEntity ($uri: String! $entity: <collectionName>Input!) {
+  dataSets {
+    <dataSetId> {
+      <collectionName> {
+        edit(uri: $uri entity: $entity) {
+          <entityTypeField1> {
+            value
+          }
+          <entityTypeField3> {
+            value
+          }
+          <entityTypeFieldN> {
+            value
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+NOTE: Users need "WRITE" permission in order to see and use an edit mutation.
+
+The next examples show the GraphQL query values for the different use cases
+
+Change a value of a single valued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField1>": {
+        "type": "http://www.w3.org/2001/XMLSchema#string",
+        "value": "Test2"
+      }
+    }
+  }
+}
+----
+
+Clear the value from a single valued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField1>": null
+    }
+  }
+}
+----
+
+Add value to an empty multivalued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "additions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Test"
+        }
+      ]
+    }
+  }
+}
+----
+
+Replace a value of a multivalued field.
+The next example replaces "Test2" with the value "Test".
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "additions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Test"
+        }
+      ]
+    },
+    "deletions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Test2"
+        }
+      ]
+    }
+  }
+}
+----
+
+Replace the whole collection of a multivalued field.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField2List>": [
+        {
+          "type": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Test2"
+        }
+      ]
+    }
+  }
+}
+----
+
+Remove a value from a multivalued field
+The next example removes "Test2" from the collection.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "deletions": {
+      "<entityTypeField2List>": [
+        {
+          "type": "http://www.w3.org/2001/XMLSchema#string",
+          "value": "Test2"
+        }
+      ]
+    }
+  }
+}
+----
+
+Clear a multivalued field.
+Replace the field with an empty array.
+----
+{
+  "uri": "http://example.org/entity"
+  "entity": {
+    "replacements": {
+      "<entityTypeField2List>": []
+    }
+  }
+}
+----
+
+=== Update collection title
+.Query
+----
+mutation SetCollectionMetadata($dataSetId:String! $collectionUri:String! $metadata:CollectionMetadataInput!) {
+  setCollectionMetadata(dataSetId:$dataSetId collectionUri: $collectionUri metadata: $metadata) {
+    uri
+    title {
+      value
+    }
+  }
+}
+----
+.Query variables
+----
+{
+  "dataSetId": "<dataSetId>",
+  "collectionUri": "<collectionUri>", #like http://schema.org/Place
+	"metadata": {
+    "title": "<title>"
+  }
+}
+----
+
+To retrieve the collection URI's the following query can be used.
+The collectionId is the GraphQl identifier.
+----
+query CollectionMetadata {
+  dataSets {
+    <dataSetId> { #Should be the same as the dataSetId used in the mutation.
+      metadata {
+        collectionList {
+          items {
+            collectionId
+            uri
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Set the index configuration
+See for more information link:create_an_index_config.adoc[Create an index configuration]
+
+=== Reset index configuration to default
+
+This will remove the old search indexes from all the collections of the data set.
+It will add an full text search index on the title field of each collection.
+
+----
+mutation resetIndex{
+  dataSets {
+     <dataSetId> {
+      resetIndex {
+        message
+      }
+    }
+  }
+}
+----

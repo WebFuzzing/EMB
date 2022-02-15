@@ -1,0 +1,29 @@
+[
+  {
+    "roleName": "USER",
+    "permissions": [
+      "READ",
+      "WRITE",
+      "READ_IMPORT_STATUS"
+    ]
+  },
+  {
+    "roleName": "ADMIN",
+    "permissions": [
+      "IMPORT_DATA",
+      "REMOVE_DATASET",
+      "PUBLISH_DATASET",
+      "EDIT_COLLECTION_METADATA",
+      "EDIT_DATASET_METADATA",
+      "EXTEND_SCHEMA",
+      "CONFIG_INDEX",
+      "CONFIG_VIEW",
+      "CHANGE_SUMMARYPROPS",
+      "READ",
+      "WRITE",
+      "UPDATE_RESOURCESYNC",
+      "IMPORT_RESOURCESYNC",
+      "READ_IMPORT_STATUS"
+    ]
+  }
+]

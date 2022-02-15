@@ -71,9 +71,14 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testRegex": "(em|tests|bbtests)/.*Test\\.(js|jsx|ts|tsx)$",
+    "testRegex": "em/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
+    ],
+    "coverageReporters": [
+      "json",
+      "html",
+      "json-summary"
     ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/",

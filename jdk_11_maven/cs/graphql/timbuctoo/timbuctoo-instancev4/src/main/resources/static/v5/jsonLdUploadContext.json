@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@vocab": "http://example.org/UNKNOWN#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "tim": "http://timbuctoo.huygens.knaw.nl/v5/vocabulary#",
+    "ex": "http://example.org/",
+    "additions": {
+      "@id": "http://timbuctoo.huygens.knaw.nl/v5/vocabulary#additions"
+    },
+    "deletions": {
+      "@id": "http://timbuctoo.huygens.knaw.nl/v5/vocabulary#deletions"
+    },
+    "replacements": {
+      "@id": "http://timbuctoo.huygens.knaw.nl/v5/vocabulary#replacements"
+    },
+    "latestRevision": {
+      "@id": "http://timbuctoo.huygens.knaw.nl/v5/vocabulary#latestRevision",
+      "@type": "@id"
+    },
+    "used": {
+      "@id": "http://www.w3.org/ns/prov#used"
+    },
+    "generates": {
+      "@id": "http://www.w3.org/ns/prov#generates"
+    },
+    "qualifiedAssociation": {
+      "@id": "http://www.w3.org/ns/prov#qualifiedAssociation"
+    },
+    "agent": {
+      "@id": "http://www.w3.org/ns/prov#agent",
+      "@type": "@id"
+    },
+    "hadRole": {
+      "@id": "http://www.w3.org/ns/prov#hadRole",
+      "@type": "@id"
+    },
+    "specializationOf": {
+      "@id": "http://www.w3.org/ns/prov#specializationOf",
+      "@type": "@id"
+    },
+    "entityType": {
+      "@id": "http://www.w3.org/ns/prov#entityType",
+      "@type": "@id"
+    },
+    "entity": {
+      "@id": "http://www.w3.org/ns/prov#entity",
+      "@type": "@id"
+    },
+    "wasRevisionOf": {
+      "@id": "http://www.w3.org/ns/prov#wasRevisionOf",
+      "@type": "@id"
+    }
+  }
+}

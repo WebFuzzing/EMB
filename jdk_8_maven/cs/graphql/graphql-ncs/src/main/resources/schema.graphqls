@@ -1,0 +1,8 @@
+type Query {
+   bessj(n: Int, x: Float): Float
+   expint(n: Int, x: Float): Float
+   fisher(m: Int ,n: Int, x: Float): Float
+   gammq(a: Float ,x: Float): Float
+   remainder(a: Int, b: Int): Int
+   triangleClassification(a: Int, b: Int, c: Int): Int
+}

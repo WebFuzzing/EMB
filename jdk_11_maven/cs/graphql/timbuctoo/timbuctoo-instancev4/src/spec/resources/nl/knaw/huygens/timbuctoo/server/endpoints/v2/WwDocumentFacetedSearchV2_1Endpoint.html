@@ -1,0 +1,77 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Faceted search API for wwdocuments</title>
+</head>
+<body>
+<section data-type="chapter">
+  <h2>Retrieving documents</h2>
+  Let's assume we're searching the collection <b>wwdocuments</b>.
+  <aside class="example highlight" h:http="#searchPostDocs">
+    <div h:request="">
+      POST /v2.1/search/wwdocuments HTTP/1.1
+      VRE_ID: WomenWriters
+      Content-type: application/json
+
+      {}
+    </div>
+    <div h:response="">
+      HTTP/1.1 201
+      Location:
+    </div>
+  </aside>
+  <p>
+    You then get a Location header back (In this case <small><span c:echo="#searchPostDocs.firstHeaders.location"></span></small>)
+  </p>
+  <aside class="example highlight" h:http="#searchGetDocs">
+    <div h:request="">
+      GET $(#searchPostDocs.firstHeaders.location) HTTP/1.1
+    </div>
+    <div h:response="">
+      HTTP/1.1 200
+
+      {
+      	"start": "/*NUMBER*/",
+      	"rows": "/*NUMBER*/",
+      	"numFound": "/*NUMBER*/",
+      	"sortableFields": [
+      		"dynamic_sort_title",
+      		"dynamic_k_modified",
+      		"dynamic_sort_creator"
+      	],
+      	"fullTextSearchFields": [
+      		"dynamic_t_author_name",
+      		"dynamic_t_title",
+      		"dynamic_t_notes"
+      	],
+      	"refs": {
+					"custom-matcher": "/*ALL_MATCH_ONE_OF*/",
+					"invariant": {
+						"type": "wwdocument",
+						"id": "/*STRING*/",
+						"displayName": "/*STRING_OR_NULL*/",
+						"path": "/*STRING*/",
+						"data": {
+							"_id": "/*STRING*/",
+							"date": "/*STRING_OR_NULL*/",
+							"title": "/*STRING_OR_NULL*/",
+							"language": "/*STRING_OR_NULL*/",
+							"genre": "/*STRING_OR_NULL*/",
+							"documentType": "/*STRING_OR_NULL*/",
+							"publishLocation": "/*STRING_OR_NULL*/",
+							"modified_date": "/*DATE_STRING*/",
+							"authorGender": "/*STRING_OR_NULL*/",
+							"authorName": "/*STRING_OR_NULL*/"
+						}
+					}
+				}
+      }
+    </div>
+  </aside>
+</section>
+
+
+</body>
+</html>

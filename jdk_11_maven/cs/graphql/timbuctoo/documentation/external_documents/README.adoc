@@ -1,0 +1,5 @@
+= External documents
+
+This folder contains documents that should not be merged in the documentation website.
+They're in different file formats and will not be updated to the latest state of the application.
+Instead, their function is more of a provenance trail or historic curiosity.

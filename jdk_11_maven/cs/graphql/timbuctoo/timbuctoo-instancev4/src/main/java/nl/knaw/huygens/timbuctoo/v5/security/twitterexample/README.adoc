@@ -1,0 +1,49 @@
+= Custom Authentication Implementation in Timbuctoo
+
+.How to add a custom authentication client implementation in Timbuctoo
+* Implement the UserValidator interface (v5/security/userValidator):
+** The "getUserFromAccessToken" method should take a String access token
+and use the custom authentication protocol to verify it. The string contents are opaque and can be a json-serialized object if you want.
+** When you receive the verified user information back from the
+security server you should use it to construct a Timbuctoo User object.
+** The easiest way to do so is by calling the method User.create which accepts a user_name,
+ user_persistent_id and user_id as arguments.
+** You should have the method return the above User object or
+an Optional.empty() if one is not constructed.
+** The 'getUserFromId' method should be implemented in the same way except
+now you will now be passed an id that you previously stored as a persistent_id in the user 
+object. In other words, this method does not need to validate, just provide public 
+information about a given user id.
+* Set-up security configuration to use the new UserValidator:
+** Implement the SecurityFactory interface (v5/security/SecurityFactory)
+*** Set up a new instance of your UserValidator in the constructor
+*** Have the function 'getUserValidator' return this UserValidator
+*** Have the functions 'getPermissionFetcher' and 'getHealthChecks' either use
+Timbuctoo's existing 'OldStyleSecurityFactory' implementation or write new ones.
+** Implement the SecurityFactoryConfiguration interface
+*** You can extend the "OldStyleSecurityFactoryConfiguration" to do this.
+*** Override the method "createNewSecurityFactory" to return the new SecurityFactory
+implementation that you created.
+* Inject the Validator into Timbuctoo:
+** Open up example_config.yaml and set the "securityConfiguration" class to point
+to your new security factory configuration. Eg:
+"@class": nl.knaw.huygens.timbuctoo.v5.security.oauthexample.NewOauthSecurityFactoryConfiguration
+
+= Testing your Implementation
+* Run Timbuctoo
+* Somehow generate or obtain an access token that your userValidator can use.
+* send a GET request to "<timbuctoo>/v2.1/system/users/me" with your access token as the `Authorization` header.
+* you should receive back the User object including displayName, persistentId and Id.
+
+== Example Twitter Implementation
+* An example Twitter implementation (that uses the Twitter4j library) has been
+provided for demonstration and testing purposes. This example implementation will let you authenticate a
+Timbuctoo user using OAuth by using their Twitter credentials.
+** The implementation is available at:
+ "<timbuctoo_root>/timbuctoo-instancev4/src/main/java/nl/knaw/huygens/timbuctoo/v5/security/twitterexample/"
+** To use the example Twitter implementation, open up example_config.yaml and set the "securityConfiguration" class to point
+  to it:
+  "@class": nl.knaw.huygens.timbuctoo.v5.security.twitterexample.TwitterSecurityFactoryConfiguration
+** This implementation also provides an endpoint on timbuctoo to do the actual authentication. Go to `<timbuctoo_url>/v5/twitter` to log in. Upon successful login a string token will be printed on the screen that you can use in the authorization header.
+ "<timbuctoo_root>/timbuctoo-instancev4/src/main/java/nl/knaw/huygens/timbuctoo/v5/security/twitterexample/"
+** Note that this implementation has no real support for permission management, owners of a dataset are admins, everyone else has read permissions

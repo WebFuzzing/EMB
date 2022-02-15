@@ -134,6 +134,12 @@ hs_err_pid*
 /jdk_8_maven/em/external/graphql/spring-petclinic-graphql/target/
 /jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/src/main/em/
 /jdk_8_maven/em/external/graphql/spring-petclinic-graphql/src/main/em/
+/jdk_8_maven/cs/graphql/graphql-ncs/target
+/jdk_8_maven/cs/graphql/graphql-scs/target
+/jdk_8_maven/em/embedded/graphql/graphql-ncs/target
+/jdk_8_maven/em/embedded/graphql/graphql-scs/target
+/jdk_8_maven/em/external/graphql/graphql-ncs/target
+/jdk_8_maven/em/external/graphql/graphql-scs/target
 
 /jdk_11_maven/temp
 /jdk_11_maven/cs/rest/cwa-verification-server/target
@@ -146,6 +152,8 @@ hs_err_pid*
 /jdk_11_gradle/em/external/graphql/patio-api/build
 
 
+/jdk_8_maven/em/external/rest/restcountries/target/
+/jdk_8_maven/em/embedded/rest/restcountries/target/
 
 ### JavaScript
 /venv/
@@ -166,25 +174,29 @@ hs_err_pid*
 /js_npm/rest/disease-sh-api/build/
 /js_npm/rest/disease-sh-api/EvoMasterTest.js
 /js_npm/rest/disease-sh-api/redis/
-
+/js_npm/rest/realworld-app/node_modules/
+/js_npm/rest/realworld-app/build/
+/js_npm/rest/spacex-api/node_modules/
+/js_npm/rest/spacex-api/build/
 
 
 #DotNet
 [Dd]ebug/
 [Bb]in/
 [Oo]bj/
-logs/
+dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 *.dll
-dotnet_3/*/Properties/
 .vscode/
+.vs/
 *.launchSettings.json
-
-dotnet_3/em/embedded/rest/*/warning.html
-dotnet_3/cs/rest/Menu.API/Menu.API/packages.lock.json
-
-*packages.lock.json
 *.sln.DotSettings.user
+
+
+# RPC
 /jdk_8_maven/cs/rpc/grpc/artificial/grpc-ncs/target/
 /jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs/target/
 /jdk_8_maven/cs/rpc/thrift/artificial/thrift-scs/target/
 /jdk_8_maven/cs/rpc/thrift/artificial/thrift-ncs/target/
+
+
+

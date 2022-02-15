@@ -6,7 +6,7 @@ const {AddressInfo}  = require("net");
 const em = require("evomaster-client-js");
 
 
-class AppController  extends em.SutController {
+class AppController extends em.SutController {
 
 
     setupForGeneratedTest(){
@@ -27,7 +27,7 @@ class AppController  extends em.SutController {
 
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
-        dto.swaggerJsonUrl = "http://localhost:" + this.port + "/apidocs/swagger_v3.json";
+        dto.openApiUrl = "http://localhost:" + this.port + "/apidocs/swagger_v3.json";
 
         return dto;
     }
@@ -54,10 +54,11 @@ class AppController  extends em.SutController {
     }
 
     stopSut() {
-        return new Promise( (resolve) =>
-            {
-                this.server.close( () => resolve());
-            }
+        return new Promise( (resolve) => {
+                this.server.close( () => {
+                    dbHandler.stopDb();
+                    resolve();
+                });}
         );
     }
 

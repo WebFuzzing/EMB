@@ -46,7 +46,7 @@ namespace SCS.Imp
                     int j;
                     if (txt[i] == pat[0])
                     {
-                        possMatch = txt.Substring(i, i + patLen);
+                        possMatch = txt.Substring(i, patLen);
                         if (possMatch.Equals(pat))
                         {
                             //FOUND pat
@@ -56,7 +56,8 @@ namespace SCS.Imp
                             {
                                 if (txt[j] == patRev[0])
                                 {
-                                    possMatch = txt.Substring(j, j + patLen);
+                                    //possMatch = txt.Substring(j, j + patLen);
+                                    possMatch = txt.Substring(j,  patLen);
                                     if (possMatch.Equals(patRev))
                                     {
                                         if (j == i + patLen)
@@ -74,7 +75,7 @@ namespace SCS.Imp
                     }
                     else if (txt[i] == patRev[0])
                     {
-                        possMatch = txt.Substring(i, i + patLen);
+                        possMatch = txt.Substring(i, patLen);
                         if (possMatch.Equals(patRev))
                         {
                             //FOUND pat REVERSE
@@ -84,7 +85,7 @@ namespace SCS.Imp
                             {
                                 if (txt[j] == pat[0])
                                 {
-                                    possMatch = txt.Substring(j, j + patLen);
+                                    possMatch = txt.Substring(j, patLen);
                                     if (possMatch.Equals(pat))
                                     {
                                         if (j == i + patLen)

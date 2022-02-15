@@ -1,0 +1,16 @@
+See https://confluence.socialhistoryservices.org/x/qIPVAw 
+"How to create new users with fresh credentials in Timbuctoo, using NEWW VRE (Women Writers) an an example" 
+
+Usage
+Run the localUserImport.sh {local_users_file} {server_url}
+
+Local users file
+It needs to look like:
+--pid;user;password;givenName;surname;email;organization;vreId;role
+pid;user;password;givenName;surname;email;organization;WomenWriters;USER
+
+All the lines starting with -- are ignored.
+
+Server Url
+Because this script is run from the same host as Timbuctoo the url will be 'http://localhost'. The port information
+you can find in the 'config.yaml' in the 'conf' directory of Timbuctoo. Look for the 'adminConnectors' property 'port'.

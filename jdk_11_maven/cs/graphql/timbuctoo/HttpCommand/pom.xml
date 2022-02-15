@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>nl.knaw.huygens.concordion</groupId>
+  <artifactId>HttpCommand</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <properties>
+    <jdk.version>11</jdk.version>
+    <maven-compiler.version>3.8.1</maven-compiler.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <jersey-client.version>2.22.2</jersey-client.version>
+    <concordion.version>1.5.1</concordion.version>
+    <guava.version>31.0.1-jre</guava.version>
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+    <httpcore.version>4.4.14</httpcore.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.concordion</groupId>
+      <artifactId>concordion</artifactId>
+      <version>${concordion.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>${httpcore.version}</version>
+    </dependency>
+
+    <!-- ### prefab implementation requirements ## -->
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>${jersey-client.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>nl.knaw.huygens</groupId>
+      <artifactId>contract-diff</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+
+    <!-- ### Std lib additions ## -->
+    <!-- Guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler.version}</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

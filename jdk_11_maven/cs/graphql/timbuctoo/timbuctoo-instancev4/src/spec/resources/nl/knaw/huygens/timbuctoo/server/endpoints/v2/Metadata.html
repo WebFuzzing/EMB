@@ -1,0 +1,81 @@
+<html lang="en"
+      xmlns:c="http://www.concordion.org/2007/concordion"
+      xmlns:h="http://huygens.knaw.nl/concordion-http-verifier">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Timbuctoo v2.1 Metadata API</title>
+</head>
+<body>
+<section data-type="chapter">
+  <p>
+    The metadata API allows a client to introspect the data model that is configured for a specific VRE. This allows you
+    to build generic clients that work for any VRE without knowledge of the specific configuration at build time.
+  </p>
+</section>
+
+<section data-type="chapter">
+    <h2>Retrieving the configuration for a VRE</h2>
+
+    <aside class="example" h:http="">
+      <p>When a GET is performed to metadata/vre</p>
+
+      <div h:request="">
+        GET /v2.1/metadata/WomenWriters HTTP/1.1
+        Content-type: application/json
+      </div>
+      <p>The server will show a list of metadata about the data fields that can be used to generate an edit or search interface</p>
+
+      <div h:response="">
+        HTTP/1.1 200
+
+        {
+          "wwpersons": [
+            {
+              "name":"/*STRING*/",
+              "type":"text"
+            },
+            {
+              "name":"/*STRING*/",
+              "type":"select",
+              "options":[ "/*STRING*/" ]
+            },
+            {
+              "name":"/*STRING*/",
+              "type":"datable"
+            },
+            {
+              "name":"/*STRING*/",
+              "type":"links"
+            },
+            {
+              "name":"/*STRING*/",
+              "type":"multiselect",
+              "options":[ "/*STRING*/" ]
+            },
+            {
+              "name": "/*STRING*/",
+              "type": "names",
+              "options": [
+                "/*NAME_COMPONENT*/"
+              ]
+            },
+            {
+              "name": "/*STRING*/",
+              "type": "relation",
+              "quicksearch": "/*RELATIVE_URL*/",
+              "relation":{
+                "direction": "/*IN_OR_OUT_OR_BOTH*/",
+                "outName": "/*STRING*/",
+                "inName": "/*STRING*/",
+                "targetCollection": "/*STRING_STARTING_WITH_WW_ENDING_WITH_S*/",
+                "relationCollection": "/*STRING_STARTING_WITH_WW_ENDING_WITH_S*/",
+                "relationTypeId": "/*UUID*/"
+              }
+            }
+          ]
+        }
+      </div>
+    </aside>
+</section>
+</body>
+</html>
