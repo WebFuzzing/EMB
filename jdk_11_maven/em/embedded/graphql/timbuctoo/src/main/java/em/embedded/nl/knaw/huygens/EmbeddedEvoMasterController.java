@@ -7,6 +7,7 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
@@ -150,6 +151,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         }catch (Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return null;
     }
 
     @Override

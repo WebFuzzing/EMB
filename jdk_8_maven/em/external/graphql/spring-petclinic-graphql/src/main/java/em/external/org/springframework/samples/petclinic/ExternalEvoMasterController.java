@@ -4,8 +4,10 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
@@ -13,6 +15,7 @@ import org.testcontainers.containers.GenericContainer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -212,5 +215,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return null;
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return new DbSpecification(){{
+            dbType = DatabaseType.POSTGRES;
+            connections = Arrays.asList(connection);
+            schemaName = "public";
+            initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
+        }};
     }
 }

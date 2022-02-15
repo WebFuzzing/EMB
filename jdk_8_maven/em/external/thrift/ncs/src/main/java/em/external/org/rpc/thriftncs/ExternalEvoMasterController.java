@@ -9,6 +9,7 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RPCProblem;
 import org.thrift.ncs.client.NcsService;
@@ -162,6 +163,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return null;
     }
 
 }

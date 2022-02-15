@@ -2,7 +2,9 @@ package em.external.org.zalando;
 
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -58,6 +60,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int dbPort;
     private String jarLocation;
     private Connection connection;
+    private DbSpecification dbSpecification;
     private Server h2;
 
 
@@ -144,6 +147,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(dbUrl(), "sa", "");
+            dbSpecification = new DbSpecification(){{
+                dbType = DatabaseType.H2;
+                connections = Arrays.asList(connection);
+                schemaName = "schema_version";
+            }};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -151,7 +159,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection, Arrays.asList("schema_version"));
+//        DbCleaner.clearDatabase_H2(connection, Arrays.asList("schema_version"));
     }
 
     @Override
@@ -211,6 +219,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 
  }

@@ -6,7 +6,9 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -40,6 +43,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection connection;
+    private DbSpecification dbSpecification;
 
 
     public EmbeddedEvoMasterController() {
@@ -76,6 +80,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        // need to check tablesToSkip with DATABASECHANGELOG
+        dbSpecification = new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            connections = Arrays.asList(connection);
+        }};
+
         return "http://localhost:" + getSutPort();
     }
 
@@ -103,7 +113,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection, List.of("DATABASECHANGELOG"));
+//        DbCleaner.clearDatabase_H2(connection, List.of("DATABASECHANGELOG"));
     }
 
     @Override
@@ -133,5 +143,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
 
-
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
+    }
 }

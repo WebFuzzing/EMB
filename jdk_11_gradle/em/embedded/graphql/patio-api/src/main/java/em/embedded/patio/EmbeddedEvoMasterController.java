@@ -7,9 +7,11 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.SutController;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
@@ -38,6 +40,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ApplicationContext ctx;
     private Connection connection;
+    private DbSpecification dbSpecification;
 
     private final int portApp = 8080; //Hardcoded. will need fixing
     // TODO maybe report at https://github.com/micronaut-projects/micronaut-core/issues
@@ -90,6 +93,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        dbSpecification = new DbSpecification(){{
+            dbType = DatabaseType.POSTGRES;
+            schemaName = "public";
+            initSqlOnResourcePath = "/initDb.sql";
+        }};
 
         return "http://localhost:" + getSutPort();
     }
@@ -121,8 +129,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection, "public", List.of("flyway_schema_history"));
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/initDB.sql");
+//        DbCleaner.clearDatabase_Postgres(connection, "public", List.of("flyway_schema_history"));
+//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/initDB.sql");
     }
 
     @Override
@@ -160,4 +168,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String getDatabaseDriverName() {
         return "org.postgresql.Driver";
     }
+
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
+    }
+
 }

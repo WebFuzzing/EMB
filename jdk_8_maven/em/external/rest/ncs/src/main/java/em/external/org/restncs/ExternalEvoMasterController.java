@@ -2,6 +2,7 @@ package em.external.org.restncs;
 
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -150,6 +151,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getDatabaseDriverName() {
+        return null;
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
         return null;
     }
 }

@@ -5,8 +5,10 @@ import com.mongodb.MongoClient;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -64,6 +66,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private  String jarLocation;
     private Connection connection;
+    private DbSpecification dbSpecification;
     private Server h2;
 
     private MongoClient mongoClient;
@@ -183,6 +186,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(dbUrl(), "sa", "");
+            dbSpecification = new DbSpecification(){{
+                dbType = DatabaseType.H2;
+                connections = Arrays.asList(connection);
+                initSqlOnResourcePath = "/init_db.sql";
+            }};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -211,8 +219,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         mongoClient.getDatabase("ocvn").drop();
         mongoClient.getDatabase("ocvn-shadow").drop();
 
-        DbCleaner.clearDatabase_H2(connection);
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/init_db.sql");
+//        DbCleaner.clearDatabase_H2(connection);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/init_db.sql");
     }
 
 
@@ -243,6 +251,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 
 

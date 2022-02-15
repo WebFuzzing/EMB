@@ -4,7 +4,9 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
@@ -69,6 +71,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private  String jarLocation;
     private final String packagesToInstrument;
     private Connection connection;
+    private DbSpecification dbSpecification;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -165,6 +168,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName(getDatabaseDriverName());
             connection = DriverManager.getConnection(dbUrl(), "postgres", "");
+            dbSpecification = new DbSpecification(){{
+                dbType = DatabaseType.POSTGRES;
+                schemaName = "comments";
+            }};
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -172,9 +179,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection,
-                "comments",
-                Arrays.asList("flyway_schema_history"));
+//        DbCleaner.clearDatabase_Postgres(connection,
+//                "comments",
+//                Arrays.asList("flyway_schema_history"));
     }
 
     @Override
@@ -229,5 +236,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return null;
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 }

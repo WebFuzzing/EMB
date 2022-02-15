@@ -3,8 +3,10 @@ package em.embedded.se.devscout.scoutapi;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -42,6 +44,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private ScoutAPIApplication application;
     private Connection connection;
     private List<String> sqlCommands;
+    private DbSpecification dbSpecification;
 
     public EmbeddedEvoMasterController() {
         this(40100);
@@ -84,6 +87,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         }
 
         connection = application.getConnection();
+
+        dbSpecification = new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            initSqlOnResourcePath = String.join("\n", sqlCommands);
+            connections = Arrays.asList(connection);
+        }};
 
         resetStateOfSUT();
 
@@ -128,8 +137,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         deleteDir(new File("./target/temp"));
 
-        DbCleaner.clearDatabase_H2(connection);
-        SqlScriptRunner.runCommands(connection, sqlCommands);
+//        DbCleaner.clearDatabase_H2(connection);
+//        SqlScriptRunner.runCommands(connection, sqlCommands);
     }
 
 
@@ -174,5 +183,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
         file.delete();
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 }

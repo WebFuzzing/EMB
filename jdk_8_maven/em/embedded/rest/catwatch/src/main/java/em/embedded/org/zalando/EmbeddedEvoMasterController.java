@@ -3,7 +3,9 @@ package em.embedded.org.zalando;
 
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -40,6 +42,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection connection;
+    private DbSpecification dbSpecification;
 
 
     public EmbeddedEvoMasterController() {
@@ -75,6 +78,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        dbSpecification = new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            connections = Arrays.asList(connection);
+            schemaName = "schema_version";
+        }};
 
         return "http://localhost:" + getSutPort();
     }
@@ -103,7 +111,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection, Arrays.asList("schema_version"));
+//        DbCleaner.clearDatabase_H2(connection, Arrays.asList("schema_version"));
     }
 
     @Override
@@ -134,6 +142,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 
 }

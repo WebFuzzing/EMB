@@ -6,7 +6,9 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.springframework.boot.SpringApplication;
@@ -40,6 +42,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection connection;
+    private DbSpecification dbSpecification;
 
 
     public EmbeddedEvoMasterController() {
@@ -79,6 +82,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        dbSpecification = new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            connections = Arrays.asList(connection);
+        }};
+
         return "http://localhost:" + getSutPort();
     }
 
@@ -106,7 +114,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection);
+//        DbCleaner.clearDatabase_H2(connection);
 
         deleteDir(new File("./target/temp"));
 
@@ -184,5 +192,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
         file.delete();
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 }

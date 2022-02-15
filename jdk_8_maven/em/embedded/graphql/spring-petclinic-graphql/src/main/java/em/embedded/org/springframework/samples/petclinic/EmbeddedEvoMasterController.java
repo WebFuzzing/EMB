@@ -4,9 +4,11 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.SutController;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,7 @@ import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +41,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection connection;
+    private DbSpecification dbSpecification;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -87,7 +91,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/initDB.sql");
+        dbSpecification = new DbSpecification(){{
+            dbType = DatabaseType.POSTGRES;
+            connections = Arrays.asList(connection);
+            schemaName = "public";
+            initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
+        }};
+
+//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/initDB.sql");
 
         return "http://localhost:" + getSutPort();
     }
@@ -117,8 +128,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection,"public", null);
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/populateDB.sql");
+//        DbCleaner.clearDatabase_Postgres(connection,"public", null);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/populateDB.sql");
     }
 
     @Override
@@ -144,5 +155,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public String getDatabaseDriverName() {
         return "org.postgresql.Driver";
+    }
+
+    @Override
+    public DbSpecification getDbSpecification() {
+        return dbSpecification;
     }
 }
