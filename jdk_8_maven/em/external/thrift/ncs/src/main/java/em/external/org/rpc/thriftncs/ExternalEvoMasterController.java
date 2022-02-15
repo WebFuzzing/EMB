@@ -166,7 +166,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return null;
     }
 

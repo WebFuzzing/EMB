@@ -42,9 +42,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private ScoutAPIApplication application;
-    private Connection connection;
+    private Connection sqlConnection;
     private List<String> sqlCommands;
-    private DbSpecification dbSpecification;
+    private List<DbSpecification> dbSpecification;
 
     public EmbeddedEvoMasterController() {
         this(40100);
@@ -86,13 +86,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        connection = application.getConnection();
+        sqlConnection = application.getConnection();
 
-        dbSpecification = new DbSpecification(){{
+        dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.H2;
             initSqlOnResourcePath = String.join("\n", sqlCommands);
-            connections = Arrays.asList(connection);
-        }};
+            connection = sqlConnection;
+        }});
 
         resetStateOfSUT();
 
@@ -118,9 +118,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 e.printStackTrace();
             }
         }
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -153,7 +153,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -186,7 +186,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }

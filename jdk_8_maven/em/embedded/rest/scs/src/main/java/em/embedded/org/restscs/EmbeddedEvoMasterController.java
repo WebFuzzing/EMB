@@ -111,7 +111,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return null;
     }
 

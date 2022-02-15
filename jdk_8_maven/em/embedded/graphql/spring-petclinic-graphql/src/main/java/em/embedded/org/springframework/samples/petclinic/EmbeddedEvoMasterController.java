@@ -40,8 +40,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     private ConfigurableApplicationContext ctx;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -76,29 +76,30 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.jmx.enabled=false",
         });
 
-        if (connection != null) {
+          if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
         JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
-
         try {
-            connection = jdbc.getDataSource().getConnection();
+            sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        dbSpecification = new DbSpecification(){{
-            dbType = DatabaseType.POSTGRES;
-            connections = Arrays.asList(connection);
-            schemaName = "public";
-            initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
-        }};
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
 
-//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/initDB.sql");
+        dbSpecification = Arrays.asList(new DbSpecification(){{
+            dbType = DatabaseType.POSTGRES;
+            connection = sqlConnection;
+            schemaNames = Arrays.asList("public");
+            initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
+        }});
+
+
 
         return "http://localhost:" + getSutPort();
     }
@@ -149,7 +150,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -158,7 +159,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }

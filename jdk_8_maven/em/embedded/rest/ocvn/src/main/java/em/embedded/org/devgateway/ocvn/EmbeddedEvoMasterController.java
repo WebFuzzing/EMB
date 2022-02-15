@@ -45,8 +45,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private ConfigurableApplicationContext ctx;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
     private MongoClient mongoClient;
 
 
@@ -87,9 +87,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
 
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -97,15 +97,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
 
         try {
-            connection = jdbc.getDataSource().getConnection();
+            sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        dbSpecification = new DbSpecification(){{
+        dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.H2;
-            connections = Arrays.asList(connection);
+            connection = sqlConnection;
             initSqlOnResourcePath = "/init_db.sql";
-        }};
+        }});
 
         return "http://localhost:" + getSutPort();
     }
@@ -152,7 +152,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
 
@@ -171,7 +171,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }

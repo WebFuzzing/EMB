@@ -59,8 +59,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int sutPort;
     private final int dbPort;
     private String jarLocation;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
     private Server h2;
 
 
@@ -146,12 +146,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = new DbSpecification(){{
+            sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
+            dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.H2;
-                connections = Arrays.asList(connection);
-                schemaName = "schema_version";
-            }};
+                connection = sqlConnection;
+                schemaNames = Arrays.asList("schema_version");
+            }});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -175,13 +175,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     private void closeDataBaseConnection() {
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            connection = null;
+            sqlConnection = null;
         }
     }
 
@@ -213,7 +213,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -222,7 +222,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 

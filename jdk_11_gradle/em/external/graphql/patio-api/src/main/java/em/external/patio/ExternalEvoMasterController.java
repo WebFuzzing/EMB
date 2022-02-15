@@ -16,6 +16,7 @@ import org.testcontainers.containers.GenericContainer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,8 +62,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
     private  String jarLocation;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
@@ -151,12 +152,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName(getDatabaseDriverName());
-            connection = DriverManager.getConnection(dbUrl(), "patio", "patio");
-            dbSpecification = new DbSpecification(){{
+            sqlConnection = DriverManager.getConnection(dbUrl(), "patio", "patio");
+            dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.POSTGRES;
-                schemaName = "public";
+                schemaNames = Arrays.asList("public");
                 initSqlOnResourcePath = "/initDb.sql";
-            }};
+            }});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -179,13 +180,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     private void closeDataBaseConnection() {
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            connection = null;
+            sqlConnection = null;
         }
     }
 
@@ -206,7 +207,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -231,7 +232,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }

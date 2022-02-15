@@ -20,6 +20,7 @@ import patio.Application;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,8 +40,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     private ApplicationContext ctx;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
     private final int portApp = 8080; //Hardcoded. will need fixing
     // TODO maybe report at https://github.com/micronaut-projects/micronaut-core/issues
@@ -79,25 +80,25 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         });
 
 
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
 
         try {
-           connection = DriverManager.getConnection(url, "patio", "patio");
+            sqlConnection = DriverManager.getConnection(url, "patio", "patio");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        dbSpecification = new DbSpecification(){{
+        dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.POSTGRES;
-            schemaName = "public";
+            schemaNames = Arrays.asList("public");
             initSqlOnResourcePath = "/initDb.sql";
-        }};
+        }});
 
         return "http://localhost:" + getSutPort();
     }
@@ -161,7 +162,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -169,7 +170,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return "org.postgresql.Driver";
     }
 
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 

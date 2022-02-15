@@ -42,8 +42,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private ConfigurableApplicationContext ctx;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
 
     public EmbeddedEvoMasterController() {
@@ -65,26 +65,24 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;"
         });
 
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
-        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
-
-        try {
-            connection = jdbc.getDataSource().getConnection();
+        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);try {
+            sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         // need to check tablesToSkip with DATABASECHANGELOG
-        dbSpecification = new DbSpecification(){{
+        dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.H2;
-            connections = Arrays.asList(connection);
-        }};
+            connection = sqlConnection;
+        }});
 
         return "http://localhost:" + getSutPort();
     }
@@ -139,12 +137,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }

@@ -73,8 +73,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final String tmpDir;
     private final String CONFIG_FILE = "scout_api_evomaster.yml";
 
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
     private List<String> sqlCommands;
     private Server h2;
 
@@ -195,12 +195,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = new DbSpecification(){{
+            sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
+            dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.H2;
                 initSqlOnResourcePath = String.join("\n", sqlCommands);
-                connections = Arrays.asList(connection);
-            }};
+                connection = sqlConnection;
+            }});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -269,7 +269,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -278,7 +278,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }

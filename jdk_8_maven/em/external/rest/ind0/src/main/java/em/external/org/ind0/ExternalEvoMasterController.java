@@ -70,8 +70,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int sutPort;
     private  String jarLocation;
     private final String packagesToInstrument;
-    private Connection connection;
-    private DbSpecification dbSpecification;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -167,11 +167,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName(getDatabaseDriverName());
-            connection = DriverManager.getConnection(dbUrl(), "postgres", "");
-            dbSpecification = new DbSpecification(){{
+            sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", "");
+            dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.POSTGRES;
-                schemaName = "comments";
-            }};
+                schemaNames = Arrays.asList("comments");
+            }});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -195,13 +195,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     private void closeDataBaseConnection() {
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            connection = null;
+            sqlConnection = null;
         }
     }
 
@@ -225,7 +225,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -239,7 +239,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     @Override
-    public DbSpecification getDbSpecification() {
+    public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
 }
