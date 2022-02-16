@@ -57,7 +57,7 @@
     "atob": ">=2.1.0",
     "dedent": "0.7.0",
     "deep-extend": ">=0.5.1",
-    "evomaster-client-js": "file:../../evomaster-client-js",
+    "evomaster-client-js": "1.4.0",
     "extend": ">=3.0.2",
     "jest": "^25.5.3",
     "nodemon": "^1.19.4",
