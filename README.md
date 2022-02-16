@@ -108,6 +108,12 @@ We just re-implemented in different languages, and put them behind a web service
 * SCS (not-known license, artificial string examples coming from different sources)
 
 
+### RPC (Thrift/gRPC): Java
+
+* NCS (not-known license, artificial numerical examples coming from different sources)
+
+* SCS (not-known license, artificial string examples coming from different sources)
+
 ## Using This Repository
 
 Due to several reasons, the software in this repository is not published as a library (e.g., on Maven and NPM).
@@ -164,11 +170,6 @@ For running experiments with EvoMaster, you can also "start" each driver directl
 Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by EvoMaster.
 For JavaScript, you need to use the files `em-main.js`.
 
-### RPC (Thrift/gRPC): Java
-
-* NCS (not-known license, artificial numerical examples coming from different sources)
-
-* SCS (not-known license, artificial string examples coming from different sources)
 
 
 You can also build (and install) each module separately, based on needs. 
