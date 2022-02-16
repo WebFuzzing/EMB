@@ -1,4 +1,9 @@
 # EMB
+
+[![DOI](https://zenodo.org/badge/94008854.svg)](https://zenodo.org/badge/latestdoi/94008854)
+
+
+
 [EvoMaster](http://evomaster.org) Benchmark (EMB): 
 a set of web/enterprise applications for scientific research in Software Engineering.
 
@@ -153,10 +158,6 @@ In the built `dist` folder, the files will be organized as follows:
  Instrumentation can be done at runtime by attaching the `evomaster-agent.jar` JavaAgent. If you are running experiments with EvoMaster, this will be automatically attached when running experiments with `exp.py` (available in the EvoMaster's repository). Or it can be attached manually with JVM option `-Devomaster.instrumentation.jar.path=evomaster-agent.jar` when starting the driver.
 * For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `build`.
 * For .NET: currently only the instrumented version is available (WORK IN PROGRESS)
-
-Note: the building of .NET SUTs/drivers is disabled by default in `dist.py`.
-The reason is that, at the time of this writing, it is _very_ expensive to publish libraries on NuGet (due to the high costs of code certificates). 
-The EM Driver library for .NET would have to be installed manually on local machine before any of the C# drivers can be used. 
 
 
 
