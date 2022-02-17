@@ -106,9 +106,9 @@ def replaceAllJs():
     replaceInJS("/js_npm/rest/spacex-api")
 
 def replaceInCS():
-    regex = re.compile(r'\s*<Version>.*</Version>\s*')
-    replacement = '         <Version>'+version+'</Version>\n'
-    replace("dotnet_3/em/embedded/common.props", regex, replacement)
+    regex = re.compile(r'\s*<PackageReference\s+Include="EvoMaster.Controller"\s+Version=".*"\s+/>\s*')
+    replacement = '         <PackageReference Include="EvoMaster.Controller" Version="'+version+'" />\n'
+    replace("dotnet_3/em/common.props", regex, replacement)
 
 
 ######################################################################################################
