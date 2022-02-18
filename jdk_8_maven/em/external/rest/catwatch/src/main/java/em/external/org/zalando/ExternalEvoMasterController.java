@@ -150,7 +150,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
             dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.H2;
                 connection = sqlConnection;
-                schemaNames = Arrays.asList("schema_version");
             }});
         } catch (Exception e) {
             throw new RuntimeException(e);

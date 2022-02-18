@@ -43,7 +43,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ScoutAPIApplication application;
     private Connection sqlConnection;
-    private List<String> sqlCommands;
+    private final List<String> sqlCommands;
     private List<DbSpecification> dbSpecification;
 
     public EmbeddedEvoMasterController() {
@@ -90,8 +90,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.H2;
-            initSqlOnResourcePath = String.join("\n", sqlCommands);
             connection = sqlConnection;
+            employSmartDbClean = false;
         }});
 
         resetStateOfSUT();
@@ -137,8 +137,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         deleteDir(new File("./target/temp"));
 
-//        DbCleaner.clearDatabase_H2(connection);
-//        SqlScriptRunner.runCommands(connection, sqlCommands);
+        DbCleaner.clearDatabase_H2(sqlConnection);
+        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
 

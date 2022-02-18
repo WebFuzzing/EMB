@@ -158,6 +158,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.H2;
                 connection = sqlConnection;
+                employSmartDbClean = false;
             }});
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -166,7 +167,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-//        DbCleaner.clearDatabase_H2(connection);
+        DbCleaner.clearDatabase_H2(sqlConnection);
 
         deleteDir(new File("./target/temp"));
 

@@ -75,7 +75,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
-    private List<String> sqlCommands;
+    private final List<String> sqlCommands;
     private Server h2;
 
 
@@ -198,8 +198,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
             dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.H2;
-                initSqlOnResourcePath = String.join("\n", sqlCommands);
                 connection = sqlConnection;
+                employSmartDbClean = false;
             }});
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -230,8 +230,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         deleteDir(new File(tmpDir));
 
-//        DbCleaner.clearDatabase_H2(connection);
-//        SqlScriptRunner.runCommands(connection, sqlCommands);
+        DbCleaner.clearDatabase_H2(sqlConnection);
+        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
     private void deleteDir(File file) {

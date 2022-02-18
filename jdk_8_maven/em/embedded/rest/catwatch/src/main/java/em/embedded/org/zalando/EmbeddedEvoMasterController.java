@@ -81,7 +81,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.H2;
             connection = sqlConnection;
-            schemaNames = Arrays.asList("schema_version");
         }});
 
         return "http://localhost:" + getSutPort();
