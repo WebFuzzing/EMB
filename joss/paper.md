@@ -49,7 +49,7 @@ bibliography: paper.bib
 In this repository,
 we collected several different systems, in different programming languages, like
 Java, Kotlin, JavaScript and C#.
-In this documentation, we will refer to these projects as System Under Test (SUT).
+In this documentation, we will refer to these projects as Systems Under Test (SUTs).
 Currently, the SUTs are either _REST_ or _GraphQL_ APIs.
 
 For each SUT, we implemented _driver_ classes, which can programmatically _start_, _stop_ and _reset_ the state of SUT (e.g., data in SQL databases).
@@ -76,7 +76,7 @@ Note that some of these open-source projects might be no longer supported, where
 Once a system is added to EMB, we do not modify nor keep it updated with its current version under development.
 The reason is that we want to keep an easy to use, constant set of case studies for experimentation that can be reliably used throughout the years.
 
-The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case Study) are artificial, developed by us.
+The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case Study) are artificial, written by the authors.
 They are based on numerical and string-based functions previously used in the literature of unit test generation.
 We just re-implemented in different languages, and put them behind a web service.
 
