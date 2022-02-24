@@ -74,7 +74,7 @@
     <repositories>
         <repository>
             <id>jcenter</id>
-            <url>http://jcenter.bintray.com/</url>
+            <url>https://jcenter.bintray.com/</url>
         </repository>
         <repository>
             <id>OCVN</id>
@@ -90,7 +90,7 @@
         <pluginRepository>
             <id>jcenter</id>
             <name>jcenter</name>
-            <url>http://jcenter.bintray.com</url>
+            <url>https://jcenter.bintray.com</url>
         </pluginRepository>
         <pluginRepository>
             <id>OCVN</id>
