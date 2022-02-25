@@ -5,6 +5,7 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.internal.SutController;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.languagetool.server.DatabaseAccess;
@@ -100,5 +101,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         //TODO should clean thread buffer
     }
 
-
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return null;
+    }
 }

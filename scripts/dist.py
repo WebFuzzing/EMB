@@ -112,7 +112,12 @@ def build_jdk_8_maven() :
     copy(folder +"/cs/graphql/graphql-scs/target/graphql-scs-sut.jar", DIST)
     copy(folder +"/em/external/graphql/graphql-scs/target/graphql-scs-evomaster-runner.jar", DIST)
 
+    #RPC
+    copy(folder+"/cs/rpc/thrift/artificial/thrift-ncs/target/rpc-thrift-ncs-sut.jar", DIST)
+    copy(folder+"/em/external/thrift/ncs/target/rpc-thrift-ncs-evomaster-runner.jar", DIST)
 
+    copy(folder+"/cs/rpc/thrift/artificial/thrift-scs/target/rpc-thrift-scs-sut.jar", DIST)
+    copy(folder+"/em/external/thrift/scs/target/rpc-thrift-scs-evomaster-runner.jar", DIST)
 
     ind0 = os.environ.get('SUT_LOCATION_IND0', '')
     if ind0 == '':

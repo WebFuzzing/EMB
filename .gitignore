@@ -192,4 +192,11 @@ dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 *.sln.DotSettings.user
 
 
+# RPC
+/jdk_8_maven/cs/rpc/grpc/artificial/grpc-ncs/target/
+/jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs/target/
+/jdk_8_maven/cs/rpc/thrift/artificial/thrift-scs/target/
+/jdk_8_maven/cs/rpc/thrift/artificial/thrift-ncs/target/
+
+
 

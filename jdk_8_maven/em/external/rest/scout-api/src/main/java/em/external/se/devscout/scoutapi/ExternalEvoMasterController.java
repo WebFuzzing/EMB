@@ -3,8 +3,10 @@ package em.external.se.devscout.scoutapi;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -71,8 +73,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final String tmpDir;
     private final String CONFIG_FILE = "scout_api_evomaster.yml";
 
-    private Connection connection;
-    private List<String> sqlCommands;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
+    private final List<String> sqlCommands;
     private Server h2;
 
 
@@ -192,7 +195,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(), "sa", "");
+            sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
+            dbSpecification = Arrays.asList(new DbSpecification(){{
+                dbType = DatabaseType.H2;
+                connection = sqlConnection;
+                employSmartDbClean = false;
+            }});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -222,8 +230,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         deleteDir(new File(tmpDir));
 
-        DbCleaner.clearDatabase_H2(connection);
-        SqlScriptRunner.runCommands(connection, sqlCommands);
+        DbCleaner.clearDatabase_H2(sqlConnection);
+        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
     private void deleteDir(File file) {
@@ -261,7 +269,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -269,4 +277,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return "org.h2.Driver";
     }
 
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
+    }
 }
