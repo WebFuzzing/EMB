@@ -6,6 +6,7 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
@@ -161,6 +162,21 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public void resetStateOfSUT() {
         DbCleaner.clearDatabase_Postgres(connection,"public", null);
         SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/populateDB.sql");
+    }
+
+    @Override
+    public boolean handleLocalAuthenticationSetup(String authenticationInfo) {
+        return super.handleLocalAuthenticationSetup(authenticationInfo);
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return null;
+    }
+
+    @Override
+    public void resetDatabase(List<String> tablesToClean) {
+        super.resetDatabase(tablesToClean);
     }
 
     @Override

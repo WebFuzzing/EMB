@@ -5,6 +5,7 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -130,6 +131,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         DbCleaner.clearDatabase_H2(connection);
         SqlScriptRunner.runCommands(connection, sqlCommands);
+    }
+
+    @Override
+    public boolean handleLocalAuthenticationSetup(String authenticationInfo) {
+        return super.handleLocalAuthenticationSetup(authenticationInfo);
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return null;
+    }
+
+    @Override
+    public void resetDatabase(List<String> tablesToClean) {
+        super.resetDatabase(tablesToClean);
     }
 
 

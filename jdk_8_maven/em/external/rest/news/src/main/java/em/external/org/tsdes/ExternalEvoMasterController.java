@@ -3,6 +3,7 @@ package em.external.org.tsdes;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -149,6 +150,21 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public void resetStateOfSUT() {
         DbCleaner.clearDatabase_H2(connection);
+    }
+
+    @Override
+    public boolean handleLocalAuthenticationSetup(String authenticationInfo) {
+        return super.handleLocalAuthenticationSetup(authenticationInfo);
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return null;
+    }
+
+    @Override
+    public void resetDatabase(List<String> tablesToClean) {
+        super.resetDatabase(tablesToClean);
     }
 
     @Override
