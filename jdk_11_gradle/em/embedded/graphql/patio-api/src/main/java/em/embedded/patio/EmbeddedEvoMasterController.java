@@ -97,7 +97,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.POSTGRES;
             schemaNames = Arrays.asList("public");
-            initSqlOnResourcePath = "/initDb.sql";
+//            initSqlOnResourcePath = "/initDb.sql";
+            connection = sqlConnection;
+            employSmartDbClean = false;
         }});
 
         return "http://localhost:" + getSutPort();
@@ -130,8 +132,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-//        DbCleaner.clearDatabase_Postgres(connection, "public", List.of("flyway_schema_history"));
-//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/initDB.sql");
+        DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
     }
 
     @Override
