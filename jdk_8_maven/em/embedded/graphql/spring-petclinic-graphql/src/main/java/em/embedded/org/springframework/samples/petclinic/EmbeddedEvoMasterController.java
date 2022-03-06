@@ -90,7 +90,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
+
 
         dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.POSTGRES;
@@ -100,7 +100,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             employSmartDbClean = false;
         }});
 
-
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
 
         return "http://localhost:" + getSutPort();
     }

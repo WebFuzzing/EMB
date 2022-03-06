@@ -151,12 +151,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public void postStart() {
         closeDataBaseConnection();
 
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
-
-
         try {
             Class.forName(getDatabaseDriverName());
             sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", "");
+
             dbSpecification = Arrays.asList(new DbSpecification(){{
                 dbType = DatabaseType.POSTGRES;
                 connection = sqlConnection;
@@ -164,6 +162,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 //                initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
                 employSmartDbClean = false;
             }});
+
+            SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
