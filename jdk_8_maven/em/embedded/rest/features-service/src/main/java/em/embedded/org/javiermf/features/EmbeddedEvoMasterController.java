@@ -82,6 +82,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.H2;
             connection = sqlConnection;
+            employSmartDbClean = false;
         }});
 
         return "http://localhost:" + getSutPort();
@@ -111,7 +112,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-//        DbCleaner.clearDatabase_H2(connection);
+        DbCleaner.clearDatabase_H2(sqlConnection);
     }
 
     @Override
