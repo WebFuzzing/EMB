@@ -3,8 +3,10 @@ package em.embedded.se.devscout.scoutapi;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -40,8 +42,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private ScoutAPIApplication application;
-    private Connection connection;
-    private List<String> sqlCommands;
+    private Connection sqlConnection;
+    private final List<String> sqlCommands;
+    private List<DbSpecification> dbSpecification;
 
     public EmbeddedEvoMasterController() {
         this(40100);
@@ -83,7 +86,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        connection = application.getConnection();
+        sqlConnection = application.getConnection();
+
+        dbSpecification = Arrays.asList(new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            connection = sqlConnection;
+            employSmartDbClean = false;
+        }});
 
         resetStateOfSUT();
 
@@ -109,9 +118,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 e.printStackTrace();
             }
         }
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -128,8 +137,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         deleteDir(new File("./target/temp"));
 
-        DbCleaner.clearDatabase_H2(connection);
-        SqlScriptRunner.runCommands(connection, sqlCommands);
+        DbCleaner.clearDatabase_H2(sqlConnection);
+        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
 
@@ -144,7 +153,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -174,5 +183,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
         file.delete();
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
     }
 }

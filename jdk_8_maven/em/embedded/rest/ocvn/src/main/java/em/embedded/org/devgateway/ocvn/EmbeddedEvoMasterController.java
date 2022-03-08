@@ -6,8 +6,10 @@ import org.devgateway.toolkit.web.spring.WebApplication;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -43,7 +45,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private ConfigurableApplicationContext ctx;
-    private Connection connection;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
     private MongoClient mongoClient;
 
 
@@ -84,9 +87,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
 
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -94,10 +97,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
 
         try {
-            connection = jdbc.getDataSource().getConnection();
+            sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        dbSpecification = Arrays.asList(new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            connection = sqlConnection;
+            initSqlOnResourcePath = "/init_db.sql";
+        }});
 
         return "http://localhost:" + getSutPort();
     }
@@ -132,8 +140,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         mongoClient.getDatabase("ocvn").drop();
         mongoClient.getDatabase("ocvn-shadow").drop();
 
-        DbCleaner.clearDatabase_H2(connection);
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/init_db.sql");
+//        DbCleaner.clearDatabase_H2(connection);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/init_db.sql");
     }
 
 
@@ -144,7 +152,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
 
@@ -160,5 +168,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
     }
 }

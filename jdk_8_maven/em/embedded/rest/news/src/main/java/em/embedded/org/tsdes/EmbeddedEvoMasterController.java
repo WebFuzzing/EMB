@@ -3,7 +3,9 @@ package em.embedded.org.tsdes;
 
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -15,6 +17,7 @@ import org.tsdes.spring.examples.news.NewsRestApplication;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +41,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private ConfigurableApplicationContext ctx;
-    private Connection connection;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
 
     public EmbeddedEvoMasterController() {
@@ -61,21 +65,24 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.jmx.enabled=false"
         });
 
-        if (connection != null) {
+          if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
         JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
-
         try {
-            connection = jdbc.getDataSource().getConnection();
+            sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+        dbSpecification = Arrays.asList(new DbSpecification(){{
+            dbType = DatabaseType.H2;
+            connection = sqlConnection;
+        }});
         return "http://localhost:" + getSutPort();
     }
 
@@ -103,7 +110,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection);
+//        DbCleaner.clearDatabase_H2(connection);
     }
 
     @Override
@@ -112,7 +119,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
@@ -131,5 +138,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
     }
 }

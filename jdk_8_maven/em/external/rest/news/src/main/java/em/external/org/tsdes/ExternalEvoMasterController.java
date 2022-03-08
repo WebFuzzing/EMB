@@ -2,7 +2,9 @@ package em.external.org.tsdes;
 
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -12,6 +14,7 @@ import org.h2.tools.Server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -55,7 +58,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int sutPort;
     private final int dbPort;
     private  String jarLocation;
-    private Connection connection;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
     private Server h2;
 
     public ExternalEvoMasterController() {
@@ -140,7 +144,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(dbUrl(), "sa", "");
+            sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
+            dbSpecification = Arrays.asList(new DbSpecification(){{
+                dbType = DatabaseType.H2;
+                connection = sqlConnection;
+            }});
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -148,7 +156,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(connection);
+//        DbCleaner.clearDatabase_H2(connection);
     }
 
     @Override
@@ -164,13 +172,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
     }
 
     private void closeDataBaseConnection() {
-        if (connection != null) {
+        if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            connection = null;
+            sqlConnection = null;
         }
     }
 
@@ -199,11 +207,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
     public String getDatabaseDriverName() {
         return "org.h2.Driver";
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
     }
 }

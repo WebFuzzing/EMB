@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.grpc.scs.generated";
+
+
+service ScsService {
+  rpc calc(CalcRequest) returns (DtoResponse) {}
+
+  rpc cookie(CookieRequest) returns (DtoResponse) {}
+
+  rpc costfuns(CostfunsRequest) returns (DtoResponse) {}
+
+  rpc dateParse(DateParseRequest) returns (DtoResponse) {}
+
+  rpc fileSuffix(FileSuffixRequest) returns (DtoResponse) {}
+
+  rpc notyPevar(NotyPevarRequest) returns (DtoResponse) {}
+
+  rpc ordered4(Ordered4Request) returns (DtoResponse) {}
+
+  rpc pat(PatRequest) returns (DtoResponse) {}
+
+  rpc regex(RegexRequest) returns (DtoResponse) {}
+
+  rpc text2txt(Text2txtRequest) returns (DtoResponse) {}
+
+  rpc title(TitleRequest) returns (DtoResponse) {}
+}
+
+message TitleRequest{
+  string sex = 1;
+  string title = 2;
+}
+
+message Text2txtRequest{
+  string word1 = 1;
+  string word2 = 2;
+  string word3 = 3;
+}
+
+message RegexRequest{
+  string txt = 1;
+}
+
+message PatRequest{
+  string txt = 1;
+  string pat = 2;
+}
+
+message Ordered4Request{
+  string w = 1;
+  string x = 2;
+  string z = 3;
+  string y = 4;
+}
+
+message NotyPevarRequest{
+  int32 i = 1;
+  string s = 2;
+}
+
+message FileSuffixRequest{
+  string directory = 1;
+  string file = 2;
+}
+
+message DateParseRequest{
+  string dayname = 1;
+  string monthname = 2;
+}
+
+message CostfunsRequest{
+  int32  i = 1;
+  string s = 2;
+}
+
+message CookieRequest{
+  string name = 1;
+  string val = 2;
+  string site = 3;
+}
+
+message CalcRequest{
+  string op = 1;
+  double arg1 = 2;
+  double arg2 = 3;
+}
+
+message DtoResponse{
+  string value = 1;
+}
+

@@ -4,9 +4,11 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.SutController;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,7 @@ import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     private ConfigurableApplicationContext ctx;
-    private Connection connection;
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -72,22 +76,31 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.jmx.enabled=false",
         });
 
-        if (connection != null) {
+          if (sqlConnection != null) {
             try {
-                connection.close();
+                sqlConnection.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
         JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
-
         try {
-            connection = jdbc.getDataSource().getConnection();
+            sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/initDB.sql");
+
+
+        dbSpecification = Arrays.asList(new DbSpecification(){{
+            dbType = DatabaseType.POSTGRES;
+            connection = sqlConnection;
+            schemaNames = Arrays.asList("public");
+            //initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
+            employSmartDbClean = false;
+        }});
+
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
 
         return "http://localhost:" + getSutPort();
     }
@@ -117,8 +130,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(connection,"public", null);
-        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/populateDB.sql");
+        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/populateDB.sql");
     }
 
     @Override
@@ -138,11 +151,16 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     public Connection getConnection() {
-        return connection;
+        return sqlConnection;
     }
 
     @Override
     public String getDatabaseDriverName() {
         return "org.postgresql.Driver";
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
     }
 }

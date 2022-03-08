@@ -5,6 +5,7 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.internal.SutController;
+import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.springframework.boot.SpringApplication;
@@ -99,6 +100,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getDatabaseDriverName() {
+        return null;
+    }
+
+    @Override
+    public List<DbSpecification> getDbSpecifications() {
         return null;
     }
 }
