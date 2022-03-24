@@ -3,7 +3,7 @@ const {AddressInfo}  = require("net");
 
 const em = require("evomaster-client-js");
 
-const createApp = require("../server/app");
+const createApp = require("../server/app").default;
 
 
 
@@ -23,6 +23,7 @@ class AppController  extends em.SutController {
 
     getProblemInfo() {
         const dto = new em.dto.GraphQLProblemDto();
+        dto.endpoint = "/graphql"
         return dto;
     }
 
