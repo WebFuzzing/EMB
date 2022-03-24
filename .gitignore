@@ -200,3 +200,7 @@ dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 
 
 
+/js_npm/graphql/react-finland/build/
+/js_npm/graphql/react-finland/.idea/
+/js_npm/graphql/react-finland/node_modules/
+/js_npm/graphql/react-finland/instrumented/
