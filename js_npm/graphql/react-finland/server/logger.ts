@@ -10,12 +10,12 @@ if (!fs.existsSync(directory)) {
   fs.mkdirSync(directory);
 }
 
-const ignorePingAndMedia = format(info => {
+const ignorePingAndMedia = format((info) => {
   const message = info.message;
 
   if (
     isString(message) &&
-    ["GET /ping ", "GET /media"].some(match => message.includes(match))
+    ["GET /ping ", "GET /media"].some((match) => message.includes(match))
   ) {
     return false;
   }

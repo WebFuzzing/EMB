@@ -19,12 +19,12 @@ import { resolveSessions } from "../Schedule";
 import SessionType from "../SessionType";
 import { Social } from "../Social";
 
-@Resolver(_ => Contact)
+@Resolver((_) => Contact)
 class ContactResolver {
-  @Query(_ => Contact)
+  @Query((_) => Contact)
   public contact(
     @Arg("contactName") contactName: string,
-    @Arg("conferenceId", _ => ID) conferenceId: string
+    @Arg("conferenceId", (_) => ID) conferenceId: string
   ) {
     const conference = getConference(conferenceId);
     const sponsor = conference.sponsors.find(
@@ -59,44 +59,41 @@ class ContactResolver {
     return contact;
   }
 
-  @Query(_ => [Contact])
+  @Query((_) => [Contact])
   public locations() {
     return Object.values(locations);
   }
 
-  @Query(_ => [Contact])
+  @Query((_) => [Contact])
   public people() {
     return Object.values(people);
   }
 
-  @Query(_ => [Contact])
+  @Query((_) => [Contact])
   public sponsors() {
     return Object.values(sponsors);
   }
 
-  @FieldResolver(_ => [ContactType])
+  @FieldResolver((_) => [ContactType])
   public type(@Root() contact: Contact) {
     return contact.type || [];
   }
 
-  @FieldResolver(_ => String)
+  @FieldResolver((_) => String)
   public firstName(@Root() contact: Contact) {
     return contact.firstName || contact.name.split(" ")[0];
   }
 
-  @FieldResolver(_ => String)
+  @FieldResolver((_) => String)
   public lastName(@Root() contact: Contact) {
     return (
       contact.lastName ||
       /* TODO: This approximation isn't accurate always */
-      contact.name
-        .split(" ")
-        .slice(1)
-        .join(" ")
+      contact.name.split(" ").slice(1).join(" ")
     );
   }
 
-  @FieldResolver(_ => Image)
+  @FieldResolver((_) => Image)
   public image(@Root() contact: Contact, @Ctx() ctx: IContext) {
     if (!contact.image) {
       return {
@@ -114,7 +111,7 @@ class ContactResolver {
     };
   }
 
-  @FieldResolver(_ => String)
+  @FieldResolver((_) => String)
   public aboutShort(@Root() contact: Contact) {
     if (contact.aboutShort) {
       return contact.aboutShort;
@@ -123,7 +120,7 @@ class ContactResolver {
     }
   }
 
-  @FieldResolver(_ => Social)
+  @FieldResolver((_) => Social)
   public social(@Root() contact: Contact) {
     interface IRules {
       [key: string]: string | undefined;
@@ -150,7 +147,7 @@ class ContactResolver {
     };
     const result: IRules = {};
 
-    Object.keys(social).forEach(media => {
+    Object.keys(social).forEach((media) => {
       if (rules[media]) {
         result[media] = rules[media];
       }
@@ -159,7 +156,9 @@ class ContactResolver {
     return result;
   }
 
-  @FieldResolver(_ => Country, { deprecationReason: "Use `location` instead" })
+  @FieldResolver((_) => Country, {
+    deprecationReason: "Use `location` instead",
+  })
   public country(@Root() contact: Contact) {
     return contact.location.country;
   }

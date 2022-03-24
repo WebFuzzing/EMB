@@ -12,8 +12,7 @@ it is to use context now and how to migrate your old context code to the new API
   type: SessionType.LIGHTNING_TALK,
   keywords: speaker.keywords,
   urls: {
-    web:
-      "https://technology-ebay-de.github.io/get-rich-quick-with-react-context/#/",
+    web: "https://technology-ebay-de.github.io/get-rich-quick-with-react-context/#/",
   },
 };
 

@@ -7,7 +7,7 @@ function rebuildSites(urls) {
 }
 
 function rebuildSite(url) {
-  request.post(url, err => {
+  request.post(url, (err) => {
     if (err) {
       return logger.error(err);
     }

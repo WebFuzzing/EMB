@@ -2,15 +2,15 @@ import { Arg, ID, Query, Resolver } from "type-graphql";
 import { Theme } from "../Theme";
 import allSeries from "./conferenceSeries";
 
-@Resolver(_ => Theme)
+@Resolver((_) => Theme)
 class ThemeResolver {
-  @Query(_ => [Theme])
+  @Query((_) => [Theme])
   public themes() {
     return Object.values(allSeries).map(({ theme }) => theme);
   }
 
-  @Query(_ => Theme)
-  public theme(@Arg("conferenceId", _ => ID) conferenceId: string) {
+  @Query((_) => Theme)
+  public theme(@Arg("conferenceId", (_) => ID) conferenceId: string) {
     const series = allSeries[conferenceId];
 
     if (series) {

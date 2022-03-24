@@ -3,7 +3,8 @@ import Keyword from "../../server/schema/keywords";
 
 const person: Contact = {
   name: "Naman Goel",
-  about: "Maintainer of Stylex, Facebook's not-yet-open-source CSS-in-JS framework. Working on Web Designs System Components at Facebook.",
+  about:
+    "Maintainer of Stylex, Facebook's not-yet-open-source CSS-in-JS framework. Working on Web Designs System Components at Facebook.",
   image: {
     url: "people/naman.jpg",
   },
@@ -25,7 +26,16 @@ const person: Contact = {
     },
     city: "San Francisco",
   },
-  keywords: [Keyword.REACT, Keyword.LIBRARIES, Keyword.STYLING, Keyword.TOOLING, Keyword.TYPESCRIPT, Keyword.WEBPACK, Keyword.BABEL, Keyword.NEXT_JS],
+  keywords: [
+    Keyword.REACT,
+    Keyword.LIBRARIES,
+    Keyword.STYLING,
+    Keyword.TOOLING,
+    Keyword.TYPESCRIPT,
+    Keyword.WEBPACK,
+    Keyword.BABEL,
+    Keyword.NEXT_JS,
+  ],
   type: [ContactType.SPEAKER],
 };
 

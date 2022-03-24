@@ -3,10 +3,15 @@ import isEqual from "lodash/isEqual";
 import * as React from "react";
 
 // TODO: Extract apiUrl to context?
-function connect(apiUrl, query, variables = {}, propsToVars = props => props) {
+function connect(
+  apiUrl,
+  query,
+  variables = {},
+  propsToVars = (props) => props
+) {
   return function getConnect(
     component
-  ): React.ComponentClass<any> & { filename: string, variables: {} } {
+  ): React.ComponentClass<any> & { filename: string; variables: {} } {
     let queryCache = {};
 
     interface ConnectState {
@@ -15,14 +20,14 @@ function connect(apiUrl, query, variables = {}, propsToVars = props => props) {
 
     class Connect<P = any> extends React.Component<P, ConnectState | void> {
       public static filename: string;
-      public static variables: Array<{
+      public static variables: {
         id: string;
         query?: string;
         // TODO: Type better
         mapToCollection?: (result: any) => any;
         mapToOption?: (result: any) => { value: any; label: any };
         validation?: { type: any; values?: any; default: any };
-      }>;
+      }[];
       public state: ConnectState = {
         data: {},
       };
@@ -32,11 +37,11 @@ function connect(apiUrl, query, variables = {}, propsToVars = props => props) {
         this.state = { data: queryCache };
       }
       public componentDidMount() {
-        this.fetchData().then(data => this.setState(() => data));
+        this.fetchData().then((data) => this.setState(() => data));
       }
       public componentDidUpdate(prevProps) {
         if (!isEqual(prevProps, this.props)) {
-          this.fetchData().then(data => this.setState(() => data));
+          this.fetchData().then((data) => this.setState(() => data));
         }
       }
       public render() {
@@ -58,12 +63,12 @@ function connect(apiUrl, query, variables = {}, propsToVars = props => props) {
         }
 
         return request(apiUrl, query, variables)
-          .then(data => {
+          .then((data) => {
             queryCache = data;
 
             return { data };
           })
-          .catch(err => console.error(err));
+          .catch((err) => console.error(err));
       }
     }
 

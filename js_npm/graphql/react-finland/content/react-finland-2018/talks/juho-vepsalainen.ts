@@ -10,8 +10,7 @@ const talk: Session = {
   type: SessionType.LIGHTNING_TALK,
   keywords: [Keyword.REACT, Keyword.STATIC_SITE_GENERATION, Keyword.WEBPACK],
   urls: {
-    web:
-      "https://docs.google.com/presentation/d/1dYwzzByKugHIrfA48cdhV0N-b2S2Ms_Ojd8I4ux_QRg/edit?usp=sharing",
+    web: "https://docs.google.com/presentation/d/1dYwzzByKugHIrfA48cdhV0N-b2S2Ms_Ojd8I4ux_QRg/edit?usp=sharing",
   },
 };
 

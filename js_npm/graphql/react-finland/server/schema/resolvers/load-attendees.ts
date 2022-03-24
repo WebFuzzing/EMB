@@ -24,17 +24,17 @@ async function loadAttendees(conference: Conference, csvPath: string) {
 
 function getSponsors(conference: Conference): Contact[] {
   return conference.sponsors.filter(
-    sponsor => !sponsor.type.includes(ContactType.PARTNER)
+    (sponsor) => !sponsor.type.includes(ContactType.PARTNER)
   );
 }
 
 function convertData(sponsors: Contact[], tickets): Contact[] {
   return map(
     filter(
-      map(tickets, row => mapValues(row, v => (v === "-" ? null : v))),
-      t => !t["Void Status"] && !t.Ticket.startsWith("Workshop only")
+      map(tickets, (row) => mapValues(row, (v) => (v === "-" ? null : v))),
+      (t) => !t["Void Status"] && !t.Ticket.startsWith("Workshop only")
     ),
-    row => ({
+    (row) => ({
       name: getName(row),
       firstName: getFirstName(row),
       lastName: getLastName(row),
@@ -78,10 +78,7 @@ function getCompany(row): string {
     return "";
   }
 
-  return companyName
-    .split(". z o.o.")[0]
-    .replace(/[ ]+/g, " ")
-    .trim();
+  return companyName.split(". z o.o.")[0].replace(/[ ]+/g, " ").trim();
 }
 
 function getType(

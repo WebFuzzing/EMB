@@ -37,7 +37,7 @@ async function createApp() {
   app.use(
     morgan("combined", {
       stream: {
-        write: message => logger.info(message),
+        write: (message) => logger.info(message),
       },
     })
   );

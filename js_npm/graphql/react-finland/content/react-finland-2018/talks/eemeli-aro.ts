@@ -9,8 +9,7 @@ const talk: Session = {
   type: SessionType.LIGHTNING_TALK,
   keywords: speaker.keywords,
   urls: {
-    web:
-      "https://docs.google.com/presentation/d/e/2PACX-1vTnz2eogdCs9XG8tOsXEJw4CRBncm_ZJ1uGLoN3aqwXjIF5cL_P9KvNYRYpJfaUQNVW4JYUOjzroicp/pub?start=false&loop=false&delayms=3000&slide=id.p",
+    web: "https://docs.google.com/presentation/d/e/2PACX-1vTnz2eogdCs9XG8tOsXEJw4CRBncm_ZJ1uGLoN3aqwXjIF5cL_P9KvNYRYpJfaUQNVW4JYUOjzroicp/pub?start=false&loop=false&delayms=3000&slide=id.p",
   },
 };
 

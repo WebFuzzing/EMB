@@ -9,12 +9,14 @@
     "generate:indices": "node utils/generate-indices.js content --verbose",
     "generate:reason-conf": "node utils/generate-reason-conf.js",
     "generate:typeof": "node utils/generate-typeof.js",
-    "build": "npm run generate:all && rimraf build && tsc",
+    "build": "npm run generate:all && rimraf build && tsc && npm run instrument",
     "lint": "tslint --config tslint.json content/**/*.ts server/**/*.ts --fix",
     "start": "tsc-watch --onSuccess \"node ./build/server\" --onFailure \"echo Beep! Compilation Failed\"",
     "heroku:start": "node ./build/server",
     "format": "prettier content/**/*.ts server/**/*.ts --write",
-    "heroku-postbuild": "echo Skip build on Heroku"
+    "heroku-postbuild": "echo Skip build on Heroku",
+    "instrument": "rimraf instrumented && babel build -d instrumented --copy-files && babel em -d instrumented/em --copy-files",
+    "em": "node instrumented/em/em-main.js"
   },
   "keywords": [],
   "author": "",
@@ -52,7 +54,9 @@
     "tsc-watch": "^4.4.0",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.3.0"
+    "tslint-plugin-prettier": "^2.3.0",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4"
   },
   "repository": {
     "type": "git",
@@ -111,7 +115,8 @@
     "uglify-es": "^3.3.9",
     "window-or-global": "^1.0.1",
     "winston": "^3.3.3",
-    "zerofill": "^0.1.0"
+    "zerofill": "^0.1.0",
+    "evomaster-client-js": "file:../../evomaster-client-js"
   },
   "husky": {
     "hooks": {
@@ -125,5 +130,13 @@
       "git add"
     ]
   },
-  "heroku-run-build-script": true
+  "heroku-run-build-script": true,
+  "babel": {
+    "only": [
+      "build"
+    ],
+    "plugins": [
+      "module:evomaster-client-js"
+    ]
+  }
 }

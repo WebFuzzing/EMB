@@ -10,8 +10,7 @@ const talk: Session = {
   type: SessionType.LIGHTNING_TALK,
   keywords: [Keyword.TOOLING],
   urls: {
-    web:
-      "https://docs.google.com/presentation/d/e/2PACX-1vRFz5W8H1CavTWgQvPMRG6gud5ZXxy4TT9QNL82Zy8radlIGKhDps6cHMkCpjr1rP0t4j-Ofhceq6_M/pub?start=false&loop=false&delayms=3000&slide=id.p",
+    web: "https://docs.google.com/presentation/d/e/2PACX-1vRFz5W8H1CavTWgQvPMRG6gud5ZXxy4TT9QNL82Zy8radlIGKhDps6cHMkCpjr1rP0t4j-Ofhceq6_M/pub?start=false&loop=false&delayms=3000&slide=id.p",
   },
 };
 
