@@ -1,0 +1,15 @@
+*.log
+.eslintcache
+node_modules/
+logs/
+build/
+attendees/
+server/types/
+media/scripts/
+utils/*.csv
+utils/google-*
+utils/diversity-*
+.env
+.fusebox
+.scripts
+

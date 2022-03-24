@@ -1,0 +1,506 @@
+{
+  "schedules": [
+    {
+      "day": "2019-03-27",
+      "description": "Workshop day",
+      "intervals": [
+        {
+          "begin": "08:30",
+          "end": "09:00",
+          "sessions": [
+            {
+              "title": "Check-in 🎟",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "09:00",
+          "end": "10:30",
+          "sessions": [
+            {
+              "title": "Workshops",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "10:30",
+          "end": "11:00",
+          "sessions": [
+            {
+              "title": "Coffee Break ☕️",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "11:00",
+          "end": "12:30",
+          "sessions": [
+            {
+              "title": "Workshops",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "12:30",
+          "end": "13:15",
+          "sessions": [
+            {
+              "title": "Lunch 🍽",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "13:15",
+          "end": "15:30",
+          "sessions": [
+            {
+              "title": "Workshops",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "15:30",
+          "end": "16:00",
+          "sessions": [
+            {
+              "title": "Coffee Break ☕️",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "16:00",
+          "end": "17:30",
+          "sessions": [
+            {
+              "title": "Workshops",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "17:30",
+          "end": "17:30",
+          "sessions": [
+            {
+              "title": "Closing 👋",
+              "people": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "2019-03-28",
+      "description": "Conference day 1",
+      "intervals": [
+        {
+          "begin": "09:00",
+          "end": "09:45",
+          "sessions": [
+            {
+              "title": "Check-in 🎟",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "09:45",
+          "end": "10:00",
+          "sessions": [
+            {
+              "title": "Opening ✨",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "10:00",
+          "end": "11:15",
+          "sessions": [
+            {
+              "title": "SVG Illustrations as Components",
+              "people": [
+                {
+                  "name": "Elizabet Oliveira"
+                }
+              ]
+            },
+            {
+              "title": "Beyond Web Apps: React and WebAssembly to rewrite native apps",
+              "people": [
+                {
+                  "name": "Florian Rival"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "11:15",
+          "end": "11:45",
+          "sessions": [
+            {
+              "title": "Coffee Break ☕️",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "11:45",
+          "end": "12:30",
+          "sessions": [
+            {
+              "title": "Lights, camera, render! Getting your feet wet with WebGL",
+              "people": [
+                {
+                  "name": "António Capelo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "12:30",
+          "end": "14:00",
+          "sessions": [
+            {
+              "title": "Lunch 🍽",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "14:00",
+          "end": "15:15",
+          "sessions": [
+            {
+              "title": "GraphQL without GraphQL",
+              "people": [
+                {
+                  "name": "Juho Vepsäläinen"
+                }
+              ]
+            },
+            {
+              "title": "Doing the thing right, or doing the right thing?",
+              "people": [
+                {
+                  "name": "José Fonseca"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "15:15",
+          "end": "16:00",
+          "sessions": [
+            {
+              "title": "Coffee Break ☕️",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "16:00",
+          "end": "17:15",
+          "sessions": [
+            {
+              "title": "Building the web in the web",
+              "people": [
+                {
+                  "name": "Ives van Hoorne"
+                }
+              ]
+            },
+            {
+              "title": "Creative Momentum - How to tap into your creativity to solve problems faster",
+              "people": [
+                {
+                  "name": "Joana Galvão"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "17:15",
+          "end": "21:00",
+          "sessions": [
+            {
+              "title": "Closing 👋",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "21:00",
+          "end": "21:00",
+          "sessions": [
+            {
+              "title": "typeof Party 🎉",
+              "people": [
+                {
+                  "name": "Porto Downtown"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "2019-03-29",
+      "description": "Conference day 2",
+      "intervals": [
+        {
+          "begin": "09:00",
+          "end": "09:45",
+          "sessions": [
+            {
+              "title": "Check-in 🎟",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "09:45",
+          "end": "10:00",
+          "sessions": [
+            {
+              "title": "Opening ✨",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "10:00",
+          "end": "11:15",
+          "sessions": [
+            {
+              "title": "useGraphQL()",
+              "people": [
+                {
+                  "name": "Sara Vieira"
+                }
+              ]
+            },
+            {
+              "title": "A Modern Approach to Digital Product Design",
+              "people": [
+                {
+                  "name": "Andrei Herasimchuk"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "11:15",
+          "end": "11:45",
+          "sessions": [
+            {
+              "title": "Coffee Break ☕️",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "11:45",
+          "end": "12:30",
+          "sessions": [
+            {
+              "title": "Vue.js and Design Systems",
+              "people": [
+                {
+                  "name": "Ramon Victor"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "12:30",
+          "end": "14:00",
+          "sessions": [
+            {
+              "title": "Lunch 🍽",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "14:00",
+          "end": "15:15",
+          "sessions": [
+            {
+              "title": "Paint the Web - Drawing with CSS",
+              "people": [
+                {
+                  "name": "Eva Lettner"
+                }
+              ]
+            },
+            {
+              "title": "Browsers - For better or worse",
+              "people": [
+                {
+                  "name": "Renato Rodrigues"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "15:15",
+          "end": "16:00",
+          "sessions": [
+            {
+              "title": "Coffee Break ☕️",
+              "people": null
+            }
+          ]
+        },
+        {
+          "begin": "16:00",
+          "end": "17:15",
+          "sessions": [
+            {
+              "title": "Designing a Design Culture",
+              "people": [
+                {
+                  "name": "Sónia Gomes"
+                }
+              ]
+            },
+            {
+              "title": "Navigating the Hype-Driven Frontend Development World Without Going Nuts",
+              "people": [
+                {
+                  "name": "Kristijan Ristovski (Kitze)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "17:15",
+          "end": "17:15",
+          "sessions": [
+            {
+              "title": "Closing 👋",
+              "people": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "speakers": [
+    {
+      "name": "Andrei Herasimchuk",
+      "about": "Booking.com, Netherlands",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/andrei-herasimchuk-376-ac9a535b2c2545d94737477423ed110f.jpg"
+      }
+    },
+    {
+      "name": "António Capelo",
+      "about": "YLD, Portugal",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/antonio-capelo-376-69ab9902f8580b27f24ddbe063451f21.jpg"
+      }
+    },
+    {
+      "name": "Elizabet Oliveira",
+      "about": "Optum, Ireland",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/elizabet-oliveira-376-cf01139edbf5c161e352381eed9da7ce.jpg"
+      }
+    },
+    {
+      "name": "Eva Lettner",
+      "about": "xxxldigital, Austria",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/eva-lettner-376-36edb008795a270cca31335735ea9a4a.jpg"
+      }
+    },
+    {
+      "name": "Florian Rival",
+      "about": "Facebook, United Kingdom",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/florian-rival-376-34aa99752ff777bc02558e805815c5c3.jpg"
+      }
+    },
+    {
+      "name": "Ives van Hoorne",
+      "about": "CodeSandbox, Netherlands",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/ives-hoorne-376-cf9cbc9b1e2c329edd2500f94670e0f1.jpg"
+      }
+    },
+    {
+      "name": "Joana Galvão",
+      "about": "GiF Design Studios, Portugal",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/joana-galvao-376-ce6e04fd3f6df17b2809f7ecdb8d5c1e.jpg"
+      }
+    },
+    {
+      "name": "José Fonseca",
+      "about": "Mindera, Portugal",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/jose-fonseca-376-9198b5e1410c8509b396711b199d8cfa.jpg"
+      }
+    },
+    {
+      "name": "Juho Vepsäläinen",
+      "about": "SurviveJS, Austria",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/juho-vepsalainen-376-afb46e782e587d4fb2a6f7ddde3e8bcf.jpg"
+      }
+    },
+    {
+      "name": "Kristijan Ristovski (Kitze)",
+      "about": "React Academy, Poland",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/kitze-376-1db0c6e3f20142451d2066ede7e790c9.jpg"
+      }
+    },
+    {
+      "name": "Sara Vieira",
+      "about": "CodeSandbox, Berlin",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/sara-vieira-376-0a36a58dc58861b32f24a67e8ea94a9b.jpg"
+      }
+    },
+    {
+      "name": "Sónia Gomes",
+      "about": "Prozis, Portugal",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/sonia-gomes-376-5208df2596c96c37f56b2e161dc2790d.jpg"
+      }
+    },
+    {
+      "name": "Ramon Victor",
+      "about": "Booking.com, Netherlands",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/ramon-bezerra-376-aa1489c0d5550004ad3b6deaddc155e9.jpg"
+      }
+    },
+    {
+      "name": "Renato Rodrigues",
+      "about": "Farfetch, Portugal",
+      "image": {
+        "url": "https://typeofconf.com/_next/static/images/renato-rodrigues-376-46c89a956cb4f372ffbb23c1d9765617.jpg"
+      }
+    }
+  ]
+}

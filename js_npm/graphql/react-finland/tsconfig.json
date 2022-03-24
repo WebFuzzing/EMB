@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "lib": ["dom", "es2017", "esnext.asynciterable"],
+    "target": "es2017",
+    "strict": true,
+    "sourceMap": true,
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types"],
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["server/**/*.ts"]
+}
