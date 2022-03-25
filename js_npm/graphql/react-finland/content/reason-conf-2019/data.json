@@ -1,0 +1,547 @@
+{
+  "schedules": [
+    {
+      "day": "2019-4-11",
+      "description": "Workshop Day",
+      "intervals": [
+        {
+          "begin": "08:45",
+          "end": "09:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "MISC",
+              "title": "Doors open, Registration & Editor Setup",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "09:30",
+          "end": "12:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "WORKSHOP",
+              "title": "Beginner Reason & ReasonReact Workshop",
+              "description": ""
+            },
+            {
+              "type": "WORKSHOP",
+              "title": "Advanced ReasonReact Workshop",
+              "description": ""
+            },
+            {
+              "type": "WORKSHOP",
+              "title": "Reason & GraphQL Workshop",
+              "description": ""
+            },
+            {
+              "type": "WORKSHOP",
+              "title": "OCaml Workshop",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "12:30",
+          "end": "13:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "COFFEE_BREAK",
+              "title": "Lunch",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "13:30",
+          "end": "17:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "MISC",
+              "title": "Afternoon Workshop Block",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "2019-4-12",
+      "description": "Conference Day",
+      "intervals": [
+        {
+          "begin": "08:45",
+          "end": "09:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "MISC",
+              "title": "Doors open & Registration",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "09:30",
+          "end": "10:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "Keynote",
+              "description": "",
+              "people": [
+                "Cheng Lou"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "10:30",
+          "end": "11:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "COFFEE_BREAK",
+              "title": "Coffee break",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "11:00",
+          "end": "11:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "Our Journey with React Native and ReasonML",
+              "description": "At Ubisoft Club we rewrote our application from Ionic / Cordova to React Native / ReasonML. As we all were Javascript developers, the transition was difficult, both technically and humanly. We implemented some fancy features using e.g. Storybook and GraphQL. But we had to pay the price of immature bindings, bundler issues...\n\nWe would like to share this experience with you, including the best and the worst of it.",
+              "people": [
+                "Amelie Benoit",
+                "David Corticchiato"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "11:30",
+          "end": "12:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "TBA",
+              "description": "Details will be announced reasonably soon!",
+              "people": [
+                "TBA"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "12:00",
+          "end": "13:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "COFFEE_BREAK",
+              "title": "Lunch",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "13:30",
+          "end": "14:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "17 Years of Caml Herding",
+              "description": "Jane Street is a long-time user of OCaml and the largest industrial user of the language. Today, there are hundreds of people at Jane Street who use OCaml to build rich and complex applications that are essential to our business.\n\nIn this talk, I'll discuss the work we've done to provide those people with a great development experience as they write, maintain, and deploy software. I'll also discuss Jane Street as an example of how OCaml can contribute to a tech-focused company's success, both in the short and long term.\n",
+              "people": [
+                "Jeremie Dimino"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "14:00",
+          "end": "14:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "Why your ReasonML Evangelism isn't working",
+              "description": "Not everyone is of the \"Early-Adopter\" Personality. Many of our coworkers don't care if things are technically \"better\" or fancy language features that help them to remain \"safe\". Understanding the different personality types helps us know how we can all get ReasonML to \"jump the gap\" to more mainstream languages and help our more pragmatic co-works understand why ReasonML is something they should devote time to learn.",
+              "people": [
+                "Gage Peterson"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "14:30",
+          "end": "15:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "COFFEE_BREAK",
+              "title": "Coffee break",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "15:00",
+          "end": "15:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "How Reason keeps my ADHD out of production",
+              "description": "I have been diagnosed with ADHD late in life (2 years ago). This opened my eyes to a journey through challenges and hardship I have not been able to comprehend were even affecting me up to that point. My talk is focused on these challenges and how Reason in particular helps me deal with them in my daily workflow.",
+              "people": [
+                "Jonathan Siebern"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "15:30",
+          "end": "16:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "A Mission-Critical ReasonML App for Railway Safety",
+              "description": "At cca.io, we build mission-critical apps and services for the Public Transport and Public Safety industries. In 2018, we moved all our frontend development (web and React Native) to ReasonML.\n\nAs a case study about ReasonML in a finished product / client project, we present “Written Order”, a web app for Railway Safety. The app is an intelligent assistant for manual processes in train signalling, helping the signaller to ensure it is safe for the train to proceed.\n\nBased on an interpreter for a check list definition language, it presents the signaller a series of simple questions to guide him/her through complex, deeply context-dependent check lists, generating a filled out “Written Order form” image on the way. The app authenticates against the customer’s Active Directory service and is fully offline-capable, yet still runs in Internet Explorer 11.",
+              "people": [
+                "Christoph Knittel"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "16:00",
+          "end": "16:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "COFFEE_BREAK",
+              "title": "Coffee break",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "16:30",
+          "end": "17:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "Saving lives with ReasonML",
+              "description": "For stroke patients, there is a saying “time is brain”. First responders need to assess patients as accurately and as quickly as possible, and then it's off to the races to the best treatment centre. This is a high stakes situation where problems arising of both the human and software variety is ideally zero. Losing a loved one because “undefined is not a function” is certainly not ideal.\n\nIt should not be a surprise that eliminating the occurrence of such software defects in such a high stakes application is of paramount importance. We recently rewrote the core of our first responder stroke triage mobile application in ReasonML and Bucklescript to achieve the necessary safety guarantees that only the ML family of languages can provide. In this talk, I share details of how we undertook this task and lessons learnt along the way.",
+              "people": [
+                "Douglas Teoh"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "17:00",
+          "end": "17:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "TALK",
+              "title": "How ReasonML has improved our hiring process",
+              "description": "ReasonML is a hybrid of Javascript and Ocaml - traditionally 2 different pools of candidates. Have you ever wondered what the best of both worlds is like? Learn how ReasonML has improved the quality of our candidates letting us focus more time on the product and less on hiring.",
+              "people": [
+                "Peter Piekarczyk"
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "17:30",
+          "end": "18:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "PANEL",
+              "title": "Panel Discussion",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "18:00",
+          "end": "∞",
+          "title": "",
+          "sessions": [
+            {
+              "type": "OPEN_END",
+              "title": "After Party at Luftburg sponsored by Jane Street",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "2019-4-13",
+      "description": "Community & Dojo Day",
+      "intervals": [
+        {
+          "begin": "08:45",
+          "end": "09:15",
+          "title": "",
+          "sessions": [
+            {
+              "type": "MISC",
+              "title": "Doors open",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "09:15",
+          "end": "12:30",
+          "title": "",
+          "sessions": [
+            {
+              "type": "MISC",
+              "title": "Open Stage",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "12:30",
+          "end": "14:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "COFFEE_BREAK",
+              "title": "Lunch",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "14:00",
+          "end": "17:00",
+          "title": "",
+          "sessions": [
+            {
+              "type": "MISC",
+              "title": "Dojo with the Ahrefs Team and Benjamin San Souci",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "begin": "17:00",
+          "end": "∞",
+          "title": "",
+          "sessions": [
+            {
+              "type": "OPEN_END",
+              "title": "Gathering at the Weinhof Zimmermann (Neustift am Walde)",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "speakers": [
+    {
+      "name": "Cheng Lou",
+      "about": "I work on Reason and Facebook Messenger",
+      "company": "Facebook",
+      "image": {
+        "url": "https://www.reason-conf.com/e995e583ff3729e2a7036b83c2d83917.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "Keynote",
+          "description": "",
+          "people": [
+            "Cheng Lou"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Amelie Benoit",
+      "about": "As a web developer, I worked in France to create web applications first using Angular and then React; always in Javascript. A few month ago, I joined Ubisoft Montréal to work on a React-Native application in ReasonML. Sketchnoting addict, I also like to share knowledge and look for solutions to bring fun and dynamism in daily life.",
+      "company": "Ubisoft",
+      "image": {
+        "url": "https://www.reason-conf.com/224f77d4443b8fb639bdd467ff0262a5.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "Our Journey with React Native and ReasonML",
+          "description": "At Ubisoft Club we rewrote our application from Ionic / Cordova to React Native / ReasonML. As we all were Javascript developers, the transition was difficult, both technically and humanly. We implemented some fancy features using e.g. Storybook and GraphQL. But we had to pay the price of immature bindings, bundler issues...\n\nWe would like to share this experience with you, including the best and the worst of it.",
+          "people": [
+            "Amelie Benoit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Benjamin San Souci",
+      "about": "Ben is a French citizen who is excited about building things. After getting his bac in France, he decided to check out what was on the other side of the pond. After getting his degree in Software Engineering, and a short detour through Google, he found himself working at Apple.",
+      "company": "Apple",
+      "image": {
+        "url": "https://www.reason-conf.com/084dcbd73c039ff4d02798e686f7a507.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "Shipping a game on iOS written in ReasonML",
+          "description": "Shipping a mobile game in ReasonML is not as hard as one might think. This talk will go over our demo-driven approach to developing this game, the small technical difficulties one might encounter and the tough non-technical ones. You'll hopefully be inspired to gain back creative confidence to make your childhood dream game in ReasonML.",
+          "people": [
+            "Benjamin San Souci"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Peter Piekarczyk",
+      "about": "Peter Piekarczyk is the co-founder of Draftbit: a tool that allows anyone to build native apps visually with almost no learning curve. Draftbit is built with ReasonML and has allowed his team to move quickly and effortlessly. Peter loves to cycle, drink coffee and make music. He's a huge fan of learning how to do new things. Peter was born in Chicago but speaks fluent Polish.",
+      "company": "Draftbit",
+      "image": {
+        "url": "https://www.reason-conf.com/8003e2e5db7bf1401132200779fe2712.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "How ReasonML has improved our hiring process",
+          "description": "ReasonML is a hybrid of Javascript and Ocaml - traditionally 2 different pools of candidates. Have you ever wondered what the best of both worlds is like? Learn how ReasonML has improved the quality of our candidates letting us focus more time on the product and less on hiring.",
+          "people": [
+            "Peter Piekarczyk"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Douglas Teoh",
+      "about": "Douglas is a software engineer currently working at Allm Inc. in Japan. He develops backend services with Ruby, and webapp frontends with various compile-to-JavaScript languages. He has also published open source macOS apps.",
+      "company": "Allm Inc",
+      "image": {
+        "url": "https://www.reason-conf.com/1db8f0819041a206cc8904d81e24871e.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "Saving lives with ReasonML",
+          "description": "For stroke patients, there is a saying “time is brain”. First responders need to assess patients as accurately and as quickly as possible, and then it's off to the races to the best treatment centre. This is a high stakes situation where problems arising of both the human and software variety is ideally zero. Losing a loved one because “undefined is not a function” is certainly not ideal.\n\nIt should not be a surprise that eliminating the occurrence of such software defects in such a high stakes application is of paramount importance. We recently rewrote the core of our first responder stroke triage mobile application in ReasonML and Bucklescript to achieve the necessary safety guarantees that only the ML family of languages can provide. In this talk, I share details of how we undertook this task and lessons learnt along the way.",
+          "people": [
+            "Douglas Teoh"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "David Corticchiato",
+      "about": "I started as a C++ developer 14 years ago (So I'm old basically). About 7 years ago I chose to quit embedded software industry for web development. I've been a Pythonita for a long time, then a javascript developper. Now I work for Ubisoft as a mobile developer. We're rebuilding our app in ReasonML + React Native.",
+      "company": "Ubisoft",
+      "image": {
+        "url": "https://www.reason-conf.com/09800f60f1a4ab9dfab1d4dfc47fa685.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "Our journey with React Native and ReasonML",
+          "description": "At Ubisoft Club we rewrote our application from Ionic / Cordova to React Native / ReasonML. As we all were Javascript developers, the transition was difficult, both technically and humanly. We implemented some fancy features using e.g. Storybook and GraphQL. But we had to pay the price of immature bindings, bundler issues...\n\nWe would like to share this experience with you, including the best and the worst of it.",
+          "people": [
+            "David Corticchiato"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Christoph Knittel",
+      "about": "Christoph Knittel is CTO at the Vienna-based Control Center Apps GmbH. Combining 20 years of experience in the design and development of software products with enthusiasm for mobile apps, React/React Native and ReasonML, he has set out with his team to bring modern technologies and user interfaces to enterprise applications in the Public Transport and Public Safety industries.",
+      "company": "Control Center Apps GmbH",
+      "image": {
+        "url": "https://www.reason-conf.com/0d237460c2d9ea02c56b5a59fa7e7cc2.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "A Mission-Critical ReasonML App for Railway Safety",
+          "description": "At cca.io, we build mission-critical apps and services for the Public Transport and Public Safety industries. In 2018, we moved all our frontend development (web and React Native) to ReasonML.\n\nAs a case study about ReasonML in a finished product / client project, we present “Written Order”, a web app for Railway Safety. The app is an intelligent assistant for manual processes in train signalling, helping the signaller to ensure it is safe for the train to proceed.\n\nBased on an interpreter for a check list definition language, it presents the signaller a series of simple questions to guide him/her through complex, deeply context-dependent check lists, generating a filled out “Written Order form” image on the way. The app authenticates against the customer’s Active Directory service and is fully offline-capable, yet still runs in Internet Explorer 11.",
+          "people": [
+            "Christoph Knittel"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Jeremie Dimino",
+      "about": "Jeremie Dimino is the original author of Dune, a popular\n    OCaml build system. He has been working as a Software Engineer at Jane\n    Street for the past 6 years where he thrived doing what he is passionate\n    about: programming and Open Source. He is also part of the core OCaml\n    development team and has contributed to various aspect of the compiler such\n    as improving the FFI. He is also the initial author of the utop toplevel\n    and was the main maintainer of the widely used Lwt library for several\n    years.",
+      "company": "Jane Street",
+      "image": {
+        "url": "https://www.reason-conf.com/8b7986d7984f52aff7262f53a962f8bb.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "17 Years of Caml Herding",
+          "description": "Jane Street is a long-time user of OCaml and the largest industrial user of the language. Today, there are hundreds of people at Jane Street who use OCaml to build rich and complex applications that are essential to our business.\n\nIn this talk, I'll discuss the work we've done to provide those people with a great development experience as they write, maintain, and deploy software. I'll also discuss Jane Street as an example of how OCaml can contribute to a tech-focused company's success, both in the short and long term.\n",
+          "people": [
+            "Jeremie Dimino"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gage Peterson",
+      "about": "I graduated in Computer Science from Brigham Young University - Idaho, where my senior project was building a (poor) programming language in OCaml, later went on to work for Podium where I've built lots of stuff in Elixir, JavaScript (React), and Ruby, OCaml has remained my favorite language through it, recently had more serious discussions about introducing Reason. I'm Vegan, passionate about the environment.",
+      "company": "Podium",
+      "image": {
+        "url": "https://www.reason-conf.com/c3e34e0388082226c3cd05afb1bfc705.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "Why your ReasonML Evangelism isn't working",
+          "description": "Not everyone is of the \"Early-Adopter\" Personality. Many of our coworkers don't care if things are technically \"better\" or fancy language features that help them to remain \"safe\". Understanding the different personality types helps us know how we can all get ReasonML to \"jump the gap\" to more mainstream languages and help our more pragmatic co-works understand why ReasonML is something they should devote time to learn.",
+          "people": [
+            "Gage Peterson"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Jonathan Siebern",
+      "about": "Full-Stack-Developer from Münster, Germany with about 17 years of experience (mostly web technologies working for Digital Solutions GmbH in Münster, creating tools for online marketers.",
+      "company": "Digital Solutions GmbH",
+      "image": {
+        "url": "https://www.reason-conf.com/21999488766858f40579ea1584ee3a4d.jpg"
+      },
+      "talks": [
+        {
+          "type": "TALK",
+          "title": "How Reason keeps my ADHD out of production",
+          "description": "I have been diagnosed with ADHD late in life (2 years ago). This opened my eyes to a journey through challenges and hardship I have not been able to comprehend were even affecting me up to that point. My talk is focused on these challenges and how Reason in particular helps me deal with them in my daily workflow.",
+          "people": [
+            "Jonathan Siebern"
+          ]
+        }
+      ]
+    }
+  ]
+}

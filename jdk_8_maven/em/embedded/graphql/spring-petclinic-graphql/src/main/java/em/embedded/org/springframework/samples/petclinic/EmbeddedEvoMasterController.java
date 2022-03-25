@@ -90,16 +90,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
+
 
         dbSpecification = Arrays.asList(new DbSpecification(){{
             dbType = DatabaseType.POSTGRES;
             connection = sqlConnection;
             schemaNames = Arrays.asList("public");
-            initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
+            //initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
+            employSmartDbClean = false;
         }});
 
-
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
 
         return "http://localhost:" + getSutPort();
     }
@@ -129,8 +130,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-//        DbCleaner.clearDatabase_Postgres(connection,"public", null);
-//        SqlScriptRunnerCached.runScriptFromResourceFile(connection,"/db/postgresql/populateDB.sql");
+        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/populateDB.sql");
     }
 
     @Override

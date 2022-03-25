@@ -59,7 +59,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <!-- it is required in order to get parameter name for reflection -->
-                    <compilerArgument>-parameters</compilerArgument>
+<!--                    <compilerArgument>-parameters</compilerArgument>-->
                 </configuration>
             </plugin>
         </plugins>
