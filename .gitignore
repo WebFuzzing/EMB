@@ -178,6 +178,14 @@ hs_err_pid*
 /js_npm/rest/realworld-app/build/
 /js_npm/rest/spacex-api/node_modules/
 /js_npm/rest/spacex-api/build/
+/js_npm/graphql/react-finland/build/
+/js_npm/graphql/react-finland/.idea/
+/js_npm/graphql/react-finland/node_modules/
+/js_npm/graphql/react-finland/instrumented/
+/js_npm/graphql/ecommerce-server/build/
+/js_npm/graphql/ecommerce-server/.idea/
+/js_npm/graphql/ecommerce-server/node_modules/
+/js_npm/graphql/ecommerce-server/instrumented/
 
 
 #DotNet
@@ -200,7 +208,3 @@ dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 
 
 
-/js_npm/graphql/react-finland/build/
-/js_npm/graphql/react-finland/.idea/
-/js_npm/graphql/react-finland/node_modules/
-/js_npm/graphql/react-finland/instrumented/
