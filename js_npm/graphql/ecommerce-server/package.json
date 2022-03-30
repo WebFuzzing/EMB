@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "nest build && npm run instrument",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
@@ -18,7 +18,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "instrument": "rimraf instrumented && babel dist em -d instrumented/src --copy-files ",
+    "em": "node instrumented/em/em-main.js"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -66,7 +68,20 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "evomaster-client-js": "file:../../evomaster-client-js",
+    "postgres": "3.0.0",
+    "testcontainers": "7.20.0",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4"
+  },
+  "babel": {
+    "only": [
+      "build"
+    ],
+    "plugins": [
+      "module:evomaster-client-js"
+    ]
   },
   "jest": {
     "moduleFileExtensions": [
