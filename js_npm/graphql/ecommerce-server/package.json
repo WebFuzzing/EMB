@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "instrument": "rimraf instrumented && babel dist em -d instrumented/src --copy-files ",
-    "em": "node instrumented/em/em-main.js"
+    "em": "node instrumented/src/em-main.js"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -77,7 +77,7 @@
   },
   "babel": {
     "only": [
-      "build"
+      "dist"
     ],
     "plugins": [
       "module:evomaster-client-js"

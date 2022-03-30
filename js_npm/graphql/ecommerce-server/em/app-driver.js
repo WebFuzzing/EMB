@@ -1,8 +1,8 @@
-const em = require("evomaster-client-js);
+const em = require("evomaster-client-js");
 const dbHandler = require("./db-handler");
 
 const { NestFactory } = require('@nestjs/core');
-const { AppModule } =  require('./../src/app.module');
+
 
 class AppController  extends em.SutController {
 
@@ -47,11 +47,13 @@ class AppController  extends em.SutController {
             process.env.DATABASE_NAME="db";
             process.env.DATABASE_PORT=process.env.DB_PORT
 
+            const { AppModule } =  require('./../src/app.module');
+
             const app = await NestFactory.create(AppModule);
             app.setGlobalPrefix('api')
 
             app.listen(0, "localhost", () => {
-                this.server = app.server;
+                this.server = app.getHttpServer();
                 this.port = this.server.address().port;
                 resolve("http://localhost:" + this.port);
             });
