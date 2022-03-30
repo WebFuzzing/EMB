@@ -186,6 +186,7 @@ hs_err_pid*
 /js_npm/graphql/ecommerce-server/.idea/
 /js_npm/graphql/ecommerce-server/node_modules/
 /js_npm/graphql/ecommerce-server/instrumented/
+/js_npm/graphql/ecommerce-server/src/graphql/schemas/schema.gql
 
 
 #DotNet
