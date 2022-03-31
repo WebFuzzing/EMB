@@ -76,7 +76,7 @@ module.exports ={
         //             )
         //         })
 
-
+        return Promise.resolve();
     },
 
     stopDb : async () =>{
