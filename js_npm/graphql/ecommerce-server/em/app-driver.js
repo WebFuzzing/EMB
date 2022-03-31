@@ -11,11 +11,11 @@ class AppController extends em.SutController {
 
     getInfoForAuthentication() {
         let jwtLogin = new em.dto.JsonTokenPostLoginDto();
-        jwtLogin.endpoint = "/api/graphql";
+        jwtLogin.endpoint = "/graphql";
         jwtLogin.userId = "foo";
         jwtLogin.extractTokenField = "/data/login/token";
         jwtLogin.jsonPayload = `{
-           "mutation": "login(data:{email:\\"foo@foo.com\\",password:\\"bar123\\"}){token}"
+           "query": "mutation{login(data:{email:\\"foo@foo.com\\",password:\\"bar123\\"}){token}}"
         }`;
         jwtLogin.headerPrefix = "Bearer ";
 
@@ -50,15 +50,9 @@ class AppController extends em.SutController {
                     .post(this.baseUrlOfSut + "/graphql")
                     .set('Content-Type', 'application/json')
                     .send(`{
-                                   "mutation" : "createUser(data:{
-                                            name:\\"foo\\",
-                                            username:\\"foo\\",
-                                            email:\\"foo@foo.com\\",
-                                            password:\\"bar123\\",
-                                            confirmPassword:\\"bar123\\"}
-                                    ){username}"
+                          "query" : "mutation{createUser(data:{ name:\\"foo\\",username:\\"foo\\", email:\\"foo@foo.com\\",password:\\"bar123\\",confirmPassword:\\"bar123\\"}){username}}"
                          }`)
-                    .ok(res => res.status);
+                    //.ok(res => res.status);
                 resolve();
             });
         });
