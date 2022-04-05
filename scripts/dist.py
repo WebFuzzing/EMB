@@ -190,6 +190,7 @@ def build_js_npm():
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","realworld-app")), "realworld-app")
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","rest","spacex-api")), "spacex-api")
     buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","graphql","react-finland")), "react-finland")
+    buildJS(os.path.abspath(os.path.join(PROJ_LOCATION, "js_npm","graphql","ecommerce-server")), "ecommerce-server")
 
 ####################
 def build_dotnet_3():
