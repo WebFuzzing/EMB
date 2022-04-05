@@ -1,7 +1,9 @@
 const { GenericContainer } = require("testcontainers");
 
 //https://www.npmjs.com/package/postgres
-const postgres = require("postgres");
+//const postgres = require("postgres");
+//https://node-postgres.com/
+const postgres = require("pg");
 
 // docker run -p 5432:5432 -e POSTGRES_PASSWORD=bar -e POSTGRES_USER=foo postgres:11
 
@@ -38,13 +40,23 @@ module.exports ={
             console.log("connecting "+dbURL);
         }
 
-        connection = postgres(dbURL, {
-          //  host                 : '',            // Postgres ip address[s] or domain name[s]
-          //  port                 : 5432,          // Postgres server port[s]
-            database             : 'db',            // Name of database to connect to
-            username             : 'foo',            // Username of database user
-            password             : 'bar',            // Password of database user
-        })
+        connection = new postgres.Client({
+            user: 'foo',
+            host: 'localhost',
+            database: 'db',
+            password: 'bar',
+            port: process.env.DB_PORT,
+        });
+
+        await connection.connect();
+
+        // connection = postgres(dbURL, {
+        //   //  host                 : '',            // Postgres ip address[s] or domain name[s]
+        //   //  port                 : 5432,          // Postgres server port[s]
+        //     database             : 'db',            // Name of database to connect to
+        //     username             : 'foo',            // Username of database user
+        //     password             : 'bar',            // Password of database user
+        // })
 
         return test_container;
 
@@ -59,29 +71,30 @@ module.exports ={
         const queryAllTables = 'SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES where (TABLE_TYPE=\'TABLE\' OR TABLE_TYPE=\'BASE TABLE\')'
                 + " AND TABLE_SCHEMA='public' ";
 
-        //TODO
-        // return new Promise(resolve => {
-        //
-        //         querySql(queryAllTables)
-        //             .then(results => {
-        //             let truncateAll= '';
-        //             let resetSeq = '';
-        //             for (const element of results){
-        //                 truncateAll += `TRUNCATE TABLE ${element.TABLE_NAME};`;
-        //                 resetSeq += `ALTER TABLE ${element.TABLE_NAME} AUTO_INCREMENT=1;`;
-        //             }
-        //
-        //             querySql(truncateAll+resetSeq).then(e=>
-        //                 querySql(enableReferentialIntegrity).then(f=>resolve())
-        //             )
-        //         })
+        return new Promise(resolve => {
 
-        return Promise.resolve();
+//            connection([queryAllTables])
+            connection.query(queryAllTables)
+                    .then(results => {
+                    let truncateAll= 'TRUNCATE TABLE ';
+                    let resetSeq = '';
+                    truncateAll += results.rows.map(_ => _.table_name).join(",")
+                    // for (const element of results.rows){
+                    //     truncateAll += `${element.table_name},`;
+                    //     //TODO
+                    //     //resetSeq += `ALTER SEQUENCE ${element.TABLE_NAME} RESTART WITH 1;`;
+                    // }
+                    truncateAll += ";"
+
+                    //connection([truncateAll+resetSeq]).then(f=>resolve())
+                    connection.query(truncateAll+resetSeq).then(f=>resolve())
+                })
+        })
     },
 
     stopDb : async () =>{
         if (connection)
-            connection.end();
+            await connection.end();
 
         if (test_container){
             await test_container.stop();
