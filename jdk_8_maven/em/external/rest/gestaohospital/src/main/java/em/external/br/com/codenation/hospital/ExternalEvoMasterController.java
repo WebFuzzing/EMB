@@ -42,7 +42,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if (!jarLocation.endsWith(".jar")) {
-            jarLocation += "/gestaohospitalar-sut.jar";
+            jarLocation += "/gestaohospital-sut.jar";
         }
 
         int timeoutSeconds = 120;
@@ -77,7 +77,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final GenericContainer<?> mongodb;
 
     public ExternalEvoMasterController() {
-        this(DEFAULT_CONTROLLER_PORT, "../target/gestaohospitalar-0.0.1.jar", DEFAULT_SUT_PORT, 120, "java");
+        this(DEFAULT_CONTROLLER_PORT, "../target/gestaohospital-sut.jar", DEFAULT_SUT_PORT, 120, "java");
     }
 
     public ExternalEvoMasterController(String jarLocation) {
