@@ -71,7 +71,7 @@
                     </execution>
                 </executions>
 				<configuration>
-					<finalName>gestaohospital</finalName>
+					<finalName>gestaohospital-rest</finalName>
 					<classifier>sut</classifier>
 				</configuration>
 			</plugin>

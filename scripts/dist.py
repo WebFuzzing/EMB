@@ -103,6 +103,9 @@ def build_jdk_8_maven() :
     copy(folder +"/cs/rest/original/restcountries/target/restcountries-sut.jar", DIST)
     copy(folder +"/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", DIST)
 
+    copy(folder +"/cs/rest-gui/gestaohospital/target/gestaohospital-rest-sut.jar", DIST)
+    copy(folder +"/em/external/rest/gestaohospital/target/gestaohospital-rest-evomaster-runner.jar", DIST)
+
     copy(folder +"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar", DIST)
     copy(folder +"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", DIST)
 
