@@ -140,6 +140,9 @@ hs_err_pid*
 /jdk_8_maven/em/embedded/graphql/graphql-scs/target
 /jdk_8_maven/em/external/graphql/graphql-ncs/target
 /jdk_8_maven/em/external/graphql/graphql-scs/target
+/jdk_8_maven/cs/rest-gui/gestaohospital/target/
+/jdk_8_maven/em/external/rest/gestaohospital/target/
+/jdk_8_maven/em/embedded/rest/gestaohospital/target/
 
 /jdk_11_maven/temp
 /jdk_11_maven/cs/rest/cwa-verification-server/target
@@ -152,8 +155,7 @@ hs_err_pid*
 /jdk_11_gradle/em/external/graphql/patio-api/build
 
 
-/jdk_8_maven/em/external/rest/restcountries/target/
-/jdk_8_maven/em/embedded/rest/restcountries/target/
+
 
 ### JavaScript
 /venv/
@@ -206,6 +208,7 @@ dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 /jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs/target/
 /jdk_8_maven/cs/rpc/thrift/artificial/thrift-scs/target/
 /jdk_8_maven/cs/rpc/thrift/artificial/thrift-ncs/target/
+
 
 
 

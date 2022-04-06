@@ -23,6 +23,7 @@
         <module>ocvn</module>
         <module>languagetool</module>
         <module>restcountries</module>
+        <module>gestaohospital</module>
     </modules>
 
 </project>
