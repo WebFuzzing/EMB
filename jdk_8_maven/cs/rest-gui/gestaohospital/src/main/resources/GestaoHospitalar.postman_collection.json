@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "d5fd816c-9b6c-4c90-8a0e-ebbae03513af",
+		"name": "GestaoHospitalar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hospitais - Insere um hospital",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 4,\n    \"name\": \"HOSPITAL INFANTIL DARCY VARGAS\",\n    \"address\": \"R. Dr. Seráfico de Assis Carvalho, 38-66 - Jardim Leonor, São Paulo - SP, 05614-040\",\n    \"beds\": 15,\n    \"availableBeds\": 1,\n    \"latitude\": \"0\",\n    \"longitude\": \"0\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hospitais - Altera um hospital",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"HOSPITAL INFANTIL DARCY VARGAS\",\n    \"address\": \"R. Dr. Seráfico de Assis Carvalho, 38-66, Jardim Leonor, São Paulo - SP, 05614-040\",\n    \"beds\": 15,\n    \"availableBeds\": 1,\n    \"latitude\": \"-23.593438\",\n    \"longitude\": \"-46.710462\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hospitais - Retorna um hospital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hospitais - Retorna uma lista com todos os hospitais",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estoque - Retorna uma lista com todos os produtos do estoque do hospital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/1/estoque",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"1",
+						"estoque"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estoque - Insere um produto no estoque do hospital",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Curativos\",\n    \"quantity\": 50,\n    \"productType\": \"COMMON\",\n    \"name\": \"Curativos\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/1/estoque",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"1",
+						"estoque"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estoque - Altera um produto no estoque do hospital",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Curativos 2\",\n    \"quantity\": 50,\n    \"productType\": \"COMMON\",\n    \"name\": \"Curativos 2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/1/estoque/5cac077fa9c6543dc892fdf9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"1",
+						"estoque",
+						"5cac077fa9c6543dc892fdf9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estoque - Remove um produto do estoque do hospital",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/1/estoque/5cac07a5a9c6543dc892fdf5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"1",
+						"estoque",
+						"5cac07a5a9c6543dc892fdf5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estoque -  Retorna um produto do estoque do hospital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/1/estoque/5cac074ea9c6543dc892fdf1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"1",
+						"estoque",
+						"5cac074ea9c6543dc892fdf1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Localizacao - Retorna dados sobre um endereço",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://us1.locationiq.com/v1/search.php?key=43b382813d8baa&q=Avenida%20Paulista%20Sao%20Paulo&format=json",
+					"protocol": "https",
+					"host": [
+						"us1",
+						"locationiq",
+						"com"
+					],
+					"path": [
+						"v1",
+						"search.php"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "43b382813d8baa"
+						},
+						{
+							"key": "q",
+							"value": "Avenida%20Paulista%20Sao%20Paulo"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Localizacao - Retorna uma lista de endereços perto de um hospital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/3/proximidades",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"3",
+						"proximidades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Localizacao - Retorna uma lista de hospitais perto de outro hospital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/hospitais/3/hospitaisproximos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"hospitais",
+						"3",
+						"hospitaisproximos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

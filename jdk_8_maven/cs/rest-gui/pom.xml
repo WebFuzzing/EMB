@@ -14,6 +14,7 @@
 
     <modules>
         <module>ocvn</module>
+        <module>gestaohospital</module>
     </modules>
 
 

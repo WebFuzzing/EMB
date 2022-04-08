@@ -69,6 +69,8 @@ We just re-implemented in different languages, and put them behind a web service
 
 * CWA-Verification-Server (Apache), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
 
+* Gestao Hospital (not-known license), from [https://github.com/ValchanOficial/GestaoHospital](https://github.com/ValchanOficial/GestaoHospital)
+
 * NCS (not-known license, artificial numerical examples coming from different sources)
 
 * SCS (not-known license, artificial string examples coming from different sources)
