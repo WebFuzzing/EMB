@@ -104,7 +104,7 @@ We just re-implemented in different languages, and put them behind a web service
 
 ### GraphQL: Java/Kotlin
 
-* Spring-Pet-Clinic (Apache ), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
+* Spring-Pet-Clinic (Apache), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
 
 * Patio-Api (GPL), from [https://github.com/patio-team/patio-api]()
 
@@ -114,6 +114,12 @@ We just re-implemented in different languages, and put them behind a web service
 
 * SCS (not-known license, artificial string examples coming from different sources)
 
+
+### GraphQL: JavaScript/TypeScript
+
+* React-Finland (not-known license), from [https://github.com/ReactFinland/graphql-api](https://github.com/ReactFinland/graphql-api)
+
+* E-Commerce Server (MIT), from [https://github.com/react-shop/react-ecommerce](https://github.com/react-shop/react-ecommerce)
 
 ### RPC (Thrift/gRPC): Java
 
