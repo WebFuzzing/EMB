@@ -4,8 +4,9 @@
   "description": "[![Build Status](https://travis-ci.org/anishkny/node-express-realworld-example-app.svg?branch=master)](https://travis-ci.org/anishkny/node-express-realworld-example-app)",
   "main": "src/index.js",
   "scripts": {
-    "build": "tsc && babel em src -d build/src --copy-files",
-    "em": "node build/src/em-main.js",
+    "build": "rimraf dist && tsc",
+    "em:run": "node instrumented/em/em-main.js",
+    "em:build": "npm run build && rimraf instrumented & babel dist -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files && babel em -d dist/em --copy-files",
     "start": "node src/index.js",
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
@@ -65,7 +66,8 @@
     "supertest": "^3.4.2",
     "ts-jest": "^25.4.0",
     "ts-node": "^8.9.1",
-    "testcontainers": "7.20.0"
+    "testcontainers": "7.20.0",
+    "rimraf": "^3.0.0"
   },
   "jest": {
     "testEnvironment": "node",
@@ -89,7 +91,7 @@
   },
   "babel": {
     "only": [
-      "src"
+      "dist"
     ],
     "plugins": [
       "module:evomaster-client-js"

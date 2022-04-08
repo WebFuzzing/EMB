@@ -83,7 +83,7 @@ class AppController  extends em.SutController {
         //note that for this sut, do not support mysql:8.*
         return new Promise(async (resolve) => {
             this.port = process.env.SUT_PORT || await getFreePort();
-            this.server = await require("../src/dist/server").bootstrap(this.port);
+            this.server = await require("../src/server").bootstrap(this.port);
             this.baseUrlOfSut = "http://localhost:" + this.port;
             resolve("http://localhost:" + this.port);
         });
@@ -93,7 +93,7 @@ class AppController  extends em.SutController {
     stopSut() {
         return new Promise( (async resolve => {
                 await dbHandler.stopDb();
-                await require("../src/dist/server").stop().then(()=>{
+                await require("../src/server").stop().then(()=>{
                     // process.exit();
                     resolve();
                 });
