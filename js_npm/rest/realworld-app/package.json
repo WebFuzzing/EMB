@@ -4,13 +4,13 @@
   "description": "[![Build Status](https://travis-ci.org/anishkny/node-express-realworld-example-app.svg?branch=master)](https://travis-ci.org/anishkny/node-express-realworld-example-app)",
   "main": "src/index.js",
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "rimraf build && tsc",
     "em:run": "cross-env NODE_ENV=em_production node instrumented/em/em-main.js",
-    "em:build": "npm run build && rimraf instrumented & babel dist -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files && babel swagger.json -d instrumented --copy-files && babel em -d dist/em --copy-files",
+    "em:build": "npm run build && rimraf instrumented & babel build -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files && babel swagger.json -d instrumented --copy-files && babel em -d build/em --copy-files",
     "start": "node src/index.js",
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
-    "start:prod": "NODE_ENV=production node src/dist/main.js",
+    "start:prod": "cross-env NODE_ENV=production node build/src/main.js",
     "test": "jest --config=jest.json",
     "test:watch": "jest --watch --config=jest.json",
     "test:coverage": "jest --config=jest.json --coverage --coverageDirectory=coverage"
@@ -92,7 +92,7 @@
   },
   "babel": {
     "only": [
-      "dist"
+      "build"
     ],
     "plugins": [
       "module:evomaster-client-js"
