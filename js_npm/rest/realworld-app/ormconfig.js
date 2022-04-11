@@ -5,11 +5,11 @@ module.exports = {
     "username": "test",
     "password": "test",
     "database": "test",
-    "entities": [ process.env.NODE_ENV == 'production' ? __dirname + '/src/build/**/**.entity.js' : (process.env.NODE_ENV == 'em_production'? __dirname + '/instrumented/src/**/**.entity.js':__dirname + '/src/src/**/**.entity.ts') ],
+    "entities": [ process.env.NODE_ENV == 'production' ? __dirname + '/build/src/**/**.entity.js' : (process.env.NODE_ENV == 'em_production'? __dirname + '/instrumented/src/**/**.entity.js':__dirname + '/build/src/**/**.entity.ts') ],
     "migrationsTableName": "migrations",
-    "migrations": [process.env.NODE_ENV == 'em_production'? "instrumented/src/database/migration/*.js": "src/database/migration/*.js"],
+    "migrations": [process.env.NODE_ENV == 'em_production'? "instrumented/src/database/migration/*.js": "build/src/database/migration/*.js"],
     "cli": {
-        "migrationsDir": process.env.NODE_ENV == 'em_production'? "instrumented/src/database/migration": "src/database/migration"
+        "migrationsDir": process.env.NODE_ENV == 'em_production'? "instrumented/src/database/migration": "build/src/database/migration"
     },
     "synchronize": true
 }

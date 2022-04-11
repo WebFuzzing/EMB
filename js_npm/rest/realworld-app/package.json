@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf build && tsc",
     "em:run": "cross-env NODE_ENV=em_production node instrumented/em/em-main.js",
-    "em:build": "npm run build && rimraf instrumented & babel build -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files && babel swagger.json -d instrumented --copy-files && babel em -d build/em --copy-files",
+    "em:build": "npm run build && rimraf instrumented & babel build -d instrumented --copy-files && babel em -d instrumented/em --copy-files && babel swagger.json -d instrumented --copy-files && babel em -d build/em --copy-files",
     "start": "node src/index.js",
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
@@ -72,7 +72,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testRegex": "[em|tests]/.*Test\\.(js|jsx|ts|tsx)$",
+    "testRegex": "[build/em|tests]/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
       "src/**/*.(js|jsx|ts|tsx)"
     ],
