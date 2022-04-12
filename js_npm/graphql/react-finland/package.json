@@ -9,14 +9,14 @@
     "generate:indices": "node utils/generate-indices.js content --verbose",
     "generate:reason-conf": "node utils/generate-reason-conf.js",
     "generate:typeof": "node utils/generate-typeof.js",
-    "build": "npm run generate:all && rimraf build && tsc && npm run instrument",
+    "build": "npm run generate:all && rimraf build && tsc",
     "lint": "tslint --config tslint.json content/**/*.ts server/**/*.ts --fix",
     "start": "tsc-watch --onSuccess \"node ./build/server\" --onFailure \"echo Beep! Compilation Failed\"",
     "heroku:start": "node ./build/server",
     "format": "prettier content/**/*.ts server/**/*.ts --write",
     "heroku-postbuild": "echo Skip build on Heroku",
-    "instrument": "rimraf instrumented && babel build -d instrumented --copy-files && babel em -d instrumented/em --copy-files",
-    "em": "node instrumented/em/em-main.js"
+    "em:build": "npm run build && rimraf instrumented && babel build -d instrumented --copy-files && babel em -d instrumented/em --copy-files && babel em -d build/em --copy-files",
+    "em:run": "node instrumented/em/em-main.js"
   },
   "keywords": [],
   "author": "",
@@ -56,7 +56,9 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
     "@babel/cli": "7.8.4",
-    "@babel/core": "7.8.4"
+    "@babel/core": "7.8.4",
+    "superagent": "5.2.2",
+    "jest": "27.0.6"
   },
   "repository": {
     "type": "git",
@@ -118,7 +120,6 @@
     "zerofill": "^0.1.0",
     "evomaster-client-js": "file:../../evomaster-client-js"
   },
-
   "lint-staged": {
     "*.--write": [
       "prettier --write",
@@ -133,5 +134,9 @@
     "plugins": [
       "module:evomaster-client-js"
     ]
+  },
+  "jest": {
+    "rootDir": "build/em",
+    "testRegex": ".*Test.js$"
   }
 }
