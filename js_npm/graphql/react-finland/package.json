@@ -9,7 +9,7 @@
     "generate:indices": "node utils/generate-indices.js content --verbose",
     "generate:reason-conf": "node utils/generate-reason-conf.js",
     "generate:typeof": "node utils/generate-typeof.js",
-    "build": "npm run generate:all && rimraf build && tsc",
+    "build": "npm run generate:all && rimraf build && rimraf node_modules/@types/prettier && tsc",
     "lint": "tslint --config tslint.json content/**/*.ts server/**/*.ts --fix",
     "start": "tsc-watch --onSuccess \"node ./build/server\" --onFailure \"echo Beep! Compilation Failed\"",
     "heroku:start": "node ./build/server",
