@@ -1,21 +1,9 @@
 const dbHandler = require("./db-handler");
-
-const http  = require("http");
-const {AddressInfo}  = require("net");
-
 const em = require("evomaster-client-js");
 
 
 class AppController extends em.SutController {
 
-
-    setupForGeneratedTest(){
-
-        return new Promise((resolve)=>{
-            this.testcontainer = dbHandler.startDb();
-            resolve(this.testcontainer);
-        });
-    }
 
     getInfoForAuthentication(){
         return [];
@@ -44,10 +32,15 @@ class AppController extends em.SutController {
     }
 
     startSut(){
-        const app = require("../src/server");
-        return new Promise( (resolve) => {
+        return new Promise( async (resolve) => {
+
+            await dbHandler.startDb();
+
+            const app = require("../src/server");
+
             this.port = require('../src/config/index').port;
-            this.server = app.listen(this.port, "localhost", () => {
+            this.server = app.listen(0, "localhost", () => {
+                this.port = this.server.address().port;
                 resolve("http://localhost:" + this.port);
             });
         });
