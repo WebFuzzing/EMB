@@ -6,9 +6,6 @@ const superagent = require("superagent");
 
 class AppController extends em.SutController {
 
-    setupForGeneratedTest() {
-    }
-
     getInfoForAuthentication() {
         let jwtLogin = new em.dto.JsonTokenPostLoginDto();
         jwtLogin.endpoint = "/graphql";

@@ -6,8 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "nest build && npm run instrument",
+    "prebuild": "rimraf build",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
@@ -19,8 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "instrument": "rimraf instrumented && babel dist em -d instrumented/src --copy-files ",
-    "em": "node instrumented/src/em-main.js"
+    "em:run": "node instrumented/em/em-main.js",
+    "em:build": "npm run build && rimraf instrumented && babel build -d instrumented --copy-files && babel em -d instrumented/em --copy-files &&  babel em -d build/em --copy-files "
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -78,7 +78,7 @@
   },
   "babel": {
     "only": [
-      "dist"
+      "build"
     ],
     "plugins": [
       "module:evomaster-client-js"
@@ -90,11 +90,8 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
+    "rootDir": "build/em",
+    "testRegex": ".*Test.js$",
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
