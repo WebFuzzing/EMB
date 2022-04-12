@@ -173,7 +173,7 @@ def buildJS(path, name):
     if res != 0:
         print("\nERROR installing packages with NPM in " + path)
         exit(1)
-    res = run(["npm", "run", "build"], shell=SHELL, cwd=path).returncode
+    res = run(["npm", "run", "em:build"], shell=SHELL, cwd=path).returncode
     if res != 0:
         print("\nERROR when building " + path)
         exit(1)
