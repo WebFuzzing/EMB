@@ -1,4 +1,4 @@
-require( "reflect-metadata");
+
 
 const AppController = require("./app-driver");
 const em = require("evomaster-client-js");

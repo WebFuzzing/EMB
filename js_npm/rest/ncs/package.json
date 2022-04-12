@@ -16,13 +16,13 @@
     "jest": "24.9.0",
     "dedent": "0.7.0",
     "superagent": "5.2.2",
-    "supertest": "4.0.2"
+    "supertest": "4.0.2",
+    "rimraf": "^3.0.0"
   },
   "scripts": {
-    "check": "babel src -d check",
-    "build": "babel  em src -d build/src --copy-files",
     "test": "jest --coverage",
-    "em": "node build/src/em-main.js"
+    "em:build": "rimraf instrumented && babel  src -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files",
+    "em:run": "node instrumented/em/em-main.js"
   },
   "babel": {
     "only": [

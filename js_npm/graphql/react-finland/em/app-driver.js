@@ -1,10 +1,11 @@
+require( "reflect-metadata");
+
 const http  = require("http");
 const {AddressInfo}  = require("net");
 
 const em = require("evomaster-client-js");
 
 const createApp = require("../server/app").default;
-
 
 
 class AppController  extends em.SutController {

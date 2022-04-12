@@ -13,9 +13,6 @@
     "covid"
   ],
   "scripts": {
-    "check": "babel src -d check",
-    "build": "babel em src -d build/src --copy-files",
-    "em": "node build/src/em-main.js",
     "updateCheck": "node src/updateCheck.js",
     "start": "node src/serverStart.js",
     "start:scraper": "node --insecure-http-parser src/serverScraper.js",
@@ -24,7 +21,9 @@
     "lint": "eslint 'src/**/*.js'",
     "lint:fix": "eslint ./src/**/*.js --fix",
     "lint:win32": "eslint ./src/**/*.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "em:build": "rimraf instrumented && babel src -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files",
+    "em:run": "node instrumented/em/em-main.js"
   },
   "dependencies": {
     "@sentry/node": "5.12.2",
@@ -57,7 +56,8 @@
     "dedent": "0.7.0",
     "superagent": "5.2.2",
     "supertest": "4.0.2",
-    "testcontainers": "7.20.0"
+    "testcontainers": "7.20.0",
+    "rimraf": "^3.0.0"
   },
   "babel": {
     "only": [

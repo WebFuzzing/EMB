@@ -9,12 +9,6 @@ const em = require("evomaster-client-js");
 
 class AppController  extends em.SutController {
 
-    setupForGeneratedTest(){
-        return new Promise((resolve)=>{
-            this.testcontainer = dbHandler.startDb();
-            resolve(this.testcontainer);
-        });
-    }
 
     getInfoForAuthentication(){
         return [];
@@ -27,7 +21,6 @@ class AppController  extends em.SutController {
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
         dto.openApiUrl = "http://localhost:" + this.port + "/swagger.json";
-
         return dto;
     }
 
@@ -39,15 +32,21 @@ class AppController  extends em.SutController {
     }
 
     resetStateOfSUT(){
-        dbHandler.cleanDb();
-        return Promise.resolve();
-
+        return new Promise(async (resolve) => {
+            await dbHandler.cleanDb();
+            resolve();
+        });
     }
 
     startSut(){
         //docker run -p 27017:27017 mongo
-        return new Promise( (resolve) => {
-            this.server = require("../src/app").listen(0, "localhost", () => {
+        return new Promise( async (resolve) => {
+
+           await dbHandler.startDb();
+
+            const app =  require("../src/app");
+
+            this.server = app.listen(0, "localhost", () => {
                 this.port = this.server.address().port;
                 resolve("http://localhost:" + this.port);
             });
@@ -55,8 +54,7 @@ class AppController  extends em.SutController {
     }
 
     stopSut() {
-        return new Promise( (resolve) =>
-            {
+        return new Promise( (resolve) => {
                 this.server.close( () => {
                     // https://mongoosejs.com/docs/api/connection.html#connection_Connection-readyState
                     mongoose.connection.close();

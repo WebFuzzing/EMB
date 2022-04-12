@@ -1,21 +1,10 @@
 const dbHandler = require("./db-handler");
-const {getFreePort} =require("./get-free-port")
-const http  = require("http");
-
-const em= require("evomaster-client-js");
-const mongoose = require('mongoose');
+const em = require("evomaster-client-js");
 
 
 class AppController extends em.SutController {
 
-    setupForGeneratedTest(){
-        return new Promise((resolve)=>{
-            this.testcontainer = dbHandler.startDb();
-            resolve(this.testcontainer);
-        });
-    }
-
-    getInfoForAuthentication(){
+    getInfoForAuthentication() {
         let header = new em.dto.HeaderDto();
         header.name = "spaceX-key";
         header.value = "foo";
@@ -35,14 +24,14 @@ class AppController extends em.SutController {
         return dto;
     }
 
-    isSutRunning(){
+    isSutRunning() {
         if (!this.server) {
             return false;
         }
         return this.server.listening;
     }
 
-    resetStateOfSUT(){
+    resetStateOfSUT() {
         return new Promise((async resolve => {
             await dbHandler.cleanDb();
             dbHandler.initAuth('foo');
@@ -50,22 +39,24 @@ class AppController extends em.SutController {
         }))
     }
 
-    startSut(){
-        return new Promise( (resolve) => {
-            getFreePort().then((value)=>{
-                this.port = value;
-                this.server = require("./appAPIs");
-                this.server.listen(this.port, "localhost", () => {
-                    resolve("http://localhost:" + this.port);
-                });
-            })
+    startSut() {
+        return new Promise(async (resolve) => {
+
+            await dbHandler.startDb();
+
+            this.server = require("./appAPIs");
+            this.server.listen(0, "localhost", () => {
+                this.port = this.server.address().port;
+                resolve("http://localhost:" + this.port);
+            });
+
         });
     }
 
     stopSut() {
-        return new Promise( (async resolve => {
+        return new Promise((async resolve => {
                 await dbHandler.stopDb();
-                this.server.close( () => {
+                this.server.close(() => {
                     process.exit();
                     resolve();
                 });

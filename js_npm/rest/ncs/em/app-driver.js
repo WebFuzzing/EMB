@@ -1,16 +1,8 @@
-const http  = require("http");
-const {AddressInfo}  = require("net");
-
 const app = require("../src/app");
-
 const em = require("evomaster-client-js");
 
 
 class AppController  extends em.SutController {
-
-    setupForGeneratedTest(){
-        return Promise.resolve();
-    }
 
     getInfoForAuthentication(){
         return [];

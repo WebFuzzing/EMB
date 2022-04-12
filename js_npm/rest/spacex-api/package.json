@@ -4,13 +4,13 @@
   "description": "Open Source REST API for data about SpaceX",
   "main": "server.js",
   "scripts": {
-    "build": "babel em src -d build/src --copy-files",
-    "em": "node build/src/em-main.js",
     "test": "npm run lint && npm run check-dependencies && jest --silent --verbose",
     "start": "node src/server.js",
     "worker": "node src/jobs/worker.js",
     "lint": "eslint .",
-    "check-dependencies": "npx depcheck --ignores=\"pino-pretty\""
+    "check-dependencies": "npx depcheck --ignores=\"pino-pretty\"",
+    "em:build": "rimraf instrumented && babel src -d instrumented/src --copy-files && babel em -d instrumented/em --copy-files",
+    "em:run": "node instrumented/em/em-main.js"
   },
   "repository": {
     "type": "git",
@@ -72,7 +72,8 @@
     "evomaster-client-js": "file:../../evomaster-client-js",
     "superagent": "5.2.2",
     "supertest": "4.0.2",
-    "testcontainers": "6.3.0"
+    "testcontainers": "6.3.0",
+    "rimraf": "^3.0.0"
   },
   "jest": {
     "testEnvironment": "node",

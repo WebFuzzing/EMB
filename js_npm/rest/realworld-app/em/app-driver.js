@@ -1,21 +1,13 @@
+require('ts-node/register');
+
 const dbHandler = require("./db-handler");
-const http  = require("http");
-const {AddressInfo}  = require("net");
-
-// const app = require("../src/dist/server");
-
 const em = require("evomaster-client-js");
 const superagent = require("superagent");
-const {getFreePort} =require("./get-free-port")
+const {getConnectionOptions} = require("typeorm");
+const {NestFactory} = require("@nestjs/core");
+
 
 class AppController  extends em.SutController {
-
-    setupForGeneratedTest(){
-        return new Promise((resolve)=>{
-            this.testcontainer = dbHandler.startDb();
-            resolve(this.testcontainer);
-        });
-    }
 
     getInfoForAuthentication(){
         let jwtLogin = new em.dto.JsonTokenPostLoginDto();
@@ -78,14 +70,36 @@ class AppController  extends em.SutController {
     }
 
     startSut(){
-        //TODO clean mysql db
-        //docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test  -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5.7.22
-        //note that for this sut, do not support mysql:8.*
+
         return new Promise(async (resolve) => {
-            this.port = process.env.SUT_PORT || await getFreePort();
-            this.server = await require("../src/dist/server").bootstrap(this.port);
-            this.baseUrlOfSut = "http://localhost:" + this.port;
-            resolve("http://localhost:" + this.port);
+
+            //docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test  -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5.7.22
+            //note that for this sut, do not support mysql:8.*
+            await dbHandler.startDb();
+
+            const connectionOptions = await getConnectionOptions();
+            // modify the value of port
+            Object.assign(connectionOptions, { port: process.env.DB_PORT || 3306});
+
+            const {ApplicationModule} = require("../src/app.module");
+
+            const appOptions = {cors: true};
+            const app = await NestFactory.create(ApplicationModule, appOptions);
+            app.setGlobalPrefix('api');
+
+            app.use('/swagger.json', (req, res) => {
+                res.status(200);
+                res.json(require('../swagger.json'));
+            });
+
+            app.listen(0, "localhost", () => {
+                this.server = app.getHttpServer();
+                this.port = this.server.address().port;
+                const url = "http://localhost:" + this.port;
+                this.baseUrlOfSut = url;
+                console.log("Started API at: " + url)
+                resolve(url);
+            });
         });
 
     }
@@ -93,11 +107,7 @@ class AppController  extends em.SutController {
     stopSut() {
         return new Promise( (async resolve => {
                 await dbHandler.stopDb();
-                await require("../src/dist/server").stop().then(()=>{
-                    // process.exit();
-                    resolve();
-                });
-
+                this.server.close(() => resolve())
             })
         );
     }

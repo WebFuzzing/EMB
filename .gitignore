@@ -159,27 +159,35 @@ hs_err_pid*
 
 ### JavaScript
 /venv/
-/js_npm/rest/ncs/build/
 /js_npm/evomaster-client-js/
+/js_npm/rest/ncs/build/
+/js_npm/rest/ncs/instrumented/
 /js_npm/rest/ncs/node_modules/
 /js_npm/rest/ncs/em/EvoMasterTest.js
 /js_npm/rest/ncs/coverage/
 /js_npm/rest/cyclotron/node_modules/
 /js_npm/rest/cyclotron/build/
+/js_npm/rest/cyclotron/instrumented/
 /js_npm/rest/cyclotron/em/EvoMasterTest.js
 /js_npm/rest/cyclotron/em/samples
 /js_npm/rest/cyclotron/coverage/
 /js_npm/rest/scs/node_modules/
 /js_npm/rest/scs/build/
+/js_npm/rest/scs/instrumented/
 /js_npm/rest/scs/em/EvoMasterTest.js
 /js_npm/rest/disease-sh-api/node_modules/
 /js_npm/rest/disease-sh-api/build/
+/js_npm/rest/disease-sh-api/instrumented/
 /js_npm/rest/disease-sh-api/EvoMasterTest.js
 /js_npm/rest/disease-sh-api/redis/
 /js_npm/rest/realworld-app/node_modules/
 /js_npm/rest/realworld-app/build/
+/js_npm/rest/realworld-app/instrumented/
+/js_npm/rest/realworld-app/dist/
+/js_npm/rest/realworld-app/instrumented/
 /js_npm/rest/spacex-api/node_modules/
 /js_npm/rest/spacex-api/build/
+/js_npm/rest/spacex-api/instrumented/
 /js_npm/graphql/react-finland/build/
 /js_npm/graphql/react-finland/.idea/
 /js_npm/graphql/react-finland/node_modules/
@@ -189,7 +197,6 @@ hs_err_pid*
 /js_npm/graphql/ecommerce-server/node_modules/
 /js_npm/graphql/ecommerce-server/instrumented/
 /js_npm/graphql/ecommerce-server/src/graphql/schemas/schema.gql
-
 
 #DotNet
 [Dd]ebug/
@@ -208,6 +215,7 @@ dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 /jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs/target/
 /jdk_8_maven/cs/rpc/thrift/artificial/thrift-scs/target/
 /jdk_8_maven/cs/rpc/thrift/artificial/thrift-ncs/target/
+
 
 
 
