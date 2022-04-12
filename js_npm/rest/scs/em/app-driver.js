@@ -1,16 +1,8 @@
-const http  = require("http");
-const {AddressInfo}  = require("net");
-
 const app = require("../src/app");
-
 const em = require("evomaster-client-js");
 
 
 class AppController  extends em.SutController {
-
-    setupForGeneratedTest(){
-        return Promise.resolve();
-    }
 
     getInfoForAuthentication(){
         return [];
@@ -23,7 +15,6 @@ class AppController  extends em.SutController {
     getProblemInfo() {
         const dto = new em.dto.RestProblemDto();
         dto.openApiUrl = "http://localhost:" + this.port + "/swagger.json";
-
         return dto;
     }
 
