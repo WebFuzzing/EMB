@@ -1,7 +1,6 @@
 const dbHandler = require("./db-handler");
 const em = require("evomaster-client-js");
 const http = require("http");
-const app = require("../src/app");
 
 
 class AppController extends em.SutController {
@@ -47,7 +46,7 @@ class AppController extends em.SutController {
             await dbHandler.startDb();
 
             const app = require("../src/app");
-            const server = http.createServer(app.callback());
+            this.server = http.createServer(app.callback());
             this.server.listen(0, "localhost", () => {
                 this.port = this.server.address().port;
                 resolve("http://localhost:" + this.port);
