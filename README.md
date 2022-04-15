@@ -170,14 +170,14 @@ In the built `dist` folder, the files will be organized as follows:
 
 * For JVM: `<name>-sut.jar` will be the non-instrumented SUTs, whereas their executable drivers will be called `<name>-evomaster-runner.jar`.
  Instrumentation can be done at runtime by attaching the `evomaster-agent.jar` JavaAgent. If you are running experiments with EvoMaster, this will be automatically attached when running experiments with `exp.py` (available in the EvoMaster's repository). Or it can be attached manually with JVM option `-Devomaster.instrumentation.jar.path=evomaster-agent.jar` when starting the driver.
-* For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `build`.
+* For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `instrumented`. If the SUT is written in TypeScript, then the compiled version will be under `build`.
 * For .NET: currently only the instrumented version is available (WORK IN PROGRESS)
 
 
 
 For running experiments with EvoMaster, you can also "start" each driver directly from an IDE (e.g., IntelliJ).
 Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by EvoMaster.
-For JavaScript, you need to use the files `em-main.js`.
+For JavaScript, you need to use the files `em-main.js` under the `instrumented/em` folders.
 
 
 
@@ -198,6 +198,7 @@ Note: building a top-module will build as well all of its internal submodules.
 Regarding JavaScript, unfortunately NodeJS does not have a good handling of multi-module projects.
 Each SUT has to be built separately.
 However, for each SUT, we put its source code under a folder called `src`, whereas all the code related to the drivers is under `em`.
+Currently, both NodeJS `14` and `16` should work on these SUTs.
 
 The driver classes for Java and .NET are called `EmbeddedEvoMasterController`.
 For JavaScript, they are in a script file called `app-driver.js`.
