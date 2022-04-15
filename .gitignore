@@ -175,19 +175,23 @@ hs_err_pid*
 /js_npm/rest/scs/build/
 /js_npm/rest/scs/instrumented/
 /js_npm/rest/scs/em/EvoMasterTest.js
+/js_npm/rest/scs/coverage/
 /js_npm/rest/disease-sh-api/node_modules/
 /js_npm/rest/disease-sh-api/build/
 /js_npm/rest/disease-sh-api/instrumented/
 /js_npm/rest/disease-sh-api/EvoMasterTest.js
 /js_npm/rest/disease-sh-api/redis/
+/js_npm/rest/disease-sh-api/coverage/
 /js_npm/rest/realworld-app/node_modules/
 /js_npm/rest/realworld-app/build/
 /js_npm/rest/realworld-app/instrumented/
 /js_npm/rest/realworld-app/dist/
 /js_npm/rest/realworld-app/instrumented/
+/js_npm/rest/realworld-app/coverage/
 /js_npm/rest/spacex-api/node_modules/
 /js_npm/rest/spacex-api/build/
 /js_npm/rest/spacex-api/instrumented/
+/js_npm/rest/spacex-api/coverage/
 /js_npm/graphql/react-finland/build/
 /js_npm/graphql/react-finland/.idea/
 /js_npm/graphql/react-finland/node_modules/
@@ -197,6 +201,8 @@ hs_err_pid*
 /js_npm/graphql/ecommerce-server/node_modules/
 /js_npm/graphql/ecommerce-server/instrumented/
 /js_npm/graphql/ecommerce-server/src/graphql/schemas/schema.gql
+
+
 
 #DotNet
 [Dd]ebug/
