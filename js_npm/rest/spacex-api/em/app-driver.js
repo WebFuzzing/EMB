@@ -7,7 +7,7 @@ class AppController extends em.SutController {
 
     getInfoForAuthentication() {
         let header = new em.dto.HeaderDto();
-        header.name = "spaceX-key";
+        header.name = "spacex-key";
         header.value = "foo";
         let auth = new em.dto.AuthenticationDto();
         auth.name = "spaceX-foo";
