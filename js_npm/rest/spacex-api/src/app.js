@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const { requestLogger, logger } = require('./middleware/logger');
 const { responseTime, errors } = require('./middleware');
 const { v4 } = require('./routes');
+const Router = require("koa-router");
+const openapi = require("./openapi.json");
 
 const app = new Koa();
 
@@ -65,5 +67,13 @@ app.use(requestLogger);
 
 // V4 routes
 app.use(v4.routes());
+
+const router = new Router();
+router.get('/openapi.json', (ctx, next) => {
+  ctx.status = 200;
+  ctx.body = openapi;
+});
+app.use(router.routes());
+
 
 module.exports = app;

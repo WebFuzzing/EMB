@@ -13,7 +13,7 @@ if (dotenv.error) {
 }
 
 // SERVER PORT
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.PORT || process.env.SERVER_PORT || 3000;
 
 // REDIS CONFIGURATION
 config.redis.host = process.env.REDIS_HOST || (process.env.DOCKER ? 'redis' : 'localhost');

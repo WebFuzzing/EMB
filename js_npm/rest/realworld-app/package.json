@@ -4,7 +4,7 @@
   "description": "[![Build Status](https://travis-ci.org/anishkny/node-express-realworld-example-app.svg?branch=master)](https://travis-ci.org/anishkny/node-express-realworld-example-app)",
   "main": "src/index.js",
   "scripts": {
-    "build": "rimraf build && tsc",
+    "build": "rimraf build && tsc && babel swagger.json -d build --copy-files",
     "em:run": "node instrumented/em/em-main.js",
     "em:build": "npm run build && rimraf instrumented & babel build -d instrumented --copy-files && babel em -d instrumented/em --copy-files && babel swagger.json -d instrumented --copy-files && babel em -d build/em --copy-files",
     "start": "node src/index.js",

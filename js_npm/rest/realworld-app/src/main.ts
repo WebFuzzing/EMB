@@ -19,12 +19,25 @@ async function bootstrap() {
   //Man: there exists some problems with auto-generated swagger, i.e., lack of parameter info
   SwaggerModule.setup('/docs', app, document);
 
+  /*
+  Added to be able to collect coverage with C8. See:
+  https://github.com/bcoe/c8/issues/166
+*/
+//setTimeout(()=> process.exit(0), 10000)
+// process.on("SIGINT", () =>{console.log("SIGINT"); process.exit(0)})
+// process.on("SIGTERM", () =>{console.log("SIGTERM"); process.exit(0)})
+// process.on("SIGUSR1", () =>{console.log("SIGUSR1"); process.exit(0)})
+  app.getHttpAdapter().post("/shutdown", () => process.exit(0))
+
+
   app.use('/swagger.json', (req, res) => {
     res.status(200);
     res.json(require('../swagger.json'));
   });
 
+  const port = process.env.PORT || 3000;
+
   //mysql is employed, docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test  -e MYSQL_DATABASE=test -p 3306:3306 -d mysql:5.7.22
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
