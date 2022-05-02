@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "em", "em", "{7CB8449A-28CC-44AA-A07E-0B583C8E43F0}"
+	ProjectSection(SolutionItems) = preProject
+		em\common.props = em\common.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "embedded", "embedded", "{551DA5A8-231C-46C4-9D70-C940BAE06D3C}"
 EndProject
