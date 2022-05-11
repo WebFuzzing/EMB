@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Menu</RootNamespace>
 	  <AssemblyName>menu-api-evomaster-runner</AssemblyName>
+	  <StartupObject>Menu.EmbeddedEvoMasterController</StartupObject>
   </PropertyGroup>
 	
 	<Import Project="../../../common.props" />
@@ -22,7 +23,6 @@
   </Target>
 
 	<Target Name="PostClean" AfterTargets="Clean">
-		<RemoveDir Directories="generated" />
 		<RemoveDir Directories="bin-temp" />
 	</Target>
 	
@@ -48,7 +48,7 @@
 		<Copy SourceFiles="@(CurrentRuntimeConfig)" DestinationFiles="@(InstrumentationRuntimeConfig)" />
 
 		<!-- Run the instrumentation and specify bin-temp as output directory -->
-		<Exec Command="cd $(OutputPath)&#xD;&#xA;			  dotnet EvoMaster.Instrumentation.dll @(Sut) @(TempDirectory)" />
+		<Exec Command="cd $(OutputPath)&#xD;&#xA;		dotnet EvoMaster.Instrumentation.dll @(Sut) @(TempDirectory)" />
 
 	</Target>
 

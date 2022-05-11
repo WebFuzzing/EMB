@@ -4,6 +4,7 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <AssemblyName>sampleproject-evomaster-runner</AssemblyName>
+        <StartupObject>SampleProjectDriver.EmbeddedEvoMasterController</StartupObject>
     </PropertyGroup>
 
     <Import Project="../../../common.props" />

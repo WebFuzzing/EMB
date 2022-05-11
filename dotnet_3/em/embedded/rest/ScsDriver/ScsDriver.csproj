@@ -4,6 +4,7 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <AssemblyName>cs-rest-scs-evomaster-runner</AssemblyName>
+		<StartupObject>ScsDriver.EmbeddedEvoMasterController</StartupObject>
     </PropertyGroup>
 
     <Import Project="../../../common.props" />
