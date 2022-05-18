@@ -214,6 +214,10 @@ dotnet_3/em/embedded/rest/SampleProjectDriver/logs/
 .vs/
 *.launchSettings.json
 *.sln.DotSettings.user
+dotnet_3/em/embedded/rest/MenuAPIDriver/generated-tests/
+dotnet_3/em/embedded/rest/SampleProjectDriver/generated-tests/
+dotnet_3/em/embedded/rest/NcsDriver/generated-tests/
+dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 
 
 # RPC
