@@ -103,7 +103,7 @@ app.get("/api/title/:sex/:title", (req, res) => {
 
 app.get("/api/pat/:txt", (req, res) => {
 
-    const txt = rep.params.txt;
+    const txt = req.params.txt;
 
     res.json(regex(txt));
 });
