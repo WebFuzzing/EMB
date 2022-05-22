@@ -79,10 +79,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         }
 
         // need to check tablesToSkip with DATABASECHANGELOG
-        dbSpecification = Arrays.asList(new DbSpecification(){{
-            dbType = DatabaseType.H2;
-            connection = sqlConnection;
-        }});
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection));
 
         return "http://localhost:" + getSutPort();
     }
@@ -136,9 +133,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return null;
     }
 
-    public Connection getConnection() {
-        return sqlConnection;
-    }
 
 
     @Override

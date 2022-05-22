@@ -69,10 +69,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return null;
     }
 
-    @Override
-    public Connection getConnection() {
-        return null;
-    }
 
     @Override
     public ProblemInfo getProblemInfo() {

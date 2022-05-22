@@ -166,12 +166,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         closeDataBaseConnection();
 
         try {
-            Class.forName(getDatabaseDriverName());
             sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", "");
-            dbSpecification = Arrays.asList(new DbSpecification(){{
-                dbType = DatabaseType.POSTGRES;
-                schemaNames = Arrays.asList("comments");
-            }});
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
+                    .withSchemas("comments"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -223,15 +220,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
-    @Override
-    public Connection getConnection() {
-        return sqlConnection;
-    }
-
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.postgresql.Driver";
-    }
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {

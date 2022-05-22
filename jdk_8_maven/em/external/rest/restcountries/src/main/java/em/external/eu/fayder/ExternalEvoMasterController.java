@@ -137,15 +137,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
-    @Override
-    public Connection getConnection() {
-        return null;
-    }
-
-    @Override
-    public String getDatabaseDriverName() {
-        return null;
-    }
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {

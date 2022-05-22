@@ -92,13 +92,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
 
-        dbSpecification = Arrays.asList(new DbSpecification(){{
-            dbType = DatabaseType.POSTGRES;
-            connection = sqlConnection;
-            schemaNames = Arrays.asList("public");
-            //initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
-            employSmartDbClean = false;
-        }});
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
+                .withSchemas("public").withDisabledSmartClean());
 
         SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
 
@@ -150,14 +145,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return null;
     }
 
-    public Connection getConnection() {
-        return sqlConnection;
-    }
-
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.postgresql.Driver";
-    }
 
     @Override
     public List<DbSpecification> getDbSpecifications() {

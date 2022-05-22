@@ -88,14 +88,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return null;
     }
 
-    public Connection getConnection() {
-        return null;
-    }
 
-    @Override
-    public String getDatabaseDriverName() {
-        return null;
-    }
 
     @Override
     public ProblemInfo getProblemInfo() {

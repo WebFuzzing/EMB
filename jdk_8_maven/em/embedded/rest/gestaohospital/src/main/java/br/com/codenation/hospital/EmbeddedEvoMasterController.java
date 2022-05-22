@@ -129,15 +129,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return null;
     }
 
-    /**
-     * Returns null since the case study has no JDBC Connection
-     *
-     * @return
-     */
-    @Override
-    public Connection getConnection() {
-        return null;
-    }
+
 
 
     @Override

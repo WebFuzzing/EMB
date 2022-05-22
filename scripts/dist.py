@@ -256,7 +256,8 @@ build_jdk_11_maven()
 build_jdk_11_gradle()
 build_js_npm()
 
-build_dotnet_3()
+## Disabled for now
+#build_dotnet_3()
 
 
 copyEvoMasterAgent()
