@@ -130,15 +130,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return null;
     }
 
-    @Override
-    public Connection getConnection() {
-        return null;
-    }
 
-    @Override
-    public String getDatabaseDriverName() {
-        return null;
-    }
 
     @Override
     public ProblemInfo getProblemInfo() {

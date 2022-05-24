@@ -186,11 +186,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = Arrays.asList(new DbSpecification(){{
-                dbType = DatabaseType.H2;
-                connection = sqlConnection;
-                initSqlOnResourcePath = "/init_db.sql";
-            }});
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
+                    .withInitSqlOnResourcePath("/init_db.sql"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -243,15 +240,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return Arrays.asList(AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"));
     }
 
-    @Override
-    public Connection getConnection() {
-        return sqlConnection;
-    }
 
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.h2.Driver";
-    }
 
     @Override
     public List<DbSpecification> getDbSpecifications() {

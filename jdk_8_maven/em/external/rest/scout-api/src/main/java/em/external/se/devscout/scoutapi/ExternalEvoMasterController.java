@@ -196,11 +196,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = Arrays.asList(new DbSpecification(){{
-                dbType = DatabaseType.H2;
-                connection = sqlConnection;
-                employSmartDbClean = false;
-            }});
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
+                    .withDisabledSmartClean());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -267,15 +264,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         );
     }
 
-    @Override
-    public Connection getConnection() {
-        return sqlConnection;
-    }
-
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.h2.Driver";
-    }
 
     @Override
     public List<DbSpecification> getDbSpecifications() {

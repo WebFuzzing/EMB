@@ -101,11 +101,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        dbSpecification = Arrays.asList(new DbSpecification(){{
-            dbType = DatabaseType.H2;
-            connection = sqlConnection;
-            initSqlOnResourcePath = "/init_db.sql";
-        }});
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
+                .withInitSqlOnResourcePath("/init_db.sql"));
 
         return "http://localhost:" + getSutPort();
     }
@@ -148,11 +145,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"));
-    }
-
-    @Override
-    public Connection getConnection() {
-        return sqlConnection;
     }
 
 

@@ -223,10 +223,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return List.of(AuthUtils.getForAuthorizationHeader("user", "u33707283d426f900d4d33707283d426f900d4d0d"));
     }
 
-    @Override
-    public Connection getConnection() {
-        return null;
-    }
+
 
     @Override
     public List<DbSpecification> getDbSpecifications() {

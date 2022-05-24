@@ -88,11 +88,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         sqlConnection = application.getConnection();
 
-        dbSpecification = Arrays.asList(new DbSpecification(){{
-            dbType = DatabaseType.H2;
-            connection = sqlConnection;
-            employSmartDbClean = false;
-        }});
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
+                .withDisabledSmartClean());
 
         resetStateOfSUT();
 
@@ -151,15 +148,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         );
     }
 
-    @Override
-    public Connection getConnection() {
-        return sqlConnection;
-    }
 
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.h2.Driver";
-    }
 
     @Override
     public ProblemInfo getProblemInfo() {

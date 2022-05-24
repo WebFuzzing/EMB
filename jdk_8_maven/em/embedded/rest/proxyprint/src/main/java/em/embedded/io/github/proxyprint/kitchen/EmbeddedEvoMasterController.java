@@ -82,11 +82,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
-        dbSpecification = Arrays.asList(new DbSpecification(){{
-            dbType = DatabaseType.H2;
-            connection = sqlConnection;
-            employSmartDbClean = false;
-        }});
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
+                .withDisabledSmartClean());
 
         return "http://localhost:" + getSutPort();
     }
@@ -163,16 +160,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
-
-
-    public Connection getConnection() {
-        return sqlConnection;
-    }
-
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.h2.Driver";
-    }
 
 
     @Override

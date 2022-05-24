@@ -173,9 +173,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return List.of(AuthUtils.getForAuthorizationHeader("user", "u33707283d426f900d4d33707283d426f900d4d0d"));
     }
 
-    public Connection getConnection() {
-        return null;
-    }
 
 
     private void deleteDir(File file) {

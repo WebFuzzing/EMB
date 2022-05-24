@@ -94,13 +94,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
-        dbSpecification = Arrays.asList(new DbSpecification(){{
-            dbType = DatabaseType.POSTGRES;
-            schemaNames = Arrays.asList("public");
-//            initSqlOnResourcePath = "/initDb.sql";
-            connection = sqlConnection;
-            employSmartDbClean = false;
-        }});
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
+                .withSchemas("public").withDisabledSmartClean());
+        //            initSqlOnResourcePath = "/initDb.sql";
 
         return "http://localhost:" + getSutPort();
     }
@@ -163,14 +159,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return List.of(dto);
     }
 
-    public Connection getConnection() {
-        return sqlConnection;
-    }
 
-    @Override
-    public String getDatabaseDriverName() {
-        return "org.postgresql.Driver";
-    }
+
+
 
     public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
