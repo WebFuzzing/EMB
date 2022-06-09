@@ -75,6 +75,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setJavaCommand(command);
     }
 
+    public ExternalEvoMasterController(String jarLocation){
+        this(40100, jarLocation, 12345, 120, "java");
+    }
 
     @Override
     public String[] getInputParameters() {
@@ -155,7 +158,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         return new RPCProblem(new HashMap<String, Object>() {{
             put(NcsService.Iface.class.getName(), client);
-        }}, RPCType.THRIFT);
+        }});
     }
 
     @Override
