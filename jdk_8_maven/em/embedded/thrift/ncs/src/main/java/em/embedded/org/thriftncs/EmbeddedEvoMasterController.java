@@ -9,6 +9,7 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.problem.rpc.RPCType;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RPCProblem;
@@ -75,7 +76,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         return new RPCProblem(new HashMap<String, Object>() {{
             put(NcsService.Iface.class.getName(), client);
-        }});
+        }}, RPCType.THRIFT);
     }
 
     @Override
