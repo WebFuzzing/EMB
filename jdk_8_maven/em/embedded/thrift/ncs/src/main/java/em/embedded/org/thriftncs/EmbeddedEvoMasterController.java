@@ -76,7 +76,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         return new RPCProblem(new HashMap<String, Object>() {{
             put(NcsService.Iface.class.getName(), client);
-        }}, RPCType.THRIFT);
+        }});
     }
 
     @Override

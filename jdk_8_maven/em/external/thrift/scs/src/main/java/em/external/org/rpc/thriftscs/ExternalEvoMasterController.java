@@ -67,6 +67,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this(40100, "cs/rpc/thrift/artificial/thrift-scs/target/rpc-thrift-scs-sut.jar", 12345, 120, "java");
     }
 
+    public ExternalEvoMasterController(String jarLocation){
+        this(40100, jarLocation, 12345, 120, "java");
+    }
+
     public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds, String command) {
         this.sutPort = sutPort;
         this.jarLocation = jarLocation;
@@ -154,7 +158,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         return new RPCProblem(new HashMap<String, Object>() {{
             put(ScsService.Iface.class.getName(), client);
-        }}, RPCType.THRIFT);
+        }});
     }
 
     @Override
