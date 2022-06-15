@@ -131,7 +131,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Ddw.securityConfiguration.localAuthentication.permissionConfig="+tmpFolder +"/permissionConfig.json",
                 "-Ddw.securityConfiguration.localAuthentication.loginsFilePath="+tmpFolder+"/logins.json",
                 "-Ddw.securityConfiguration.localAuthentication.usersFilePath="+tmpFolder + "/users.json",
-                "-Ddw.server.adminConnectors[0].port="+(sutPort+1),
+//                "-Ddw.server.adminConnectors[0].port="+(sutPort+1),
                 "-Ddw.baseUri=http://localhost:0",
                 "-Ddw.collectionFilters.elasticsearch.hostname="+elasticsearch.getContainerIpAddress(),
                 "-Ddw.collectionFilters.elasticsearch.port="+elasticsearch.getMappedPort(9200),

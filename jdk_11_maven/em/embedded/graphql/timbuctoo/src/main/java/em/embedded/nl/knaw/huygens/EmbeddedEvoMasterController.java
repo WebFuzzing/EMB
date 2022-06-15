@@ -1,6 +1,9 @@
 package em.embedded.nl.knaw.huygens;
 
 
+import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
+import io.dropwizard.setup.Bootstrap;
+import nl.knaw.huygens.timbuctoo.server.TimbuctooConfiguration;
 import nl.knaw.huygens.timbuctoo.server.TimbuctooV4;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -16,9 +19,8 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.util.Collections;
 import java.util.List;
+
 
 /**
  * Class used to start/stop the SUT. This will be controller by the EvoMaster process
@@ -63,7 +65,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         elasticsearch.start();
 
-        application = new TimbuctooV4();
+        //application = new TimbuctooV4();
+        application = new TimbuctooResource();
 
         tmpFolder = "tmpFolder";
 
@@ -74,7 +77,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("dw.securityConfiguration.localAuthentication.permissionConfig",tmpFolder +"/permissionConfig.json");
         System.setProperty("dw.securityConfiguration.localAuthentication.loginsFilePath", tmpFolder+"/logins.json");
         System.setProperty("dw.securityConfiguration.localAuthentication.usersFilePath", tmpFolder + "/users.json");
-        System.setProperty("dw.server.adminConnectors[0].port","8081");
+//        System.setProperty("dw.server.adminConnectors[0].port","8081");
+//        System.setProperty("dw.server.adminConnectors","[]");
         System.setProperty("dw.baseUri","http://localhost:0");
         System.setProperty("dw.collectionFilters.elasticsearch.hostname", "" + elasticsearch.getContainerIpAddress());
         System.setProperty("dw.collectionFilters.elasticsearch.port",""+elasticsearch.getMappedPort(9200));
@@ -88,7 +92,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
         try {
-            application.run("server", "em/embedded/graphql/timbuctoo/src/main/resources/timbuctoo_evomaster.yaml");
+            application.run("server",
+                    //"em/embedded/graphql/timbuctoo/src/main/resources/timbuctoo_evomaster.yaml"
+                    "/timbuctoo_evomaster.yaml"
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -187,4 +194,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             System.err.println("FAILED TO DELETE: " + file.getAbsolutePath());
         }
     }
+}
+
+
+class TimbuctooResource extends TimbuctooV4{
+
+    @Override
+    public void initialize(Bootstrap<TimbuctooConfiguration> bootstrap) {
+        super.initialize(bootstrap);
+        bootstrap.setConfigurationSourceProvider(new ResourceConfigurationSourceProvider());
+    }
+
 }

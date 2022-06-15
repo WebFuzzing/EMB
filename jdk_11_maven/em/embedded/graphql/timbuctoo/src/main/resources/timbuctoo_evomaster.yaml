@@ -131,8 +131,8 @@ server:
   applicationConnectors:
     - type: http #Note! if you change this you might or might not also want to change the baseUri
 #      port: $#{timbuctoo_port} #Note! if you change this you might or might not also want to change the baseUri
-  adminConnectors:
-    - type: http
+  adminConnectors: []
+    #- type: http
 #      port: $#{timbuctoo_adminPort}
   requestLog:
     appenders: [] #All requests are already logged using logging.LoggingFilter so the seperate requestlog is not needed
