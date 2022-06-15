@@ -9,6 +9,7 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.problem.rpc.RPCType;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RPCProblem;
@@ -64,6 +65,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     public ExternalEvoMasterController() {
         this(40100, "cs/rpc/thrift/artificial/thrift-scs/target/rpc-thrift-scs-sut.jar", 12345, 120, "java");
+    }
+
+    public ExternalEvoMasterController(String jarLocation){
+        this(40100, jarLocation, 12345, 120, "java");
     }
 
     public ExternalEvoMasterController(int controllerPort, String jarLocation, int sutPort, int timeoutSeconds, String command) {

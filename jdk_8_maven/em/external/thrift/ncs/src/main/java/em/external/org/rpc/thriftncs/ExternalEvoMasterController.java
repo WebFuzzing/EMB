@@ -9,6 +9,7 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
+import org.evomaster.client.java.controller.api.dto.problem.rpc.RPCType;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RPCProblem;
@@ -74,6 +75,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setJavaCommand(command);
     }
 
+    public ExternalEvoMasterController(String jarLocation){
+        this(40100, jarLocation, 12345, 120, "java");
+    }
 
     @Override
     public String[] getInputParameters() {
