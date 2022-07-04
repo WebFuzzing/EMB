@@ -82,7 +82,8 @@
       "<rootDir>/tests/",
       "<rootDir>/check/",
       "<rootDir>/build/",
-      "<rootDir>/em"
+      "<rootDir>/em",
+      "<rootDir>/src"
     ]
   }
 }
