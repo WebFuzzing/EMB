@@ -29,6 +29,7 @@ module.exports ={
             .collection('users')
             .insertOne({
                 key: key,
+                //TODO some roles are missing here, eg on capsule
                 roles: [
                     'cache:clear',
                     'company:update',

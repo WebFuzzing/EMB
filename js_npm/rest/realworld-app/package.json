@@ -74,7 +74,7 @@
     "testEnvironment": "node",
     "testRegex": "[build/em|tests]/.*Test\\.(js|jsx|ts|tsx)$",
     "collectCoverageFrom": [
-      "src/**/*.(js|jsx|ts|tsx)"
+      "build/src/**/*.(js|jsx|ts|tsx)"
     ],
     "coverageReporters": [
       "json",
@@ -87,7 +87,9 @@
       "<rootDir>/check/",
       "<rootDir>/build/",
       "<rootDir>/em",
-      "<rootDir>/ormconfig.js"
+      "<rootDir>/ormconfig.js",
+      "<rootDir>/instrumented",
+      "<rootDir>/src"
     ]
   },
   "babel": {
