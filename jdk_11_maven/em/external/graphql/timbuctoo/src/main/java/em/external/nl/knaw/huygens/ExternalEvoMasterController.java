@@ -142,7 +142,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Ddw.databases.databaseLocation="+tmpFolder+"/datasets",
                 "-Ddw.databaseConfiguration.databasePath="+tmpFolder+"/neo4j",
                 "-Ddw.dataSet.dataStorage.rootDir=/datasets",
-                "-Xmx4G"
+                "-Xmx8G"
         };
     }
 
