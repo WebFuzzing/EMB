@@ -1,0 +1,128 @@
+= Simple internet-market
+
+image:https://api.codacy.com/project/badge/Grade/8c0bd51bdba44e04bd2cbbfd7f643e9f[link=https://www.codacy.com/manual/aleksey-lukyanets/market?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aleksey-lukyanets/market&amp;utm_campaign=Badge_Grade]
+image:https://api.codacy.com/project/badge/Coverage/8c0bd51bdba44e04bd2cbbfd7f643e9f[link=https://www.codacy.com/manual/aleksey-lukyanets/market?utm_source=github.com&utm_medium=referral&utm_content=aleksey-lukyanets/market&utm_campaign=Badge_Coverage]
+image:https://github.com/aleksey-lukyanets/market/workflows/build/badge.svg[link]
+
+This project was started in 2014 as a study for Spring and related web technologies,
+partly modernized in 2020-21. Since around 2014 professionally I am focused on backend development,
+a modernization/maintenance of this project continues occasionally.
+This is not a perfectly finished project, so it may contain imperfection and some mess.
+
+== Technologies
+
+* servlet: ``Spring MVC`` ``Thymeleaf`` ``jQuery`` ``Spring Security``
+* data: ``Spring Data JPA`` ``H2`` ``Hibernate``
+* RESTful service: ``Spring MVC`` ``Spring HATEOAS``
+* tests: ``JUnit`` ``Hamcrest`` ``Mockito`` ``JSONPath``
+
+== How to
+
+The project is divided to modules and includes two applications:
+
+* Web-application, module *market-web*, default port: 8080
+** visit ``localhost:8080`` and ``localhost:8080/admin`` in your browser to enjoy the app
+** visit ``localhost:8080/h2-console/`` to access H2 console
+* REST-service, module *market-rest*, default port: 8081
+** visit ``localhost:8081/products`` to observe market products
+** visit ``localhost:8081/swagger-ui/#/`` to observe Swagger API page
+** visit ``localhost:8081/h2-console/`` to access H2 console
+
+These applications are designed to use similar database scheme and could be run together.
+
+You are able to open the project in your favourite IDE and simply run the main class of the application.
+
+By default an app is started with its own in-memory https://www.h2database.com[H2 database]
+and thus all the data is dropped after stopping the app.
+To connect to a standalone https://www.postgresql.org/[PostgreSQL] database run application with active Spring profile ``prod``.
+
+=== Running with Maven
+
+Each application could be run separately by executing the following Maven command
+against a specific module:
+
+* Web-application: ``./mvnw spring-boot:run -pl market-web``
+* REST-service: ``./mvnw spring-boot:run -pl market-rest``
+
+=== Running with Docker
+
+Both applications are packed into https://docs.docker.com/[Docker] images
+(available https://hub.docker.com/u/alukyanets[on Docker Hub]).
+
+To run the Web-application with Docker you shoukd have Docker installed and follow the steps below:
+
+* pull the image from Docker Hub: ``docker pull alukyanets/market-web``
+* run a container with application listening on port 8080: ``docker run -p 8080:8080 alukyanets/market-web``
+
+Quite similar for the REST-service:
+
+* pull the image from Docker Hub: ``docker pull alukyanets/market-rest``
+* run a container with application listening on port 8081: ``docker run -p 8081:8081 alukyanets/market-rest``
+
+=== Running with docker-compose
+
+https://docs.docker.com/compose/[Docker-compose] makes possible starting with a single command
+both an application and a standalone PostgreSQL database volume:
+
+* ``docker-compose -f docker-compose-web.yaml up`` or ``docker-compose -f docker-compose-rest.yaml up``
+
+or running both applications sharing the same standalone PostgreSQL volume:
+
+* ``docker-compose -f docker-compose.yaml up``
+
+To stop the running containers use ``Ctrl + C``. You are able to remove all the containers, e.g.:
+
+* ``docker-compose -f docker-compose.yaml down``
+
+The created PostgreSQL volume will keep database state after stopping application.
+
+== Applications attributes
+
+[%header,cols=".^2,.^3,.^3",width=90%]
+|===
+| |Web application |RESTful service
+|*module* |market-web |market-rest
+|*Java version* 2+^|11
+|*main class* |``WebApplication.java`` |``RestApplication.java``
+|*default port* |8080 |8081
+|*basic URL* |``localhost:8080``, ``localhost:8080/admin`` |``localhost:8081/products``
+|*user login* 2+|``admin/password`` ``ivan.petrov@yandex.ru/petrov``
+|*logs* 2+|``logs/``
+|*H2 console* |``localhost:8080/h2-console/`` |``localhost:8081/h2-console/``
+|*Swagger UI* |- |``localhost:8081/swagger-ui/#/``
+|===
+
+== Functionality
+
+* Visual representation of the product range
+* Customer's shopping cart
+** selecting a product: add, delete, change a quantity
+** viewing the contents of the cart
+** placing an order
+** storing in the database a shopping cart of a registered customer
+* Market control panel
+** products and categories: add, edit, delete
+** viewing information about placed orders
+** managing the availability of goods in stock
+** transfer orders from the "in progress" state to the "executed" state
+* Secured access to the application
+** registration and authorization of customers
+** restricted access to the control panel
+* Double check of form content: client-side and server-side
+
+== Building Docker images
+
+To build an image run:
+
+* ``docker build -t alukyanets/market-web --build-arg module=market-web .``
+* or ``docker build -t alukyanets/market-rest --build-arg module=market-rest .``
+
+== Legacy branches
+
+``jsp-2021`` - status with web views based on JSP and Apache Tiles, before moving to Thymeleaf
+
+``good-old-2014`` - status for 2014
+
+== Links
+
+For project description in Russian from good old 2014 refer to ``README_RU.md``
