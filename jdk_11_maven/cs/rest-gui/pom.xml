@@ -4,17 +4,16 @@
 
     <parent>
         <groupId>org.evomaster</groupId>
-        <artifactId>evomaster-benchmark-jdk11</artifactId>
+        <artifactId>evomaster-benchmark-jdk11-cs</artifactId>
         <version>1.5.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-jdk11-cs</artifactId>
+    <artifactId>evomaster-benchmark-jdk11-cs-rest-gui</artifactId>
     <packaging>pom</packaging>
 
+
     <modules>
-        <module>rest</module>
-        <module>rest-gui</module>
-        <module>graphql</module>
+        <module>market</module>
     </modules>
 
 
