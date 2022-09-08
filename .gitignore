@@ -230,3 +230,7 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 
 
 
+/jdk_11_maven/tmpFolder/
+/jdk_11_maven/em/embedded/graphql/timbuctoo/tmpFolder/
+/jdk_11_maven/em/external/graphql/timbuctoo/target/
+/jdk_11_maven/em/embedded/graphql/timbuctoo/target/
