@@ -51,6 +51,8 @@ We just re-implemented in different languages, and put them behind a web service
 
 ### REST: Java/Kotlin
 
+* Market (MIT), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)
+
 * Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
 
 * Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)

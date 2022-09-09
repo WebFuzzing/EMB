@@ -230,3 +230,14 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 
 
 
+/jdk_11_maven/tmpFolder/
+/jdk_11_maven/em/embedded/graphql/timbuctoo/tmpFolder/
+/jdk_11_maven/em/external/graphql/timbuctoo/target/
+/jdk_11_maven/em/embedded/graphql/timbuctoo/target/
+/jdk_11_maven/cs/rest-gui/market/market-core/target/
+/jdk_11_maven/cs/rest-gui/market/market-coverage/target/
+/jdk_11_maven/cs/rest-gui/market/market-rest/target/
+/jdk_11_maven/cs/rest-gui/market/market-web/target/
+/jdk_11_maven/em/embedded/rest/market/target/
+/jdk_11_maven/em/external/rest/cwa-verification/temp/
+/jdk_11_maven/em/external/rest/market/target/
