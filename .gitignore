@@ -238,3 +238,4 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_11_maven/cs/rest-gui/market/market-coverage/target/
 /jdk_11_maven/cs/rest-gui/market/market-rest/target/
 /jdk_11_maven/cs/rest-gui/market/market-web/target/
+/jdk_11_maven/em/embedded/rest/market/target/
