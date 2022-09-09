@@ -1,0 +1,182 @@
+[
+    {
+        "display_id": "USP7",
+        "primary_id": "USP7",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "HAUSP"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000176903",
+        "primary_id": "OTTHUMG00000176903",
+        "version": "3",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.744146",
+        "dbname": "UniGene",
+        "ensembl_identity": 14,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 4394,
+        "xref_start": 3,
+        "xref_end": 793,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.744146",
+        "ensembl_end": 3600,
+        "version": "0",
+        "cigar_line": "735M1D30M1D26M",
+        "score": 3876,
+        "description": "Transcribed locus",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.743739",
+        "dbname": "UniGene",
+        "ensembl_identity": 9,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 5413,
+        "xref_start": 1,
+        "xref_end": 529,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.743739",
+        "ensembl_end": 4882,
+        "version": "0",
+        "cigar_line": "8M1D521M",
+        "score": 2597,
+        "description": "Transcribed locus",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.606360",
+        "dbname": "UniGene",
+        "ensembl_identity": 4,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 4732,
+        "xref_start": 2,
+        "xref_end": 243,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.606360",
+        "ensembl_end": 4489,
+        "version": "0",
+        "cigar_line": "242M",
+        "score": 1210,
+        "description": "Transcribed locus",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.386939",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 5412,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.386939",
+        "ensembl_end": 5412,
+        "version": "0",
+        "cigar_line": "5412M",
+        "score": 27060,
+        "description": "Ubiquitin specific peptidase 7 (herpes virus-associated)",
+        "xref_identity": 100,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " UBIQUITIN-SPECIFIC PROTEASE 7 [*602519]",
+        "primary_id": "602519",
+        "version": "0",
+        "description": " UBIQUITIN-SPECIFIC PROTEASE 7; USP7",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "USP7",
+        "primary_id": "12630",
+        "version": "0",
+        "description": "ubiquitin specific peptidase 7 (herpes virus-associated)",
+        "dbname": "HGNC",
+        "synonyms": [
+            "HAUSP"
+        ],
+        "info_text": "Generated via ccds",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "USP7",
+        "primary_id": "7874",
+        "version": "0",
+        "description": "ubiquitin specific peptidase 7 (herpes virus-associated)",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "HAUSP",
+            "TEF1"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000187555",
+        "primary_id": "ENSG00000187555",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "USP7",
+        "primary_id": "7874",
+        "version": "0",
+        "description": "ubiquitin specific peptidase 7 (herpes virus-associated)",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    }
+]

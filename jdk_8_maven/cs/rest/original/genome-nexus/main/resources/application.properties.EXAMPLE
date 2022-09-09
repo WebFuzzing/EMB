@@ -1,0 +1,71 @@
+# VEP web API URL with additional parameters. Note that "VARIANT" field will be replaced with
+# the actual variant value before each VEP request.
+vep.url=http://grch37.rest.ensembl.org/vep/human/hgvs/VARIANT?content-type=application/json&xref_refseq=1&ccds=1&canonical=1&domains=1&hgvs=1&numbers=1&protein=1
+
+# 200 is the max page size allowed by the public VEP service, it might be possible to increase this for a private instance
+vep.max_page_size=200
+
+# response timeout arg when sending requests to own VEP
+# should only be turned on when pointing to own VEP
+# 300 seconds is recommended with vep.max_page_size set to 5000
+# gn_vep.timeout.seconds=300
+
+# it is possible to use your own VEP instance by running https://github.com/genome-nexus/genome-nexus-vep
+# This is only the VEP part of the Ensembl REST API.
+# e.g. when running on port 6060:
+# gn_vep.region.url=http://localhost:6060/vep/human/region/VARIANT
+# gn_vep.cache.version=
+# gn_vep.server.version=
+# Note that this overrides vep.url
+# To get the full advantage of running your own VEP, several optimizations are
+# required, please read documentation in
+# https://github.com/genome-nexus/genome-nexus-vep
+
+# the gene external references URL
+genexrefs.url=http://grch37.rest.ensembl.org/xrefs/id/ACCESSION?content-type=application/json
+
+# Mutation Assessor web API URL
+#"VARIANT" will be replaced with actual variant upon each request.
+mutationAssessor.url=http://mutationassessor.org/r3/?cm=var&var=VARIANT&frm=json&fts=input,rgaa,rgvt,msa,pdb,F_impact,F_score,vc_score,vs_score,info,var,gene,uprot,rsprot,gaps,msa_height,chr,rs_pos,rs_res,up_pos,up_res,cnt_cosmic,cnt_snps
+# mutationAssessor url for GRCh38
+# mutationAssessor.url=http://mutationassessor.org/r3/?cm=var&var=hg38,VARIANT&frm=json&fts=input,rgaa,rgvt,msa,pdb,F_impact,F_score,vc_score,vs_score,info,var,gene,uprot,rsprot,gaps,msa_height,chr,rs_pos,rs_res,up_pos,up_res,cnt_cosmic,cnt_snps
+
+# my variant info web API URL
+#"VARIANT" will be replaced with actual variant upon each request.
+myvariantinfo.url=https://myvariant.info/v1/variant/VARIANT
+myvariantinfo.max_page_size=200
+# myvariantinfo url for GRCh38
+# myvariantinfo.url=https://myvariant.info/v1/variant/VARIANT?assembly=hg38
+
+# PDB header web service URL
+pdb.header_service_url=http://files.rcsb.org/header/PDB_ID.pdb
+
+# MongoDB URI in the form of mongodb://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DB>
+spring.data.mongodb.uri=mongodb://127.0.0.1:27017/annotator
+
+# Server port number for the embedded tomcat. This property is required only when building
+# a jar file, and ignored when building a war file.
+server.port=38080
+genomenexus.server.version=1.0.2
+
+# For testing use same embeded mongo version as genome-nexus-importer
+# https://github.com/genome-nexus/genome-nexus-importer/blob/master/Dockerfile#L1
+spring.mongodb.embedded.version=3.6.2
+
+# enable compression when running embedded tomcat
+server.compression.enabled=true
+server.compression.min-response-size=2048
+server.compression.mime-types=application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
+
+# increase the header size limitation
+server.max-http-header-size=10000000
+
+# include full git info in /actuator/info endpoint
+management.info.git.mode=full
+
+# oncokb
+oncokb.url=https://www.oncokb.org/api/v1/annotate/mutations/byProteinChange?PROTEINCHANGE
+
+# For testing use same embeded mongo version as genome-nexus-importer
+# https://github.com/genome-nexus/genome-nexus-importer/blob/master/Dockerfile#L1
+spring.mongodb.embedded.version=3.6.2

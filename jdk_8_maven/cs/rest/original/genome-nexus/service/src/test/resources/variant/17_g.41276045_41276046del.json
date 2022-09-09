@@ -1,0 +1,476 @@
+{
+    "variant": "17:g.41276045_41276046del",
+    "colocatedVariants": [
+        {
+            "dbSnpId": "rs80357914"
+        }
+    ],
+    "originalVariantQuery": "17:g.41276045_41276046del",
+    "hgvsg": "17:g.41276045_41276046del",
+    "id": "17:g.41276045_41276046del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "17",
+    "start": 41276045,
+    "end": 41276046,
+    "allele_string": "CT/-",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "exon": "2/22",
+            "transcript_id": "ENST00000309486",
+            "hgvsc": "ENST00000309486.4:c.-767_-766del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000310938",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "refseq_transcript_ids": [
+                "NM_007297.3"
+            ],
+            "consequence_terms": [
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "exon": "2/19",
+            "transcript_id": "ENST00000346315",
+            "hgvsp": "ENSP00000246907.4:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000346315.3:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000246907",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "1/19",
+            "transcript_id": "ENST00000351666",
+            "hgvsp": "ENSP00000338007.3:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000351666.3:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000338007",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/22",
+            "transcript_id": "ENST00000352993",
+            "hgvsp": "ENSP00000312236.5:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000352993.3:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000312236",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/18",
+            "transcript_id": "ENST00000354071",
+            "hgvsp": "ENSP00000326002.6:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000354071.3:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000326002",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000356906",
+            "variant_allele": "-",
+            "gene_symbol": "NBR2",
+            "gene_id": "ENSG00000198496",
+            "hgnc_id": "20691",
+            "canonical": "1",
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "exon": "2/23",
+            "transcript_id": "ENST00000357654",
+            "hgvsp": "ENSP00000350283.3:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000357654.3:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000350283",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "refseq_transcript_ids": [
+                "NM_007294.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000460115",
+            "variant_allele": "-",
+            "gene_symbol": "NBR2",
+            "gene_id": "ENSG00000198496",
+            "hgnc_id": "20691",
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "exon": "2/23",
+            "transcript_id": "ENST00000461221",
+            "hgvsp": "ENSP00000418548.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000461221.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000418548",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "exon": "2/7",
+            "transcript_id": "ENST00000461798",
+            "hgvsp": "ENSP00000417988.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000461798.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000417988",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000467245",
+            "variant_allele": "-",
+            "gene_symbol": "NBR2",
+            "gene_id": "ENSG00000198496",
+            "hgnc_id": "20691",
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "exon": "2/10",
+            "transcript_id": "ENST00000467274",
+            "hgvsc": "ENST00000467274.1:n.132_133del",
+            "variant_allele": "-",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "exon": "2/22",
+            "transcript_id": "ENST00000468300",
+            "hgvsp": "ENSP00000417148.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000468300.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000417148",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "refseq_transcript_ids": [
+                "NM_007299.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/10",
+            "transcript_id": "ENST00000470026",
+            "hgvsp": "ENSP00000419274.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000470026.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000419274",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/24",
+            "transcript_id": "ENST00000471181",
+            "hgvsp": "ENSP00000418960.2:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000471181.2:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000418960",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_007300.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/9",
+            "transcript_id": "ENST00000476777",
+            "hgvsp": "ENSP00000417554.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000476777.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000417554",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/9",
+            "transcript_id": "ENST00000477152",
+            "hgvsp": "ENSP00000419988.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000477152.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000419988",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/18",
+            "transcript_id": "ENST00000478531",
+            "hgvsp": "ENSP00000420412.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000478531.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000420412",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/5",
+            "transcript_id": "ENST00000489037",
+            "hgvsp": "ENSP00000420781.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000489037.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000420781",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/23",
+            "transcript_id": "ENST00000491747",
+            "hgvsp": "ENSP00000420705.2:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000491747.2:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000420705",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "refseq_transcript_ids": [
+                "NM_007298.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "2/11",
+            "transcript_id": "ENST00000492859",
+            "hgvsp": "ENSP00000420253.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000492859.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000420253",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "exon": "2/22",
+            "transcript_id": "ENST00000493795",
+            "hgvsc": "ENST00000493795.1:c.-20_-19del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000418775",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "exon": "2/17",
+            "transcript_id": "ENST00000493919",
+            "hgvsc": "ENST00000493919.1:c.-20_-19del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000418819",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "exon": "2/10",
+            "transcript_id": "ENST00000494123",
+            "hgvsp": "ENSP00000419103.1:p.Glu23ValfsTer17",
+            "hgvsc": "ENST00000494123.1:c.68_69del",
+            "variant_allele": "-",
+            "codons": "gAG/g",
+            "protein_id": "ENSP00000419103",
+            "protein_start": 23,
+            "protein_end": 23,
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "amino_acids": "E/X",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000497488",
+            "hgvsc": "ENST00000497488.1:c.-219+1242_-219+1243del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000418986",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000586385",
+            "hgvsc": "ENST00000586385.1:c.4+1153_4+1154del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000465818",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000591534",
+            "hgvsc": "ENST00000591534.1:c.-44+1242_-44+1243del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000467329",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000591849",
+            "hgvsc": "ENST00000591849.1:c.-99+1242_-99+1243del",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000465347",
+            "gene_symbol": "BRCA1",
+            "gene_id": "ENSG00000012048",
+            "hgnc_id": "1100",
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        }
+    ],
+    "successfully_annotated": true
+}

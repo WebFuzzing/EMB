@@ -1,0 +1,88 @@
+{
+    "variant": "16:g.9057113_9057114insCTG",
+    "id": "16:g.9057113_9057114insCTG",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "16",
+    "start": 9057114,
+    "end": 9057113,
+    "allele_string": "-/CTG",
+    "strand": 1,
+    "most_severe_consequence": "protein_altering_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000344836",
+            "hgvsp": "ENSP00000343535.4:p.Gln10delinsHisArg",
+            "hgvsc": "ENST00000344836.4:c.29_30insCAG",
+            "variant_allele": "CTG",
+            "codons": "cag/caCAGg",
+            "protein_id": "ENSP00000343535",
+            "protein_start": 10,
+            "protein_end": 10,
+            "gene_symbol": "USP7",
+            "gene_id": "ENSG00000187555",
+            "amino_acids": "Q/HR",
+            "hgnc_id": 12630,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_003470.2",
+                "NM_001286458.1"
+            ],
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000563961",
+            "hgvsp": "ENSP00000454362.1:p.Gln10delinsHisArg",
+            "hgvsc": "ENST00000563961.1:c.29_30insCAG",
+            "variant_allele": "CTG",
+            "codons": "cag/caCAGg",
+            "protein_id": "ENSP00000454362",
+            "protein_start": 10,
+            "protein_end": 10,
+            "gene_symbol": "USP7",
+            "gene_id": "ENSG00000187555",
+            "amino_acids": "Q/HR",
+            "hgnc_id": 12630,
+            "consequence_terms": [
+                "protein_altering_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000564485",
+            "hgvsc": "ENST00000564485.1:n.189+362_189+363insCTG",
+            "variant_allele": "CTG",
+            "gene_symbol": "RP11-77H9.8",
+            "gene_id": "ENSG00000260979",
+            "canonical": "1",
+            "consequence_terms": [
+                "intron_variant",
+                "non_coding_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000566273",
+            "variant_allele": "CTG",
+            "protein_id": "ENSP00000455719",
+            "gene_symbol": "USP7",
+            "gene_id": "ENSG00000187555",
+            "hgnc_id": 12630,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000569230",
+            "hgvsc": "ENST00000569230.1:c.-96+1137_-96+1138insCAG",
+            "variant_allele": "CTG",
+            "protein_id": "ENSP00000457237",
+            "gene_symbol": "USP7",
+            "gene_id": "ENSG00000187555",
+            "hgnc_id": 12630,
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        }
+    ]
+}

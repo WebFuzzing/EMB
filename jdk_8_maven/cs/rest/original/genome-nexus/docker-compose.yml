@@ -1,0 +1,30 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "8888:8888"
+    environment:
+      - SERVER_PORT=8888
+      - MONGODB_URI=mongodb://db:27017/annotator
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    build: https://github.com/genome-nexus/genome-nexus-importer.git
+    environment:
+      - REF_ENSEMBL_VERSION=${REF_ENSEMBL_VERSION}
+      - SPECIES=${SPECIES}
+    restart: always
+
+  vep:
+    build: https://github.com/genome-nexus/genome-nexus-vep.git
+    environment:
+      - VEP_ASSEMBLY=${VEP_ASSEMBLY}
+    restart: always
+    ports:
+      - "6060:8080"
+    volumes:
+      - ${VEP_CACHE}:/opt/vep/.vep/

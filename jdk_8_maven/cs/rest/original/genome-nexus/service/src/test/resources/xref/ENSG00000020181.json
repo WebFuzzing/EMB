@@ -1,0 +1,120 @@
+[
+    {
+        "display_id": "GPR124",
+        "primary_id": "GPR124",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "KIAA1531",
+            "TEM5"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000156182",
+        "primary_id": "OTTHUMG00000156182",
+        "version": "4",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.274136",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 374,
+        "xref_end": 6024,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.274136",
+        "ensembl_end": 5651,
+        "version": "0",
+        "cigar_line": "5651M",
+        "score": 28255,
+        "description": "G protein-coupled receptor 124",
+        "xref_identity": 93,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " G PROTEIN-COUPLED RECEPTOR 124 [*606823]",
+        "primary_id": "606823",
+        "version": "0",
+        "description": " G PROTEIN-COUPLED RECEPTOR 124; GPR124",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "GPR124",
+        "primary_id": "17849",
+        "version": "0",
+        "description": "G protein-coupled receptor 124",
+        "dbname": "HGNC",
+        "synonyms": [
+            "DKFZp434C211",
+            "DKFZp434J0911",
+            "FLJ14390",
+            "KIAA1531",
+            "TEM5"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "GPR124",
+        "primary_id": "25960",
+        "version": "0",
+        "description": "G protein-coupled receptor 124",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "TEM5"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000020181",
+        "primary_id": "ENSG00000020181",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "GPR124",
+        "primary_id": "25960",
+        "version": "0",
+        "description": "G protein-coupled receptor 124",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    }
+]

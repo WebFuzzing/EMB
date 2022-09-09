@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <name>Genome Nexus Model</name>
+    <description>Genome Nexus Model Module</description>
+
+    <artifactId>model</artifactId>
+    <parent>
+        <groupId>org.cbioportal.genome_nexus</groupId>
+        <artifactId>genome-nexus</artifactId>
+        <!-- project version is generated through git or can be passed as
+             PROJECT_VERSION env variable (see version.sh) -->
+        <version>0-unknown-version-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.univocity</groupId>
+            <artifactId>univocity-parsers</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.9.5</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+</project>

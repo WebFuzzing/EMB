@@ -1,0 +1,117 @@
+[
+    {
+        "display_id": "FGD5",
+        "primary_id": "FGD5",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "ZFYVE23"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000155556",
+        "primary_id": "OTTHUMG00000155556",
+        "version": "5",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.412406",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 5720,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.412406",
+        "ensembl_end": 5720,
+        "version": "0",
+        "cigar_line": "5720M",
+        "score": 28600,
+        "description": "FYVE, RhoGEF and PH domain containing 5",
+        "xref_identity": 96,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " FYVE, RhoGEF, AND PH DOMAIN-CONTAI [*614788]",
+        "primary_id": "614788",
+        "version": "0",
+        "description": " FYVE, RhoGEF, AND PH DOMAIN-CONTAINING PROTEIN 5; FGD5",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "FGD5",
+        "primary_id": "19117",
+        "version": "0",
+        "description": "FYVE, RhoGEF and PH domain containing 5",
+        "dbname": "HGNC",
+        "synonyms": [
+            "FLJ00274",
+            "FLJ39957",
+            "ZFYVE23"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "FGD5",
+        "primary_id": "152273",
+        "version": "0",
+        "description": "FYVE, RhoGEF and PH domain containing 5",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "ZFYVE23"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000154783",
+        "primary_id": "ENSG00000154783",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "FGD5",
+        "primary_id": "152273",
+        "version": "0",
+        "description": "FYVE, RhoGEF and PH domain containing 5",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    }
+]

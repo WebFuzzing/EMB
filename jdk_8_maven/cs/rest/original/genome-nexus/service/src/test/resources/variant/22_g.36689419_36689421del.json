@@ -1,0 +1,44 @@
+{
+    "variant": "22:g.36689419_36689421del",
+    "id": "22:g.36689419_36689421del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "22",
+    "start": 36689419,
+    "end": 36689421,
+    "allele_string": "CCT/-",
+    "strand": 1,
+    "most_severe_consequence": "inframe_deletion",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000216181",
+            "hgvsp": "ENSP00000216181.5:p.Glu1350del",
+            "hgvsc": "ENST00000216181.5:c.4049_4051del",
+            "variant_allele": "-",
+            "codons": "gAGGcc/gcc",
+            "protein_id": "ENSP00000216181",
+            "protein_start": 1350,
+            "protein_end": 1351,
+            "gene_symbol": "MYH9",
+            "gene_id": "ENSG00000100345",
+            "amino_acids": "EA/A",
+            "hgnc_id": 7579,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_002473.4"
+            ],
+            "consequence_terms": [
+                "inframe_deletion"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000459960",
+            "variant_allele": "-",
+            "gene_symbol": "MYH9",
+            "gene_id": "ENSG00000100345",
+            "hgnc_id": 7579,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        }
+    ]
+}

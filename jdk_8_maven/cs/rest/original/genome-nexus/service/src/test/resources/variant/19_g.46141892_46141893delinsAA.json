@@ -1,0 +1,319 @@
+{
+    "variant": "19:g.46141892_46141893delinsAA",
+    "id": "19:g.46141892_46141893delinsAA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "19",
+    "start": 46141892,
+    "end": 46141893,
+    "allele_string": "TC/AA",
+    "strand": 1,
+    "most_severe_consequence": "splice_acceptor_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000245925",
+            "hgvsc": "ENST00000245925.3:c.50-1_50delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000245925",
+            "protein_end": 17,
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "refseq_transcript_ids": [
+                "NM_012155.2"
+            ],
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "coding_sequence_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000362196",
+            "variant_allele": "AA",
+            "gene_symbol": "MIR330",
+            "gene_id": "ENSG00000199066",
+            "hgnc_id": 31771,
+            "canonical": "1",
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000399594",
+            "hgvsc": "ENST00000399594.3:c.524-1_524delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000382503",
+            "protein_end": 175,
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "coding_sequence_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000536630",
+            "hgvsc": "ENST00000536630.1:c.491-1_491delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000442365",
+            "protein_end": 164,
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "refseq_transcript_ids": [
+                "NM_001193269.1"
+            ],
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "coding_sequence_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000585386",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000586195",
+            "hgvsc": "ENST00000586195.1:c.49+210_49+211delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000465339",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "intron_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000586770",
+            "hgvsc": "ENST00000586770.1:c.-17-1_-17delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000465786",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000587092",
+            "variant_allele": "AA",
+            "gene_symbol": "C19orf83",
+            "gene_id": "ENSG00000267757",
+            "hgnc_id": 48331,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000587152",
+            "hgvsc": "ENST00000587152.1:c.653-1_653delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000468312",
+            "protein_end": 218,
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_001193268.1"
+            ],
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "coding_sequence_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000587804",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588000",
+            "hgvsc": "ENST00000588000.1:n.75-1_75delinsTT",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588172",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000468768",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588308",
+            "hgvsc": "ENST00000588308.1:c.50-1_50delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000468329",
+            "protein_end": 17,
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "coding_sequence_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588420",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588610",
+            "hgvsc": "ENST00000588610.1:n.71-1_71delinsTT",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588889",
+            "hgvsc": "ENST00000588889.1:n.507-1_507delinsTT",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000589876",
+            "hgvsc": "ENST00000589876.1:c.50-1_50delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000464789",
+            "protein_end": 17,
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "coding_sequence_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000590018",
+            "hgvsc": "ENST00000590018.1:c.-18_-17delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000468373",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000590043",
+            "hgvsc": "ENST00000590043.1:c.-17-1_-17delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000464804",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000591087",
+            "variant_allele": "AA",
+            "gene_symbol": "C19orf83",
+            "gene_id": "ENSG00000267757",
+            "hgnc_id": 48331,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000591721",
+            "hgvsc": "ENST00000591721.1:c.-17-1_-17delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000468470",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "5_prime_UTR_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000592901",
+            "variant_allele": "AA",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000593161",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000464956",
+            "gene_symbol": "C19orf83",
+            "gene_id": "ENSG00000267757",
+            "hgnc_id": 48331,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_001242348.1"
+            ],
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000593255",
+            "hgvsc": "ENST00000593255.1:c.-17-1_-17delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000467941",
+            "gene_symbol": "EML2",
+            "gene_id": "ENSG00000125746",
+            "hgnc_id": 18035,
+            "consequence_terms": [
+                "splice_acceptor_variant",
+                "5_prime_UTR_variant"
+            ]
+        }
+    ]
+}

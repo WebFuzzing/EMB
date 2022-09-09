@@ -1,0 +1,9 @@
+pfamA_acc	pfamA_id	description
+PF00069	Pkinase	Protein kinase domain
+PF00130	C1_1	Phorbol esters/diacylglycerol binding domain (C1 domain)
+PF00666	Cathelicidins	Cathelicidin
+PF00757	Furin-like	Furin-like cysteine rich region
+PF01030	Recep_L_domain	Receptor L domain
+PF02196	RBD	Raf-like Ras-binding domain
+PF07714	Pkinase_Tyr	Protein tyrosine kinase
+PF09057	Smac_DIABLO	Second Mitochondria-derived Activator of Caspases

@@ -1,0 +1,93 @@
+{
+    "variant": "10:g.8100129_8100132delinsAACT",
+    "originalVariantQuery": "10:g.8100129_8100132delinsAACT",
+    "hgvsg": "10:g.8100129_8100132delinsAACT",
+    "id": "10:g.8100129_8100132delinsAACT",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "10",
+    "start": 8100129,
+    "end": 8100132,
+    "allele_string": "TGAG/AACT",
+    "strand": 1,
+    "most_severe_consequence": "intron_variant",
+    "transcript_consequences": [
+      {
+        "transcript_id": "ENST00000346208",
+        "hgvsc": "ENST00000346208.3:c.242-139_242-136delinsAACT",
+        "variant_allele": "AACT",
+        "protein_id": "ENSP00000341619",
+        "gene_symbol": "GATA3",
+        "gene_id": "ENSG00000107485",
+        "hgnc_id": "4172",
+        "canonical": "1",
+        "consequence_terms": [
+          "intron_variant"
+        ]
+      },
+      {
+        "transcript_id": "ENST00000355358",
+        "variant_allele": "AACT",
+        "gene_symbol": "GATA3-AS1",
+        "gene_id": "ENSG00000197308",
+        "hgnc_id": "33786",
+        "canonical": "1",
+        "consequence_terms": [
+          "upstream_gene_variant"
+        ]
+      },
+      {
+        "transcript_id": "ENST00000379328",
+        "hgvsc": "ENST00000379328.3:c.242-139_242-136delinsAACT",
+        "variant_allele": "AACT",
+        "protein_id": "ENSP00000368632",
+        "gene_symbol": "GATA3",
+        "gene_id": "ENSG00000107485",
+        "hgnc_id": "4172",
+        "refseq_transcript_ids": [
+          "NM_001002295.1",
+          "NM_002051.2"
+        ],
+        "consequence_terms": [
+          "intron_variant"
+        ]
+      },
+      {
+        "transcript_id": "ENST00000417359",
+        "variant_allele": "AACT",
+        "gene_symbol": "RP11-379F12.3",
+        "gene_id": "ENSG00000243350",
+        "consequence_terms": [
+          "upstream_gene_variant"
+        ]
+      },
+      {
+        "transcript_id": "ENST00000458727",
+        "variant_allele": "AACT",
+        "gene_symbol": "RP11-379F12.3",
+        "gene_id": "ENSG00000243350",
+        "consequence_terms": [
+          "upstream_gene_variant"
+        ]
+      },
+      {
+        "transcript_id": "ENST00000461472",
+        "variant_allele": "AACT",
+        "gene_symbol": "GATA3",
+        "gene_id": "ENSG00000107485",
+        "hgnc_id": "4172",
+        "consequence_terms": [
+          "upstream_gene_variant"
+        ]
+      },
+      {
+        "transcript_id": "ENST00000481743",
+        "variant_allele": "AACT",
+        "gene_symbol": "GATA3",
+        "gene_id": "ENSG00000107485",
+        "hgnc_id": "4172",
+        "consequence_terms": [
+          "downstream_gene_variant"
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,7 @@
+Gene 	Exon (not necessary)	Variant Type	Variant Classification	Overlap Enire Region 	SNP Position	SNP change	Comment	Pubmedids
+KIT	11	DEL	Splice_Site 	55595380 - 55595381	NA	NA	Potential in-frame deletion event at intron10-exon 11 boundary, commmon in Gastrointestinal Stromal Tumors	c(15507676,27600498, 32697050)
+APC	9	SNP	Splice_Site 	NA	112151184	A -> G	Potential introduction of donor splice site, common in colorectal cancers	c(29316426)
+CTNNB1	3	DEL	Splice_Site 	41266015 - 41266246	NA	NA	Potential Exon Skip Event common in Colorectal Cancers	c(15507676, 27600498, 3269705) 
+MET	14	SNP	Splice_Site 	NA	116411901, 116411902, 116412044,116412045	Any Change	Potential Exon Skip/In-frame Insertion common in ------	
+MET	14	DEL	Splice_Site 	116411901 -116411902; 	NA 	NA	Potential Exon Skip Event common in Colorectal Cancers	
+MET	14	DEL	Splice_Site 	116412044 - 116412045	NA 	NA	Potential Exon Skip Event common in Colorectal Cancers	

@@ -1,0 +1,348 @@
+{
+    "variant": "22:g.29091840_29091841delinsCA",
+    "id": "22:g.29091840_29091841delinsCA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "22",
+    "start": 29091840,
+    "end": 29091841,
+    "allele_string": "TG/CA",
+    "strand": 1,
+    "most_severe_consequence": "missense_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000328354",
+            "hgvsp": "ENSP00000329178.6:p.Lys373Glu",
+            "hgvsc": "ENST00000328354.6:c.1116_1117inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000329178",
+            "protein_start": 372,
+            "protein_end": 373,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "refseq_transcript_ids": [
+                "NM_007194.3"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000348295",
+            "hgvsp": "ENSP00000329012.5:p.Lys344Glu",
+            "hgvsc": "ENST00000348295.3:c.1029_1030inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000329012",
+            "protein_start": 343,
+            "protein_end": 344,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "refseq_transcript_ids": [
+                "NM_145862.2"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000382565",
+            "hgvsc": "ENST00000382565.1:c.320-6587_320-6586inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000372006",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000382566",
+            "hgvsc": "ENST00000382566.1:c.*184_*185inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000372007",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "3_prime_UTR_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000382578",
+            "hgvsp": "ENSP00000372021.1:p.Lys282Glu",
+            "hgvsc": "ENST00000382578.1:c.843_844inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000372021",
+            "protein_start": 281,
+            "protein_end": 282,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000382580",
+            "hgvsp": "ENSP00000372023.2:p.Lys416Glu",
+            "hgvsc": "ENST00000382580.2:c.1245_1246inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000372023",
+            "protein_start": 415,
+            "protein_end": 416,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_001005735.1"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000402731",
+            "hgvsp": "ENSP00000384835.1:p.Lys344Glu",
+            "hgvsc": "ENST00000402731.1:c.1029_1030inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000384835",
+            "protein_start": 343,
+            "protein_end": 344,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000403642",
+            "hgvsp": "ENSP00000384919.1:p.Lys282Glu",
+            "hgvsc": "ENST00000403642.1:c.843_844inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000384919",
+            "protein_start": 281,
+            "protein_end": 282,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000404276",
+            "hgvsp": "ENSP00000385747.1:p.Lys373Glu",
+            "hgvsc": "ENST00000404276.1:c.1116_1117inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000385747",
+            "protein_start": 372,
+            "protein_end": 373,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000405598",
+            "hgvsp": "ENSP00000386087.1:p.Lys373Glu",
+            "hgvsc": "ENST00000405598.1:c.1116_1117inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000386087",
+            "protein_start": 372,
+            "protein_end": 373,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000416671",
+            "hgvsc": "ENST00000416671.1:c.*606_*607inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000402225",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "3_prime_UTR_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000417588",
+            "hgvsc": "ENST00000417588.1:c.*413_*414inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000412901",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "3_prime_UTR_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000425190",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000390244",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000433028",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000403659",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000433728",
+            "hgvsc": "ENST00000433728.1:c.*184_*185inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000404400",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "3_prime_UTR_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000434810",
+            "hgvsp": "ENSP00000416721.1:p.Lys117Glu",
+            "hgvsc": "ENST00000434810.1:c.347_348inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000416721",
+            "protein_start": 116,
+            "protein_end": 117,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000439346",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000396903",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000447421",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000397478",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000448511",
+            "hgvsc": "ENST00000448511.1:c.*508_*509inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000404567",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "3_prime_UTR_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000456369",
+            "hgvsc": "ENST00000456369.1:c.263+3985_263+3986inv",
+            "variant_allele": "CA",
+            "protein_id": "ENSP00000394430",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000464581",
+            "variant_allele": "CA",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000491919",
+            "variant_allele": "CA",
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "hgnc_id": 16627,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000544772",
+            "hgvsp": "ENSP00000442458.1:p.Lys152Glu",
+            "hgvsc": "ENST00000544772.1:c.453_454inv",
+            "variant_allele": "CA",
+            "codons": "tcCAag/tcTGag",
+            "protein_id": "ENSP00000442458",
+            "protein_start": 151,
+            "protein_end": 152,
+            "gene_symbol": "CHEK2",
+            "gene_id": "ENSG00000183765",
+            "amino_acids": "SK/SE",
+            "hgnc_id": 16627,
+            "refseq_transcript_ids": [
+                "NM_001257387.1"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        }
+    ]
+}

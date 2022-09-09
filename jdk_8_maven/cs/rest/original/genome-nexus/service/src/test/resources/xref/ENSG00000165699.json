@@ -1,0 +1,182 @@
+[
+    {
+        "display_id": "TSC1",
+        "primary_id": "TSC1",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "KIAA0243",
+            "TSC"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000020844",
+        "primary_id": "OTTHUMG00000020844",
+        "version": "3",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.713977",
+        "dbname": "UniGene",
+        "ensembl_identity": 6,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 5235,
+        "xref_start": 16,
+        "xref_end": 599,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.713977",
+        "ensembl_end": 5818,
+        "version": "0",
+        "cigar_line": "584M",
+        "score": 2902,
+        "description": "Transcribed locus",
+        "xref_identity": 97,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.370854",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 13,
+        "xref_end": 8616,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.370854",
+        "ensembl_end": 8604,
+        "version": "0",
+        "cigar_line": "8604M",
+        "score": 43020,
+        "description": "Tuberous sclerosis 1",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " FOCAL CORTICAL DYSPLASIA OF TAYLOR [#607341]",
+        "primary_id": "607341",
+        "version": "0",
+        "description": " FOCAL CORTICAL DYSPLASIA OF TAYLOR; FCDT",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " TUBEROUS SCLEROSIS 1 [#191100]",
+        "primary_id": "191100",
+        "version": "0",
+        "description": " TUBEROUS SCLEROSIS 1; TSC1",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+            "191090",
+            "191091"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " TSC1 GENE [*605284]",
+        "primary_id": "605284",
+        "version": "0",
+        "description": " TSC1 GENE; TSC1",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "TSC1",
+        "primary_id": "12362",
+        "version": "0",
+        "description": "tuberous sclerosis 1",
+        "dbname": "HGNC",
+        "synonyms": [
+            "hamartin",
+            "KIAA0243",
+            "LAM",
+            "TSC"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "TSC1",
+        "primary_id": "7248",
+        "version": "0",
+        "description": "tuberous sclerosis 1",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "LAM",
+            "TSC"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "TSC1",
+        "primary_id": "161",
+        "version": "1",
+        "description": "",
+        "dbname": "DBASS3",
+        "synonyms": [
+
+        ],
+        "info_text": "Generated via Database of aberrant 3' splice sites.",
+        "info_type": "DIRECT",
+        "db_display_name": "DataBase of Aberrant 3' Splice Sites"
+    },
+    {
+        "display_id": "ENSG00000165699",
+        "primary_id": "ENSG00000165699",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "TSC1",
+        "primary_id": "7248",
+        "version": "0",
+        "description": "tuberous sclerosis 1",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    }
+]

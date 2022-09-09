@@ -1,0 +1,169 @@
+[
+    {
+        "transcript_stable_id" : "ENST00000428597",
+        "gene_stable_id" : "ENSG00000240498",
+        "protein_stable_id" : null,
+        "protein_length" : null,
+        "refseq_mrna_id" : null,
+        "ccds_id" : null,
+        "hgnc_symbols" : [
+            "CDKN2B-AS1"
+        ],
+        "exons" : [
+            {
+                "id" : "ENSE00001681245",
+                "start" : 21994790,
+                "end" : 21995160,
+                "rank" : 1,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00003460498",
+                "start" : 22029432,
+                "end" : 22029593,
+                "rank" : 2,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00003584996",
+                "start" : 22032673,
+                "end" : 22032985,
+                "rank" : 3,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001695761",
+                "start" : 22046316,
+                "end" : 22046448,
+                "rank" : 4,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001781056",
+                "start" : 22046750,
+                "end" : 22046899,
+                "rank" : 5,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001634408",
+                "start" : 22049105,
+                "end" : 22049227,
+                "rank" : 6,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001761961",
+                "start" : 22056251,
+                "end" : 22056386,
+                "rank" : 7,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001758066",
+                "start" : 22058358,
+                "end" : 22059053,
+                "rank" : 8,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001797124",
+                "start" : 22061952,
+                "end" : 22062025,
+                "rank" : 9,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001617843",
+                "start" : 22063943,
+                "end" : 22064017,
+                "rank" : 10,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001722533",
+                "start" : 22065661,
+                "end" : 22065756,
+                "rank" : 11,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001677974",
+                "start" : 22066234,
+                "end" : 22066352,
+                "rank" : 12,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001785411",
+                "start" : 22096371,
+                "end" : 22096513,
+                "rank" : 13,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001714305",
+                "start" : 22097257,
+                "end" : 22097363,
+                "rank" : 14,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001607196",
+                "start" : 22112319,
+                "end" : 22112394,
+                "rank" : 15,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001762254",
+                "start" : 22113665,
+                "end" : 22113798,
+                "rank" : 16,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001694999",
+                "start" : 22118643,
+                "end" : 22118766,
+                "rank" : 17,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001712751",
+                "start" : 22120199,
+                "end" : 22120409,
+                "rank" : 18,
+                "strand" : 1,
+                "version" : 1
+            },
+            {
+                "id" : "ENSE00001803591",
+                "start" : 22120503,
+                "end" : 22121094,
+                "rank" : 19,
+                "strand" : 1,
+                "version" : 1
+            }
+        ],
+        "utrs" : null,
+        "domains" : null
+    }
+]

@@ -1,0 +1,183 @@
+[
+    {
+        "display_id": "OTTHUMG00000016646",
+        "primary_id": "OTTHUMG00000016646",
+        "version": "3",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "display_id": "LRG_457",
+        "primary_id": "LRG_457",
+        "version": "0",
+        "description": "Locus Reference Genomic record for FLT3",
+        "dbname": "LRG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "Locus Reference Genomic"
+    },
+    {
+        "display_id": "LRG_457",
+        "primary_id": "LRG_457",
+        "version": "0",
+        "description": null,
+        "dbname": "ENS_LRG_gene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "LRG display in Ensembl gene"
+    },
+    {
+        "primary_id": "Hs.717775",
+        "dbname": "UniGene",
+        "ensembl_identity": 3,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 248,
+        "xref_start": 1,
+        "xref_end": 121,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.717775",
+        "ensembl_end": 126,
+        "version": "0",
+        "cigar_line": "121M",
+        "score": 578,
+        "description": "Transcribed locus",
+        "xref_identity": 97,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.507590",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 3842,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.507590",
+        "ensembl_end": 3842,
+        "version": "0",
+        "cigar_line": "3842M",
+        "score": 19210,
+        "description": "Fms-related tyrosine kinase 3",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " LEUKEMIA, ACUTE MYELOID [#601626]",
+        "primary_id": "601626",
+        "version": "0",
+        "description": " LEUKEMIA, ACUTE MYELOID; AML",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+            "602439"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " FMS-RELATED TYROSINE KINASE 3 [*136351]",
+        "primary_id": "136351",
+        "version": "0",
+        "description": " FMS-RELATED TYROSINE KINASE 3; FLT3",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+            "184747"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "FLT3",
+        "primary_id": "3765",
+        "version": "0",
+        "description": "fms-related tyrosine kinase 3",
+        "dbname": "HGNC",
+        "synonyms": [
+            "CD135",
+            "FLK2",
+            "STK1"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "FLT3",
+        "primary_id": "2322",
+        "version": "0",
+        "description": "fms-related tyrosine kinase 3",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "CD135",
+            "FLK-2",
+            "FLK2",
+            "STK1"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000122025",
+        "primary_id": "ENSG00000122025",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "FLT3",
+        "primary_id": "2322",
+        "version": "0",
+        "description": "fms-related tyrosine kinase 3",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "FLT3",
+        "primary_id": "FLT3",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "CD135",
+            "FLK2",
+            "STK1"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

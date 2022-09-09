@@ -1,0 +1,76 @@
+{
+    "variant": "10:g.101953779del",
+    "id": "10:g.101953779del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "10",
+    "start": 101953779,
+    "end": 101953779,
+    "allele_string": "T/-",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000370397",
+            "hgvsp": "ENSP00000359424.6:p.Arg646GlyfsTer22",
+            "hgvsc": "ENST00000370397.7:c.1936del",
+            "variant_allele": "-",
+            "codons": "Agg/gg",
+            "protein_id": "ENSP00000359424",
+            "protein_start": 646,
+            "protein_end": 646,
+            "gene_symbol": "CHUK",
+            "gene_id": "ENSG00000213341",
+            "amino_acids": "R/X",
+            "hgnc_id": 1974,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_001278.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000443919",
+            "variant_allele": "-",
+            "gene_symbol": "RP11-316M21.7",
+            "gene_id": "ENSG00000236308",
+            "canonical": "1",
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000585551",
+            "variant_allele": "-",
+            "gene_symbol": "CHUK",
+            "gene_id": "ENSG00000213341",
+            "hgnc_id": 1974,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000588656",
+            "hgvsc": "ENST00000588656.1:n.58del",
+            "variant_allele": "-",
+            "gene_symbol": "CHUK",
+            "gene_id": "ENSG00000213341",
+            "hgnc_id": 1974,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000590930",
+            "hgvsc": "ENST00000590930.1:n.1921del",
+            "variant_allele": "-",
+            "gene_symbol": "CHUK",
+            "gene_id": "ENSG00000213341",
+            "hgnc_id": 1974,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        }
+    ]
+}

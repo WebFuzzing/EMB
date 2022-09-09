@@ -1,0 +1,89 @@
+[
+    {
+        "uniprotEntry": "EGFR_HUMAN",
+        "uniprotAccession": "P00533",
+        "ensemblTranscriptIds": [
+            "ENST00000344576.6",
+            "ENST00000420316.6",
+            "ENST00000342916.7",
+            "ENST00000275493.6"
+        ],
+        "position": 708,
+        "type": "Ubiquitination",
+        "pubmedIds": [
+            "17940017"
+        ],
+        "sequence": "APNQALLRILKETEFKKIKVL"
+    },
+    {
+        "uniprotEntry": "EGFR_HUMAN",
+        "uniprotAccession": "P00533",
+        "ensemblTranscriptIds": [
+            "ENST00000344576.6",
+            "ENST00000420316.6",
+            "ENST00000342916.7",
+            "ENST00000275493.6"
+        ],
+        "position": 77,
+        "type": "Phosphorylation",
+        "pubmedIds": [
+            "22135298"
+        ],
+        "sequence": "ITYVQRNYDLSFLKTIQEVAG"
+    },
+    {
+        "uniprotEntry": "EGFR_HUMAN",
+        "uniprotAccession": "P00533",
+        "ensemblTranscriptIds": [
+            "ENST00000344576.6",
+            "ENST00000420316.6",
+            "ENST00000342916.7",
+            "ENST00000275493.6"
+        ],
+        "position": 1188,
+        "type": "Acetylation",
+        "pubmedIds": [
+            "20513767"
+        ],
+        "sequence": "PKEAKPNGIFKGSTAENAEYL"
+    },
+    {
+        "uniprotEntry": "BRAF_HUMAN",
+        "uniprotAccession": "P15056",
+        "ensemblTranscriptIds": [
+            "ENST00000646891.1"
+        ],
+        "position": 253,
+        "type": "Acetylation",
+        "pubmedIds": [
+            "7709589"
+        ],
+        "sequence": "FTLAFCDFCRKLLFQGFRCQT"
+    },
+    {
+        "uniprotEntry": "BRAF_HUMAN",
+        "uniprotAccession": "P15056",
+        "ensemblTranscriptIds": [
+            "ENST00000646891.1"
+        ],
+        "position": 363,
+        "type": "Phosphorylation",
+        "pubmedIds": [
+            "18691976"
+        ],
+        "sequence": "HRNQFGQRDRSSSAPNVHINT"
+    },
+    {
+        "uniprotEntry": "PTEN_HUMAN",
+        "uniprotAccession": "P60484",
+        "ensemblTranscriptIds": [
+            "ENST00000371953.7"
+        ],
+        "position": 13,
+        "type": "Ubiquitination",
+        "pubmedIds": [
+            "18716620"
+        ],
+        "sequence": "AIIKEIVSRNKRRYQEDGFDL"
+    }
+]

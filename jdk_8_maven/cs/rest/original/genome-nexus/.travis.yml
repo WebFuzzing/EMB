@@ -1,0 +1,8 @@
+language: java
+jdk:
+- openjdk8
+- openjdk13
+script:
+- mvn clean install
+after_success:
+- bash <(curl -s https://codecov.io/bash)

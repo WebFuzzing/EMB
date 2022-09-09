@@ -1,0 +1,188 @@
+{
+    "variant": "11:g.62393546_62393547delinsAA",
+    "id": "11:g.62393546_62393547delinsAA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "11",
+    "start": 62393546,
+    "end": 62393547,
+    "allele_string": "GG/AA",
+    "strand": 1,
+    "most_severe_consequence": "stop_gained",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000265471",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000265471",
+            "gene_symbol": "B3GAT3",
+            "gene_id": "ENSG00000149541",
+            "hgnc_id": 923,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_012200.3"
+            ],
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000346178",
+            "hgvsp": "ENSP00000340466.4:p.Gln928Ter",
+            "hgvsc": "ENST00000346178.4:c.2781_2782delinsTT",
+            "variant_allele": "AA",
+            "codons": "ctCCag/ctTTag",
+            "protein_id": "ENSP00000340466",
+            "protein_start": 927,
+            "protein_end": 928,
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "amino_acids": "LQ/L*",
+            "hgnc_id": 4138,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_198335.3"
+            ],
+            "consequence_terms": [
+                "stop_gained"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000356638",
+            "hgvsp": "ENSP00000349053.3:p.Gln906Ter",
+            "hgvsc": "ENST00000356638.3:c.2715_2716delinsTT",
+            "variant_allele": "AA",
+            "codons": "ctCCag/ctTTag",
+            "protein_id": "ENSP00000349053",
+            "protein_start": 905,
+            "protein_end": 906,
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "amino_acids": "LQ/L*",
+            "hgnc_id": 4138,
+            "refseq_transcript_ids": [
+                "NM_198334.2"
+            ],
+            "consequence_terms": [
+                "stop_gained"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000528503",
+            "hgvsc": "ENST00000528503.1:n.404_405delinsTT",
+            "variant_allele": "AA",
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "hgnc_id": 4138,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000531383",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000431359",
+            "gene_symbol": "B3GAT3",
+            "gene_id": "ENSG00000149541",
+            "hgnc_id": 923,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000531563",
+            "variant_allele": "AA",
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "hgnc_id": 4138,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000532402",
+            "hgvsc": "ENST00000532402.1:c.*2447_*2448delinsTT",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000432181",
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "hgnc_id": 4138,
+            "consequence_terms": [
+                "3_prime_UTR_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000532585",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000432604",
+            "gene_symbol": "B3GAT3",
+            "gene_id": "ENSG00000149541",
+            "hgnc_id": 923,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000534026",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000432474",
+            "gene_symbol": "B3GAT3",
+            "gene_id": "ENSG00000149541",
+            "hgnc_id": 923,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000534715",
+            "variant_allele": "AA",
+            "protein_id": "ENSP00000432854",
+            "gene_symbol": "B3GAT3",
+            "gene_id": "ENSG00000149541",
+            "hgnc_id": 923,
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000534779",
+            "hgvsp": "ENSP00000435306.1:p.Gln814Ter",
+            "hgvsc": "ENST00000534779.1:c.2439_2440delinsTT",
+            "variant_allele": "AA",
+            "codons": "ctCCag/ctTTag",
+            "protein_id": "ENSP00000435306",
+            "protein_start": 813,
+            "protein_end": 814,
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "amino_acids": "LQ/L*",
+            "hgnc_id": 4138,
+            "refseq_transcript_ids": [
+                "NM_001278193.1",
+                "NM_001278192.1"
+            ],
+            "consequence_terms": [
+                "stop_gained"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000540933",
+            "hgvsp": "ENSP00000442962.1:p.Gln809Ter",
+            "hgvsc": "ENST00000540933.1:c.2424_2425delinsTT",
+            "variant_allele": "AA",
+            "codons": "ctCCag/ctTTag",
+            "protein_id": "ENSP00000442962",
+            "protein_start": 808,
+            "protein_end": 809,
+            "gene_symbol": "GANAB",
+            "gene_id": "ENSG00000089597",
+            "amino_acids": "LQ/L*",
+            "hgnc_id": 4138,
+            "refseq_transcript_ids": [
+                "NM_001278194.1"
+            ],
+            "consequence_terms": [
+                "stop_gained"
+            ]
+        }
+    ]
+}
