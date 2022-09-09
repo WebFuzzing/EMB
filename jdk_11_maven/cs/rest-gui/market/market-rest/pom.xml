@@ -31,10 +31,12 @@
 					<execution>
 						<goals>
 							<goal>repackage</goal>
+							<goal>build-info</goal>
 						</goals>
 						<configuration>
 							<finalName>market</finalName>
 							<classifier>sut</classifier>
+							<mainClass>market.RestApplication</mainClass>
 						</configuration>
 					</execution>
 				</executions>
