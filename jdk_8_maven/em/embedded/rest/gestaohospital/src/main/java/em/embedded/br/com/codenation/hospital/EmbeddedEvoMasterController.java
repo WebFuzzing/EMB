@@ -1,4 +1,4 @@
-package br.com.codenation.hospital;
+package em.embedded.br.com.codenation.hospital;
 
 import com.mongodb.MongoClient;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -12,7 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
 
-import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 

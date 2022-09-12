@@ -129,6 +129,7 @@
               <configuration>
                   <finalName>genome-nexus</finalName>
                   <classifier>sut</classifier>
+                  <mainClass>org.cbioportal.genome_nexus.GenomeNexusAnnotation</mainClass>
               </configuration>
           </execution>
         </executions>

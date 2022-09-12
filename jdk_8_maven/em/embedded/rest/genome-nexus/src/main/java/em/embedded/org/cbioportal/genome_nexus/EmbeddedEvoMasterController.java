@@ -1,6 +1,7 @@
-package org.cbioportal.genome_nexus;
+package em.embedded.org.cbioportal.genome_nexus;
 
 import com.mongodb.MongoClient;
+import org.cbioportal.genome_nexus.GenomeNexusAnnotation;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -64,7 +65,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         ctx = SpringApplication.run(GenomeNexusAnnotation.class,
                 new String[]{"--server.port=0",
                         "--spring.data.mongodb.uri=mongodb://" + mongodbContainer.getContainerIpAddress() + ":" + mongodbContainer.getMappedPort(MONGODB_PORT) + "/" + MONGODB_DATABASE_NAME,
-                      //  "--spring.cache.type=NONE"
+                        "--spring.cache.type=NONE"
                 });
 
         return "http://localhost:" + getSutPort();
