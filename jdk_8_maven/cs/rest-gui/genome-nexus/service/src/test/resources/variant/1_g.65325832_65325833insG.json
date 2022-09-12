@@ -1,0 +1,45 @@
+{
+    "variant": "1:g.65325832_65325833insG",
+    "id": "1:g.65325832_65325833insG",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "1",
+    "start": 65325833,
+    "end": 65325832,
+    "allele_string": "-/G",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000342505",
+            "hgvsp": "ENSP00000343204.4:p.Leu431ValfsTer22",
+            "hgvsc": "ENST00000342505.4:c.1289dup",
+            "variant_allele": "G",
+            "codons": "ccg/ccCg",
+            "protein_id": "ENSP00000343204",
+            "protein_start": 430,
+            "protein_end": 430,
+            "gene_symbol": "JAK1",
+            "gene_id": "ENSG00000162434",
+            "amino_acids": "P/PX",
+            "hgnc_id": 6190,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_002227.2"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000494904",
+            "hgvsc": "ENST00000494904.1:n.183dup",
+            "variant_allele": "G",
+            "gene_symbol": "JAK1",
+            "gene_id": "ENSG00000162434",
+            "hgnc_id": 6190,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        }
+    ]
+}

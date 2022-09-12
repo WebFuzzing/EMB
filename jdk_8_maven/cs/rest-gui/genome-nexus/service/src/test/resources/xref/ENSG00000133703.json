@@ -1,0 +1,329 @@
+[
+    {
+        "display_id": "KRAS",
+        "primary_id": "KRAS",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "KRAS2",
+            "RASK2"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000171193",
+        "primary_id": "OTTHUMG00000171193",
+        "version": "1",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.734869",
+        "dbname": "UniGene",
+        "ensembl_identity": 26,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1222,
+        "xref_start": 1,
+        "xref_end": 459,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.734869",
+        "ensembl_end": 1680,
+        "version": "0",
+        "cigar_line": "459M",
+        "score": 2277,
+        "description": "Transcribed locus",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.732231",
+        "dbname": "UniGene",
+        "ensembl_identity": 9,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 5052,
+        "xref_start": 20,
+        "xref_end": 585,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.732231",
+        "ensembl_end": 4485,
+        "version": "0",
+        "cigar_line": "78M1D476M1I11M",
+        "score": 2747,
+        "description": "Transcribed locus",
+        "xref_identity": 95,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.691064",
+        "dbname": "UniGene",
+        "ensembl_identity": 9,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 3028,
+        "xref_start": 2,
+        "xref_end": 567,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.691064",
+        "ensembl_end": 3591,
+        "version": "0",
+        "cigar_line": "148M1I10M1I406M",
+        "score": 2778,
+        "description": "Transcribed locus",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.690627",
+        "dbname": "UniGene",
+        "ensembl_identity": 10,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 2371,
+        "xref_start": 10,
+        "xref_end": 592,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.690627",
+        "ensembl_end": 2955,
+        "version": "0",
+        "cigar_line": "446M1D133M1D4M",
+        "score": 2855,
+        "description": "Transcribed locus",
+        "xref_identity": 97,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.675166",
+        "dbname": "UniGene",
+        "ensembl_identity": 7,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 3606,
+        "xref_start": 1,
+        "xref_end": 457,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.675166",
+        "ensembl_end": 4062,
+        "version": "0",
+        "cigar_line": "457M",
+        "score": 2285,
+        "description": "Transcribed locus",
+        "xref_identity": 100,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.594741",
+        "dbname": "UniGene",
+        "ensembl_identity": 5,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 4952,
+        "xref_start": 3,
+        "xref_end": 358,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.594741",
+        "ensembl_end": 5308,
+        "version": "0",
+        "cigar_line": "174M1D182M",
+        "score": 1570,
+        "description": "Transcribed locus",
+        "xref_identity": 93,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " CARDIOFACIOCUTANEOUS SYNDROME 2 [#615278]",
+        "primary_id": "615278",
+        "version": "0",
+        "description": " CARDIOFACIOCUTANEOUS SYNDROME 2; CFC2",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " GASTRIC CANCER [#613659]",
+        "primary_id": "613659",
+        "version": "0",
+        "description": " GASTRIC CANCER",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " NOONAN SYNDROME 3 [#609942]",
+        "primary_id": "609942",
+        "version": "0",
+        "description": " NOONAN SYNDROME 3; NS3",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " JUVENILE MYELOMONOCYTIC LEUKEMIA [#607785]",
+        "primary_id": "607785",
+        "version": "0",
+        "description": " JUVENILE MYELOMONOCYTIC LEUKEMIA; JMML",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " LEUKEMIA, ACUTE MYELOID [#601626]",
+        "primary_id": "601626",
+        "version": "0",
+        "description": " LEUKEMIA, ACUTE MYELOID; AML",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+            "602439"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " V-KI-RAS2 KIRSTEN RAT SARCOMA VIRA [*190070]",
+        "primary_id": "190070",
+        "version": "0",
+        "description": " V-KI-RAS2 KIRSTEN RAT SARCOMA VIRAL ONCOGENE HOMOLOG; KRAS",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+            "190110"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "KRAS",
+        "primary_id": "6407",
+        "version": "0",
+        "description": "Kirsten rat sarcoma viral oncogene homolog",
+        "dbname": "HGNC",
+        "synonyms": [
+            "KRAS1",
+            "KRAS2"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "KRAS",
+        "primary_id": "3845",
+        "version": "0",
+        "description": "Kirsten rat sarcoma viral oncogene homolog",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "C-K-RAS",
+            "CFC2",
+            "K-RAS2A",
+            "K-RAS2B",
+            "K-RAS4A",
+            "K-RAS4B",
+            "KI-RAS",
+            "KRAS1",
+            "KRAS2",
+            "NS",
+            "NS3",
+            "RASK2"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000133703",
+        "primary_id": "ENSG00000133703",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "KRAS",
+        "primary_id": "3845",
+        "version": "0",
+        "description": "Kirsten rat sarcoma viral oncogene homolog",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "N-RAS",
+        "primary_id": "N-RAS",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "HRAS",
+        "primary_id": "HRAS",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "HRAS1"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

@@ -1,0 +1,215 @@
+[
+    {
+        "display_id": "OTTHUMG00000151023",
+        "primary_id": "OTTHUMG00000151023",
+        "version": "21",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.505297",
+        "dbname": "UniGene",
+        "ensembl_identity": 19,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 2058,
+        "xref_start": 1,
+        "xref_end": 504,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.505297",
+        "ensembl_end": 2560,
+        "version": "0",
+        "cigar_line": "136M1I367M",
+        "score": 2503,
+        "description": "Transcribed locus, strongly similar to NP_001244316.1 CHEK2 gene product [Homo sapiens]",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.291363",
+        "dbname": "UniGene",
+        "ensembl_identity": 99,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 12,
+        "xref_end": 2571,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.291363",
+        "ensembl_end": 2560,
+        "version": "0",
+        "cigar_line": "2560M",
+        "score": 12791,
+        "description": "Checkpoint kinase 2",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " LI-FRAUMENI SYNDROME 2 [#609265]",
+        "primary_id": "609265",
+        "version": "0",
+        "description": " LI-FRAUMENI SYNDROME 2; LFS2",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " CHECKPOINT KINASE 2, S. POMBE, HOM [+604373]",
+        "primary_id": "604373",
+        "version": "0",
+        "description": " CHECKPOINT KINASE 2, S. POMBE, HOMOLOG OF; CHEK2",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " OSTEOGENIC SARCOMA [#259500]",
+        "primary_id": "259500",
+        "version": "0",
+        "description": " OSTEOGENIC SARCOMA",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " PROSTATE CANCER [#176807]",
+        "primary_id": "176807",
+        "version": "0",
+        "description": " PROSTATE CANCER",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " BREAST CANCER [#114480]",
+        "primary_id": "114480",
+        "version": "0",
+        "description": " BREAST CANCER",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " CHECKPOINT KINASE 2, S. POMBE, HOM [+604373]",
+        "primary_id": "604373",
+        "version": "0",
+        "description": " CHECKPOINT KINASE 2, S. POMBE, HOMOLOG OF; CHEK2",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "CHEK2",
+        "primary_id": "16627",
+        "version": "0",
+        "description": "checkpoint kinase 2",
+        "dbname": "HGNC",
+        "synonyms": [
+            "bA444G7",
+            "CDS1",
+            "CHK2",
+            "HuCds1",
+            "PP1425",
+            "RAD53"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "CHEK2",
+        "primary_id": "11200",
+        "version": "0",
+        "description": "checkpoint kinase 2",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "CDS1",
+            "CHK2",
+            "hCds1",
+            "HuCds1",
+            "LFS2",
+            "PP1425",
+            "RAD53"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000183765",
+        "primary_id": "ENSG00000183765",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "CHEK2",
+        "primary_id": "11200",
+        "version": "0",
+        "description": "checkpoint kinase 2",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "CHEK2",
+        "primary_id": "CHEK2",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "CDS1",
+            "CHK2",
+            "RAD53"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

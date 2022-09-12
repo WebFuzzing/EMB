@@ -1,0 +1,139 @@
+{
+    "allele_string": "-/CAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT",
+    "assembly_name": "GRCh37",
+    "end": 55593656,
+    "id": "4:g.55593656_55593657insCAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT",
+    "input": "4:g.55593656_55593657insCAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT",
+    "most_severe_consequence": "inframe_insertion",
+    "seq_region_name": "4",
+    "start": 55593657,
+    "strand": 1,
+    "transcript_consequences": [
+        {
+            "amino_acids": "-/QLPYDHKWEFPRNRLSFG",
+            "biotype": "protein_coding",
+            "canonical": 1,
+            "ccds": "CCDS3496.1",
+            "cdna_end": 1820,
+            "cdna_start": 1819,
+            "cds_end": 1723,
+            "cds_start": 1722,
+            "codons": "-/CAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT",
+            "consequence_terms": [
+                "inframe_insertion"
+            ],
+            "domains": [
+                {
+                    "db": "hmmpanther",
+                    "name": "PTHR24416"
+                },
+                {
+                    "db": "hmmpanther",
+                    "name": "PTHR24416"
+                },
+                {
+                    "db": "Gene3D",
+                    "name": 3
+                },
+                {
+                    "db": "PIRSF_domain",
+                    "name": "PIRSF000615"
+                },
+                {
+                    "db": "PIRSF_domain",
+                    "name": "PIRSF500951"
+                },
+                {
+                    "db": "Superfamily_domains",
+                    "name": "SSF56112"
+                }
+            ],
+            "exon": "11/21",
+            "gene_id": "ENSG00000157404",
+            "gene_symbol": "KIT",
+            "gene_symbol_source": "HGNC",
+            "hgnc_id": 6342,
+            "hgvs_offset": 56,
+            "hgvsc": "ENST00000288135.5:c.1725_1774+4dup",
+            "impact": "MODERATE",
+            "protein_end": 575,
+            "protein_id": "ENSP00000288135",
+            "protein_start": 574,
+            "refseq_transcript_ids": [
+                "NM_000222.2",
+                "NM_001093772.1"
+            ],
+            "strand": 1,
+            "transcript_id": "ENST00000288135",
+            "variant_allele": "CAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT"
+        },
+        {
+            "amino_acids": "-/QLPYDHKWEFPRNRLSFG",
+            "biotype": "protein_coding",
+            "ccds": "CCDS47058.1",
+            "cdna_end": 1808,
+            "cdna_start": 1807,
+            "cds_end": 1711,
+            "cds_start": 1710,
+            "codons": "-/CAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT",
+            "consequence_terms": [
+                "inframe_insertion"
+            ],
+            "domains": [
+                {
+                    "db": "hmmpanther",
+                    "name": "PTHR24416"
+                },
+                {
+                    "db": "hmmpanther",
+                    "name": "PTHR24416"
+                },
+                {
+                    "db": "Gene3D",
+                    "name": 3
+                },
+                {
+                    "db": "PIRSF_domain",
+                    "name": "PIRSF000615"
+                },
+                {
+                    "db": "PIRSF_domain",
+                    "name": "PIRSF500951"
+                },
+                {
+                    "db": "Superfamily_domains",
+                    "name": "SSF56112"
+                }
+            ],
+            "exon": "11/21",
+            "gene_id": "ENSG00000157404",
+            "gene_symbol": "KIT",
+            "gene_symbol_source": "HGNC",
+            "hgnc_id": 6342,
+            "hgvs_offset": 56,
+            "hgvsc": "ENST00000412167.2:c.1713_1762+4dup",
+            "impact": "MODERATE",
+            "protein_end": 571,
+            "protein_id": "ENSP00000390987",
+            "protein_start": 570,
+            "strand": 1,
+            "transcript_id": "ENST00000412167",
+            "variant_allele": "CAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT"
+        },
+        {
+            "biotype": "retained_intron",
+            "consequence_terms": [
+                "upstream_gene_variant"
+            ],
+            "distance": 1801,
+            "gene_id": "ENSG00000157404",
+            "gene_symbol": "KIT",
+            "gene_symbol_source": "HGNC",
+            "hgnc_id": 6342,
+            "impact": "MODIFIER",
+            "strand": 1,
+            "transcript_id": "ENST00000512959",
+            "variant_allele": "CAACTTCCTTATGATCACAAATGGGAGTTTCCCAGAAACAGGCTGAGTTTTGGT"
+        }
+    ]
+}

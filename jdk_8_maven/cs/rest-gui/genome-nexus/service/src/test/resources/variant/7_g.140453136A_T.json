@@ -1,0 +1,94 @@
+{
+    "variant": "7:g.140453136A>T",
+    "id": "7:g.140453136A>T",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "7",
+    "start": 140453136,
+    "end": 140453136,
+    "allele_string": "A/T",
+    "strand": 1,
+    "most_severe_consequence": "missense_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000288602",
+            "hgvsp": "ENSP00000288602.6:p.Val600Glu",
+            "hgvsc": "ENST00000288602.6:c.1799T>A",
+            "variant_allele": "T",
+            "codons": "gTg/gAg",
+            "protein_id": "ENSP00000288602",
+            "protein_start": 600,
+            "protein_end": 600,
+            "gene_symbol": "BRAF",
+            "gene_id": "ENSG00000157764",
+            "amino_acids": "V/E",
+            "hgnc_id": 1097,
+            "canonical": "1",
+            "polyphen_score": 0.963,
+            "polyphen_prediction": "probably_damaging",
+            "sift_score": 0,
+            "sift_prediction": "deleterious",
+            "refseq_transcript_ids": [
+                "NM_004333.4"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000479537",
+            "hgvsp": "ENSP00000418033.1:p.Val28Glu",
+            "hgvsc": "ENST00000479537.1:c.83T>A",
+            "variant_allele": "T",
+            "codons": "gTg/gAg",
+            "protein_id": "ENSP00000418033",
+            "protein_start": 28,
+            "protein_end": 28,
+            "gene_symbol": "BRAF",
+            "gene_id": "ENSG00000157764",
+            "amino_acids": "V/E",
+            "hgnc_id": 1097,
+            "polyphen_score": 0.991,
+            "polyphen_prediction": "probably_damaging",
+            "sift_score": 0.01,
+            "sift_prediction": "deleterious",
+            "consequence_terms": [
+                "missense_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000496384",
+            "hgvsp": "ENSP00000419060.1:p.Val208Glu",
+            "hgvsc": "ENST00000496384.2:c.622T>A",
+            "variant_allele": "T",
+            "codons": "gTg/gAg",
+            "protein_id": "ENSP00000419060",
+            "protein_start": 208,
+            "protein_end": 208,
+            "gene_symbol": "BRAF",
+            "gene_id": "ENSG00000157764",
+            "amino_acids": "V/E",
+            "hgnc_id": 1097,
+            "polyphen_score": 0.817,
+            "polyphen_prediction": "possibly_damaging",
+            "sift_score": 0,
+            "sift_prediction": "deleterious",
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000497784",
+            "hgvsc": "ENST00000497784.1:c.*1249T>A",
+            "variant_allele": "T",
+            "protein_id": "ENSP00000420119",
+            "gene_symbol": "BRAF",
+            "gene_id": "ENSG00000157764",
+            "hgnc_id": 1097,
+            "consequence_terms": [
+                "3_prime_UTR_variant",
+                "NMD_transcript_variant"
+            ]
+        }
+    ]
+}

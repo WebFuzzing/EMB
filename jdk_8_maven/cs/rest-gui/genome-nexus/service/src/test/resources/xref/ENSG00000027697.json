@@ -1,0 +1,147 @@
+[
+    {
+        "display_id": "OTTHUMG00000015656",
+        "primary_id": "OTTHUMG00000015656",
+        "version": "2",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "display_id": "IFNGR1",
+        "primary_id": "IFNGR1",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "LRG_66",
+        "primary_id": "LRG_66",
+        "version": "0",
+        "description": "Locus Reference Genomic record for IFNGR1",
+        "dbname": "LRG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "Locus Reference Genomic"
+    },
+    {
+        "display_id": "LRG_66",
+        "primary_id": "LRG_66",
+        "version": "0",
+        "description": null,
+        "dbname": "ENS_LRG_gene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "LRG display in Ensembl gene"
+    },
+    {
+        "display_id": " HELICOBACTER PYLORI INFECTION, SUS [#600263]",
+        "primary_id": "600263",
+        "version": "0",
+        "description": " HELICOBACTER PYLORI INFECTION, SUSCEPTIBILITY TO",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " ATYPICAL MYCOBACTERIOSIS, FAMILIAL [#209950]",
+        "primary_id": "209950",
+        "version": "0",
+        "description": " ATYPICAL MYCOBACTERIOSIS, FAMILIAL",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+            "209750"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " INTERFERON-GAMMA RECEPTOR 1 [*107470]",
+        "primary_id": "107470",
+        "version": "0",
+        "description": " INTERFERON-GAMMA RECEPTOR 1; IFNGR1",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "IFNGR1",
+        "primary_id": "5439",
+        "version": "0",
+        "description": "interferon gamma receptor 1",
+        "dbname": "HGNC",
+        "synonyms": [
+            "CD119",
+            "IFNGR"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "IFNGR1",
+        "primary_id": "3459",
+        "version": "0",
+        "description": "interferon gamma receptor 1",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "CD119",
+            "IFNGR"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000027697",
+        "primary_id": "ENSG00000027697",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "IFNGR1",
+        "primary_id": "3459",
+        "version": "0",
+        "description": "interferon gamma receptor 1",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    }
+]
