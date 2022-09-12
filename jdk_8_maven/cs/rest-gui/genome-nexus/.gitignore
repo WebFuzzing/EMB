@@ -6,7 +6,7 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-application.properties
+#application.properties
 *.iml
 .idea/
 *.ipr

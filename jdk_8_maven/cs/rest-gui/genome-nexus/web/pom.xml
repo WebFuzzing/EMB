@@ -126,6 +126,10 @@
               <goal>build-info</goal>
               <goal>repackage</goal>
             </goals>
+              <configuration>
+                  <finalName>genome-nexus</finalName>
+                  <classifier>sut</classifier>
+              </configuration>
           </execution>
         </executions>
       </plugin>
