@@ -41,7 +41,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final String MONGODB_VERSION = "3.6.2";
 
-    private static final String MONGODB_DATABASE_NAME = "genome";
+    private static final String MONGODB_DATABASE_NAME = "annotator";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
             .withExposedPorts(MONGODB_PORT);
@@ -64,7 +64,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         ctx = SpringApplication.run(GenomeNexusAnnotation.class,
                 new String[]{"--server.port=0",
                         "--spring.data.mongodb.uri=mongodb://" + mongodbContainer.getContainerIpAddress() + ":" + mongodbContainer.getMappedPort(MONGODB_PORT) + "/" + MONGODB_DATABASE_NAME,
-                        "--spring.cache.type=NONE"
+                      //  "--spring.cache.type=NONE"
                 });
 
         return "http://localhost:" + getSutPort();
