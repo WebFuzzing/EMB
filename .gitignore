@@ -241,3 +241,7 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_11_maven/em/embedded/rest/market/target/
 /jdk_11_maven/em/external/rest/cwa-verification/temp/
 /jdk_11_maven/em/external/rest/market/target/
+/jdk_8_maven/em/embedded/rest/genome-nexus/src/test/java/
+/jdk_8_maven/em/embedded/rest/genome-nexus/target/
+/jdk_8_maven/em/external/rest/genome-nexus/target/
+/jdk_8_maven/em/external/rest/genome-nexus/src/test/
