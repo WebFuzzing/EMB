@@ -1,0 +1,98 @@
+[
+    {
+        "display_id": "TPRXL",
+        "primary_id": "TPRXL",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000155509",
+        "primary_id": "OTTHUMG00000155509",
+        "version": "2",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.739211",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 3,
+        "xref_end": 510,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.739211",
+        "ensembl_end": 508,
+        "version": "0",
+        "cigar_line": "508M",
+        "score": 2540,
+        "description": "Transcribed locus",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.529180",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 95,
+        "xref_end": 2258,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.529180",
+        "ensembl_end": 2164,
+        "version": "0",
+        "cigar_line": "2164M",
+        "score": 10820,
+        "description": "Tetra-peptide repeat homeobox-like",
+        "xref_identity": 95,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": "TPRXL",
+        "primary_id": "32178",
+        "version": "0",
+        "description": "tetra-peptide repeat homeobox-like",
+        "dbname": "HGNC",
+        "synonyms": [
+            "FLJ35107"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "ENSG00000180438",
+        "primary_id": "ENSG00000180438",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    }
+]

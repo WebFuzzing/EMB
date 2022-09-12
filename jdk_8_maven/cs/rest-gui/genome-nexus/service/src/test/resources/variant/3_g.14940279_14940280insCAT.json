@@ -1,0 +1,90 @@
+{
+    "variant": "3:g.14940279_14940280insCAT",
+    "id": "3:g.14940279_14940280insCAT",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "3",
+    "start": 14940280,
+    "end": 14940279,
+    "allele_string": "-/CAT",
+    "strand": 1,
+    "most_severe_consequence": "protein_altering_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000285046",
+            "hgvsp": "ENSP00000285046.5:p.His1034delinsProTyr",
+            "hgvsc": "ENST00000285046.5:c.3100_3101insCAT",
+            "variant_allele": "CAT",
+            "codons": "cat/cCATat",
+            "protein_id": "ENSP00000285046",
+            "protein_start": 1034,
+            "protein_end": 1034,
+            "gene_symbol": "FGD5",
+            "gene_id": "ENSG00000154783",
+            "amino_acids": "H/PY",
+            "hgnc_id": 19117,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_152536.3"
+            ],
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000457774",
+            "hgvsp": "ENSP00000394827.1:p.His218delinsProTyr",
+            "hgvsc": "ENST00000457774.1:c.650_651insCAT",
+            "variant_allele": "CAT",
+            "codons": "cat/cCATat",
+            "protein_id": "ENSP00000394827",
+            "protein_start": 218,
+            "protein_end": 218,
+            "gene_symbol": "FGD5",
+            "gene_id": "ENSG00000154783",
+            "amino_acids": "H/PY",
+            "hgnc_id": 19117,
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000468662",
+            "hgvsc": "ENST00000468662.1:n.402_403insCAT",
+            "variant_allele": "CAT",
+            "gene_symbol": "FGD5",
+            "gene_id": "ENSG00000154783",
+            "hgnc_id": 19117,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000476851",
+            "hgvsc": "ENST00000476851.1:n.637_638insCAT",
+            "variant_allele": "CAT",
+            "gene_symbol": "FGD5",
+            "gene_id": "ENSG00000154783",
+            "hgnc_id": 19117,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000543601",
+            "hgvsp": "ENSP00000445949.1:p.His793delinsProTyr",
+            "hgvsc": "ENST00000543601.1:c.2377_2378insCAT",
+            "variant_allele": "CAT",
+            "codons": "cat/cCATat",
+            "protein_id": "ENSP00000445949",
+            "protein_start": 793,
+            "protein_end": 793,
+            "gene_symbol": "FGD5",
+            "gene_id": "ENSG00000154783",
+            "amino_acids": "H/PY",
+            "hgnc_id": 19117,
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        }
+    ]
+}

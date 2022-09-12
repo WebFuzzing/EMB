@@ -1,0 +1,73 @@
+{
+    "variant": "13:g.32914438del",
+    "colocatedVariants": [
+        {
+            "dbSnpId": "CD126349"
+        },
+        {
+            "dbSnpId": "CD961857"
+        },
+        {
+            "dbSnpId": "CD994374"
+        },
+        {
+            "dbSnpId": "COSV66447676"
+        },
+        {
+            "dbSnpId": "rs80359550"
+        }
+    ],
+    "originalVariantQuery": "13:g.32914438del",
+    "hgvsg": "13:g.32914438del",
+    "id": "13:g.32914438del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "13",
+    "start": 32914438,
+    "end": 32914438,
+    "allele_string": "T/-",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "exon": "11/27",
+            "transcript_id": "ENST00000380152",
+            "hgvsp": "ENSP00000369497.3:p.Ser1982ArgfsTer22",
+            "hgvsc": "ENST00000380152.3:c.5946del",
+            "variant_allele": "-",
+            "codons": "agT/ag",
+            "protein_id": "ENSP00000369497",
+            "protein_start": 1982,
+            "protein_end": 1982,
+            "gene_symbol": "BRCA2",
+            "gene_id": "ENSG00000139618",
+            "amino_acids": "S/X",
+            "hgnc_id": "1101",
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "exon": "11/28",
+            "transcript_id": "ENST00000544455",
+            "hgvsp": "ENSP00000439902.1:p.Ser1982ArgfsTer22",
+            "hgvsc": "ENST00000544455.1:c.5946del",
+            "variant_allele": "-",
+            "codons": "agT/ag",
+            "protein_id": "ENSP00000439902",
+            "protein_start": 1982,
+            "protein_end": 1982,
+            "gene_symbol": "BRCA2",
+            "gene_id": "ENSG00000139618",
+            "amino_acids": "S/X",
+            "hgnc_id": "1101",
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_000059.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        }
+    ],
+    "successfully_annotated": true
+}

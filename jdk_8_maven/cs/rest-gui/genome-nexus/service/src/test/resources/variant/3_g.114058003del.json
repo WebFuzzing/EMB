@@ -1,0 +1,164 @@
+{
+    "variant": "3:g.114058003del",
+    "id": "3:g.114058003del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "3",
+    "start": 114058003,
+    "end": 114058003,
+    "allele_string": "G/-",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000357258",
+            "hgvsp": "ENSP00000349803.3:p.Pro619LeufsTer43",
+            "hgvsc": "ENST00000357258.3:c.1856del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000349803",
+            "protein_start": 619,
+            "protein_end": 619,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "refseq_transcript_ids": [
+                "NM_015642.4"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000393785",
+            "hgvsp": "ENSP00000377375.2:p.Pro619LeufsTer43",
+            "hgvsc": "ENST00000393785.2:c.1856del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000377375",
+            "protein_start": 619,
+            "protein_end": 619,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "refseq_transcript_ids": [
+                "NM_001164346.1"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000462705",
+            "hgvsp": "ENSP00000420324.1:p.Pro619LeufsTer43",
+            "hgvsc": "ENST00000462705.1:c.1856del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000420324",
+            "protein_start": 619,
+            "protein_end": 619,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "refseq_transcript_ids": [
+                "NM_001164343.1"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000464560",
+            "hgvsp": "ENSP00000417307.1:p.Pro619LeufsTer43",
+            "hgvsc": "ENST00000464560.1:c.1856del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000417307",
+            "protein_start": 619,
+            "protein_end": 619,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "refseq_transcript_ids": [
+                "NM_001164344.1"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000471418",
+            "hgvsp": "ENSP00000419902.1:p.Pro619LeufsTer43",
+            "hgvsc": "ENST00000471418.1:c.1856del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000419902",
+            "protein_start": 619,
+            "protein_end": 619,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "refseq_transcript_ids": [
+                "NM_001164345.1"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000474710",
+            "hgvsp": "ENSP00000419153.1:p.Pro692LeufsTer43",
+            "hgvsc": "ENST00000474710.1:c.2075del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000419153",
+            "protein_start": 692,
+            "protein_end": 692,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_001164342.1"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000479879",
+            "variant_allele": "-",
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "hgnc_id": 13503,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000481632",
+            "hgvsp": "ENSP00000418092.1:p.Pro619LeufsTer43",
+            "hgvsc": "ENST00000481632.1:c.1856del",
+            "variant_allele": "-",
+            "codons": "cCt/ct",
+            "protein_id": "ENSP00000418092",
+            "protein_start": 619,
+            "protein_end": 619,
+            "gene_symbol": "ZBTB20",
+            "gene_id": "ENSG00000181722",
+            "amino_acids": "P/X",
+            "hgnc_id": 13503,
+            "refseq_transcript_ids": [
+                "NM_001164347.1"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        }
+    ]
+}

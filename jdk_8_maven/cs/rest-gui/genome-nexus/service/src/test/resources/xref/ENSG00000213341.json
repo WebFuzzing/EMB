@@ -1,0 +1,139 @@
+[
+    {
+        "display_id": "OTTHUMG00000018899",
+        "primary_id": "OTTHUMG00000018899",
+        "version": "1",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.594380",
+        "dbname": "UniGene",
+        "ensembl_identity": 6,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 2998,
+        "xref_start": 1,
+        "xref_end": 247,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.594380",
+        "ensembl_end": 3242,
+        "version": "0",
+        "cigar_line": "25M1I185M1I35M",
+        "score": 1178,
+        "description": "Transcribed locus",
+        "xref_identity": 97,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " COCOON SYNDROME [#613630]",
+        "primary_id": "613630",
+        "version": "0",
+        "description": " COCOON SYNDROME",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " CONSERVED HELIX-LOOP-HELIX UBIQUIT [*600664]",
+        "primary_id": "600664",
+        "version": "0",
+        "description": " CONSERVED HELIX-LOOP-HELIX UBIQUITOUS KINASE; CHUK",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "CHUK",
+        "primary_id": "1974",
+        "version": "0",
+        "description": "conserved helix-loop-helix ubiquitous kinase",
+        "dbname": "HGNC",
+        "synonyms": [
+            "IkBKA",
+            "IKK-alpha",
+            "IKK1",
+            "IKKA",
+            "NFKBIKA",
+            "TCF16"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "CHUK",
+        "primary_id": "1147",
+        "version": "0",
+        "description": "conserved helix-loop-helix ubiquitous kinase",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "IKBKA",
+            "IKK-alpha",
+            "IKK1",
+            "IKKA",
+            "NFKBIKA",
+            "TCF16"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000213341",
+        "primary_id": "ENSG00000213341",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "CHUK",
+        "primary_id": "1147",
+        "version": "0",
+        "description": "conserved helix-loop-helix ubiquitous kinase",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "CHUK",
+        "primary_id": "CHUK",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "IKKA",
+            "TCF16"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

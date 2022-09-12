@@ -1,0 +1,11 @@
+{
+    "variant": "Y:g.41242962_41242963insGA",
+    "id": "Y:g.41242962_41242963insGA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "Y",
+    "start": 41242963,
+    "end": 41242962,
+    "allele_string": "-/GA",
+    "strand": 1,
+    "most_severe_consequence": "intergenic_variant"
+}

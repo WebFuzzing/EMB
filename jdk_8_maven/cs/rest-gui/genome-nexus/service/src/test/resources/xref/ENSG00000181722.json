@@ -1,0 +1,101 @@
+[
+    {
+        "display_id": "OTTHUMG00000159366",
+        "primary_id": "OTTHUMG00000159366",
+        "version": "1",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "display_id": " ZINC FINGER- AND BTB DOMAIN-CONTAI [*606025]",
+        "primary_id": "606025",
+        "version": "0",
+        "description": " ZINC FINGER- AND BTB DOMAIN-CONTAINING PROTEIN 20; ZBTB20",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "ZBTB20",
+        "primary_id": "13503",
+        "version": "0",
+        "description": "zinc finger and BTB domain containing 20",
+        "dbname": "HGNC",
+        "synonyms": [
+            "DKFZp566F123",
+            "DPZF",
+            "ODA-8S",
+            "ZNF288"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "ZBTB20",
+        "primary_id": "26137",
+        "version": "0",
+        "description": "zinc finger and BTB domain containing 20",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "DPZF",
+            "HOF",
+            "ODA-8S",
+            "RP11-553L6.5",
+            "ZNF288"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000181722",
+        "primary_id": "ENSG00000181722",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "ZBTB20",
+        "primary_id": "26137",
+        "version": "0",
+        "description": "zinc finger and BTB domain containing 20",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "ZBTB20",
+        "primary_id": "ZBTB20",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "DPZF",
+            "ZNF288"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

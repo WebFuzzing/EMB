@@ -1,0 +1,167 @@
+[
+    {
+        "hugo_symbol": "BRAF",
+        "transcript_id": "ENST00000288602",
+        "residue": "N581",
+        "type": "single residue",
+        "tumor_count": 21,
+        "missense_count": 21,
+        "trunc_count": 0,
+        "inframe_count": 0,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "BRAF",
+        "transcript_id": "ENST00000288602",
+        "residue": "N581",
+        "type": "3d",
+        "tumor_count": 11,
+        "missense_count": "",
+        "trunc_count": "",
+        "inframe_count": "",
+        "splice_count": ""
+    },
+    {
+        "hugo_symbol": "ERBB2",
+        "transcript_id": "ENST00000269571",
+        "residue": "L755",
+        "type": "single residue",
+        "tumor_count": 44,
+        "missense_count": 44,
+        "trunc_count": 0,
+        "inframe_count": 0,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "ERBB2",
+        "transcript_id": "ENST00000269571",
+        "residue": "V697",
+        "type": "single residue",
+        "tumor_count": 4,
+        "missense_count": 4,
+        "trunc_count": 0,
+        "inframe_count": 0,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "KRAS",
+        "transcript_id": "ENST00000256078",
+        "residue": "G12",
+        "type": "single residue",
+        "tumor_count": 2175,
+        "missense_count": 2175,
+        "trunc_count": 0,
+        "inframe_count": 0,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "NRAS",
+        "transcript_id": "ENST00000369535",
+        "residue": "G12",
+        "type": "single residue",
+        "tumor_count": 74,
+        "missense_count": 74,
+        "trunc_count": 0,
+        "inframe_count": 0,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "KRAS",
+        "transcript_id": "ENST00000256078",
+        "residue": "G12",
+        "type": "3d",
+        "tumor_count": 735,
+        "missense_count": "",
+        "trunc_count": "",
+        "inframe_count": "",
+        "splice_count": ""
+    },
+    {
+        "hugo_symbol": "KRAS",
+        "transcript_id": "ENST00000256078",
+        "residue": "E63",
+        "type": "3d",
+        "tumor_count": 2,
+        "missense_count": "",
+        "trunc_count": "",
+        "inframe_count": "",
+        "splice_count": ""
+    },
+    {
+        "hugo_symbol": "EGFR",
+        "transcript_id": "ENST00000275493",
+        "residue": "745-759",
+        "type": "in-frame indel",
+        "tumor_count": 155,
+        "missense_count": 0,
+        "trunc_count": 0,
+        "inframe_count": 155,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "EGFR",
+        "transcript_id": "ENST00000275493",
+        "residue": "764-774",
+        "type": "in-frame indel",
+        "tumor_count": 33,
+        "missense_count": 0,
+        "trunc_count": 0,
+        "inframe_count": 33,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "EGFR",
+        "transcript_id": "ENST00000275493",
+        "residue": "709-710",
+        "type": "in-frame indel",
+        "tumor_count": 9,
+        "missense_count": 0,
+        "trunc_count": 0,
+        "inframe_count": 9,
+        "splice_count": 0
+    },
+    {
+        "hugoSymbol": "DNMT1",
+        "transcript_id": "ENST00000340748",
+        "residue": "E432",
+        "tumorCount": 7,
+        "type": "single residue",
+        "missenseCount": 7,
+        "truncatingCount": 0,
+        "inframeCount": 0,
+        "spliceCount": 0
+    },
+    {
+        "hugo_symbol": "MET",
+        "transcript_id": "ENST00000397752",
+        "residue": "X1010",
+        "tumor_count": 19,
+        "type": "splice site",
+        "missense_count": 0,
+        "truncating_count": 0,
+        "inframe_count": 0,
+        "splice_count": 19
+    },
+    {
+        "hugo_symbol": "AKT1",
+        "transcript_id": "ENST00000349310",
+        "residue": "65-77",
+        "tumor_count": 2,
+        "type": "in-frame indel",
+        "missense_count": 0,
+        "truncating_count": 0,
+        "inframe_count": 2,
+        "splice_count": 0
+    },
+    {
+        "hugo_symbol": "AKT1",
+        "transcript_id": "ENST00000349310",
+        "residue": "E17",
+        "tumor_count": 149,
+        "type": "single residue",
+        "missense_count": 148,
+        "truncating_count": 1,
+        "inframe_count": 0,
+        "splice_count": 0
+    }
+]

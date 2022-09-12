@@ -1,0 +1,120 @@
+[
+    {
+        "display_id": "OTTHUMG00000009310",
+        "primary_id": "OTTHUMG00000009310",
+        "version": "1",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.610395",
+        "dbname": "UniGene",
+        "ensembl_identity": 11,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1658,
+        "xref_start": 8,
+        "xref_end": 574,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.610395",
+        "ensembl_end": 2227,
+        "version": "0",
+        "cigar_line": "48M3D519M",
+        "score": 2806,
+        "description": "Transcribed locus, strongly similar to NP_002218.2 JAK1 gene product [Homo sapiens]",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " JANUS KINASE 1 [*147795]",
+        "primary_id": "147795",
+        "version": "0",
+        "description": " JANUS KINASE 1; JAK1",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "JAK1",
+        "primary_id": "6190",
+        "version": "0",
+        "description": "Janus kinase 1",
+        "dbname": "HGNC",
+        "synonyms": [
+            "JAK1A",
+            "JAK1B",
+            "JTK3"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "JAK1",
+        "primary_id": "3716",
+        "version": "0",
+        "description": "Janus kinase 1",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "JAK1A",
+            "JAK1B",
+            "JTK3"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000162434",
+        "primary_id": "ENSG00000162434",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "JAK1",
+        "primary_id": "3716",
+        "version": "0",
+        "description": "Janus kinase 1",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "JAK1",
+        "primary_id": "JAK1",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "JAK1A",
+            "JAK1B"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

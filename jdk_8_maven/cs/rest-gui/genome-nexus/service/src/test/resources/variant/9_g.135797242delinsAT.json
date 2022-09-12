@@ -1,0 +1,130 @@
+{
+    "variant": "9:g.135797242delinsAT",
+    "id": "9:g.135797242delinsAT",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "9",
+    "start": 135797242,
+    "end": 135797242,
+    "allele_string": "C/AT",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000298552",
+            "hgvsp": "ENSP00000298552.3:p.Met209IlefsTer2",
+            "hgvsc": "ENST00000298552.3:c.627delinsAT",
+            "variant_allele": "AT",
+            "codons": "atG/atAT",
+            "protein_id": "ENSP00000298552",
+            "protein_start": 209,
+            "protein_end": 209,
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "amino_acids": "M/IX",
+            "hgnc_id": 12362,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_001162426.1",
+                "NM_001162427.1",
+                "NM_000368.4"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000403810",
+            "hgvsp": "ENSP00000386093.1:p.Met209IlefsTer2",
+            "hgvsc": "ENST00000403810.1:c.627delinsAT",
+            "variant_allele": "AT",
+            "codons": "atG/atAT",
+            "protein_id": "ENSP00000386093",
+            "protein_start": 209,
+            "protein_end": 209,
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "amino_acids": "M/IX",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000440111",
+            "hgvsp": "ENSP00000394524.2:p.Met209IlefsTer2",
+            "hgvsc": "ENST00000440111.2:c.627delinsAT",
+            "variant_allele": "AT",
+            "codons": "atG/atAT",
+            "protein_id": "ENSP00000394524",
+            "protein_start": 209,
+            "protein_end": 209,
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "amino_acids": "M/IX",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000461879",
+            "hgvsc": "ENST00000461879.1:n.456delinsAT",
+            "variant_allele": "AT",
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000475903",
+            "hgvsc": "ENST00000475903.1:n.784delinsAT",
+            "variant_allele": "AT",
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000490179",
+            "variant_allele": "AT",
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000493467",
+            "hgvsc": "ENST00000493467.1:n.823delinsAT",
+            "variant_allele": "AT",
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "non_coding_transcript_exon_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000545250",
+            "hgvsp": "ENSP00000444017.1:p.Met158IlefsTer2",
+            "hgvsc": "ENST00000545250.1:c.474delinsAT",
+            "variant_allele": "AT",
+            "codons": "atG/atAT",
+            "protein_id": "ENSP00000444017",
+            "protein_start": 158,
+            "protein_end": 158,
+            "gene_symbol": "TSC1",
+            "gene_id": "ENSG00000165699",
+            "amino_acids": "M/IX",
+            "hgnc_id": 12362,
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        }
+    ]
+}

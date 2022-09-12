@@ -1,0 +1,104 @@
+{
+    "variant": "12:g.25398285C>A",
+    "id": "12:g.25398285C>A",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "12",
+    "start": 25398285,
+    "end": 25398285,
+    "allele_string": "C/A",
+    "strand": 1,
+    "most_severe_consequence": "missense_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000256078",
+            "hgvsp": "ENSP00000256078.4:p.Gly12Cys",
+            "hgvsc": "ENST00000256078.4:c.34G>T",
+            "variant_allele": "A",
+            "codons": "Ggt/Tgt",
+            "protein_id": "ENSP00000256078",
+            "protein_start": 12,
+            "protein_end": 12,
+            "gene_symbol": "KRAS",
+            "gene_id": "ENSG00000133703",
+            "amino_acids": "G/C",
+            "hgnc_id": 6407,
+            "canonical": "1",
+            "polyphen_score": 0.991,
+            "polyphen_prediction": "probably_damaging",
+            "sift_score": 0.04,
+            "sift_prediction": "deleterious",
+            "refseq_transcript_ids": [
+                "NM_033360.2"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000311936",
+            "hgvsp": "ENSP00000308495.3:p.Gly12Cys",
+            "hgvsc": "ENST00000311936.3:c.34G>T",
+            "variant_allele": "A",
+            "codons": "Ggt/Tgt",
+            "protein_id": "ENSP00000308495",
+            "protein_start": 12,
+            "protein_end": 12,
+            "gene_symbol": "KRAS",
+            "gene_id": "ENSG00000133703",
+            "amino_acids": "G/C",
+            "hgnc_id": 6407,
+            "polyphen_score": 0.99,
+            "polyphen_prediction": "probably_damaging",
+            "sift_score": 0.02,
+            "sift_prediction": "deleterious",
+            "refseq_transcript_ids": [
+                "NM_004985.3"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000556131",
+            "hgvsp": "ENSP00000451856.1:p.Gly12Cys",
+            "hgvsc": "ENST00000556131.1:c.34G>T",
+            "variant_allele": "A",
+            "codons": "Ggt/Tgt",
+            "protein_id": "ENSP00000451856",
+            "protein_start": 12,
+            "protein_end": 12,
+            "gene_symbol": "KRAS",
+            "gene_id": "ENSG00000133703",
+            "amino_acids": "G/C",
+            "hgnc_id": 6407,
+            "polyphen_score": 0.938,
+            "polyphen_prediction": "probably_damaging",
+            "sift_score": 0.03,
+            "sift_prediction": "deleterious",
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000557334",
+            "hgvsp": "ENSP00000452512.1:p.Gly12Cys",
+            "hgvsc": "ENST00000557334.1:c.34G>T",
+            "variant_allele": "A",
+            "codons": "Ggt/Tgt",
+            "protein_id": "ENSP00000452512",
+            "protein_start": 12,
+            "protein_end": 12,
+            "gene_symbol": "KRAS",
+            "gene_id": "ENSG00000133703",
+            "amino_acids": "G/C",
+            "hgnc_id": 6407,
+            "polyphen_score": 0.984,
+            "polyphen_prediction": "probably_damaging",
+            "sift_score": 0.02,
+            "sift_prediction": "deleterious_low_confidence",
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        }
+    ]
+}

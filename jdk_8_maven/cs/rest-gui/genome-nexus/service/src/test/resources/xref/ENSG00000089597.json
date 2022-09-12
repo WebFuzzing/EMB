@@ -1,0 +1,141 @@
+[
+    {
+        "display_id": "OTTHUMG00000167696",
+        "primary_id": "OTTHUMG00000167696",
+        "version": "3",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.706921",
+        "dbname": "UniGene",
+        "ensembl_identity": 11,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 3181,
+        "xref_start": 4,
+        "xref_end": 421,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.706921",
+        "ensembl_end": 3598,
+        "version": "0",
+        "cigar_line": "418M",
+        "score": 2047,
+        "description": "Transcribed locus",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.595071",
+        "dbname": "UniGene",
+        "ensembl_identity": 99,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 18,
+        "xref_end": 3921,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.595071",
+        "ensembl_end": 3904,
+        "version": "0",
+        "cigar_line": "3904M",
+        "score": 19520,
+        "description": "Glucosidase, alpha; neutral AB",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " GLUCOSIDASE, ALPHA, NEUTRAL AB [*104160]",
+        "primary_id": "104160",
+        "version": "0",
+        "description": " GLUCOSIDASE, ALPHA, NEUTRAL AB; GANAB",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+            "601862"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "GANAB",
+        "primary_id": "4138",
+        "version": "0",
+        "description": "glucosidase, alpha; neutral AB",
+        "dbname": "HGNC",
+        "synonyms": [
+            "G2AN",
+            "GluII",
+            "KIAA0088"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "GANAB",
+        "primary_id": "23193",
+        "version": "0",
+        "description": "glucosidase, alpha; neutral AB",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "G2AN",
+            "GLUII"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000089597",
+        "primary_id": "ENSG00000089597",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "GANAB",
+        "primary_id": "23193",
+        "version": "0",
+        "description": "glucosidase, alpha; neutral AB",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "GANAB",
+        "primary_id": "GANAB",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "G2AN",
+            "KIAA0088"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

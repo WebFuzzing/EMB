@@ -1,0 +1,58 @@
+{
+    "variant": "4:g.9784947_9784948insAGA",
+    "id": "4:g.9784947_9784948insAGA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "4",
+    "start": 9784948,
+    "end": 9784947,
+    "allele_string": "-/AGA",
+    "strand": 1,
+    "most_severe_consequence": "protein_altering_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000304374",
+            "hgvsp": "ENSP00000306129.2:p.Gly432delinsGluSer",
+            "hgvsc": "ENST00000304374.2:c.1294_1295insAGA",
+            "variant_allele": "AGA",
+            "codons": "ggt/gAGAgt",
+            "protein_id": "ENSP00000306129",
+            "protein_start": 432,
+            "protein_end": 432,
+            "gene_symbol": "DRD5",
+            "gene_id": "ENSG00000169676",
+            "amino_acids": "G/ES",
+            "hgnc_id": 3026,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_000798.4"
+            ],
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000503803",
+            "hgvsc": "ENST00000503803.1:n.386-3259_386-3258insTCT",
+            "variant_allele": "AGA",
+            "gene_symbol": "SLC2A9",
+            "gene_id": "ENSG00000109667",
+            "hgnc_id": 13446,
+            "consequence_terms": [
+                "intron_variant",
+                "non_coding_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000508585",
+            "hgvsc": "ENST00000508585.1:n.182-11955_182-11954insTCT",
+            "variant_allele": "AGA",
+            "gene_symbol": "SLC2A9",
+            "gene_id": "ENSG00000109667",
+            "hgnc_id": 13446,
+            "consequence_terms": [
+                "intron_variant",
+                "non_coding_transcript_variant"
+            ]
+        }
+    ]
+}
