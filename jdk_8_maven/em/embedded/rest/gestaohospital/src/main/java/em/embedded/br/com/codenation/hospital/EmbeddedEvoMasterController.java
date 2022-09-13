@@ -1,5 +1,6 @@
 package em.embedded.br.com.codenation.hospital;
 
+import br.com.codenation.hospital.GestaohospitalarApplication;
 import com.mongodb.MongoClient;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
