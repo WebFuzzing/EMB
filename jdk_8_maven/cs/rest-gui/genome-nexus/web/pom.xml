@@ -86,53 +86,61 @@
   </dependencies>
 
   <build>
+      <pluginManagement>
+          <plugins>
+              <plugin>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-maven-plugin</artifactId>
+                  <version>2.2.1.RELEASE</version>
+                  <executions>
+                      <execution>
+                          <goals>
+                              <goal>repackage</goal>
+                          </goals>
+                          <configuration>
+                              <finalName>genome-nexus</finalName>
+                              <classifier>sut</classifier>
+                              <mainClass>org.cbioportal.genome_nexus.GenomeNexusAnnotation</mainClass>
+                          </configuration>
+                      </execution>
+                  </executions>
+              </plugin>
+          </plugins>
+      </pluginManagement>
+
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.3</version>
-        <executions>
-          <!-- unpack genome-nexus-frontend -->
-          <execution>
-            <id>unpack</id>
-            <!-- generate before copying over resources -->
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>com.github.genome-nexus</groupId>
-                  <artifactId>genome-nexus-frontend</artifactId>
-                  <version>744d3666a407c918673a7611157756404bfbd1a1</version>
-                  <type>jar</type>
-                  <outputDirectory>src/main/resources/static</outputDirectory>
-                  <overWrite>true</overWrite>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-dependency-plugin</artifactId>-->
+<!--        <version>2.3</version>-->
+<!--        <executions>-->
+<!--          &lt;!&ndash; unpack genome-nexus-frontend &ndash;&gt;-->
+<!--          <execution>-->
+<!--            <id>unpack</id>-->
+<!--            &lt;!&ndash; generate before copying over resources &ndash;&gt;-->
+<!--            <phase>generate-resources</phase>-->
+<!--            <goals>-->
+<!--              <goal>unpack</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <artifactItems>-->
+<!--                <artifactItem>-->
+<!--                  <groupId>com.github.genome-nexus</groupId>-->
+<!--                  <artifactId>genome-nexus-frontend</artifactId>-->
+<!--                  <version>744d3666a407c918673a7611157756404bfbd1a1</version>-->
+<!--                  <type>jar</type>-->
+<!--                  <outputDirectory>src/main/resources/static</outputDirectory>-->
+<!--                  <overWrite>true</overWrite>-->
+<!--                </artifactItem>-->
+<!--              </artifactItems>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <!-- required to build an executable jar -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.2.1.RELEASE</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build-info</goal>
-              <goal>repackage</goal>
-            </goals>
-              <configuration>
-                  <finalName>genome-nexus</finalName>
-                  <classifier>sut</classifier>
-                  <mainClass>org.cbioportal.genome_nexus.GenomeNexusAnnotation</mainClass>
-              </configuration>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>pl.project13.maven</groupId>
