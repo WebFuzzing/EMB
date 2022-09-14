@@ -146,7 +146,7 @@ def build_jdk_11_maven() :
     copy(folder +"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", DIST)
     copy(folder +"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", DIST)
 
-    copy(folder +"/cs/rest/market/market-rest/target/market-sut.jar", DIST)
+    copy(folder +"/cs/rest-gui/market/market-rest/target/market-sut.jar", DIST)
     copy(folder +"/em/external/rest/market/target/market-evomaster-runner.jar", DIST)
 
 ####################
