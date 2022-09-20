@@ -19,21 +19,13 @@ restcountries,REST,Java,24,1977,,MPL,https://github.com/apilayer/restcountries
 scout-api,REST,Java,93,9736,H2,MIT,https://github.com/mikaelsvensson/scout-api
 genome-nexus,REST,Java,405,30004,MongoDB,MIT,https://github.com/genome-nexus/genome-nexus
 market,REST,Java,124,9861,H2,MIT,https://github.com/aleksey-lukyanets/market
+petclinic-graphql,GraphQL,Java,89,5212,PostgreSQL,Apache,https://github.com/spring-petclinic/spring-petclinic-graphql
+patio-api,GraphQL,Java,178,18048,PostgreSQL,GPL,https://github.com/patio-team/patio-api
+timbuctoo,GraphQL,Java,1113,107729,Neo4j,GPL,https://github.com/HuygensING/timbuctoo
+graphql-ncs,GraphQL,Kotlin,8,548,,UNDEFINED,UNDEFINED
+graphql-scs,GraphQL,Kotlin,13,577,,UNDEFINED,UNDEFINED
+react-finland,GraphQL,TypeScript,461,16206,,UNDEFINED,https://github.com/ReactFinland/graphql-api
+ecommerce-server,GraphQL,TypeScript,49,1815,PostgreSQL,MIT,https://github.com/react-shop/react-ecommerce
+rpc-thrift-ncs,RPC-Thrift,9,585,,UNDEFINED,UNDEFINED
+rpc-thrift-scs,RPC-Thrift,14,772,,UNDEFINED,UNDEFINED
 
-
-GraphQL: Java/Kotlin
-Spring-Pet-Clinic (Apache), from https://github.com/spring-petclinic/spring-petclinic-graphql
-Patio-Api (GPL), from https://github.com/patio-team/patio-api
-Timbuctoo (GPL), from https://github.com/HuygensING/timbuctoo
-NCS (not-known license, artificial numerical examples coming from different sources)
-SCS (not-known license, artificial string examples coming from different sources)
-
-GraphQL: JavaScript/TypeScript
-React-Finland (not-known license), from https://github.com/ReactFinland/graphql-api
-
-E-Commerce Server (MIT), from https://github.com/react-shop/react-ecommerce
-
-RPC (Thrift/gRPC): Java
-NCS (not-known license, artificial numerical examples coming from different sources)
-
-SCS (not-known license, artificial string examples coming from different sources)
