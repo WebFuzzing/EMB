@@ -129,11 +129,11 @@ hs_err_pid*
 /jdk_8_maven/em/external/rest/restcountries/src/evo/
 /jdk_8_maven/em/embedded/rest/languagetool/target/
 /jdk_8_maven/em/external/rest/languagetool/target/
-/jdk_8_maven/cs/graphql/spring-petclinic-graphql/target
-/jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/target/
-/jdk_8_maven/em/external/graphql/spring-petclinic-graphql/target/
-/jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/src/main/em/
-/jdk_8_maven/em/external/graphql/spring-petclinic-graphql/src/main/em/
+/jdk_8_maven/cs/graphql/petclinic-graphql/target
+/jdk_8_maven/em/embedded/graphql/petclinic-graphql/target/
+/jdk_8_maven/em/external/graphql/petclinic-graphql/target/
+/jdk_8_maven/em/embedded/graphql/petclinic-graphql/src/main/em/
+/jdk_8_maven/em/external/graphql/petclinic-graphql/src/main/em/
 /jdk_8_maven/cs/graphql/graphql-ncs/target
 /jdk_8_maven/cs/graphql/graphql-scs/target
 /jdk_8_maven/em/embedded/graphql/graphql-ncs/target
