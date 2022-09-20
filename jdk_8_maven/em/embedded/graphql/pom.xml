@@ -13,7 +13,7 @@
 
 
     <modules>
-        <module>spring-petclinic-graphql</module>
+        <module>petclinic-graphql</module>
         <module>graphql-ncs</module>
         <module>graphql-scs</module>
     </modules>

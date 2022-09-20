@@ -109,8 +109,8 @@ def build_jdk_8_maven() :
     copy(folder +"/cs/rest-gui/genome-nexus/web/target/genome-nexus-sut.jar", DIST)
     copy(folder +"/em/external/rest/genome-nexus/target/genome-nexus-evomaster-runner.jar", DIST)
 
-    copy(folder +"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar", DIST)
-    copy(folder +"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", DIST)
+    copy(folder +"/cs/graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/petclinic-graphql/target/petclinic-graphql-evomaster-runner.jar", DIST)
 
     copy(folder +"/cs/graphql/graphql-ncs/target/graphql-ncs-sut.jar", DIST)
     copy(folder +"/em/external/graphql/graphql-ncs/target/graphql-ncs-evomaster-runner.jar", DIST)

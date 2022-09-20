@@ -159,7 +159,7 @@
 							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<finalName>petclinic</finalName>
+							<finalName>petclinic-graphql</finalName>
 							<classifier>sut</classifier>
 						</configuration>
 					</execution>
