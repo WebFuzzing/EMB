@@ -26,6 +26,6 @@ graphql-ncs,GraphQL,Kotlin,8,548,,UNDEFINED,UNDEFINED
 graphql-scs,GraphQL,Kotlin,13,577,,UNDEFINED,UNDEFINED
 react-finland,GraphQL,TypeScript,461,16206,,UNDEFINED,https://github.com/ReactFinland/graphql-api
 ecommerce-server,GraphQL,TypeScript,49,1815,PostgreSQL,MIT,https://github.com/react-shop/react-ecommerce
-rpc-thrift-ncs,RPC-Thrift,9,585,,UNDEFINED,UNDEFINED
-rpc-thrift-scs,RPC-Thrift,14,772,,UNDEFINED,UNDEFINED
+rpc-thrift-ncs,RPC-Thrift,Java,9,585,,UNDEFINED,UNDEFINED
+rpc-thrift-scs,RPC-Thrift,Java,14,772,,UNDEFINED,UNDEFINED
 
