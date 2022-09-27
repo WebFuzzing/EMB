@@ -47,7 +47,8 @@ The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case study) are a
 They are based on numerical and string-based functions previously used in the literature of unit test generation.
 We just re-implemented in different languages, and put them behind a web service. 
 
-
+For the RESTful APIs, each API has an endpoint where the OpenAPI/Swagger schemas can be downloaded from.
+For simplicity, all schemas are also available as JSON/YML files under the folder [openapi-swagger](./openapi-swagger). 
 
 ### REST: Java/Kotlin
 
