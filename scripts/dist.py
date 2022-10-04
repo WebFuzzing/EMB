@@ -156,7 +156,11 @@ def build_jdk_11_gradle() :
     env_vars["JAVA_HOME"] = JAVA_HOME_11
     folder = "jdk_11_gradle"
 
-    gradleres = run(["gradlew", "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+    GRADLEW_CMD = "gradlew"
+    if not SHELL:
+        GRADLEW_CMD = "./gradlew"
+
+    gradleres = run([GRADLEW_CMD, "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
     gradleres = gradleres.returncode
 
     if gradleres != 0:
