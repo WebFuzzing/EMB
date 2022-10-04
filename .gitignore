@@ -245,3 +245,7 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_8_maven/em/embedded/rest/genome-nexus/target/
 /jdk_8_maven/em/external/rest/genome-nexus/target/
 /jdk_8_maven/em/external/rest/genome-nexus/src/test/
+/jdk_8_maven/em/embedded/thrift/ncs/target/
+/jdk_8_maven/em/embedded/thrift/scs/target/
+/jdk_8_maven/em/external/thrift/ncs/target/
+/jdk_8_maven/em/external/thrift/scs/target/

@@ -143,8 +143,8 @@ def build_jdk_11_maven() :
     copy(folder +"/cs/rest/cwa-verification-server/target/cwa-verification-sut.jar", DIST)
     copy(folder +"/em/external/rest/cwa-verification/target/cwa-verification-evomaster-runner.jar", DIST)
 
-    copy(folder +"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", DIST)
-    copy(folder +"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", DIST)
+    #copy(folder +"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", DIST)
+    #copy(folder +"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", DIST)
 
     copy(folder +"/cs/rest-gui/market/market-rest/target/market-sut.jar", DIST)
     copy(folder +"/em/external/rest/market/target/market-evomaster-runner.jar", DIST)
@@ -156,7 +156,12 @@ def build_jdk_11_gradle() :
     env_vars["JAVA_HOME"] = JAVA_HOME_11
     folder = "jdk_11_gradle"
 
-    gradleres = run(["gradlew", "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+    command = "gradlew"
+
+    if platform.system() == "Darwin":
+        command = "./gradlew"
+
+    gradleres = run([command, "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
     gradleres = gradleres.returncode
 
     if gradleres != 0:
