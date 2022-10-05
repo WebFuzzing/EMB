@@ -1007,40 +1007,40 @@
 
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>makeIndex</id>
-      <activation>
-        <os>
-          <family>unix</family>
-        </os>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>${exec-maven-plugin.version}</version>
-            <executions>
-              <execution>
-                <id>build-docs</id>
-                <phase>post-integration-test</phase>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-                <configuration>
-                  <executable>${basedir}/src/spec/scripts/builddoc</executable>
-                  <commandlineArgs>
-                    ${basedir}/src/spec/resources/ ${basedir}/target/concordion/
-                  </commandlineArgs>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+<!--removed due to Mac-->
+<!--  <profiles>-->
+<!--    <profile>-->
+<!--      <id>makeIndex</id>-->
+<!--      <activation>-->
+<!--        <os>-->
+<!--          <family>unix</family>-->
+<!--        </os>-->
+<!--      </activation>-->
+<!--      <build>-->
+<!--        <plugins>-->
+<!--          <plugin>-->
+<!--            <groupId>org.codehaus.mojo</groupId>-->
+<!--            <artifactId>exec-maven-plugin</artifactId>-->
+<!--            <version>${exec-maven-plugin.version}</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>build-docs</id>-->
+<!--                <phase>post-integration-test</phase>-->
+<!--                <goals>-->
+<!--                  <goal>exec</goal>-->
+<!--                </goals>-->
+<!--                <configuration>-->
+<!--                  <executable>${basedir}/src/spec/scripts/builddoc</executable>-->
+<!--                  <commandlineArgs>-->
+<!--                    ${basedir}/src/spec/resources/ ${basedir}/target/concordion/-->
+<!--                  </commandlineArgs>-->
+<!--                </configuration>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
+<!--        </plugins>-->
+<!--      </build>-->
+<!--    </profile>-->
+<!--  </profiles>-->
 
 </project>
