@@ -23,6 +23,12 @@ Furthermore, it is not simple to sort out all the technical details on how to se
 Therefore, this repository provides the important contribution of providing all these necessary scripts for researchers that need this kind of case study.   
 
 
+A video providing some high level overview of EMB can be found [here](https://youtu.be/wJs34ATgLEw).
+
+[![EMB YouTube Video](https://img.youtube.com/vi/wJs34ATgLEw/0.jpg)](https://www.youtube.com/watch?v=wJs34ATgLEw)
+
+
+
 ## License
 All the code that is new for this repository (e.g., the driver classes) is released under Apache 2.0 license. 
 However, this repository contains as well sources from different open-source 
