@@ -191,9 +191,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
                 getBaseURL() + "/v2/api-docs",
-                //TODO /fetch relies on accessing Github, and it is veryyyy slow.
-                // Need to handle WireMock
-                Arrays.asList("/fetch", "/health", "/health.json", "/error")
+                Arrays.asList("/health", "/health.json", "/error")
         );
     }
 
