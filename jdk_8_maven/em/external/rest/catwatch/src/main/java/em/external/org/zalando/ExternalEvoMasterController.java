@@ -193,7 +193,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 getBaseURL() + "/v2/api-docs",
                 //TODO /fetch relies on accessing Github, and it is veryyyy slow.
                 // Need to handle WireMock
-                Arrays.asList("/fetch", "/health", "/health.json", "/error")
+                Arrays.asList(
+//                        "/fetch",
+                        "/health", "/health.json", "/error")
         );
     }
 
