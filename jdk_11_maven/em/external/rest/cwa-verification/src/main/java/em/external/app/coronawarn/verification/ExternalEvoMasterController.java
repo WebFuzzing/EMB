@@ -96,6 +96,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "--spring.profiles.active=local,external,internal",
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
+                "--cwa-testresult-server=http://cwa-testresult-server:8088"
         };
     }
 
