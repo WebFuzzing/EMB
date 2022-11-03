@@ -63,7 +63,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
                 "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
-                "--cwa-testresult-server=http://cwa-testresult-server:8088"
+                "--cwa-testresult-server.url=http://cwa-testresult-server:8088"
         });
 
         if (sqlConnection != null) {
