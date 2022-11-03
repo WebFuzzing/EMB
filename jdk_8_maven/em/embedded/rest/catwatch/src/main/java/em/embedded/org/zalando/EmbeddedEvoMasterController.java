@@ -114,9 +114,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
                 "http://localhost:" + getSutPort() + "/v2/api-docs",
-                //TODO /fetch relies on accessing Github, and it is veryyyy slow.
-                // Need to handle WireMock
-                Arrays.asList("/fetch", "/health", "/health.json", "/error")
+                Arrays.asList("/health", "/health.json", "/error")
         );
     }
 
