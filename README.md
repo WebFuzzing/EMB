@@ -58,33 +58,33 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 
 ### REST: Java/Kotlin
 
-* Genome Nexus (MIT), from [https://github.com/genome-nexus/genome-nexus](https://github.com/genome-nexus/genome-nexus)
+* Genome Nexus (MIT), [jdk_8_maven/cs/rest-gui/genome-nexus](), from [https://github.com/genome-nexus/genome-nexus](https://github.com/genome-nexus/genome-nexus)
 
-* Market (MIT), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)
+* Market (MIT), [jdk_11_maven/cs/rest-gui/market](), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)
 
-* Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
+* Features-Service (Apache), [jdk_8_maven/cs/rest/original/features-service](), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
 
-* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
+* Scout-API (MIT), [jdk_8_maven/cs/rest/original/scout-api](), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
 
-* ProxyPrint (Apache), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
+* ProxyPrint (Apache), [jdk_8_maven/cs/rest/original/proxyprint](), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
 
-* CatWatch (Apache), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
+* CatWatch (Apache), [jdk_8_maven/cs/rest/original/catwatch](), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
 
-* OCVN (MIT), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
+* OCVN (MIT), [jdk_8_maven/cs/rest-gui/ocvn](), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
 
-* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
+* News (LGPL), [jdk_8_maven/cs/rest/artificial/news](), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
 
-* Restcountries (MPL), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
+* Restcountries (MPL), [jdk_8_maven/cs/rest/original/restcountries](), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
 
-* Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
+* Languagetool (LGPL), [jdk_8_maven/cs/rest/original/languagetool](), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
 
-* CWA-Verification-Server (Apache), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
+* CWA-Verification-Server (Apache), [jdk_11_maven/cs/rest/cwa-verification-server](), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
 
-* Gestao Hospital (not-known license), from [https://github.com/ValchanOficial/GestaoHospital](https://github.com/ValchanOficial/GestaoHospital)
+* Gestao Hospital (not-known license), [jdk_8_maven/cs/rest-gui/gestaohospital](), from [https://github.com/ValchanOficial/GestaoHospital](https://github.com/ValchanOficial/GestaoHospital)
 
-* NCS (not-known license, artificial numerical examples coming from different sources)
+* NCS, [jdk_8_maven/cs/rest/artificial/ncs](), (not-known license, artificial numerical examples coming from different sources)
 
-* SCS (not-known license, artificial string examples coming from different sources)
+* SCS, [jdk_8_maven/cs/rest/artificial/scs](), (not-known license, artificial string examples coming from different sources)
 
 
 ### REST: JavaScript/TypeScript
