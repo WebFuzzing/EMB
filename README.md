@@ -89,17 +89,17 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 
 ### REST: JavaScript/TypeScript
 
-* Disease-sh-API (GPL), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
+* Disease-sh-API (GPL), [js_npm/rest/disease-sh-api](js_npm/rest/disease-sh-api), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
 
-* Cyclotron (MIT), from [https://github.com/ExpediaInceCommercePlatform/cyclotron](https://github.com/ExpediaInceCommercePlatform/cyclotron)
+* Cyclotron (MIT), [js_npm/rest/cyclotron](js_npm/rest/cyclotron), from [https://github.com/ExpediaInceCommercePlatform/cyclotron](https://github.com/ExpediaInceCommercePlatform/cyclotron)
 
-* SpaceX-API (Apache-2.0 License), from [https://github.com/r-spacex/SpaceX-API](https://github.com/r-spacex/SpaceX-API)
+* SpaceX-API (Apache-2.0 License), [js_npm/rest/spacex-api](js_npm/rest/spacex-api), from [https://github.com/r-spacex/SpaceX-API](https://github.com/r-spacex/SpaceX-API)
 
-* Realworld-App (ISC), from [https://github.com/lujakob/nestjs-realworld-example-app](https://github.com/lujakob/nestjs-realworld-example-app)
+* Realworld-App (ISC), [js_npm/rest/realworld-app](js_npm/rest/realworld-app), from [https://github.com/lujakob/nestjs-realworld-example-app](https://github.com/lujakob/nestjs-realworld-example-app)
 
-* NCS (not-known license, artificial numerical examples coming from different sources)
+* NCS, [js_npm/rest/ncs](js_npm/rest/ncs), (not-known license, artificial numerical examples coming from different sources)
 
-* SCS (not-known license, artificial string examples coming from different sources)
+* SCS, [js_npm/rest/scs](js_npm/rest/scs), (not-known license, artificial string examples coming from different sources)
 
 
 ### REST: .NET/C# 
@@ -115,22 +115,22 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 
 ### GraphQL: Java/Kotlin
 
-* Spring-Pet-Clinic (Apache), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
+* Spring-Pet-Clinic (Apache), [jdk_8_maven/cs/graphql/petclinic-graphql](jdk_8_maven/cs/graphql/petclinic-graphql), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
 
-* Patio-Api (GPL), from [https://github.com/patio-team/patio-api]()
+* Patio-Api (GPL), [jdk_11_gradle/cs/graphql/patio-api](jdk_11_gradle/cs/graphql/patio-api), from [https://github.com/patio-team/patio-api]()
 
-* Timbuctoo (GPL), from [https://github.com/HuygensING/timbuctoo]()
+* Timbuctoo (GPL), [jdk_11_maven/cs/graphql/timbuctoo](jdk_11_maven/cs/graphql/timbuctoo), from [https://github.com/HuygensING/timbuctoo]()
 
-* NCS (not-known license, artificial numerical examples coming from different sources)
+* NCS, [jdk_8_maven/cs/graphql/graphql-ncs](jdk_8_maven/cs/graphql/graphql-ncs), (not-known license, artificial numerical examples coming from different sources)
 
-* SCS (not-known license, artificial string examples coming from different sources)
+* SCS, [jdk_8_maven/cs/graphql/graphql-scs](jdk_8_maven/cs/graphql/graphql-scs), (not-known license, artificial string examples coming from different sources)
 
 
 ### GraphQL: JavaScript/TypeScript
 
-* React-Finland (not-known license), from [https://github.com/ReactFinland/graphql-api](https://github.com/ReactFinland/graphql-api)
+* React-Finland (not-known license), [js_npm/graphql/react-finland](js_npm/graphql/react-finland), from [https://github.com/ReactFinland/graphql-api](https://github.com/ReactFinland/graphql-api)
 
-* E-Commerce Server (MIT), from [https://github.com/react-shop/react-ecommerce](https://github.com/react-shop/react-ecommerce)
+* E-Commerce Server (MIT), [js_npm/graphql/ecommerce-server](js_npm/graphql/ecommerce-server), from [https://github.com/react-shop/react-ecommerce](https://github.com/react-shop/react-ecommerce)
 
 ### RPC (Thrift/gRPC): Java
 
