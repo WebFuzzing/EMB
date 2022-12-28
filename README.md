@@ -37,6 +37,15 @@ projects, each one with its own license, as clarified in more details beneath.
 ## Example
 
 To see an example of using these drivers with EvoMaster to generate test cases, you can look at this [short video](https://youtu.be/3mYxjgnhLEo) (5 minutes).
+
+## Citation
+
+If you are using EMB in an academic work, you can cite the following:
+
+> A. Arcuri, M. Zhang, A. Golmohammadi, A. Belhadi, J. P. Galeotti, B. Marculescu, S. Seran.  
+ **EMB: A Curated Corpus of Web/Enterprise Applications And Library Support for Software Testing Research**.  
+In *IEEE International Conference on Software Testing, Validation and Verification (ICST)*, 2023.
+
   
 ## Current Case Studies
 
