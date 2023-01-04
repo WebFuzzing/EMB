@@ -5,6 +5,7 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.controller.problem.ExternalService;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -16,6 +17,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class ExternalEvoMasterController extends ExternalSutController {
 
@@ -192,7 +195,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new RestProblem(
                 getBaseURL() + "/v2/api-docs",
                 Arrays.asList("/health", "/health.json", "/error")
-        );
+                //TODO remove when dealing OAuth2 with Docker
+        ).withServicesToNotMock(asList(new ExternalService("info.services.auth.zalando.com",443)));
     }
 
     @Override

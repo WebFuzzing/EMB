@@ -6,6 +6,7 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.controller.problem.ExternalService;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -20,6 +21,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Arrays.asList;
 
 /**
  * Class used to start/stop the SUT. This will be controller by the EvoMaster process
@@ -78,7 +81,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection));
+        dbSpecification = asList(new DbSpecification(DatabaseType.H2,sqlConnection));
 
         return "http://localhost:" + getSutPort();
     }
@@ -114,8 +117,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
                 "http://localhost:" + getSutPort() + "/v2/api-docs",
-                Arrays.asList("/health", "/health.json", "/error")
-        );
+                asList("/health", "/health.json", "/error")
+                //TODO remove when dealing OAuth2 with Docker
+        ).withServicesToNotMock(asList(new ExternalService("info.services.auth.zalando.com",443)));
     }
 
     @Override
