@@ -13,7 +13,7 @@
     "@babel/cli": "7.8.4",
     "@babel/core": "7.8.4",
     "dedent": "0.7.0",
-    "evomaster-client-js": "file:../../evomaster-client-js",
+    "evomaster-client-js": "1.6.0",
     "jest": "^24.9.0",
     "superagent": "5.2.2",
     "supertest": "4.0.2",
