@@ -292,6 +292,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
+                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
                 <version>${spring.boot.version}</version>
                 <executions>

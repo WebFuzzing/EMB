@@ -265,6 +265,7 @@
 <!--                MODIFIED -->
                 <configuration>
                     <classifier>exec</classifier>
+                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
                 <executions>
                     <execution>
