@@ -19,6 +19,7 @@
             </plugin>
 
             <plugin>
+                <!--        version has been managed by pom of its parent with pluginManagement   -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>

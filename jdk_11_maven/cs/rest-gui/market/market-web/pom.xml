@@ -25,6 +25,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.4.3</version>
 			</plugin>
 			<!-- Tomcat Maven Plugin -->
 			<plugin>
