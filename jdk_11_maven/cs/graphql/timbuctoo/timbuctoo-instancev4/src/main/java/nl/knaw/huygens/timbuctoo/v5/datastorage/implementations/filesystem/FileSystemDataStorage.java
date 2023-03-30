@@ -57,7 +57,8 @@ public class FileSystemDataStorage implements DataStorage {
     File[] directories = new File(dataSetMetadataLocation).listFiles(File::isDirectory);
     for (File directory : directories) {
       String dirName = directory.toString();
-      String currentOwnerId = dirName.substring(dirName.lastIndexOf("/") + 1);
+//      String currentOwnerId = dirName.substring(dirName.lastIndexOf("/") + 1);
+      String currentOwnerId = dirName.substring(dirName.lastIndexOf(File.separatorChar) + 1);
       Set<DataSetMetaData> tempMetaDataSet = new HashSet<>();
       try (Stream<Path> fileStream = Files.walk(directory.toPath())) {
         Set<Path> paths = fileStream.filter(current -> Files.isDirectory(current)).collect(Collectors.toSet());
