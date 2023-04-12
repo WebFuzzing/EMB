@@ -1,6 +1,6 @@
 <Project>
     <ItemGroup>
-         <PackageReference Include="EvoMaster.Controller" Version="1.6.1" />
+         <PackageReference Include="EvoMaster.Controller" Version="1.6.2-SNAPSHOT" />
 
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0"/>
         <PackageReference Include="xunit" Version="2.4.0"/>
