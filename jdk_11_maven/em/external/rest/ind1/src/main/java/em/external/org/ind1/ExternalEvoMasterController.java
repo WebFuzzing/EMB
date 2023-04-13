@@ -6,6 +6,7 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
@@ -24,8 +25,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         All info that could possibly identify the case study is removed, and
         must be passed as either parameter input or environment variable
      */
-    private static final String SUT_LOCATION_IND0 = System.getenv("SUT_LOCATION_IND0");
-    private static final String SUT_PACKAGE_IND0 = System.getenv("SUT_PACKAGE_IND0");
+    private static final String SUT_LOCATION_IND1 = System.getenv("SUT_LOCATION_IND1");
+    private static final String SUT_PACKAGE_IND1 = System.getenv("SUT_PACKAGE_IND1");
 
     public static void main(String[] args) {
 
@@ -37,7 +38,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         if (args.length > 1) {
             sutPort = Integer.parseInt(args[1]);
         }
-        String jarLocation = SUT_LOCATION_IND0;
+        String jarLocation = SUT_LOCATION_IND1;
         if (args.length > 2) {
             jarLocation = args[2];
         }
@@ -47,7 +48,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             timeoutSeconds = Integer.parseInt(args[3]);
         }
 
-        String packagesToInstrument = SUT_PACKAGE_IND0;
+        String packagesToInstrument = SUT_PACKAGE_IND1;
         if(args.length > 5){
             packagesToInstrument = args[5];
         }
@@ -79,7 +80,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"));
 
     public ExternalEvoMasterController(){
-        this(40100, SUT_LOCATION_IND0, 12345, 120, "java", SUT_PACKAGE_IND0);
+        this(40100, SUT_LOCATION_IND1, 12345, 120, "java", SUT_PACKAGE_IND1);
     }
 
     public ExternalEvoMasterController(String jarLocation) {
@@ -109,18 +110,24 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String[] getInputParameters() {
-        return new String[]{"--server.port=" + sutPort};
+        return new String[]{
+                "--server.port=" + sutPort,
+                "--spring.datasource.url="+dbUrl(),
+                "--spring.datasource.username=postgres",
+                "--spring.datasource.password",
+                "--spring.cache.type=none",
+                "--spring.jmx.enabled=false",
+                "--spring.profiles.active=test",
+                "--subscriptions.slack.notification_url=https://hooks.slack.com/services/fake/fake/fake",
+                "--auth0.authorization.api_url=http://fakeaddressdoesnotexist.no/adf6e2f2b84784b57522e3b19dfc9201/api",
+                "--auth0.subscriptions.client_id=fooSubscriptionsId",
+                "--auth0.domain=foo-test.eu.auth0.com"
+        };
     }
 
     public String[] getJVMParameters() {
 
         return new String[]{
-                "-Dspring.datasource.url=" + dbUrl(),
-                "-Dspring.datasource.username=postgres",
-                "-Dspring.datasource.password",
-                "-Dspring.jpa.show-sql=false",
-                "-Dspring.cache.type=none",
-                "-Dspring.jmx.enabled=false",
                 "-Xmx4G"
         };
     }
@@ -131,7 +138,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         int port = postgres.getMappedPort(5432);
 
         String url = "jdbc";
-        url += ":postgresql://"+host+":"+port+"/postgres?currentSchema=comments";
+        url += ":postgresql://"+host+":"+port+"/postgres?currentSchema=subscriptions";
 
         return url;
     }
@@ -168,7 +175,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", "");
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("comments"));
+                    .withSchemas("subscriptions").withDisabledSmartClean());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -176,9 +183,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-//        DbCleaner.clearDatabase_Postgres(connection,
-//                "comments",
-//                Arrays.asList("flyway_schema_history"));
+        DbCleaner.clearDatabase_Postgres(sqlConnection,
+                "comments",
+                Arrays.asList("flyway_schema_history"));
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/init_db.sql");
     }
 
     @Override
@@ -210,7 +218,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                getBaseURL() + "/v2/api-docs",
+                getBaseURL() + "/v3/api-docs",
                 null
         );
     }
