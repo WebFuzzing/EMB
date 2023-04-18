@@ -14,9 +14,11 @@ from os.path import expanduser
 
 
 MAKE_ZIP = False
+UPDATE = False
 
 if len(sys.argv) > 1:
-    MAKE_ZIP = sys.argv[1] == "true" or sys.argv[1] == "True"
+    MAKE_ZIP = "zip" in sys.argv
+    UPDATE = "update" in sys.argv
 
 
 ### Environment variables ###
@@ -257,6 +259,11 @@ def makeZip():
 
 #####################################################################################
 ### Build the different modules ###
+
+if UPDATE:
+    print("Updating EvoMaster JavaAgent")
+    copyEvoMasterAgent()
+    exit(0)
 
 checkJavaVersions()
 
