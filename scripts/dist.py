@@ -151,6 +151,13 @@ def build_jdk_11_maven() :
     copy(folder +"/cs/rest-gui/market/market-rest/target/market-sut.jar", DIST)
     copy(folder +"/em/external/rest/market/target/market-evomaster-runner.jar", DIST)
 
+    ind1 = os.environ.get('SUT_LOCATION_IND1', '')
+    if ind1 == '':
+            print("\nWARN: SUT_LOCATION_IND1 env variable is not defined")
+    else:
+            copy(ind1, os.path.join(DIST, "ind1-sut.jar"))
+            copy(folder +"/em/external/rest/ind1/target/ind1-evomaster-runner.jar", DIST)
+
 ####################
 def build_jdk_11_gradle() :
 

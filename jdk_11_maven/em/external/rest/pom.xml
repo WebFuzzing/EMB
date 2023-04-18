@@ -15,6 +15,7 @@
     <modules>
         <module>cwa-verification</module>
         <module>market</module>
+        <module>ind1</module>
     </modules>
 
 </project>
