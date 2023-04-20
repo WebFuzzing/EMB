@@ -12,6 +12,7 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.h2.tools.Server;
 
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -61,6 +62,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
     private final int dbPort;
+    private final String cacheDir;
     private String jarLocation;
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
@@ -82,6 +84,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
+
+
+        String base = Paths.get(jarLocation).toAbsolutePath().getParent().normalize().toString();
+        cacheDir = base + "/temp/tmp_catwatch/cache_" + dbPort;
+
         setJavaCommand(command);
     }
 
@@ -95,19 +102,18 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String[] getInputParameters() {
-        return new String[]{};
+        return new String[]{
+        };
     }
 
     public String[] getJVMParameters() {
         return new String[]{
                 "-Dserver.port=" + sutPort,
-//                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
-//                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
-                //FIXME: re-enable once fixed issue with Spring
                 "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
-                "-Dspring.datasource.password"
+                "-Dspring.datasource.password",
+                "-Dcache.path="+cacheDir
         };
     }
 
