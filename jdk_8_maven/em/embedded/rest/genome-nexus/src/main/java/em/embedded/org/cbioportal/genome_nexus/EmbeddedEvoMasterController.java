@@ -48,6 +48,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             .withExposedPorts(MONGODB_PORT);
 
 
+    private MongoClient mongoClient;
+
+
     public EmbeddedEvoMasterController() {
         this(0);
     }
@@ -61,6 +64,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
 
         mongodbContainer.start();
+
+        try {
+            mongoClient = new MongoClient(mongodbContainer.getContainerIpAddress(),
+                    mongodbContainer.getMappedPort(MONGODB_PORT));
+
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
 
         ctx = SpringApplication.run(GenomeNexusAnnotation.class,
                 new String[]{"--server.port=0",
@@ -88,6 +100,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         ctx.stop();
         ctx.close();
 
+        mongoClient.close();
         mongodbContainer.stop();
     }
 
@@ -98,9 +111,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        MongoClient mongoClient = new MongoClient(mongodbContainer.getContainerIpAddress(),
-                mongodbContainer.getMappedPort(MONGODB_PORT));
-
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
     }
 

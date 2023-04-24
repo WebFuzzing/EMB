@@ -163,6 +163,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStop() {
+        mongoClient.close();
         mongodb.stop();
     }
 
