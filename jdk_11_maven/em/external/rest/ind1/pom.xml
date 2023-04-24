@@ -9,7 +9,7 @@
 
     <parent>
         <groupId>org.evomaster</groupId>
-        <artifactId>evomaster-benchmark-jdk11-em-external</artifactId>
+        <artifactId>evomaster-benchmark-jdk11-em-external-rest</artifactId>
         <version>1.6.2-SNAPSHOT</version>
     </parent>
 
