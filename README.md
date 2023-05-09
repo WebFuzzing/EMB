@@ -22,6 +22,9 @@ However, finding this type of applications is not trivial among open-source proj
 Furthermore, it is not simple to sort out all the technical details on how to set these applications up and start them in a simple, uniform approach. 
 Therefore, this repository provides the important contribution of providing all these necessary scripts for researchers that need this kind of case study.   
 
+**NOTE**: version 1.6.1 was last one in which we still updated drivers for JavaScript and C\#. Those SUTs are not built anymore by default, and latest versions of *EvoMaster* might not work on those old drivers. Updating drivers for different programming languages (and re-implement white-box heuristics) is a massive amount of work, which unfortunately has little to no value for the scientific community (based on our experience). Those SUTs are still here in EMB to enable *black-box* experiments (and to be able to replicate old experiments), but unfortunately not for *white-box* testing with latest versions of *EvoMaster*.  
+
+
 
 A video providing some high level overview of EMB can be found [here](https://youtu.be/wJs34ATgLEw).
 
@@ -96,6 +99,27 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 * SCS, [jdk_8_maven/cs/rest/artificial/scs](jdk_8_maven/cs/rest/artificial/scs), (not-known license, artificial string examples coming from different sources)
 
 
+
+### GraphQL: Java/Kotlin
+
+* Spring-Pet-Clinic (Apache), [jdk_8_maven/cs/graphql/petclinic-graphql](jdk_8_maven/cs/graphql/petclinic-graphql), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
+
+* Patio-Api (GPL), [jdk_11_gradle/cs/graphql/patio-api](jdk_11_gradle/cs/graphql/patio-api), from [https://github.com/patio-team/patio-api]()
+
+* Timbuctoo (GPL), [jdk_11_maven/cs/graphql/timbuctoo](jdk_11_maven/cs/graphql/timbuctoo), from [https://github.com/HuygensING/timbuctoo]()
+
+* NCS, [jdk_8_maven/cs/graphql/graphql-ncs](jdk_8_maven/cs/graphql/graphql-ncs), (not-known license, artificial numerical examples coming from different sources)
+
+* SCS, [jdk_8_maven/cs/graphql/graphql-scs](jdk_8_maven/cs/graphql/graphql-scs), (not-known license, artificial string examples coming from different sources)
+
+
+### RPC (Thrift/gRPC): Java
+
+* NCS (not-known license, artificial numerical examples coming from different sources)
+
+* SCS (not-known license, artificial string examples coming from different sources)
+
+
 ### REST: JavaScript/TypeScript
 
 * Disease-sh-API (GPL), [js_npm/rest/disease-sh-api](js_npm/rest/disease-sh-api), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
@@ -111,7 +135,7 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 * SCS, [js_npm/rest/scs](js_npm/rest/scs), (not-known license, artificial string examples coming from different sources)
 
 
-### REST: .NET/C# 
+### REST: .NET/C#
 
 * Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App](https://github.com/chayxana/Restaurant-App)
 
@@ -122,18 +146,6 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 * SCS (not-known license, artificial string examples coming from different sources)
 
 
-### GraphQL: Java/Kotlin
-
-* Spring-Pet-Clinic (Apache), [jdk_8_maven/cs/graphql/petclinic-graphql](jdk_8_maven/cs/graphql/petclinic-graphql), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
-
-* Patio-Api (GPL), [jdk_11_gradle/cs/graphql/patio-api](jdk_11_gradle/cs/graphql/patio-api), from [https://github.com/patio-team/patio-api]()
-
-* Timbuctoo (GPL), [jdk_11_maven/cs/graphql/timbuctoo](jdk_11_maven/cs/graphql/timbuctoo), from [https://github.com/HuygensING/timbuctoo]()
-
-* NCS, [jdk_8_maven/cs/graphql/graphql-ncs](jdk_8_maven/cs/graphql/graphql-ncs), (not-known license, artificial numerical examples coming from different sources)
-
-* SCS, [jdk_8_maven/cs/graphql/graphql-scs](jdk_8_maven/cs/graphql/graphql-scs), (not-known license, artificial string examples coming from different sources)
-
 
 ### GraphQL: JavaScript/TypeScript
 
@@ -141,11 +153,6 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 
 * E-Commerce Server (MIT), [js_npm/graphql/ecommerce-server](js_npm/graphql/ecommerce-server), from [https://github.com/react-shop/react-ecommerce](https://github.com/react-shop/react-ecommerce)
 
-### RPC (Thrift/gRPC): Java
-
-* NCS (not-known license, artificial numerical examples coming from different sources)
-
-* SCS (not-known license, artificial string examples coming from different sources)
 
 ## Using This Repository
 

@@ -125,6 +125,6 @@ replaceInDist()
 versionSetMaven("/jdk_8_maven",JAVA_HOME_8)
 versionSetMaven("/jdk_11_maven",JAVA_HOME_11)
 
-replaceAllJs()
-
-replaceInCS()
+# We no longer support those in EMB... not enough resouces. although might change in future
+#replaceAllJs()
+#replaceInCS()

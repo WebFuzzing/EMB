@@ -279,9 +279,9 @@ prepareDistFolder()
 build_jdk_8_maven()
 build_jdk_11_maven()
 build_jdk_11_gradle()
-build_js_npm()
 
-## Disabled for now
+## Those are disabled for now... might support back in the future
+#build_js_npm()
 #build_dotnet_3()
 
 
