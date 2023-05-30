@@ -249,3 +249,5 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_8_maven/em/embedded/thrift/scs/target/
 /jdk_8_maven/em/external/thrift/ncs/target/
 /jdk_8_maven/em/external/thrift/scs/target/
+/jdk_17_maven/cs/web/spring-petclinic/target/
+/jdk_17_maven/em/embedded/web/spring-petclinic/target/
