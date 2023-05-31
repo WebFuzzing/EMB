@@ -154,6 +154,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <id>enforce-java</id>
@@ -204,13 +205,14 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.graalvm.buildtools</groupId>
-        <artifactId>native-maven-plugin</artifactId>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.graalvm.buildtools</groupId>-->
+<!--        <artifactId>native-maven-plugin</artifactId>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>3.1.0</version>
         <executions>
           <execution>
             <!-- Spring Boot Actuator displays build-related information
@@ -251,14 +253,14 @@
 
       <!-- Spring Boot Actuator displays build-related information if a git.properties
         file is present at the classpath -->
-      <plugin>
-        <groupId>io.github.git-commit-id</groupId>
-        <artifactId>git-commit-id-maven-plugin</artifactId>
-        <configuration>
-          <failOnNoGitDirectory>false</failOnNoGitDirectory>
-          <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
-        </configuration>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>io.github.git-commit-id</groupId>-->
+<!--        <artifactId>git-commit-id-maven-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <failOnNoGitDirectory>false</failOnNoGitDirectory>-->
+<!--          <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
 
     </plugins>
   </build>
