@@ -92,7 +92,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String[] getInputParameters() {
-        return new String[]{"--server.port=" + sutPort};
+        return new String[]{
+                "--server.port=" + sutPort,
+                "--spring.sql.init.data-locations="
+        };
     }
 
     public String[] getJVMParameters() {
