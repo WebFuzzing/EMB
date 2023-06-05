@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>external</module>-->
+        <module>external</module>
         <module>embedded</module>
     </modules>
 

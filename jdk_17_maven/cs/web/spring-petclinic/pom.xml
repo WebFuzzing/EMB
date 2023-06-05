@@ -229,6 +229,15 @@
               </additionalProperties>
             </configuration>
           </execution>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <finalName>spring-petclinic</finalName>
+              <classifier>sut</classifier>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -318,6 +327,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.6.0</version>
             <executions>
               <execution>
                 <id>unpack</id>
