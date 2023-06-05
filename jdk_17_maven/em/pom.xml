@@ -35,6 +35,11 @@
         </dependency>
         <dependency>
             <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-client-java-instrumentation</artifactId>
+            <version>${evomaster-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.evomaster</groupId>
             <artifactId>evomaster-client-java-dependencies</artifactId>
             <version>${evomaster-version}</version>
             <type>pom</type>
