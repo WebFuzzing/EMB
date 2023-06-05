@@ -120,6 +120,11 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 * SCS (not-known license, artificial string examples coming from different sources)
 
 
+### WEB: backend in Java/Kotlin
+
+* Spring-PetClinic (Apache), [jdk_17_maven/cs/web/spring-petclinic](jdk_17_maven/cs/web/spring-petclinic), from [https://github.com/spring-projects/spring-petclinic]()
+
+
 ### REST: JavaScript/TypeScript
 
 * Disease-sh-API (GPL), [js_npm/rest/disease-sh-api](js_npm/rest/disease-sh-api), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
