@@ -114,7 +114,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
 
-        return new WebProblem("http://localhost:"+getSutPort()+"/");
+        return new WebProblem("/");
     }
 
     @Override
