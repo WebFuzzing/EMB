@@ -94,7 +94,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getInputParameters() {
         return new String[]{
                 "--server.port=" + sutPort,
-                "--spring.sql.init.data-locations="
+                "--spring.sql.init.data-locations=",
+                "--spring.jpa.hibernate.ddl-auto=create"
         };
     }
 
