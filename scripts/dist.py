@@ -29,6 +29,7 @@ PROJ_LOCATION = os.path.abspath(os.path.join(SCRIPT_LOCATION, os.pardir))
 
 JAVA_HOME_8 = os.environ.get('JAVA_HOME_8', '')
 JAVA_HOME_11 = os.environ.get('JAVA_HOME_11', '')
+JAVA_HOME_17 = os.environ.get('JAVA_HOME_17', '')
 
 SHELL = platform.system() == 'Windows'
 
@@ -43,6 +44,10 @@ def checkJavaVersions():
 
     if JAVA_HOME_11 == '':
         print("\nERROR: JAVA_HOME_11 environment variable is not defined")
+        exit(1)
+
+    if JAVA_HOME_17 == '':
+        print("\nERROR: JAVA_HOME_17 environment variable is not defined")
         exit(1)
 
 
@@ -157,6 +162,17 @@ def build_jdk_11_maven() :
     else:
             copy(ind1, os.path.join(DIST, "ind1-sut.jar"))
             copy(folder +"/em/external/rest/ind1/target/ind1-evomaster-runner.jar", DIST)
+
+
+####################
+def build_jdk_17_maven() :
+
+    folder = "jdk_17_maven"
+    callMaven(folder, JAVA_HOME_17)
+
+    copy(folder +"/cs/web/spring-petclinic/target/spring-petclinic-sut.jar", DIST)
+    copy(folder +"/em/external/web/spring-petclinic/target/spring-petclinic-evomaster-runner.jar", DIST)
+
 
 ####################
 def build_jdk_11_gradle() :
@@ -278,6 +294,7 @@ prepareDistFolder()
 
 build_jdk_8_maven()
 build_jdk_11_maven()
+build_jdk_17_maven()
 build_jdk_11_gradle()
 
 ## Those are disabled for now... might support back in the future
