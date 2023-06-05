@@ -49,6 +49,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         ExternalEvoMasterController controller =
                 new ExternalEvoMasterController(controllerPort, jarLocation, sutPort, timeoutSeconds, command);
+        controller.setNeedsJdk17Options(true);
         InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
 
         starter.start();
@@ -115,7 +116,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getLogMessageOfInitializedServer() {
-        return "Started Application in ";
+        return "Started PetClinicApplication in ";
     }
 
     @Override
@@ -128,7 +129,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             //starting H2
-            h2 = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "" + dbPort);
+            h2 = Server.createTcpServer("-tcp", "-ifNotExists", "-tcpPort", "" + dbPort);
             h2.start();
         } catch (SQLException e) {
             throw new RuntimeException(e);
