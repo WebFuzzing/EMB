@@ -15,12 +15,6 @@ import java.util.logging.Logger;
  */
 public class NcsServer {
 
-//    public static void main(String[] args) throws IOException, InterruptedException {
-//        Server server = ServerBuilder.forPort(8080).addService(new NcsServiceImplBaseImpl()).build();
-//        server.start();
-//        server.awaitTermination();
-//    }
-
     private static final Logger logger = Logger.getLogger(NcsServer.class.getName());
 
     private final int port;
@@ -38,7 +32,7 @@ public class NcsServer {
 
     public void start() throws IOException {
         server.start();
-        logger.info("Server started, listening on " + port);
+        logger.info("NcsServer started, listening on " + port);
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
@@ -66,7 +60,15 @@ public class NcsServer {
     }
 
     public static void main(String[] args) throws Exception {
-        NcsServer server = new NcsServer(8980);
+        int sutPort = 8980;
+        if (args.length == 1){
+            try{
+                sutPort = Integer.parseInt(args[0]);
+            }catch (Exception NumberFormatException){
+
+            }
+        }
+        NcsServer server = new NcsServer(sutPort);
         server.start();
         server.blockUntilShutdown();
     }
