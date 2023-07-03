@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.evomaster</groupId>
         <artifactId>evomaster-benchmark-cs-rest-artificial</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.2-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -19,6 +19,7 @@
             </plugin>
 
             <plugin>
+                <!--        version has been managed by pom of its parent with pluginManagement   -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>

@@ -1,0 +1,249 @@
+[
+    {
+        "display_id": "OTTHUMG00000030429",
+        "primary_id": "OTTHUMG00000030429",
+        "version": "5",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.735360",
+        "dbname": "UniGene",
+        "ensembl_identity": 1,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1899,
+        "xref_start": 1,
+        "xref_end": 149,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.735360",
+        "ensembl_end": 1752,
+        "version": "0",
+        "cigar_line": "50M1I26M1I22M1I48M",
+        "score": 658,
+        "description": "Transcribed locus",
+        "xref_identity": 95,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.713174",
+        "dbname": "UniGene",
+        "ensembl_identity": 3,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 7490,
+        "xref_start": 4,
+        "xref_end": 235,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.713174",
+        "ensembl_end": 7258,
+        "version": "0",
+        "cigar_line": "97M1I134M",
+        "score": 1125,
+        "description": "Transcribed locus",
+        "xref_identity": 90,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.474751",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 7501,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.474751",
+        "ensembl_end": 7501,
+        "version": "0",
+        "cigar_line": "7501M",
+        "score": 37505,
+        "description": "Myosin, heavy chain 9, non-muscle",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " SEBASTIAN SYNDROME [#605249]",
+        "primary_id": "605249",
+        "version": "0",
+        "description": " SEBASTIAN SYNDROME; SBS",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " DEAFNESS, AUTOSOMAL DOMINANT 17 [#603622]",
+        "primary_id": "603622",
+        "version": "0",
+        "description": " DEAFNESS, AUTOSOMAL DOMINANT 17; DFNA17",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " MACROTHROMBOCYTOPENIA AND PROGRESS [#600208]",
+        "primary_id": "600208",
+        "version": "0",
+        "description": " MACROTHROMBOCYTOPENIA AND PROGRESSIVE SENSORINEURAL DEAFNESS",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " MAY-HEGGLIN ANOMALY [#155100]",
+        "primary_id": "155100",
+        "version": "0",
+        "description": " MAY-HEGGLIN ANOMALY; MHA",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " EPSTEIN SYNDROME [#153650]",
+        "primary_id": "153650",
+        "version": "0",
+        "description": " EPSTEIN SYNDROME",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " FECHTNER SYNDROME [#153640]",
+        "primary_id": "153640",
+        "version": "0",
+        "description": " FECHTNER SYNDROME; FTNS",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " MYOSIN, HEAVY CHAIN 9, NONMUSCLE [*160775]",
+        "primary_id": "160775",
+        "version": "0",
+        "description": " MYOSIN, HEAVY CHAIN 9, NONMUSCLE; MYH9",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "MYH9",
+        "primary_id": "7579",
+        "version": "0",
+        "description": "myosin, heavy chain 9, non-muscle",
+        "dbname": "HGNC",
+        "synonyms": [
+            "DFNA17",
+            "EPSTS",
+            "FTNS",
+            "MHA",
+            "NMHC-II-A",
+            "NMMHCA"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "MYH9",
+        "primary_id": "4627",
+        "version": "0",
+        "description": "myosin, heavy chain 9, non-muscle",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "BDPLT6",
+            "DFNA17",
+            "EPSTS",
+            "FTNS",
+            "MHA",
+            "NMHC-II-A",
+            "NMMHC-IIA",
+            "NMMHCA"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000100345",
+        "primary_id": "ENSG00000100345",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "MYH9",
+        "primary_id": "4627",
+        "version": "0",
+        "description": "myosin, heavy chain 9, non-muscle",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "MYH9",
+        "primary_id": "MYH9",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

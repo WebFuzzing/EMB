@@ -1,0 +1,11 @@
+{
+    "variant": "X:g.41242962_41242963insGA",
+    "id": "X:g.41242962_41242963insGA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "X",
+    "start": 41242963,
+    "end": 41242962,
+    "allele_string": "-/GA",
+    "strand": 1,
+    "most_severe_consequence": "regulatory_region_variant"
+}

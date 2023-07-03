@@ -1,0 +1,14 @@
+name: Test Build of Docker image
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout git repo'
+        uses: actions/checkout@v1
+      - name: Build Docker image
+        uses: docker/build-push-action@v1.0.1
+        with:
+          repository: genomenexus/gn-spring-boot
+          # don't push, since this is a test
+          push: false

@@ -88,7 +88,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("dw.webhooks.dataSetUpdated", "http://localhost:3000");
         System.setProperty("dw.databases.databaseLocation",tmpFolder+"/datasets");
         System.setProperty("dw.databaseConfiguration.databasePath", tmpFolder+"/neo4j");
-        System.setProperty("dw.dataSet.dataStorage.rootDir","/datasets");
+        System.setProperty("dw.dataSet.dataStorage.rootDir",tmpFolder+"/datasets");
 
 
         try {

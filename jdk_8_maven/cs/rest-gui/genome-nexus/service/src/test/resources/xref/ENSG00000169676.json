@@ -1,0 +1,189 @@
+[
+    {
+        "display_id": "OTTHUMG00000128489",
+        "primary_id": "OTTHUMG00000128489",
+        "version": "1",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.568236",
+        "dbname": "UniGene",
+        "ensembl_identity": 84,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 102,
+        "xref_end": 2219,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.568236",
+        "ensembl_end": 2108,
+        "version": "0",
+        "cigar_line": "792M8I676M1D215M3I424M",
+        "score": 9563,
+        "description": "D(1B) dopamine receptor-like",
+        "xref_identity": 90,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.457002",
+        "dbname": "UniGene",
+        "ensembl_identity": 26,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 2109,
+        "xref_start": 8,
+        "xref_end": 676,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.457002",
+        "ensembl_end": 1441,
+        "version": "0",
+        "cigar_line": "418M3I220M1D28M",
+        "score": 3021,
+        "description": "Transcribed locus, strongly similar to NP_000789.1 DRD5 gene product [Homo sapiens]",
+        "xref_identity": 93,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.380681",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 2375,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.380681",
+        "ensembl_end": 2375,
+        "version": "0",
+        "cigar_line": "2375M",
+        "score": 11875,
+        "description": "Dopamine receptor D5",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " BLEPHAROSPASM, BENIGN ESSENTIAL [#606798]",
+        "primary_id": "606798",
+        "version": "0",
+        "description": " BLEPHAROSPASM, BENIGN ESSENTIAL",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " DOPAMINE RECEPTOR D5 [+126453]",
+        "primary_id": "126453",
+        "version": "0",
+        "description": " DOPAMINE RECEPTOR D5; DRD5",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+            "126448"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " DOPAMINE RECEPTOR D5 [+126453]",
+        "primary_id": "126453",
+        "version": "0",
+        "description": " DOPAMINE RECEPTOR D5; DRD5",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+            "126448"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "DRD5",
+        "primary_id": "3026",
+        "version": "0",
+        "description": "dopamine receptor D5",
+        "dbname": "HGNC",
+        "synonyms": [
+            "DRD1B",
+            "DRD1L2"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "DRD5",
+        "primary_id": "1816",
+        "version": "0",
+        "description": "dopamine receptor D5",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "DBDR",
+            "DRD1B",
+            "DRD1L2"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000169676",
+        "primary_id": "ENSG00000169676",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "DRD5",
+        "primary_id": "1816",
+        "version": "0",
+        "description": "dopamine receptor D5",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "DRD5",
+        "primary_id": "DRD5",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "DRD1B",
+            "DRD1L2"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

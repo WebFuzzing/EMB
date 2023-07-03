@@ -1,0 +1,170 @@
+{
+    "variant": "7:g.55220240G>T",
+    "colocatedVariants": [
+        {},
+        {},
+        {},
+        {}
+    ],
+    "id": "7:g.55220240G>T",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "7",
+    "start": 55220240,
+    "end": 55220240,
+    "allele_string": "G/T",
+    "strand": 1,
+    "most_severe_consequence": "splice_region_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000275493",
+            "hgvsp": "ENSP00000275493.2:p.Leu210=",
+            "hgvsc": "ENST00000275493.2:c.630G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000275493",
+            "protein_start": 210,
+            "protein_end": 210,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_005228.3"
+            ],
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000342916",
+            "hgvsp": "ENSP00000342376.3:p.Leu210=",
+            "hgvsc": "ENST00000342916.3:c.630G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000342376",
+            "protein_start": 210,
+            "protein_end": 210,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "refseq_transcript_ids": [
+                "NM_201282.1"
+            ],
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000344576",
+            "hgvsp": "ENSP00000345973.2:p.Leu210=",
+            "hgvsc": "ENST00000344576.2:c.630G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000345973",
+            "protein_start": 210,
+            "protein_end": 210,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "refseq_transcript_ids": [
+                "NM_201284.1"
+            ],
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000420316",
+            "hgvsp": "ENSP00000413843.2:p.Leu210=",
+            "hgvsc": "ENST00000420316.2:c.630G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000413843",
+            "protein_start": 210,
+            "protein_end": 210,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "refseq_transcript_ids": [
+                "NM_201283.1"
+            ],
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000442591",
+            "hgvsp": "ENSP00000410031.1:p.Leu210=",
+            "hgvsc": "ENST00000442591.1:c.630G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000410031",
+            "protein_start": 210,
+            "protein_end": 210,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000454757",
+            "hgvsp": "ENSP00000395243.2:p.Leu157=",
+            "hgvsc": "ENST00000454757.2:c.471G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000395243",
+            "protein_start": 157,
+            "protein_end": 157,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000455089",
+            "hgvsp": "ENSP00000415559.1:p.Leu165=",
+            "hgvsc": "ENST00000455089.1:c.495G>T",
+            "variant_allele": "T",
+            "codons": "ctG/ctT",
+            "protein_id": "ENSP00000415559",
+            "protein_start": 165,
+            "protein_end": 165,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "L",
+            "hgnc_id": 3236,
+            "consequence_terms": [
+                "splice_region_variant",
+                "synonymous_variant"
+            ]
+        }
+    ],
+    "hotspots": {
+        "license": "https://opendatacommons.org/licenses/odbl/1.0/",
+        "annotation": [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    }
+}

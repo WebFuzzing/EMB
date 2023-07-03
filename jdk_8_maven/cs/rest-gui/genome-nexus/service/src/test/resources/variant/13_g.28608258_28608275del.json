@@ -1,0 +1,86 @@
+{
+    "variant": "13:g.28608258_28608275del",
+    "id": "13:g.28608258_28608275del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "13",
+    "start": 28608258,
+    "end": 28608275,
+    "allele_string": "CATATTCATATTCTCTGA/GGGGTGGGGGGG",
+    "strand": 1,
+    "most_severe_consequence": "protein_altering_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000241453",
+            "hgvsp": "ENSP00000241453.7:p.Phe594_Asp600delinsSerProProProHis",
+            "hgvsc": "ENST00000241453.7:c.1781_1798delinsCCCCCCCACCCC",
+            "variant_allele": "GGGGTGGGGGGG",
+            "codons": "tTCAGAGAATATGAATATGat/tCCCCCCCACCCCat",
+            "protein_id": "ENSP00000241453",
+            "protein_start": 594,
+            "protein_end": 600,
+            "gene_symbol": "FLT3",
+            "gene_id": "ENSG00000122025",
+            "amino_acids": "FREYEYD/SPPPH",
+            "hgnc_id": 3765,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_004119.2"
+            ],
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000380982",
+            "hgvsp": "ENSP00000370369.4:p.Phe594_Asp600delinsSerProProProHis",
+            "hgvsc": "ENST00000380982.4:c.1781_1798delinsCCCCCCCACCCC",
+            "variant_allele": "GGGGTGGGGGGG",
+            "codons": "tTCAGAGAATATGAATATGat/tCCCCCCCACCCCat",
+            "protein_id": "ENSP00000370369",
+            "protein_start": 594,
+            "protein_end": 600,
+            "gene_symbol": "FLT3",
+            "gene_id": "ENSG00000122025",
+            "amino_acids": "FREYEYD/SPPPH",
+            "hgnc_id": 3765,
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000380987",
+            "hgvsp": "ENSP00000370374.2:p.Phe594_Asp600delinsSerProProProHis",
+            "hgvsc": "ENST00000380987.2:c.1781_1798delinsCCCCCCCACCCC",
+            "variant_allele": "GGGGTGGGGGGG",
+            "codons": "tTCAGAGAATATGAATATGat/tCCCCCCCACCCCat",
+            "protein_id": "ENSP00000370374",
+            "protein_start": 594,
+            "protein_end": 600,
+            "gene_symbol": "FLT3",
+            "gene_id": "ENSG00000122025",
+            "amino_acids": "FREYEYD/SPPPH",
+            "hgnc_id": 3765,
+            "consequence_terms": [
+                "protein_altering_variant",
+                "NMD_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000537084",
+            "hgvsp": "ENSP00000438139.1:p.Phe594_Asp600delinsSerProProProHis",
+            "hgvsc": "ENST00000537084.1:c.1781_1798delinsCCCCCCCACCCC",
+            "variant_allele": "GGGGTGGGGGGG",
+            "codons": "tTCAGAGAATATGAATATGat/tCCCCCCCACCCCat",
+            "protein_id": "ENSP00000438139",
+            "protein_start": 594,
+            "protein_end": 600,
+            "gene_symbol": "FLT3",
+            "gene_id": "ENSG00000122025",
+            "amino_acids": "FREYEYD/SPPPH",
+            "hgnc_id": 3765,
+            "consequence_terms": [
+                "protein_altering_variant"
+            ]
+        }
+    ]
+}

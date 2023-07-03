@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.evomaster</groupId>
         <artifactId>evomaster-benchmark-em-embedded</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>evomaster-benchmark-em-embedded-graphql</artifactId>
@@ -13,7 +13,7 @@
 
 
     <modules>
-        <module>spring-petclinic-graphql</module>
+        <module>petclinic-graphql</module>
         <module>graphql-ncs</module>
         <module>graphql-scs</module>
     </modules>

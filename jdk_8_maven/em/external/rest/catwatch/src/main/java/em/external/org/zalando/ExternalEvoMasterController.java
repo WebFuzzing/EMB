@@ -5,17 +5,21 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.controller.problem.ExternalService;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.h2.tools.Server;
 
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class ExternalEvoMasterController extends ExternalSutController {
 
@@ -58,6 +62,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
     private final int dbPort;
+    private final String cacheDir;
     private String jarLocation;
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
@@ -79,32 +84,36 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.jarLocation = jarLocation;
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
+
+
+        String base = Paths.get(jarLocation).toAbsolutePath().getParent().normalize().toString();
+        cacheDir = base + "/temp/tmp_catwatch/cache_" + dbPort;
+
         setJavaCommand(command);
     }
 
     private String dbUrl( ) {
 
         String url = "jdbc";
-        url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_catwatch/testdb_" + dbPort;
+        url += ":h2:tcp://localhost:" + dbPort + "/mem:testdb_" + dbPort;
 
         return url;
     }
 
     @Override
     public String[] getInputParameters() {
-        return new String[]{};
+        return new String[]{
+        };
     }
 
     public String[] getJVMParameters() {
         return new String[]{
                 "-Dserver.port=" + sutPort,
-//                "-Dspring.datasource.url=" + dbUrl(false) + ";DB_CLOSE_DELAY=-1",
-//                "-Dspring.datasource.driver-class-name=" + getDatabaseDriverName(),
-                //FIXME: re-enable once fixed issue with Spring
                 "-Dspring.datasource.url=" + dbUrl() + ";DB_CLOSE_DELAY=-1",
                 "-Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
                 "-Dspring.datasource.username=sa",
-                "-Dspring.datasource.password"
+                "-Dspring.datasource.password",
+                "-Dcache.path="+cacheDir
         };
     }
 
@@ -191,10 +200,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
                 getBaseURL() + "/v2/api-docs",
-                //TODO /fetch relies on accessing Github, and it is veryyyy slow.
-                // Need to handle WireMock
-                Arrays.asList("/fetch", "/health", "/health.json", "/error")
-        );
+                Arrays.asList("/health", "/health.json", "/error")
+                //TODO remove when dealing OAuth2 with Docker
+        ).withServicesToNotMock(asList(new ExternalService("info.services.auth.zalando.com",443)));
     }
 
     @Override

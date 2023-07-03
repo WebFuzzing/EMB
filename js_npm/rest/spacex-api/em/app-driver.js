@@ -59,7 +59,6 @@ class AppController extends em.SutController {
         return new Promise((async resolve => {
                 await dbHandler.stopDb();
                 this.server.close(() => {
-                    process.exit();
                     resolve();
                 });
             })

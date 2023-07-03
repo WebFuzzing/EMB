@@ -32,6 +32,13 @@ if JAVA_HOME_11 == '':
     print("\nERROR: JAVA_HOME_11 environment variable is not defined")
     exit(1)
 
+JAVA_HOME_17 = os.environ.get('JAVA_HOME_17', '')
+if JAVA_HOME_11 == '':
+    print("\nERROR: JAVA_HOME_17 environment variable is not defined")
+    exit(1)
+
+
+
 SHELL = platform.system() == 'Windows'
 
 def replaceInPom(file):
@@ -115,6 +122,7 @@ def replaceInCS():
 
 replaceInPom("jdk_8_maven/pom.xml")
 replaceInPom("jdk_11_maven/pom.xml")
+replaceInPom("jdk_17_maven/pom.xml")
 
 # is there any easier way for Gradle?
 replaceInKotlinGradle("jdk_11_gradle/em/embedded/graphql/patio-api/build.gradle.kts")
@@ -124,7 +132,8 @@ replaceInDist()
 
 versionSetMaven("/jdk_8_maven",JAVA_HOME_8)
 versionSetMaven("/jdk_11_maven",JAVA_HOME_11)
+versionSetMaven("/jdk_17_maven",JAVA_HOME_17)
 
-replaceAllJs()
-
-replaceInCS()
+# We no longer support those in EMB... not enough resouces. although might change in future
+#replaceAllJs()
+#replaceInCS()

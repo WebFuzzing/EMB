@@ -1,0 +1,171 @@
+{
+    "variant": "3:g.14106026_14106037del",
+    "id": "3:g.14106026_14106037del",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "3",
+    "start": 14106026,
+    "end": 14106037,
+    "allele_string": "CCAGCAGTAGCT/-",
+    "strand": 1,
+    "most_severe_consequence": "inframe_deletion",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000326972",
+            "hgvsp": "ENSP00000322097.8:p.Ser124_Ser127del",
+            "hgvsc": "ENST00000326972.8:c.357_368del",
+            "variant_allele": "-",
+            "codons": "cCCAGCAGTAGCTcc/ccc",
+            "protein_id": "ENSP00000322097",
+            "protein_start": 117,
+            "protein_end": 121,
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "amino_acids": "PSSSS/P",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "inframe_deletion"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000424053",
+            "hgvsp": "ENSP00000400448.1:p.Ser124_Ser127del",
+            "hgvsc": "ENST00000424053.1:c.357_368del",
+            "variant_allele": "-",
+            "codons": "cCCAGCAGTAGCTcc/ccc",
+            "protein_id": "ENSP00000400448",
+            "protein_start": 117,
+            "protein_end": 121,
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "amino_acids": "PSSSS/P",
+            "hgnc_id": 32178,
+            "canonical": "1",
+            "consequence_terms": [
+                "inframe_deletion"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000429201",
+            "hgvsp": "ENSP00000400824.1:p.Ser124_Ser127del",
+            "hgvsc": "ENST00000429201.1:c.357_368del",
+            "variant_allele": "-",
+            "codons": "cCCAGCAGTAGCTcc/ccc",
+            "protein_id": "ENSP00000400824",
+            "protein_start": 117,
+            "protein_end": 121,
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "amino_acids": "PSSSS/P",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "inframe_deletion"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000524375",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000435219",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000528040",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000435511",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000528067",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000435438",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000528312",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000435227",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000529129",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000436919",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000530586",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000435853",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000532753",
+            "hgvsc": "ENST00000532753.1:n.324+1025_324+1036del",
+            "variant_allele": "-",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "intron_variant",
+                "non_coding_transcript_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000532880",
+            "variant_allele": "-",
+            "protein_id": "ENSP00000437227",
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000532924",
+            "hgvsp": "ENSP00000432662.1:p.Ser124_Ser127del",
+            "hgvsc": "ENST00000532924.1:c.357_368del",
+            "variant_allele": "-",
+            "codons": "cCCAGCAGTAGCTcc/ccc",
+            "protein_id": "ENSP00000432662",
+            "protein_start": 117,
+            "protein_end": 121,
+            "gene_symbol": "TPRXL",
+            "gene_id": "ENSG00000180438",
+            "amino_acids": "PSSSS/P",
+            "hgnc_id": 32178,
+            "consequence_terms": [
+                "inframe_deletion"
+            ]
+        }
+    ]
+}

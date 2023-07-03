@@ -1,0 +1,66 @@
+{
+    "variant": "8:g.37696499_37696500insG",
+    "id": "8:g.37696499_37696500insG",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "8",
+    "start": 37696500,
+    "end": 37696499,
+    "allele_string": "-/G",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000220659",
+            "variant_allele": "G",
+            "protein_id": "ENSP00000220659",
+            "gene_symbol": "BRF2",
+            "gene_id": "ENSG00000104221",
+            "hgnc_id": 17298,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_018310.3"
+            ],
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000315215",
+            "hgvsp": "ENSP00000323508.7:p.Ala548ArgfsTer98",
+            "hgvsc": "ENST00000315215.7:c.1640dup",
+            "variant_allele": "G",
+            "codons": "gtg/gtGg",
+            "protein_id": "ENSP00000323508",
+            "protein_start": 545,
+            "protein_end": 545,
+            "gene_symbol": "GPR124",
+            "gene_id": "ENSG00000020181",
+            "amino_acids": "V/VX",
+            "hgnc_id": 17849,
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000412232",
+            "hgvsp": "ENSP00000406367.2:p.Ala765ArgfsTer98",
+            "hgvsc": "ENST00000412232.2:c.2291dup",
+            "variant_allele": "G",
+            "codons": "gtg/gtGg",
+            "protein_id": "ENSP00000406367",
+            "protein_start": 762,
+            "protein_end": 762,
+            "gene_symbol": "GPR124",
+            "gene_id": "ENSG00000020181",
+            "amino_acids": "V/VX",
+            "hgnc_id": 17849,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_032777.9"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        }
+    ]
+}

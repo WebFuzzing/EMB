@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-EVOMASTER_VERSION = "1.5.0"
+EVOMASTER_VERSION = "1.6.2-SNAPSHOT"
 
 
 import sys
@@ -14,9 +14,11 @@ from os.path import expanduser
 
 
 MAKE_ZIP = False
+UPDATE = False
 
 if len(sys.argv) > 1:
-    MAKE_ZIP = sys.argv[1] == "true" or sys.argv[1] == "True"
+    MAKE_ZIP = "zip" in sys.argv
+    UPDATE = "update" in sys.argv
 
 
 ### Environment variables ###
@@ -27,6 +29,7 @@ PROJ_LOCATION = os.path.abspath(os.path.join(SCRIPT_LOCATION, os.pardir))
 
 JAVA_HOME_8 = os.environ.get('JAVA_HOME_8', '')
 JAVA_HOME_11 = os.environ.get('JAVA_HOME_11', '')
+JAVA_HOME_17 = os.environ.get('JAVA_HOME_17', '')
 
 SHELL = platform.system() == 'Windows'
 
@@ -41,6 +44,10 @@ def checkJavaVersions():
 
     if JAVA_HOME_11 == '':
         print("\nERROR: JAVA_HOME_11 environment variable is not defined")
+        exit(1)
+
+    if JAVA_HOME_17 == '':
+        print("\nERROR: JAVA_HOME_17 environment variable is not defined")
         exit(1)
 
 
@@ -106,8 +113,11 @@ def build_jdk_8_maven() :
     copy(folder +"/cs/rest-gui/gestaohospital/target/gestaohospital-rest-sut.jar", DIST)
     copy(folder +"/em/external/rest/gestaohospital/target/gestaohospital-rest-evomaster-runner.jar", DIST)
 
-    copy(folder +"/cs/graphql/spring-petclinic-graphql/target/petclinic-sut.jar", DIST)
-    copy(folder +"/em/external/graphql/spring-petclinic-graphql/target/petclinic-evomaster-runner.jar", DIST)
+    copy(folder +"/cs/rest-gui/genome-nexus/web/target/genome-nexus-sut.jar", DIST)
+    copy(folder +"/em/external/rest/genome-nexus/target/genome-nexus-evomaster-runner.jar", DIST)
+
+    copy(folder +"/cs/graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", DIST)
+    copy(folder +"/em/external/graphql/petclinic-graphql/target/petclinic-graphql-evomaster-runner.jar", DIST)
 
     copy(folder +"/cs/graphql/graphql-ncs/target/graphql-ncs-sut.jar", DIST)
     copy(folder +"/em/external/graphql/graphql-ncs/target/graphql-ncs-evomaster-runner.jar", DIST)
@@ -143,6 +153,27 @@ def build_jdk_11_maven() :
     copy(folder +"/cs/graphql/timbuctoo/timbuctoo-instancev4/target/timbuctoo-sut.jar", DIST)
     copy(folder +"/em/external/graphql/timbuctoo/target/timbuctoo-evomaster-runner.jar", DIST)
 
+    copy(folder +"/cs/rest-gui/market/market-rest/target/market-sut.jar", DIST)
+    copy(folder +"/em/external/rest/market/target/market-evomaster-runner.jar", DIST)
+
+    ind1 = os.environ.get('SUT_LOCATION_IND1', '')
+    if ind1 == '':
+            print("\nWARN: SUT_LOCATION_IND1 env variable is not defined")
+    else:
+            copy(ind1, os.path.join(DIST, "ind1-sut.jar"))
+            copy(folder +"/em/external/rest/ind1/target/ind1-evomaster-runner.jar", DIST)
+
+
+####################
+def build_jdk_17_maven() :
+
+    folder = "jdk_17_maven"
+    callMaven(folder, JAVA_HOME_17)
+
+    copy(folder +"/cs/web/spring-petclinic/target/spring-petclinic-sut.jar", DIST)
+    copy(folder +"/em/external/web/spring-petclinic/target/spring-petclinic-evomaster-runner.jar", DIST)
+
+
 ####################
 def build_jdk_11_gradle() :
 
@@ -150,7 +181,12 @@ def build_jdk_11_gradle() :
     env_vars["JAVA_HOME"] = JAVA_HOME_11
     folder = "jdk_11_gradle"
 
-    gradleres = run(["gradlew", "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
+    command = "gradlew"
+
+    if platform.system() == "Darwin":
+        command = "./gradlew"
+
+    gradleres = run([command, "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION,folder), env=env_vars)
     gradleres = gradleres.returncode
 
     if gradleres != 0:
@@ -247,16 +283,22 @@ def makeZip():
 #####################################################################################
 ### Build the different modules ###
 
+if UPDATE:
+    print("Updating EvoMaster JavaAgent")
+    copyEvoMasterAgent()
+    exit(0)
+
 checkJavaVersions()
 
 prepareDistFolder()
 
 build_jdk_8_maven()
 build_jdk_11_maven()
+build_jdk_17_maven()
 build_jdk_11_gradle()
-build_js_npm()
 
-## Disabled for now
+## Those are disabled for now... might support back in the future
+#build_js_npm()
 #build_dotnet_3()
 
 

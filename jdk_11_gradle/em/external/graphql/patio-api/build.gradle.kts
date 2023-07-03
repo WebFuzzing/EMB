@@ -37,7 +37,7 @@ dependencyManagement  {
     }
 }
 
-val EVOMASTER_VERSION = "1.5.0"
+val EVOMASTER_VERSION = "1.6.2-SNAPSHOT"
 
 dependencies{
     implementation("org.evomaster:evomaster-client-java-controller:$EVOMASTER_VERSION")

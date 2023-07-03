@@ -84,7 +84,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private String dbUrl( ) {
 
         String url = "jdbc";
-        url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_cwa_verification/testdb_" + dbPort;
+        url += ":h2:tcp://localhost:" + dbPort + "/mem:testdb_" + dbPort;
 
         return url;
     }
@@ -96,6 +96,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "--spring.profiles.active=local,external,internal",
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
+                "--cwa-testresult-server.url=http://cwa-testresult-server:8088"
         };
     }
 

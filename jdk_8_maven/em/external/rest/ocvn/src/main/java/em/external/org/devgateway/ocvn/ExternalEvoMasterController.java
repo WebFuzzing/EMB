@@ -101,7 +101,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private String dbUrl( ) {
 
         String url = "jdbc";
-        url += ":h2:tcp://localhost:" + dbPort + "/./temp/tmp_ocvn/testdb_" + dbPort;
+        url += ":h2:tcp://localhost:" + dbPort + "/mem:testdb_" + dbPort;
 
         return url;
     }

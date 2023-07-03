@@ -1,0 +1,373 @@
+[
+    {
+        "display_id": "BRAF",
+        "primary_id": "BRAF",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "BRAF1",
+            "RAFB1"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    },
+    {
+        "display_id": "OTTHUMG00000157457",
+        "primary_id": "OTTHUMG00000157457",
+        "version": "2",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.737412",
+        "dbname": "UniGene",
+        "ensembl_identity": 5,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 4558,
+        "xref_start": 18,
+        "xref_end": 505,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.737412",
+        "ensembl_end": 5045,
+        "version": "0",
+        "cigar_line": "488M",
+        "score": 2413,
+        "description": "Transcribed locus",
+        "xref_identity": 95,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.659507",
+        "dbname": "UniGene",
+        "ensembl_identity": 31,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 5534,
+        "xref_start": 1,
+        "xref_end": 2606,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.659507",
+        "ensembl_end": 8139,
+        "version": "0",
+        "cigar_line": "2606M",
+        "score": 13021,
+        "description": "CDNA FLJ36704 fis, clone UTERU2009335",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.614551",
+        "dbname": "UniGene",
+        "ensembl_identity": 6,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 3515,
+        "xref_start": 3,
+        "xref_end": 559,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.614551",
+        "ensembl_end": 4070,
+        "version": "0",
+        "cigar_line": "70M1D165M1I34M1I24M1I36M1I19M1I36M2D3M1D44M1D21M1I13M1I48M1I20M1D4M1D12M",
+        "score": 2348,
+        "description": "Transcribed locus",
+        "xref_identity": 91,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.613773",
+        "dbname": "UniGene",
+        "ensembl_identity": 2,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1867,
+        "xref_start": 3,
+        "xref_end": 196,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.613773",
+        "ensembl_end": 1672,
+        "version": "0",
+        "cigar_line": "194M",
+        "score": 970,
+        "description": "Transcribed locus",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.604885",
+        "dbname": "UniGene",
+        "ensembl_identity": 6,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 6326,
+        "xref_start": 8,
+        "xref_end": 506,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.604885",
+        "ensembl_end": 5826,
+        "version": "0",
+        "cigar_line": "499M",
+        "score": 2495,
+        "description": "Transcribed locus",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.601041",
+        "dbname": "UniGene",
+        "ensembl_identity": 7,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 3482,
+        "xref_start": 1,
+        "xref_end": 621,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.601041",
+        "ensembl_end": 4102,
+        "version": "0",
+        "cigar_line": "621M",
+        "score": 3105,
+        "description": "Transcribed locus",
+        "xref_identity": 100,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.600998",
+        "dbname": "UniGene",
+        "ensembl_identity": 28,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1246,
+        "xref_start": 1,
+        "xref_end": 2362,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.600998",
+        "ensembl_end": 3606,
+        "version": "0",
+        "cigar_line": "664M1I1697M",
+        "score": 11775,
+        "description": "CDNA FLJ42263 fis, clone TKIDN2014570",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.550061",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 2480,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.550061",
+        "ensembl_end": 2480,
+        "version": "0",
+        "cigar_line": "2480M",
+        "score": 12400,
+        "description": "V-raf murine sarcoma viral oncogene homolog B1",
+        "xref_identity": 84,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.324250",
+        "dbname": "UniGene",
+        "ensembl_identity": 4,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 8295,
+        "xref_start": 7,
+        "xref_end": 412,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.324250",
+        "ensembl_end": 7888,
+        "version": "0",
+        "cigar_line": "406M",
+        "score": 2030,
+        "description": "Transcribed locus",
+        "xref_identity": 98,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " LEOPARD SYNDROME 3 [#613707]",
+        "primary_id": "613707",
+        "version": "0",
+        "description": " LEOPARD SYNDROME 3",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " NOONAN SYNDROME 7 [#613706]",
+        "primary_id": "613706",
+        "version": "0",
+        "description": " NOONAN SYNDROME 7; NS7",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " LYMPHOMA, NON-HODGKIN, FAMILIAL [#605027]",
+        "primary_id": "605027",
+        "version": "0",
+        "description": " LYMPHOMA, NON-HODGKIN, FAMILIAL",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " LUNG CANCER [#211980]",
+        "primary_id": "211980",
+        "version": "0",
+        "description": " LUNG CANCER",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " CARDIOFACIOCUTANEOUS SYNDROME 1 [#115150]",
+        "primary_id": "115150",
+        "version": "0",
+        "description": " CARDIOFACIOCUTANEOUS SYNDROME 1; CFC1",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " COLORECTAL CANCER [#114500]",
+        "primary_id": "114500",
+        "version": "0",
+        "description": " COLORECTAL CANCER; CRC",
+        "dbname": "MIM_MORBID",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM disease"
+    },
+    {
+        "display_id": " V-RAF MURINE SARCOMA VIRAL ONCOGEN [*164757]",
+        "primary_id": "164757",
+        "version": "0",
+        "description": " V-RAF MURINE SARCOMA VIRAL ONCOGENE HOMOLOG B1; BRAF",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "BRAF",
+        "primary_id": "1097",
+        "version": "0",
+        "description": "v-raf murine sarcoma viral oncogene homolog B",
+        "dbname": "HGNC",
+        "synonyms": [
+            "BRAF1"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "BRAF",
+        "primary_id": "673",
+        "version": "0",
+        "description": "v-raf murine sarcoma viral oncogene homolog B",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "B-RAF1",
+            "BRAF1",
+            "NS7",
+            "RAFB1"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000157764",
+        "primary_id": "ENSG00000157764",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "BRAF",
+        "primary_id": "673",
+        "version": "0",
+        "description": "v-raf murine sarcoma viral oncogene homolog B",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    }
+]

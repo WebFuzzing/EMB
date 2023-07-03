@@ -1,0 +1,64 @@
+{
+    "variant": "4:g.77675978_77675979insC",
+    "id": "4:g.77675978_77675979insC",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "4",
+    "start": 77675979,
+    "end": 77675978,
+    "allele_string": "-/C",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000296043",
+            "hgvsp": "ENSP00000296043.6:p.Asp1450Ter",
+            "hgvsc": "ENST00000296043.6:c.4346dup",
+            "variant_allele": "C",
+            "codons": "gcc/gCcc",
+            "protein_id": "ENSP00000296043",
+            "protein_start": 1448,
+            "protein_end": 1448,
+            "gene_symbol": "SHROOM3",
+            "gene_id": "ENSG00000138771",
+            "amino_acids": "A/AX",
+            "hgnc_id": 30422,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_020859.3"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000449007",
+            "variant_allele": "C",
+            "gene_symbol": "RP11-359D14.3",
+            "gene_id": "ENSG00000224218",
+            "canonical": "1",
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000452412",
+            "variant_allele": "C",
+            "gene_symbol": "RP11-359D14.2",
+            "gene_id": "ENSG00000233860",
+            "canonical": "1",
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000469923",
+            "variant_allele": "C",
+            "gene_symbol": "SHROOM3",
+            "gene_id": "ENSG00000138771",
+            "hgnc_id": 30422,
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        }
+    ]
+}

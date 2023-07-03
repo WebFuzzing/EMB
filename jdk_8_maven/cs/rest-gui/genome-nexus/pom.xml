@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.cbioportal.genome_nexus</groupId>
+    <artifactId>genome-nexus</artifactId>
+    <packaging>pom</packaging>
+    <name>Genome Nexus Master</name>
+    <!-- project version is generated through git or can be passed as
+         PROJECT_VERSION env variable (see version.sh) -->
+    <version>1.1.49-SNAPSHOT</version>
+    <description>Genome Nexus Master Module</description>
+    <url>https://github.com/cBioPortal/genome-nexus/</url>
+
+    <modules>
+      <module>model</module>
+      <module>component</module>
+      <module>persistence</module>
+      <module>service</module>
+      <module>web</module>
+    </modules>
+    <repositories>
+      <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+      </repository>
+    </repositories>
+    <pluginRepositories>
+      <pluginRepository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+      </pluginRepository>
+    </pluginRepositories>
+    <!-- inherit defaults from spring boot -->
+<!--    <parent>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--      <version>2.2.1.RELEASE</version>-->
+<!--    </parent>-->
+
+    <properties>
+      <java.version>1.8</java.version>
+      <log4j2.version>2.17.0</log4j2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.2.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.github.genome-nexus.oncokb-java-api-client</groupId>
+          <artifactId>oncokbPublicApiClient</artifactId>
+          <version>d7a38a4215d9bba561e7e2a555b7abc9dad6242b</version>
+        </dependency>
+        <dependency>
+          <groupId>com.github.genome-nexus.oncokb-java-api-client</groupId>
+          <artifactId>oncokbPrivateApiClient</artifactId>
+          <version>d7a38a4215d9bba561e7e2a555b7abc9dad6242b</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+<!--        <plugin>-->
+<!--          <groupId>com.github.cbioportal.maven-external-version</groupId>-->
+<!--          <artifactId>maven-external-version-plugin</artifactId>-->
+<!--          <version>f09c2b9608</version>-->
+<!--          <extensions>true</extensions>-->
+<!--          <configuration>-->
+<!--            <strategy hint="script">-->
+<!--              <script>./version.sh</script>-->
+<!--            </strategy>-->
+<!--          </configuration>-->
+<!--        </plugin>-->
+        <plugin>
+         <groupId>org.jacoco</groupId>
+         <artifactId>jacoco-maven-plugin</artifactId>
+         <version>0.8.5</version>
+         <executions>
+          <execution>
+           <goals>
+            <goal>prepare-agent</goal>
+           </goals>
+          </execution>
+          <execution>
+           <id>report</id>
+           <phase>test</phase>
+           <goals>
+            <goal>report</goal>
+           </goals>
+          </execution>
+         </executions>
+        </plugin>
+      </plugins>
+    </build>
+
+</project>

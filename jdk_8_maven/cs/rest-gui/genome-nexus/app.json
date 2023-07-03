@@ -1,0 +1,42 @@
+{
+  "name": "genome-nexus",
+  "description":"Genome Nexus - A Resource for Annotation and Interpretation of Genetic Variants",
+  "repository":"https://github.com/cBioPortal/genome-nexus",
+  "keywords": [
+    "java",
+    "tomcat",
+    "javascript",
+    "cancer",
+    "genomics",
+    "hgvs",
+    "cancerhotspots",
+    "variants",
+    "genes"
+  ],
+  "env": {
+    "JAVA_OPTS": {
+      "description":"options for jvm",
+      "value": "-Xmx300m -Xms300m -XX:+UseCompressedOops"
+    },
+    "MAVEN_CUSTOM_OPTS": {
+        "description":"set options for mvn",
+        "value":"-DskipTests -Dpackaging.type=jar"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-java"
+    },
+    {
+      "url": "https://github.com/genome-nexus/heroku-buildpack-mongo#v3.4.9"
+    }
+  ],
+  "scripts": {
+      "postdeploy": "export GENOME_NEXUS_IMPORT_COMMIT=b890e87bd868467b8c7a2aa3f94b7fc7b6766c3c && IMPORT_DIR=$(bash <(curl -L \"https://github.com/genome-nexus/genome-nexus-importer/blob/${GENOME_NEXUS_IMPORT_COMMIT}/scripts/download_files_from_github_url.sh?raw=true\") https://github.com/genome-nexus/genome-nexus-importer/tree/${GENOME_NEXUS_IMPORT_COMMIT}/export) && sleep 1s && bash $IMPORT_DIR/scripts/import_mongo.sh ${MONGODB_URI} && rm -rf $IMPORT_DIR"
+  },
+  "addons" : [
+    {
+      "plan": "mongolab:sandbox"
+    }
+  ]
+}

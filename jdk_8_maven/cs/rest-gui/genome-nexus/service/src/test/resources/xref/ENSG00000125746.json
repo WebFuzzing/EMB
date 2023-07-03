@@ -1,0 +1,120 @@
+[
+    {
+        "display_id": "OTTHUMG00000182127",
+        "primary_id": "OTTHUMG00000182127",
+        "version": "1",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.24178",
+        "dbname": "UniGene",
+        "ensembl_identity": 95,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 113,
+        "xref_start": 1,
+        "xref_end": 2651,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.24178",
+        "ensembl_end": 2763,
+        "version": "0",
+        "cigar_line": "2651M",
+        "score": 13255,
+        "description": "Echinoderm microtubule associated protein like 2",
+        "xref_identity": 91,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": "hsa-mir-330",
+        "primary_id": "MI0000803",
+        "version": "0",
+        "description": "hsa-mir-330",
+        "dbname": "miRBase",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "MISC",
+        "db_display_name": "miRBase"
+    },
+    {
+        "display_id": "EML2",
+        "primary_id": "18035",
+        "version": "0",
+        "description": "echinoderm microtubule associated protein like 2",
+        "dbname": "HGNC",
+        "synonyms": [
+            "ELP70",
+            "EMAP-2",
+            "EMAP2"
+        ],
+        "info_text": "Generated via ccds",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "EML2",
+        "primary_id": "24139",
+        "version": "0",
+        "description": "echinoderm microtubule associated protein like 2",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "ELP70",
+            "EMAP-2",
+            "EMAP2"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000125746",
+        "primary_id": "ENSG00000125746",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "EML2",
+        "primary_id": "24139",
+        "version": "0",
+        "description": "echinoderm microtubule associated protein like 2",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "EML2",
+        "primary_id": "EML2",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "EMAP2",
+            "EMAPL2"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

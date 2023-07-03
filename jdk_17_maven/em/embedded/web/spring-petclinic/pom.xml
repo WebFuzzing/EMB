@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>evomaster-benchmark-jdk17-em-embedded-web-spring-petclinic</artifactId>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.evomaster</groupId>
+        <artifactId>evomaster-benchmark-jdk17-em-embedded-web</artifactId>
+        <version>1.6.2-SNAPSHOT</version>
+    </parent>
+
+
+   <dependencies>
+       <dependency>
+           <groupId>org.springframework.samples</groupId>
+           <artifactId>spring-petclinic</artifactId>
+           <version>3.1.0-SNAPSHOT</version>
+       </dependency>
+       <dependency>
+           <groupId>org.evomaster</groupId>
+           <artifactId>evomaster-client-java-dependencies</artifactId>
+           <version>${evomaster-version}</version>
+           <type>pom</type>
+           <scope>test</scope>
+           <exclusions>
+               <exclusion>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>slf4j-api</artifactId>
+               </exclusion>
+           </exclusions>
+       </dependency>
+   </dependencies>
+
+
+
+</project>

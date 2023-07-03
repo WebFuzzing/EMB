@@ -1,0 +1,235 @@
+[
+    {
+        "display_id": "OTTHUMG00000157075",
+        "primary_id": "OTTHUMG00000157075",
+        "version": "2",
+        "description": null,
+        "dbname": "OTTG",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "NONE",
+        "db_display_name": "Havana gene"
+    },
+    {
+        "primary_id": "Hs.702168",
+        "dbname": "UniGene",
+        "ensembl_identity": 100,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 11020,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.702168",
+        "ensembl_end": 11020,
+        "version": "0",
+        "cigar_line": "11020M",
+        "score": 55100,
+        "description": "Shroom family member 3",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.689676",
+        "dbname": "UniGene",
+        "ensembl_identity": 76,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 112,
+        "xref_start": 5,
+        "xref_end": 368,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.689676",
+        "ensembl_end": 475,
+        "version": "0",
+        "cigar_line": "364M",
+        "score": 1811,
+        "description": "Transcribed locus",
+        "xref_identity": 91,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.683808",
+        "dbname": "UniGene",
+        "ensembl_identity": 99,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 1,
+        "xref_start": 1,
+        "xref_end": 504,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.683808",
+        "ensembl_end": 504,
+        "version": "0",
+        "cigar_line": "504M",
+        "score": 2502,
+        "description": "CDNA FLJ40481 fis, clone TESTI2043477",
+        "xref_identity": 30,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.606207",
+        "dbname": "UniGene",
+        "ensembl_identity": 5,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 7558,
+        "xref_start": 2,
+        "xref_end": 578,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.606207",
+        "ensembl_end": 6980,
+        "version": "0",
+        "cigar_line": "577M",
+        "score": 2885,
+        "description": "Transcribed locus",
+        "xref_identity": 99,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "primary_id": "Hs.432504",
+        "dbname": "UniGene",
+        "ensembl_identity": 5,
+        "synonyms": [
+
+        ],
+        "ensembl_start": 11014,
+        "xref_start": 1,
+        "xref_end": 580,
+        "db_display_name": "UniGene",
+        "display_id": "Hs.432504",
+        "ensembl_end": 10433,
+        "version": "0",
+        "cigar_line": "580M",
+        "score": 2900,
+        "description": "Transcribed locus",
+        "xref_identity": 100,
+        "evalue": null,
+        "info_type": "SEQUENCE_MATCH",
+        "info_text": ""
+    },
+    {
+        "display_id": " SHROOM FAMILY MEMBER 3 [*604570]",
+        "primary_id": "604570",
+        "version": "0",
+        "description": " SHROOM FAMILY MEMBER 3; SHROOM3",
+        "dbname": "MIM_GENE",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "MIM gene"
+    },
+    {
+        "display_id": "SHROOM3",
+        "primary_id": "30422",
+        "version": "0",
+        "description": "shroom family member 3",
+        "dbname": "HGNC",
+        "synonyms": [
+            "APXL3",
+            "KIAA1481",
+            "SHRM",
+            "ShrmL"
+        ],
+        "info_text": "Generated via ensembl_manual",
+        "info_type": "DIRECT",
+        "db_display_name": "HGNC Symbol"
+    },
+    {
+        "display_id": "LOC100996628",
+        "primary_id": "100996628",
+        "version": "0",
+        "description": "uncharacterized LOC100996628",
+        "dbname": "EntrezGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "SHROOM3",
+        "primary_id": "57619",
+        "version": "0",
+        "description": "shroom family member 3",
+        "dbname": "EntrezGene",
+        "synonyms": [
+            "APXL3",
+            "SHRM",
+            "ShrmL"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "EntrezGene"
+    },
+    {
+        "display_id": "ENSG00000138771",
+        "primary_id": "ENSG00000138771",
+        "version": "0",
+        "description": "",
+        "dbname": "ArrayExpress",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DIRECT",
+        "db_display_name": "ArrayExpress"
+    },
+    {
+        "display_id": "LOC100996628",
+        "primary_id": "100996628",
+        "version": "0",
+        "description": "uncharacterized LOC100996628",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "SHROOM3",
+        "primary_id": "57619",
+        "version": "0",
+        "description": "shroom family member 3",
+        "dbname": "WikiGene",
+        "synonyms": [
+
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "WikiGene"
+    },
+    {
+        "display_id": "SHROOM3",
+        "primary_id": "SHROOM3",
+        "version": "0",
+        "description": "",
+        "dbname": "Uniprot_gn",
+        "synonyms": [
+            "KIAA1481",
+            "SHRML"
+        ],
+        "info_text": "",
+        "info_type": "DEPENDENT",
+        "db_display_name": "UniProtKB Gene Name"
+    }
+]

@@ -141,8 +141,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 "-Ddw.webhooks.dataSetUpdated=http://localhost:3000",
                 "-Ddw.databases.databaseLocation="+tmpFolder+"/datasets",
                 "-Ddw.databaseConfiguration.databasePath="+tmpFolder+"/neo4j",
-                "-Ddw.dataSet.dataStorage.rootDir=/datasets",
-                "-Xmx4G"
+                "-Ddw.dataSet.dataStorage.rootDir="+tmpFolder+"/datasets",
+                "-Xmx8G"
         };
     }
 

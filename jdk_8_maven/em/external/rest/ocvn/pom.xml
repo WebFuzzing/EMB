@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.evomaster</groupId>
         <artifactId>evomaster-benchmark-em-external-rest</artifactId>
-        <version>1.5.0</version>
+        <version>1.6.2-SNAPSHOT</version>
     </parent>
 
     <properties>

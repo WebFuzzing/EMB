@@ -22,6 +22,15 @@ However, finding this type of applications is not trivial among open-source proj
 Furthermore, it is not simple to sort out all the technical details on how to set these applications up and start them in a simple, uniform approach. 
 Therefore, this repository provides the important contribution of providing all these necessary scripts for researchers that need this kind of case study.   
 
+**NOTE**: version 1.6.1 was last one in which we still updated drivers for JavaScript and C\#. Those SUTs are not built anymore by default, and latest versions of *EvoMaster* might not work on those old drivers. Updating drivers for different programming languages (and re-implement white-box heuristics) is a massive amount of work, which unfortunately has little to no value for the scientific community (based on our experience). Those SUTs are still here in EMB to enable *black-box* experiments (and to be able to replicate old experiments), but unfortunately not for *white-box* testing with latest versions of *EvoMaster*.  
+
+
+
+A video providing some high level overview of EMB can be found [here](https://youtu.be/wJs34ATgLEw).
+
+[![EMB YouTube Video](https://img.youtube.com/vi/wJs34ATgLEw/0.jpg)](https://www.youtube.com/watch?v=wJs34ATgLEw)
+
+
 
 ## License
 All the code that is new for this repository (e.g., the driver classes) is released under Apache 2.0 license. 
@@ -31,6 +40,15 @@ projects, each one with its own license, as clarified in more details beneath.
 ## Example
 
 To see an example of using these drivers with EvoMaster to generate test cases, you can look at this [short video](https://youtu.be/3mYxjgnhLEo) (5 minutes).
+
+## Citation
+
+If you are using EMB in an academic work, you can cite the following:
+
+> A. Arcuri, M. Zhang, A. Golmohammadi, A. Belhadi, J. P. Galeotti, B. Marculescu, S. Seran.  
+ **EMB: A Curated Corpus of Web/Enterprise Applications And Library Support for Software Testing Research**.  
+In *IEEE International Conference on Software Testing, Validation and Verification (ICST)*, 2023.
+
   
 ## Current Case Studies
 
@@ -47,51 +65,82 @@ The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case study) are a
 They are based on numerical and string-based functions previously used in the literature of unit test generation.
 We just re-implemented in different languages, and put them behind a web service. 
 
-
+For the RESTful APIs, each API has an endpoint where the OpenAPI/Swagger schemas can be downloaded from.
+For simplicity, all schemas are also available as JSON/YML files under the folder [openapi-swagger](./openapi-swagger). 
 
 ### REST: Java/Kotlin
 
-* Features-Service (Apache), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
+* Genome Nexus (MIT), [jdk_8_maven/cs/rest-gui/genome-nexus](jdk_8_maven/cs/rest-gui/genome-nexus), from [https://github.com/genome-nexus/genome-nexus](https://github.com/genome-nexus/genome-nexus)
 
-* Scout-API (MIT), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
+* Market (MIT), [jdk_11_maven/cs/rest-gui/market](jdk_11_maven/cs/rest-gui/market), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)
 
-* ProxyPrint (Apache), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
+* Features-Service (Apache), [jdk_8_maven/cs/rest/original/features-service](jdk_8_maven/cs/rest/original/features-service), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
 
-* CatWatch (Apache), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
+* Scout-API (MIT), [jdk_8_maven/cs/rest/original/scout-api](jdk_8_maven/cs/rest/original/scout-api), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
 
-* OCVN (MIT), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
+* ProxyPrint (Apache), [jdk_8_maven/cs/rest/original/proxyprint](jdk_8_maven/cs/rest/original/proxyprint), from [https://github.com/ProxyPrint/proxyprint-kitchen](https://github.com/ProxyPrint/proxyprint-kitchen)
 
-* News (LGPL), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
+* CatWatch (Apache), [jdk_8_maven/cs/rest/original/catwatch](jdk_8_maven/cs/rest/original/catwatch), from [https://github.com/zalando-incubator/catwatch](https://github.com/zalando-incubator/catwatch)
 
-* Restcountries (MPL), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
+* OCVN (MIT), [jdk_8_maven/cs/rest-gui/ocvn](jdk_8_maven/cs/rest-gui/ocvn), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
 
-* Languagetool (LGPL), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
+* News (LGPL), [jdk_8_maven/cs/rest/artificial/news](jdk_8_maven/cs/rest/artificial/news), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
 
-* CWA-Verification-Server (Apache), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
+* Restcountries (MPL), [jdk_8_maven/cs/rest/original/restcountries](jdk_8_maven/cs/rest/original/restcountries), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
 
-* Gestao Hospital (not-known license), from [https://github.com/ValchanOficial/GestaoHospital](https://github.com/ValchanOficial/GestaoHospital)
+* Languagetool (LGPL), [jdk_8_maven/cs/rest/original/languagetool](jdk_8_maven/cs/rest/original/languagetool), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
+
+* CWA-Verification-Server (Apache), [jdk_11_maven/cs/rest/cwa-verification-server](jdk_11_maven/cs/rest/cwa-verification-server), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
+
+* Gestao Hospital (not-known license), [jdk_8_maven/cs/rest-gui/gestaohospital](jdk_8_maven/cs/rest-gui/gestaohospital), from [https://github.com/ValchanOficial/GestaoHospital](https://github.com/ValchanOficial/GestaoHospital)
+
+* NCS, [jdk_8_maven/cs/rest/artificial/ncs](jdk_8_maven/cs/rest/artificial/ncs), (not-known license, artificial numerical examples coming from different sources)
+
+* SCS, [jdk_8_maven/cs/rest/artificial/scs](jdk_8_maven/cs/rest/artificial/scs), (not-known license, artificial string examples coming from different sources)
+
+
+
+### GraphQL: Java/Kotlin
+
+* Spring-Pet-Clinic (Apache), [jdk_8_maven/cs/graphql/petclinic-graphql](jdk_8_maven/cs/graphql/petclinic-graphql), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
+
+* Patio-Api (GPL), [jdk_11_gradle/cs/graphql/patio-api](jdk_11_gradle/cs/graphql/patio-api), from [https://github.com/patio-team/patio-api]()
+
+* Timbuctoo (GPL), [jdk_11_maven/cs/graphql/timbuctoo](jdk_11_maven/cs/graphql/timbuctoo), from [https://github.com/HuygensING/timbuctoo]()
+
+* NCS, [jdk_8_maven/cs/graphql/graphql-ncs](jdk_8_maven/cs/graphql/graphql-ncs), (not-known license, artificial numerical examples coming from different sources)
+
+* SCS, [jdk_8_maven/cs/graphql/graphql-scs](jdk_8_maven/cs/graphql/graphql-scs), (not-known license, artificial string examples coming from different sources)
+
+
+### RPC (Thrift/gRPC): Java
 
 * NCS (not-known license, artificial numerical examples coming from different sources)
 
 * SCS (not-known license, artificial string examples coming from different sources)
+
+
+### WEB: backend in Java/Kotlin
+
+* Spring-PetClinic (Apache), [jdk_17_maven/cs/web/spring-petclinic](jdk_17_maven/cs/web/spring-petclinic), from [https://github.com/spring-projects/spring-petclinic]()
 
 
 ### REST: JavaScript/TypeScript
 
-* Disease-sh-API (GPL), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
+* Disease-sh-API (GPL), [js_npm/rest/disease-sh-api](js_npm/rest/disease-sh-api), from [https://github.com/disease-sh/API](https://github.com/disease-sh/API)
 
-* Cyclotron (MIT), from [https://github.com/ExpediaInceCommercePlatform/cyclotron](https://github.com/ExpediaInceCommercePlatform/cyclotron)
+* Cyclotron (MIT), [js_npm/rest/cyclotron](js_npm/rest/cyclotron), from [https://github.com/ExpediaInceCommercePlatform/cyclotron](https://github.com/ExpediaInceCommercePlatform/cyclotron)
 
-* SpaceX-API (Apache-2.0 License), from [https://github.com/r-spacex/SpaceX-API](https://github.com/r-spacex/SpaceX-API)
+* SpaceX-API (Apache-2.0 License), [js_npm/rest/spacex-api](js_npm/rest/spacex-api), from [https://github.com/r-spacex/SpaceX-API](https://github.com/r-spacex/SpaceX-API)
 
-* Realworld-App (ISC), from [https://github.com/lujakob/nestjs-realworld-example-app](https://github.com/lujakob/nestjs-realworld-example-app)
+* Realworld-App (ISC), [js_npm/rest/realworld-app](js_npm/rest/realworld-app), from [https://github.com/lujakob/nestjs-realworld-example-app](https://github.com/lujakob/nestjs-realworld-example-app)
 
-* NCS (not-known license, artificial numerical examples coming from different sources)
+* NCS, [js_npm/rest/ncs](js_npm/rest/ncs), (not-known license, artificial numerical examples coming from different sources)
 
-* SCS (not-known license, artificial string examples coming from different sources)
+* SCS, [js_npm/rest/scs](js_npm/rest/scs), (not-known license, artificial string examples coming from different sources)
 
 
-### REST: .NET/C# 
+### REST: .NET/C#
 
 * Menu.API (not-known license), from [https://github.com/chayxana/Restaurant-App](https://github.com/chayxana/Restaurant-App)
 
@@ -102,30 +151,13 @@ We just re-implemented in different languages, and put them behind a web service
 * SCS (not-known license, artificial string examples coming from different sources)
 
 
-### GraphQL: Java/Kotlin
-
-* Spring-Pet-Clinic (Apache), from [https://github.com/spring-petclinic/spring-petclinic-graphql]()
-
-* Patio-Api (GPL), from [https://github.com/patio-team/patio-api]()
-
-* Timbuctoo (GPL), from [https://github.com/HuygensING/timbuctoo]()
-
-* NCS (not-known license, artificial numerical examples coming from different sources)
-
-* SCS (not-known license, artificial string examples coming from different sources)
-
 
 ### GraphQL: JavaScript/TypeScript
 
-* React-Finland (not-known license), from [https://github.com/ReactFinland/graphql-api](https://github.com/ReactFinland/graphql-api)
+* React-Finland (not-known license), [js_npm/graphql/react-finland](js_npm/graphql/react-finland), from [https://github.com/ReactFinland/graphql-api](https://github.com/ReactFinland/graphql-api)
 
-* E-Commerce Server (MIT), from [https://github.com/react-shop/react-ecommerce](https://github.com/react-shop/react-ecommerce)
+* E-Commerce Server (MIT), [js_npm/graphql/ecommerce-server](js_npm/graphql/ecommerce-server), from [https://github.com/react-shop/react-ecommerce](https://github.com/react-shop/react-ecommerce)
 
-### RPC (Thrift/gRPC): Java
-
-* NCS (not-known license, artificial numerical examples coming from different sources)
-
-* SCS (not-known license, artificial string examples coming from different sources)
 
 ## Using This Repository
 

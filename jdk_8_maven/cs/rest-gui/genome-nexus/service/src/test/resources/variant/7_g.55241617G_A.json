@@ -1,0 +1,117 @@
+{
+    "variant": "7:g.55241617G>A",
+    "colocatedVariants": [
+        {
+            "dbSnpId": "COSV51807743"
+        }
+    ],
+    "originalVariantQuery": "7:g.55241617G>A",
+    "hgvsg": "7:g.55241617G>A",
+    "id": "7:g.55241617G>A",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "7",
+    "start": 55241617,
+    "end": 55241617,
+    "allele_string": "G/A",
+    "strand": 1,
+    "most_severe_consequence": "missense_variant",
+    "transcript_consequences": [
+        {
+            "exon": "18/28",
+            "transcript_id": "ENST00000275493",
+            "hgvsp": "ENSP00000275493.2:p.Val689Met",
+            "hgvsc": "ENST00000275493.2:c.2065G>A",
+            "variant_allele": "A",
+            "codons": "Gtg/Atg",
+            "protein_id": "ENSP00000275493",
+            "protein_start": 689,
+            "protein_end": 689,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "V/M",
+            "hgnc_id": "3236",
+            "canonical": "1",
+            "polyphen_score": 0.905,
+            "polyphen_prediction": "possibly_damaging",
+            "sift_score": 0,
+            "sift_prediction": "deleterious",
+            "refseq_transcript_ids": [
+                "NM_005228.3"
+            ],
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000344576",
+            "variant_allele": "A",
+            "protein_id": "ENSP00000345973",
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "hgnc_id": "3236",
+            "refseq_transcript_ids": [
+                "NM_201284.1"
+            ],
+            "consequence_terms": [
+                "downstream_gene_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000442591",
+            "hgvsc": "ENST00000442591.1:c.*28+996G>A",
+            "variant_allele": "A",
+            "protein_id": "ENSP00000410031",
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "hgnc_id": "3236",
+            "consequence_terms": [
+                "intron_variant"
+            ]
+        },
+        {
+            "exon": "18/28",
+            "transcript_id": "ENST00000454757",
+            "hgvsp": "ENSP00000395243.2:p.Val636Met",
+            "hgvsc": "ENST00000454757.2:c.1906G>A",
+            "variant_allele": "A",
+            "codons": "Gtg/Atg",
+            "protein_id": "ENSP00000395243",
+            "protein_start": 636,
+            "protein_end": 636,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "V/M",
+            "hgnc_id": "3236",
+            "polyphen_score": 0.905,
+            "polyphen_prediction": "possibly_damaging",
+            "sift_score": 0,
+            "sift_prediction": "deleterious",
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        },
+        {
+            "exon": "17/26",
+            "transcript_id": "ENST00000455089",
+            "hgvsp": "ENSP00000415559.1:p.Val644Met",
+            "hgvsc": "ENST00000455089.1:c.1930G>A",
+            "variant_allele": "A",
+            "codons": "Gtg/Atg",
+            "protein_id": "ENSP00000415559",
+            "protein_start": 644,
+            "protein_end": 644,
+            "gene_symbol": "EGFR",
+            "gene_id": "ENSG00000146648",
+            "amino_acids": "V/M",
+            "hgnc_id": "3236",
+            "polyphen_score": 0.72,
+            "polyphen_prediction": "possibly_damaging",
+            "sift_score": 0.01,
+            "sift_prediction": "deleterious",
+            "consequence_terms": [
+                "missense_variant"
+            ]
+        }
+    ],
+    "successfully_annotated": true
+}

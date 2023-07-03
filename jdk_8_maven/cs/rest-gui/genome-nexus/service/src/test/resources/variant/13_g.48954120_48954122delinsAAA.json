@@ -1,0 +1,31 @@
+{
+    "variant": "13:g.48954120_48954122delinsAAA",
+    "originalVariantQuery": "13:g.48954120_48954122delinsAAA",
+    "hgvsg": "13:g.48954120_48954122delinsAAA",
+    "id": "13:g.48954120_48954122delinsAAA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "13",
+    "start": 48954120,
+    "end": 48954122,
+    "allele_string": "TTC/AAA",
+    "strand": 1,
+    "most_severe_consequence": "intron_variant",
+    "transcript_consequences": [
+      {
+        "transcript_id": "ENST00000267163",
+        "hgvsc": "ENST00000267163.4:c.1390-69_1390-67delinsAAA",
+        "variant_allele": "AAA",
+        "protein_id": "ENSP00000267163",
+        "gene_symbol": "RB1",
+        "gene_id": "ENSG00000139687",
+        "hgnc_id": "9884",
+        "canonical": "1",
+        "refseq_transcript_ids": [
+          "NM_000321.2"
+        ],
+        "consequence_terms": [
+          "intron_variant"
+        ]
+      }
+    ]
+  }

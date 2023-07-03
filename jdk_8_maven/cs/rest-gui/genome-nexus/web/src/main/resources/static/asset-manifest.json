@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.28cfacd8.chunk.css",
+    "main.js": "/static/js/main.12efc3c1.chunk.js",
+    "main.js.map": "/static/js/main.12efc3c1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b1c67cf7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b1c67cf7.js.map",
+    "static/css/2.fd312d97.chunk.css": "/static/css/2.fd312d97.chunk.css",
+    "static/js/2.1bd64e08.chunk.js": "/static/js/2.1bd64e08.chunk.js",
+    "static/js/2.1bd64e08.chunk.js.map": "/static/js/2.1bd64e08.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.3550644b712ee411af35f01b6d7ddcae.js": "/precache-manifest.3550644b712ee411af35f01b6d7ddcae.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.fd312d97.chunk.css.map": "/static/css/2.fd312d97.chunk.css.map",
+    "static/css/main.28cfacd8.chunk.css.map": "/static/css/main.28cfacd8.chunk.css.map",
+    "static/js/2.1bd64e08.chunk.js.LICENSE.txt": "/static/js/2.1bd64e08.chunk.js.LICENSE.txt",
+    "static/media/font-awesome.css": "/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/logo_square_white_background_with_padding.png": "/static/media/logo_square_white_background_with_padding.cddcda01.png",
+    "static/media/index.css": "/static/media/open-sans-latin-800italic.79b58175.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b1c67cf7.js",
+    "static/css/2.fd312d97.chunk.css",
+    "static/js/2.1bd64e08.chunk.js",
+    "static/css/main.28cfacd8.chunk.css",
+    "static/js/main.12efc3c1.chunk.js"
+  ]
+}

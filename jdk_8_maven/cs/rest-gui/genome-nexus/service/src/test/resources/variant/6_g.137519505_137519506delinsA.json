@@ -1,0 +1,51 @@
+{
+    "variant": "6:g.137519505_137519506delinsA",
+    "id": "6:g.137519505_137519506delinsA",
+    "assembly_name": "GRCh37",
+    "seq_region_name": "6",
+    "start": 137519505,
+    "end": 137519506,
+    "allele_string": "CT/A",
+    "strand": 1,
+    "most_severe_consequence": "frameshift_variant",
+    "transcript_consequences": [
+        {
+            "transcript_id": "ENST00000367739",
+            "hgvsp": "ENSP00000356713.4:p.Ser378PhefsTer5",
+            "hgvsc": "ENST00000367739.4:c.1132_1133delinsT",
+            "variant_allele": "A",
+            "codons": "AGt/Tt",
+            "protein_id": "ENSP00000356713",
+            "protein_start": 378,
+            "protein_end": 378,
+            "gene_symbol": "IFNGR1",
+            "gene_id": "ENSG00000027697",
+            "amino_acids": "S/X",
+            "hgnc_id": 5439,
+            "canonical": "1",
+            "refseq_transcript_ids": [
+                "NM_000416.2"
+            ],
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        },
+        {
+            "transcript_id": "ENST00000543628",
+            "hgvsp": "ENSP00000443282.1:p.Ser350PhefsTer5",
+            "hgvsc": "ENST00000543628.1:c.1048_1049delinsT",
+            "variant_allele": "A",
+            "codons": "AGt/Tt",
+            "protein_id": "ENSP00000443282",
+            "protein_start": 350,
+            "protein_end": 350,
+            "gene_symbol": "IFNGR1",
+            "gene_id": "ENSG00000027697",
+            "amino_acids": "S/X",
+            "hgnc_id": 5439,
+            "consequence_terms": [
+                "frameshift_variant"
+            ]
+        }
+    ]
+}
