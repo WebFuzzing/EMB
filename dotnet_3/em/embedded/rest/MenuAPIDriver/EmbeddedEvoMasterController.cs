@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Threading.Tasks;
 using EvoMaster.Controller;
 using EvoMaster.Controller.Api;
 using EvoMaster.Controller.Problem;
 using Npgsql;
 using EvoMaster.Controller.Controllers.db;
-using EvoMaster.DatabaseController;
-using EvoMaster.DatabaseController.Abstractions;
+using Testcontainers.PostgreSql;
 
 namespace Menu {
     public class EmbeddedEvoMasterController : EmbeddedSutController {
         private bool _isSutRunning;
         private static int _sutPort;
-        private NpgsqlConnection _connection;
-        private IDatabaseController _databaseController;
+        private DbConnection _connection;
+        private readonly PostgreSqlContainer _postgreSqlContainer = new PostgreSqlBuilder().Build();
 
         private static void Main(string[] args) {
             var embeddedEvoMasterController = new EmbeddedEvoMasterController();
@@ -57,7 +57,7 @@ namespace Menu {
         public override bool IsSutRunning() => _isSutRunning;
 
         public override void ResetStateOfSut() {
-            DbCleaner.ClearDatabase_Postgres(_connection);
+            DbCleaner.ClearDatabase(_connection, null, DatabaseType.POSTGRES);
         }
 
         public override string StartSut() {
@@ -65,26 +65,27 @@ namespace Menu {
             Task.Run(async () => {
                 // TODO why is this not taken from Docker??? 
                 var dbPort = GetEphemeralTcpPort();
+                
+                await _postgreSqlContainer.StartAsync();
 
-                _databaseController = new PostgresDatabaseController("restaurant_menu_database", dbPort, "password123");
+                await using (DbConnection connection = new NpgsqlConnection(_postgreSqlContainer.GetConnectionString()))
+                {
+                    _connection = connection;
+                    API.Program.Main(new[] {$"{_sutPort}", connection.ConnectionString});
 
-                var (connectionString, dbConnection) = await _databaseController.StartAsync();
-
-                _connection = dbConnection as NpgsqlConnection;
-
-                API.Program.Main(new[] {$"{_sutPort}", connectionString});
+                }
             });
 
-            WaitUntilSutIsRunning(_sutPort);
+            WaitUntilSutIsRunning(_sutPort, 45);
             
             _isSutRunning = true;
 
             return $"http://localhost:{_sutPort}";
         }
 
-        public override void StopSut() {
+        public override async void StopSut() {
             API.Program.Shutdown();
-            _databaseController.Stop();
+            await _postgreSqlContainer.StopAsync();
             _isSutRunning = false;
         }
 
