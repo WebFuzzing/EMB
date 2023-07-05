@@ -75,4 +75,8 @@ As there are quite a few things to keep in mind, we list here the most important
   Need to specify the license, folder location on EMB, and original source repositories.
   See other SUT entries to check exactly how to do it (especially how to add clickable links in Markdown).
 
+- the drivers should be written under "jdk_X_Y/em/embedded" and "jdk_X_Y/em/external", following the same tree structure
+  of the SUT under "cs", eg, "jdk_17_maven/cs/grpc/NAME" would lead to embedded driver be under
+  "jdk_17_maven/em/embedded/grpc/NAME".
+
 - TODO
