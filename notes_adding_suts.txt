@@ -1,0 +1,48 @@
+==============================================
+NOTES
+Here some high level notes on how to add new SUTs to EMB.
+As there are quite a few things to keep in mind, we list here the most important.
+==============================================
+
+- before adding a SUT, its repository needs to be cloned locally, and should make sure the application can be built and
+  run with no problem.
+  Then, need to be able to write an Embedded driver for it, and make sure that EM can work with it.
+  Only after this is verified, we can add an SUT to EMB.
+  Note that we have (tens of) thousands of files in EMB, and adding new stuff does have a toll on Git.
+  So should avoid cases of adding something and then remove them later for some issues.
+
+- adding a new SUT should always be done on a branch of "develop", as needs to be reviewed.
+
+- need to check which built tool is used (e.g., Maven or Gradle), and which LTS version of the JDK is used.
+  Currently, we support from 8 on, ie, 8, 11 and 17 (and soon 21).
+  Based on this, the SUT will belong to a folder matching such settings, eg, "jdk_8_maven".
+  If such folder does not exist yet, it needs to be created and configured.
+  See pom.xml from the other existing folders, to use as starting point (ie, copy&paste&update)
+
+- the SUT needs to be added under the folder "cs" (which stands for "case study"), and then under a subfolder matching
+  the type of the application, eg: "rest", "web", "graphql", "grpc" and "thrift".
+  Note: in the past we have used further subfolder structures like "artificial", "original" and "rpc".
+  Those are not really so needed anymore, so should avoid using them when adding new SUTs (but we are not going to
+  refactor EMB to removed them).
+  A special case is when an SUT is an API that also provide a GUI (eg Web browser frontend).
+  In those cases, for REST we used the label "rest-gui".
+  But we have not made a proper decision on how to deal with those cases yet.
+  So, if the SUT you add falls under such a case, need to discuss first with supervisors.
+
+- when adding the SUT under "jdk_X_Y/cs/<type>" for first time, add original code of the SUT WITHOUT ANY MODIFICATION,
+  in a single commit, containing only that (ie, no custom modification, and no EM drivers).
+  This is to be able to easily trace the original version of the SUT.
+  Also, it is EXTREMELY DIFFICULT to review in PRs the EM drivers when you have as well thousands of SUTs files cluttering
+  the GitHub diff views.
+  This means there is the need to 2 distinct PRs:
+  1) having the original SUTs files
+  2) having all custom modifications (if any needed), pom files and their modifications, and EM drivers (embedded and external)
+
+- under no circumstance should add compiled files. Also large files should be avoided if they are not strictly necessary.
+  EMB is huge, and we should be careful of what we add, especially in terms of MBs size.
+
+- note: there might be few special cases in which we need to do some minor modifications to the SUTs.
+  Those should be rare. Might need to add specific comments stating why the SUT was modified directly in the modified files.
+  A common example is parent pom declarations for SpringBoot applications, which mess up a lot of thins (more on this later).
+
+- TODO
