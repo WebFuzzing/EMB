@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package org.signal.registration.analytics;
+
+import "registration_service.proto";
+
+message AttemptPendingAnalysis {
+
+  /**
+   * The unique identifier for the session in which this attempt took place.
+   */
+  bytes session_id = 1;
+
+  /**
+   * The ordinal identifier for this attempt within a session.
+   */
+  uint32 attempt_id = 2;
+
+  /**
+   * The name of the `VerificationCodeSender` used in this attempt.
+   */
+  string sender_name = 3;
+
+  /**
+   * A unique, sender-specific identifier for this attempt; may be empty if the
+   * sender does not produce unique identifiers for each attempt.
+   */
+  string remote_id = 4;
+
+  /**
+   * The message transport via which this attempt took place.
+   */
+  org.signal.registration.rpc.MessageTransport message_transport = 5;
+
+  /**
+   * The type of client that initiated this attempt.
+   */
+  org.signal.registration.rpc.ClientType client_type = 6;
+
+  /**
+   * The ISO 3166-1 identifier for the region of the phone number associated
+   * with this attempt.
+   */
+  string region = 7;
+
+  /**
+   * The timestamp, in milliseconds since the epoch, at which this attempt took
+   * place.
+   */
+  uint64 timestamp_epoch_millis = 8;
+
+  /**
+   * Indicates whether an account already exists with the given e164 (i.e. this
+   * is a "re-registration" attempt).
+   */
+  bool account_exists_with_e164 = 9;
+
+  /**
+   * Indicates whether this attempt to verify a phone number ultimately
+   * succeeded.
+   */
+  bool verified = 10;
+}

@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package org.signal.registration.session;
+
+import "registration_service.proto";
+
+/**
+ * A registration session stores information about a current attempt to register
+ * a phone number. Registration sessions are created when a client first
+ * requests that a verification code be sent to a phone number and store all
+ * state related to the registration attempt including the phone number being
+ * registered, the VerificationCodeSender responsible for sending and verifying
+ * registration codes, and any persistent data that sender may need to verify
+ * codes.
+ */
+message RegistrationSession {
+
+  reserved 2, 3;
+
+  /**
+   * The E.164-formatted representation of the phone number being registered in
+   * this session.
+   */
+  string phone_number = 1;
+
+  /**
+   * The successfully-verified code associated with this session. If this field
+   * is not blank, the remote client has successfully verified their
+   * registration. Callers may use this value to de-duplicate verification
+   * attempts (i.e. repeated submissions from a remote client due to an
+   * interrupted connection).
+   */
+  string verified_code = 4;
+
+  repeated RegistrationAttempt registration_attempts = 5;
+
+  /**
+   * A unique identifier for this session.
+   */
+  bytes id = 6;
+
+  /**
+   * The number of times a caller has attempted to check a verification code for
+   * the active registration attempt.
+   */
+  uint32 check_code_attempts = 7;
+
+  /**
+   * The UNIX timestamp (in milliseconds) at which a caller last attempted to
+   * check a verification code for the active registration attempt.
+   */
+  uint64 last_check_code_attempt_epoch_millis = 8;
+
+  /**
+   * The UNIX timestamp (in milliseconds) after which this session will expire.
+   */
+  uint64 expiration_epoch_millis = 9;
+
+  /**
+   * The UNIX timestamp (in milliseconds) at which this session was created.
+   */
+  uint64 created_epoch_millis = 10;
+
+  SessionMetadata session_metadata = 11;
+}
+
+message RegistrationAttempt {
+
+  /**
+   * The UNIX timestamp (in milliseconds) when this attempt was created.
+   */
+  uint64 timestamp_epoch_millis = 1;
+
+  /**
+   * The name of the `VerificationCodeSender` used in this attempt.
+   */
+  string sender_name = 2;
+
+  org.signal.registration.rpc.MessageTransport message_transport = 3;
+
+  /**
+   * An opaque collection of bytes provided by senders when an attempt is created
+   * and presented to senders when a caller checks a verification code.
+   * Verification code senders can use this space to store whatever state they
+   * may need to check a verification code (the code itself, for example, or an
+   * upstream session ID) after an attempt has been created.
+   */
+  bytes sender_data = 4;
+
+  /**
+   * The UNIX timestamp (in milliseconds) at which this attempt will no longer
+   * be valid.
+   */
+  uint64 expiration_epoch_millis = 5;
+
+  /**
+   * A unique, sender-specific identifier for this attempt. This may be an
+   * upstream session identifier, for example. The interpretation of this value
+   * will vary by sender. Senders that do not have remote session identifiers
+   * may leave this field blank.
+   */
+  string remote_id = 6;
+
+  /**
+   * The type of client that initiated this attempt.
+   */
+  org.signal.registration.rpc.ClientType client_type = 7;
+}
+
+message SessionMetadata {
+  /**
+   * Indicates whether an account already exists with the given e164 (i.e. this
+   * session represents a "re-registration" attempt).
+   */
+  bool account_exists_with_e164 = 1;
+}

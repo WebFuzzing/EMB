@@ -43,6 +43,28 @@ As there are quite a few things to keep in mind, we list here the most important
 
 - note: there might be few special cases in which we need to do some minor modifications to the SUTs.
   Those should be rare. Might need to add specific comments stating why the SUT was modified directly in the modified files.
-  A common example is parent pom declarations for SpringBoot applications, which mess up a lot of thins (more on this later).
+  A common example is parent pom declarations for SpringBoot applications, which mess up a lot of things (more on this later).
+
+- when adding the SUT, some files should be skipped, like ".idea", ".gitignore", "mvnw", ".github", etc., as those can
+  mess up the configurations of EMB. in other words, we only need the files to be able to build an executable JAR file.
+  Other files could be added, as long as not too heavy (eg readme.md) or potentially messing up EMB (eg netsted .gitignore).
+
+- Maven: when creating pom.xml tree-structures for "jdk_X_Y/cs/<type>", it makes sense to copy&paste from the other existing pom
+  files at same "depth", and modify names in <artifactId> accordingly.
+  Those names are hierarchical structured, starting with "evomaster-benchmark".
+  For example, the pom file for "jdk_17_maven/cs/grpc" would have artifactId "evomaster-benchmark-jdk17-cs-grpc",
+  whose parent in "jdk_17_maven/cs" would have artifactId "evomaster-benchmark-jdk17-cs".
+  The SUT should be buildable from "jdk_X_Y", ie, the tree-structure needs to be defined with the <module> directive
+  to specify which child subfolders with pom files represent sub-modules.
+
+- Gradle: should use same structure "jdk_X_Y/cs/<type>", but the build structure needs to be defined in settings.gradle.kts
+
+- need to choose a NAME for the SUT. usually, it depends on the actual name from GitHub, but it does not necessarily mean
+  it must be exactly the same. Small modifications (especially if the name is generic or very long) can be done.
+  The reason is that NAME is used everywhere, including in the writing of the scientific articles.
+  Might want to discuss with supervisor before choosing then NAME (as the change of the name can impact thousands of files
+  if refactored).
+
+
 
 - TODO

@@ -1,0 +1,346 @@
+micronaut:
+  application:
+    name: registrationService
+
+  metrics:
+    binders:
+      netty:
+        queues:
+          enabled: true
+
+    export:
+      datadog:
+        enabled: false
+        step: 20s
+
+    tags:
+      # Note that an `instance` tag is added at runtime in `Application.java`
+      service: registration
+
+rate-limits:
+  leaky-bucket:
+    session-creation:
+      max-capacity: 5
+      permit-regeneration-period: 288m
+      min-delay: 1m
+
+  check-verification-code:
+    delays:
+      - 0s
+      - 0s
+      - 1m
+      - 2m
+
+  send-sms-verification-code:
+    delays:
+      - 1m
+      - 2m
+      - 5m
+      - 10m
+
+  send-voice-verification-code:
+    delay-after-first-sms: 1m
+    delays:
+      - 1m
+      - 5m
+
+verification:
+  sms:
+    supported-languages:
+      - af
+      - ar
+      - az
+      - bg
+      - bn
+      - bs
+      - ca
+      - cs
+      - da
+      - de
+      - el
+      - en
+      - es
+      - et
+      - eu
+      - fa
+      - fi
+      - fr
+      - ga
+      - gl
+      - gu
+      - he
+      - hi
+      - hr
+      - hu
+      - id
+      - it
+      - ja
+      - ka
+      - kk
+      - km
+      - kn
+      - ko
+      - ky
+      - lt
+      - lv
+      - mk
+      - ml
+      - mr
+      - ms
+      - my
+      - nb
+      - nl
+      - pa
+      - pl
+      - pt
+      - pt-BR
+      - pt-PT
+      - ro
+      - ru
+      - sk
+      - sl
+      - sq
+      - sr
+      - sv
+      - sw
+      - ta
+      - te
+      - th
+      - tl
+      - tr
+      - uk
+      - ur
+      - vi
+      - zh
+      - zh-CN
+      - zh-HK
+      - zh-TW
+  voice:
+    supported-languages:
+      - af
+      - ar
+      - az
+      - bg
+      - bn
+      - bs
+      - ca
+      - cs
+      - da
+      - de
+      - el
+      - en
+      - es
+      - et
+      - eu
+      - fa
+      - fi
+      - fr
+      - ga
+      - gl
+      - gu
+      - he
+      - hi
+      - hr
+      - hu
+      - id
+      - it
+      - ja
+      - ka
+      - kk
+      - km
+      - kn
+      - ko
+      - ky
+      - lt
+      - lv
+      - mk
+      - ml
+      - mr
+      - ms
+      - my
+      - nb
+      - nl
+      - pa
+      - pl
+      - pt
+      - pt-BR
+      - pt-PT
+      - ro
+      - ru
+      - sk
+      - sl
+      - sq
+      - sr
+      - sv
+      - sw
+      - ta
+      - te
+      - th
+      - tl
+      - tr
+      - uk
+      - ur
+      - vi
+      - zh
+      - zh-CN
+      - zh-HK
+      - zh-TW
+
+twilio:
+  verify:
+    # For a current list of supported languages, please see https://www.twilio.com/docs/verify/supported-languages
+    supported-languages:
+      - af
+      - ar
+      - ca
+      - zh
+      - zh-CN
+      - zh-HK
+      - hr
+      - cs
+      - da
+      - nl
+      - en
+      - en-GB
+      - et
+      - fi
+      - fr
+      - de
+      - el
+      - he
+      - hi
+      - hu
+      - id
+      - it
+      - ja
+      - kn
+      - ko
+      - lt
+      - ms
+      - mr
+      - nb
+      - pl
+      - pt-BR
+      - pt
+      - ro
+      - ru
+      - sk
+      - es
+      - sv
+      - tl
+      - te
+      - th
+      - tr
+      - uk
+      - vi
+
+  voice:
+    supported-languages:
+      - am
+      - ar
+      - bg
+      - bn
+      - bs
+      - cs
+      - da
+      - de
+      - el
+      - en-AU
+      - en-BD
+      - en-CN
+      - en-GB
+      - en-IN
+      - en-NZ
+      - en-PK
+      - en-SG
+      - en-US
+      - es
+      - es-ES
+      - es-MX
+      - et
+      - fa
+      - fi
+      - fr
+      - fr-CA
+      - he
+      - hi
+      - hr
+      - ht
+      - hu
+      - hy
+      - id
+      - is
+      - it
+      - ja
+      - kk
+      - km
+      - ko
+      - lo
+      - lt
+      - lv
+      - mr
+      - my
+      - nl
+      - nl-BE
+      - no
+      - pa
+      - pl
+      - pt
+      - pt-BR
+      - ro
+      - ru
+      - si
+      - sk
+      - sl
+      - so
+      - sq
+      - sr
+      - sv
+      - ta
+      - te
+      - th
+      - tr
+      - uk
+      - ur
+      - vi
+      - zh
+      - zh-HK
+      - zh-TW
+
+messagebird:
+  voice:
+    supported-languages:
+      - cy-gb
+      - da-dk
+      - de-de
+      - el-gr
+      - en-au
+      - en-gb
+      - en-gb-wls
+      - en-in
+      - en-us
+      - es-es
+      - es-mx
+      - es-us
+      - fr-ca
+      - fr-fr
+      - id-id
+      - is-is
+      - it-it
+      - ja-jp
+      - ko-kr
+      - ms-my
+      - nb-no
+      - nl-nl
+      - pl-pl
+      - pt-br
+      - pt-pt
+      - ro-ro
+      - ru-ru
+      - sv-se
+      - ta-in
+      - th-th
+      - tr-tr
+      - vi-vn
+      - zh-cn
+      - zh-hk

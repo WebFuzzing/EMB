@@ -1,0 +1,6 @@
+applicationType: grpc
+defaultPackage: org.signal.registration
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, grpc, jackson-databind, java, java-application, junit, logback, maven, readme, shade, yaml]

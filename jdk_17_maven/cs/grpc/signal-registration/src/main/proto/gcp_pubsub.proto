@@ -1,0 +1,115 @@
+/* Note: proto2 is de-facto required here because BigQuery pub/sub
+ * subscriptions demand strict matching of "modes" (i.e. nullability), and
+ * the BigQuery subscription system doesn't recognize proto3 fields as
+ * "required".
+ */
+syntax = "proto2";
+
+option java_multiple_files = true;
+
+package org.signal.registration.analytics.gcp.pubsub;
+
+/**
+ * A message that contains details about an analyzed verification attempt and
+ * is destined for a GCP Pub/Sub queue with a BigQuery subscription. For
+ * additional details, please see https://cloud.google.com/pubsub/docs/bigquery.
+ */
+message AttemptAnalyzedPubSubMessage {
+
+  /**
+   * The unique identifier for the session in which this attempt took place.
+   */
+  required string session_id = 1;
+
+  /**
+   * The ordinal identifier for this attempt within a session.
+   */
+  required uint32 attempt_id = 2;
+
+  /**
+   * The name of the `VerificationCodeSender` used in this attempt.
+   */
+  required string sender_name = 3;
+
+  /**
+   * The message transport via which this attempt took place.
+   */
+  required string message_transport = 4;
+
+  /**
+   * The type of client that initiated this attempt.
+   */
+  required string client_type = 5;
+
+  /**
+   * The ISO 3166-1 identifier for the region of the phone number associated
+   * with this attempt.
+   */
+  required string region = 6;
+
+  /**
+   * The instant at which this attempt took place, formatted as a string that
+   * BigQuery will accept as a timestamp (see
+   * https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type).
+   */
+  required string timestamp = 7;
+
+  /**
+   * Indicates whether an account already exists with the given e164 (i.e. this
+   * is a "re-registration" attempt).
+   */
+  required bool account_exists_with_e164 = 8;
+
+  /**
+   * Indicates whether this attempt to verify a phone number ultimately
+   * succeeded.
+   */
+  required bool verified = 9;
+
+  /**
+   * The price to send the message associated with this attempt as reported by
+   * the sender. Prices are reported in "micros," or one millionth of the base
+   * unit of their currency. For example, a value of 100,000 with a currency of
+   * "USD" would represent a quantity of $0.10.
+   */
+  optional int64 price_micros = 10;
+
+  /**
+   * The currency in which the price was reported by the sender.
+   */
+  optional string currency = 11;
+
+  /**
+   * The MCC of the receiving device for this attempt as reported by the sender.
+   */
+  optional string sender_mcc = 12;
+
+  /**
+   * The MNC of the receiving device for this attempt as reported by the sender.
+   */
+  optional string sender_mnc = 13;
+
+  /**
+   * The MCC associated with the SIM of the receiving device for this attempt as
+   * reported by the client.
+   */
+  optional string client_sim_mcc = 14;
+
+  /**
+   * The MNC associated with the SIM of the receiving device for this attempt as
+   * reported by the client.
+   */
+  optional string client_sim_mnc = 15;
+
+  /**
+   * The MCC associated with the radio of the receiving device for this attempt
+   * as reported by the client.
+   */
+  optional string client_radio_mcc = 16;
+
+  /**
+   * The MCC associated with the radio of the receiving device for this attempt
+   * as reported by the client.
+   */
+  optional string client_radio_mnc = 17;
+}
