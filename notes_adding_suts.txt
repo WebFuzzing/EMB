@@ -59,12 +59,17 @@ As there are quite a few things to keep in mind, we list here the most important
 
 - Gradle: should use same structure "jdk_X_Y/cs/<type>", but the build structure needs to be defined in settings.gradle.kts
 
-- need to choose a NAME for the SUT. usually, it depends on the actual name from GitHub, but it does not necessarily mean
-  it must be exactly the same. Small modifications (especially if the name is generic or very long) can be done.
+- need to choose a NAME for the SUT. usually, it depends on the actual name from GitHub (eg some combination/adaptation
+  of the "author/name" GitHub identifier), but it does not necessarily mean it must be exactly the same.
+  Small modifications (especially if the name is generic or very long) can be done.
   The reason is that NAME is used everywhere, including in the writing of the scientific articles.
   Might want to discuss with supervisor before choosing then NAME (as the change of the name can impact thousands of files
   if refactored).
 
+- if the NAME is composed of 2 or more words, use "-" to separate them.
 
+- the README.md needs to be updated with info on the new SUT, under the proper group.
+  Need to specify the license, folder location on EMB, and original source repositories.
+  See other SUT entries to check exactly how to do it (especially how to add clickable links in Markdown).
 
 - TODO
