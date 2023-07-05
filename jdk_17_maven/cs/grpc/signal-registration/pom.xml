@@ -16,6 +16,7 @@
     <groupId>io.micronaut</groupId>
     <artifactId>micronaut-parent</artifactId>
     <version>3.8.0</version>
+    <relativePath/>
   </parent>
 
   <properties>

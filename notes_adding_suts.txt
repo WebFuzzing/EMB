@@ -34,8 +34,8 @@ As there are quite a few things to keep in mind, we list here the most important
   This is to be able to easily trace the original version of the SUT.
   Also, it is EXTREMELY DIFFICULT to review in PRs the EM drivers when you have as well thousands of SUTs files cluttering
   the GitHub diff views.
-  This means there is the need to 2 distinct PRs:
-  1) having the original SUTs files
+  THIS MEANS THERE IS THE NEED OF 2 DISTINCT PRs:
+  1) having the original SUTs files, and only those, ie nothing outside of  "jdk_X_Y/cs/<type>/NAME"
   2) having all custom modifications (if any needed), pom files and their modifications, and EM drivers (embedded and external)
 
 - under no circumstance should add compiled files. Also large files should be avoided if they are not strictly necessary.
@@ -57,13 +57,16 @@ As there are quite a few things to keep in mind, we list here the most important
   The SUT should be buildable from "jdk_X_Y", ie, the tree-structure needs to be defined with the <module> directive
   to specify which child subfolders with pom files represent sub-modules.
 
+- Maven: if the SUT root pom.xml file refers to an external <parent>, eg "spring-boot-starter-parent" or "micronaut-parent",
+  in the parent declaration you might need to add <relativePath/> to avoid an inconsistent Maven structure.
+
 - Gradle: should use same structure "jdk_X_Y/cs/<type>", but the build structure needs to be defined in settings.gradle.kts
 
 - need to choose a NAME for the SUT. usually, it depends on the actual name from GitHub (eg some combination/adaptation
   of the "author/name" GitHub identifier), but it does not necessarily mean it must be exactly the same.
   Small modifications (especially if the name is generic or very long) can be done.
   The reason is that NAME is used everywhere, including in the writing of the scientific articles.
-  Might want to discuss with supervisor before choosing then NAME (as the change of the name can impact thousands of files
+  Might want to discuss with supervisor before choosing the NAME (as the change of the name can impact thousands of files
   if refactored).
 
 - if the NAME is composed of 2 or more words, use "-" to separate them.
