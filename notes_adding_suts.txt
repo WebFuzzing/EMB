@@ -79,4 +79,46 @@ As there are quite a few things to keep in mind, we list here the most important
   of the SUT under "cs", eg, "jdk_17_maven/cs/grpc/NAME" would lead to embedded driver be under
   "jdk_17_maven/em/embedded/grpc/NAME".
 
-- TODO
+- Maven: the artifactId for the new modules follow the same convention of using same folder names separated with "-",
+  eg "evomaster-benchmark-jdk17-em-embedded-NAME" for an embedded driver under JDK 17.
+
+- EMBEDDED: the driver should be called "EmbeddedEvoMasterController", under the package "em.embedded.X", where X is the
+  main package name of the SUT.
+  Should be under "src/main" and not "src/test".
+  The pom file needs to import 2 dependencies:
+  1) EM dependencies
+  2) SUT as a library
+  Regarding (1), this should be done by default in the pom file of "jdk_X_Y/cs".
+  If you make a new "jdk_X_Y", then you need to copy&paste from another top module (settings are the same).
+  Note, you might still want to override some dependencies in case of library conflicts, eg, you can resolve some of
+  those issues by redefining the dependency imports by using <exclusions> tags.
+  Regarding (2), this might be problematic if the default settings of the SUT do build a uber JAR that use a custom
+  classloader, ie, the typical case of SpringBoot applications (will need to check if same issues with other frameworks
+  such as Micronaut).
+  Solving this "might" (eg depending on SpringBoot version) require modifications to the pom.xml (in case of Maven) of the SUT.
+  In particular, might need to remove the <parent> declaration, and rather include it as a pom import
+   under the <dependencyManagement> (that would fix all version issues for dependencies, but not for plugins... which
+   would need to be fixed manually).
+   Then, in the plugin used for creating the uber JAR, need to make sure to still build the original JAR as well
+   (so need 2 different names, default based on module for original, and modified name for uber JAR).
+  Note: for the actual writing of the "EmbeddedEvoMasterController", you can see the EM documentation for it.
+
+- EXTERNAL: first, need to make sure to build an uber JAR in the SUT.
+  It MUST BE in the form "NAME-sut.jar". Eg, for SpringBoot you can have a setting like:
+  <configuration>
+    <finalName>NAME</finalName>
+    <classifier>sut</classifier>
+  </configuration>
+  (btw, recall that NAME is just a placeholder for the actual name...)
+  The driver "ExternalEvoMasterController" needs to be under the package "em.external.PACKAGE", in similar way as
+  for embedded driver.
+  Unfortunately, we currently have no documentation on how to write External Drivers.
+  An important difference here is that we need to build an uber JAR of the driver itself, named NAME-evomaster-runner.jar.
+  This is done with the "maven-shade-plugin" plugin (can copy&paste an existing one, and update names in it).
+  Those JAR files are needed by "dist.py", discussed next, to be able to run experiments.
+
+- Distribution: the "dist.py" file needs to be updated with the new API. Usually, this is just adding 2 lines, one in
+  which NAME-sut.jar is copied over into the "dist" folder, and one for NAME-evomaster-runner.jar
+
+- If the SUT is a REST API, need to add its OpenAPI schema into "openapi-swagger" folder
+

@@ -4,16 +4,16 @@
 
     <parent>
         <groupId>org.evomaster</groupId>
-        <artifactId>evomaster-benchmark-jdk17-em</artifactId>
+        <artifactId>evomaster-benchmark-jdk17-em-external</artifactId>
         <version>1.6.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-jdk17-em-external</artifactId>
+    <artifactId>evomaster-benchmark-jdk17-em-external-grpc</artifactId>
     <packaging>pom</packaging>
 
+
     <modules>
-        <module>web</module>
-        <module>grpc</module>
+      <module>signal-registration</module>
     </modules>
 
 </project>
