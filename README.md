@@ -115,6 +115,8 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 
 ### RPC (Thrift/gRPC): Java
 
+* Signal-Registration (not-known license), [jdk_17_maven/cs/grpc/signal-registration](jdk_17_maven/cs/grpc/signal-registration), from [https://github.com/signalapp/registration-service]()
+
 * NCS (not-known license, artificial numerical examples coming from different sources)
 
 * SCS (not-known license, artificial string examples coming from different sources)

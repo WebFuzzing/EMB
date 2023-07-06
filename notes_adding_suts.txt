@@ -1,0 +1,126 @@
+==============================================
+NOTES
+Here some high level notes on how to add new SUTs to EMB.
+As there are quite a few things to keep in mind, we list here the most important.
+==============================================
+
+- before adding a SUT, its repository needs to be cloned locally, and should make sure the application can be built and
+  run with no problem.
+  Then, need to be able to write an Embedded driver for it, and make sure that EM can work with it.
+  Only after this is verified, we can add an SUT to EMB.
+  Note that we have (tens of) thousands of files in EMB, and adding new stuff does have a toll on Git.
+  So should avoid cases of adding something and then remove them later for some issues.
+
+- adding a new SUT should always be done on a branch of "develop", as needs to be reviewed.
+
+- need to check which built tool is used (e.g., Maven or Gradle), and which LTS version of the JDK is used.
+  Currently, we support from 8 on, ie, 8, 11 and 17 (and soon 21).
+  Based on this, the SUT will belong to a folder matching such settings, eg, "jdk_8_maven".
+  If such folder does not exist yet, it needs to be created and configured.
+  See pom.xml from the other existing folders, to use as starting point (ie, copy&paste&update)
+
+- the SUT needs to be added under the folder "cs" (which stands for "case study"), and then under a subfolder matching
+  the type of the application, eg: "rest", "web", "graphql", "grpc" and "thrift".
+  Note: in the past we have used further subfolder structures like "artificial", "original" and "rpc".
+  Those are not really so needed anymore, so should avoid using them when adding new SUTs (but we are not going to
+  refactor EMB to removed them).
+  A special case is when an SUT is an API that also provide a GUI (eg Web browser frontend).
+  In those cases, for REST we used the label "rest-gui".
+  But we have not made a proper decision on how to deal with those cases yet.
+  So, if the SUT you add falls under such a case, need to discuss first with supervisors.
+
+- when adding the SUT under "jdk_X_Y/cs/<type>" for first time, add original code of the SUT WITHOUT ANY MODIFICATION,
+  in a single commit, containing only that (ie, no custom modification, and no EM drivers).
+  This is to be able to easily trace the original version of the SUT.
+  Also, it is EXTREMELY DIFFICULT to review in PRs the EM drivers when you have as well thousands of SUTs files cluttering
+  the GitHub diff views.
+  THIS MEANS THERE IS THE NEED OF 2 DISTINCT PRs:
+  1) having the original SUTs files, and only those, ie nothing outside of  "jdk_X_Y/cs/<type>/NAME"
+  2) having all custom modifications (if any needed), pom files and their modifications, and EM drivers (embedded and external)
+
+- under no circumstance should add compiled files. Also large files should be avoided if they are not strictly necessary.
+  EMB is huge, and we should be careful of what we add, especially in terms of MBs size.
+
+- note: there might be few special cases in which we need to do some minor modifications to the SUTs.
+  Those should be rare. Might need to add specific comments stating why the SUT was modified directly in the modified files.
+  A common example is parent pom declarations for SpringBoot applications, which mess up a lot of things (more on this later).
+
+- when adding the SUT, some files should be skipped, like ".idea", ".gitignore", "mvnw", ".github", etc., as those can
+  mess up the configurations of EMB. in other words, we only need the files to be able to build an executable JAR file.
+  Other files could be added, as long as not too heavy (eg readme.md) or potentially messing up EMB (eg netsted .gitignore).
+
+- Maven: when creating pom.xml tree-structures for "jdk_X_Y/cs/<type>", it makes sense to copy&paste from the other existing pom
+  files at same "depth", and modify names in <artifactId> accordingly.
+  Those names are hierarchical structured, starting with "evomaster-benchmark".
+  For example, the pom file for "jdk_17_maven/cs/grpc" would have artifactId "evomaster-benchmark-jdk17-cs-grpc",
+  whose parent in "jdk_17_maven/cs" would have artifactId "evomaster-benchmark-jdk17-cs".
+  The SUT should be buildable from "jdk_X_Y", ie, the tree-structure needs to be defined with the <module> directive
+  to specify which child subfolders with pom files represent sub-modules.
+
+- Maven: if the SUT root pom.xml file refers to an external <parent>, eg "spring-boot-starter-parent" or "micronaut-parent",
+  in the parent declaration you might need to add <relativePath/> to avoid an inconsistent Maven structure.
+
+- Gradle: should use same structure "jdk_X_Y/cs/<type>", but the build structure needs to be defined in settings.gradle.kts
+
+- need to choose a NAME for the SUT. usually, it depends on the actual name from GitHub (eg some combination/adaptation
+  of the "author/name" GitHub identifier), but it does not necessarily mean it must be exactly the same.
+  Small modifications (especially if the name is generic or very long) can be done.
+  The reason is that NAME is used everywhere, including in the writing of the scientific articles.
+  Might want to discuss with supervisor before choosing the NAME (as the change of the name can impact thousands of files
+  if refactored).
+
+- if the NAME is composed of 2 or more words, use "-" to separate them.
+
+- the README.md needs to be updated with info on the new SUT, under the proper group.
+  Need to specify the license, folder location on EMB, and original source repositories.
+  See other SUT entries to check exactly how to do it (especially how to add clickable links in Markdown).
+
+- the drivers should be written under "jdk_X_Y/em/embedded" and "jdk_X_Y/em/external", following the same tree structure
+  of the SUT under "cs", eg, "jdk_17_maven/cs/grpc/NAME" would lead to embedded driver be under
+  "jdk_17_maven/em/embedded/grpc/NAME".
+
+- Maven: the artifactId for the new modules follow the same convention of using same folder names separated with "-",
+  eg "evomaster-benchmark-jdk17-em-embedded-NAME" for an embedded driver under JDK 17.
+
+- EMBEDDED: the driver should be called "EmbeddedEvoMasterController", under the package "em.embedded.X", where X is the
+  main package name of the SUT.
+  Should be under "src/main" and not "src/test".
+  The pom file needs to import 2 dependencies:
+  1) EM dependencies
+  2) SUT as a library
+  Regarding (1), this should be done by default in the pom file of "jdk_X_Y/cs".
+  If you make a new "jdk_X_Y", then you need to copy&paste from another top module (settings are the same).
+  Note, you might still want to override some dependencies in case of library conflicts, eg, you can resolve some of
+  those issues by redefining the dependency imports by using <exclusions> tags.
+  Regarding (2), this might be problematic if the default settings of the SUT do build a uber JAR that use a custom
+  classloader, ie, the typical case of SpringBoot applications (will need to check if same issues with other frameworks
+  such as Micronaut).
+  Solving this "might" (eg depending on SpringBoot version) require modifications to the pom.xml (in case of Maven) of the SUT.
+  In particular, might need to remove the <parent> declaration, and rather include it as a pom import
+   under the <dependencyManagement> (that would fix all version issues for dependencies, but not for plugins... which
+   would need to be fixed manually).
+   Then, in the plugin used for creating the uber JAR, need to make sure to still build the original JAR as well
+   (so need 2 different names, default based on module for original, and modified name for uber JAR).
+  Note: for the actual writing of the "EmbeddedEvoMasterController", you can see the EM documentation for it.
+
+- EXTERNAL: first, need to make sure to build an uber JAR in the SUT.
+  It MUST BE in the form "NAME-sut.jar". Eg, for SpringBoot you can have a setting like:
+  <configuration>
+    <finalName>NAME</finalName>
+    <classifier>sut</classifier>
+  </configuration>
+  (btw, recall that NAME is just a placeholder for the actual name...)
+  The driver "ExternalEvoMasterController" needs to be under the package "em.external.PACKAGE", in similar way as
+  for embedded driver.
+  Unfortunately, we currently have no documentation on how to write External Drivers.
+  An important difference here is that we need to build an uber JAR of the driver itself, named NAME-evomaster-runner.jar.
+  This is done with the "maven-shade-plugin" plugin (can copy&paste an existing one, and update names in it).
+  Those JAR files are needed by "dist.py", discussed next, to be able to run experiments.
+
+- Distribution: the "dist.py" file needs to be updated with the new API. Usually, this is just adding 2 lines, one in
+  which NAME-sut.jar is copied over into the "dist" folder, and one for NAME-evomaster-runner.jar
+  Note: dist.py can take a LOT of time... while debugging it, might want to temporarily disable (ie comment out) the
+  build of the other top modules
+
+- If the SUT is a REST API, need to add its OpenAPI schema into "openapi-swagger" folder
+
