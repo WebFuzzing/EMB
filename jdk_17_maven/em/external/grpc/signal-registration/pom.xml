@@ -13,10 +13,13 @@
         <version>1.6.2-SNAPSHOT</version>
     </parent>
 
-
-   <dependencies>
-
-   </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.signal.registration</groupId>
+            <artifactId>registration-service</artifactId>
+            <version>JGITVER</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
