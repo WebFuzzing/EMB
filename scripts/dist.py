@@ -199,7 +199,7 @@ def build_jdk_17_maven():
     copy(folder + "/em/external/web/spring-petclinic/target/spring-petclinic-evomaster-runner.jar", DIST)
 
 
-    copy(folder + "/cs/grpc/signal-registration/target/rpc-grpc-signal-registration-sut.jar", DIST)
+    copy(folder + "/cs/grpc/signal-registration/target/signal-registration-sut.jar", DIST)
     copy(folder + "/em/external/grpc/signal-registration/target/signal-registration-evomaster-runner.jar", DIST)
 
 

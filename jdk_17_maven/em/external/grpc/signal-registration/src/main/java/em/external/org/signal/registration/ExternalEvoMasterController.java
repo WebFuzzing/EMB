@@ -36,7 +36,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 			jarLocation = args[2];
 		}
 		if(! jarLocation.endsWith(".jar")) {
-			jarLocation += "/rpc-grpc-signal-registration-sut.jar";
+			jarLocation += "/signal-registration-sut.jar";
 		}
 		int timeoutSeconds = 120;
 		if(args.length > 3){
@@ -62,7 +62,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 	private final String jarLocation;
 
 	public ExternalEvoMasterController() {
-		this(40100, "cs/grpc/signal-registration/target/rpc-grpc-signal-registration-sut.jar", 12345, 120, "java");
+		this(40100, "cs/grpc/signal-registration/target/signal-registration-sut.jar", 12345, 120, "java");
 	}
 
 	@Override
