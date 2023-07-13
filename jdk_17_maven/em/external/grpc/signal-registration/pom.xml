@@ -34,6 +34,7 @@
                         </goals>
                         <configuration>
                             <finalName>signal-registration-evomaster-runner</finalName>
+                            <!-- to fix JNI problem when running fatjar-->
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
