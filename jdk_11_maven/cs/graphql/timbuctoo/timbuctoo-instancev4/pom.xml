@@ -954,8 +954,16 @@
               <goal>run</goal>
             </goals>
             <configuration>
-              <tasks>
-                <echo>
+              <!-- fix a maven build error
+
+               You are using 'tasks' which has been removed from the maven-antrun-plugin.
+               Please use 'target' and refer to the >>Major Version Upgrade to version 3.0.0<< on the plugin site.
+
+               see https://maven.apache.org/plugins/maven-antrun-plugin/
+               -->
+<!--              <tasks>-->
+              <target>
+              <echo>
                   ======================================================================================================
                   Done! now run
 
@@ -964,7 +972,8 @@
                   to get a debug server up and running then go to http://localhost:8080
                   ======================================================================================================
                 </echo>
-              </tasks>
+<!--              </tasks>-->
+              </target>
             </configuration>
           </execution>
         </executions>
