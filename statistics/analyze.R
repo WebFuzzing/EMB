@@ -1,8 +1,8 @@
 
-# NAME,TYPE,LANGUAGE,FILES,LOCS,DATABASE,LICENSE,URL
+#NAME,TYPE,LANGUAGE,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
 DATA_FILE="./data.csv"
 
-latexTable <- function(){
+oldLatexTable <- function(){
 
   dt <- read.csv(DATA_FILE,header=T)
 

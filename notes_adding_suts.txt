@@ -75,6 +75,18 @@ As there are quite a few things to keep in mind, we list here the most important
   Need to specify the license, folder location on EMB, and original source repositories.
   See other SUT entries to check exactly how to do it (especially how to add clickable links in Markdown).
 
+- the content of folder "statistics" needs to be updated.
+  In particular, need to create a new entry for the API in "data.csv" file.
+  To count #Files, can use bash command
+
+  find . -name *.java | wc -l
+
+  assuming the project is in Java (.kt for Kotlin otherwise).
+  Note that this pick up everything, including tests, and automatically generated files from build (eg. for .proto)/
+  To count LOCs, can use
+
+  cat `find . -name *.java` | wc -l
+
 - the drivers should be written under "jdk_X_Y/em/embedded" and "jdk_X_Y/em/external", following the same tree structure
   of the SUT under "cs", eg, "jdk_17_maven/cs/grpc/NAME" would lead to embedded driver be under
   "jdk_17_maven/em/embedded/grpc/NAME".
