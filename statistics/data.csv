@@ -13,13 +13,20 @@ TRUE,restcountries,REST,Java,24,1977,,MPL,22,https://github.com/apilayer/restcou
 TRUE,scout-api,REST,Java,93,9736,H2,MIT,49,https://github.com/mikaelsvensson/scout-api
 TRUE,genome-nexus,REST,Java,405,30004,MongoDB,MIT,23,https://github.com/genome-nexus/genome-nexus
 TRUE,market,REST,Java,124,9861,H2,MIT,13,https://github.com/aleksey-lukyanets/market
-TRUE,petclinic-graphql,GraphQL,Java,89,5212,PostgreSQL,Apache,TODO,https://github.com/spring-petclinic/spring-petclinic-graphql
-TRUE,patio-api,GraphQL,Java,178,18048,PostgreSQL,GPL,TODO,https://github.com/patio-team/patio-api
-TRUE,timbuctoo,GraphQL,Java,1113,107729,Neo4j,GPL,TODO,https://github.com/HuygensING/timbuctoo
-TRUE,graphql-ncs,GraphQL,Kotlin,8,548,,UNDEFINED,TODO,UNDEFINED
-TRUE,graphql-scs,GraphQL,Kotlin,13,577,,UNDEFINED,TODO,UNDEFINED
-TRUE,rpc-thrift-ncs,Thrift,Java,9,585,,UNDEFINED,TODO,UNDEFINED
-TRUE,rpc-thrift-scs,Thrift,Java,14,772,,UNDEFINED,TODO,UNDEFINED
+TRUE,petclinic-graphql,GraphQL,Java,89,5212,PostgreSQL,Apache,15,https://github.com/spring-petclinic/spring-petclinic-graphql
+TRUE,patio-api,GraphQL,Java,178,18048,PostgreSQL,GPL,20,https://github.com/patio-team/patio-api
+TRUE,timbuctoo,GraphQL,Java,1113,107729,Neo4j,GPL,18,https://github.com/HuygensING/timbuctoo
+TRUE,graphql-ncs,GraphQL,Kotlin,8,548,,UNDEFINED,6,UNDEFINED
+TRUE,graphql-scs,GraphQL,Kotlin,13,577,,UNDEFINED,11,UNDEFINED
+TRUE,thrift-ncs,Thrift,Java,9,585,,UNDEFINED,6,UNDEFINED
+TRUE,thrift-scs,Thrift,Java,14,772,,UNDEFINED,11,UNDEFINED
+TRUE,grpc-ncs,gRPC,Java,9,638,,UNDEFINED,6,UNDEFINED
+TRUE,grpc-scs,gRPC,Java,14,894,,UNDEFINED,11,UNDEFINED
+TRUE,signal-registration,gRPC,Java,177,13652, TODO
+
 TODO gRPC
 TODO ind0
 TODO ind1
+
+TODO RUNTIME , eg JDK 8
+TODO BUILD, ie Maven/Gradle
