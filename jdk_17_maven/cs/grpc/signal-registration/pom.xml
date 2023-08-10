@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.signal.registration</groupId>
   <artifactId>registration-service</artifactId>
-  <version>JGITVER</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>${packaging}</packaging>
 
   <parent>
@@ -259,7 +259,7 @@
         <groupId>io.micronaut.build</groupId>
         <artifactId>micronaut-maven-plugin</artifactId>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -353,6 +353,46 @@
             <mainClass>org.signal.registration.Application</mainClass>
           </container>
         </configuration>
+      </plugin>
+
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <version>2.5.4</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>repackage</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <finalName>rpc-grpc-signal-registration</finalName>-->
+<!--              <classifier>sut</classifier>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+
+      <!-- build with maven-shade-plugin based on (see io.micronaut:micronaut-parent POM)
+      https://micronaut-projects.github.io/micronaut-maven-plugin/latest/examples/package.html-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${maven-shade-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>default-shade</id>
+            <configuration>
+              <finalName>signal-registration-sut</finalName>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>org.signal.registration.Application</mainClass>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
