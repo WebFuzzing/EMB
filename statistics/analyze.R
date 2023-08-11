@@ -1,6 +1,48 @@
 
-#NAME,TYPE,LANGUAGE,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
+#EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
 DATA_FILE="./data.csv"
+
+UNDEFINED = "UNDEFINED"
+
+handleMultiValues <- function(s){
+  return(gsub(";", ", ", s))
+}
+
+markdown <- function (){
+
+  dt <- read.csv(DATA_FILE,header=T)
+
+  dt = dt[order(dt$TYPE, dt$LANGUAGE, -dt$LOCS, dt$NAME),]
+  # skip industrial APIs that are not stored in EMB
+  dt = dt[dt$EMB==TRUE,]
+
+  TABLE = "./table_emb.md"
+  unlink(TABLE)
+  sink(TABLE, append = TRUE, split = TRUE)
+
+  #EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
+  cat("|Name|Type|#LOCs|#SourceFiles|#Endpoints|Language(s)|Runtime|Build Tool|Database(s)|\n")
+  cat("|----|----|----:|-----------:|---------:|-----------|-------|----------|-----------|\n")
+
+  for (i in 1:nrow(dt)){
+
+    row = dt[i,]
+    cat("|__",row$NAME,"__|",sep="")
+
+    cat(row$TYPE,"|",sep="")
+    cat(row$LOCS,"|",sep="")
+    cat(row$FILES,"|",sep="")
+    cat(row$ENDPOINTS,"|",sep="")
+    cat(handleMultiValues(row$LANGUAGE),"|",sep="")
+    cat(row$RUNTIME,"|",sep="")
+    cat(row$BUILD,"|",sep="")
+    cat(handleMultiValues(row$DATABASE),"|",sep="")
+    cat("\n")
+  }
+
+  sink()
+}
+
 
 oldLatexTable <- function(){
 
@@ -8,7 +50,7 @@ oldLatexTable <- function(){
 
   dt = dt[order(dt$TYPE, dt$LANGUAGE, -dt$LOCS, dt$NAME),]
 
-  TABLE = "./statistics_table_emb.tex"
+  TABLE = "./old_statistics_table_emb.tex"
   unlink(TABLE)
   sink(TABLE, append = TRUE, split = TRUE)
 

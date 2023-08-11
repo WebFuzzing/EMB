@@ -68,6 +68,8 @@ We just re-implemented in different languages, and put them behind a web service
 For the RESTful APIs, each API has an endpoint where the OpenAPI/Swagger schemas can be downloaded from.
 For simplicity, all schemas are also available as JSON/YML files under the folder [openapi-swagger](./openapi-swagger). 
 
+More details (e.g., #LOCs and used databases) on these APIs can be found [in this table](statistics/table_emb.md).
+
 ### REST: Java/Kotlin
 
 * Genome Nexus (MIT), [jdk_8_maven/cs/rest-gui/genome-nexus](jdk_8_maven/cs/rest-gui/genome-nexus), from [https://github.com/genome-nexus/genome-nexus](https://github.com/genome-nexus/genome-nexus)
