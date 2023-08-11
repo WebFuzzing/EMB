@@ -87,6 +87,8 @@ As there are quite a few things to keep in mind, we list here the most important
 
   cat `find . -name *.java` | wc -l
 
+- once "data.csv" file has been updated, need to recreate "table_emb.md" from "analyze.R" -> "markdown()" function.
+
 - the drivers should be written under "jdk_X_Y/em/embedded" and "jdk_X_Y/em/external", following the same tree structure
   of the SUT under "cs", eg, "jdk_17_maven/cs/grpc/NAME" would lead to embedded driver be under
   "jdk_17_maven/em/embedded/grpc/NAME".
