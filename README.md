@@ -68,6 +68,8 @@ We just re-implemented in different languages, and put them behind a web service
 For the RESTful APIs, each API has an endpoint where the OpenAPI/Swagger schemas can be downloaded from.
 For simplicity, all schemas are also available as JSON/YML files under the folder [openapi-swagger](./openapi-swagger). 
 
+More details (e.g., #LOCs and used databases) on these APIs can be found [in this table](statistics/table_emb.md).
+
 ### REST: Java/Kotlin
 
 * Genome Nexus (MIT), [jdk_8_maven/cs/rest-gui/genome-nexus](jdk_8_maven/cs/rest-gui/genome-nexus), from [https://github.com/genome-nexus/genome-nexus](https://github.com/genome-nexus/genome-nexus)
@@ -113,13 +115,17 @@ For simplicity, all schemas are also available as JSON/YML files under the folde
 * SCS, [jdk_8_maven/cs/graphql/graphql-scs](jdk_8_maven/cs/graphql/graphql-scs), (not-known license, artificial string examples coming from different sources)
 
 
-### RPC (Thrift/gRPC): Java
+### RPC (e.g.,Thrift and gRPC): Java
 
 * Signal-Registration (not-known license), [jdk_17_maven/cs/grpc/signal-registration](jdk_17_maven/cs/grpc/signal-registration), from [https://github.com/signalapp/registration-service]()
 
-* NCS (not-known license, artificial numerical examples coming from different sources)
+* NCS (not-known license, artificial numerical examples coming from different sources).
+ Thrift: [jdk_8_maven/cs/rpc/thrift/artificial/thrift-ncs](jdk_8_maven/cs/rpc/thrift/artificial/thrift-ncs).
+ gRPC: [jdk_8_maven/cs/rpc/grpc/artificial/grpc-ncs](jdk_8_maven/cs/rpc/grpc/artificial/grpc-ncs).
 
-* SCS (not-known license, artificial string examples coming from different sources)
+* SCS (not-known license, artificial string examples coming from different sources).
+  Thrift: [jdk_8_maven/cs/rpc/thrift/artificial/thrift-scs](jdk_8_maven/cs/rpc/thrift/artificial/thrift-scs).
+  gRPC: [jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs](jdk_8_maven/cs/rpc/grpc/artificial/grpc-scs).
 
 
 ### WEB: backend in Java/Kotlin

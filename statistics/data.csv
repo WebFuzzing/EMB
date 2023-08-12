@@ -1,31 +1,28 @@
-NAME,TYPE,LANGUAGE,FILES,LOCS,DATABASE,LICENSE,URL
-cyclotron,REST,JavaScript,25,5803,MongoDB,MIT,https://github.com/ExpediaInceCommercePlatform/cyclotron
-disease-sh-api,REST,JavaScript,57,3343,Redis,GPL,https://github.com/disease-sh/API
-js-rest-ncs,REST,JavaScript,8,775,,UNDEFINED,UNDEFINED
-js-rest-scs,REST,JavaScript,13,1046,,UNDEFINED,UNDEFINED
-realworld-app,REST,TypeScript,37,1229,MySQL,ISC,https://github.com/lujakob/nestjs-realworld-example-app
-spacex-api,REST,JavaScript,63,4966,MongoDB,Apache,https://github.com/r-spacex/SpaceX-API
-catwatch,REST,Java,106,9636,H2,Apache,https://github.com/zalando-incubator/catwatch
-cwa-verification,REST,Java,47,3955,H2,Apache,https://github.com/corona-warn-app/cwa-verification-server
-features-service,REST,Java,39,2275,H2,Apache,https://github.com/JavierMF/features-service
-gestaohospital-rest,REST,Java,33,3506,MongoDB,UNDEFINED,https://github.com/ValchanOficial/GestaoHospital
-languagetool,REST,Java,1385,174781,,LGPL,https://github.com/languagetool-org/languagetool
-ocvn-rest,REST,Java,526,45521,H2;MongoDB,MIT,https://github.com/devgateway/ocvn
-proxyprint,REST,Java,73,8338,H2,Apache,https://github.com/ProxyPrint/proxyprint-kitchen
-rest-ncs,REST,Java,9,605,,UNDEFINED,UNDEFINED
-rest-news,REST,Kotlin,11,857,H2,LGPL,https://github.com/arcuri82/testing_security_development_enterprise_systems
-rest-scs,REST,Java,13,862,,UNDEFINED,UNDEFINED
-restcountries,REST,Java,24,1977,,MPL,https://github.com/apilayer/restcountries
-scout-api,REST,Java,93,9736,H2,MIT,https://github.com/mikaelsvensson/scout-api
-genome-nexus,REST,Java,405,30004,MongoDB,MIT,https://github.com/genome-nexus/genome-nexus
-market,REST,Java,124,9861,H2,MIT,https://github.com/aleksey-lukyanets/market
-petclinic-graphql,GraphQL,Java,89,5212,PostgreSQL,Apache,https://github.com/spring-petclinic/spring-petclinic-graphql
-patio-api,GraphQL,Java,178,18048,PostgreSQL,GPL,https://github.com/patio-team/patio-api
-timbuctoo,GraphQL,Java,1113,107729,Neo4j,GPL,https://github.com/HuygensING/timbuctoo
-graphql-ncs,GraphQL,Kotlin,8,548,,UNDEFINED,UNDEFINED
-graphql-scs,GraphQL,Kotlin,13,577,,UNDEFINED,UNDEFINED
-react-finland,GraphQL,TypeScript,461,16206,,UNDEFINED,https://github.com/ReactFinland/graphql-api
-ecommerce-server,GraphQL,TypeScript,49,1815,PostgreSQL,MIT,https://github.com/react-shop/react-ecommerce
-rpc-thrift-ncs,RPC-Thrift,Java,9,585,,UNDEFINED,UNDEFINED
-rpc-thrift-scs,RPC-Thrift,Java,14,772,,UNDEFINED,UNDEFINED
+EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
+TRUE,catwatch,REST,Java,JDK 8,Maven,106,9636,H2,Apache,14,https://github.com/zalando-incubator/catwatch
+TRUE,cwa-verification,REST,Java,JDK 11,Maven,47,3955,H2,Apache,5,https://github.com/corona-warn-app/cwa-verification-server
+TRUE,features-service,REST,Java,JDK 8,Maven,39,2275,H2,Apache,18,https://github.com/JavierMF/features-service
+TRUE,gestaohospital,REST,Java,JDK 8,Maven,33,3506,MongoDB,UNDEFINED,20,https://github.com/ValchanOficial/GestaoHospital
+TRUE,languagetool,REST,Java,JDK 8,Maven,1385,174781,,LGPL,2,https://github.com/languagetool-org/languagetool
+TRUE,ocvn,REST,Java,JDK 8,Maven,526,45521,H2;MongoDB,MIT,258,https://github.com/devgateway/ocvn
+TRUE,proxyprint,REST,Java,JDK 8,Maven,73,8338,H2,Apache,74,https://github.com/ProxyPrint/proxyprint-kitchen
+TRUE,rest-ncs,REST,Java,JDK 8,Maven,9,605,,UNDEFINED,6,UNDEFINED
+TRUE,rest-news,REST,Kotlin,JDK 8,Maven,11,857,H2,LGPL,7,https://github.com/arcuri82/testing_security_development_enterprise_systems
+TRUE,rest-scs,REST,Java,JDK 8,Maven,13,862,,UNDEFINED,11,UNDEFINED
+TRUE,restcountries,REST,Java,JDK 8,Maven,24,1977,,MPL,22,https://github.com/apilayer/restcountries
+TRUE,scout-api,REST,Java,JDK 8,Maven,93,9736,H2,MIT,49,https://github.com/mikaelsvensson/scout-api
+TRUE,genome-nexus,REST,Java,JDK 8,Maven,405,30004,MongoDB,MIT,23,https://github.com/genome-nexus/genome-nexus
+TRUE,market,REST,Java,JDK 11,Maven,124,9861,H2,MIT,13,https://github.com/aleksey-lukyanets/market
+TRUE,petclinic-graphql,GraphQL,Java,JDK 8,Maven,89,5212,PostgreSQL,Apache,15,https://github.com/spring-petclinic/spring-petclinic-graphql
+TRUE,patio-api,GraphQL,Java,JDK 11,Gradle,178,18048,PostgreSQL,GPL,20,https://github.com/patio-team/patio-api
+TRUE,timbuctoo,GraphQL,Java,JDK 11,Maven,1113,107729,Neo4j,GPL,18,https://github.com/HuygensING/timbuctoo
+TRUE,graphql-ncs,GraphQL,Kotlin,JDK 8,Maven,8,548,,UNDEFINED,6,UNDEFINED
+TRUE,graphql-scs,GraphQL,Kotlin,JDK 8,Maven,13,577,,UNDEFINED,11,UNDEFINED
+TRUE,thrift-ncs,Thrift,Java,JDK 8,Maven,9,585,,UNDEFINED,6,UNDEFINED
+TRUE,thrift-scs,Thrift,Java,JDK 8,Maven,14,772,,UNDEFINED,11,UNDEFINED
+TRUE,grpc-ncs,gRPC,Java,JDK 8,Maven,9,638,,UNDEFINED,6,UNDEFINED
+TRUE,grpc-scs,gRPC,Java,JDK 8,Maven,14,894,,UNDEFINED,11,UNDEFINED
+TRUE,signal-registration,gRPC,Java,JDK 17,Maven,177,13652,,UNDEFINED,5,https://github.com/signalapp/registration-service
+FALSE,ind0,REST,Java,JDK 8,Gradle,103,17039,PostgreSQL,Proprietary,20,UNDEFINED
+FALSE,ind1,REST,Java;Kotlin,JDK 11,Gradle,163,15240,PostgreSQL,Proprietary,53,UNDEFINED
 
