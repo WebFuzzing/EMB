@@ -43,8 +43,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ScoutAPIApplication application;
     private Connection sqlConnection;
-    private final List<String> sqlCommands;
     private List<DbSpecification> dbSpecification;
+
+    private final static String INIT_DB_SQL_SCRIPT = "/init_db.sql";
+    private String initSql;
+
+    private final SqlScriptRunner sqlUtil = new SqlScriptRunner();
 
     public EmbeddedEvoMasterController() {
         this(40100);
@@ -53,8 +57,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
 
-        try (InputStream in = getClass().getResourceAsStream("/init_db.sql")) {
-            sqlCommands = (new SqlScriptRunner()).readCommands(new InputStreamReader(in));
+        try (InputStream is = getClass().getResourceAsStream(INIT_DB_SQL_SCRIPT)) {
+            initSql = String.join(System.lineSeparator(), sqlUtil.readCommands(new InputStreamReader(is)));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -89,7 +93,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         sqlConnection = application.getConnection();
 
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                .withDisabledSmartClean());
+                .withInitSqlScript(initSql)
+                .executeInitSQLScriptAfterStartup()
+        );
 
         resetStateOfSUT();
 
@@ -134,8 +140,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         deleteDir(new File("./target/temp"));
 
-        DbCleaner.clearDatabase_H2(sqlConnection);
-        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
+//        DbCleaner.clearDatabase_H2(sqlConnection);
+//        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
 

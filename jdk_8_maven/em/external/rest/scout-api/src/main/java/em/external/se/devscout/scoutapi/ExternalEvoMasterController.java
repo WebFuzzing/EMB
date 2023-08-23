@@ -75,8 +75,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
-    private final List<String> sqlCommands;
     private Server h2;
+
+    private final static String INIT_DB_SQL_SCRIPT = "/init_db.sql";
+
+    private String initSql;
+
+    private final SqlScriptRunner sqlUtil = new SqlScriptRunner();
 
 
     public ExternalEvoMasterController(){
@@ -104,9 +109,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
         tmpDir = base + "/temp/tmp_scout_api/temp_"+dbPort;
         createConfigurationFile();
 
-        try(InputStream in = getClass().getResourceAsStream("/init_db.sql")) {
-            sqlCommands = (new SqlScriptRunner()).readCommands(new InputStreamReader(in));
-        } catch (Exception e){
+        try {
+            InputStream is = getClass().getResourceAsStream(INIT_DB_SQL_SCRIPT);
+            initSql = String.join(System.lineSeparator(), sqlUtil.readCommands(new InputStreamReader(is)));
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
     }
@@ -197,7 +203,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                    .withDisabledSmartClean());
+                    .withInitSqlScript(initSql)
+                    .executeInitSQLScriptAfterStartup()
+            );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -227,8 +235,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         deleteDir(new File(tmpDir));
 
-        DbCleaner.clearDatabase_H2(sqlConnection);
-        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
+//        DbCleaner.clearDatabase_H2(sqlConnection);
+//        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
     private void deleteDir(File file) {

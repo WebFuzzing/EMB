@@ -3,7 +3,7 @@ package em.external.org.javiermf.features;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
-import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
@@ -11,6 +11,8 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.h2.tools.Server;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -62,6 +64,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private List<DbSpecification> dbSpecification;
     private Server h2;
 
+    private final static String INIT_DB_SQL_SCRIPT = "/data.sql";
+
+    private String initSql;
+
+    private final SqlScriptRunner sqlUtil = new SqlScriptRunner();
+
     public ExternalEvoMasterController() {
         this(40100, "../core/target", 12345, 120, "java");
     }
@@ -78,6 +86,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         setJavaCommand(command);
+
+        try {
+            InputStream is = getClass().getResourceAsStream(INIT_DB_SQL_SCRIPT);
+            initSql = String.join(System.lineSeparator(), sqlUtil.readCommands(new InputStreamReader(is)));
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     private String dbUrl( ) {
@@ -144,8 +159,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                    .withDisabledSmartClean());
+            dbSpecification = Arrays.asList(
+                    (new DbSpecification(DatabaseType.H2,sqlConnection))
+                            .withInitSqlScript(initSql)
+                            // data initialization is managed by application, then disable the execution
+                            .disableExecutionOfInitSQLScriptAfterStartup()
+            );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -153,7 +172,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(sqlConnection);
+//        DbCleaner.clearDatabase_H2(sqlConnection);
     }
 
     @Override
