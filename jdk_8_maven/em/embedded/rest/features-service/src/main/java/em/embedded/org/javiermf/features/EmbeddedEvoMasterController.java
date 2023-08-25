@@ -5,6 +5,7 @@ import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
@@ -15,6 +16,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -42,7 +45,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection sqlConnection;
+    private String INIT_DB_SCRIPT_PATH = "/data.sql";
+
     private List<DbSpecification> dbSpecification;
+
+    private String initSQLScript;
 
 
     public EmbeddedEvoMasterController() {
@@ -51,6 +58,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
+
+        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
+            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -79,8 +92,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        /*
+            the application will be initialized some data in database
+            to consistently manage data by evomaster
+         */
+        DbCleaner.clearDatabase_H2(sqlConnection);
+
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                .withDisabledSmartClean());
+                .withInitSqlScript(initSQLScript));
 
         return "http://localhost:" + getSutPort();
     }
@@ -109,7 +128,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(sqlConnection);
+//        DbCleaner.clearDatabase_H2(sqlConnection);
     }
 
     @Override
