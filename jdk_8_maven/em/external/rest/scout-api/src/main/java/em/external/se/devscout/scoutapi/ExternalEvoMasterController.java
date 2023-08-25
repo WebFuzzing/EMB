@@ -75,7 +75,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
-    private final List<String> sqlCommands;
+//    private final List<String> sqlCommands;
+
+    private String INIT_DB_SCRIPT_PATH = "/init_db.sql";
+
+    private String initSQLScript;
     private Server h2;
 
 
@@ -105,7 +109,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         createConfigurationFile();
 
         try(InputStream in = getClass().getResourceAsStream("/init_db.sql")) {
-            sqlCommands = (new SqlScriptRunner()).readCommands(new InputStreamReader(in));
+            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
         } catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -196,8 +200,14 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                    .withDisabledSmartClean());
+
+            /*
+                ensure that the database is clean
+             */
+            DbCleaner.clearDatabase_H2(sqlConnection);
+
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlScript(initSQLScript));
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -227,8 +237,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         deleteDir(new File(tmpDir));
 
-        DbCleaner.clearDatabase_H2(sqlConnection);
-        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
+//        DbCleaner.clearDatabase_H2(sqlConnection);
+//        SqlScriptRunner.runCommands(sqlConnection, sqlCommands);
     }
 
     private void deleteDir(File file) {
