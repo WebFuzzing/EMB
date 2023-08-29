@@ -6,6 +6,7 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.SutController;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
@@ -17,6 +18,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.samples.petclinic.PetClinicApplication;
 import org.testcontainers.containers.GenericContainer;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -41,7 +44,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection sqlConnection;
+    private String INIT_DB_SCRIPT_PATH = "/populateDB.sql";
+
     private List<DbSpecification> dbSpecification;
+
+    private String initSQLScript;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -56,6 +63,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
+
+        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
+            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -90,12 +103,18 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        // create tables
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
 
+        /*
+            ensure the data is empty
+         */
+        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
 
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                .withSchemas("public").withDisabledSmartClean());
+                .withSchemas("public").withInitSqlScript(initSQLScript));
 
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
+
 
         return "http://localhost:" + getSutPort();
     }
@@ -125,8 +144,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/populateDB.sql");
+//        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/populateDB.sql");
     }
 
     @Override
