@@ -104,7 +104,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setJavaCommand(command);
 
         try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
