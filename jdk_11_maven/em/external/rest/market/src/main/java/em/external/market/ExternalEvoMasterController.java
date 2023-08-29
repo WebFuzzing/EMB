@@ -7,12 +7,15 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.h2.tools.Server;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -65,6 +68,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private List<DbSpecification> dbSpecification;
     private Server h2;
 
+    private String INIT_DB_SCRIPT_PATH = "/data.sql";
+
+    private String initSQLScript;
+
     public ExternalEvoMasterController() {
         this(40100, "../core/target", 12345, 120, "java");
     }
@@ -81,6 +88,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         setJavaCommand(command);
+
+        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
+            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String dbUrl( ) {
@@ -145,19 +158,21 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
+
+            SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/schema.sql");
+            DbCleaner.clearDatabase_H2(sqlConnection);
+
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                    .withDisabledSmartClean());
+                    .withInitSqlScript(initSQLScript));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/schema.sql");
     }
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(sqlConnection);
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/data.sql");
+//        DbCleaner.clearDatabase_H2(sqlConnection);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/data.sql");
     }
 
     @Override

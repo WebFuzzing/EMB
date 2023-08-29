@@ -17,6 +17,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -48,12 +50,22 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private List<DbSpecification> dbSpecification;
 
 
+    private String INIT_DB_SCRIPT_PATH = "/data.sql";
+
+    private String initSQLScript;
+
     public EmbeddedEvoMasterController() {
         this(40100);
     }
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
+
+        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
+            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -77,9 +89,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/schema.sql");
+        DbCleaner.clearDatabase_H2(sqlConnection);
+
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                //.withInitSqlOnResourcePath("/data.sql"));
-                .withDisabledSmartClean());
+                .withInitSqlScript(initSQLScript));
 
         return "http://localhost:" + getSutPort();
     }
@@ -108,8 +122,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(sqlConnection, null);
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/data.sql");
+//        DbCleaner.clearDatabase_H2(sqlConnection, null);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/data.sql");
     }
 
     @Override
