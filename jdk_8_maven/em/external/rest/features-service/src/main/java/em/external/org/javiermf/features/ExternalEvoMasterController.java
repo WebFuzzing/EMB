@@ -162,7 +162,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 to consistently manage data by evomaster
              */
             DbCleaner.clearDatabase_H2(sqlConnection);
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlOnResourcePath(initSQLScript));
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlScript(initSQLScript));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
