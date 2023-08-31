@@ -48,7 +48,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private final String INIT_DB_SCRIPT_PATH = "/initDB.sql";
 
-    private String initSQLScript;
 
     private final int portApp = 8080; //Hardcoded. will need fixing
     // TODO maybe report at https://github.com/micronaut-projects/micronaut-core/issues
@@ -70,11 +69,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
 
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
@@ -113,7 +107,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
 
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                .withSchemas("public").withInitSqlScript(initSQLScript));
+                .withSchemas("public").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
         return "http://localhost:" + getSutPort();
     }

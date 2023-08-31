@@ -70,8 +70,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private final String INIT_DB_SCRIPT_PATH = "/initDB.sql";
 
-    private String initSQLScript;
-
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
             .withEnv("POSTGRES_DB", "patio")
@@ -103,11 +101,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setControllerPort(controllerPort);
         setJavaCommand(command);
 
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
@@ -172,7 +165,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
 
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public").withInitSqlScript(initSQLScript));
+                    .withSchemas("public").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
