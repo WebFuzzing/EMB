@@ -85,12 +85,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         setJavaCommand(command);
-
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private String dbUrl( ) {
@@ -162,7 +156,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                 to consistently manage data by evomaster
              */
             DbCleaner.clearDatabase_H2(sqlConnection);
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlScript(initSQLScript));
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

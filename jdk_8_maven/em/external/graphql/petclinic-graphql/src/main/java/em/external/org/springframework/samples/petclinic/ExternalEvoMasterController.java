@@ -100,12 +100,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         setJavaCommand(command);
-
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
@@ -176,7 +170,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
 
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public").withInitSqlScript(initSQLScript));
+                    .withSchemas("public").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
 
         } catch (Exception e) {

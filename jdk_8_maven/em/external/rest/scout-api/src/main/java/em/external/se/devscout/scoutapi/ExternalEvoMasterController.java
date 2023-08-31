@@ -79,7 +79,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private String INIT_DB_SCRIPT_PATH = "/init_db.sql";
 
-    private String initSQLScript;
     private Server h2;
 
 
@@ -107,12 +106,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         String base = Paths.get(jarLocation).toAbsolutePath().getParent().normalize().toString();
         tmpDir = base + "/temp/tmp_scout_api/temp_"+dbPort;
         createConfigurationFile();
-
-        try(InputStream in = getClass().getResourceAsStream("/init_db.sql")) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e){
-            throw new RuntimeException(e);
-        }
     }
 
     private String dbUrl( ) {
@@ -206,7 +199,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
              */
             DbCleaner.clearDatabase_H2(sqlConnection);
 
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlScript(initSQLScript));
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
