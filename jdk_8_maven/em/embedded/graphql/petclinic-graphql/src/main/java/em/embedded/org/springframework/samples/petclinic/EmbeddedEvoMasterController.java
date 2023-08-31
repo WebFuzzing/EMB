@@ -44,7 +44,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private ConfigurableApplicationContext ctx;
     private Connection sqlConnection;
-    private String INIT_DB_SCRIPT_PATH = "/populateDB.sql";
+    private String INIT_DB_SCRIPT_PATH = "/db/postgresql/populateDB.sql";
 
     private List<DbSpecification> dbSpecification;
 
@@ -104,7 +104,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         }
 
         // create tables
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
+        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/db/postgresql/initDB.sql");
 
         /*
             ensure the data is empty
