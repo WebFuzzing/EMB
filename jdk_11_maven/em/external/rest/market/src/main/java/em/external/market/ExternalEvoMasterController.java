@@ -70,8 +70,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private String INIT_DB_SCRIPT_PATH = "/data.sql";
 
-    private String initSQLScript;
-
     public ExternalEvoMasterController() {
         this(40100, "../core/target", 12345, 120, "java");
     }
@@ -88,12 +86,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         setJavaCommand(command);
-
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private String dbUrl( ) {
@@ -163,7 +155,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             DbCleaner.clearDatabase_H2(sqlConnection);
 
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                    .withInitSqlScript(initSQLScript));
+                    .withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

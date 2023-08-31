@@ -49,7 +49,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
-
     private String INIT_DB_SCRIPT_PATH = "/data.sql";
 
     private String initSQLScript;
@@ -60,12 +59,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
-
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = (new SqlScriptRunner()).readSQLCommandsAsString(new InputStreamReader(in));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -93,7 +86,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         DbCleaner.clearDatabase_H2(sqlConnection);
 
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                .withInitSqlScript(initSQLScript));
+                .withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
         return "http://localhost:" + getSutPort();
     }
