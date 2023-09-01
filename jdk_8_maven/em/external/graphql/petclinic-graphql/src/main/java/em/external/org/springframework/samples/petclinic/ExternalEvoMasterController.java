@@ -170,7 +170,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
             DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
 
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
+                    .withSchemas("public")
+                    /*
+                         evomaster not support to parse `on conflict` for postgresql yet
+                         then cannot execute the sql script to initialize data in db
+
+                         see https://www.postgresql.org/docs/current/sql-insert.html#:~:text=ON%20CONFLICT%20DO%20NOTHING%20simply,insertion%20as%20its%20alternative%20action.
+                     */
+                    //.withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH)
+            );
 
 
         } catch (Exception e) {
