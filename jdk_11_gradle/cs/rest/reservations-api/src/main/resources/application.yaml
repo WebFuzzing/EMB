@@ -1,0 +1,20 @@
+spring.application.name: 'ReservationAPI'
+springdoc:
+  packagesToScan: 'sk.cyrilgavala.reservationsApi.web'
+  pathsToMatch: '/api/**'
+  swagger-ui.path: '/documentation'
+
+databaseUrl: ${DATABASE_URL:localhost:27017}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:'jwt_secret'}
+    expiration:
+      minutes: 60
+
+# logging levels
+logging.level:
+  org.mongodb: WARN
+  org.springframework: WARN
+  org.springdoc: WARN
+  org.apache: WARN

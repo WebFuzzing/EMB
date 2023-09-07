@@ -1,0 +1,7 @@
+spring.application.name: 'ReservationAPI'
+databaseUrl: 'mongodb://localhost:27017'
+app:
+  jwt:
+    secret: 'jwt_secret'
+    expiration:
+      minutes: 60
