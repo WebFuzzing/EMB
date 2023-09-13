@@ -6,12 +6,15 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -74,6 +77,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
+    private String INIT_DB_SCRIPT_PATH = "/init_db.sql";
+
+    private String initSQLScript;
+
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
@@ -105,6 +112,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.packagesToInstrument = packagesToInstrument;
         setControllerPort(controllerPort);
         setJavaCommand(command);
+
+        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
+            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -174,8 +187,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", "");
+
+            /*
+                ensure the data in db is empty
+             */
+            DbCleaner.clearDatabase_Postgres(sqlConnection,
+                    "subscriptions",
+                    Arrays.asList("flyway_schema_history"));
+
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("subscriptions").withDisabledSmartClean());
+                    .withSchemas("subscriptions").withInitSqlScript(initSQLScript));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -183,10 +204,10 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(sqlConnection,
-                "subscriptions",
-                Arrays.asList("flyway_schema_history"));
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/init_db.sql");
+//        DbCleaner.clearDatabase_Postgres(sqlConnection,
+//                "subscriptions",
+//                Arrays.asList("flyway_schema_history"));
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/init_db.sql");
     }
 
     @Override

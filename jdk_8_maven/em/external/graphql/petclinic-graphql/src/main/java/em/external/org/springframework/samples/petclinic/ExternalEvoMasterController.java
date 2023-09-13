@@ -6,12 +6,15 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -62,7 +65,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int sutPort;
     private  String jarLocation;
     private Connection sqlConnection;
+    private String INIT_DB_SCRIPT_PATH = "/populateDB.sql";
+
     private List<DbSpecification> dbSpecification;
+
+    private String initSQLScript;
 
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withExposedPorts(5432)
@@ -154,11 +161,26 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", "");
 
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public").withDisabledSmartClean());
-            //                initSqlOnResourcePath = "/db/postgresql/populateDB.sql";
-
+            // create tables
             SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
+
+            /*
+                ensure the data is empty
+            */
+            DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
+
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
+                    .withSchemas("public")
+                    /*
+                         evomaster not support to parse `on conflict` for postgresql yet
+                         then cannot execute the sql script to initialize data in db
+
+                         see https://www.postgresql.org/docs/current/sql-insert.html#:~:text=ON%20CONFLICT%20DO%20NOTHING%20simply,insertion%20as%20its%20alternative%20action.
+                     */
+                    //.withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH)
+            );
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -166,8 +188,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/populateDB.sql");
+//        DbCleaner.clearDatabase_Postgres(sqlConnection,"public", null);
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/populateDB.sql");
     }
 
     @Override

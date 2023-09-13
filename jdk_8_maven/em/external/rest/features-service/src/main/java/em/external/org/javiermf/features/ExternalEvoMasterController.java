@@ -4,6 +4,7 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
@@ -11,6 +12,8 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.h2.tools.Server;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -59,7 +62,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int dbPort;
     private  String jarLocation;
     private Connection sqlConnection;
+    private String INIT_DB_SCRIPT_PATH = "/data.sql";
+
     private List<DbSpecification> dbSpecification;
+
+    private String initSQLScript;
     private Server h2;
 
     public ExternalEvoMasterController() {
@@ -144,8 +151,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
         try {
             Class.forName("org.h2.Driver");
             sqlConnection = DriverManager.getConnection(dbUrl(), "sa", "");
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection)
-                    .withDisabledSmartClean());
+            /*
+                the application will be initialized some data in database
+                to consistently manage data by evomaster
+             */
+            DbCleaner.clearDatabase_H2(sqlConnection);
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.H2,sqlConnection).withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -153,7 +164,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_H2(sqlConnection);
+//        DbCleaner.clearDatabase_H2(sqlConnection);
     }
 
     @Override

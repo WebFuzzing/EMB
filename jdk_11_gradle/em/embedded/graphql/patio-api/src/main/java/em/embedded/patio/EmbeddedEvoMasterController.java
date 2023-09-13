@@ -9,6 +9,7 @@ import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.SutController;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
@@ -17,6 +18,8 @@ import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
 import patio.Application;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -43,6 +46,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
+    private final String INIT_DB_SCRIPT_PATH = "/initDB.sql";
+
+
     private final int portApp = 8080; //Hardcoded. will need fixing
     // TODO maybe report at https://github.com/micronaut-projects/micronaut-core/issues
 
@@ -62,6 +68,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
+
     }
 
 
@@ -94,9 +101,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
+        /*
+                ensure the data is empty
+             */
+        DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
+
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                .withSchemas("public").withDisabledSmartClean());
-        //            initSqlOnResourcePath = "/initDb.sql";
+                .withSchemas("public").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
         return "http://localhost:" + getSutPort();
     }
@@ -128,8 +139,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
+//        DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
     }
 
     @Override

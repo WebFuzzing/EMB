@@ -7,12 +7,15 @@ import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.db.DbCleaner;
+import org.evomaster.client.java.controller.db.SqlScriptRunner;
 import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -65,6 +68,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
+    private final String INIT_DB_SCRIPT_PATH = "/initDB.sql";
+
     private static final GenericContainer postgres = new GenericContainer("postgres:9")
             .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
             .withEnv("POSTGRES_DB", "patio")
@@ -95,6 +100,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         setJavaCommand(command);
+
     }
 
 
@@ -152,9 +158,14 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             sqlConnection = DriverManager.getConnection(dbUrl(), "patio", "patio");
+
+            /*
+                ensure the data is empty
+             */
+            DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
+
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public").withDisabledSmartClean());
-            //                initSqlOnResourcePath = "/initDb.sql";
+                    .withSchemas("public").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -163,8 +174,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
-        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
+//        DbCleaner.clearDatabase_Postgres(sqlConnection, "public", List.of("flyway_schema_history"));
+//        SqlScriptRunnerCached.runScriptFromResourceFile(sqlConnection,"/initDB.sql");
     }
 
     @Override
