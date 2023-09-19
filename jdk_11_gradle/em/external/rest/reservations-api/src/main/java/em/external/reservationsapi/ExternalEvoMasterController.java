@@ -1,5 +1,7 @@
 package em.external.reservationsapi;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -107,24 +109,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public String[] getInputParameters() {
         return new String[]{
-                "-micronaut.server.port="+sutPort,
-                "-datasources.default.url=" + dbUrl()
+                "--server.port=" + sutPort,
+                "--spring.data.mongodb.uri="+mongoDbUrl
         };
     }
 
     public String[] getJVMParameters() {
         return new String[]{};
-    }
-
-    private String dbUrl() {
-
-        String host = postgres.getContainerIpAddress();
-        int port = postgres.getMappedPort(5432);
-
-        String url = "jdbc";
-        url += ":postgresql://"+host+":"+port+"/patio";
-
-        return url;
     }
 
     @Override
@@ -149,22 +140,13 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void preStart() {
-        postgres.start();
+        mongodbContainer.start();
+        mongoDbUrl = "mongodb://" + mongodbContainer.getContainerIpAddress() + ":" + mongodbContainer.getMappedPort(MONGODB_PORT) + "/" + MONGODB_DATABASE_NAME;
+        mongoClient = MongoClients.create(mongoDbUrl);
     }
 
     @Override
     public void postStart() {
-        closeDataBaseConnection();
-
-        try {
-            sqlConnection = DriverManager.getConnection(dbUrl(), "patio", "patio");
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public").withDisabledSmartClean());
-            //                initSqlOnResourcePath = "/initDb.sql";
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -174,12 +156,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void preStop() {
-        closeDataBaseConnection();
     }
 
     @Override
     public void postStop() {
-        postgres.stop();
+        mongodbContainer.stop();
     }
 
 
@@ -192,7 +173,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://localhost:" + getSutPort() + "/v3/api-docs",
+                "http://localhost:" + sutPort + "/v3/api-docs",
                 null
         );
     }
