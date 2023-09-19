@@ -97,3 +97,12 @@ jacocoTestCoverageVerification {
 }
 
 check.dependsOn jacocoTestCoverageVerification
+
+
+tasks.named("bootJar") {
+    archiveClassifier = 'sut'
+}
+
+tasks.named("jar") {
+    archiveClassifier = 'plain'
+}

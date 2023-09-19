@@ -72,6 +72,8 @@ More details (e.g., #LOCs and used databases) on these APIs can be found [in thi
 
 ### REST: Java/Kotlin
 
+* Reservations API (not-known license), [jdk_11_gradle/cs/rest/reservations-api](jdk_11_gradle/cs/rest/reservations-api) , from [https://github.com/cyrilgavala/reservations-api](https://github.com/cyrilgavala/reservations-api)
+
 * Genome Nexus (MIT), [jdk_8_maven/cs/rest-gui/genome-nexus](jdk_8_maven/cs/rest-gui/genome-nexus), from [https://github.com/genome-nexus/genome-nexus](https://github.com/genome-nexus/genome-nexus)
 
 * Market (MIT), [jdk_11_maven/cs/rest-gui/market](jdk_11_maven/cs/rest-gui/market), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)

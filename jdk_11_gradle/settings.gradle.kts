@@ -6,3 +6,4 @@ include("em:external:graphql:patio-api")
 
 include("cs:rest:reservations-api")
 include("em:embedded:rest:reservations-api")
+include("em:external:rest:reservations-api")
