@@ -1,0 +1,10 @@
+# vim: ft=gitignore
+# Everything ignored by default
+*
+# Only whitelist what's needed
+!*.gradle.kts
+!docker/
+!gradle/
+!gradlew
+!license*.txt
+!src/
