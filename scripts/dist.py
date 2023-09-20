@@ -225,6 +225,8 @@ def build_jdk_11_gradle():
     # Copy JAR files
     copy(folder + "/cs/graphql/patio-api/build/libs/patio-api-sut.jar", DIST)
     copy(folder + "/em/external/graphql/patio-api/build/libs/patio-api-evomaster-runner.jar", DIST)
+    copy(folder + "/cs/rest/reservations-api/build/libs/reservations-api-sut.jar", DIST)
+    copy(folder + "/em/external/rest/reservations-api/build/libs/reservations-api-evomaster-runner.jar", DIST)
 
 
 # Building JavaScript projects

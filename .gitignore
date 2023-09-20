@@ -254,3 +254,4 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /statistics/table_suts.tex
 /jdk_11_gradle/cs/rest/reservations-api/build/
 /jdk_11_gradle/em/embedded/rest/reservations-api/build/
+/jdk_11_gradle/em/external/rest/reservations-api/build/
