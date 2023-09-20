@@ -5,22 +5,12 @@ import com.mongodb.client.MongoClients;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
-import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
-import org.evomaster.client.java.controller.db.DbCleaner;
-import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
 import org.evomaster.client.java.controller.internal.db.DbSpecification;
-import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -110,6 +100,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getInputParameters() {
         return new String[]{
                 "--server.port=" + sutPort,
+                "--databaseUrl="+mongoDbUrl,
                 "--spring.data.mongodb.uri="+mongoDbUrl
         };
     }
@@ -130,7 +121,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getLogMessageOfInitializedServer() {
-        return "Startup completed in";
+        return "Started ReservationsApi in";
     }
 
     @Override
