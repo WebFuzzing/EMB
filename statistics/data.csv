@@ -1,4 +1,5 @@
 EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
+TRUE,reservations-api,REST,Java,JDK 11,Gradle,39,1853,MongoDB,UNDEFINED,7,https://github.com/cyrilgavala/reservations-api
 TRUE,catwatch,REST,Java,JDK 8,Maven,106,9636,H2,Apache,14,https://github.com/zalando-incubator/catwatch
 TRUE,cwa-verification,REST,Java,JDK 11,Maven,47,3955,H2,Apache,5,https://github.com/corona-warn-app/cwa-verification-server
 TRUE,features-service,REST,Java,JDK 8,Maven,39,2275,H2,Apache,18,https://github.com/JavierMF/features-service
