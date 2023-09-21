@@ -27,9 +27,9 @@ indra {
 spotless {
   java {
     endWithNewline()
-    importOrderFile(rootProject.file(".spotless/bibliothek.importorder"))
+    importOrderFile(rootProject.file("cs/rest/bibliothek/.spotless/bibliothek.importorder"))
     indentWithSpaces(2)
-    licenseHeaderFile(rootProject.file("license_header.txt"))
+    licenseHeaderFile(rootProject.file("cs/rest/bibliothek/license_header.txt"))
     trimTrailingWhitespace()
   }
 }
