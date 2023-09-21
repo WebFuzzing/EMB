@@ -31,6 +31,9 @@ dependencies{
     api(project(":cs:rest:bibliothek"))
 
     //Gradle api() is not importing transitive dependencies???
-//    implementation("org.springframework.boot:spring-boot-starter-web:2.7.0")
-//    implementation("org.mongodb:mongodb-driver-sync:4.4.2")
+    implementation("org.springframework.boot:spring-boot-starter-web:3.1.1")
+    implementation("org.mongodb:mongodb-driver-sync:4.9.1")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.1.1")
+    implementation("org.springframework.boot:spring-boot-starter-validation:3.1.1")
 }
