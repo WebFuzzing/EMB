@@ -2,7 +2,7 @@ plugins {
   id("java")
 
   alias(libs.plugins.indra)
-  alias(libs.plugins.indra.checkstyle)
+  //alias(libs.plugins.indra.checkstyle)
   alias(libs.plugins.spotless)
   alias(libs.plugins.spring.dependency.management)
   alias(libs.plugins.spring.boot)
@@ -36,7 +36,7 @@ spotless {
 
 dependencies {
   annotationProcessor("org.springframework.boot", "spring-boot-configuration-processor")
-  checkstyle(libs.stylecheck)
+  //checkstyle(libs.stylecheck)
   implementation(libs.jetbrains.annotations)
   implementation(libs.springdoc.openapi.starter.webmvc.ui)
   implementation("org.springframework.boot", "spring-boot-starter-data-mongodb")
@@ -49,7 +49,12 @@ dependencies {
 
 tasks {
   bootJar {
+    archiveClassifier.set("sut")
     launchScript()
+  }
+
+  jar{
+    archiveClassifier.set("plain")
   }
 
   // From StackOverflow: https://stackoverflow.com/a/53087407
