@@ -49,6 +49,7 @@ dependencies {
 
 tasks {
   bootJar {
+    version = ""
     archiveClassifier.set("sut")
     launchScript()
   }
