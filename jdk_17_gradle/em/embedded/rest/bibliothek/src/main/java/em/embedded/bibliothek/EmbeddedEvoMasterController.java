@@ -44,9 +44,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     //https://www.mongodb.com/docs/drivers/java/sync/current/compatibility/
 
-    private static final String MONGODB_VERSION = "6.1";
+    private static final String MONGODB_VERSION = "6.0";
 
-    private static final String MONGODB_DATABASE_NAME = "Reservations";
+    private static final String MONGODB_DATABASE_NAME = "library";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
             .withExposedPorts(MONGODB_PORT);
@@ -77,7 +77,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 new String[]{"--server.port=0",
                         "--databaseUrl="+mongoDbUrl,
                         "--spring.data.mongodb.uri="+mongoDbUrl,
-                        "--spring.cache.type=NONE"
+                        "--spring.cache.type=NONE",
+                        "--app.storagePath=./tmp/bibliothek"
                 });
 
         return "http://localhost:" + getSutPort();
@@ -131,7 +132,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://localhost:" + getSutPort() + "/v3/api-docs",
+                "http://localhost:" + getSutPort() + "/openapi",
                 null
         );
     }

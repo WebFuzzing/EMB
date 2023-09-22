@@ -26,7 +26,9 @@ val EVOMASTER_VERSION = "1.6.2-SNAPSHOT"
 
 dependencies{
     implementation("org.evomaster:evomaster-client-java-controller:$EVOMASTER_VERSION")
-    implementation("org.evomaster:evomaster-client-java-dependencies:$EVOMASTER_VERSION")
+    implementation("org.evomaster:evomaster-client-java-dependencies:$EVOMASTER_VERSION"){
+        exclude("com.github.tomakehurst")
+    }
 
     api(project(":cs:rest:bibliothek"))
 
