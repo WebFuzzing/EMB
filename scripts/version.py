@@ -68,9 +68,9 @@ def replaceInProperty(file):
     replacement = 'EVOMASTER_VERSION='+version+'\n'
     replace(file, regex, replacement)
 
-def replaceInKotlinGradle(file):
-    regex = re.compile(r'.*val.*EVOMASTER_VERSION.*=.*')
-    replacement = "val EVOMASTER_VERSION = \""+version+"\"\n"
+def replaceInGradle(file):
+    regex = re.compile(r'.*EVOMASTER_VERSION.*=.*')
+    replacement = "        EVOMASTER_VERSION = \""+version+"\"\n"
     replace(file, regex, replacement)
 
 def versionSetMaven(folder, jdk_home):
@@ -124,9 +124,8 @@ replaceInPom("jdk_8_maven/pom.xml")
 replaceInPom("jdk_11_maven/pom.xml")
 replaceInPom("jdk_17_maven/pom.xml")
 
-# is there any easier way for Gradle?
-replaceInKotlinGradle("jdk_11_gradle/em/embedded/graphql/patio-api/build.gradle.kts")
-replaceInKotlinGradle("jdk_11_gradle/em/external/graphql/patio-api/build.gradle.kts")
+replaceInGradle("jdk_17_gradle/build.gradle")
+replaceInGradle("jdk_11_gradle/build.gradle")
 
 replaceInDist()
 

@@ -1,0 +1,14 @@
+[versions]
+indra = "3.1.1"
+
+[plugins]
+indra = { id = "net.kyori.indra", version.ref = "indra" }
+indra-checkstyle = { id = "net.kyori.indra.checkstyle", version.ref = "indra" }
+spotless = { id = "com.diffplug.spotless", version = "6.19.0" }
+spring-boot = { id = "org.springframework.boot", version = "3.1.1" }
+spring-dependency-management = { id = "io.spring.dependency-management", version = "1.1.1" }
+
+[libraries]
+jetbrains-annotations = { group = "org.jetbrains", name = "annotations", version = "24.0.1" }
+springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version = "2.1.0" }
+stylecheck = { group = "ca.stellardrift", name = "stylecheck", version = "0.2.1" }

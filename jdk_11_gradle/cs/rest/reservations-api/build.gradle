@@ -1,0 +1,108 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+}
+
+group = 'sk.cyrilgavala'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /* Annotation processors */
+    annotationProcessor group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: '0.1.0'
+    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: mapStructVersion
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+
+    /* Implementation dependencies */
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: springBootVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: jjwtVersion
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: jjwtVersion
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: jjwtVersion
+    implementation group: 'org.mapstruct', name: 'mapstruct', version: mapStructVersion
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.8'
+
+    /* Compile only dependencies */
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+
+    /* Test annotation processors */
+    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    testAnnotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: mapStructVersion
+
+    /* Test implementation dependencies */
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: springBootVersion
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: springSecurityVersion
+
+    /* Test compile only dependencies */
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+
+}
+
+def jacocoExcludePackages = ["**/reservationsApi/ReservationsApi.class",
+                             "**/reservationsApi/config/**",
+                             "**/reservationsApi/exception/*",
+                             "**/reservationsApi/model/*",
+                             "**/reservationsApi/security/*",
+                             "**/reservationsApi/web/advise/*",
+                             "**/reservationsApi/web/interceptor/*",
+                             "**/reservationsApi/web/request/*",
+                             "**/reservationsApi/web/response/*"]
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion "0.8.8"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: jacocoExcludePackages)
+        }))
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.95
+            }
+        }
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: jacocoExcludePackages)
+        }))
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+
+tasks.named("bootJar") {
+    archiveClassifier = 'sut'
+}
+
+tasks.named("jar") {
+    archiveClassifier = 'plain'
+}

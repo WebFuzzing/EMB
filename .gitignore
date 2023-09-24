@@ -252,3 +252,7 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_17_maven/cs/web/spring-petclinic/target/
 /jdk_17_maven/em/embedded/web/spring-petclinic/target/
 /statistics/table_suts.tex
+/jdk_11_gradle/cs/rest/reservations-api/build/
+/jdk_11_gradle/em/embedded/rest/reservations-api/build/
+/jdk_11_gradle/em/external/rest/reservations-api/build/
+/jdk_17_gradle/.gradle/

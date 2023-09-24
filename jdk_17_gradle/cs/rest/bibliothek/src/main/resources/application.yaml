@@ -1,0 +1,23 @@
+spring:
+  data:
+    mongodb:
+      # "library" instead of "bibliothek" is intentional here
+      database: "library"
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+springdoc:
+  api-docs:
+    path: "/openapi"
+  show-actuator: false
+  swagger-ui:
+    disable-swagger-default-url: true
+    operations-sorter: "alpha"
+    path: "/docs/"
+    show-common-extensions: true
+server:
+  error:
+    whitelabel:
+      enabled: false
