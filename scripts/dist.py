@@ -228,6 +228,29 @@ def build_jdk_11_gradle():
     copy(folder + "/cs/rest/reservations-api/build/libs/reservations-api-sut.jar", DIST)
     copy(folder + "/em/external/rest/reservations-api/build/libs/reservations-api-evomaster-runner.jar", DIST)
 
+####################
+def build_jdk_17_gradle():
+    env_vars = os.environ.copy()
+    env_vars["JAVA_HOME"] = JAVA_HOME_17
+    folder = "jdk_17_gradle"
+
+    command = "gradlew"
+
+    if platform.system() == "Darwin":
+        command = "./gradlew"
+
+    gradleres = run([command, "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION, folder),
+                    env=env_vars)
+    gradleres = gradleres.returncode
+
+    if gradleres != 0:
+        print("\nERROR: Gradle command failed")
+        exit(1)
+
+    # Copy JAR files
+    copy(folder + "/cs/rest/bibliothek/build/libs/bibliothek-sut.jar", DIST)
+    copy(folder + "/em/external/rest/bibliothek/build/libs/bibliothek-evomaster-runner.jar", DIST)
+
 
 # Building JavaScript projects
 def buildJS(path, name):
@@ -320,6 +343,7 @@ build_jdk_8_maven()
 build_jdk_11_maven()
 build_jdk_17_maven()
 build_jdk_11_gradle()
+build_jdk_17_gradle()
 
 ## Those are disabled for now... might support back in the future
 # build_js_npm()

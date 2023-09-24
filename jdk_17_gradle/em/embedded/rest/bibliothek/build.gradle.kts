@@ -21,8 +21,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-
-val EVOMASTER_VERSION = "1.6.2-SNAPSHOT"
+val EVOMASTER_VERSION = project.ext.get("EVOMASTER_VERSION")
 
 dependencies{
     implementation("org.evomaster:evomaster-client-java-controller:$EVOMASTER_VERSION")
