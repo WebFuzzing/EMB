@@ -21,6 +21,8 @@ suts <- function(){
     "scout-api",
     "genome-nexus",
     "market",
+    "bibliothek",
+    "reservations-api",
     #"petclinic-graphql",
     #"patio-api",
     #"timbuctoo",
