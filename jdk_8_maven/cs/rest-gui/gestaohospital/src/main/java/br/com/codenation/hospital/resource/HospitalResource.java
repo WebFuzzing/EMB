@@ -24,7 +24,7 @@ import br.com.codenation.hospital.services.HospitalService;
 @RestController
 @RequestMapping(path = Constant.V1)
 public class HospitalResource {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductResource.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(HospitalResource.class);
 
 	@Autowired
 	private HospitalService service;
