@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.evomaster</groupId>
         <artifactId>evomaster-benchmark-em-embedded-rest</artifactId>
-        <version>1.6.2-SNAPSHOT</version>
+        <version>2.0.0</version>
     </parent>
 
     <dependencyManagement>

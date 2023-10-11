@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-EVOMASTER_VERSION = "1.6.2-SNAPSHOT"
+EVOMASTER_VERSION = "2.0.0"
 
 import sys
 import os
