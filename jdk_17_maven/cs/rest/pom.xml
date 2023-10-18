@@ -4,17 +4,16 @@
 
     <parent>
         <groupId>org.evomaster</groupId>
-        <artifactId>evomaster-benchmark-jdk17</artifactId>
+        <artifactId>evomaster-benchmark-jdk17-cs</artifactId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-jdk17-cs</artifactId>
+    <artifactId>evomaster-benchmark-jdk17-cs-rest</artifactId>
     <packaging>pom</packaging>
 
+
     <modules>
-        <module>web</module>
-        <module>grpc</module>
-        <module>rest</module>
+        <module>familie-ba-sak</module>
     </modules>
 
 
