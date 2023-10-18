@@ -15,6 +15,7 @@
     <modules>
         <module>familie-ba-sak</module>
         <module>familie-tilbake</module>
+        <module>tiltaksgjennomforing-api</module>
     </modules>
 
 
