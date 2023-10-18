@@ -16,6 +16,7 @@
         <module>familie-ba-sak</module>
         <module>familie-tilbake</module>
         <module>tiltaksgjennomforing-api</module>
+        <module>signal-server</module>
     </modules>
 
 
