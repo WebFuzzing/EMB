@@ -21,11 +21,21 @@ MAVEN_VERSION_ABOVE = "3.8.6"
 
 
 def checkMavenVersion():
-    mvn_txt = re.search(MAVEN_VERSION_REGEX, shutil.which("mvn")).group()
-    mvn_version = mvn_txt.split(".")
-    if len(mvn_version) != 3:
-        print("\nERROR: Cannot find maven with `which mvn`:" + mvn_txt)
+    mvn_path = shutil.which("mvn")
+    if mvn_path == None:
+        print("\nERROR: Cannot find maven with `which mvn`")
         exit(1)
+
+    match = re.search(MAVEN_VERSION_REGEX, mvn_path)
+    if match == None:
+        print("\nCannot determine mvn version from its path location: " + mvn_path)
+        exit(1)
+
+    mvn_txt = match.group()
+    mvn_version = mvn_txt.split(".")
+
+    print("\nDetected mvn version based on its path location: " + mvn_txt)
+
     above = MAVEN_VERSION_ABOVE.split(".")
     for index, v in enumerate(mvn_version):
         if int(above[index]) > int(v):
