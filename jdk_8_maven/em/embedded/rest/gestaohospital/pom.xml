@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <mongo.version>3.12.10</mongo.version>
+        <mongo.version>3.8.2</mongo.version>
     </properties>
 
     <artifactId>evomaster-benchmark-em-embedded-rest-gestaohospital</artifactId>
