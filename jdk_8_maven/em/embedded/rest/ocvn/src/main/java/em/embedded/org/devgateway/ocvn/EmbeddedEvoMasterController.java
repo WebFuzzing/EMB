@@ -166,4 +166,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
+
+    @Override
+    public Object getMongoConnection() {return mongoClient;}
 }

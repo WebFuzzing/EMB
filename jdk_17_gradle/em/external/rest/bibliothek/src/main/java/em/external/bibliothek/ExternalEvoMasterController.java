@@ -186,4 +186,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public List<DbSpecification> getDbSpecifications() {
         return null;
     }
+
+    @Override
+    public Object getMongoConnection() {return mongoClient;}
 }

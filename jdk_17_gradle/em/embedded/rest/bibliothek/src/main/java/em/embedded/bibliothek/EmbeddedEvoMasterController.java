@@ -142,5 +142,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
-
+    @Override
+    public Object getMongoConnection() {return mongoClient;}
 }
