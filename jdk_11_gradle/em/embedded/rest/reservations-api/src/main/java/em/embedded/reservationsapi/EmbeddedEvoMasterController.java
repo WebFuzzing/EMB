@@ -14,6 +14,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
 import sk.cyrilgavala.reservationsApi.ReservationsApi;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +48,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final String MONGODB_DATABASE_NAME = "Reservations";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(MONGODB_PORT);
 
     private String mongoDbUrl;

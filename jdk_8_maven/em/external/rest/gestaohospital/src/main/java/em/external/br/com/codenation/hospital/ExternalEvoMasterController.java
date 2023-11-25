@@ -13,6 +13,7 @@ import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -92,6 +93,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         this.mongodb = new GenericContainer<>("mongo:" + MONGODB_VERSION)
+                .withTmpFs(Collections.singletonMap("/data/db", "rw"))
                 .withExposedPorts(DEFAULT_DB_PORT);
         setJavaCommand(command);
     }

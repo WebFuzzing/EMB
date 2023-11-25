@@ -14,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final String MONGODB_DATABASE_NAME = "HospitalDB";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(MONGODB_PORT);
 
     private MongoClient mongoClient;

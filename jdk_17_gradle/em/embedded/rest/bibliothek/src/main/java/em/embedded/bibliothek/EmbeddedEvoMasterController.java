@@ -17,6 +17,7 @@ import org.testcontainers.containers.GenericContainer;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 
 /**
@@ -49,6 +50,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final String MONGODB_DATABASE_NAME = "library";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(MONGODB_PORT);
 
     private String mongoDbUrl;

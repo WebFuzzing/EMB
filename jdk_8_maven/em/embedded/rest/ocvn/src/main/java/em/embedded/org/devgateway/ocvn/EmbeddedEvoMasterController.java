@@ -22,6 +22,7 @@ import org.testcontainers.containers.GenericContainer;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private static final GenericContainer mongodb = new GenericContainer("mongo:3.2")
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(27017);
 
 

@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -72,6 +73,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private MongoClient mongoClient;
 
     private static final GenericContainer mongodb = new GenericContainer("mongo:3.2")
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(27017);
 
     public ExternalEvoMasterController() {
