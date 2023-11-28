@@ -5,7 +5,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -54,18 +53,18 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final String MONGODB_DATABASE_NAME = "reservations-api";
 
     //  docker run -p 27017:27017  -e MONGODB_REPLICA_SET_MODE=primary -e  ALLOW_EMPTY_PASSWORD=yes bitnami/mongodb:4.4
-    //  /bitnami/mongodb
     //  https://hub.docker.com/r/bitnami/mongodb
+    // cannot use standard Mongo image, due ridiculous handling of transaction that requires a cluster...
 
     private static final GenericContainer mongodbContainer = new GenericContainer("bitnami/mongodb:" + MONGODB_VERSION)
             .withTmpFs(Collections.singletonMap("/bitnami/mongodb", "rw"))
-            .withEnv("MONGODB_REPLICA_SET_MODE","primary")
-            .withEnv("ALLOW_EMPTY_PASSWORD","yes")
+            .withEnv("MONGODB_REPLICA_SET_MODE", "primary")
+            .withEnv("ALLOW_EMPTY_PASSWORD", "yes")
             .withExposedPorts(MONGODB_PORT);
 
-//    private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
-//            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
-//            .withExposedPorts(MONGODB_PORT);
+
+    private static final String rawPassword = "bar123";
+    private static final String hashedPassword = "$2a$10$nEDY5j731yXGnQHyM39PWurJWr1FukegmKYYarK5WOoAMmgDs6D3u";
 
     private String mongoDbUrl;
 
@@ -87,13 +86,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         mongoDbUrl = "mongodb://" + mongodbContainer.getContainerIpAddress() + ":" + mongodbContainer.getMappedPort(MONGODB_PORT) + "/" + MONGODB_DATABASE_NAME;
         mongoClient = MongoClients.create(mongoDbUrl);
 
-        //from command line:
-        //--databaseUrl=mongodb://localhost:27017/Reservations --app.jwt.secret=abcdef0123456789
-
         ctx = SpringApplication.run(ReservationsApi.class,
                 new String[]{"--server.port=0",
-                        "--databaseUrl="+mongoDbUrl,
-                        "--spring.data.mongodb.uri="+mongoDbUrl,
+                        "--databaseUrl=" + mongoDbUrl,
+                        "--spring.data.mongodb.uri=" + mongoDbUrl,
                         "--spring.cache.type=NONE",
                         "--app.jwt.secret=abcdef012345678901234567890123456789abcdef012345678901234567890123456789"
                 });
@@ -131,7 +127,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
 
 
-
         // "bar123"
         // YmFyMTIz
         // $2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm
@@ -144,22 +139,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                         .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
                         .append("username", "foo")
                         .append("email", "foo@foo.com")
-                        .append("password", "$2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm")
+                        .append("password", hashedPassword)
                         .append("role", "USER"),
                 new Document()
                         .append("_id", new ObjectId())
                         .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
                         .append("username", "bar")
                         .append("email", "bar@foo.com")
-                        .append("password", "$2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm")
+                        .append("password", hashedPassword)
                         .append("role", "USER"),
                 new Document()
                         .append("_id", new ObjectId())
                         .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
                         .append("username", "admin")
                         .append("email", "admin@foo.com")
-                        .append("password","$2a$10$nEDY5j731yXGnQHyM39PWurJWr1FukegmKYYarK5WOoAMmgDs6D3u")
-                        //.append("password", "$2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm")
+                        .append("password", hashedPassword)
                         .append("role", "ADMIN")
         ));
 
@@ -176,20 +170,38 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public List<AuthenticationDto> getInfoForAuthentication() {
 
         return Arrays.asList(
-            new AuthenticationDto() {{
-                name = "admin";
-                jsonTokenPostLogin = new JsonTokenPostLoginDto(){{
-                    userId = "admin";
-                    endpoint ="/api/user/login";
-                    jsonPayload = "{\"username\":\"admin\", \"password\":\"bar123\"}";
-                    extractTokenField ="/accessToken";
-                    headerPrefix = "Bearer ";
-                }};
+                new AuthenticationDto() {{
+                    name = "admin";
+                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
+                        userId = "admin";
+                        endpoint = "/api/user/login";
+                        jsonPayload = "{\"username\":\"admin\", \"password\":\""+rawPassword+"\"}";
+                        extractTokenField = "/accessToken";
+                        headerPrefix = "Bearer ";
+                    }};
+                }},
+                new AuthenticationDto() {{
+                    name = "foo";
+                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
+                        userId = "foo";
+                        endpoint = "/api/user/login";
+                        jsonPayload = "{\"username\":\"foo\", \"password\":\""+rawPassword+"\"}";
+                        extractTokenField = "/accessToken";
+                        headerPrefix = "Bearer ";
+                    }};
+                }},
+                new AuthenticationDto() {{
+                    name = "bar";
+                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
+                        userId = "bar";
+                        endpoint = "/api/user/login";
+                        jsonPayload = "{\"username\":\"bar\", \"password\":\""+rawPassword+"\"}";
+                        extractTokenField = "/accessToken";
+                        headerPrefix = "Bearer ";
+                    }};
                 }}
         );
     }
-
-
 
 
     @Override
@@ -206,6 +218,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public Object getMongoConnection() {return mongoClient;}
+    public Object getMongoConnection() {
+        return mongoClient;
+    }
 
 }
