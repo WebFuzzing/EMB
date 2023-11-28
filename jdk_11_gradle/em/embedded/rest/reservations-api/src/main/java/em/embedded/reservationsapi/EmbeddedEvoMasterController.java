@@ -74,7 +74,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         mongoDbUrl = "mongodb://" + mongodbContainer.getContainerIpAddress() + ":" + mongodbContainer.getMappedPort(MONGODB_PORT) + "/" + MONGODB_DATABASE_NAME;
         mongoClient = MongoClients.create(mongoDbUrl);
 
-
+        //from command line:
+        //--databaseUrl=mongodb://localhost:27017/Reservations --app.jwt.secret=abcdef0123456789
 
         ctx = SpringApplication.run(ReservationsApi.class,
                 new String[]{"--server.port=0",
