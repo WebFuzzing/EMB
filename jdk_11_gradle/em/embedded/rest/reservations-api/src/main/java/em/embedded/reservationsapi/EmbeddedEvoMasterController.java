@@ -2,6 +2,9 @@ package em.embedded.reservationsapi;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -111,6 +114,33 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void resetStateOfSUT() {
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
+
+        //  docker run -p 27017:27017  -e MONGODB_REPLICA_SET_MODE=primary -e  ALLOW_EMPTY_PASSWORD=yes bitnami/mongodb:4.4
+        //  /bitnami/mongodb
+        //  https://hub.docker.com/r/bitnami/mongodb
+
+        // "bar123"
+        // $2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm
+        mongoClient.getDatabase(MONGODB_DATABASE_NAME).createCollection("users");
+
+        MongoCollection<Document> users = mongoClient.getDatabase(MONGODB_DATABASE_NAME).getCollection("users");
+        users.insertOne(new Document()
+                .append("_id", new ObjectId())
+                .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
+                .append("username", "foo")
+                .append("email", "foo@foo.com")
+                .append("password", "$2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm")
+                .append("role", "USER")
+        );
+        users.insertOne(new Document()
+                .append("_id", new ObjectId())
+                .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
+                .append("username", "admin")
+                .append("email", "admin@foo.com")
+                .append("password", "$2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm")
+                .append("role", "ADMIN")
+        );
+
     }
 
     @Override
