@@ -126,10 +126,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public void resetStateOfSUT() {
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
 
-
-        // "bar123"
-        // YmFyMTIz
-        // $2a$10$b/SjlT3jexPDGci3EtmzpOnYwmjXrtzCQq5dn8rbMCgz7UZ/saylm
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).createCollection("users");
 
         MongoCollection<Document> users = mongoClient.getDatabase(MONGODB_DATABASE_NAME).getCollection("users");
