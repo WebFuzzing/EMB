@@ -2,15 +2,20 @@ package em.external.reservationsapi;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,11 +66,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
     //https://www.mongodb.com/docs/drivers/java/sync/current/compatibility/
     private static final String MONGODB_VERSION = "4.4";
 
-    private static final String MONGODB_DATABASE_NAME = "Reservations";
+    private static final String MONGODB_DATABASE_NAME = "reservations-api";
 
-    private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
-            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
+    private static final GenericContainer mongodbContainer = new GenericContainer("bitnami/mongodb:" + MONGODB_VERSION)
+            .withTmpFs(Collections.singletonMap("/bitnami/mongodb", "rw"))
+            .withEnv("MONGODB_REPLICA_SET_MODE", "primary")
+            .withEnv("ALLOW_EMPTY_PASSWORD", "yes")
             .withExposedPorts(MONGODB_PORT);
+
+    private static final String rawPassword = "bar123";
+    private static final String hashedPassword = "$2a$10$nEDY5j731yXGnQHyM39PWurJWr1FukegmKYYarK5WOoAMmgDs6D3u";
 
     private String mongoDbUrl;
 
@@ -103,7 +113,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return new String[]{
                 "--server.port=" + sutPort,
                 "--databaseUrl="+mongoDbUrl,
-                "--spring.data.mongodb.uri="+mongoDbUrl
+                "--spring.data.mongodb.uri="+mongoDbUrl,
+                "--app.jwt.secret=abcdef012345678901234567890123456789abcdef012345678901234567890123456789"
         };
     }
 
@@ -145,6 +156,34 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public void resetStateOfSUT() {
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
+
+        mongoClient.getDatabase(MONGODB_DATABASE_NAME).createCollection("users");
+
+        MongoCollection<Document> users = mongoClient.getDatabase(MONGODB_DATABASE_NAME).getCollection("users");
+        users.insertMany(Arrays.asList(
+                new Document()
+                        .append("_id", new ObjectId())
+                        .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
+                        .append("username", "foo")
+                        .append("email", "foo@foo.com")
+                        .append("password", hashedPassword)
+                        .append("role", "USER"),
+                new Document()
+                        .append("_id", new ObjectId())
+                        .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
+                        .append("username", "bar")
+                        .append("email", "bar@foo.com")
+                        .append("password", hashedPassword)
+                        .append("role", "USER"),
+                new Document()
+                        .append("_id", new ObjectId())
+                        .append("_class", "sk.cyrilgavala.reservationsApi.model.User")
+                        .append("username", "admin")
+                        .append("email", "admin@foo.com")
+                        .append("password", hashedPassword)
+                        .append("role", "ADMIN")
+        ));
+
     }
 
     @Override
@@ -180,7 +219,39 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        return null;
+
+        return Arrays.asList(
+                new AuthenticationDto() {{
+                    name = "admin";
+                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
+                        userId = "admin";
+                        endpoint = "/api/user/login";
+                        jsonPayload = "{\"username\":\"admin\", \"password\":\""+rawPassword+"\"}";
+                        extractTokenField = "/accessToken";
+                        headerPrefix = "Bearer ";
+                    }};
+                }},
+                new AuthenticationDto() {{
+                    name = "foo";
+                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
+                        userId = "foo";
+                        endpoint = "/api/user/login";
+                        jsonPayload = "{\"username\":\"foo\", \"password\":\""+rawPassword+"\"}";
+                        extractTokenField = "/accessToken";
+                        headerPrefix = "Bearer ";
+                    }};
+                }},
+                new AuthenticationDto() {{
+                    name = "bar";
+                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
+                        userId = "bar";
+                        endpoint = "/api/user/login";
+                        jsonPayload = "{\"username\":\"bar\", \"password\":\""+rawPassword+"\"}";
+                        extractTokenField = "/accessToken";
+                        headerPrefix = "Bearer ";
+                    }};
+                }}
+        );
     }
 
     @Override
