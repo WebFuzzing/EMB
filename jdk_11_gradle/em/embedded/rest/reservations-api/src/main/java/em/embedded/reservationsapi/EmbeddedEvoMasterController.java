@@ -1,8 +1,10 @@
 package em.embedded.reservationsapi;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.evomaster.client.java.controller.EmbeddedSutController;
@@ -124,11 +126,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
 
-        mongoClient.getDatabase(MONGODB_DATABASE_NAME).createCollection("users");
+        MongoDatabase db = mongoClient.getDatabase(MONGODB_DATABASE_NAME);
 
-        MongoCollection<Document> users = mongoClient.getDatabase(MONGODB_DATABASE_NAME).getCollection("users");
+        //THIS WAS VERY EXPENSIVE for this API... might be due to transactions or different Docker image?
+        //db.drop();
+
+        for(String name: db.listCollectionNames()){
+            db.getCollection(name).deleteMany(new BasicDBObject());
+        }
+
+        MongoCollection<Document> users = db.getCollection("users");
         users.insertMany(Arrays.asList(
                 new Document()
                         .append("_id", new ObjectId())
@@ -152,8 +160,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                         .append("password", hashedPassword)
                         .append("role", "ADMIN")
         ));
-
-
     }
 
     @Override
@@ -164,7 +170,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-
         return Arrays.asList(
                 new AuthenticationDto() {{
                     name = "admin";

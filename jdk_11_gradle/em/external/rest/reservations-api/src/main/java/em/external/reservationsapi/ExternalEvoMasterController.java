@@ -1,8 +1,10 @@
 package em.external.reservationsapi;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.evomaster.client.java.controller.ExternalSutController;
@@ -155,11 +157,16 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void resetStateOfSUT() {
-        mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
+        MongoDatabase db = mongoClient.getDatabase(MONGODB_DATABASE_NAME);
 
-        mongoClient.getDatabase(MONGODB_DATABASE_NAME).createCollection("users");
+        //THIS WAS VERY EXPENSIVE
+        //db.drop();
 
-        MongoCollection<Document> users = mongoClient.getDatabase(MONGODB_DATABASE_NAME).getCollection("users");
+        for(String name: db.listCollectionNames()){
+            db.getCollection(name).deleteMany(new BasicDBObject());
+        }
+
+        MongoCollection<Document> users = db.getCollection("users");
         users.insertMany(Arrays.asList(
                 new Document()
                         .append("_id", new ObjectId())
