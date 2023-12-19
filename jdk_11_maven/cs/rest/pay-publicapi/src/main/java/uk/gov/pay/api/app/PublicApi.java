@@ -15,6 +15,8 @@ import io.dropwizard.setup.Environment;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.dropwizard.DropwizardExports;
 import io.prometheus.client.exporter.MetricsServlet;
+import org.eclipse.jetty.server.AbstractNetworkConnector;
+import org.eclipse.jetty.server.Server;
 import org.glassfish.jersey.CommonProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,8 +80,18 @@ import static javax.servlet.DispatcherType.REQUEST;
 public class PublicApi extends Application<PublicApiConfig> {
 
     private static final Logger logger = LoggerFactory.getLogger(PublicApi.class);
-    
+
     private static final String SERVICE_METRICS_NODE = "publicapi";
+
+    private Server jettyServer;
+
+    public int getJettyPort() {
+        return ((AbstractNetworkConnector)jettyServer.getConnectors()[0]).getLocalPort();
+    }
+
+    public Server getJettyServer() {
+        return jettyServer;
+    }
 
     @Override
     public void initialize(Bootstrap<PublicApiConfig> bootstrap) {
@@ -129,7 +141,7 @@ public class PublicApi extends Application<PublicApiConfig> {
 
         /*
            Turn off 'FilteringJacksonJaxbJsonProvider' which overrides dropwizard JacksonMessageBodyProvider.
-           Fails on Integration tests if not disabled. 
+           Fails on Integration tests if not disabled.
                - https://github.com/dropwizard/dropwizard/issues/1341
         */
         environment.jersey().property(CommonProperties.FEATURE_AUTO_DISCOVERY_DISABLE, Boolean.TRUE);
@@ -153,6 +165,8 @@ public class PublicApi extends Application<PublicApiConfig> {
         environment.admin().addServlet("prometheusMetrics", new MetricsServlet(collectorRegistry)).addMapping("/metrics");
 
         environment.lifecycle().manage(injector.getInstance(RedisClientManager.class));
+
+        environment.lifecycle().addServerLifecycleListener(server -> jettyServer = server);
     }
 
     /**
