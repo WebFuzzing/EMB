@@ -85,11 +85,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         application = new PublicApi();
 
         //Dirty hack for DW...
-        System.setProperty("dw.server.connector.port", "0");
-        System.setProperty("REDIS_URL", "localhost:" + REDIS_PORT);
+        System.setProperty("dw.server.applicationConnectors[0].port", "0");
+        System.setProperty("dw.server.adminConnectors[0].port", "0");
+        System.setProperty("dw.redis.endpoint", "localhost:" + REDIS_PORT);
 
         try {
-            application.run("server", "/src/main/resources/em_config.yaml");
+            application.run("server", "src/main/resources/em_config.yaml");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
