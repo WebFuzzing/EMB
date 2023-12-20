@@ -89,6 +89,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("dw.server.adminConnectors[0].port", "0");
         System.setProperty("dw.redis.endpoint", "localhost:" + REDIS_PORT);
 
+        /*
+        Note: When running using IntelliJ, make sure the working directory is set to the
+        driver module.
+         */
         try {
             application.run("server", "src/main/resources/em_config.yaml");
         } catch (Exception e) {
