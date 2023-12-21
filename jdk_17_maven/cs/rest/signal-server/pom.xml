@@ -75,7 +75,7 @@
 
   <groupId>org.whispersystems.textsecure</groupId>
   <artifactId>TextSecureServer</artifactId>
-  <version>JGITVER</version>
+  <version>10.3.0</version>
 
   <dependencyManagement>
     <dependencies>

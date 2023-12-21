@@ -6,6 +6,7 @@ import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.sql.DbSpecification;
+import org.whispersystems.textsecuregcm.WhisperServerService;
 
 import java.util.List;
 
@@ -61,7 +62,33 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String startSut() {
+        application = new WhisperServerService();
+
+
+//        try {
+//            application.run("server", "src/main/resources/em-sample.yml");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+
+        try {
+            Thread.sleep(3_000);
+        } catch (InterruptedException e) {
+
+        }
+
+//        while(!application.getJettyServer().isStarted()) {
+//            try {
+//                Thread.sleep(3_000);
+//            } catch (InterruptedException e) {
+//
+//            }
+//        }
+
+//        return "http://localhost:" + application.getJettyPort();
         return null;
+
     }
 
     @Override
