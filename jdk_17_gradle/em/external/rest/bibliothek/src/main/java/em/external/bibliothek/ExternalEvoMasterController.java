@@ -6,12 +6,13 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
-import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
 import java.util.List;
+import java.util.Collections;
 
 public class ExternalEvoMasterController extends ExternalSutController {
 
@@ -63,6 +64,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private static final String MONGODB_DATABASE_NAME = "library";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(MONGODB_PORT);
 
     private String mongoDbUrl;
@@ -186,4 +188,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public List<DbSpecification> getDbSpecifications() {
         return null;
     }
+
+    @Override
+    public Object getMongoConnection() {return mongoClient;}
 }

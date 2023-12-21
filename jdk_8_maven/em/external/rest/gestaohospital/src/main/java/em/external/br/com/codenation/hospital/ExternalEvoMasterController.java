@@ -1,17 +1,19 @@
 package em.external.br.com.codenation.hospital;
 
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
-import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -23,7 +25,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private static final int DEFAULT_DB_PORT = 27017;
     private static final int MONGODB_PORT = 27017;
 
-    private static final String MONGODB_VERSION = "3.2";
+    private static final String MONGODB_VERSION = "6.0";
 
     private static final String MONGODB_DATABASE_NAME = "HospitalDB";
 
@@ -42,7 +44,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
             jarLocation = args[2];
         }
         if (!jarLocation.endsWith(".jar")) {
-            jarLocation += "/gestaohospital-sut.jar";
+            jarLocation += "/gestaohospital-rest-sut.jar";
         }
 
         int timeoutSeconds = 120;
@@ -91,6 +93,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         this.mongodb = new GenericContainer<>("mongo:" + MONGODB_VERSION)
+                .withTmpFs(Collections.singletonMap("/data/db", "rw"))
                 .withExposedPorts(DEFAULT_DB_PORT);
         setJavaCommand(command);
     }
@@ -146,9 +149,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         mongodb.start();
 
         try {
-            mongoClient = new MongoClient(mongodb.getContainerIpAddress(),
-                    mongodb.getMappedPort(DEFAULT_DB_PORT));
-
+            mongoClient = MongoClients.create("mongodb://" + mongodb.getContainerIpAddress() + ":" + mongodb.getMappedPort(DEFAULT_DB_PORT));
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
             throw new RuntimeException(e);
@@ -204,6 +205,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
+    }
+
+    @Override
+    public Object getMongoConnection() {
+        return mongoClient;
     }
 
 

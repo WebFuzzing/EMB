@@ -1,18 +1,20 @@
 package em.embedded.br.com.codenation.hospital;
 
 import br.com.codenation.hospital.GestaohospitalarApplication;
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
-import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -40,13 +42,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final int MONGODB_PORT = 27017;
 
-    private static final String MONGODB_VERSION = "3.2";
+    private static final String MONGODB_VERSION = "6.0";
 
     private static final String MONGODB_DATABASE_NAME = "HospitalDB";
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(MONGODB_PORT);
 
+    private MongoClient mongoClient;
 
     public EmbeddedEvoMasterController() {
         this(0);
@@ -61,6 +65,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
 
         mongodbContainer.start();
+        mongoClient = MongoClients.create("mongodb://" + mongodbContainer.getContainerIpAddress() + ":" + mongodbContainer.getMappedPort(MONGODB_PORT));
 
         ctx = SpringApplication.run(GestaohospitalarApplication.class,
                 new String[]{"--server.port=0",
@@ -102,9 +107,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        MongoClient mongoClient = new MongoClient(mongodbContainer.getContainerIpAddress(),
-                mongodbContainer.getMappedPort(MONGODB_PORT));
-
         mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
     }
 
@@ -130,8 +132,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
 
-
-
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
@@ -145,5 +145,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return SutInfoDto.OutputFormat.JAVA_JUNIT_4;
     }
 
-
+    @Override
+    public Object getMongoConnection() {
+        return mongoClient;
+    }
 }
