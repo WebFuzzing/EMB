@@ -6,12 +6,13 @@ import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
-import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -90,6 +91,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
         this.timeoutSeconds = timeoutSeconds;
         setControllerPort(controllerPort);
         this.mongodb = new GenericContainer<>("mongo:" + MONGODB_VERSION)
+                .withTmpFs(Collections.singletonMap("/data/db", "rw"))
                 .withExposedPorts(DEFAULT_DB_PORT);
         setJavaCommand(command);
     }
@@ -202,5 +204,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
         return dbSpecification;
     }
 
-
+    @Override
+    public Object getMongoConnection() {return mongoClient;}
 }

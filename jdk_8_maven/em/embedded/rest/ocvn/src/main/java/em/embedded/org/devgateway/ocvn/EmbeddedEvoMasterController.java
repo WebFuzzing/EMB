@@ -7,9 +7,9 @@ import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
-import org.evomaster.client.java.controller.db.DbCleaner;
-import org.evomaster.client.java.controller.db.SqlScriptRunnerCached;
-import org.evomaster.client.java.controller.internal.db.DbSpecification;
+import org.evomaster.client.java.sql.DbCleaner;
+import org.evomaster.client.java.sql.SqlScriptRunnerCached;
+import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
@@ -22,6 +22,7 @@ import org.testcontainers.containers.GenericContainer;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
 
     private static final GenericContainer mongodb = new GenericContainer("mongo:3.2")
+            .withTmpFs(Collections.singletonMap("/data/db", "rw"))
             .withExposedPorts(27017);
 
 
@@ -166,4 +168,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public List<DbSpecification> getDbSpecifications() {
         return dbSpecification;
     }
+
+    @Override
+    public Object getMongoConnection() {return mongoClient;}
 }
