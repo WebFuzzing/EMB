@@ -8,6 +8,8 @@ import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.utility.MountableFile;
 import org.whispersystems.textsecuregcm.WhisperServerService;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -25,12 +27,16 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final int REDIS_PORT = 6379;
 
-    private static final String REDIS_VERSION = "7.0.14";
+    private static final String REDIS_VERSION = "7.2.3";
 
-    private static final GenericContainer redisClusterContainer = new GenericContainer("bitnami/redis-cluster:" + REDIS_VERSION)
-            .withExposedPorts(REDIS_PORT).withCommand();
+    private static final DockerImageName REDIS_IMAGE = DockerImageName.parse("redis:" + REDIS_VERSION);
 
-    private static final JedisPool jedisPool = new JedisPool("localhost", REDIS_PORT);
+    private static final GenericContainer redisContainer = new GenericContainer(REDIS_IMAGE)
+            .withExposedPorts(REDIS_PORT)
+            .withEnv("ALLOW_EMPTY_PASSWORD", "yes")
+            .withEnv("REDIS_NODES", "redis-cluster-01")
+            .withCopyFileToContainer(MountableFile.forHostPath("src/main/resources/redis.conf"), "/usr/local/etc/redis/redis.conf")
+            .withCommand("redis-server /usr/local/etc/redis/redis.conf");
 
     public static void main(String[] args) {
 
@@ -91,19 +97,23 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         System.setProperty("aws.region", "us-west-2");
 
-        redisClusterContainer.start();
+        redisContainer.start();
+
         dynamoDBContainer.start();
 
         application = new WhisperServerService();
 
         //Dirty hack for DW...
         System.setProperty("dw.server.applicationConnectors[0].port", "0");
-//        System.setProperty("dw.server.adminConnectors[0].port", "0");
-        System.setProperty("dw.cacheCluster.configurationUri", "redis://localhost:" + REDIS_PORT + "/");
-        System.setProperty("dw.clientPresenceCluster.configurationUri", "redis://localhost:" + REDIS_PORT + "/");
-        System.setProperty("dw.pubsub.uri", "redis://localhost:" + REDIS_PORT + "/");
-        System.setProperty("dw.pushSchedulerCluster.configurationUri", "redis://localhost:" + REDIS_PORT + "/");
-        System.setProperty("dw.rateLimitersCluster.configurationUri", "redis://localhost:" + REDIS_PORT + "/");
+        System.setProperty("dw.server.adminConnectors[0].port", "0");
+
+        System.setProperty("dw.cacheCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.clientPresenceCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.pubsub.uri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.pushSchedulerCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.rateLimitersCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.messageCache.cluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.metricsCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
 
         try {
             application.run("server", "src/main/resources/em-sample.yml");
@@ -139,12 +149,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        redisClusterContainer.stop();
+        redisContainer.stop();
         dynamoDBContainer.stop();
     }
 
     @Override
     public void resetStateOfSUT() {
+        JedisPool jedisPool = new JedisPool("0.0.0.0", redisContainer.getFirstMappedPort());
+
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.flushAll();
         }

@@ -9,7 +9,7 @@
         <version>2.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-jdk11-em-embedded-rest.pay-publicapi</artifactId>
+    <artifactId>evomaster-benchmark-jdk11-em-embedded-rest-pay-publicapi</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
