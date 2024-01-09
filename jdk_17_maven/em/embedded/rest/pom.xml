@@ -13,6 +13,7 @@
 
     <modules>
         <module>signal-server</module>
+        <module>familie-tilbake</module>
     </modules>
 
 </project>

@@ -1,7 +1,9 @@
 server:
+  rootPath: '/*'
   applicationConnectors:
     - type: http
       port: ${PORT:-8080}
+#  adminConnectors: []
   adminConnectors:
     - type: http
       port: ${ADMIN_PORT:-8081}

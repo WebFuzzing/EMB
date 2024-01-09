@@ -9,6 +9,8 @@ import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.testcontainers.containers.GenericContainer;
 import uk.gov.pay.api.app.PublicApi;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.io.File;
 import java.util.List;
@@ -21,6 +23,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final GenericContainer redisContainer = new GenericContainer("redis:" + REDIS_VERSION)
             .withExposedPorts(REDIS_PORT);
+
+    private static final JedisPool jedisPool = new JedisPool("localhost", REDIS_PORT);
 
     public static void main(String[] args) {
         int port = 40100;
@@ -66,7 +70,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://localhost:" + application.getJettyPort() + "/api/swagger.json",
+                "http://0.0.0.0:" + application.getJettyPort() + "/assets/swagger.json",
                 null
         );
     }
@@ -78,10 +82,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String startSut() {
-
         redisContainer.start();
 
-//        REDIS_URL
         application = new PublicApi();
 
         //Dirty hack for DW...
@@ -112,7 +114,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        int p = application.getJettyPort();
         return "http://localhost:" + application.getJettyPort();
     }
 
@@ -131,22 +132,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        deleteDir(new File("./target/temp"));
+        try (Jedis jedis = jedisPool.getResource()) {
+            jedis.flushAll()
+        }
     }
 
     @Override
     public List<DbSpecification> getDbSpecifications() {
         return null;
     }
-
-    private void deleteDir(File file) {
-        File[] contents = file.listFiles();
-        if (contents != null) {
-            for (File f : contents) {
-                deleteDir(f);
-            }
-        }
-        file.delete();
-    }
-
 }

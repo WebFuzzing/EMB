@@ -9,7 +9,7 @@
         <version>2.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evomaster-benchmark-jdk17-em-embedded-rest-signal-server</artifactId>
+    <artifactId>evomaster-benchmark-jdk17-em-embedded-rest-familie-tilbake</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -17,24 +17,28 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.1.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
-            <groupId>org.whispersystems.textsecure</groupId>
-            <artifactId>service</artifactId>
-            <version>10.3.0</version>
-            <scope>compile</scope>
+            <groupId>no.nav</groupId>
+            <artifactId>familie-tilbake</artifactId>
+            <version></version>
         </dependency>
         <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>1.19.1</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>4.3.1</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
     </dependencies>
 

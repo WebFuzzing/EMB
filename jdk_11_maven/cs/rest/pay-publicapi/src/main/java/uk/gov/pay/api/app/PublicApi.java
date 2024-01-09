@@ -3,6 +3,7 @@ package uk.gov.pay.api.app;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.CachingAuthenticator;
@@ -95,6 +96,9 @@ public class PublicApi extends Application<PublicApiConfig> {
 
     @Override
     public void initialize(Bootstrap<PublicApiConfig> bootstrap) {
+        // Added to server Swagger JSON as static file
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/assets/"));
+
         bootstrap.setConfigurationSourceProvider(
                 new SubstitutingSourceProvider(
                         bootstrap.getConfigurationSourceProvider(),

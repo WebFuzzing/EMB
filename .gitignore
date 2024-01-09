@@ -265,6 +265,10 @@ jdk_11_maven/em/embedded/rest/pay-publicapi/target/
 jdk_11_maven/em/external/rest/ind1/target/
 jdk_17_maven/cs/rest/signal-server/event-logger/target/
 jdk_17_maven/cs/rest/signal-server/websocket-resources/target/
+jdk_17_maven/cs/rest/signal-server/integration-tests/target/
+jdk_17_maven/cs/rest/signal-server/service/target/
+jdk_17_maven/cs/rest/signal-server/api-doc/target/
+jdk_17_maven/em/embedded/rest/signal-server/target/
 
 /jdk_8_maven/em/embedded/grpc/ncs/target/
 /jdk_8_maven/em/embedded/grpc/scs/target/
