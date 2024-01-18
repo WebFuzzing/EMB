@@ -28,6 +28,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final int POSTGRES_PORT = 5432;
 
+    private static final String INIT_DB_SCRIPT = "init.sql";
+
     private static final GenericContainer postgresContainer = new GenericContainer("postgres:" + POSTGRES_VERSION)
             .withEnv("POSTGRES_PASSWORD", POSTGRES_PASSWORD)
             .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust") //to allow all connections without a password
@@ -87,16 +89,24 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         postgresContainer.start();
 
+        String postgresURL = "postgres://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familietilbake";
+
         ctx = SpringApplication.run(Launcher.class, new String[]{
                 "--server.port=0",
-                "--spring.profiles.active=local",
+                "--spring.profiles.active=dev",
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
-                "--spring.datasource.url=jdbc:postgresql://localhost:5432/familie-tilbake",
+                "--spring.datasource.url=jdbc:" + postgresURL,
                 "--spring.datasource.username=postgres",
-                "--spring.datasource.password=test",
+                "--spring.datasource.password=" + POSTGRES_PASSWORD,
                 "--sentry.logging.enabled=false",
+                "--sentry.environment=local",
+                "--logging.path=target",
+                "--spring.main.web-application-type=none"
         });
+
+        // https://www.baeldung.com/spring-boot-application-context-exception
+        // spring.main.web-application-type=none
 
         if (sqlConnection != null) {
             try {
@@ -112,7 +122,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             throw new RuntimeException(e);
         }
 
-        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES, sqlConnection));
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES, sqlConnection).withInitSqlOnResourcePath(INIT_DB_SCRIPT));
 
         return "http://localhost:" + getSutPort();
     }

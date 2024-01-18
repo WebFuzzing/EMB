@@ -103,17 +103,19 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         application = new WhisperServerService();
 
+        String redisURL = "redis://" + redisContainer.getHost() + ":" + redisContainer.getMappedPort(REDIS_PORT) + "/";
+
         //Dirty hack for DW...
         System.setProperty("dw.server.applicationConnectors[0].port", "0");
         System.setProperty("dw.server.adminConnectors[0].port", "0");
 
-        System.setProperty("dw.cacheCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
-        System.setProperty("dw.clientPresenceCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
-        System.setProperty("dw.pubsub.uri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
-        System.setProperty("dw.pushSchedulerCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
-        System.setProperty("dw.rateLimitersCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
-        System.setProperty("dw.messageCache.cluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
-        System.setProperty("dw.metricsCluster.configurationUri", "redis://0.0.0.0:" + redisContainer.getFirstMappedPort() + "/");
+        System.setProperty("dw.cacheCluster.configurationUri", redisURL);
+        System.setProperty("dw.clientPresenceCluster.configurationUri", redisURL);
+        System.setProperty("dw.pubsub.uri", redisURL);
+        System.setProperty("dw.pushSchedulerCluster.configurationUri", redisURL);
+        System.setProperty("dw.rateLimitersCluster.configurationUri", redisURL);
+        System.setProperty("dw.messageCache.cluster.configurationUri", redisURL);
+        System.setProperty("dw.metricsCluster.configurationUri", redisURL);
 
         try {
             application.run("server", "src/main/resources/em-sample.yml");

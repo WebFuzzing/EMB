@@ -270,6 +270,7 @@ jdk_17_maven/cs/rest/signal-server/service/target/
 jdk_17_maven/cs/rest/signal-server/api-doc/target/
 jdk_17_maven/em/embedded/rest/signal-server/target/
 jdk_17_maven/cs/rest/familie-tilbake/target/
+jdk_17_maven/em/embedded/rest/familie-tilbake/target/
 
 /jdk_8_maven/em/embedded/grpc/ncs/target/
 /jdk_8_maven/em/embedded/grpc/scs/target/
