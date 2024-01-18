@@ -1,18 +1,42 @@
 package em.embedded.familie.tilbake;
 
+import no.nav.familie.tilbake.Launcher;
 import org.evomaster.client.java.controller.EmbeddedSutController;
+import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
+import org.evomaster.client.java.sql.DbCleaner;
 import org.evomaster.client.java.sql.DbSpecification;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.testcontainers.containers.GenericContainer;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
+    private static final String POSTGRES_VERSION = "13.13";
+
+    private static final String POSTGRES_PASSWORD = "password";
+
+    private static final int POSTGRES_PORT = 5432;
+
+    private static final GenericContainer postgresContainer = new GenericContainer("postgres:" + POSTGRES_VERSION)
+            .withEnv("POSTGRES_PASSWORD", POSTGRES_PASSWORD)
+            .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust") //to allow all connections without a password
+            .withExposedPorts(POSTGRES_PORT);
+
     private ConfigurableApplicationContext ctx;
+
+    private Connection sqlConnection;
+    private List<DbSpecification> dbSpecification;
 
     public EmbeddedEvoMasterController() {
         this(40100);
@@ -23,7 +47,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        int port = 40100;
+        if (args.length > 0) {
+            port = Integer.parseInt(args[0]);
+        }
+
+        EmbeddedEvoMasterController controller = new EmbeddedEvoMasterController(port);
+        InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
+
+        starter.start();
     }
 
     @Override
@@ -33,7 +65,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return null;
+        return "no.nav.familie.tilbake.";
     }
 
     @Override
@@ -48,19 +80,39 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
-        return null;
+        return SutInfoDto.OutputFormat.JAVA_JUNIT_5;
     }
 
     @Override
     public String startSut() {
+        postgresContainer.start();
+
         ctx = SpringApplication.run(Launcher.class, new String[]{
                 "--server.port=0",
-                "--spring.profiles.active=local,external,internal",
+                "--spring.profiles.active=local",
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
-                "--spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;",
-                "--cwa-testresult-server.url=http://cwa-testresult-server:8088"
+                "--spring.datasource.url=jdbc:postgresql://localhost:5432/familie-tilbake",
+                "--spring.datasource.username=postgres",
+                "--spring.datasource.password=test",
+                "--sentry.logging.enabled=false",
         });
+
+        if (sqlConnection != null) {
+            try {
+                sqlConnection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);try {
+            sqlConnection = jdbc.getDataSource().getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES, sqlConnection));
 
         return "http://localhost:" + getSutPort();
     }
@@ -73,16 +125,18 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void stopSut() {
-
+        postgresContainer.stop();
+        ctx.stop();
     }
 
     @Override
     public void resetStateOfSUT() {
-
+        // TODO: check and see for any necessary steps required
+        DbCleaner.clearDatabase(sqlConnection, List.of(), DatabaseType.POSTGRES);
     }
 
     @Override
     public List<DbSpecification> getDbSpecifications() {
-        return null;
+        return dbSpecification;
     }
 }
