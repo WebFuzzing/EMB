@@ -2,6 +2,7 @@ package em.embedded.rest.tiltaksgjennomforing.api;
 
 import no.nav.tag.tiltaksgjennomforing.TiltaksgjennomforingApplication;
 import org.evomaster.client.java.controller.EmbeddedSutController;
+import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
@@ -38,9 +39,24 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
+    public EmbeddedEvoMasterController() {
+        this(40100);
+    }
+
+    public EmbeddedEvoMasterController(int port) {
+        setControllerPort(port);
+    }
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        int port = 40100;
+        if (args.length > 0) {
+            port = Integer.parseInt(args[0]);
+        }
+
+        EmbeddedEvoMasterController controller = new EmbeddedEvoMasterController(port);
+        InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
+
+        starter.start();
     }
 
     @Override
@@ -73,6 +89,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         postgresContainer.start();
 
         String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/tiltaksgjennomforing";
+
         ctx = SpringApplication.run(TiltaksgjennomforingApplication.class, new String[]{
                 "--server.port=0",
                 "--spring.profiles.active=dev",
