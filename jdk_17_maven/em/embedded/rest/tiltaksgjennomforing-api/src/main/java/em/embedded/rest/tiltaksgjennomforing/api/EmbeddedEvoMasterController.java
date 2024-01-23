@@ -1,8 +1,7 @@
-package em.embedded.familie.tilbake;
+package em.embedded.rest.tiltaksgjennomforing.api;
 
-import no.nav.familie.tilbake.Launcher;
+import no.nav.tag.tiltaksgjennomforing.TiltaksgjennomforingApplication;
 import org.evomaster.client.java.controller.EmbeddedSutController;
-import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
@@ -31,7 +30,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final GenericContainer postgresContainer = new GenericContainer("postgres:" + POSTGRES_VERSION)
             .withEnv("POSTGRES_PASSWORD", POSTGRES_PASSWORD)
             .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust") //to allow all connections without a password
-            .withEnv("POSTGRES_DB", "familietilbake")
+            .withEnv("POSTGRES_DB", "tiltaksgjennomforing")
             .withExposedPorts(POSTGRES_PORT);
 
     private ConfigurableApplicationContext ctx;
@@ -39,24 +38,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
-    public EmbeddedEvoMasterController() {
-        this(40100);
-    }
-
-    public EmbeddedEvoMasterController(int port) {
-        setControllerPort(port);
-    }
 
     public static void main(String[] args) {
-        int port = 40100;
-        if (args.length > 0) {
-            port = Integer.parseInt(args[0]);
-        }
-
-        EmbeddedEvoMasterController controller = new EmbeddedEvoMasterController(port);
-        InstrumentedSutStarter starter = new InstrumentedSutStarter(controller);
-
-        starter.start();
+        System.out.println("Hello world!");
     }
 
     @Override
@@ -66,7 +50,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "no.nav.familie.tilbake.";
+        return "no.nav.tag.tiltaksgjennomforing.";
     }
 
     @Override
@@ -88,16 +72,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         postgresContainer.start();
 
-        String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familietilbake";
-
-        System.setProperty("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT", "http://localhost:8080/");
-        System.setProperty("UNLEASH_SERVER_API_URL", "http://localhost:8080/");
-        System.setProperty("UNLEASH_SERVER_API_TOKEN", "71c722758740d43341c295ffdc237bd3");
-        System.setProperty("NAIS_APP_NAME", "familietilbake");
-        System.setProperty("NAIS_CLUSTER_NAME", "dev-gcp");
-        System.setProperty("KAFKA_TRUSTSTORE_PATH", "dev-gcp");
-
-        ctx = SpringApplication.run(Launcher.class, new String[]{
+        String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/tiltaksgjennomforing";
+        ctx = SpringApplication.run(TiltaksgjennomforingApplication.class, new String[]{
                 "--server.port=0",
                 "--spring.profiles.active=dev",
                 "--management.server.port=-1",

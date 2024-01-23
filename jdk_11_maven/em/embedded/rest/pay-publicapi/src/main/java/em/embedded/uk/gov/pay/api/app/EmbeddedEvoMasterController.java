@@ -65,6 +65,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
+        // TODO: Application takes Bearer token through header
         return null;
     }
 

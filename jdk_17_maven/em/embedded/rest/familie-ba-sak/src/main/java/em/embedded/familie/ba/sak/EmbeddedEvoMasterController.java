@@ -1,6 +1,6 @@
-package em.embedded.familie.tilbake;
+package em.embedded.familie.ba.sak;
 
-import no.nav.familie.tilbake.Launcher;
+import no.nav.familie.ba.sak.ApplicationKt;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
@@ -31,7 +31,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final GenericContainer postgresContainer = new GenericContainer("postgres:" + POSTGRES_VERSION)
             .withEnv("POSTGRES_PASSWORD", POSTGRES_PASSWORD)
             .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust") //to allow all connections without a password
-            .withEnv("POSTGRES_DB", "familietilbake")
+            .withEnv("POSTGRES_DB", "familiebasak")
             .withExposedPorts(POSTGRES_PORT);
 
     private ConfigurableApplicationContext ctx;
@@ -46,6 +46,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public EmbeddedEvoMasterController(int port) {
         setControllerPort(port);
     }
+
 
     public static void main(String[] args) {
         int port = 40100;
@@ -66,7 +67,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "no.nav.familie.tilbake.";
+        return "no.nav.familie.ba.sak.";
     }
 
     @Override
@@ -88,16 +89,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         postgresContainer.start();
 
-        String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familietilbake";
+        String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familiebasak";
 
-        System.setProperty("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT", "http://localhost:8080/");
-        System.setProperty("UNLEASH_SERVER_API_URL", "http://localhost:8080/");
-        System.setProperty("UNLEASH_SERVER_API_TOKEN", "71c722758740d43341c295ffdc237bd3");
-        System.setProperty("NAIS_APP_NAME", "familietilbake");
-        System.setProperty("NAIS_CLUSTER_NAME", "dev-gcp");
-        System.setProperty("KAFKA_TRUSTSTORE_PATH", "dev-gcp");
 
-        ctx = SpringApplication.run(Launcher.class, new String[]{
+        ctx = SpringApplication.run(ApplicationKt.class, new String[]{
                 "--server.port=0",
                 "--spring.profiles.active=dev",
                 "--management.server.port=-1",
@@ -107,11 +102,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--spring.datasource.password=" + POSTGRES_PASSWORD,
                 "--sentry.logging.enabled=false",
                 "--sentry.environment=local",
+                "--funksjonsbrytere.kafka.producer.enabled=false",
+                "--funksjonsbrytere.enabled=false",
                 "--logging.level.root=OFF",
                 "--logback.configurationFile=src/main/resources/logback.xml",
                 "--logging.level.org.springframework=OFF",
                 "--spring.main.web-application-type=none"
         });
+
 
         // https://www.baeldung.com/spring-boot-application-context-exception
         // spring.main.web-application-type=none
@@ -149,7 +147,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        // TODO: check and see for any necessary steps required
         DbCleaner.clearDatabase(sqlConnection, List.of(), DatabaseType.POSTGRES);
     }
 
