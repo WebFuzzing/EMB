@@ -2,7 +2,7 @@ package em.embedded.uk.gov.pay.api.app;
 
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
-import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
@@ -12,7 +12,6 @@ import uk.gov.pay.api.app.PublicApi;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.io.File;
 import java.util.List;
 
 public class EmbeddedEvoMasterController extends EmbeddedSutController {
@@ -24,7 +23,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final GenericContainer redisContainer = new GenericContainer("redis:" + REDIS_VERSION)
             .withExposedPorts(REDIS_PORT);
 
-    private static final JedisPool jedisPool = new JedisPool("localhost", REDIS_PORT);
+    private static String REDIS_URL = "";
+
+    private static JedisPool jedisPool;
 
     public static void main(String[] args) {
         int port = 40100;
@@ -70,7 +71,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://0.0.0.0:" + application.getJettyPort() + "/assets/swagger.json",
+                "http://localhost:" + application.getJettyPort() + "/assets/swagger.json",
                 null
         );
     }
@@ -84,12 +85,16 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         redisContainer.start();
 
+        REDIS_URL = redisContainer.getHost() + redisContainer.getMappedPort(REDIS_PORT);
+
+        jedisPool = new JedisPool(redisContainer.getHost(), redisContainer.getMappedPort(REDIS_PORT));
+
         application = new PublicApi();
 
         //Dirty hack for DW...
         System.setProperty("dw.server.applicationConnectors[0].port", "0");
         System.setProperty("dw.server.adminConnectors[0].port", "0");
-        System.setProperty("dw.redis.endpoint", "localhost:" + REDIS_PORT);
+        System.setProperty("dw.redis.endpoint", REDIS_URL);
 
         /*
         Note: When running using IntelliJ, make sure the working directory is set to the
@@ -133,7 +138,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void resetStateOfSUT() {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.flushAll()
+            jedis.flushAll();
         }
     }
 

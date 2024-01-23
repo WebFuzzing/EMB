@@ -35,6 +35,7 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <scope>compile</scope>
+            <version>5.1.0</version>
         </dependency>
     </dependencies>
 

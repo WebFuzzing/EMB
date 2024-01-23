@@ -27,6 +27,7 @@ hs_err_pid*
 *.iml
 
 
+js_npm/evomaster-client-js
 
 /temp/
 /dist.zip
