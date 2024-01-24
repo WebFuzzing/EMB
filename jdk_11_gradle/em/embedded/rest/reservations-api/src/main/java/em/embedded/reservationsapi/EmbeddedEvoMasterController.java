@@ -113,6 +113,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return "http://localhost:" + getSutPort();
     }
 
+    /**
+     * Checks if the mongo database is ready to receive commands using a ping command
+     * @return
+     */
     private boolean isMongoClientReady() {
         try {
             MongoDatabase db = mongoClient.getDatabase(MONGODB_DATABASE_NAME);
