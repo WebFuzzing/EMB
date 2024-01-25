@@ -70,14 +70,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public List<AuthenticationDto> getInfoForAuthentication() {
-        return null;
-    }
+    public List<AuthenticationDto> getInfoForAuthentication() { return null; }
 
     @Override
-    public ProblemInfo getProblemInfo() {
-        return null;
-    }
+    public ProblemInfo getProblemInfo() { return null; }
 
     @Override
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
@@ -147,7 +143,5 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public List<DbSpecification> getDbSpecifications() {
-        return dbSpecification;
-    }
+    public List<DbSpecification> getDbSpecifications() { return dbSpecification; }
 }
