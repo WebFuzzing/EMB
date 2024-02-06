@@ -84,6 +84,10 @@ public class PublicApi extends Application<PublicApiConfig> {
 
     private static final String SERVICE_METRICS_NODE = "publicapi";
 
+    /**
+     * Added to check the status of the SUT, since there is no API
+     * available to access this information.
+     */
     private Server jettyServer;
 
     public int getJettyPort() {

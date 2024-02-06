@@ -10,6 +10,7 @@
   <parent>
     <artifactId>TextSecureServer</artifactId>
     <groupId>org.whispersystems.textsecure</groupId>
+    <!-- <version>JGITVER</version> -->
     <version>10.3.0</version>
   </parent>
 
