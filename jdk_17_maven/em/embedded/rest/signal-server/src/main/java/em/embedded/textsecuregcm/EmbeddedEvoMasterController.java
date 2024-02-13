@@ -31,6 +31,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final DockerImageName REDIS_IMAGE = DockerImageName.parse("redis:" + REDIS_VERSION);
 
+    private static JedisPool jedisPool;
+
     private static final GenericContainer redisContainer = new GenericContainer(REDIS_IMAGE)
             .withExposedPorts(REDIS_PORT)
             .withEnv("ALLOW_EMPTY_PASSWORD", "yes")
@@ -83,7 +85,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://0.0.0.0:" + application.getJettyPort() + "/assets/swagger.json",
+                "http://localhost:" + application.getJettyPort() + "/assets/swagger.json",
                 null
         );
     }
@@ -98,6 +100,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("aws.region", "us-west-2");
 
         redisContainer.start();
+        jedisPool = new JedisPool(redisContainer.getHost(), redisContainer.getMappedPort(REDIS_PORT));
 
         dynamoDBContainer.start();
 
@@ -107,7 +110,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         //Dirty hack for DW...
         System.setProperty("dw.server.applicationConnectors[0].port", "0");
-        System.setProperty("dw.server.adminConnectors[0].port", "0");
 
         System.setProperty("dw.cacheCluster.configurationUri", redisURL);
         System.setProperty("dw.clientPresenceCluster.configurationUri", redisURL);
@@ -157,8 +159,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        JedisPool jedisPool = new JedisPool("0.0.0.0", redisContainer.getFirstMappedPort());
-
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.flushAll();
         }

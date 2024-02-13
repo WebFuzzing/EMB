@@ -7,6 +7,7 @@ import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
+import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.sql.DbCleaner;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.springframework.boot.SpringApplication;
@@ -70,10 +71,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     }
 
     @Override
-    public List<AuthenticationDto> getInfoForAuthentication() { return null; }
+    public List<AuthenticationDto> getInfoForAuthentication() {
+        return null;
+    }
 
     @Override
-    public ProblemInfo getProblemInfo() { return null; }
+    public ProblemInfo getProblemInfo() {
+        return new RestProblem(
+                "http://localhost:" + getSutPort() + "/assets/swagger.json",
+                null
+        );
+    }
 
     @Override
     public SutInfoDto.OutputFormat getPreferredOutputFormat() {
@@ -113,7 +121,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);try {
+        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
+        try {
             sqlConnection = jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -138,10 +147,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        // TODO: check and see for any necessary steps required
-        DbCleaner.clearDatabase(sqlConnection, List.of(), DatabaseType.POSTGRES);
+
     }
 
     @Override
-    public List<DbSpecification> getDbSpecifications() { return dbSpecification; }
+    public List<DbSpecification> getDbSpecifications() {
+        return dbSpecification;
+    }
 }
