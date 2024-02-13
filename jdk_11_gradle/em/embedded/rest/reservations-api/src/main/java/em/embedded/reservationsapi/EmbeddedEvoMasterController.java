@@ -96,7 +96,36 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                         "--app.jwt.secret=abcdef012345678901234567890123456789abcdef012345678901234567890123456789"
                 });
 
+        try {
+            Thread.sleep(3_000);
+        } catch (InterruptedException e) {
+            // do nothing
+        }
+
+        while (!isMongoClientReady()) {
+            try {
+                Thread.sleep(1_000);
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+
         return "http://localhost:" + getSutPort();
+    }
+
+    /**
+     * Checks if the mongo database is ready to receive commands using a ping command
+     * @return
+     */
+    private boolean isMongoClientReady() {
+        try {
+            MongoDatabase db = mongoClient.getDatabase(MONGODB_DATABASE_NAME);
+            Document pingResult = db.runCommand(new Document("ping", 1));
+            return pingResult.getDouble("ok") == 1.0;
+        } catch (Exception ex) {
+            // Connection error
+            return false;
+        }
     }
 
     protected int getSutPort() {

@@ -153,6 +153,34 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStart() {
+        try {
+            Thread.sleep(3_000);
+        } catch (InterruptedException e) {
+            // do nothing
+        }
+
+        while (!isMongoClientReady()) {
+            try {
+                Thread.sleep(1_000);
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+    }
+
+    /**
+     * Checks if the mongo database is ready to receive commands using a ping command
+     * @return
+     */
+    private boolean isMongoClientReady() {
+        try {
+            MongoDatabase db = mongoClient.getDatabase(MONGODB_DATABASE_NAME);
+            Document pingResult = db.runCommand(new Document("ping", 1));
+            return pingResult.getDouble("ok") == 1.0;
+        } catch (Exception ex) {
+            // Connection error
+            return false;
+        }
     }
 
     @Override
@@ -270,4 +298,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public Object getMongoConnection() {
         return mongoClient;
     }
+
+
 }
