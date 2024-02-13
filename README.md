@@ -7,10 +7,9 @@
 [EvoMaster](http://evomaster.org) Benchmark (EMB): 
 a set of web/enterprise applications for scientific research in Software Engineering.
 
-We collected several different systems, in different programming languages, like
-Java, Kotlin, JavaScript and C#.
+We collected several different systems running on the JVM, in different programming languages such as  Java and Kotlin.
 In this documentation, we will refer to these projects as System Under Test (SUT).
-Currently, the SUTs are either _REST_ or _GraphQL_ APIs.
+Currently, the SUTs are either _REST_,  _GraphQL_ or _RPC_ APIs.
 
 For each SUT, we implemented _driver_ classes, which can programmatically _start_, _stop_ and _reset_ the state of SUT (e.g., data in SQL databases).
 As well as enable setting up different properties in a _uniform_ way, like choosing TCP port numbers for the HTTP servers. 
@@ -18,7 +17,7 @@ If a SUT uses any external services (e.g., a SQL database), these will be automa
 
 
 This collection of SUTs was originally assembled for easing experimentation with the fuzzer called [EvoMaster](http://evomaster.org).
-However, finding this type of applications is not trivial among open-source projects. 
+However, finding this type of application is not trivial among open-source projects. 
 Furthermore, it is not simple to sort out all the technical details on how to set these applications up and start them in a simple, uniform approach. 
 Therefore, this repository provides the important contribution of providing all these necessary scripts for researchers that need this kind of case study.   
 
@@ -187,10 +186,43 @@ There are 2 main use cases for EMB:
 * Run experiments with other tools
 
 Everything can be setup by running the script `scripts/dist.py`.
-Note that you will need installed at least JDK 8, JDK 11, NPM and .NET 3.x, as well as Docker.
-Also, you will need to setup environment variables like `JAVA_HOME_8` and `JAVA_HOME_11`.
+Note that you will need installed at least Maven, Gradle, JDK 8, JDK 11, JDK 17, NPM, as well as Docker.
+Also, you will need to setup environment variables like `JAVA_HOME_8`, `JAVA_HOME_11` and `JAVA_HOME_17`.
 The script will issue error messages if any prerequisite is missing.
 Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well (if `scripts/dist.py` is run with `True` as input).
+
+Regarding Maven, most-third party dependencies are automatically downloaded from Maven Central. 
+However, some dependencies are from GitHub, which unfortunately require authentication to be able to download such dependencies. 
+In your home folder, you need to create a configuration file for Maven, in particular `.m2/settings.xml`, with the following configurations:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+<servers>
+    <server>
+        <id>github</id>
+		<!-- Old pre Maven 3.9.0 version -->
+        <username>YOURUSERNAME</username>
+		<password>???</password>
+		<!-- New post Maven 3.9.0 version -->
+		<configuration>
+			<httpHeaders>
+			<property>
+				<name>Authorization</name>
+				<value>Bearer ???</value>
+			</property>
+			</httpHeaders>
+		</configuration>
+    </server>
+</servers>
+</settings>
+```
+Which configuration to use depends on the version of Maven (it was changed in version 3.9.0).
+In latest versions of Maven, you need to create an authorization token in GitHub (see more info directly on [GitHub documentation pages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)), and put it instead of `???`.
+
+
 
 [//]: # (There is also a Docker file to run `dist.py`, named `build.dockerfile`.)
 
@@ -208,20 +240,14 @@ Once the script is completed, all the SUTs will be available under the `dist` fo
 
 
 
-Note that here the drivers will be built as well besides the SUTs, and the SUT themselves will also have an instrumented version (for white-box testing heuristics) for _EvoMaster_ (this is for JavaScript and .NET, whereas instrumentation for JVM is done at runtime, via an attached JavaAgent). 
-
 In the built `dist` folder, the files will be organized as follows:
-
-* For JVM: `<name>-sut.jar` will be the non-instrumented SUTs, whereas their executable drivers will be called `<name>-evomaster-runner.jar`.
+ `<name>-sut.jar` will be the non-instrumented SUTs, whereas their executable drivers will be called `<name>-evomaster-runner.jar`.
  Instrumentation can be done at runtime by attaching the `evomaster-agent.jar` JavaAgent. If you are running experiments with EvoMaster, this will be automatically attached when running experiments with `exp.py` (available in the EvoMaster's repository). Or it can be attached manually with JVM option `-Devomaster.instrumentation.jar.path=evomaster-agent.jar` when starting the driver.
-* For NodeJS: under the folder `<name>` (for each NodeJS SUT), the SUT is available under `src`, whereas the instrumented version is under `instrumented`. If the SUT is written in TypeScript, then the compiled version will be under `build`.
-* For .NET: currently only the instrumented version is available (WORK IN PROGRESS)
 
 
 
 For running experiments with EvoMaster, you can also "start" each driver directly from an IDE (e.g., IntelliJ).
 Each of these drivers has a "main" method that is running a REST API (binding on default port 40100), where each operation (like start/stop/reset the SUT) can be called via an HTTP message by EvoMaster.
-For JavaScript, you need to use the files `em-main.js` under the `instrumented/em` folders.
 
 
 
@@ -235,18 +261,12 @@ Each folder represents a set of SUTs (and drivers) that can be built using the s
 For example, the folder `jdk_8_maven` contains all the SUTs that need JDK 8 and are built with Maven.
 On the other hand, the SUTs in the folder `jdk_11_gradle` require JDK 11 and Gradle.
 
-For JVM and .NET, each module has 2 submodules, called `cs` (short for "Case Study") and `em` (short for "EvoMaster").
+For thr JVM, each module has 2 submodules, called `cs` (short for "Case Study") and `em` (short for "EvoMaster").
 `cs` contains all the source code of the different SUTs, whereas `em` contains all the drivers.
 Note: building a top-module will build as well all of its internal submodules. 
 
-Regarding JavaScript, unfortunately NodeJS does not have a good handling of multi-module projects.
-Each SUT has to be built separately.
-However, for each SUT, we put its source code under a folder called `src`, whereas all the code related to the drivers is under `em`.
-Currently, both NodeJS `14` and `16` should work on these SUTs.
-
-The driver classes for Java and .NET are called `EmbeddedEvoMasterController`.
-For JavaScript, they are in a script file called `app-driver.js`.
-Note that Java also a different kind of driver called `ExternalEvoMasterController`.
+The driver classes for Java  are called `EmbeddedEvoMasterController`.
+Note that Java also has a different kind of driver called `ExternalEvoMasterController`.
 The difference is that in External the SUT is started on a separated process, and not running in the same JVM of the driver itself.
 
 
@@ -290,13 +310,3 @@ Branch *develop* is using the most recent SNAPSHOT version of _EvoMaster_.
 As that is not published online, you need to clone its repository, and build
 it locally (see its documentation on how to do it).
 
-To handle JavaScript, unfortunately there is the need for some manual settings.
-However, it needs to be done just once. 
-
-You need to create _symbolic_ link inside `EMB\js_npm` that points to the `evomaster-client-js` folder in _EvoMaster_.
-How to do this, depends on the Operating System.
-Note that in the following, `<some-path>` should be replaced with the actual real paths of where you cloned the _EvoMaster_ and _EMB_ repositories. 
-
-Windows: `mklink /D  C:\<some-path>\EMB\js_npm\evomaster-client-js  C:\<some-path>\EvoMaster\client-js\evomaster-client-js`
-
-Mac: `ln -s /<some-path>/EvoMaster/client-js/evomaster-client-js  /<some-path>/EMB/js_npm/evomaster-client-js`
