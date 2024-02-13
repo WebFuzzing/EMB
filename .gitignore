@@ -269,3 +269,4 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_17_maven/em/embedded/grpc/signal-registration/target/
 /jdk_17_maven/em/external/grpc/signal-registration/target/
 /jdk_17_maven/em/external/web/spring-petclinic/target/
+/jdk_8_maven/cs/rest/original/session-service/target/
