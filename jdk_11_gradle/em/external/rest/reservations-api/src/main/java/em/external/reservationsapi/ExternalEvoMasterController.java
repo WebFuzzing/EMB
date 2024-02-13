@@ -9,8 +9,8 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
-import org.evomaster.client.java.controller.api.dto.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.JsonTokenPostLoginDto;
+import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.auth.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
@@ -153,6 +153,34 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public void postStart() {
+        try {
+            Thread.sleep(3_000);
+        } catch (InterruptedException e) {
+            // do nothing
+        }
+
+        while (!isMongoClientReady()) {
+            try {
+                Thread.sleep(1_000);
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+    }
+
+    /**
+     * Checks if the mongo database is ready to receive commands using a ping command
+     * @return
+     */
+    private boolean isMongoClientReady() {
+        try {
+            MongoDatabase db = mongoClient.getDatabase(MONGODB_DATABASE_NAME);
+            Document pingResult = db.runCommand(new Document("ping", 1));
+            return pingResult.getDouble("ok") == 1.0;
+        } catch (Exception ex) {
+            // Connection error
+            return false;
+        }
     }
 
     @Override
@@ -270,4 +298,6 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public Object getMongoConnection() {
         return mongoClient;
     }
+
+
 }
