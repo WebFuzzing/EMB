@@ -236,11 +236,24 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.s3.S3AsyncClient;
 import software.amazon.awssdk.services.s3.S3Client;
 
+import org.eclipse.jetty.server.AbstractNetworkConnector;
+import org.eclipse.jetty.server.Server;
+
 public class WhisperServerService extends Application<WhisperServerConfiguration> {
 
   private static final Logger log = LoggerFactory.getLogger(WhisperServerService.class);
 
   public static final String SECRETS_BUNDLE_FILE_NAME_PROPERTY = "secrets.bundle.filename";
+
+  private Server jettyServer;
+
+  public int getJettyPort() {
+    return ((AbstractNetworkConnector)jettyServer.getConnectors()[0]).getLocalPort();
+  }
+
+  public Server getJettyServer() {
+    return jettyServer;
+  }
 
   public static final software.amazon.awssdk.auth.credentials.AwsCredentialsProvider AWSSDK_CREDENTIALS_PROVIDER =
       AwsCredentialsProviderChain.of(
@@ -840,6 +853,9 @@ public class WhisperServerService extends Application<WhisperServerConfiguration
     environment.healthChecks().register("cacheCluster", new RedisClusterHealthCheck(cacheCluster));
 
     MetricsUtil.registerSystemResourceMetrics(environment);
+
+    // Note: Custom code
+    environment.lifecycle().addServerLifecycleListener(server -> jettyServer = server);
   }
 
 
