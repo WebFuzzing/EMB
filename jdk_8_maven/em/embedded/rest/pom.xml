@@ -25,6 +25,7 @@
         <module>restcountries</module>
         <module>gestaohospital</module>
         <module>genome-nexus</module>
+        <module>session-service</module>
     </modules>
 
 </project>

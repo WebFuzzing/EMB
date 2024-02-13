@@ -1,0 +1,34 @@
+{
+  "stack": "heroku-18",
+  "name": "cbioportal-session-service",
+  "description":"The cBioPortal for Cancer Genomics provides visualization, analysis and download of large-scale cancer genomics data sets.",
+  "repository":"https://github.com/cbioportal/session-service",
+  "logo":"http://www.cbioportal.org/images/cbioportal_logo.png",
+  "keywords": [
+    "java",
+    "tomcat",
+    "javascript",
+    "cancer",
+    "genomics"
+  ],
+  "env": {
+    "JAVA_OPTS": {
+      "description":"options for jvm",
+      "value": "-Xmx300m -Xms300m -XX:+UseCompressedOops"
+    },
+    "MAVEN_CUSTOM_OPTS": {
+        "description":"set heroku profile for mvn",
+        "value":"-DskipTests -Dpackaging.type=jar -Ddockerfile.skip"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-java"
+    }
+  ],
+  "addons" : [
+    {
+      "plan": "mongolab:sandbox"
+    }
+  ]
+}

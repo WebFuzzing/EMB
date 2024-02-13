@@ -23,6 +23,7 @@ suts <- function(){
     "market",
     "bibliothek",
     "reservations-api",
+    "session-service",
     #"petclinic-graphql",
     #"patio-api",
     #"timbuctoo",

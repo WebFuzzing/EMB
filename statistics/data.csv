@@ -1,4 +1,5 @@
 EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
+TRUE,session-service,REST,Java,JDK 8,Maven,15,1471,MongoDB,UNDEFINED,8,https://github.com/cBioPortal/session-service
 TRUE,bibliothek,REST,Java,JDK 17,Gradle,33,2176,MongoDB,MIT,8,https://github.com/PaperMC/bibliothek
 TRUE,reservations-api,REST,Java,JDK 11,Gradle,39,1853,MongoDB,UNDEFINED,7,https://github.com/cyrilgavala/reservations-api
 TRUE,catwatch,REST,Java,JDK 8,Maven,106,9636,H2,Apache,14,https://github.com/zalando-incubator/catwatch

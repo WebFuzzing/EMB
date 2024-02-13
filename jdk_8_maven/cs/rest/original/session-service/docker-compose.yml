@@ -1,0 +1,25 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Dspring.data.mongodb.uri=mongodb://db:27017/session-service
+      # with sentry logging enabled (replace SENTRY_DSN with yours sentry dsn, one can find it in the SDK setup section in sentry's setting):
+      # - JAVA_OPTS=-Dspring.data.mongodb.uri=mongodb://db:27017/session-service -Dsentry.dsn=SENTRY_DSN
+      # with user/pass enabled:
+      # - JAVA_OPTS=-Dspring.data.mongodb.uri=mongodb://db:27017/session-service -Dsecurity.basic.enabled=true -Dspring.security.user.name=user -Dspring.security.user.password=pass
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: mongo:3.6.6
+    restart: always
+    # this makes mongo use smaller default size limits:
+    # https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-smallfiles
+    command: --smallfiles
+    # uncomment this to expose the db port on localhost
+    # ports:
+    #   - "27017:27017"
