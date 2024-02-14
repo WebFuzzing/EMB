@@ -121,16 +121,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--funksjonsbrytere.kafka.producer.enabled=false",
                 "--funksjonsbrytere.enabled=false",
                 "--logging.level.root=OFF",
-                "--logging.config=classpath:logback.xml",
-                //"--logback.configurationFile=src/main/resources/logback.xml",
+                "--logging.config=classpath:logback-spring.xml",
                 "--logging.level.org.springframework=INFO",
-                //"--API_SCOPE=api://AZURE_APP_CLIENT_ID/.default"
-               // "--spring.main.web-application-type=none"
         });
-
-
-        // https://www.baeldung.com/spring-boot-application-context-exception
-        // spring.main.web-application-type=none
 
         if (sqlConnection != null) {
             try {
@@ -140,10 +133,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        //JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
         try {
             sqlConnection = DriverManager.getConnection(postgresURL, "postgres", POSTGRES_PASSWORD);
-            //jdbc.getDataSource().getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -168,7 +159,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-      //  DbCleaner.clearDatabase(sqlConnection, List.of(), DatabaseType.POSTGRES);
     }
 
     @Override
