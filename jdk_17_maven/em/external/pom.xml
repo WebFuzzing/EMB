@@ -14,6 +14,17 @@
     <modules>
         <module>web</module>
         <module>grpc</module>
+        <module>rest</module>
     </modules>
 
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.1.4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
