@@ -43,7 +43,7 @@ def checkMavenVersion():
 
     above = MAVEN_VERSION_ABOVE.split(".")
     for index, v in enumerate(mvn_version):
-        if int(above[index]) > int(v):
+        if int(above[index]) < int(v):
             return True
 
     return False
