@@ -48,7 +48,7 @@ def checkMavenVersion():
         elif int(above[index]) > int(v):
             return False
 
-    return False
+    return True #  same
 
 
 if not checkMavenVersion():
