@@ -5,16 +5,15 @@ import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
+import org.evomaster.client.java.controller.problem.RestProblem;
 import org.evomaster.client.java.sql.DbCleaner;
 import org.evomaster.client.java.sql.SqlScriptRunner;
 import org.evomaster.client.java.sql.SqlScriptRunnerCached;
 import org.evomaster.client.java.sql.DbSpecification;
-import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -65,11 +64,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int sutPort;
     private  String jarLocation;
     private Connection sqlConnection;
-    //private String INIT_DB_SCRIPT_PATH = "/populateDB.sql";
 
     private List<DbSpecification> dbSpecification;
 
-    private String initSQLScript;
 
     private static final String POSTGRES_VERSION = "13.13";
 
@@ -112,16 +109,34 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String[] getInputParameters() {
-        return new String[]{"--server.port=" + sutPort};
+        return new String[]{
+                "--server.port=" + sutPort,
+                "--spring.profiles.active=dev",
+                "--management.server.port=-1",
+                "--server.ssl.enabled=false",
+                "--spring.datasource.url=" + dbUrl(),
+                "--spring.datasource.username=postgres",
+                "--spring.datasource.password=" + POSTGRES_PASSWORD,
+                "--sentry.logging.enabled=false",
+                "--sentry.environment=local",
+                //TODO check when dealing with Kafka
+                "--funksjonsbrytere.kafka.producer.enabled=false",
+                "--funksjonsbrytere.enabled=false",
+                "--logging.level.root=OFF",
+                "--logging.config=classpath:logback-spring.xml",
+                "--logging.level.org.springframework=INFO",
+        };
     }
 
     public String[] getJVMParameters() {
 
         return new String[]{
-                "-Dspring.datasource.url=" + dbUrl(),
-                "-Dspring.cache.type=none",
-                "-Dspring.profiles.active=postgresql,spring-data-jpa",
-                "-Dspring.jmx.enabled=false",
+                "-DAZUREAD_TOKEN_ENDPOINT_URL=http://foo",
+                "-DAZURE_OPENID_CONFIG_TOKEN_ENDPOINT=bar",
+                "-DAZURE_APP_CLIENT_ID=bar",
+                "-DNAIS_APP_NAME=bar",
+                "-DUNLEASH_SERVER_API_URL=http://bar",
+                "-DUNLEASH_SERVER_API_TOKEN=bar"
         };
     }
 
@@ -130,10 +145,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
         String host = postgres.getContainerIpAddress();
         int port = postgres.getMappedPort(5432);
 
-        String url = "jdbc";
-        url += ":postgresql://"+host+":"+port+"/petclinic";
 
-        return url;
+        return "jdbc:postgresql://"+host+":"+port+"/familiebasak";
     }
 
     @Override
@@ -148,7 +161,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getLogMessageOfInitializedServer() {
-        return "Tomcat started on port";
+        return "Jetty started on port";
     }
 
     @Override
@@ -167,10 +180,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
         try {
             sqlConnection = DriverManager.getConnection(dbUrl(), "postgres", POSTGRES_PASSWORD);
-
-            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("public")
-            );
+            dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -203,12 +213,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "org.springframework.samples.petclinic";
+        return "no.nav.familie.ba.sak.";
     }
 
     @Override
     public ProblemInfo getProblemInfo() {
-        return new GraphQlProblem("/graphql");
+        return new RestProblem(
+                "http://localhost:" + sutPort + "/v3/api-docs",
+                null
+        );
     }
 
     @Override
