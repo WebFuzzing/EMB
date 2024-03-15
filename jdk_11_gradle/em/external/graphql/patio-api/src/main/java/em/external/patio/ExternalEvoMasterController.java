@@ -1,21 +1,19 @@
 package em.external.patio;
 
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.auth.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.sql.DbCleaner;
-import org.evomaster.client.java.sql.SqlScriptRunner;
-import org.evomaster.client.java.sql.SqlScriptRunnerCached;
+
 import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.GraphQlProblem;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.testcontainers.containers.GenericContainer;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -219,17 +217,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
 
-        JsonTokenPostLoginDto token = new JsonTokenPostLoginDto();
-        token.userId = "Stark";
-        token.headerPrefix = "JWT ";
-        token.endpoint = "/graphql";
-        token.jsonPayload = "{\"query\": \"{login(email: \\\"tstark@email.com\\\",password: \\\"avengers\\\"){tokens{authenticationToken}}}\"}";
-        token.extractTokenField = "/data/login/tokens/authenticationToken";
-
-        AuthenticationDto dto = new AuthenticationDto("Stark");
-        dto.jsonTokenPostLogin = token;
-
-        return List.of(dto);
+        return List.of(AuthUtils.getForJWT(
+                "Stark",
+                "/graphql",
+                "{\"query\": \"{login(email: \\\"tstark@email.com\\\",password: \\\"avengers\\\"){tokens{authenticationToken}}}\"}",
+                "/data/login/tokens/authenticationToken"
+        ));
     }
 
     @Override
