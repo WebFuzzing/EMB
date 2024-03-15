@@ -19,6 +19,7 @@
         <module>catwatch</module>
         <module>languagetool</module>
         <module>restcountries</module>
+        <module>session-service</module>
     </modules>
 
 

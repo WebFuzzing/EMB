@@ -21,6 +21,7 @@
 |__bibliothek__|REST|2176|33|8|Java|JDK 17|Gradle|MongoDB|
 |__restcountries__|REST|1977|24|22|Java|JDK 8|Maven||
 |__reservations-api__|REST|1853|39|7|Java|JDK 11|Gradle|MongoDB|
+|__session-service__|REST|1471|15|8|Java|JDK 8|Maven|MongoDB|
 |__rest-scs__|REST|862|13|11|Java|JDK 8|Maven||
 |__rest-ncs__|REST|605|9|6|Java|JDK 8|Maven||
 |__rest-news__|REST|857|11|7|Kotlin|JDK 8|Maven|H2|

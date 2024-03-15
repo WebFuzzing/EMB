@@ -7,10 +7,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.auth.JsonTokenPostLoginDto;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
@@ -256,36 +256,24 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public List<AuthenticationDto> getInfoForAuthentication() {
 
         return Arrays.asList(
-                new AuthenticationDto() {{
-                    name = "admin";
-                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
-                        userId = "admin";
-                        endpoint = "/api/user/login";
-                        jsonPayload = "{\"username\":\"admin\", \"password\":\""+rawPassword+"\"}";
-                        extractTokenField = "/accessToken";
-                        headerPrefix = "Bearer ";
-                    }};
-                }},
-                new AuthenticationDto() {{
-                    name = "foo";
-                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
-                        userId = "foo";
-                        endpoint = "/api/user/login";
-                        jsonPayload = "{\"username\":\"foo\", \"password\":\""+rawPassword+"\"}";
-                        extractTokenField = "/accessToken";
-                        headerPrefix = "Bearer ";
-                    }};
-                }},
-                new AuthenticationDto() {{
-                    name = "bar";
-                    jsonTokenPostLogin = new JsonTokenPostLoginDto() {{
-                        userId = "bar";
-                        endpoint = "/api/user/login";
-                        jsonPayload = "{\"username\":\"bar\", \"password\":\""+rawPassword+"\"}";
-                        extractTokenField = "/accessToken";
-                        headerPrefix = "Bearer ";
-                    }};
-                }}
+                AuthUtils.getForJsonTokenBearer(
+                        "admin",
+                        "/api/user/login",
+                        "{\"username\":\"admin\", \"password\":\""+rawPassword+"\"}",
+                        "/accessToken"
+                ),
+                AuthUtils.getForJsonTokenBearer(
+                        "foo",
+                        "/api/user/login",
+                        "{\"username\":\"foo\", \"password\":\""+rawPassword+"\"}",
+                        "/accessToken"
+                ),
+                AuthUtils.getForJsonTokenBearer(
+                        "bar",
+                        "/api/user/login",
+                        "{\"username\":\"bar\", \"password\":\""+rawPassword+"\"}",
+                        "/accessToken"
+                )
         );
     }
 

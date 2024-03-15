@@ -43,10 +43,12 @@ def checkMavenVersion():
 
     above = MAVEN_VERSION_ABOVE.split(".")
     for index, v in enumerate(mvn_version):
-        if int(above[index]) > int(v):
+        if int(above[index]) < int(v):
             return True
+        elif int(above[index]) > int(v):
+            return False
 
-    return False
+    return True #  same
 
 
 if not checkMavenVersion():
@@ -145,6 +147,9 @@ def build_jdk_8_maven():
 
     copy(folder + "/cs/rest/original/restcountries/target/restcountries-sut.jar", DIST)
     copy(folder + "/em/external/rest/restcountries/target/restcountries-evomaster-runner.jar", DIST)
+
+    copy(folder + "/cs/rest/original/session-service/target/session-service-sut.jar", DIST)
+    copy(folder + "/em/external/rest/session-service/target/session-service-evomaster-runner.jar", DIST)
 
     copy(folder + "/cs/rest-gui/gestaohospital/target/gestaohospital-rest-sut.jar", DIST)
     copy(folder + "/em/external/rest/gestaohospital/target/gestaohospital-rest-evomaster-runner.jar", DIST)
