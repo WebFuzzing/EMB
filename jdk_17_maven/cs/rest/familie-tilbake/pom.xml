@@ -11,7 +11,9 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+<!--        <version>3.1.4</version>-->
+<!--        see https://stackoverflow.com/questions/74946784/java-lang-classnotfoundexception-jakarta-servlet-http-httpsessioncontext-with-s-->
+        <version>3.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -465,6 +467,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>${main-class}</mainClass>
+                    <finalName>familie-tilbake</finalName>
+                    <classifier>sut</classifier>
                 </configuration>
                 <executions>
                     <execution>

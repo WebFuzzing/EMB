@@ -16,8 +16,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             .withEnv("POSTGRES_PASSWORD", POSTGRES_PASSWORD)
             .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust") //to allow all connections without a password
             .withEnv("POSTGRES_DB", "familietilbake")
+            .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"))
             .withExposedPorts(POSTGRES_PORT);
 
     private ConfigurableApplicationContext ctx;
@@ -62,7 +65,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public boolean isSutRunning() {
-        return ctx.isRunning();
+        return ctx!=null && ctx.isRunning();
     }
 
     @Override
@@ -78,7 +81,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://localhost:" + getSutPort() + "/assets/swagger.json",
+                "http://localhost:" + getSutPort() + "/v3/api-docs",
                 null
         );
     }
@@ -94,8 +97,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familietilbake";
 
-        System.setProperty("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT", "http://localhost:8080/");
-        System.setProperty("UNLEASH_SERVER_API_URL", "http://localhost:8080/");
+        System.setProperty("AZURE_APP_WELL_KNOWN_URL", "http://azure:8080/");
+        System.setProperty("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT", "http://foo:8080/");
+        System.setProperty("UNLEASH_SERVER_API_URL", "http://bar:8080/");
         System.setProperty("UNLEASH_SERVER_API_TOKEN", "71c722758740d43341c295ffdc237bd3");
         System.setProperty("NAIS_APP_NAME", "familietilbake");
         System.setProperty("NAIS_CLUSTER_NAME", "dev-gcp");
@@ -112,13 +116,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--sentry.logging.enabled=false",
                 "--sentry.environment=local",
                 "--logging.level.root=OFF",
-                "--logback.configurationFile=src/main/resources/logback.xml",
-                "--logging.level.org.springframework=OFF",
-                "--spring.main.web-application-type=none"
+                "--logging.config=classpath:logback-spring.xml",
+                "--logging.level.org.springframework=INFO"
         });
-
-        // https://www.baeldung.com/spring-boot-application-context-exception
-        // spring.main.web-application-type=none
 
         if (sqlConnection != null) {
             try {
@@ -128,8 +128,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);try {
-            sqlConnection = jdbc.getDataSource().getConnection();
+        try {
+            sqlConnection = DriverManager.getConnection(postgresURL, "postgres", POSTGRES_PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -148,13 +148,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void stopSut() {
         postgresContainer.stop();
-        ctx.stop();
+        if(ctx!=null) ctx.stop();
     }
 
     @Override
     public void resetStateOfSUT() {
-        // TODO: check and see for any necessary steps required
-        DbCleaner.clearDatabase(sqlConnection, List.of(), DatabaseType.POSTGRES);
     }
 
     @Override
