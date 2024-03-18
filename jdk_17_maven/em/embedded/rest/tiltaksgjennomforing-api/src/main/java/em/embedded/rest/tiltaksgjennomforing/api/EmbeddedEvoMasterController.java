@@ -16,8 +16,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.testcontainers.containers.GenericContainer;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             .withEnv("POSTGRES_PASSWORD", POSTGRES_PASSWORD)
             .withEnv("POSTGRES_HOST_AUTH_METHOD", "trust") //to allow all connections without a password
             .withEnv("POSTGRES_DB", "tiltaksgjennomforing")
+            .withTmpFs(Collections.singletonMap("/var/lib/postgresql/data", "rw"))
             .withExposedPorts(POSTGRES_PORT);
 
     private ConfigurableApplicationContext ctx;
@@ -62,7 +65,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public boolean isSutRunning() {
-        return ctx.isRunning();
+        return ctx!=null && ctx.isRunning();
     }
 
     @Override
@@ -78,7 +81,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                "http://localhost:" + getSutPort() + "/assets/swagger.json",
+                "http://localhost:" + getSutPort() + "/v3/api-docs",
                 null
         );
     }
@@ -94,6 +97,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/tiltaksgjennomforing";
 
+
+        //TODO should go through all the environment variables in application properties
+        System.setProperty("KAFKA_BROKERS","KAFKA_BROKERS");
+        System.setProperty("KAFKA_TRUSTSTORE_PATH","KAFKA_TRUSTSTORE_PATH");
+        System.setProperty("KAFKA_CREDSTORE_PASSWORD","KAFKA_CREDSTORE_PASSWORD");
+        System.setProperty("KAFKA_KEYSTORE_PATH","KAFKA_KEYSTORE_PATH");
+        System.setProperty("KAFKA_CREDSTORE_PASSWORD","KAFKA_CREDSTORE_PASSWORD");
+        System.setProperty("KAFKA_SCHEMA_REGISTRY","KAFKA_SCHEMA_REGISTRY");
+        System.setProperty("KAFKA_SCHEMA_REGISTRY_USER","KAFKA_SCHEMA_REGISTRY_USER");
+        System.setProperty("KAFKA_SCHEMA_REGISTRY_PASSWORD","KAFKA_SCHEMA_REGISTRY_PASSWORD");
+        System.setProperty("AZURE_APP_TENANT_ID","AZURE_APP_TENANT_ID");
+        System.setProperty("AZURE_APP_CLIENT_ID","AZURE_APP_CLIENT_ID");
+        System.setProperty("AZURE_APP_CLIENT_SECRET","AZURE_APP_CLIENT_SECRET");
+        System.setProperty("beslutter.ad.gruppe","99ea78dc-db77-44d0-b193-c5dc22f01e1d");
+
         ctx = SpringApplication.run(TiltaksgjennomforingApplication.class, new String[]{
                 "--server.port=0",
                 "--spring.profiles.active=dev",
@@ -105,13 +123,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--sentry.logging.enabled=false",
                 "--sentry.environment=local",
                 "--logging.level.root=OFF",
-                "--logback.configurationFile=src/main/resources/logback.xml",
-                "--logging.level.org.springframework=OFF",
-                "--spring.main.web-application-type=none"
+                "--logging.config=classpath:logback-spring.xml",
+                "--logging.level.org.springframework=INFO",
         });
 
-        // https://www.baeldung.com/spring-boot-application-context-exception
-        // spring.main.web-application-type=none
 
         if (sqlConnection != null) {
             try {
@@ -121,12 +136,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             }
         }
 
-        JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
         try {
-            sqlConnection = jdbc.getDataSource().getConnection();
+            sqlConnection = DriverManager.getConnection(postgresURL, "postgres", POSTGRES_PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
         dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES, sqlConnection));
 
@@ -142,7 +157,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void stopSut() {
         postgresContainer.stop();
-        ctx.stop();
+        if(ctx != null) ctx.stop();
     }
 
     @Override
