@@ -60,7 +60,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public String getPackagePrefixesToCover() {
-        return "uk.gov.pay.api.app.";
+        return "uk.gov.pay.api.";
     }
 
     @Override
