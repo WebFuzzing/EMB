@@ -1,30 +1,21 @@
 package em.external.uk.gov.pay.api.app;
 
-import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
-import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
-import org.evomaster.client.java.sql.DbCleaner;
 import org.evomaster.client.java.sql.DbSpecification;
-import org.h2.tools.Server;
 import org.testcontainers.containers.GenericContainer;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -40,21 +31,20 @@ public class ExternalEvoMasterController extends ExternalSutController {
             sutPort = Integer.parseInt(args[1]);
         }
         String jarLocation = "cs/rest/pay-publicapi/target";
-        if(args.length > 2){
+        if (args.length > 2) {
             jarLocation = args[2];
         }
-        if(! jarLocation.endsWith(".jar")) {
+        if (!jarLocation.endsWith(".jar")) {
             jarLocation += "/pay-publicapi-sut.jar";
         }
         int timeoutSeconds = 120;
-        if(args.length > 3){
+        if (args.length > 3) {
             timeoutSeconds = Integer.parseInt(args[3]);
         }
         String command = "java";
-        if(args.length > 4){
+        if (args.length > 4) {
             command = args[4];
         }
-
 
 
         ExternalEvoMasterController controller =
@@ -68,7 +58,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     private final int timeoutSeconds;
     private final int sutPort;
 
-    private  String jarLocation;
+    private String jarLocation;
     private final String CONFIG_FILE = "em_config.yaml";
 
     private static final int REDIS_PORT = 6379;
@@ -82,7 +72,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     private static JedisPool jedisPool;
 
-    public ExternalEvoMasterController(){
+    public ExternalEvoMasterController() {
         this(40100, "../api/target", 12345, 120, "java");
     }
 
@@ -106,22 +96,22 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
 
     /**
-           Unfortunately, it seems like Dropwizard is buggy, and has
-           problems with overriding params without a YML file :(
+     * Unfortunately, it seems like Dropwizard is buggy, and has
+     * problems with overriding params without a YML file :(
      */
     private void createConfigurationFile() {
 
         //save config to same folder of JAR file
         Path path = getConfigPath();
 
-        try(InputStream is = this.getClass().getResourceAsStream("/"+ CONFIG_FILE )){
+        try (InputStream is = this.getClass().getResourceAsStream("/" + CONFIG_FILE)) {
             Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Path getConfigPath(){
+    private Path getConfigPath() {
         return Paths.get(jarLocation)
                 .toAbsolutePath()
                 .getParent()
@@ -138,15 +128,15 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getJVMParameters() {
 
         return new String[]{
-                "-Ddw.server.applicationConnectors[0].port="+sutPort,
+                "-Ddw.server.applicationConnectors[0].port=" + sutPort,
                 "-Ddw.server.adminConnectors[0].port=0",
-                "-Ddw.redis.endpoint="+REDIS_URL
+                "-Ddw.redis.endpoint=" + REDIS_URL
         };
     }
 
     @Override
     public String getBaseURL() {
-        return "http://localhost:"+sutPort;
+        return "http://localhost:" + sutPort;
     }
 
     @Override
@@ -156,7 +146,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public String getLogMessageOfInitializedServer() {
-        return "Server: Started";
+        return "Started application";
     }
 
     @Override
@@ -204,7 +194,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
     @Override
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
-                getBaseURL()  + "/assets/swagger.json",
+                getBaseURL() + "/assets/swagger.json",
                 null
         );
     }
