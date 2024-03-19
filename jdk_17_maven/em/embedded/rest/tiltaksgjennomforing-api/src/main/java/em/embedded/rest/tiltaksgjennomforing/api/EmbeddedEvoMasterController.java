@@ -107,6 +107,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("KAFKA_SCHEMA_REGISTRY","KAFKA_SCHEMA_REGISTRY");
         System.setProperty("KAFKA_SCHEMA_REGISTRY_USER","KAFKA_SCHEMA_REGISTRY_USER");
         System.setProperty("KAFKA_SCHEMA_REGISTRY_PASSWORD","KAFKA_SCHEMA_REGISTRY_PASSWORD");
+        System.setProperty("AZURE_APP_WELL_KNOWN_URL","http://not-existing-fake-url-FOO.com");
+        System.setProperty("TOKEN_X_WELL_KNOWN_URL","http://not-existing-fake-url-BAR.com");
         System.setProperty("AZURE_APP_TENANT_ID","AZURE_APP_TENANT_ID");
         System.setProperty("AZURE_APP_CLIENT_ID","AZURE_APP_CLIENT_ID");
         System.setProperty("AZURE_APP_CLIENT_SECRET","AZURE_APP_CLIENT_SECRET");
@@ -114,7 +116,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         ctx = SpringApplication.run(TiltaksgjennomforingApplication.class, new String[]{
                 "--server.port=0",
-                "--spring.profiles.active=dev",
+                "--spring.profiles.active=dev-fss",
                 "--management.server.port=-1",
                 "--server.ssl.enabled=false",
                 "--spring.datasource.url=" + postgresURL,
