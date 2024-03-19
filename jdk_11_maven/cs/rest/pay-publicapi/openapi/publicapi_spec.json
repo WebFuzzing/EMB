@@ -1558,6 +1558,32 @@
           }
         }
       },
+      "CardDetailsFromResponse" : {
+        "type" : "object",
+        "properties" : {
+          "billing_address" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "card_brand" : {
+            "type" : "string"
+          },
+          "card_type" : {
+            "type" : "string"
+          },
+          "cardholder_name" : {
+            "type" : "string"
+          },
+          "expiry_date" : {
+            "type" : "string"
+          },
+          "first_digits_card_number" : {
+            "type" : "string"
+          },
+          "last_digits_card_number" : {
+            "type" : "string"
+          }
+        }
+      },
       "CreateAgreementRequest" : {
         "type" : "object",
         "description" : "The Agreement Request Payload",
@@ -1680,7 +1706,7 @@
             "example" : 1200
           },
           "card_details" : {
-            "$ref" : "#/components/schemas/CardDetails"
+            "$ref" : "#/components/schemas/CardDetailsFromResponse"
           },
           "created_date" : {
             "type" : "string",
@@ -2111,7 +2137,7 @@
         "type" : "object",
         "properties" : {
           "CardDetails" : {
-            "$ref" : "#/components/schemas/CardDetails"
+            "$ref" : "#/components/schemas/CardDetailsFromResponse"
           },
           "created_date" : {
             "type" : "string",
