@@ -119,6 +119,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("dw.messageCache.cluster.configurationUri", redisURL);
         System.setProperty("dw.metricsCluster.configurationUri", redisURL);
 
+        System.setProperty("secrets.bundle.filename", "src/main/resources/secrets.yml");
+
         try {
             application.run("server", "src/main/resources/em-sample.yml");
         } catch (Exception e) {
