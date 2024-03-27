@@ -30,7 +30,8 @@ logging:
 
 baseUrl: ${PUBLICAPI_BASE}
 connectorUrl: ${CONNECTOR_URL}
-publicAuthUrl: ${PUBLIC_AUTH_URL}
+publicAuthUrl: http://public.auth.url.com:8080
+#publicAuthUrl: ${PUBLIC_AUTH_URL}
 ledgerUrl: ${LEDGER_URL}
 
 jerseyClientConfig:
@@ -58,7 +59,9 @@ redis:
 
 allowHttpForReturnUrl: ${ALLOW_HTTP_FOR_RETURN_URL:-false}
 
-apiKeyHmacSecret: ${TOKEN_API_HMAC_SECRET}
+#apiKeyHmacSecret: ${TOKEN_API_HMAC_SECRET}
+apiKeyHmacSecret: "mysupersecret"
+
 
 # Caching authenticator.
 authenticationCachePolicy: expireAfterWrite=1m

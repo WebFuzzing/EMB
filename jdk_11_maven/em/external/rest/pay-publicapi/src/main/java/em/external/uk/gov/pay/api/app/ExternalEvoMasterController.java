@@ -1,5 +1,6 @@
 package em.external.uk.gov.pay.api.app;
 
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.ExternalSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
@@ -16,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExternalEvoMasterController extends ExternalSutController {
@@ -206,8 +208,9 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        //TODO
-        return null;
+        return Arrays.asList(
+                AuthUtils.getForAuthorizationHeader("foo", "Bearer asdfghdasdjlguuolnga94upq3nrd2642sq7uel0oo")
+        );
     }
 
 

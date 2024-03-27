@@ -1,5 +1,6 @@
 package em.embedded.uk.gov.pay.api.app;
 
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
@@ -12,6 +13,7 @@ import uk.gov.pay.api.app.PublicApi;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class EmbeddedEvoMasterController extends EmbeddedSutController {
@@ -65,8 +67,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        // TODO: Application takes Bearer token through header
-        return null;
+        return Arrays.asList(
+                AuthUtils.getForAuthorizationHeader("foo", "Bearer asdfghdasdjlguuolnga94upq3nrd2642sq7uel0oo")
+        );
     }
 
     @Override
