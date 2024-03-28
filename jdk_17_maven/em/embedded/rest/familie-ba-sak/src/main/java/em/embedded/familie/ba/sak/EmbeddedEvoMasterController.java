@@ -99,11 +99,11 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familiebasak";
 
         //TODO should go through all the environment variables in application properties
-        System.setProperty("AZUREAD_TOKEN_ENDPOINT_URL","http://foo");
+        System.setProperty("AZUREAD_TOKEN_ENDPOINT_URL","http://fake-azure-token-endpoint.no:8080");
         System.setProperty("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT","bar");
         System.setProperty("AZURE_APP_CLIENT_ID","bar");
         System.setProperty("NAIS_APP_NAME","bar");
-        System.setProperty("UNLEASH_SERVER_API_URL","http://bar");
+        System.setProperty("UNLEASH_SERVER_API_URL","http://fake-unleash-server-api.no:8080");
         System.setProperty("UNLEASH_SERVER_API_TOKEN","bar");
 
 

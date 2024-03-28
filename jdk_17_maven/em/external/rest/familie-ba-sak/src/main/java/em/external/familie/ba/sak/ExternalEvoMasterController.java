@@ -131,11 +131,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public String[] getJVMParameters() {
 
         return new String[]{
-                "-DAZUREAD_TOKEN_ENDPOINT_URL=http://foo",
+                "-DAZUREAD_TOKEN_ENDPOINT_URL=http://fake-azure-token-endpoint.no:8080",
                 "-DAZURE_OPENID_CONFIG_TOKEN_ENDPOINT=bar",
                 "-DAZURE_APP_CLIENT_ID=bar",
                 "-DNAIS_APP_NAME=bar",
-                "-DUNLEASH_SERVER_API_URL=http://bar",
+                "-DUNLEASH_SERVER_API_URL=http://fake-unleash-server-api.no:8080",
                 "-DUNLEASH_SERVER_API_TOKEN=bar"
         };
     }
