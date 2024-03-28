@@ -67,9 +67,9 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        return Arrays.asList(
-                AuthUtils.getForAuthorizationHeader("foo", "Bearer asdfghdasdjlguuolnga94upq3nrd2642sq7uel0oo")
-        );
+        AuthenticationDto dto = AuthUtils.getForAuthorizationHeader("foo", "Bearer asdfghdasdjlguuolnga94upq3nrd2642sq7uel0oo");
+        dto.requireMockHandling = true;
+        return Arrays.asList(dto);
     }
 
     @Override
