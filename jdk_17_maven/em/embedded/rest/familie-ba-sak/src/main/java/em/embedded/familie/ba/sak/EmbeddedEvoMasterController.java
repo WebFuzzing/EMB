@@ -1,6 +1,9 @@
 package em.embedded.familie.ba.sak;
 
-import no.nav.familie.ba.sak.ApplicationKt;
+import com.nimbusds.jose.JOSEObjectType;
+import no.nav.security.mock.oauth2.MockOAuth2Server;
+import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
@@ -8,7 +11,6 @@ import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
-import org.evomaster.client.java.sql.DbCleaner;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,10 +19,8 @@ import org.testcontainers.containers.GenericContainer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
@@ -38,6 +38,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
             .withExposedPorts(POSTGRES_PORT);
 
     private ConfigurableApplicationContext ctx;
+
+    private MockOAuth2Server oAuth2Server;
+
+    private final String ISSUER_ID = "azuread";
+
+    private final String DEFAULT_AUDIENCE = "some-audience";
+
+    private final String PROSESSERING_ROLLE = "928636f4-fd0d-4149-978e-a6fb68bb19de";
 
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
@@ -75,9 +83,64 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        //TODO seems like it uses auth
-        return null;
+
+        //see RolletilgangTest
+        String token_veileder = getToken(Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface");
+        String token_saksbehandler = getToken(Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar");
+        String token_beslutter = getToken(Arrays.asList("BESLUTTER"),"Z0002", "John Smith");
+        String token_forvalter = getToken(Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi");
+        String token_kode6 = getToken(Arrays.asList("KODE6"),"Z0004", "Kode Six");
+        String token_kode7 = getToken(Arrays.asList("KODE7"),"Z0005", "Kode Seven");
+
+        /*
+            TODO check
+            enum class BehandlerRolle(val nivå: Int) {
+            SYSTEM(4),
+            BESLUTTER(3),
+            SAKSBEHANDLER(2),
+            VEILEDER(1),
+            UKJENT(0),
+            }
+         */
+
+        /*
+            FIXME
+            prosessering_rolle is only for endpoints under:
+            "/api/task"
+            TODO need to check how others are validated...
+         */
+
+        return Arrays.asList(
+                AuthUtils.getForAuthorizationHeader("Veileder", "Bearer " + token_veileder),
+                AuthUtils.getForAuthorizationHeader("Saksbehandler", "Bearer " + token_saksbehandler),
+                AuthUtils.getForAuthorizationHeader("Beslutter", "Bearer " + token_beslutter),
+                AuthUtils.getForAuthorizationHeader("Forvalter", "Bearer " + token_forvalter),
+                AuthUtils.getForAuthorizationHeader("Kode6", "Bearer " + token_kode6),
+                AuthUtils.getForAuthorizationHeader("Kode7", "Bearer " + token_kode7)
+        );
     }
+
+    private String getToken(List<String> groups, String id, String name) {
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("groups",groups);
+        claims.put("name",name);
+        claims.put("NAVident", id);
+
+        String token = oAuth2Server.issueToken(
+                ISSUER_ID,
+                id,
+                new DefaultOAuth2TokenCallback(
+                        ISSUER_ID,
+                        "subject",
+                        JOSEObjectType.JWT.getType(),
+                        Arrays.asList(DEFAULT_AUDIENCE),
+                        claims,
+                        360000
+                        )
+                ).serialize();
+        return token;
+    }
+
 
     @Override
     public ProblemInfo getProblemInfo() {
@@ -96,6 +159,12 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         postgresContainer.start();
 
+        oAuth2Server = new  MockOAuth2Server();
+        oAuth2Server.start(8081); //TODO fixed until we handle dynamic headers in generated tests
+
+        String wellKnownUrl = oAuth2Server.wellKnownUrl(ISSUER_ID).toString();
+
+
         String postgresURL = "jdbc:postgresql://" + postgresContainer.getHost() + ":" + postgresContainer.getMappedPort(POSTGRES_PORT) + "/familiebasak";
 
         //TODO should go through all the environment variables in application properties
@@ -105,7 +174,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         System.setProperty("NAIS_APP_NAME","bar");
         System.setProperty("UNLEASH_SERVER_API_URL","http://fake-unleash-server-api.no:8080");
         System.setProperty("UNLEASH_SERVER_API_TOKEN","bar");
-
+        System.setProperty("BA_SAK_CLIENT_ID", DEFAULT_AUDIENCE);
 
         ctx = SpringApplication.run(no.nav.familie.ba.sak.FamilieBaSakApplication.class, new String[]{
                 "--server.port=0",
@@ -123,6 +192,19 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--logging.level.root=OFF",
                 "--logging.config=classpath:logback-spring.xml",
                 "--logging.level.org.springframework=INFO",
+                "--no.nav.security.jwt.issuer.azuread.discoveryurl="+wellKnownUrl,
+                "--prosessering.rolle=" + PROSESSERING_ROLLE,
+                "--FAMILIE_EF_SAK_API_URL=http://fake-familie-ef-sak/api",
+                "--FAMILIE_KLAGE_URL=http://fake-familie-klage",
+                "--FAMILIE_BREV_API_URL=http://fake-familie-brev",
+                "--FAMILIE_BA_INFOTRYGD_FEED_API_URL=http://fake-familie-ba-infotrygd-feed/api",
+                "--FAMILIE_BA_INFOTRYGD_API_URL=http://fake-familie-ba-infotrygd",
+                "--FAMILIE_TILBAKE_API_URL=http://fake-familie-tilbake/api",
+                "--PDL_URL=http://fake-pdl-api.default",
+                "--FAMILIE_INTEGRASJONER_API_URL=http://fake-familie-integrasjoner/api",
+                "--FAMILIE_OPPDRAG_API_URL=http://fake-familie-oppdrag/api",
+                "--SANITY_FAMILIE_API_URL=http://fake-xsrv1mh6.apicdn.sanity.io/v2021-06-07/data/query/ba-brev",
+                "--ECB_API_URL=http://fake-data-api.ecb.europa.eu/service/data/EXR/"
         });
 
         if (sqlConnection != null) {
@@ -154,6 +236,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public void stopSut() {
         postgresContainer.stop();
+        if(oAuth2Server!=null) oAuth2Server.shutdown();
         if(ctx!=null)ctx.stop();
     }
 
