@@ -194,7 +194,8 @@ The script will issue error messages if any prerequisite is missing.
 Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well (if `scripts/dist.py` is run with `True` as input).
 
 Regarding Maven, most-third party dependencies are automatically downloaded from Maven Central. 
-However, some dependencies are from GitHub, which unfortunately require authentication to be able to download such dependencies. 
+However, some dependencies are from GitHub, which unfortunately require authentication to be able to download such dependencies.
+Unfortunately, they have [no intention](https://github.com/orgs/community/discussions/26634) to fix this huge usability issue :(
 In your home folder, you need to create a configuration file for Maven, in particular `.m2/settings.xml`, with the following configurations:
 
 ```
