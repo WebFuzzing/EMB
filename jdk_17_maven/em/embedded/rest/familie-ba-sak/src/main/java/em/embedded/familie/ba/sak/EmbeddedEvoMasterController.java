@@ -85,6 +85,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public List<AuthenticationDto> getInfoForAuthentication() {
 
         //see RolletilgangTest
+        String token_task = getToken(Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner");
         String token_veileder = getToken(Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface");
         String token_saksbehandler = getToken(Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar");
         String token_beslutter = getToken(Arrays.asList("BESLUTTER"),"Z0002", "John Smith");
@@ -111,6 +112,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
          */
 
         return Arrays.asList(
+                AuthUtils.getForAuthorizationHeader("TaskRunner", "Bearer " + token_task),
                 AuthUtils.getForAuthorizationHeader("Veileder", "Bearer " + token_veileder),
                 AuthUtils.getForAuthorizationHeader("Saksbehandler", "Bearer " + token_saksbehandler),
                 AuthUtils.getForAuthorizationHeader("Beslutter", "Bearer " + token_beslutter),
