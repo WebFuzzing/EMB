@@ -2,12 +2,18 @@ package em.embedded.familie.ba.sak;
 
 import com.nimbusds.jose.JOSEObjectType;
 import no.nav.security.mock.oauth2.MockOAuth2Server;
+import no.nav.security.mock.oauth2.OAuth2Config;
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback;
+import no.nav.security.mock.oauth2.token.RequestMapping;
+import no.nav.security.mock.oauth2.token.RequestMappingTokenCallback;
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
+import org.evomaster.client.java.controller.api.dto.auth.HttpVerb;
+import org.evomaster.client.java.controller.api.dto.auth.LoginEndpointDto;
+import org.evomaster.client.java.controller.api.dto.auth.TokenHandlingDto;
 import org.evomaster.client.java.controller.api.dto.database.schema.DatabaseType;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
@@ -47,6 +53,17 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private final String PROSESSERING_ROLLE = "928636f4-fd0d-4149-978e-a6fb68bb19de";
 
+    private final String TOKEN_PARAM = "name";
+
+    private static final String A0 = "TaskRunner";
+    private static final String A1 = "Veileder";
+    private static final String A2 = "Saksbehandler";
+    private static final String A3 = "Beslutter";
+    private static final String A4 = "Forvalter";
+    private static final String A5 = "Kode6";
+    private static final String A6 = "Kode7";
+
+
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
 
@@ -81,67 +98,132 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         return "no.nav.familie.ba.sak.";
     }
 
+
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
 
-        //see RolletilgangTest
-        String token_task = getToken(Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner");
-        String token_veileder = getToken(Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface");
-        String token_saksbehandler = getToken(Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar");
-        String token_beslutter = getToken(Arrays.asList("BESLUTTER"),"Z0002", "John Smith");
-        String token_forvalter = getToken(Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi");
-        String token_kode6 = getToken(Arrays.asList("KODE6"),"Z0004", "Kode Six");
-        String token_kode7 = getToken(Arrays.asList("KODE7"),"Z0005", "Kode Seven");
-
-        /*
-            TODO check
-            enum class BehandlerRolle(val nivå: Int) {
-            SYSTEM(4),
-            BESLUTTER(3),
-            SAKSBEHANDLER(2),
-            VEILEDER(1),
-            UKJENT(0),
-            }
-         */
-
-        /*
-            FIXME
-            prosessering_rolle is only for endpoints under:
-            "/api/task"
-            TODO need to check how others are validated...
-         */
+        String url = oAuth2Server.baseUrl() + ISSUER_ID + "/token";
 
         return Arrays.asList(
-                AuthUtils.getForAuthorizationHeader("TaskRunner", "Bearer " + token_task),
-                AuthUtils.getForAuthorizationHeader("Veileder", "Bearer " + token_veileder),
-                AuthUtils.getForAuthorizationHeader("Saksbehandler", "Bearer " + token_saksbehandler),
-                AuthUtils.getForAuthorizationHeader("Beslutter", "Bearer " + token_beslutter),
-                AuthUtils.getForAuthorizationHeader("Forvalter", "Bearer " + token_forvalter),
-                AuthUtils.getForAuthorizationHeader("Kode6", "Bearer " + token_kode6),
-                AuthUtils.getForAuthorizationHeader("Kode7", "Bearer " + token_kode7)
+                getAuthenticationDto(A0,url),
+                getAuthenticationDto(A1,url),
+                getAuthenticationDto(A2,url),
+                getAuthenticationDto(A3,url),
+                getAuthenticationDto(A4,url),
+                getAuthenticationDto(A5,url),
+                getAuthenticationDto(A6,url)
         );
     }
 
-    private String getToken(List<String> groups, String id, String name) {
+    private RequestMappingTokenCallback getTokenCallback(String label, List<String> groups, String id, String name) {
         Map<String,Object> claims = new HashMap<>();
         claims.put("groups",groups);
         claims.put("name",name);
         claims.put("NAVident", id);
 
-        String token = oAuth2Server.issueToken(
+        Set<RequestMapping> mappings = new HashSet<>();
+        RequestMapping rm = new RequestMapping(TOKEN_PARAM,label,claims,JOSEObjectType.JWT.getType());
+        mappings.add(rm);
+
+        RequestMappingTokenCallback callback = new RequestMappingTokenCallback(
                 ISSUER_ID,
-                id,
-                new DefaultOAuth2TokenCallback(
-                        ISSUER_ID,
-                        "subject",
-                        JOSEObjectType.JWT.getType(),
-                        Arrays.asList(DEFAULT_AUDIENCE),
-                        claims,
-                        360000
-                        )
-                ).serialize();
-        return token;
+                mappings,
+                360000
+        );
+
+        return callback;
     }
+
+    private OAuth2Config getOAuth2Config(){
+
+        Set<RequestMappingTokenCallback> callbacks = Set.of(
+                getTokenCallback(A0, Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner"),
+                getTokenCallback(A1, Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface"),
+                getTokenCallback(A2, Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar"),
+                getTokenCallback(A3, Arrays.asList("BESLUTTER"),"Z0002", "John Smith"),
+                getTokenCallback(A4, Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi"),
+                getTokenCallback(A5, Arrays.asList("KODE6"),"Z0004", "Kode Six"),
+                getTokenCallback(A6, Arrays.asList("KODE7"),"Z0005", "Kode Seven")
+        );
+
+        OAuth2Config config = new OAuth2Config(
+                false,
+                null,
+                null,
+                new no.nav.security.mock.oauth2.token.OAuth2TokenProvider(),
+                callbacks
+                );
+
+        return config;
+    }
+
+    private AuthenticationDto getAuthenticationDto(String label, String oauth2Url){
+
+        AuthenticationDto dto = new AuthenticationDto(label);
+        LoginEndpointDto x = new LoginEndpointDto();
+        dto.loginEndpointAuth = x;
+
+        x.externalEndpointURL = oauth2Url;
+        x.payloadRaw = "name="+label+"&grant_type=authorization_code&code=foo&client_id=foo";
+        x.verb = HttpVerb.POST;
+        x.contentType = "application/x-www-form-urlencoded";
+        x.expectCookies = false;
+
+        TokenHandlingDto token = new TokenHandlingDto();
+        token.headerPrefix = "Bearer ";
+        token.httpHeaderName = "Authorization";
+        token.extractFromField = "/access_token";
+        x.token = token;
+
+        return dto;
+    }
+
+
+
+
+//    @Override
+//    public List<AuthenticationDto> getInfoForAuthentication() {
+//
+//        //see RolletilgangTest
+//        String token_task = getToken(Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner");
+//        String token_veileder = getToken(Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface");
+//        String token_saksbehandler = getToken(Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar");
+//        String token_beslutter = getToken(Arrays.asList("BESLUTTER"),"Z0002", "John Smith");
+//        String token_forvalter = getToken(Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi");
+//        String token_kode6 = getToken(Arrays.asList("KODE6"),"Z0004", "Kode Six");
+//        String token_kode7 = getToken(Arrays.asList("KODE7"),"Z0005", "Kode Seven");
+//
+//        return Arrays.asList(
+//                AuthUtils.getForAuthorizationHeader("TaskRunner", "Bearer " + token_task),
+//                AuthUtils.getForAuthorizationHeader("Veileder", "Bearer " + token_veileder),
+//                AuthUtils.getForAuthorizationHeader("Saksbehandler", "Bearer " + token_saksbehandler),
+//                AuthUtils.getForAuthorizationHeader("Beslutter", "Bearer " + token_beslutter),
+//                AuthUtils.getForAuthorizationHeader("Forvalter", "Bearer " + token_forvalter),
+//                AuthUtils.getForAuthorizationHeader("Kode6", "Bearer " + token_kode6),
+//                AuthUtils.getForAuthorizationHeader("Kode7", "Bearer " + token_kode7)
+//        );
+//    }
+//
+//    private String getToken(List<String> groups, String id, String name) {
+//        Map<String,Object> claims = new HashMap<>();
+//        claims.put("groups",groups);
+//        claims.put("name",name);
+//        claims.put("NAVident", id);
+//
+//        String token = oAuth2Server.issueToken(
+//                ISSUER_ID,
+//                id,
+//                new DefaultOAuth2TokenCallback(
+//                        ISSUER_ID,
+//                        "subject",
+//                        JOSEObjectType.JWT.getType(),
+//                        Arrays.asList(DEFAULT_AUDIENCE),
+//                        claims,
+//                        360000
+//                        )
+//                ).serialize();
+//        return token;
+//    }
 
 
     @Override
@@ -161,8 +243,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public String startSut() {
         postgresContainer.start();
 
-        oAuth2Server = new  MockOAuth2Server();
-        oAuth2Server.start(8081); //TODO fixed until we handle dynamic headers in generated tests
+        oAuth2Server = new  MockOAuth2Server(getOAuth2Config());
+        oAuth2Server.start();
 
         String wellKnownUrl = oAuth2Server.wellKnownUrl(ISSUER_ID).toString();
 
