@@ -244,7 +244,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         postgresContainer.start();
 
         oAuth2Server = new  MockOAuth2Server(getOAuth2Config());
-        oAuth2Server.start();
+        oAuth2Server.start(8081); //ephemeral gives issues in generated tests
 
         String wellKnownUrl = oAuth2Server.wellKnownUrl(ISSUER_ID).toString();
 
