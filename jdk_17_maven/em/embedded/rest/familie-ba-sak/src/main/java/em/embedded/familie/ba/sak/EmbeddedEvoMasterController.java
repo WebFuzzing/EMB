@@ -164,7 +164,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         dto.loginEndpointAuth = x;
 
         x.externalEndpointURL = oauth2Url;
-        x.payloadRaw = "name="+label+"&grant_type=authorization_code&code=foo&client_id=foo";
+        x.payloadRaw = TOKEN_PARAM+"="+label+"&grant_type=authorization_code&code=foo&client_id=foo";
         x.verb = HttpVerb.POST;
         x.contentType = "application/x-www-form-urlencoded";
         x.expectCookies = false;
