@@ -3,10 +3,8 @@ package em.embedded.familie.ba.sak;
 import com.nimbusds.jose.JOSEObjectType;
 import no.nav.security.mock.oauth2.MockOAuth2Server;
 import no.nav.security.mock.oauth2.OAuth2Config;
-import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback;
 import no.nav.security.mock.oauth2.token.RequestMapping;
 import no.nav.security.mock.oauth2.token.RequestMappingTokenCallback;
-import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.SutInfoDto;
@@ -115,15 +113,26 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         );
     }
 
-    private RequestMappingTokenCallback getTokenCallback(String label, List<String> groups, String id, String name) {
+    private RequestMapping getRequestMapping(String label, List<String> groups, String id, String name) {
         Map<String,Object> claims = new HashMap<>();
         claims.put("groups",groups);
         claims.put("name",name);
         claims.put("NAVident", id);
 
-        Set<RequestMapping> mappings = new HashSet<>();
         RequestMapping rm = new RequestMapping(TOKEN_PARAM,label,claims,JOSEObjectType.JWT.getType());
-        mappings.add(rm);
+
+        return rm;
+    }
+
+    private OAuth2Config getOAuth2Config(){
+
+        List<RequestMapping> mappings = Arrays.asList( getRequestMapping(A0, Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner"),
+                getRequestMapping(A1, Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface"),
+                getRequestMapping(A2, Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar"),
+                getRequestMapping(A3, Arrays.asList("BESLUTTER"),"Z0002", "John Smith"),
+                getRequestMapping(A4, Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi"),
+                getRequestMapping(A5, Arrays.asList("KODE6"),"Z0004", "Kode Six"),
+                getRequestMapping(A6, Arrays.asList("KODE7"),"Z0005", "Kode Seven"));
 
         RequestMappingTokenCallback callback = new RequestMappingTokenCallback(
                 ISSUER_ID,
@@ -131,25 +140,15 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 360000
         );
 
-        return callback;
-    }
-
-    private OAuth2Config getOAuth2Config(){
-
         Set<RequestMappingTokenCallback> callbacks = Set.of(
-                getTokenCallback(A0, Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner"),
-                getTokenCallback(A1, Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface"),
-                getTokenCallback(A2, Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar"),
-                getTokenCallback(A3, Arrays.asList("BESLUTTER"),"Z0002", "John Smith"),
-                getTokenCallback(A4, Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi"),
-                getTokenCallback(A5, Arrays.asList("KODE6"),"Z0004", "Kode Six"),
-                getTokenCallback(A6, Arrays.asList("KODE7"),"Z0005", "Kode Seven")
+              callback
         );
 
         OAuth2Config config = new OAuth2Config(
+                true,
+                null,
+                null,
                 false,
-                null,
-                null,
                 new no.nav.security.mock.oauth2.token.OAuth2TokenProvider(),
                 callbacks
                 );
@@ -164,7 +163,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         dto.loginEndpointAuth = x;
 
         x.externalEndpointURL = oauth2Url;
-        x.payloadRaw = TOKEN_PARAM+"="+label+"&grant_type=authorization_code&code=foo&client_id=foo";
+        x.payloadRaw = TOKEN_PARAM+"="+label+"&grant_type=client_credentials&code=foo&client_id=foo&client_secret=secret";
         x.verb = HttpVerb.POST;
         x.contentType = "application/x-www-form-urlencoded";
         x.expectCookies = false;
