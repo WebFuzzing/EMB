@@ -60,7 +60,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private static final String A4 = "Forvalter";
     private static final String A5 = "Kode6";
     private static final String A6 = "Kode7";
+    private static final String A7 = "System";
 
+    private static final String veileder =  "93a26831-9866-4410-927b-74ff51a9107c";
+    private static final String saksbehandler = "d21e00a4-969d-4b28-8782-dc818abfae65";
+    private static final String beslutter = "9449c153-5a1e-44a7-84c6-7cc7a8867233";
+    private static final String forvalter = "c62e908a-cf20-4ad0-b7b3-3ff6ca4bf38b";
+    private static final String kode6 = "5ef775f2-61f8-4283-bf3d-8d03f428aa14";
+    private static final String kode7 = "ea930b6b-9397-44d9-b9e6-f4cf527a632a";
 
     private Connection sqlConnection;
     private List<DbSpecification> dbSpecification;
@@ -109,7 +116,8 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 getAuthenticationDto(A3,url),
                 getAuthenticationDto(A4,url),
                 getAuthenticationDto(A5,url),
-                getAuthenticationDto(A6,url)
+                getAuthenticationDto(A6,url),
+                getAuthenticationDto(A7,url)
         );
     }
 
@@ -118,6 +126,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         claims.put("groups",groups);
         claims.put("name",name);
         claims.put("NAVident", id);
+        claims.put("sub","subject");
+        claims.put("aud","some-audience");
+        claims.put("tid",ISSUER_ID);
+        claims.put("azp",id);
 
         RequestMapping rm = new RequestMapping(TOKEN_PARAM,label,claims,JOSEObjectType.JWT.getType());
 
@@ -127,12 +139,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     private OAuth2Config getOAuth2Config(){
 
         List<RequestMapping> mappings = Arrays.asList( getRequestMapping(A0, Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner"),
-                getRequestMapping(A1, Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface"),
-                getRequestMapping(A2, Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar"),
-                getRequestMapping(A3, Arrays.asList("BESLUTTER"),"Z0002", "John Smith"),
-                getRequestMapping(A4, Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi"),
-                getRequestMapping(A5, Arrays.asList("KODE6"),"Z0004", "Kode Six"),
-                getRequestMapping(A6, Arrays.asList("KODE7"),"Z0005", "Kode Seven"));
+                getRequestMapping(A1, Arrays.asList(veileder),"Z0000", "Mock McMockface"),
+                getRequestMapping(A2, Arrays.asList(saksbehandler),"Z0001", "Foo Bar"),
+                getRequestMapping(A3, Arrays.asList(beslutter),"Z0002", "John Smith"),
+                getRequestMapping(A4, Arrays.asList(forvalter),"Z0003", "Mario Rossi"),
+                getRequestMapping(A5, Arrays.asList(kode6),"Z0004", "Kode Six"),
+                getRequestMapping(A6, Arrays.asList(kode7),"Z0005", "Kode Seven"),
+                getRequestMapping(A7, Arrays.asList(),"VL", "The System")
+        );
 
         RequestMappingTokenCallback callback = new RequestMappingTokenCallback(
                 ISSUER_ID,
@@ -176,53 +190,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
         return dto;
     }
-
-
-
-
-//    @Override
-//    public List<AuthenticationDto> getInfoForAuthentication() {
-//
-//        //see RolletilgangTest
-//        String token_task = getToken(Arrays.asList(PROSESSERING_ROLLE),"Z0042", "Task Runner");
-//        String token_veileder = getToken(Arrays.asList("VEILEDER"),"Z0000", "Mock McMockface");
-//        String token_saksbehandler = getToken(Arrays.asList("SAKSBEHANDLER"),"Z0001", "Foo Bar");
-//        String token_beslutter = getToken(Arrays.asList("BESLUTTER"),"Z0002", "John Smith");
-//        String token_forvalter = getToken(Arrays.asList("FORVALTER"),"Z0003", "Mario Rossi");
-//        String token_kode6 = getToken(Arrays.asList("KODE6"),"Z0004", "Kode Six");
-//        String token_kode7 = getToken(Arrays.asList("KODE7"),"Z0005", "Kode Seven");
-//
-//        return Arrays.asList(
-//                AuthUtils.getForAuthorizationHeader("TaskRunner", "Bearer " + token_task),
-//                AuthUtils.getForAuthorizationHeader("Veileder", "Bearer " + token_veileder),
-//                AuthUtils.getForAuthorizationHeader("Saksbehandler", "Bearer " + token_saksbehandler),
-//                AuthUtils.getForAuthorizationHeader("Beslutter", "Bearer " + token_beslutter),
-//                AuthUtils.getForAuthorizationHeader("Forvalter", "Bearer " + token_forvalter),
-//                AuthUtils.getForAuthorizationHeader("Kode6", "Bearer " + token_kode6),
-//                AuthUtils.getForAuthorizationHeader("Kode7", "Bearer " + token_kode7)
-//        );
-//    }
-//
-//    private String getToken(List<String> groups, String id, String name) {
-//        Map<String,Object> claims = new HashMap<>();
-//        claims.put("groups",groups);
-//        claims.put("name",name);
-//        claims.put("NAVident", id);
-//
-//        String token = oAuth2Server.issueToken(
-//                ISSUER_ID,
-//                id,
-//                new DefaultOAuth2TokenCallback(
-//                        ISSUER_ID,
-//                        "subject",
-//                        JOSEObjectType.JWT.getType(),
-//                        Arrays.asList(DEFAULT_AUDIENCE),
-//                        claims,
-//                        360000
-//                        )
-//                ).serialize();
-//        return token;
-//    }
 
 
     @Override
@@ -287,7 +254,13 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 "--FAMILIE_INTEGRASJONER_API_URL=http://fake-familie-integrasjoner/api",
                 "--FAMILIE_OPPDRAG_API_URL=http://fake-familie-oppdrag/api",
                 "--SANITY_FAMILIE_API_URL=http://fake-xsrv1mh6.apicdn.sanity.io/v2021-06-07/data/query/ba-brev",
-                "--ECB_API_URL=http://fake-data-api.ecb.europa.eu/service/data/EXR/"
+                "--ECB_API_URL=http://fake-data-api.ecb.europa.eu/service/data/EXR/",
+                "--rolle.veileder=" + veileder,
+                "--rolle.saksbehandler=" + saksbehandler,
+                "--rolle.beslutter=" + beslutter,
+                "--rolle.forvalter=" + forvalter,
+                "--rolle.kode6=" + kode6,
+                "--rolle.kode7=" + kode7
         });
 
         if (sqlConnection != null) {
