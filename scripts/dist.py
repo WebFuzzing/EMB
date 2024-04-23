@@ -202,6 +202,10 @@ def build_jdk_11_maven():
     copy(folder + "/cs/rest-gui/market/market-rest/target/market-sut.jar", DIST)
     copy(folder + "/em/external/rest/market/target/market-evomaster-runner.jar", DIST)
 
+    copy(folder + "/cs/rest/pay-publicapi/target/pay-publicapi-sut.jar", DIST)
+    copy(folder + "/em/external/rest/pay-publicapi/target/pay-publicapi-evomaster-runner.jar", DIST)
+
+
     ind1 = os.environ.get('SUT_LOCATION_IND1', '')
     if ind1 == '':
         print("\nWARN: SUT_LOCATION_IND1 env variable is not defined")
@@ -218,9 +222,11 @@ def build_jdk_17_maven():
     copy(folder + "/cs/web/spring-petclinic/target/spring-petclinic-sut.jar", DIST)
     copy(folder + "/em/external/web/spring-petclinic/target/spring-petclinic-evomaster-runner.jar", DIST)
 
-
     copy(folder + "/cs/grpc/signal-registration/target/signal-registration-sut.jar", DIST)
     copy(folder + "/em/external/grpc/signal-registration/target/signal-registration-evomaster-runner.jar", DIST)
+
+    copy(folder + "/cs/rest/familie-ba-sak/target/familie-ba-sak-sut.jar", DIST)
+    copy(folder + "/em/external/rest/familie-ba-sak/target/familie-ba-sak-evomaster-runner.jar", DIST)
 
 
 ####################

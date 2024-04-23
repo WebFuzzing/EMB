@@ -71,6 +71,10 @@ More details (e.g., #LOCs and used databases) on these APIs can be found [in thi
 
 ### REST: Java/Kotlin
 
+* Familie Ba Sak (MIT), [jdk_17_maven/cs/rest/familie-ba-sak](jdk_17_maven/cs/rest/familie-ba-sak), from [https://github.com/navikt/familie-ba-sak](https://github.com/navikt/familie-ba-sak)
+
+* Payments Public API (MIT), [jdk_11_maven/cs/rest/pay-publicapi](jdk_11_maven/cs/rest/pay-publicapi), from [https://github.com/alphagov/pay-publicapi](https://github.com/alphagov/pay-publicapi)
+
 * Session Service (not-known license), [jdk_8_maven/cs/rest/original/session-service](jdk_8_maven/cs/rest/original/session-service), from [https://github.com/cBioPortal/session-service](https://github.com/cBioPortal/session-service)
 
 * Bibliothek (MIT), [jdk_17_gradle/cs/rest/bibliothek](jdk_17_gradle/cs/rest/bibliothek), from [https://github.com/PaperMC/bibliothek](https://github.com/PaperMC/bibliothek)
