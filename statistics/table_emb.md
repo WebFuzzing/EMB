@@ -10,6 +10,7 @@
 |__grpc-ncs__|gRPC|638|9|6|Java|JDK 8|Maven||
 |__languagetool__|REST|174781|1385|2|Java|JDK 8|Maven||
 |__ocvn__|REST|45521|526|258|Java|JDK 8|Maven|H2, MongoDB|
+|__pay-publicapi__|REST|34576|377|10|Java|JDK 11|Maven|Redis|
 |__genome-nexus__|REST|30004|405|23|Java|JDK 8|Maven|MongoDB|
 |__market__|REST|9861|124|13|Java|JDK 11|Maven|H2|
 |__scout-api__|REST|9736|93|49|Java|JDK 8|Maven|H2|
@@ -24,6 +25,7 @@
 |__session-service__|REST|1471|15|8|Java|JDK 8|Maven|MongoDB|
 |__rest-scs__|REST|862|13|11|Java|JDK 8|Maven||
 |__rest-ncs__|REST|605|9|6|Java|JDK 8|Maven||
+|__familie-ba-sak__|REST|143556|1089|183|Kotlin|JDK 17|Maven|PostgreSQL|
 |__rest-news__|REST|857|11|7|Kotlin|JDK 8|Maven|H2|
 |__thrift-scs__|Thrift|772|14|11|Java|JDK 8|Maven||
 |__thrift-ncs__|Thrift|585|9|6|Java|JDK 8|Maven||

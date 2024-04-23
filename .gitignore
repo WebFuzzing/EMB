@@ -27,6 +27,7 @@ hs_err_pid*
 *.iml
 
 
+js_npm/evomaster-client-js
 
 /temp/
 /dist.zip
@@ -257,6 +258,24 @@ dotnet_3/em/embedded/rest/ScsDriver/generated-tests/
 /jdk_11_gradle/em/external/rest/reservations-api/build/
 /jdk_17_gradle/.gradle/
 /jdk_8_maven/em/embedded/graphql/spring-petclinic-graphql/target/
+/jdk_17_gradle/cs/rest/bibliothek/build/
+/jdk_17_gradle/em/external/rest/bibliothek/build
+/jdk_17_maven/cs/grpc/signal-registration/target/
+jdk_11_maven/cs/rest/pay-publicapi/target/
+jdk_11_maven/em/embedded/rest/pay-publicapi/target/
+jdk_11_maven/em/external/rest/ind1/target/
+jdk_17_maven/cs/rest/signal-server/event-logger/target/
+jdk_17_maven/cs/rest/signal-server/websocket-resources/target/
+jdk_17_maven/cs/rest/signal-server/integration-tests/target/
+jdk_17_maven/cs/rest/signal-server/service/target/
+jdk_17_maven/cs/rest/signal-server/api-doc/target/
+jdk_17_maven/em/embedded/rest/signal-server/target/
+jdk_17_maven/cs/rest/familie-tilbake/target/
+jdk_17_maven/em/embedded/rest/familie-tilbake/target/
+jdk_17_maven/cs/rest/familie-ba-sak/target/
+jdk_17_maven/cs/rest/tiltaksgjennomforing-api/target/
+jdk_17_maven/em/embedded/rest/familie-ba-sak/target/
+
 /jdk_8_maven/em/embedded/grpc/ncs/target/
 /jdk_8_maven/em/embedded/grpc/scs/target/
 /jdk_8_maven/em/external/grpc/ncs/target/

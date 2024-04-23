@@ -1,4 +1,6 @@
 EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
+TRUE,familie-ba-sak,REST,Kotlin,JDK 17,Maven,1089,143556,PostgreSQL,MIT,183,https://github.com/navikt/familie-ba-sak
+TRUE,pay-publicapi,REST,Java,JDK 11,Maven,377,34576,Redis,MIT,10,https://github.com/alphagov/pay-publicapi
 TRUE,session-service,REST,Java,JDK 8,Maven,15,1471,MongoDB,UNDEFINED,8,https://github.com/cBioPortal/session-service
 TRUE,bibliothek,REST,Java,JDK 17,Gradle,33,2176,MongoDB,MIT,8,https://github.com/PaperMC/bibliothek
 TRUE,reservations-api,REST,Java,JDK 11,Gradle,39,1853,MongoDB,UNDEFINED,7,https://github.com/cyrilgavala/reservations-api

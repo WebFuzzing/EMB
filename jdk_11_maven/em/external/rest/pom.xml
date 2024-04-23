@@ -16,6 +16,7 @@
         <module>cwa-verification</module>
         <module>market</module>
         <module>ind1</module>
+        <module>pay-publicapi</module>
     </modules>
 
 </project>
