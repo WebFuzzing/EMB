@@ -113,11 +113,11 @@ public class ExternalEvoMasterController extends ExternalSutController {
         setControllerPort(controllerPort);
         setJavaCommand(command);
 
-        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
-            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        try (InputStream in = getClass().getResourceAsStream(INIT_DB_SCRIPT_PATH)) {
+//            initSQLScript = String.join(System.lineSeparator(), (new SqlScriptRunner()).readCommands(new InputStreamReader(in)));
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 
@@ -196,7 +196,7 @@ public class ExternalEvoMasterController extends ExternalSutController {
                     Arrays.asList("flyway_schema_history"));
 
             dbSpecification = Arrays.asList(new DbSpecification(DatabaseType.POSTGRES,sqlConnection)
-                    .withSchemas("subscriptions").withInitSqlScript(initSQLScript));
+                    .withSchemas("subscriptions").withInitSqlOnResourcePath(INIT_DB_SCRIPT_PATH));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
