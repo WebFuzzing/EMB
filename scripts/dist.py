@@ -250,6 +250,9 @@ def build_jdk_11_gradle():
     command = "gradlew"
 
     if platform.system() == "Darwin":
+        # make sure gradlew command is executable
+        os.system("chmod +x " + os.getcwd() + "/" + folder + "/gradlew")
+
         command = "./gradlew"
 
     gradleres = run([command, "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION, folder),
@@ -275,6 +278,10 @@ def build_jdk_17_gradle():
     command = "gradlew"
 
     if platform.system() == "Darwin":
+
+        # make sure gradlew command is executable
+        os.system("chmod +x " + os.getcwd() + "/" + folder + "/gradlew")
+
         command = "./gradlew"
 
     gradleres = run([command, "build", "-x", "test"], shell=SHELL, cwd=os.path.join(PROJ_LOCATION, folder),
