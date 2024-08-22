@@ -29,12 +29,24 @@ def checkMavenVersion():
     match = re.search(MAVEN_VERSION_REGEX, mvn_path)
     if match == None:
         print("\nCannot determine mvn version from its path location: " + mvn_path)
-#        might happen depending on installation path... instead of crashing immediately,
-#        we try to build, as it might be the correct version... if not, it will fail anyway
-#  TODO ideally, should rather use "mvn -v" to determine the version number...
-#  although it would be bit tricky to implement (so not super important)
-        return True
-#         exit(1)
+
+        # use mcn -v
+        print("\nTrying mvn -v to retrieve the version")
+
+        version_res = run([mvn_path, "-v"], capture_output=True, text=True)
+        result_out = version_res.stdout.strip()
+        match = re.search(MAVEN_VERSION_REGEX, result_out)
+
+        if match == None:
+            print("\nVersion could not be retrieved with mvn -v command")
+
+            #        might happen depending on installation path... instead of crashing immediately,
+            #        we try to build, as it might be the correct version... if not, it will fail anyway
+            #  TODO ideally, should rather use "mvn -v" to determine the version number...
+            #  although it would be bit tricky to implement (so not super important)
+            return True
+
+        #         exit(1)
 
     mvn_txt = match.group()
     mvn_version = mvn_txt.split(".")
