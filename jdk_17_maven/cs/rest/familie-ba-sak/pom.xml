@@ -392,6 +392,10 @@
             <id>github</id>
             <url>https://maven.pkg.github.com/navikt/familie-felles</url>
         </repository>
+        <repository>
+            <id>familie</id>
+            <url>https://github-package-registry-mirror.gc.nav.no/cached/maven-release</url>
+        </repository>
     </repositories>
 
 
