@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.evomaster</groupId>
+    <artifactId>runner</artifactId>
+
+    <version>3.1.1-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <evomaster-version>3.1.1-SNAPSHOT</evomaster-version>
+        <lib-folder>${project.basedir}</lib-folder>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-benchmark-em-external-rest-genome-nexus</artifactId>
+            <version>${evomaster-version}</version>
+            <scope>system</scope>
+            <systemPath>${lib-folder}/genome-nexus-evomaster-runner.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-benchmark-em-external-rest-gestaohospital</artifactId>
+            <version>${evomaster-version}</version>
+            <scope>system</scope>
+            <systemPath>${lib-folder}/gestaohospital-rest-evomaster-runner.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-benchmark-em-external-rest-session-service</artifactId>
+            <version>${evomaster-version}</version>
+            <scope>system</scope>
+            <systemPath>${lib-folder}/session-service-evomaster-runner.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-benchmark-em-external-rest-ocvn</artifactId>
+            <version>${evomaster-version}</version>
+            <scope>system</scope>
+            <systemPath>${lib-folder}/ocvn-rest-evomaster-runner.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-benchmark-em-external-rest-bibliothek</artifactId>
+            <version>${evomaster-version}</version>
+            <scope>system</scope>
+            <systemPath>${lib-folder}/bibliothek-evomaster-runner.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.evomaster</groupId>
+            <artifactId>evomaster-benchmark-em-external-rest-reservations-api</artifactId>
+            <version>${evomaster-version}</version>
+            <scope>system</scope>
+            <systemPath>${lib-folder}/reservations-api-evomaster-runner.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compileSourceRoots>
+                        <compileSourceRoot>${project.basedir}/tests/genome-nexus</compileSourceRoot>
+                        <compileSourceRoot>${project.basedir}/tests/gestaohospital-rest</compileSourceRoot>
+                        <compileSourceRoot>${project.basedir}/tests/session-service</compileSourceRoot>
+                        <compileSourceRoot>${project.basedir}/tests/bibliothek</compileSourceRoot>
+                        <compileSourceRoot>${project.basedir}/tests/ocvn-rest</compileSourceRoot>
+                        <compileSourceRoot>${project.basedir}/tests/reservations-api</compileSourceRoot>
+                    </compileSourceRoots>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+</project>
