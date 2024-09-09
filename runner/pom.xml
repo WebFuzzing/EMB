@@ -39,6 +39,8 @@
 
 <!--        TODO following still lead to clashes (eg Mongo versions).
             likely would need multi-module or profiles :(
+
+            TODO would need to do it for all SUTs
 -->
 
         <dependency>
