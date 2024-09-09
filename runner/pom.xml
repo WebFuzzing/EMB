@@ -34,8 +34,12 @@
             <version>${junit.jupiter.version}</version>
         </dependency>
 
+<!--        TODO add RestAssured-->
 
 
+<!--        TODO following still lead to clashes (eg Mongo versions).
+            likely would need multi-module or profiles :(
+-->
 
         <dependency>
             <groupId>org.evomaster</groupId>
