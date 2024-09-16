@@ -4,7 +4,7 @@
 
 
 
-[EvoMaster](http://evomaster.org) Benchmark (EMB): 
+[EvoMaster](http://evomaster.org) Benchmark (EMB):
 a set of web/enterprise applications for scientific research in Software Engineering.
 
 We collected several different systems running on the JVM, in different programming languages such as  Java and Kotlin.
@@ -12,16 +12,16 @@ In this documentation, we will refer to these projects as System Under Test (SUT
 Currently, the SUTs are either _REST_,  _GraphQL_ or _RPC_ APIs.
 
 For each SUT, we implemented _driver_ classes, which can programmatically _start_, _stop_ and _reset_ the state of SUT (e.g., data in SQL databases).
-As well as enable setting up different properties in a _uniform_ way, like choosing TCP port numbers for the HTTP servers. 
-If a SUT uses any external services (e.g., a SQL database), these will be automatically started via Docker in these driver classes. 
+As well as enable setting up different properties in a _uniform_ way, like choosing TCP port numbers for the HTTP servers.
+If a SUT uses any external services (e.g., a SQL database), these will be automatically started via Docker in these driver classes.
 
 
 This collection of SUTs was originally assembled for easing experimentation with the fuzzer called [EvoMaster](http://evomaster.org).
-However, finding this type of application is not trivial among open-source projects. 
-Furthermore, it is not simple to sort out all the technical details on how to set these applications up and start them in a simple, uniform approach. 
-Therefore, this repository provides the important contribution of providing all these necessary scripts for researchers that need this kind of case study.   
+However, finding this type of application is not trivial among open-source projects.
+Furthermore, it is not simple to sort out all the technical details on how to set these applications up and start them in a simple, uniform approach.
+Therefore, this repository provides the important contribution of providing all these necessary scripts for researchers that need this kind of case study.
 
-**NOTE**: version 1.6.1 was last one in which we still updated drivers for JavaScript and C\#. Those SUTs are not built anymore by default, and latest versions of *EvoMaster* might not work on those old drivers. Updating drivers for different programming languages (and re-implement white-box heuristics) is a massive amount of work, which unfortunately has little to no value for the scientific community (based on our experience). Those SUTs are still here in EMB to enable *black-box* experiments (and to be able to replicate old experiments), but unfortunately not for *white-box* testing with latest versions of *EvoMaster*.  
+**NOTE**: version 1.6.1 was last one in which we still updated drivers for JavaScript and C\#. Those SUTs are not built anymore by default, and latest versions of *EvoMaster* might not work on those old drivers. Updating drivers for different programming languages (and re-implement white-box heuristics) is a massive amount of work, which unfortunately has little to no value for the scientific community (based on our experience). Those SUTs are still here in EMB to enable *black-box* experiments (and to be able to replicate old experiments), but unfortunately not for *white-box* testing with latest versions of *EvoMaster*.
 
 
 
@@ -32,8 +32,8 @@ A video providing some high level overview of EMB can be found [here](https://yo
 
 
 ## License
-All the code that is new for this repository (e.g., the driver classes) is released under Apache 2.0 license. 
-However, this repository contains as well sources from different open-source 
+All the code that is new for this repository (e.g., the driver classes) is released under Apache 2.0 license.
+However, this repository contains as well sources from different open-source
 projects, each one with its own license, as clarified in more details beneath.
 
 ## Example
@@ -44,11 +44,11 @@ To see an example of using these drivers with EvoMaster to generate test cases, 
 
 If you are using EMB in an academic work, you can cite the following:
 
-> A. Arcuri, M. Zhang, A. Golmohammadi, A. Belhadi, J. P. Galeotti, B. Marculescu, S. Seran.  
- **EMB: A Curated Corpus of Web/Enterprise Applications And Library Support for Software Testing Research**.  
+> A. Arcuri, M. Zhang, A. Golmohammadi, A. Belhadi, J. P. Galeotti, B. Marculescu, S. Seran.
+ **EMB: A Curated Corpus of Web/Enterprise Applications And Library Support for Software Testing Research**.
 In *IEEE International Conference on Software Testing, Validation and Verification (ICST)*, 2023.
 
-  
+
 ## Current Case Studies
 
 The projects were selected based on searches using keywords on GitHub APIs, using convenience sampling.
@@ -62,10 +62,10 @@ The reason is that we want to keep an easy to use, constant set of case studies 
 
 The SUTs called _NCS_ (Numerical Case Study) and _SCS_ (String Case study) are artificial, developed by us.
 They are based on numerical and string-based functions previously used in the literature of unit test generation.
-We just re-implemented in different languages, and put them behind a web service. 
+We just re-implemented in different languages, and put them behind a web service.
 
 For the RESTful APIs, each API has an endpoint where the OpenAPI/Swagger schemas can be downloaded from.
-For simplicity, all schemas are also available as JSON/YML files under the folder [openapi-swagger](./openapi-swagger). 
+For simplicity, all schemas are also available as JSON/YML files under the folder [openapi-swagger](./openapi-swagger).
 
 More details (e.g., #LOCs and used databases) on these APIs can be found [in this table](statistics/table_emb.md).
 
@@ -85,7 +85,7 @@ More details (e.g., #LOCs and used databases) on these APIs can be found [in thi
 
 * Market (MIT), [jdk_11_maven/cs/rest-gui/market](jdk_11_maven/cs/rest-gui/market), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)
 
-* Features-Service (Apache), [jdk_8_maven/cs/rest/original/features-service](jdk_8_maven/cs/rest/original/features-service), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)  
+* Features-Service (Apache), [jdk_8_maven/cs/rest/original/features-service](jdk_8_maven/cs/rest/original/features-service), from [https://github.com/JavierMF/features-service](https://github.com/JavierMF/features-service)
 
 * Scout-API (MIT), [jdk_8_maven/cs/rest/original/scout-api](jdk_8_maven/cs/rest/original/scout-api), from [https://github.com/mikaelsvensson/scout-api](https://github.com/mikaelsvensson/scout-api)
 
@@ -95,11 +95,11 @@ More details (e.g., #LOCs and used databases) on these APIs can be found [in thi
 
 * OCVN (MIT), [jdk_8_maven/cs/rest-gui/ocvn](jdk_8_maven/cs/rest-gui/ocvn), from [https://github.com/devgateway/ocvn](https://github.com/devgateway/ocvn)
 
-* News (LGPL), [jdk_8_maven/cs/rest/artificial/news](jdk_8_maven/cs/rest/artificial/news), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems) 
+* News (LGPL), [jdk_8_maven/cs/rest/artificial/news](jdk_8_maven/cs/rest/artificial/news), from [https://github.com/arcuri82/testing_security_development_enterprise_systems](https://github.com/arcuri82/testing_security_development_enterprise_systems)
 
 * Restcountries (MPL), [jdk_8_maven/cs/rest/original/restcountries](jdk_8_maven/cs/rest/original/restcountries), from [https://github.com/apilayer/restcountries](https://github.com/apilayer/restcountries)
 
-* Languagetool (LGPL), [jdk_8_maven/cs/rest/original/languagetool](jdk_8_maven/cs/rest/original/languagetool), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) 
+* Languagetool (LGPL), [jdk_8_maven/cs/rest/original/languagetool](jdk_8_maven/cs/rest/original/languagetool), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool)
 
 * CWA-Verification-Server (Apache), [jdk_11_maven/cs/rest/cwa-verification-server](jdk_11_maven/cs/rest/cwa-verification-server), from [https://github.com/corona-warn-app/cwa-verification-server](https://github.com/corona-warn-app/cwa-verification-server)
 
@@ -197,15 +197,15 @@ Also, you will need to setup environment variables like `JAVA_HOME_8`, `JAVA_HOM
 The script will issue error messages if any prerequisite is missing.
 Once the script is completed, all the SUTs will be available under the `dist` folder, and a `dist.zip` will be created as well (if `scripts/dist.py` is run with `True` as input).
 
-Regarding Maven, most-third party dependencies are automatically downloaded from Maven Central. 
+Regarding Maven, most-third party dependencies are automatically downloaded from Maven Central.
 However, some dependencies are from GitHub, which unfortunately require authentication to be able to download such dependencies.
 Unfortunately, they have [no intention](https://github.com/orgs/community/discussions/26634) to fix this huge usability issue :(
 In your home folder, you need to create a configuration file for Maven, in particular `.m2/settings.xml`, with the following configurations:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 <servers>
     <server>
@@ -258,7 +258,7 @@ Each of these drivers has a "main" method that is running a REST API (binding on
 
 
 
-You can also build (and install) each module separately, based on needs. 
+You can also build (and install) each module separately, based on needs.
 For example, a Maven module can be installed with:
 
 ``mvn clean install -DskipTests``
@@ -270,7 +270,7 @@ On the other hand, the SUTs in the folder `jdk_11_gradle` require JDK 11 and Gra
 
 For thr JVM, each module has 2 submodules, called `cs` (short for "Case Study") and `em` (short for "EvoMaster").
 `cs` contains all the source code of the different SUTs, whereas `em` contains all the drivers.
-Note: building a top-module will build as well all of its internal submodules. 
+Note: building a top-module will build as well all of its internal submodules.
 
 The driver classes for Java  are called `EmbeddedEvoMasterController`.
 Note that Java also has a different kind of driver called `ExternalEvoMasterController`.
@@ -284,7 +284,7 @@ The release of EMB are linked in version number with the release of EvoMaster, a
 In the Git repository of EMB, we did tag the versions of EMB.
 See the [releases](https://github.com/EMResearch/EMB/releases) page.
 For example, to use version `X`, you can check out the Git commit
-of EMB tagged with version `X`. 
+of EMB tagged with version `X`.
 To see the current available tags, from a command-line you can execute:
 
 `git tag`
@@ -295,9 +295,9 @@ Then, to switch to a specific tag X (e.g., `v1.0.0`), you can run:
 
 Finally, if for any reason you need to switch back to the latest snapshot version, you can run:
 
-`git checkout master` 
+`git checkout master`
 
-There is an issue if you try to checkout an old version. 
+There is an issue if you try to checkout an old version.
 Not only Java broke backward compatibility with JDK 9, but also Maven...
 If you try to build with Maven and get an error regarding
 `maven-processor-plugin`, you might have to add manually
@@ -317,3 +317,7 @@ Branch *develop* is using the most recent SNAPSHOT version of _EvoMaster_.
 As that is not published online, you need to clone its repository, and build
 it locally (see its documentation on how to do it).
 
+### Building on Apple Silicon
+
+When building on Apple Silicon, use JDKs that are built for x86 instead of Arm (i.e., *AArch64*).
+Since, not all the dependencies are available for Arm, especially older versions.
