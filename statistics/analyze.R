@@ -32,9 +32,10 @@ markdown <- function (){
   unlink(TABLE)
   sink(TABLE, append = TRUE, split = TRUE)
 
-  #EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,URL
-  cat("|Name|Type|#LOCs|#SourceFiles|#Endpoints|Language(s)|Runtime|Build Tool|Database(s)|\n")
-  cat("|----|----|----:|-----------:|---------:|-----------|-------|----------|-----------|\n")
+  #EMB,NAME,TYPE,LANGUAGE,RUNTIME,BUILD,FILES,LOCS,DATABASE,LICENSE,ENDPOINTS,AUTHENTICATION,URL
+  cat("|Name|Type|#LOCs|#SourceFiles|#Endpoints|Language(s)|Runtime|Build Tool|Database(s)|Authentication|\n")
+  ## Note: the ":" are used for alignment of the columns
+  cat("|----|----|----:|-----------:|---------:|-----------|-------|----------|-----------|:------------:|\n")
 
   for (i in 1:nrow(dt)){
 
@@ -49,6 +50,13 @@ markdown <- function (){
     cat(row$RUNTIME,"|",sep="")
     cat(row$BUILD,"|",sep="")
     cat(handleMultiValues(row$DATABASE),"|",sep="")
+
+    if(row$AUTHENTICATION){
+        cat("&check;")
+    }
+    cat("|")
+
+
     cat("\n")
   }
 
