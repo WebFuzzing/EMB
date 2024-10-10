@@ -131,6 +131,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
+        // Onur, it does not have authentication. So, it needs authentication setup.
         return null;
     }
 
