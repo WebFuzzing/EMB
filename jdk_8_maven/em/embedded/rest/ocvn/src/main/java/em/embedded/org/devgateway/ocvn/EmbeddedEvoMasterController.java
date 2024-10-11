@@ -147,9 +147,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"));
-
-        // ONUR It has only ADMIN user, no basic user.
-
     }
 
 
