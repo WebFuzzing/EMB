@@ -21,3 +21,5 @@ server:
   error:
     whitelabel:
       enabled: false
+
+secret: "secretsecretsecretsecretsecretsecretsecretsecret"
