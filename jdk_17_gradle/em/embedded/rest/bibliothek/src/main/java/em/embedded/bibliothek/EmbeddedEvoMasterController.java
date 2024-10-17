@@ -3,6 +3,7 @@ package em.embedded.bibliothek;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import io.papermc.bibliothek.BibliothekApplication;
+import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
 import org.evomaster.client.java.controller.api.dto.auth.AuthenticationDto;
@@ -13,11 +14,16 @@ import org.evomaster.client.java.controller.problem.RestProblem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.startupcheck.OneShotStartupCheckStrategy;
 
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Collections;
+
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 
 /**
@@ -51,6 +57,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     private static final GenericContainer mongodbContainer = new GenericContainer("mongo:" + MONGODB_VERSION)
             .withTmpFs(Collections.singletonMap("/data/db", "rw"))
+            .withStartupTimeout(Duration.of(150, SECONDS))
             .withExposedPorts(MONGODB_PORT);
 
     private String mongoDbUrl;
@@ -82,6 +89,10 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                         "--spring.cache.type=NONE",
                         "--app.storagePath=./tmp/bibliothek"
                 });
+
+        // add two users to MongoDB database
+
+        // TODO we need two POST requests here for adding two users.
 
         return "http://localhost:" + getSutPort();
     }
@@ -125,7 +136,21 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
         //TODO might need to setup JWT headers here
-        return null;
+
+        AuthenticationDto dto1 = AuthUtils.getForJWT("userDto1", "/login", """
+                                {"userId": "user", "password":"pass"}
+                            """.trim(), "/token/authToken1");
+
+        AuthenticationDto dto2 = AuthUtils.getForJWT("userDto2", "/login", """
+                                {"userId": "user2", "password":"pass2"}
+                            """.trim(), "/token/authToken2");
+
+        List<AuthenticationDto> listOfDtos= new ArrayList<>();
+
+        listOfDtos.add(dto1);
+        listOfDtos.add(dto2);
+
+        return listOfDtos;
     }
 
 
