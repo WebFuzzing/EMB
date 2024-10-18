@@ -1,5 +1,6 @@
 package io.papermc.bibliothek.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,6 +39,7 @@ public class AuthenticationController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Hidden
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
@@ -52,6 +54,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponse(jwt, userDetails.getUsername() ));
     }
 
+    @Hidden
     @PostMapping("/createuser")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {

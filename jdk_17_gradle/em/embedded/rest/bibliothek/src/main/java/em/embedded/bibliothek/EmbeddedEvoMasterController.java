@@ -2,7 +2,9 @@ package em.embedded.bibliothek;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+
 import io.papermc.bibliothek.BibliothekApplication;
+
 import org.evomaster.client.java.controller.AuthUtils;
 import org.evomaster.client.java.controller.EmbeddedSutController;
 import org.evomaster.client.java.controller.InstrumentedSutStarter;
@@ -11,10 +13,18 @@ import org.evomaster.client.java.controller.api.dto.SutInfoDto;
 import org.evomaster.client.java.sql.DbSpecification;
 import org.evomaster.client.java.controller.problem.ProblemInfo;
 import org.evomaster.client.java.controller.problem.RestProblem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.startupcheck.OneShotStartupCheckStrategy;
+
+
+import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpClient;
+import java.net.URI;
 
 
 import java.time.Duration;
@@ -30,6 +40,8 @@ import static java.time.temporal.ChronoUnit.SECONDS;
  * Class used to start/stop the SUT. This will be controller by the EvoMaster process
  */
 public class EmbeddedEvoMasterController extends EmbeddedSutController {
+
+    private static final Logger log = LoggerFactory.getLogger(EmbeddedEvoMasterController.class);
 
     public static void main(String[] args) {
 
@@ -91,10 +103,53 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                 });
 
         // add two users to MongoDB database
-
         // TODO we need two POST requests here for adding two users.
+        String sutURL = "http://localhost:" + getSutPort();
 
-        return "http://localhost:" + getSutPort();
+        if(this.addUserToMongo(sutURL, "user1", "pass1")) {
+            log.info("Successfully added user1 to the database");
+        }
+        else {
+            log.error("Failed to add user1 to the database");
+        }
+
+        if(this.addUserToMongo(sutURL, "user2", "pass2")) {
+            log.info("Successfully added user2 to the database");
+        }
+        else {
+            log.error("Failed to add user2 to the database");
+        }
+
+        return sutURL;
+    }
+
+    private boolean addUserToMongo(String sutURL, String username, String password) {
+
+        String requestBody = "{\"username\": \"" + username +  "\", \"password\": \""+ password +"\" }";
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .uri(URI.create(sutURL + "/createuser"))
+                .header("Content-Type", "application/json")
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (response != null) {
+            if (response.statusCode() == 200) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected int getSutPort() {
@@ -124,7 +179,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public void resetStateOfSUT() {
-        mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
+        //mongoClient.getDatabase(MONGODB_DATABASE_NAME).drop();
     }
 
     @Override
@@ -138,12 +193,14 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
         //TODO might need to setup JWT headers here
 
         AuthenticationDto dto1 = AuthUtils.getForJWT("userDto1", "/login", """
-                                {"userId": "user", "password":"pass"}
-                            """.trim(), "/token/authToken1");
+                                {\"username\":\"user1\",
+                                \"password\":\"pass1\"}
+                            """.trim(), "/accessToken");
 
         AuthenticationDto dto2 = AuthUtils.getForJWT("userDto2", "/login", """
-                                {"userId": "user2", "password":"pass2"}
-                            """.trim(), "/token/authToken2");
+                                {\"username\":\"user2\",
+                                \"password\":\"pass2\"}
+                            """.trim(), "/accessToken");
 
         List<AuthenticationDto> listOfDtos= new ArrayList<>();
 
