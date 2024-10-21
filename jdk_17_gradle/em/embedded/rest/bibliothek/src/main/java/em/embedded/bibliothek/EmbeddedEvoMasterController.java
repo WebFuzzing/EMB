@@ -124,7 +124,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        //TODO might need to setup JWT headers here
         return null;
     }
 
