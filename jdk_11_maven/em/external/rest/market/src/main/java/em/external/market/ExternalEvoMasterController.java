@@ -216,7 +216,8 @@ public class ExternalEvoMasterController extends ExternalSutController {
     public List<AuthenticationDto> getInfoForAuthentication() {
         return Arrays.asList(
                 AuthUtils.getForBasic("admin","admin","password"),
-                AuthUtils.getForBasic("user", "ivan.petrov@yandex.ru", "petrov")
+                AuthUtils.getForBasic("user", "ivan.petrov@yandex.ru", "petrov"),
+                AuthUtils.getForBasic("user2", "user2@yandex.ru", "yuridolgoruki")
         );
     }
 

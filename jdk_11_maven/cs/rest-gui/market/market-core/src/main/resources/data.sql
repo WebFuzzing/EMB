@@ -85,6 +85,8 @@ INSERT INTO storage (id, available) VALUES (11, true);
 
 INSERT INTO user_account (id, email, password, name, active) VALUES (1, 'admin', '$2a$10$Cmwx2Xr/PVpkibiiDz0s7eaVGZHPUvAu5ivdVC5BJgSYbp3c06FY6', 'Admin', true);
 INSERT INTO user_account (id, email, password, name, active) VALUES (4, 'ivan.petrov@yandex.ru', '$2a$10$LfLg6vp4.wyowWP9ysg3F.yQ/udNKfRhGlHJ298xGCtBLC2dDX.OC', 'Ivan Petrov', true);
+INSERT INTO user_account (id, email, password, name, active) VALUES (5, 'user2@yandex.ru', '$2a$12$vMKCOwlcHtiPqQJaS6TqR.YFZyjcXTz1BVQk5pPlW/oIidNRIrqfm', 'Yuri Dolgoruki', true);
+
 
 INSERT INTO user_role (user_id, role_id) VALUES (1, 0);
 
