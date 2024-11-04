@@ -239,7 +239,12 @@ public class ExternalEvoMasterController extends ExternalSutController {
 
     @Override
     public List<AuthenticationDto> getInfoForAuthentication() {
-        return Arrays.asList(AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"));
+
+        // Adding a new user called user1 with password "password". User details are stored in the database.
+
+        return Arrays.asList(
+                AuthUtils.getForDefaultSpringFormLogin("ADMIN", "admin", "admin"),
+                AuthUtils.getForDefaultSpringFormLogin("user1", "user1", "password"));
     }
 
 
