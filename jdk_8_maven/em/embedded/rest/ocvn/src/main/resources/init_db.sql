@@ -33,7 +33,7 @@ VALUES
      'admin',
      NULL
 );
-
+-- Adding a new user called user1 with password "password". User details are stored in the database.
 INSERT INTO PERSON
 (
     CHANGE_PASSWORD,
@@ -65,4 +65,5 @@ INSERT INTO PERSON_ROLES(PERSON_ID,ROLES_ID)VALUES(1,2);
 INSERT INTO PERSON_ROLES(PERSON_ID,ROLES_ID)VALUES(1,1);
 INSERT INTO PERSON_ROLES(PERSON_ID,ROLES_ID)VALUES(1,3);
 
+-- user1 has user privilege only
 INSERT INTO PERSON_ROLES(PERSON_ID,ROLES_ID)VALUES(2,1);
