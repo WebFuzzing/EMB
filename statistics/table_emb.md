@@ -8,6 +8,7 @@
 |gRPC|__grpc-ncs__|638|9|6|Java|JDK 8|Maven|||
 |gRPC|__grpc-scs__|894|14|11|Java|JDK 8|Maven|||
 |gRPC|__signal-registration__|13652|177|5|Java|JDK 17|Maven|||
+|REST|__adoptme__|6158|41|14|Java|JDK 21|Maven|Neo4j||
 |REST|__bibliothek__|2176|33|8|Java|JDK 17|Gradle|MongoDB||
 |REST|__blogapi__|4787|89|52|Java|JDK 8|Maven|MySQL|&check;|
 |REST|__catwatch__|9636|106|14|Java|JDK 8|Maven|H2||

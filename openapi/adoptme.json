@@ -1,0 +1,677 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:54794",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/adopters": {
+      "get": {
+        "tags": [
+          "adopter-controller"
+        ],
+        "operationId": "getAll",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Adopter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adopter-controller"
+        ],
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Adopter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Adopter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transport/optimal-dp": {
+      "get": {
+        "tags": [
+          "transport-controller"
+        ],
+        "operationId": "optimalTransport",
+        "parameters": [
+          {
+            "name": "capacityKg",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shelters": {
+      "get": {
+        "tags": [
+          "shelter-controller"
+        ],
+        "operationId": "all",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Shelter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/routes/tsp/bnb": {
+      "get": {
+        "tags": [
+          "routes-controller"
+        ],
+        "operationId": "tspBranchBound",
+        "parameters": [
+          {
+            "name": "nodes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TspResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/routes/shortest": {
+      "get": {
+        "tags": [
+          "routes-controller"
+        ],
+        "operationId": "shortestRoute",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "tags": [
+          "health-controller"
+        ],
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/network/mst": {
+      "get": {
+        "tags": [
+          "network-controller"
+        ],
+        "operationId": "mst",
+        "parameters": [
+          {
+            "name": "algorithm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "kruskal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MSTResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/network/graph": {
+      "get": {
+        "tags": [
+          "network-controller"
+        ],
+        "operationId": "getGraph",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GraphResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/graph/reachable": {
+      "get": {
+        "tags": [
+          "graph-controller"
+        ],
+        "operationId": "reachable",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "bfs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dogs": {
+      "get": {
+        "tags": [
+          "dog-controller"
+        ],
+        "operationId": "all_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dog"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dogs/sort": {
+      "get": {
+        "tags": [
+          "dog-controller"
+        ],
+        "operationId": "sortDogs",
+        "parameters": [
+          {
+            "name": "criteria",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "priority"
+            }
+          },
+          {
+            "name": "algorithm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "mergesort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/adoptions/greedy": {
+      "get": {
+        "tags": [
+          "adoptions-controller"
+        ],
+        "operationId": "greedyAdoption",
+        "parameters": [
+          {
+            "name": "adopterId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GreedyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/adoptions/constraints/backtracking": {
+      "get": {
+        "tags": [
+          "adoptions-controller"
+        ],
+        "operationId": "backtrackingAdoption",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BacktrackingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Adopter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "budget": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasYard": {
+            "type": "boolean"
+          },
+          "hasKids": {
+            "type": "boolean"
+          },
+          "maxDogs": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Shelter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "capacity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TspResponse": {
+        "type": "object",
+        "properties": {
+          "route": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "totalDistanceKm": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "PathResponse": {
+        "type": "object",
+        "properties": {
+          "exists": {
+            "type": "boolean"
+          },
+          "method": {
+            "type": "string"
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "steps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalWeight": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "EdgeDTO": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MSTResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeDTO"
+            }
+          },
+          "totalWeight": {
+            "type": "number",
+            "format": "double"
+          },
+          "algorithm": {
+            "type": "string"
+          }
+        }
+      },
+      "GraphResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EdgeDTO"
+            }
+          }
+        }
+      },
+      "Dog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "weightKg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "energy": {
+            "type": "string"
+          },
+          "goodWithKids": {
+            "type": "boolean"
+          },
+          "specialNeeds": {
+            "type": "boolean"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "AssignedDog": {
+        "type": "object",
+        "properties": {
+          "dogId": {
+            "type": "string"
+          },
+          "dogName": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "GreedyResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "adopterId": {
+            "type": "string"
+          },
+          "adopterName": {
+            "type": "string"
+          },
+          "assignedDogs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssignedDog"
+            }
+          },
+          "totalScore": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalCost": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "AdopterAssignment": {
+        "type": "object",
+        "properties": {
+          "adopterId": {
+            "type": "string"
+          },
+          "adopterName": {
+            "type": "string"
+          },
+          "assignedDogs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssignedDog"
+            }
+          }
+        }
+      },
+      "BacktrackingResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "assignments": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AdopterAssignment"
+            }
+          },
+          "totalScore": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}

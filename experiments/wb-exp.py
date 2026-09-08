@@ -200,6 +200,7 @@ SUTS = [
     Sut("ocvn",  JDK_8),
     Sut("ohsome-api", JDK_17),
     Sut("pay-publicapi",JDK_11),
+    Sut("adoptme", JDK_21),
     Sut("person-controller",JDK_21),
     Sut("redis-sample", JDK_21),
     Sut("proxyprint",  JDK_8),
