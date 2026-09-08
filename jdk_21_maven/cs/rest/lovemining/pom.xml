@@ -77,6 +77,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!--          MODIFIED-->
+                    <!-- WFD expects a single self-contained "lovemining-sut.jar". The classifier keeps
+                         the plain jar as the main artifact, which the embedded driver depends on. -->
+                    <finalName>lovemining</finalName>
+                    <classifier>sut</classifier>
+                    <!--          MODIFIED-->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

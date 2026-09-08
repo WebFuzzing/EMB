@@ -197,6 +197,7 @@ SUTS = [
     Sut("jasper",  JDK_25),
     Sut("joinus", JDK_21),
     Sut("languagetool",  JDK_8),
+    Sut("lovemining", JDK_21),
     Sut("market",  JDK_11),
     Sut("microcks", JDK_21),
     Sut("ocvn",  JDK_8),

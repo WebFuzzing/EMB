@@ -1,0 +1,688 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LoveMining API",
+    "description": "Documentation for LoveMining Application",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:39090",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "paths": {
+    "/api/users/{id}/review": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "createReview",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewDocument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}/like": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "likeUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}/dislike": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "dislikeUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/authentication/register": {
+      "post": {
+        "tags": [
+          "authentication-controller"
+        ],
+        "operationId": "registerUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDocument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/me": {
+      "patch": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "updateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDocument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getMe",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/reviews": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getReviews",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/recommendations/{filters}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getRecommendations",
+        "parameters": [
+          {
+            "name": "locationFilter",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "minAge",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "maxAge",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/matches": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getMatches",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/userReviews/{id}": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getReview",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/user/{id}": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getUser_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/analytics/unhappy-cities": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getUnhappyCitiesAnalytics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/analytics/status-by-age-group": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getStatusAnalytics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/analytics/orientation-by-age-group": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getOrientationAnalytics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/analytics/love-points": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getLovePointsAnalytic",
+        "parameters": [
+          {
+            "name": "state",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/analytics/glow-up": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getGlowUpAnalytics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/users/{id}": {
+      "delete": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ReviewDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "targetId": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ReviewSummary": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "string"
+          },
+          "targetId": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UserDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "orientation": {
+            "type": "string"
+          },
+          "bodyType": {
+            "type": "string"
+          },
+          "diet": {
+            "type": "string"
+          },
+          "drinks": {
+            "type": "string"
+          },
+          "education": {
+            "type": "string"
+          },
+          "ethnicity": {
+            "type": "string"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "income": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "job": {
+            "type": "string"
+          },
+          "offspring": {
+            "type": "string"
+          },
+          "pets": {
+            "type": "string"
+          },
+          "religion": {
+            "type": "string"
+          },
+          "smokes": {
+            "type": "string"
+          },
+          "speaks": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "essay0": {
+            "type": "string"
+          },
+          "interests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reviewsMade": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReviewSummary"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
