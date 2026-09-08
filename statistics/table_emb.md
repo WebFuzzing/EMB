@@ -9,6 +9,7 @@
 |gRPC|__grpc-scs__|894|14|11|Java|JDK 8|Maven|||
 |gRPC|__signal-registration__|13652|177|5|Java|JDK 17|Maven|||
 |REST|__adoptme__|6158|41|14|Java|JDK 21|Maven|Neo4j||
+|REST|__arimaa__|9460|141|38|Java|JDK 21|Maven|MySQL, MongoDB, Neo4j|&check;|
 |REST|__bibliothek__|2176|33|8|Java|JDK 17|Gradle|MongoDB||
 |REST|__blogapi__|4787|89|52|Java|JDK 8|Maven|MySQL|&check;|
 |REST|__catwatch__|9636|106|14|Java|JDK 8|Maven|H2||
@@ -21,6 +22,7 @@
 |REST|__gestaohospital__|3506|33|20|Java|JDK 8|Maven|MongoDB||
 |REST|__http-patch-spring__|1450|30|6|Java|JDK 11|Maven|||
 |REST|__jasper__|46791|337|61|Java|JDK 25|Maven|PostgreSQL|&check;|
+|REST|__joinus__|7906|101|37|Java|JDK 21|Maven|MongoDB, Neo4j|&check;|
 |REST|__languagetool__|174781|1385|2|Java|JDK 8|Maven|||
 |REST|__market__|9861|124|13|Java|JDK 11|Maven|H2|&check;|
 |REST|__microcks__|66186|471|88|Java|JDK 21|Maven|MongoDB|&check;|

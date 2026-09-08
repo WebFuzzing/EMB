@@ -13,6 +13,8 @@ ENV CLASS_FILES=/classfiles
 
 ### IMPORTANT!!!: must be kept in sync with what declared in run-tools.py, which will need to be updated
 ###               any time in this file we add a new entry to WFD
+COPY jdk_21_maven/cs/rest/adoptme/target/classes  ${CLASS_FILES}/jdk_21_maven/cs/rest/adoptme/target/classes
+COPY jdk_21_maven/cs/rest/arimaa/target/classes  ${CLASS_FILES}/jdk_21_maven/cs/rest/arimaa/target/classes
 COPY jdk_17_gradle/cs/rest/bibliothek/build/classes  ${CLASS_FILES}/jdk_17_gradle/cs/rest/bibliothek/build/classes
 COPY jdk_8_maven/cs/rest/original/blogapi/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/blogapi/target/classes
 COPY jdk_8_maven/cs/rest/original/catwatch/catwatch-backend/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/catwatch/catwatch-backend/target/classes
@@ -27,6 +29,7 @@ COPY jdk_8_maven/cs/rest-gui/genome-nexus/service/target/classes  ${CLASS_FILES}
 COPY jdk_8_maven/cs/rest-gui/genome-nexus/web/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest-gui/genome-nexus/web/target/classes
 COPY jdk_8_maven/cs/rest-gui/gestaohospital/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest-gui/gestaohospital/target/classes
 COPY jdk_11_maven/cs/rest/http-patch-spring/target/classes  ${CLASS_FILES}/jdk_11_maven/cs/rest/http-patch-spring/target/classes
+COPY jdk_21_maven/cs/rest/joinus/target/classes  ${CLASS_FILES}/jdk_21_maven/cs/rest/joinus/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-core/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-core/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-gui-commons/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-gui-commons/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/all/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/all/target/classes
@@ -55,7 +58,7 @@ COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/ml/
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/nl/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/nl/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/pl/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/pl/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/pt/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/pt/target/classes
-COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/ro/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/pt/target/classes
+COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/ro/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/ro/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/ru/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/ru/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/sk/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/sk/target/classes
 COPY jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/sl/target/classes  ${CLASS_FILES}/jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/sl/target/classes

@@ -300,6 +300,11 @@ def build_jdk_21_maven():
     copy(folder + "/cs/rest/adoptme/target/adoptme-sut.jar", DIST)
     copy(folder + "/em/external/rest/adoptme/target/adoptme-evomaster-runner.jar", DIST)
 
+    copy(folder + "/cs/rest/arimaa/target/arimaa-sut.jar", DIST)
+    copy(folder + "/em/external/rest/arimaa/target/arimaa-evomaster-runner.jar", DIST)
+    copy(folder + "/cs/rest/joinus/target/joinus-sut.jar", DIST)
+    copy(folder + "/em/external/rest/joinus/target/joinus-evomaster-runner.jar", DIST)
+
     copy(folder + "/cs/rest-gui/webgoat/target/webgoat-sut.jar", DIST)
     copy(folder + "/em/external/rest-gui/webgoat/target/webgoat-evomaster-runner.jar", DIST)
 

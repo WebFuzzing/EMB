@@ -77,6 +77,8 @@ JSON="json"
 
 # To ge the SUTs, you need in EMB to run the script "scripts/dist.py"
 SUTS = [
+    Sut("adoptme",False,SLEEP,JSON,["jdk_21_maven/cs/rest/adoptme/target/classes"]),
+    Sut("arimaa",True,SLEEP,JSON,["jdk_21_maven/cs/rest/arimaa/target/classes"]),
     Sut("bibliothek",False,SLEEP,JSON,["jdk_17_gradle/cs/rest/bibliothek/build/classes"]),
     Sut("blogapi",True, SLEEP,JSON,["jdk_8_maven/cs/rest/original/blogapi/target/classes"]),
     Sut("catwatch",False,SLEEP,JSON,["jdk_8_maven/cs/rest/original/catwatch/catwatch-backend/target/classes"]),
@@ -91,6 +93,7 @@ SUTS = [
                                    "jdk_8_maven/cs/rest-gui/genome-nexus/web/target/classes"]),
     Sut("gestaohospital",False,SLEEP,JSON,["jdk_8_maven/cs/rest-gui/gestaohospital/target/classes"]),
     Sut("http-patch-spring",False,SLEEP,JSON,["jdk_11_maven/cs/rest/http-patch-spring/target/classes"]),
+    Sut("joinus",True,SLEEP,JSON,["jdk_21_maven/cs/rest/joinus/target/classes"]),
     Sut("languagetool",False,SLEEP,JSON,["jdk_8_maven/cs/rest/original/languagetool/languagetool-core/target/classes",
                                    "jdk_8_maven/cs/rest/original/languagetool/languagetool-gui-commons/target/classes",
                                    "jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/all/target/classes",
