@@ -132,6 +132,7 @@ SUTS = [
                                    "jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/uk/target/classes",
                                    "jdk_8_maven/cs/rest/original/languagetool/languagetool-language-modules/zh/target/classes",
                                    "jdk_8_maven/cs/rest/original/languagetool/languagetool-server/target/classes"]),
+    Sut("lovemining",True,SLEEP,JSON,["jdk_21_maven/cs/rest/lovemining/target/classes"]),
     Sut("market",True,SLEEP,JSON,["jdk_11_maven/cs/rest-gui/market/market-core/target/classes",
                              "jdk_11_maven/cs/rest-gui/market/market-rest/target/classes",
                              "jdk_11_maven/cs/rest-gui/market/market-web/target/classes"]),
