@@ -182,6 +182,7 @@ class Sut:
 
 SUTS = [
     # REST
+    Sut("adoptme", JDK_21),
     Sut("arimaa", JDK_21),
     Sut("bibliothek",  JDK_17),
     Sut("blogapi",JDK_8),

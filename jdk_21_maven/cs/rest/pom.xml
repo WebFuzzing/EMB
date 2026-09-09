@@ -13,6 +13,7 @@
 
 
     <modules>
+        <module>adoptme</module>
         <module>joinus</module>
         <module>person-controller</module>
         <module>redis-sample</module>

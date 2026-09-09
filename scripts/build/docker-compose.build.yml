@@ -256,6 +256,7 @@ services:
         fi
         cp cs/rest/person-controller/target/person-controller-sut.jar /dist/
         cp cs/rest/redis-sample/target/redis-sample-sut.jar /dist/
+        cp cs/rest/adoptme/target/adoptme-sut.jar /dist/
         cp cs/rest/arimaa/target/arimaa-sut.jar /dist/
         cp cs/rest/joinus/target/joinus-sut.jar /dist/
         cp cs/rest/lovemining/target/lovemining-sut.jar /dist/
@@ -264,6 +265,7 @@ services:
         if [ "$${BUILD_EVOMASTER:-false}" = "true" ]; then
           cp em/external/rest/person-controller/target/person-controller-evomaster-runner.jar /dist/
           cp em/external/rest/redis-sample/target/redis-sample-evomaster-runner.jar /dist/
+          cp em/external/rest/adoptme/target/adoptme-evomaster-runner.jar /dist/
           cp em/external/rest/arimaa/target/arimaa-evomaster-runner.jar /dist/
           cp em/external/rest/joinus/target/joinus-evomaster-runner.jar /dist/
           cp em/external/rest/lovemining/target/lovemining-evomaster-runner.jar /dist/
