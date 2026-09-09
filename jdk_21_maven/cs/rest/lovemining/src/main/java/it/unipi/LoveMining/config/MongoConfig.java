@@ -19,10 +19,18 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     @Override
     protected String getDatabaseName() { return "LoveMining"; }
 
+    // MODIFIED
+    // The URI was hardcoded to the original deployment VMs, and AbstractMongoClientConfiguration
+    // makes Spring Boot back off, so no property could override it. Default keeps the old value.
+    @org.springframework.beans.factory.annotation.Value(
+            "${spring.data.mongodb.uri:mongodb://10.1.1.14:27017,10.1.1.15:27017,10.1.1.16:27017/?replicaSet=lsmdb}")
+    private String mongoUri;
+    // MODIFIED
+
     @Override
     @Bean
     public MongoClient mongoClient() {
-        String uri = "mongodb://10.1.1.14:27017,10.1.1.15:27017,10.1.1.16:27017/?replicaSet=lsmdb";
+        String uri = mongoUri; // MODIFIED
 
         // Write and Read preferences
         MongoClientSettings settings = MongoClientSettings.builder().applyConnectionString(new ConnectionString(uri))
