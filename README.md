@@ -278,10 +278,6 @@ _Black-box_ testing: you can build all the SUTs via Docker using  `scripts/dist-
 docker-compose -f dockerfiles/reservations-api.yaml up
 ```
 
-Note: for `digitalbanking`, run the fuzzer with `--endpointExclude "/generateData"`.
-That endpoint loops on its request parameters with no upper bound, and a large value makes the SUT unresponsive for the rest of the experiment.
-The white-box drivers already skip it.
-
 _White-box_ testing: everything can be setup by running the script `scripts/dist.py`.
 Note that you will need installed at least Maven, Gradle, JDK 8, JDK 11, JDK 17, JDK 21, JDK 25, NPM, as well as Docker.
 Also, you will need to setup environment variables like `JAVA_HOME_8`, `JAVA_HOME_11`,  `JAVA_HOME_17`, `JAVA_HOME_21` and `JAVA_HOME_25`.

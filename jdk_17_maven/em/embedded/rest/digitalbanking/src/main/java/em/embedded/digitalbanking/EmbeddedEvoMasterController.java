@@ -17,7 +17,6 @@ import redis.clients.jedis.JedisPooled;
 import redis.clients.jedis.UnifiedJedis;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,12 +59,6 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
                     " originalamount text, amount text, trancd text, description text, initialdate text," +
                     " settlementdate text, postingdate text, status text, disputeid text," +
                     " transactionreturn text, location text, transactiontags text, primary key (tranid));";
-
-    /*
-        /generateData loops on its request parameters with no upper bound. Fuzzed with a large
-        value, it drives the SUT into a GC death-spiral it never recovers from.
-     */
-    private static final List<String> ENDPOINTS_TO_SKIP = Arrays.asList("/generateData");
 
     private static final GenericContainer redis = new GenericContainer("redis/redis-stack-server:" + REDIS_VERSION)
             .withEnv("REDIS_ARGS", "--requirepass " + REDIS_PASSWORD)
@@ -216,7 +209,7 @@ public class EmbeddedEvoMasterController extends EmbeddedSutController {
     public ProblemInfo getProblemInfo() {
         return new RestProblem(
                 "http://localhost:" + getSutPort() + "/v3/api-docs",
-                ENDPOINTS_TO_SKIP
+                null
         );
     }
 
