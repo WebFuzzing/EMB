@@ -20,9 +20,10 @@ services:
     depends_on:
       - sut-spring-ecommerce
   sut-spring-ecommerce:
-    build:
-      dockerfile: ./dockerfiles/spring-ecommerce.dockerfile
-      context: ..
+    image: webfuzzing/wfd-spring-ecommerce:FINAL
+#    build:
+#      dockerfile: ./dockerfiles/spring-ecommerce.dockerfile
+#      context: ..
     environment:
        AUTH_PORT: ${AUTH_PORT:-8081}
     ports:
@@ -35,8 +36,8 @@ services:
       MONGODB_REPLICA_SET_MODE: primary
       ALLOW_EMPTY_PASSWORD: yes
     volumes:
-      - ../scripts/dockerize/data/additional_files/spring-ecommerce/mongo_import.sh:/docker-entrypoint-initdb.d/mongo_import.sh
-      - ../scripts/dockerize/data/additional_files/spring-ecommerce/init.json:/fixtures/init.json
+      - ./additional_files/spring-ecommerce/mongo_import.sh:/docker-entrypoint-initdb.d/mongo_import.sh
+      - ./additional_files/spring-ecommerce/init.json:/fixtures/init.json
   redis:
     image: redis:7.0.11
   elasticsearch:

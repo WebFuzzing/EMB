@@ -85,7 +85,11 @@ How to setup authentication information, based on the current content of the ini
 Auth configuration files can found in the [auth](auth) folder. 
 
 
-### REST: Java/Kotlin (40)
+### REST: Java/Kotlin (44)
+
+* **AdoptMe** (not-known license), [jdk_21_maven/cs/rest/adoptme](jdk_21_maven/cs/rest/adoptme), from [https://github.com/daanimelian/Programacion3-TPO](https://github.com/daanimelian/Programacion3-TPO)
+
+* **Arimaa** (not-known license), [jdk_21_maven/cs/rest/arimaa](jdk_21_maven/cs/rest/arimaa), from [https://github.com/KEAArimaaProject/arimaa-backend](https://github.com/KEAArimaaProject/arimaa-backend)
 
 * **Bibliothek** (MIT), [jdk_17_gradle/cs/rest/bibliothek](jdk_17_gradle/cs/rest/bibliothek), from [https://github.com/PaperMC/bibliothek](https://github.com/PaperMC/bibliothek)
 
@@ -113,7 +117,11 @@ Auth configuration files can found in the [auth](auth) folder.
 
 * **Jasper** (MIT), [jdk_25_maven/cs/rest/jasper](jdk_25_maven/cs/rest/jasper), from [https://github.com/cjmalloy/jasper](https://github.com/cjmalloy/jasper)
 
+* **JoinUs** (not-known license), [jdk_21_maven/cs/rest/joinus](jdk_21_maven/cs/rest/joinus), from [https://github.com/KLAJDI16/joinUs](https://github.com/KLAJDI16/joinUs)
+
 * **Languagetool** (LGPL), [jdk_8_maven/cs/rest/original/languagetool](jdk_8_maven/cs/rest/original/languagetool), from [https://github.com/languagetool-org/languagetool](https://github.com/languagetool-org/languagetool)
+
+* **LoveMining** (not-known license), [jdk_21_maven/cs/rest/lovemining](jdk_21_maven/cs/rest/lovemining), from [https://github.com/Andryd22/LoveMining](https://github.com/Andryd22/LoveMining)
 
 * **Market** (MIT), [jdk_11_maven/cs/rest-gui/market](jdk_11_maven/cs/rest-gui/market), from [https://github.com/aleksey-lukyanets/market](https://github.com/aleksey-lukyanets/market)
 

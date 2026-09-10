@@ -182,6 +182,8 @@ class Sut:
 
 SUTS = [
     # REST
+    Sut("adoptme", JDK_21),
+    Sut("arimaa", JDK_21),
     Sut("bibliothek",  JDK_17),
     Sut("blogapi",JDK_8),
     Sut("catwatch",  JDK_8),
@@ -195,7 +197,9 @@ SUTS = [
     Sut("gestaohospital",  JDK_8),
     Sut("http-patch-spring", JDK_11),
     Sut("jasper",  JDK_25),
+    Sut("joinus", JDK_21),
     Sut("languagetool",  JDK_8),
+    Sut("lovemining", JDK_21),
     Sut("market",  JDK_11),
     Sut("microcks", JDK_21),
     Sut("ocvn",  JDK_8),
