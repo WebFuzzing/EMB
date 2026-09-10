@@ -1,0 +1,103 @@
+application.version: ${version}
+
+logging:
+  logback:
+    rollingpolicy:
+      max-history: 7
+      total-size-cap: 1GB
+      clean-history-on-start: true
+      max-file-size: 10MB
+  file:
+    name: \${komga.config-dir}/logs/komga.log
+  level:
+    org.apache.activemq.audit: WARN
+    org.apache.fontbox.cff.Type1CharString: ERROR
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
+
+komga:
+  database:
+    file: \${komga.config-dir}/database.sqlite
+  lucene:
+    data-directory: \${komga.config-dir}/lucene
+  fonts:
+    data-directory: \${komga.config-dir}/fonts
+  config-dir: \${user.home}/.komga
+  tasks-db:
+    file: \${komga.config-dir}/tasks.sqlite
+
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/{vendor}
+    mixed: true
+    placeholders:
+      library-file-hashing: \${komga.file-hashing:true}
+      library-scan-startup: \${komga.libraries-scan-startup:false}
+      delete-empty-collections: \${komga.delete-empty-collections:true}
+      delete-empty-read-lists: \${komga.delete-empty-read-lists:true}
+  thymeleaf:
+    prefix: classpath:/public/
+  mvc:
+    async:
+      request-timeout: 1h
+  web:
+    resources:
+      add-mappings: false
+  jackson:
+    deserialization:
+      FAIL_ON_NULL_FOR_PRIMITIVES: true
+    mapper:
+      accept-case-insensitive-properties: true
+      accept-case-insensitive-values: true
+  config:
+    import:
+      - "optional:file:\${komga.config-dir}/application.yml"
+      - "optional:file:\${komga.config-dir}/application.yaml"
+      - "optional:file:\${komga.config-dir}/application.properties"
+  http:
+    codecs:
+      max-in-memory-size: 10MB
+
+server:
+  servlet.session.timeout: 7d
+  forward-headers-strategy: framework
+  shutdown: graceful
+  error:
+    include-message: always
+  port: 25600
+  tomcat:
+    relaxed-query-chars:
+      - '{'
+      - '}'
+      - '['
+      - ']'
+
+management:
+  endpoints.web.exposure.include: "*"
+  endpoint:
+    configprops:
+      roles: ADMIN
+      show-values: when_authorized
+    env:
+      roles: ADMIN
+      show-values: when_authorized
+    health:
+      roles: ADMIN
+      show-details: when_authorized
+    shutdown:
+      access: unrestricted
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
+  simple:
+    metrics:
+      export:
+        enabled: true
+        step: 24h
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+  paths-to-match: "/api/**"
+  writer-with-order-by-keys: true

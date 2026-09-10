@@ -1,0 +1,59 @@
+### Gradle
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+
+### Kotlin
+.kotlin
+
+### NodeJS
+node_modules
+
+### Logs
+*.log
+*.log.*.gz
+
+### Temporary files
+*.tmp
+*.bak
+
+### SQLite databases
+*.sqlite
+*.sqlite-journal
+
+### STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA
+.idea/*
+!/.idea/codeStyles/
+!/.idea/runConfigurations/
+*.iws
+*.iml
+*.ipr
+
+### IntelliJ Fleet
+.fleet/
+
+### NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Komga
+/komga/src/main/resources/public/
+/config-dir/
+application-oauth2.yml
+/benchmark
+/release_notes
+
+### Conveyor
+output/
+secret/
